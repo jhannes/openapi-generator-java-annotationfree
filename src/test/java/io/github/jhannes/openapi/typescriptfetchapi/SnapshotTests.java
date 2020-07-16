@@ -94,6 +94,7 @@ public class SnapshotTests {
                 .setApiPackage("io.github.jhannes.openapi." + modelName + ".api")
                 .addAdditionalProperty("generateModelTests", "true")
                 .addAdditionalProperty("hideGenerationTimestamp", "true")
+                .addAdditionalProperty("generateApis", "true")
                 .setOutputDir(output.resolve(modelName).toString());
 
         final ClientOptInput clientOptInput = configurator.toClientOptInput();
