@@ -1,0 +1,7 @@
+/localSnapshotTests/
+/target/
+*.iml
+.idea
+/snapshotTests/output/
+pom.xml.releaseBackup
+release.properties
