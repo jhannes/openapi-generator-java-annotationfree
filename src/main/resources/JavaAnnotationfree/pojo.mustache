@@ -1,0 +1,188 @@
+/**
+* {{#description}}{{.}}{{/description}}{{^description}}{{classname}}{{/description}}
+*/
+public class {{classname}} {
+{{#vars}}
+    {{#isEnum}}
+        {{^isContainer}}
+            {{>modelInnerEnum}}
+        {{/isContainer}}
+        {{#isContainer}}
+            {{#mostInnerItems}}
+                {{>modelInnerEnum}}
+            {{/mostInnerItems}}
+        {{/isContainer}}
+    {{/isEnum}}
+
+    private {{{datatypeWithEnum}}} {{baseName}}{{#defaultValue}} = {{{.}}}{{/defaultValue}};
+{{/vars}}
+
+    public static String[] readOnlyFields() {
+        return new String[] {
+        {{#vars}}
+            {{#isReadOnly}}
+                "{{baseName}}",
+            {{/isReadOnly}}
+        {{/vars}}
+        };
+    }
+
+    public static String[] writeOnlyFields() {
+        return new String[] {
+        {{#vars}}
+            {{#isWriteOnly}}
+                "{{baseName}}",
+            {{/isWriteOnly}}
+        {{/vars}}
+        };
+    }
+
+    public static String[] requiredFields() {
+        return new String[] {
+        {{#vars}}
+            {{#required}}
+                "{{baseName}}",
+            {{/required}}
+        {{/vars}}
+        };
+    }
+
+    public List<String> missingRequiredFields() {
+        List<String> result = new ArrayList();
+        {{#vars}}
+            {{#required}}
+        if (isMissing({{baseName}})) result.add("{{baseName}}");
+            {{/required}}
+        {{/vars}}
+        return result;
+    }
+
+    private boolean isMissing(String s) {
+        return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(Object s) {
+        return s == null;
+    }
+
+{{#vars}}
+    {{#isListContainer}}
+
+    public <T> {{classname}} {{name}}(Collection<T> items, Function<T, {{items.datatypeWithEnum}}> mapper) {
+        return {{baseName}}(items.stream().map(mapper).collect(Collectors.toList()));
+    }
+
+    public <T> List<T> {{getter}}(Function<{{items.datatypeWithEnum}}, T> mapper) {
+        return {{getter}}().stream().map(mapper).collect(Collectors.toList());
+    }
+
+    public {{classname}} add{{nameInCamelCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item) {
+        {{^required}}
+        if (this.{{baseName}} == null) {
+            this.{{baseName}} = {{{defaultValue}}};
+        }
+        {{/required}}
+        this.{{baseName}}.add({{name}}Item);
+        return this;
+    }
+    {{/isListContainer}}
+    {{#isMapContainer}}
+
+    public {{classname}} put{{nameInCamelCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item) {
+         {{^required}}
+         if (this.{{baseName}} == null) {
+             this.{{baseName}} = {{{defaultValue}}};
+         }
+         {{/required}}
+         this.{{baseName}}.put(key, {{name}}Item);
+         return this;
+    }
+    {{/isMapContainer}}
+
+    /**
+    {{#description}}
+     * {{description}}
+    {{/description}}
+    {{^description}}
+     * Get {{baseName}}
+    {{/description}}
+    {{#example}}
+     * example: {{example}}
+    {{/example}}
+    {{#minimum}}
+     * minimum: {{minimum}}
+    {{/minimum}}
+    {{#maximum}}
+     * maximum: {{maximum}}
+    {{/maximum}}
+    {{#isReadOnly}}
+     * read only
+    {{/isReadOnly}}
+     * @return {{baseName}}
+     */
+    {{#vendorExtensions.extraAnnotation}}
+        {{{vendorExtensions.extraAnnotation}}}
+    {{/vendorExtensions.extraAnnotation}}
+    public {{{datatypeWithEnum}}} {{getter}}() {
+        return {{baseName}};
+    }
+
+    {{#isReadOnly}}
+    /** <strong>read only</strong> */
+    {{/isReadOnly}}
+    public void {{setter}}({{{datatypeWithEnum}}} {{name}}) {
+        this.{{baseName}} = {{name}};
+    }
+
+    public {{classname}} {{name}}({{{datatypeWithEnum}}} {{name}}) {
+        this.{{baseName}} = {{name}};
+        return this;
+    }
+{{/vars}}
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }{{#hasVars}}
+        {{classname}} {{classVarName}} = ({{classname}}) o;
+        return {{#vars}}{{#isByteArray}}Arrays{{/isByteArray}}{{^isByteArray}}Objects{{/isByteArray}}.equals(this.{{baseName}}, {{classVarName}}.{{baseName}}){{#hasMore}} &&
+            {{/hasMore}}{{/vars}}{{#parent}} &&
+            super.equals(o){{/parent}};{{/hasVars}}{{^hasVars}}
+            return {{#parent}}super.equals(o){{/parent}}{{^parent}}true{{/parent}};{{/hasVars}}
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash({{#vars}}{{^isByteArray}}{{baseName}}{{/isByteArray}}{{#isByteArray}}Arrays.hashCode({{baseName}}){{/isByteArray}}{{#hasMore}}, {{/hasMore}}{{/vars}}{{#parent}}{{#hasVars}}, {{/hasVars}}super.hashCode(){{/parent}});
+    }
+
+    @Override
+    public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("class {{classname}} {\n");
+    {{#parent}}
+        sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+    {{/parent}}
+    {{#vars}}
+        sb.append("    {{baseName}}: ").append(toIndentedString({{baseName}})).append("\n");
+    {{/vars}}
+        sb.append("}");
+        return sb.toString();
+    }
+
+    /**
+    * Convert the given object to string with each line indented by 4 spaces
+    * (except the first line).
+    */
+    private String toIndentedString(java.lang.Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
+
+}

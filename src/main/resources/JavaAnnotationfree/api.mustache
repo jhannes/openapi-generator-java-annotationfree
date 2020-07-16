@@ -1,0 +1,55 @@
+{{>licenseInfo}}
+package {{package}};
+
+import {{modelPackage}}.*;
+
+{{#imports}}import {{import}};
+{{/imports}}
+
+import org.actioncontroller.*;
+import org.actioncontroller.json.JsonBody;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Consumer;
+
+{{#operations}}
+public interface {{classname}} {
+    {{#operation}}
+        /**
+         * {{summary}}
+         * {{notes}}
+        {{#allParams}}
+         * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/isContainer}}{{/required}}
+        {{/allParams}}
+        {{#returnType}}
+         * @return {{returnType}}
+        {{/returnType}}
+        {{#isDeprecated}}
+         * @deprecated
+        {{/isDeprecated}}
+        {{#externalDocs}}
+         * {{description}}
+         * @see <a href="{{url}}">{{summary}} Documentation</a>
+        {{/externalDocs}}
+         */
+        {{#isDeprecated}}
+            @Deprecated
+        {{/isDeprecated}}
+        @{{httpMethod}}("{{path}}"){{#returnType}}
+        @JsonBody{{/returnType}}
+        public {{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}{{operationId}}({{#allParams}}{{#isPathParam}}
+                @PathParam("{{baseName}}") {{{dataType}}} {{paramName}}{{/isPathParam}}{{#isQueryParam}}
+                @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isQueryParam}}{{#isBodyParam}}
+                @JsonBody {{{dataType}}} {{paramName}}{{/isBodyParam}}{{#isFormParam}}
+                @RequestParam("{{baseName}}") Optional<{{{dataType}}}> {{paramName}}{{/isFormParam}}{{#isHeaderParam}}
+                @HttpHeader("{{baseName}}") Optional<{{{dataType}}}> {{paramName}}{{/isHeaderParam}}{{#hasMore}}, {{/hasMore}}{{/allParams}}{{#responses}}{{#headers}},
+                @HttpHeader("{{baseName}}") Consumer<{{{dataType}}}> set{{nameInCamelCase}}{{/headers}}{{/responses}}
+        ) throws IOException;
+    {{/operation}}
+}
+{{/operations}}
