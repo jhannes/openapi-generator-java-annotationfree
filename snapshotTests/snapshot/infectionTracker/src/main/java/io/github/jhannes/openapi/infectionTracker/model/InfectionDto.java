@@ -13,143 +13,176 @@
 
 package io.github.jhannes.openapi.infectionTracker.model;
 
-import java.util.Objects;
-import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.github.jhannes.openapi.infectionTracker.model.ExposureDto;
-import io.github.jhannes.openapi.infectionTracker.model.InfectionInformationDto;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
+import java.net.URI;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
- * InfectionDto
- */
-
+* InfectionDto
+*/
 public class InfectionDto {
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
-  private UUID id;
 
-  public static final String SERIALIZED_NAME_INFORMATION = "information";
-  @SerializedName(SERIALIZED_NAME_INFORMATION)
-  private InfectionInformationDto information;
+    private UUID id;
 
-  public static final String SERIALIZED_NAME_REGISTERED_EXPOSURES = "registeredExposures";
-  @SerializedName(SERIALIZED_NAME_REGISTERED_EXPOSURES)
-  private List<ExposureDto> registeredExposures = new ArrayList<ExposureDto>();
+    private InfectionInformationDto information;
 
+    private List<ExposureDto> registeredExposures = new ArrayList<ExposureDto>();
 
-   /**
-   * Get id
-   * @return id
-  **/
-  @ApiModelProperty(required = true, value = "")
-
-  public UUID getId() {
-    return id;
-  }
-
-
-
-
-  public InfectionDto information(InfectionInformationDto information) {
-    
-    this.information = information;
-    return this;
-  }
-
-   /**
-   * Get information
-   * @return information
-  **/
-  @ApiModelProperty(required = true, value = "")
-
-  public InfectionInformationDto getInformation() {
-    return information;
-  }
-
-
-  public void setInformation(InfectionInformationDto information) {
-    this.information = information;
-  }
-
-
-  public InfectionDto registeredExposures(List<ExposureDto> registeredExposures) {
-    
-    this.registeredExposures = registeredExposures;
-    return this;
-  }
-
-  public InfectionDto addRegisteredExposuresItem(ExposureDto registeredExposuresItem) {
-    this.registeredExposures.add(registeredExposuresItem);
-    return this;
-  }
-
-   /**
-   * Get registeredExposures
-   * @return registeredExposures
-  **/
-  @ApiModelProperty(required = true, value = "")
-
-  public List<ExposureDto> getRegisteredExposures() {
-    return registeredExposures;
-  }
-
-
-  public void setRegisteredExposures(List<ExposureDto> registeredExposures) {
-    this.registeredExposures = registeredExposures;
-  }
-
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
+    public static String[] readOnlyFields() {
+        return new String[] {
+                "id",
+        };
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    public static String[] writeOnlyFields() {
+        return new String[] {
+        };
     }
-    InfectionDto infection = (InfectionDto) o;
-    return Objects.equals(this.id, infection.id) &&
-        Objects.equals(this.information, infection.information) &&
-        Objects.equals(this.registeredExposures, infection.registeredExposures);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, information, registeredExposures);
-  }
+    public static String[] requiredFields() {
+        return new String[] {
+                "id",
+                "information",
+                "registeredExposures",
+        };
+    }
+
+    public List<String> missingRequiredFields() {
+        List<String> result = new ArrayList();
+        if (isMissing(id)) result.add("id");
+        if (isMissing(information)) result.add("information");
+        if (isMissing(registeredExposures)) result.add("registeredExposures");
+        return result;
+    }
+
+    private boolean isMissing(String s) {
+        return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(Object s) {
+        return s == null;
+    }
 
 
-  @Override
-  public String toString() {
+    /**
+     * Get id
+     * read only
+     * @return id
+     */
+    public UUID getId() {
+        return id;
+    }
+
+    /** <strong>read only</strong> */
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public InfectionDto id(UUID id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
+     * Get information
+     * @return information
+     */
+    public InfectionInformationDto getInformation() {
+        return information;
+    }
+
+    public void setInformation(InfectionInformationDto information) {
+        this.information = information;
+    }
+
+    public InfectionDto information(InfectionInformationDto information) {
+        this.information = information;
+        return this;
+    }
+
+    public <T> InfectionDto registeredExposures(Collection<T> items, Function<T, ExposureDto> mapper) {
+        return registeredExposures(items.stream().map(mapper).collect(Collectors.toList()));
+    }
+
+    public <T> List<T> getRegisteredExposures(Function<ExposureDto, T> mapper) {
+        return getRegisteredExposures().stream().map(mapper).collect(Collectors.toList());
+    }
+
+    public InfectionDto addRegisteredExposuresItem(ExposureDto registeredExposuresItem) {
+        this.registeredExposures.add(registeredExposuresItem);
+        return this;
+    }
+
+    /**
+     * Get registeredExposures
+     * @return registeredExposures
+     */
+    public List<ExposureDto> getRegisteredExposures() {
+        return registeredExposures;
+    }
+
+    public void setRegisteredExposures(List<ExposureDto> registeredExposures) {
+        this.registeredExposures = registeredExposures;
+    }
+
+    public InfectionDto registeredExposures(List<ExposureDto> registeredExposures) {
+        this.registeredExposures = registeredExposures;
+        return this;
+    }
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        InfectionDto infection = (InfectionDto) o;
+        return Objects.equals(this.id, infection.id) &&
+            Objects.equals(this.information, infection.information) &&
+            Objects.equals(this.registeredExposures, infection.registeredExposures);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, information, registeredExposures);
+    }
+
+    @Override
+    public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class InfectionDto {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    information: ").append(toIndentedString(information)).append("\n");
-    sb.append("    registeredExposures: ").append(toIndentedString(registeredExposures)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
+        sb.append("    id: ").append(toIndentedString(id)).append("\n");
+        sb.append("    information: ").append(toIndentedString(information)).append("\n");
+        sb.append("    registeredExposures: ").append(toIndentedString(registeredExposures)).append("\n");
+        sb.append("}");
+        return sb.toString();
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    /**
+    * Convert the given object to string with each line indented by 4 spaces
+    * (except the first line).
+    */
+    private String toIndentedString(java.lang.Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
 
 }
 

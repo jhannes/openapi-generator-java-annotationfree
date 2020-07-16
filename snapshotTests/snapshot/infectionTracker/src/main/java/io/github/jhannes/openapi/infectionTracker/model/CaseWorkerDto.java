@@ -13,212 +13,220 @@
 
 package io.github.jhannes.openapi.infectionTracker.model;
 
-import java.util.Objects;
+import java.net.URI;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
- * CaseWorkerDto
- */
-
+* CaseWorkerDto
+*/
 public class CaseWorkerDto {
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
-  private UUID id;
 
-  public static final String SERIALIZED_NAME_FULL_NAME = "fullName";
-  @SerializedName(SERIALIZED_NAME_FULL_NAME)
-  private String fullName;
+    private UUID id;
 
-  public static final String SERIALIZED_NAME_EMAIL = "email";
-  @SerializedName(SERIALIZED_NAME_EMAIL)
-  private String email;
+    private String fullName;
 
-  /**
-   * Gets or Sets role
-   */
-  @JsonAdapter(RoleEnum.Adapter.class)
-  public enum RoleEnum {
-    ADMINISTRATOR("administrator"),
-    
-    INTERVIEWER("interviewer"),
-    
-    FOLLOWUP("followup");
+    private String email;
+            
+    /**
+     * Gets or Sets role
+     */
+    public enum RoleEnum {
+        ADMINISTRATOR("administrator"),
+        
+        INTERVIEWER("interviewer"),
+        
+        FOLLOWUP("followup");
 
-    private String value;
+        private String value;
 
-    RoleEnum(String value) {
-      this.value = value;
+        RoleEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static RoleEnum fromValue(String text) {
+            for (RoleEnum b : RoleEnum.values()) {
+                if (String.valueOf(b.value).equals(text)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + text + "'");
+        }
     }
 
-    public String getValue() {
-      return value;
+    private RoleEnum role;
+
+    public static String[] readOnlyFields() {
+        return new String[] {
+                "id",
+        };
+    }
+
+    public static String[] writeOnlyFields() {
+        return new String[] {
+        };
+    }
+
+    public static String[] requiredFields() {
+        return new String[] {
+                "fullName",
+                "email",
+                "role",
+        };
+    }
+
+    public List<String> missingRequiredFields() {
+        List<String> result = new ArrayList();
+        if (isMissing(fullName)) result.add("fullName");
+        if (isMissing(email)) result.add("email");
+        if (isMissing(role)) result.add("role");
+        return result;
+    }
+
+    private boolean isMissing(String s) {
+        return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(Object s) {
+        return s == null;
+    }
+
+
+    /**
+     * Get id
+     * read only
+     * @return id
+     */
+    public UUID getId() {
+        return id;
+    }
+
+    /** <strong>read only</strong> */
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public CaseWorkerDto id(UUID id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
+     * Get fullName
+     * example: Florence Nightingale
+     * @return fullName
+     */
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public CaseWorkerDto fullName(String fullName) {
+        this.fullName = fullName;
+        return this;
+    }
+
+    /**
+     * Get email
+     * @return email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public CaseWorkerDto email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    /**
+     * Get role
+     * @return role
+     */
+    public RoleEnum getRole() {
+        return role;
+    }
+
+    public void setRole(RoleEnum role) {
+        this.role = role;
+    }
+
+    public CaseWorkerDto role(RoleEnum role) {
+        this.role = role;
+        return this;
+    }
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        CaseWorkerDto caseWorker = (CaseWorkerDto) o;
+        return Objects.equals(this.id, caseWorker.id) &&
+            Objects.equals(this.fullName, caseWorker.fullName) &&
+            Objects.equals(this.email, caseWorker.email) &&
+            Objects.equals(this.role, caseWorker.role);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, fullName, email, role);
     }
 
     @Override
     public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static RoleEnum fromValue(String value) {
-      for (RoleEnum b : RoleEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<RoleEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final RoleEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public RoleEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return RoleEnum.fromValue(value);
-      }
-    }
-  }
-
-  public static final String SERIALIZED_NAME_ROLE = "role";
-  @SerializedName(SERIALIZED_NAME_ROLE)
-  private RoleEnum role;
-
-
-   /**
-   * Get id
-   * @return id
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public UUID getId() {
-    return id;
-  }
-
-
-
-
-  public CaseWorkerDto fullName(String fullName) {
-    
-    this.fullName = fullName;
-    return this;
-  }
-
-   /**
-   * Get fullName
-   * @return fullName
-  **/
-  @ApiModelProperty(example = "Florence Nightingale", required = true, value = "")
-
-  public String getFullName() {
-    return fullName;
-  }
-
-
-  public void setFullName(String fullName) {
-    this.fullName = fullName;
-  }
-
-
-  public CaseWorkerDto email(String email) {
-    
-    this.email = email;
-    return this;
-  }
-
-   /**
-   * Get email
-   * @return email
-  **/
-  @ApiModelProperty(required = true, value = "")
-
-  public String getEmail() {
-    return email;
-  }
-
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-
-  public CaseWorkerDto role(RoleEnum role) {
-    
-    this.role = role;
-    return this;
-  }
-
-   /**
-   * Get role
-   * @return role
-  **/
-  @ApiModelProperty(required = true, value = "")
-
-  public RoleEnum getRole() {
-    return role;
-  }
-
-
-  public void setRole(RoleEnum role) {
-    this.role = role;
-  }
-
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    CaseWorkerDto caseWorker = (CaseWorkerDto) o;
-    return Objects.equals(this.id, caseWorker.id) &&
-        Objects.equals(this.fullName, caseWorker.fullName) &&
-        Objects.equals(this.email, caseWorker.email) &&
-        Objects.equals(this.role, caseWorker.role);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id, fullName, email, role);
-  }
-
-
-  @Override
-  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CaseWorkerDto {\n");
-    sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    fullName: ").append(toIndentedString(fullName)).append("\n");
-    sb.append("    email: ").append(toIndentedString(email)).append("\n");
-    sb.append("    role: ").append(toIndentedString(role)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
+        sb.append("    id: ").append(toIndentedString(id)).append("\n");
+        sb.append("    fullName: ").append(toIndentedString(fullName)).append("\n");
+        sb.append("    email: ").append(toIndentedString(email)).append("\n");
+        sb.append("    role: ").append(toIndentedString(role)).append("\n");
+        sb.append("}");
+        return sb.toString();
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    /**
+    * Convert the given object to string with each line indented by 4 spaces
+    * (except the first line).
+    */
+    private String toIndentedString(java.lang.Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
 
 }
 

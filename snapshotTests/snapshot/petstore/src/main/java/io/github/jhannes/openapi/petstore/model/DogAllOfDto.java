@@ -13,167 +13,170 @@
 
 package io.github.jhannes.openapi.petstore.model;
 
-import java.util.Objects;
+import java.net.URI;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
- * DogAllOfDto
- */
-
+* DogAllOfDto
+*/
 public class DogAllOfDto {
-  public static final String SERIALIZED_NAME_BARK = "bark";
-  @SerializedName(SERIALIZED_NAME_BARK)
-  private Boolean bark;
 
-  /**
-   * Gets or Sets breed
-   */
-  @JsonAdapter(BreedEnum.Adapter.class)
-  public enum BreedEnum {
-    DINGO("Dingo"),
-    
-    HUSKY("Husky"),
-    
-    RETRIEVER("Retriever"),
-    
-    SHEPHERD("Shepherd");
+    private Boolean bark;
+            
+    /**
+     * Gets or Sets breed
+     */
+    public enum BreedEnum {
+        DINGO("Dingo"),
+        
+        HUSKY("Husky"),
+        
+        RETRIEVER("Retriever"),
+        
+        SHEPHERD("Shepherd");
 
-    private String value;
+        private String value;
 
-    BreedEnum(String value) {
-      this.value = value;
+        BreedEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static BreedEnum fromValue(String text) {
+            for (BreedEnum b : BreedEnum.values()) {
+                if (String.valueOf(b.value).equals(text)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + text + "'");
+        }
     }
 
-    public String getValue() {
-      return value;
+    private BreedEnum breed;
+
+    public static String[] readOnlyFields() {
+        return new String[] {
+        };
+    }
+
+    public static String[] writeOnlyFields() {
+        return new String[] {
+        };
+    }
+
+    public static String[] requiredFields() {
+        return new String[] {
+        };
+    }
+
+    public List<String> missingRequiredFields() {
+        List<String> result = new ArrayList();
+        return result;
+    }
+
+    private boolean isMissing(String s) {
+        return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(Object s) {
+        return s == null;
+    }
+
+
+    /**
+     * Get bark
+     * @return bark
+     */
+    public Boolean getBark() {
+        return bark;
+    }
+
+    public void setBark(Boolean bark) {
+        this.bark = bark;
+    }
+
+    public DogAllOfDto bark(Boolean bark) {
+        this.bark = bark;
+        return this;
+    }
+
+    /**
+     * Get breed
+     * @return breed
+     */
+    public BreedEnum getBreed() {
+        return breed;
+    }
+
+    public void setBreed(BreedEnum breed) {
+        this.breed = breed;
+    }
+
+    public DogAllOfDto breed(BreedEnum breed) {
+        this.breed = breed;
+        return this;
+    }
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        DogAllOfDto dogAllOf = (DogAllOfDto) o;
+        return Objects.equals(this.bark, dogAllOf.bark) &&
+            Objects.equals(this.breed, dogAllOf.breed);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(bark, breed);
     }
 
     @Override
     public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static BreedEnum fromValue(String value) {
-      for (BreedEnum b : BreedEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<BreedEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final BreedEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public BreedEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return BreedEnum.fromValue(value);
-      }
-    }
-  }
-
-  public static final String SERIALIZED_NAME_BREED = "breed";
-  @SerializedName(SERIALIZED_NAME_BREED)
-  private BreedEnum breed;
-
-
-  public DogAllOfDto bark(Boolean bark) {
-    
-    this.bark = bark;
-    return this;
-  }
-
-   /**
-   * Get bark
-   * @return bark
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public Boolean getBark() {
-    return bark;
-  }
-
-
-  public void setBark(Boolean bark) {
-    this.bark = bark;
-  }
-
-
-  public DogAllOfDto breed(BreedEnum breed) {
-    
-    this.breed = breed;
-    return this;
-  }
-
-   /**
-   * Get breed
-   * @return breed
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public BreedEnum getBreed() {
-    return breed;
-  }
-
-
-  public void setBreed(BreedEnum breed) {
-    this.breed = breed;
-  }
-
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    DogAllOfDto dogAllOf = (DogAllOfDto) o;
-    return Objects.equals(this.bark, dogAllOf.bark) &&
-        Objects.equals(this.breed, dogAllOf.breed);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(bark, breed);
-  }
-
-
-  @Override
-  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class DogAllOfDto {\n");
-    sb.append("    bark: ").append(toIndentedString(bark)).append("\n");
-    sb.append("    breed: ").append(toIndentedString(breed)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
+        sb.append("    bark: ").append(toIndentedString(bark)).append("\n");
+        sb.append("    breed: ").append(toIndentedString(breed)).append("\n");
+        sb.append("}");
+        return sb.toString();
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    /**
+    * Convert the given object to string with each line indented by 4 spaces
+    * (except the first line).
+    */
+    private String toIndentedString(java.lang.Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
 
 }
 

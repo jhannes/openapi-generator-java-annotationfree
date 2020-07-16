@@ -13,148 +13,156 @@
 
 package io.github.jhannes.openapi.petstore.model;
 
-import java.util.Objects;
+import java.net.URI;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
- * PetDto
- */
-
-
+* PetDto
+*/
 public class PetDto {
-  public static final String SERIALIZED_NAME_PET_TYPE = "pet_type";
-  @SerializedName(SERIALIZED_NAME_PET_TYPE)
-  protected String petType;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
+    private String pet_type;
 
-  public static final String SERIALIZED_NAME_BIRTH_DATE = "birth_date";
-  @SerializedName(SERIALIZED_NAME_BIRTH_DATE)
-  private String birthDate;
+    private String name;
 
-  public PetDto() {
-    this.petType = this.getClass().getSimpleName();
-  }
+    private String birth_date;
 
-  public PetDto petType(String petType) {
-    
-    this.petType = petType;
-    return this;
-  }
-
-   /**
-   * Get petType
-   * @return petType
-  **/
-  @ApiModelProperty(required = true, value = "")
-
-  public String getPetType() {
-    return petType;
-  }
-
-
-  public void setPetType(String petType) {
-    this.petType = petType;
-  }
-
-
-  public PetDto name(String name) {
-    
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * Get name
-   * @return name
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public String getName() {
-    return name;
-  }
-
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-
-  public PetDto birthDate(String birthDate) {
-    
-    this.birthDate = birthDate;
-    return this;
-  }
-
-   /**
-   * Get birthDate
-   * @return birthDate
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public String getBirthDate() {
-    return birthDate;
-  }
-
-
-  public void setBirthDate(String birthDate) {
-    this.birthDate = birthDate;
-  }
-
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
+    public static String[] readOnlyFields() {
+        return new String[] {
+        };
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    public static String[] writeOnlyFields() {
+        return new String[] {
+        };
     }
-    PetDto pet = (PetDto) o;
-    return Objects.equals(this.petType, pet.petType) &&
-        Objects.equals(this.name, pet.name) &&
-        Objects.equals(this.birthDate, pet.birthDate);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(petType, name, birthDate);
-  }
+    public static String[] requiredFields() {
+        return new String[] {
+                "pet_type",
+        };
+    }
+
+    public List<String> missingRequiredFields() {
+        List<String> result = new ArrayList();
+        if (isMissing(pet_type)) result.add("pet_type");
+        return result;
+    }
+
+    private boolean isMissing(String s) {
+        return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(Object s) {
+        return s == null;
+    }
 
 
-  @Override
-  public String toString() {
+    /**
+     * Get pet_type
+     * @return pet_type
+     */
+    public String getPetType() {
+        return pet_type;
+    }
+
+    public void setPetType(String petType) {
+        this.pet_type = petType;
+    }
+
+    public PetDto petType(String petType) {
+        this.pet_type = petType;
+        return this;
+    }
+
+    /**
+     * Get name
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public PetDto name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Get birth_date
+     * @return birth_date
+     */
+    public String getBirthDate() {
+        return birth_date;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birth_date = birthDate;
+    }
+
+    public PetDto birthDate(String birthDate) {
+        this.birth_date = birthDate;
+        return this;
+    }
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        PetDto pet = (PetDto) o;
+        return Objects.equals(this.pet_type, pet.pet_type) &&
+            Objects.equals(this.name, pet.name) &&
+            Objects.equals(this.birth_date, pet.birth_date);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pet_type, name, birth_date);
+    }
+
+    @Override
+    public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class PetDto {\n");
-    sb.append("    petType: ").append(toIndentedString(petType)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    birthDate: ").append(toIndentedString(birthDate)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
+        sb.append("    pet_type: ").append(toIndentedString(pet_type)).append("\n");
+        sb.append("    name: ").append(toIndentedString(name)).append("\n");
+        sb.append("    birth_date: ").append(toIndentedString(birth_date)).append("\n");
+        sb.append("}");
+        return sb.toString();
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    /**
+    * Convert the given object to string with each line indented by 4 spaces
+    * (except the first line).
+    */
+    private String toIndentedString(java.lang.Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
 
 }
 

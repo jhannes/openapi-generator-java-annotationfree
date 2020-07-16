@@ -13,259 +13,235 @@
 
 package io.github.jhannes.openapi.petstore.model;
 
-import java.util.Objects;
+import java.net.URI;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.github.jhannes.openapi.petstore.model.CatDto;
-import io.github.jhannes.openapi.petstore.model.DogDto;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
- * AnyPetDto
- */
-
-
+* AnyPetDto
+*/
 public class AnyPetDto {
-  public static final String SERIALIZED_NAME_PET_TYPE = "pet_type";
-  @SerializedName(SERIALIZED_NAME_PET_TYPE)
-  protected String petType;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
-  private String name;
+    private String pet_type;
 
-  public static final String SERIALIZED_NAME_BIRTH_DATE = "birth_date";
-  @SerializedName(SERIALIZED_NAME_BIRTH_DATE)
-  private String birthDate;
+    private String name;
 
-  public static final String SERIALIZED_NAME_BARK = "bark";
-  @SerializedName(SERIALIZED_NAME_BARK)
-  private Boolean bark;
+    private String birth_date;
 
-  /**
-   * Gets or Sets breed
-   */
-  @JsonAdapter(BreedEnum.Adapter.class)
-  public enum BreedEnum {
-    DINGO("Dingo"),
-    
-    HUSKY("Husky"),
-    
-    RETRIEVER("Retriever"),
-    
-    SHEPHERD("Shepherd");
+    private Boolean bark;
+            
+    /**
+     * Gets or Sets breed
+     */
+    public enum BreedEnum {
+        DINGO("Dingo"),
+        
+        HUSKY("Husky"),
+        
+        RETRIEVER("Retriever"),
+        
+        SHEPHERD("Shepherd");
 
-    private String value;
+        private String value;
 
-    BreedEnum(String value) {
-      this.value = value;
+        BreedEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static BreedEnum fromValue(String text) {
+            for (BreedEnum b : BreedEnum.values()) {
+                if (String.valueOf(b.value).equals(text)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + text + "'");
+        }
     }
 
-    public String getValue() {
-      return value;
+    private BreedEnum breed;
+
+    public static String[] readOnlyFields() {
+        return new String[] {
+        };
+    }
+
+    public static String[] writeOnlyFields() {
+        return new String[] {
+        };
+    }
+
+    public static String[] requiredFields() {
+        return new String[] {
+                "pet_type",
+        };
+    }
+
+    public List<String> missingRequiredFields() {
+        List<String> result = new ArrayList();
+        if (isMissing(pet_type)) result.add("pet_type");
+        return result;
+    }
+
+    private boolean isMissing(String s) {
+        return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(Object s) {
+        return s == null;
+    }
+
+
+    /**
+     * Get pet_type
+     * @return pet_type
+     */
+    public String getPetType() {
+        return pet_type;
+    }
+
+    public void setPetType(String petType) {
+        this.pet_type = petType;
+    }
+
+    public AnyPetDto petType(String petType) {
+        this.pet_type = petType;
+        return this;
+    }
+
+    /**
+     * Get name
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public AnyPetDto name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Get birth_date
+     * @return birth_date
+     */
+    public String getBirthDate() {
+        return birth_date;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birth_date = birthDate;
+    }
+
+    public AnyPetDto birthDate(String birthDate) {
+        this.birth_date = birthDate;
+        return this;
+    }
+
+    /**
+     * Get bark
+     * @return bark
+     */
+    public Boolean getBark() {
+        return bark;
+    }
+
+    public void setBark(Boolean bark) {
+        this.bark = bark;
+    }
+
+    public AnyPetDto bark(Boolean bark) {
+        this.bark = bark;
+        return this;
+    }
+
+    /**
+     * Get breed
+     * @return breed
+     */
+    public BreedEnum getBreed() {
+        return breed;
+    }
+
+    public void setBreed(BreedEnum breed) {
+        this.breed = breed;
+    }
+
+    public AnyPetDto breed(BreedEnum breed) {
+        this.breed = breed;
+        return this;
+    }
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        AnyPetDto anyPet = (AnyPetDto) o;
+        return Objects.equals(this.pet_type, anyPet.pet_type) &&
+            Objects.equals(this.name, anyPet.name) &&
+            Objects.equals(this.birth_date, anyPet.birth_date) &&
+            Objects.equals(this.bark, anyPet.bark) &&
+            Objects.equals(this.breed, anyPet.breed);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(pet_type, name, birth_date, bark, breed);
     }
 
     @Override
     public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static BreedEnum fromValue(String value) {
-      for (BreedEnum b : BreedEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<BreedEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final BreedEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public BreedEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return BreedEnum.fromValue(value);
-      }
-    }
-  }
-
-  public static final String SERIALIZED_NAME_BREED = "breed";
-  @SerializedName(SERIALIZED_NAME_BREED)
-  private BreedEnum breed;
-
-  public AnyPetDto() {
-    this.petType = this.getClass().getSimpleName();
-  }
-
-  public AnyPetDto petType(String petType) {
-    
-    this.petType = petType;
-    return this;
-  }
-
-   /**
-   * Get petType
-   * @return petType
-  **/
-  @ApiModelProperty(required = true, value = "")
-
-  public String getPetType() {
-    return petType;
-  }
-
-
-  public void setPetType(String petType) {
-    this.petType = petType;
-  }
-
-
-  public AnyPetDto name(String name) {
-    
-    this.name = name;
-    return this;
-  }
-
-   /**
-   * Get name
-   * @return name
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public String getName() {
-    return name;
-  }
-
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-
-  public AnyPetDto birthDate(String birthDate) {
-    
-    this.birthDate = birthDate;
-    return this;
-  }
-
-   /**
-   * Get birthDate
-   * @return birthDate
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public String getBirthDate() {
-    return birthDate;
-  }
-
-
-  public void setBirthDate(String birthDate) {
-    this.birthDate = birthDate;
-  }
-
-
-  public AnyPetDto bark(Boolean bark) {
-    
-    this.bark = bark;
-    return this;
-  }
-
-   /**
-   * Get bark
-   * @return bark
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public Boolean getBark() {
-    return bark;
-  }
-
-
-  public void setBark(Boolean bark) {
-    this.bark = bark;
-  }
-
-
-  public AnyPetDto breed(BreedEnum breed) {
-    
-    this.breed = breed;
-    return this;
-  }
-
-   /**
-   * Get breed
-   * @return breed
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public BreedEnum getBreed() {
-    return breed;
-  }
-
-
-  public void setBreed(BreedEnum breed) {
-    this.breed = breed;
-  }
-
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-    AnyPetDto anyPet = (AnyPetDto) o;
-    return Objects.equals(this.petType, anyPet.petType) &&
-        Objects.equals(this.name, anyPet.name) &&
-        Objects.equals(this.birthDate, anyPet.birthDate) &&
-        Objects.equals(this.bark, anyPet.bark) &&
-        Objects.equals(this.breed, anyPet.breed);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(petType, name, birthDate, bark, breed);
-  }
-
-
-  @Override
-  public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class AnyPetDto {\n");
-    sb.append("    petType: ").append(toIndentedString(petType)).append("\n");
-    sb.append("    name: ").append(toIndentedString(name)).append("\n");
-    sb.append("    birthDate: ").append(toIndentedString(birthDate)).append("\n");
-    sb.append("    bark: ").append(toIndentedString(bark)).append("\n");
-    sb.append("    breed: ").append(toIndentedString(breed)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
+        sb.append("    pet_type: ").append(toIndentedString(pet_type)).append("\n");
+        sb.append("    name: ").append(toIndentedString(name)).append("\n");
+        sb.append("    birth_date: ").append(toIndentedString(birth_date)).append("\n");
+        sb.append("    bark: ").append(toIndentedString(bark)).append("\n");
+        sb.append("    breed: ").append(toIndentedString(breed)).append("\n");
+        sb.append("}");
+        return sb.toString();
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    /**
+    * Convert the given object to string with each line indented by 4 spaces
+    * (except the first line).
+    */
+    private String toIndentedString(java.lang.Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
 
 }
 

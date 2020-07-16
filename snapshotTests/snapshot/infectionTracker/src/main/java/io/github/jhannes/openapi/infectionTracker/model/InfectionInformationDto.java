@@ -13,175 +13,176 @@
 
 package io.github.jhannes.openapi.infectionTracker.model;
 
-import java.util.Objects;
+import java.net.URI;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 import java.util.Arrays;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import java.io.IOException;
-import org.threeten.bp.LocalDate;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
- * InfectionInformationDto
- */
-
+* InfectionInformationDto
+*/
 public class InfectionInformationDto {
-  public static final String SERIALIZED_NAME_PATIENT_NAME = "patientName";
-  @SerializedName(SERIALIZED_NAME_PATIENT_NAME)
-  private String patientName;
 
-  public static final String SERIALIZED_NAME_PATIENT_PHONE_NUMBER = "patientPhoneNumber";
-  @SerializedName(SERIALIZED_NAME_PATIENT_PHONE_NUMBER)
-  private String patientPhoneNumber;
+    private String patientName;
 
-  public static final String SERIALIZED_NAME_LIKELY_INFECTION_DATE = "likelyInfectionDate";
-  @SerializedName(SERIALIZED_NAME_LIKELY_INFECTION_DATE)
-  private LocalDate likelyInfectionDate;
+    private String patientPhoneNumber;
 
-  public static final String SERIALIZED_NAME_NOTES = "notes";
-  @SerializedName(SERIALIZED_NAME_NOTES)
-  private String notes;
+    private LocalDate likelyInfectionDate;
 
+    private String notes;
 
-  public InfectionInformationDto patientName(String patientName) {
-    
-    this.patientName = patientName;
-    return this;
-  }
-
-   /**
-   * Get patientName
-   * @return patientName
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(example = "John Smith", value = "")
-
-  public String getPatientName() {
-    return patientName;
-  }
-
-
-  public void setPatientName(String patientName) {
-    this.patientName = patientName;
-  }
-
-
-  public InfectionInformationDto patientPhoneNumber(String patientPhoneNumber) {
-    
-    this.patientPhoneNumber = patientPhoneNumber;
-    return this;
-  }
-
-   /**
-   * Get patientPhoneNumber
-   * @return patientPhoneNumber
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public String getPatientPhoneNumber() {
-    return patientPhoneNumber;
-  }
-
-
-  public void setPatientPhoneNumber(String patientPhoneNumber) {
-    this.patientPhoneNumber = patientPhoneNumber;
-  }
-
-
-  public InfectionInformationDto likelyInfectionDate(LocalDate likelyInfectionDate) {
-    
-    this.likelyInfectionDate = likelyInfectionDate;
-    return this;
-  }
-
-   /**
-   * Get likelyInfectionDate
-   * @return likelyInfectionDate
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public LocalDate getLikelyInfectionDate() {
-    return likelyInfectionDate;
-  }
-
-
-  public void setLikelyInfectionDate(LocalDate likelyInfectionDate) {
-    this.likelyInfectionDate = likelyInfectionDate;
-  }
-
-
-  public InfectionInformationDto notes(String notes) {
-    
-    this.notes = notes;
-    return this;
-  }
-
-   /**
-   * Free form text to describe anything about the patient
-   * @return notes
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "Free form text to describe anything about the patient")
-
-  public String getNotes() {
-    return notes;
-  }
-
-
-  public void setNotes(String notes) {
-    this.notes = notes;
-  }
-
-
-  @Override
-  public boolean equals(java.lang.Object o) {
-    if (this == o) {
-      return true;
+    public static String[] readOnlyFields() {
+        return new String[] {
+        };
     }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
+
+    public static String[] writeOnlyFields() {
+        return new String[] {
+        };
     }
-    InfectionInformationDto infectionInformation = (InfectionInformationDto) o;
-    return Objects.equals(this.patientName, infectionInformation.patientName) &&
-        Objects.equals(this.patientPhoneNumber, infectionInformation.patientPhoneNumber) &&
-        Objects.equals(this.likelyInfectionDate, infectionInformation.likelyInfectionDate) &&
-        Objects.equals(this.notes, infectionInformation.notes);
-  }
 
-  @Override
-  public int hashCode() {
-    return Objects.hash(patientName, patientPhoneNumber, likelyInfectionDate, notes);
-  }
+    public static String[] requiredFields() {
+        return new String[] {
+        };
+    }
+
+    public List<String> missingRequiredFields() {
+        List<String> result = new ArrayList();
+        return result;
+    }
+
+    private boolean isMissing(String s) {
+        return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(Object s) {
+        return s == null;
+    }
 
 
-  @Override
-  public String toString() {
+    /**
+     * Get patientName
+     * example: John Smith
+     * @return patientName
+     */
+    public String getPatientName() {
+        return patientName;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public InfectionInformationDto patientName(String patientName) {
+        this.patientName = patientName;
+        return this;
+    }
+
+    /**
+     * Get patientPhoneNumber
+     * @return patientPhoneNumber
+     */
+    public String getPatientPhoneNumber() {
+        return patientPhoneNumber;
+    }
+
+    public void setPatientPhoneNumber(String patientPhoneNumber) {
+        this.patientPhoneNumber = patientPhoneNumber;
+    }
+
+    public InfectionInformationDto patientPhoneNumber(String patientPhoneNumber) {
+        this.patientPhoneNumber = patientPhoneNumber;
+        return this;
+    }
+
+    /**
+     * Get likelyInfectionDate
+     * @return likelyInfectionDate
+     */
+    public LocalDate getLikelyInfectionDate() {
+        return likelyInfectionDate;
+    }
+
+    public void setLikelyInfectionDate(LocalDate likelyInfectionDate) {
+        this.likelyInfectionDate = likelyInfectionDate;
+    }
+
+    public InfectionInformationDto likelyInfectionDate(LocalDate likelyInfectionDate) {
+        this.likelyInfectionDate = likelyInfectionDate;
+        return this;
+    }
+
+    /**
+     * Free form text to describe anything about the patient
+     * @return notes
+     */
+    public String getNotes() {
+        return notes;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public InfectionInformationDto notes(String notes) {
+        this.notes = notes;
+        return this;
+    }
+
+    @Override
+    public boolean equals(java.lang.Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        InfectionInformationDto infectionInformation = (InfectionInformationDto) o;
+        return Objects.equals(this.patientName, infectionInformation.patientName) &&
+            Objects.equals(this.patientPhoneNumber, infectionInformation.patientPhoneNumber) &&
+            Objects.equals(this.likelyInfectionDate, infectionInformation.likelyInfectionDate) &&
+            Objects.equals(this.notes, infectionInformation.notes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(patientName, patientPhoneNumber, likelyInfectionDate, notes);
+    }
+
+    @Override
+    public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class InfectionInformationDto {\n");
-    sb.append("    patientName: ").append(toIndentedString(patientName)).append("\n");
-    sb.append("    patientPhoneNumber: ").append(toIndentedString(patientPhoneNumber)).append("\n");
-    sb.append("    likelyInfectionDate: ").append(toIndentedString(likelyInfectionDate)).append("\n");
-    sb.append("    notes: ").append(toIndentedString(notes)).append("\n");
-    sb.append("}");
-    return sb.toString();
-  }
-
-  /**
-   * Convert the given object to string with each line indented by 4 spaces
-   * (except the first line).
-   */
-  private String toIndentedString(java.lang.Object o) {
-    if (o == null) {
-      return "null";
+        sb.append("    patientName: ").append(toIndentedString(patientName)).append("\n");
+        sb.append("    patientPhoneNumber: ").append(toIndentedString(patientPhoneNumber)).append("\n");
+        sb.append("    likelyInfectionDate: ").append(toIndentedString(likelyInfectionDate)).append("\n");
+        sb.append("    notes: ").append(toIndentedString(notes)).append("\n");
+        sb.append("}");
+        return sb.toString();
     }
-    return o.toString().replace("\n", "\n    ");
-  }
+
+    /**
+    * Convert the given object to string with each line indented by 4 spaces
+    * (except the first line).
+    */
+    private String toIndentedString(java.lang.Object o) {
+        if (o == null) {
+            return "null";
+        }
+        return o.toString().replace("\n", "\n    ");
+    }
 
 }
 
