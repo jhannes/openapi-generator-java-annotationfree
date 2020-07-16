@@ -13,7 +13,7 @@
 
 package io.github.jhannes.openapi.petstore;
 
-@javax.annotation.Generated(value = "io.github.jhannes.openapi.javaannotationfree.JavaCodegen", date = "2020-07-16T23:32:22.026033200+02:00[Europe/Oslo]")
+
 public class Pair {
     private String name = "";
     private String value = "";

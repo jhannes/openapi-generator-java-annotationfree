@@ -27,7 +27,7 @@ import java.io.IOException;
 /**
  * CatAllOfDto
  */
-@javax.annotation.Generated(value = "io.github.jhannes.openapi.javaannotationfree.JavaCodegen", date = "2020-07-16T23:32:22.026033200+02:00[Europe/Oslo]")
+
 public class CatAllOfDto {
   public static final String SERIALIZED_NAME_HUNTS = "hunts";
   @SerializedName(SERIALIZED_NAME_HUNTS)

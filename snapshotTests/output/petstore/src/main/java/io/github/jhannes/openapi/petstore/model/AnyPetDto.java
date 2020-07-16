@@ -29,7 +29,7 @@ import java.io.IOException;
 /**
  * AnyPetDto
  */
-@javax.annotation.Generated(value = "io.github.jhannes.openapi.javaannotationfree.JavaCodegen", date = "2020-07-16T23:32:22.026033200+02:00[Europe/Oslo]")
+
 
 public class AnyPetDto {
   public static final String SERIALIZED_NAME_PET_TYPE = "pet_type";

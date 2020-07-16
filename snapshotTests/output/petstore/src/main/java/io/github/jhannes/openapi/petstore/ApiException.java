@@ -16,7 +16,7 @@ package io.github.jhannes.openapi.petstore;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "io.github.jhannes.openapi.javaannotationfree.JavaCodegen", date = "2020-07-16T23:32:22.026033200+02:00[Europe/Oslo]")
+
 public class ApiException extends Exception {
     private int code = 0;
     private Map<String, List<String>> responseHeaders = null;

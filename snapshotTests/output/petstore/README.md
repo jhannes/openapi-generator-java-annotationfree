@@ -2,7 +2,6 @@
 
 Sample API
 - API version: 0.1.9
-  - Build date: 2020-07-16T23:32:22.026033200+02:00[Europe/Oslo]
 
 Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
 

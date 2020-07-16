@@ -2,7 +2,6 @@
 
 Infection Tracker
 - API version: 1.0.0-draft
-  - Build date: 2020-07-16T23:32:21.036035700+02:00[Europe/Oslo]
 
 Infection Tracker - A case management system for tracking the spread of diseases
 

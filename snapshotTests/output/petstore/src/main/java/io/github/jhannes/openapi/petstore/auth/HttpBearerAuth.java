@@ -18,7 +18,7 @@ import io.github.jhannes.openapi.petstore.Pair;
 import java.util.Map;
 import java.util.List;
 
-@javax.annotation.Generated(value = "io.github.jhannes.openapi.javaannotationfree.JavaCodegen", date = "2020-07-16T23:32:22.026033200+02:00[Europe/Oslo]")
+
 public class HttpBearerAuth implements Authentication {
   private final String scheme;
   private String bearerToken;

@@ -28,7 +28,7 @@ import org.threeten.bp.LocalDate;
 /**
  * InfectionInformationDto
  */
-@javax.annotation.Generated(value = "io.github.jhannes.openapi.javaannotationfree.JavaCodegen", date = "2020-07-16T23:32:21.036035700+02:00[Europe/Oslo]")
+
 public class InfectionInformationDto {
   public static final String SERIALIZED_NAME_PATIENT_NAME = "patientName";
   @SerializedName(SERIALIZED_NAME_PATIENT_NAME)
