@@ -1,0 +1,295 @@
+openapi: 3.0.2
+info:
+  description: Infection Tracker - A case management system for tracking the spread
+    of diseases
+  title: Infection Tracker
+  version: 1.0.0-draft
+servers:
+- description: current
+  url: /api
+- description: production
+  url: https://infectiontracker.example.gov/api
+tags:
+- description: List, add and edit infected individuals
+  name: Cases
+- description: List, add and edit exposures to infected individuals
+  name: Exposures
+- description: List, add and edit people who can follow up infected individuals
+  name: CaseWorkers
+paths:
+  /api/cases:
+    get:
+      operationId: listCases
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Infection'
+          description: The resulting infection case
+      tags:
+      - Cases
+      x-accepts: application/json
+    post:
+      operationId: newCase
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InfectionInformation'
+      responses:
+        "200":
+          description: The case was registered
+      tags:
+      - Cases
+      x-contentType: application/json
+      x-accepts: application/json
+  /api/cases/{caseId}:
+    get:
+      operationId: getCaseDetails
+      parameters:
+      - explode: false
+        in: path
+        name: caseId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Infection'
+          description: The details of an infection case, including the exposures
+      tags:
+      - Cases
+      x-accepts: application/json
+  /api/cases/{caseId}/exposures:
+    post:
+      operationId: registerExposure
+      parameters:
+      - explode: false
+        in: path
+        name: caseId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Exposure'
+      responses:
+        "200":
+          description: The exposure was registered
+      tags:
+      - Cases
+      x-contentType: application/json
+      x-accepts: application/json
+  /api/exposures:
+    get:
+      operationId: listExposures
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Exposure'
+          description: List exposures that the case worker can follow up
+      tags:
+      - Exposures
+      x-accepts: application/json
+  /api/exposures/{exposureId}:
+    put:
+      operationId: updateExposure
+      parameters:
+      - explode: false
+        in: path
+        name: exposureId
+        required: true
+        schema:
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Exposure'
+      responses:
+        "200":
+          description: The exposure was registered
+      tags:
+      - Exposures
+      x-contentType: application/json
+      x-accepts: application/json
+  /api/caseWorkers:
+    get:
+      operationId: listCaseWorkers
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CaseWorker'
+          description: Returns the case workers that the current user can assign to
+            cases
+      tags:
+      - CaseWorkers
+      x-accepts: application/json
+    post:
+      operationId: registerCaseWorker
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CaseWorker'
+      responses:
+        "200":
+          description: The exposure was registered
+      tags:
+      - CaseWorkers
+      x-contentType: application/json
+      x-accepts: application/json
+components:
+  schemas:
+    CaseWorker:
+      example:
+        role: administrator
+        fullName: Florence Nightingale
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        email: email
+      properties:
+        id:
+          format: uuid
+          readOnly: true
+          type: string
+        fullName:
+          example: Florence Nightingale
+          type: string
+        email:
+          format: email
+          type: string
+        role:
+          enum:
+          - administrator
+          - interviewer
+          - followup
+          type: string
+      required:
+      - email
+      - fullName
+      - role
+      type: object
+    Infection:
+      example:
+        information:
+          patientName: John Smith
+          patientPhoneNumber: patientPhoneNumber
+          notes: notes
+          likelyInfectionDate: 2000-01-23
+        registeredExposures:
+        - exposureLocation: exposureLocation
+          notes: notes
+          caseWorker: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          exposedPersonPhoneNumber: exposedPersonPhoneNumber
+          exposedPersonName: Jane Doe
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          exposedDate: 2000-01-23
+          status: unidentified
+        - exposureLocation: exposureLocation
+          notes: notes
+          caseWorker: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          exposedPersonPhoneNumber: exposedPersonPhoneNumber
+          exposedPersonName: Jane Doe
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          exposedDate: 2000-01-23
+          status: unidentified
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+      properties:
+        id:
+          format: uuid
+          readOnly: true
+          type: string
+        information:
+          $ref: '#/components/schemas/InfectionInformation'
+        registeredExposures:
+          items:
+            $ref: '#/components/schemas/Exposure'
+          type: array
+      required:
+      - id
+      - information
+      - registeredExposures
+      type: object
+    Exposure:
+      example:
+        exposureLocation: exposureLocation
+        notes: notes
+        caseWorker: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        exposedPersonPhoneNumber: exposedPersonPhoneNumber
+        exposedPersonName: Jane Doe
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        exposedDate: 2000-01-23
+        status: unidentified
+      properties:
+        id:
+          format: uuid
+          readOnly: true
+          type: string
+        exposedPersonName:
+          example: Jane Doe
+          type: string
+        exposedPersonPhoneNumber:
+          format: phone
+          type: string
+        exposedDate:
+          format: date
+          type: string
+        exposureLocation:
+          description: Address or other identifying description of the location
+          type: string
+        notes:
+          description: Information that may be relevant to identify the person fully
+            or determine if they are infected
+          type: string
+        caseWorker:
+          description: The id of the case worker assigned to follow up this person
+          format: uuid
+          type: string
+        status:
+          enum:
+          - unidentified
+          - identified
+          - contacted
+          - tested
+          - infected
+          type: string
+      required:
+      - status
+      type: object
+    InfectionInformation:
+      example:
+        patientName: John Smith
+        patientPhoneNumber: patientPhoneNumber
+        notes: notes
+        likelyInfectionDate: 2000-01-23
+      properties:
+        patientName:
+          example: John Smith
+          type: string
+        patientPhoneNumber:
+          format: phone
+          type: string
+        likelyInfectionDate:
+          format: date
+          type: string
+        notes:
+          description: Free form text to describe anything about the patient
+          type: string
+      type: object
+

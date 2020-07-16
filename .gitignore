@@ -2,6 +2,6 @@
 /target/
 *.iml
 .idea
-/snapshotTests/output/
+/snapshotTests/snapshot/
 pom.xml.releaseBackup
 release.properties

@@ -73,7 +73,7 @@ public class SnapshotTests {
 
                 if (!Files.exists(snapshotFile)) {
                     System.err.println("Missing " + snapshotFile);
-                } else if (Files.isRegularFile(file)) {
+                } else if (Files.isRegularFile(file) && !file.toString().endsWith(".jar")) {
 
                     try {
                         Patch<String> diff = DiffUtils.diff(Files.readAllLines(file), Files.readAllLines(snapshotFile));
@@ -86,6 +86,7 @@ public class SnapshotTests {
                         }
 
                     } catch (IOException e) {
+                        System.err.println("Threw exception for " + file);
                         e.printStackTrace();
                     }
                 }
