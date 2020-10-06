@@ -2,7 +2,6 @@ package io.github.jhannes.openapi.typescriptfetchapi;
 
 import difflib.DiffUtils;
 import difflib.Patch;
-import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
 import org.openapitools.codegen.ClientOptInput;
@@ -27,47 +26,45 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class SnapshotTests {
 
-
     @TestFactory
-    Stream<DynamicNode> snapshots() throws IOException {
+    Stream<DynamicNode> javaAnnotationFreeSnapshots() throws IOException {
         return Stream.of(
-                snapshots(Paths.get("snapshotTests")),
-                snapshots(Paths.get("localSnapshotTests"))
+                snapshots(Paths.get("snapshotTests"), "java-annotationfree", Paths.get("snapshotTests").resolve("output"), Paths.get("snapshotTests").resolve("snapshot")),
+                snapshots(Paths.get("localSnapshotTests"), "java-annotationfree", Paths.get("localSnapshotTests").resolve("output"), Paths.get("localSnapshotTests").resolve("snapshot"))
         );
     }
 
-    private DynamicNode snapshots(Path testDir) throws IOException {
+    private DynamicNode snapshots(Path testDir, String generatorName, Path outputDir, Path snapshotDir) throws IOException {
         Path inputDir = testDir.resolve("input");
         if (!Files.isDirectory(inputDir)) {
             return dynamicTest("No snapshots for " + testDir, () -> {});
         }
-        Path output = testDir.resolve("output");
-        cleanDirectory(output);
-        return dynamicContainer("Snapshots of " + testDir, Files.list(inputDir).map(this::createTestsForSpec));
+        cleanDirectory(outputDir);
+        return dynamicContainer(
+                "Snapshots of " + testDir,
+                Files.list(inputDir).map(spec -> createTestsForSpec(spec, generatorName, outputDir, snapshotDir))
+        );
     }
 
-    private DynamicNode createTestsForSpec(Path spec) {
-        Path output = spec.getParent().getParent().resolve("output");
-        Path snapshotDir = spec.getParent().getParent().resolve("snapshot");
-        generate(spec);
+    private DynamicNode createTestsForSpec(Path spec, String generatorName, Path outputDir, Path snapshotDir) {
+        generate(spec, generatorName, outputDir, getModelName(spec));
+
         List<Path> files;
-        try (Stream<Path> list = Files.walk(output)) {
+        try (Stream<Path> list = Files.walk(outputDir.resolve(getModelName(spec)))) {
             files = list.filter(this::isTextOutput).collect(Collectors.toList());
         } catch (IOException e) {
-            return dynamicTest("Snapshot for " + spec, () -> assertNull(e));
+            return dynamicTest("Snapshots for " + spec, () -> assertNull(e));
         }
         return dynamicContainer("Snapshots for " + spec, Stream.of(
-                dynamicTest("Files", () -> compareFiles(spec)),
-                dynamicContainer("File contents", files.stream().map(file ->
-                    dynamicTest("file " + output.relativize(file), () -> diff(file, snapshotDir.resolve(output.relativize(file))))
+                dynamicTest("Files", () -> compareFiles(outputDir, snapshotDir, getModelName(spec))),
+                dynamicContainer("File contents in " + outputDir, files.stream().map(file ->
+                        dynamicTest("file " + outputDir.relativize(file), () -> diff(file, snapshotDir.resolve(outputDir.relativize(file))))
                 ))));
     }
 
-    private void compareFiles(Path spec) throws IOException {
-        Path output = spec.getParent().getParent().resolve("output");
-        Path snapshotDir = spec.getParent().getParent().resolve("snapshot");
-        String outputFiles = Files.walk(output.resolve(getModelName(spec))).map(path -> output.relativize(path).toString()).collect(Collectors.joining("\n"));
-        String snapshotFiles = Files.walk(snapshotDir.resolve(getModelName(spec))).map(path -> snapshotDir.relativize(path).toString()).collect(Collectors.joining("\n"));
+    private void compareFiles(Path output, Path snapshotDir, String modelName) throws IOException {
+        String outputFiles = Files.walk(output.resolve(modelName)).map(path -> output.relativize(path).toString()).collect(Collectors.joining("\n"));
+        String snapshotFiles = Files.walk(snapshotDir.resolve(modelName)).map(path -> snapshotDir.relativize(path).toString()).collect(Collectors.joining("\n"));
         assertEquals(snapshotFiles, outputFiles);
     }
 
@@ -81,20 +78,18 @@ public class SnapshotTests {
         assertEquals("", diff.getDeltas().stream().map(Object::toString).collect(Collectors.joining("\n")));
     }
 
-    private void generate(Path file) {
-        Path output = file.getParent().getParent().resolve("output");
-        String modelName = getModelName(file);
-
+    private void generate(Path file, String generatorName, Path output, String modelName) {
         final CodegenConfigurator configurator = new CodegenConfigurator()
-                .setGeneratorName("java-annotationfree")
+                .setGeneratorName(generatorName)
                 .setInputSpec(file.toString())
                 .setModelNameSuffix("Dto")
                 .setPackageName("io.github.jhannes.openapi." + modelName)
                 .setModelPackage("io.github.jhannes.openapi." + modelName + ".model")
                 .setApiPackage("io.github.jhannes.openapi." + modelName + ".api")
-                .addAdditionalProperty("generateModelTests", "true")
                 .addAdditionalProperty("hideGenerationTimestamp", "true")
-                .addAdditionalProperty("generateApis", "true")
+                .addAdditionalProperty("generateApis", "false")
+                .addAdditionalProperty("dateLibrary", "java8")
+                //.addAdditionalProperty(CodegenConstants.ARTIFACT_ID, modelName)
                 .setOutputDir(output.resolve(modelName).toString());
 
         final ClientOptInput clientOptInput = configurator.toClientOptInput();

@@ -108,8 +108,8 @@ public class ExposureDto {
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList();
-        if (isMissing(status)) result.add("status");
+        List<String> result = new ArrayList<>();
+        if (isMissing(getStatus())) result.add("status");
         return result;
     }
 

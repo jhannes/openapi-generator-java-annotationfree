@@ -98,10 +98,10 @@ public class CaseWorkerDto {
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList();
-        if (isMissing(fullName)) result.add("fullName");
-        if (isMissing(email)) result.add("email");
-        if (isMissing(role)) result.add("role");
+        List<String> result = new ArrayList<>();
+        if (isMissing(getFullName())) result.add("fullName");
+        if (isMissing(getEmail())) result.add("email");
+        if (isMissing(getRole())) result.add("role");
         return result;
     }
 

@@ -59,7 +59,7 @@ public class InfectionInformationDto {
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList();
+        List<String> result = new ArrayList<>();
         return result;
     }
 

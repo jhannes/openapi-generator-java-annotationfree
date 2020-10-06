@@ -92,7 +92,7 @@ public class DogAllOfDto {
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList();
+        List<String> result = new ArrayList<>();
         return result;
     }
 

@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 /**
 * DogDto
 */
-public class DogDto {
+public class DogDto extends PetDto {
 
     private Boolean bark;
             
@@ -88,11 +88,13 @@ public class DogDto {
 
     public static String[] requiredFields() {
         return new String[] {
+                "pet_type",
         };
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList();
+        List<String> result = new ArrayList<>();
+        if (isMissing(getPetType())) result.add("pet_type");
         return result;
     }
 

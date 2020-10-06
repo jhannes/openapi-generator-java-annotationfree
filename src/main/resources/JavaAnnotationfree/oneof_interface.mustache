@@ -1,6 +1,26 @@
-{{>additionalModelTypeAnnotations}}{{>generatedAnnotation}}{{>typeInfoAnnotation}}{{>xmlAnnotation}}
 public interface {{classname}} {{#vendorExtensions.x-implements}}{{#-first}}extends {{{.}}}{{/-first}}{{^-first}}, {{{.}}}{{/-first}}{{/vendorExtensions.x-implements}} {
     {{#discriminator}}
-    public {{propertyType}} {{propertyGetter}}();
+    {{propertyType}} {{propertyGetter}}();
     {{/discriminator}}
+
+{{#discriminator}}
+    {{#mappedModels}}
+    static {{modelName}} {{mappingName}}() {
+        return new {{modelName}}().{{discriminator.propertyName}}("{{mappingName}}");
+    }
+    {{/mappedModels}}
+{{/discriminator}}
+
+{{#discriminator}}
+    static Class<?> getType(String type) {
+        switch (type) {
+{{#mappedModels}}
+        case "{{mappingName}}":
+            return {{modelName}}.class;
+    {{/mappedModels}}
+        default:
+            throw new IllegalArgumentException("Illegal {{discriminator.propertyName}} " + type);
+        }
+    }
+{{/discriminator}}
 }

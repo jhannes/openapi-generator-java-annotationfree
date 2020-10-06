@@ -30,218 +30,25 @@ import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/**
-* AnyPetDto
-*/
-public class AnyPetDto {
+public interface AnyPetDto  {
+    String getPetType();
 
-    private String pet_type;
+    static CatDto Cat() {
+        return new CatDto().petType("Cat");
+    }
+    static DogDto Dog() {
+        return new DogDto().petType("Dog");
+    }
 
-    private String name;
-
-    private String birth_date;
-
-    private Boolean bark;
-            
-    /**
-     * Gets or Sets breed
-     */
-    public enum BreedEnum {
-        DINGO("Dingo"),
-        
-        HUSKY("Husky"),
-        
-        RETRIEVER("Retriever"),
-        
-        SHEPHERD("Shepherd");
-
-        private String value;
-
-        BreedEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static BreedEnum fromValue(String text) {
-            for (BreedEnum b : BreedEnum.values()) {
-                if (String.valueOf(b.value).equals(text)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + text + "'");
+    static Class<?> getType(String type) {
+        switch (type) {
+        case "Cat":
+            return CatDto.class;
+        case "Dog":
+            return DogDto.class;
+        default:
+            throw new IllegalArgumentException("Illegal petType " + type);
         }
     }
-
-    private BreedEnum breed;
-
-    public static String[] readOnlyFields() {
-        return new String[] {
-        };
-    }
-
-    public static String[] writeOnlyFields() {
-        return new String[] {
-        };
-    }
-
-    public static String[] requiredFields() {
-        return new String[] {
-                "pet_type",
-        };
-    }
-
-    public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList();
-        if (isMissing(pet_type)) result.add("pet_type");
-        return result;
-    }
-
-    private boolean isMissing(String s) {
-        return s == null || s.isEmpty();
-    }
-
-    private boolean isMissing(Object s) {
-        return s == null;
-    }
-
-
-    /**
-     * Get pet_type
-     * @return pet_type
-     */
-    public String getPetType() {
-        return pet_type;
-    }
-
-    public void setPetType(String petType) {
-        this.pet_type = petType;
-    }
-
-    public AnyPetDto petType(String petType) {
-        this.pet_type = petType;
-        return this;
-    }
-
-    /**
-     * Get name
-     * @return name
-     */
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public AnyPetDto name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    /**
-     * Get birth_date
-     * @return birth_date
-     */
-    public String getBirthDate() {
-        return birth_date;
-    }
-
-    public void setBirthDate(String birthDate) {
-        this.birth_date = birthDate;
-    }
-
-    public AnyPetDto birthDate(String birthDate) {
-        this.birth_date = birthDate;
-        return this;
-    }
-
-    /**
-     * Get bark
-     * @return bark
-     */
-    public Boolean getBark() {
-        return bark;
-    }
-
-    public void setBark(Boolean bark) {
-        this.bark = bark;
-    }
-
-    public AnyPetDto bark(Boolean bark) {
-        this.bark = bark;
-        return this;
-    }
-
-    /**
-     * Get breed
-     * @return breed
-     */
-    public BreedEnum getBreed() {
-        return breed;
-    }
-
-    public void setBreed(BreedEnum breed) {
-        this.breed = breed;
-    }
-
-    public AnyPetDto breed(BreedEnum breed) {
-        this.breed = breed;
-        return this;
-    }
-
-    @Override
-    public boolean equals(java.lang.Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        AnyPetDto anyPet = (AnyPetDto) o;
-        return Objects.equals(this.pet_type, anyPet.pet_type) &&
-            Objects.equals(this.name, anyPet.name) &&
-            Objects.equals(this.birth_date, anyPet.birth_date) &&
-            Objects.equals(this.bark, anyPet.bark) &&
-            Objects.equals(this.breed, anyPet.breed);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(pet_type, name, birth_date, bark, breed);
-    }
-
-    @Override
-    public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class AnyPetDto {\n");
-        sb.append("    pet_type: ").append(toIndentedString(pet_type)).append("\n");
-        sb.append("    name: ").append(toIndentedString(name)).append("\n");
-        sb.append("    birth_date: ").append(toIndentedString(birth_date)).append("\n");
-        sb.append("    bark: ").append(toIndentedString(bark)).append("\n");
-        sb.append("    breed: ").append(toIndentedString(breed)).append("\n");
-        sb.append("}");
-        return sb.toString();
-    }
-
-    /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
-    private String toIndentedString(java.lang.Object o) {
-        if (o == null) {
-            return "null";
-        }
-        return o.toString().replace("\n", "\n    ");
-    }
-
 }
 

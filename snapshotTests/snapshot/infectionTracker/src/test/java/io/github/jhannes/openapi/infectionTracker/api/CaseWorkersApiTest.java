@@ -17,6 +17,7 @@ import io.github.jhannes.openapi.infectionTracker.ApiException;
 import io.github.jhannes.openapi.infectionTracker.model.CaseWorkerDto;
 import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,41 +27,32 @@ import java.util.Map;
 /**
  * API tests for CaseWorkersApi
  */
-@Ignore
 public class CaseWorkersApiTest {
 
     private final CaseWorkersApi api = new CaseWorkersApi();
 
-    
     /**
-     * 
-     *
-     * 
-     *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void listCaseWorkersTest() throws ApiException {
-        CaseWorkerDto response = api.listCaseWorkers();
+        //
+        //CaseWorkerDto response = api.listCaseWorkers();
 
         // TODO: test validations
     }
-    
     /**
-     * 
-     *
-     * 
-     *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void registerCaseWorkerTest() throws ApiException {
-        CaseWorkerDto caseWorkerDto = null;
-        api.registerCaseWorker(caseWorkerDto);
+        //
+        //CaseWorkerDto caseWorkerDto = null;
+        //
+        //api.registerCaseWorker(caseWorkerDto);
 
         // TODO: test validations
     }
-    
 }

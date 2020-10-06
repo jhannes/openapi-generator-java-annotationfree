@@ -10,250 +10,41 @@
  * Do not edit the class manually.
  */
 
-
 package io.github.jhannes.openapi.infectionTracker.api;
 
-import io.github.jhannes.openapi.infectionTracker.ApiCallback;
-import io.github.jhannes.openapi.infectionTracker.ApiClient;
-import io.github.jhannes.openapi.infectionTracker.ApiException;
-import io.github.jhannes.openapi.infectionTracker.ApiResponse;
-import io.github.jhannes.openapi.infectionTracker.Configuration;
-import io.github.jhannes.openapi.infectionTracker.Pair;
-import io.github.jhannes.openapi.infectionTracker.ProgressRequestBody;
-import io.github.jhannes.openapi.infectionTracker.ProgressResponseBody;
-
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-
+import io.github.jhannes.openapi.infectionTracker.model.*;
 
 import io.github.jhannes.openapi.infectionTracker.model.CaseWorkerDto;
 
-import java.lang.reflect.Type;
+import org.actioncontroller.*;
+import org.actioncontroller.json.JsonBody;
+
+import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.Consumer;
 
-public class CaseWorkersApi {
-    private ApiClient localVarApiClient;
-
-    public CaseWorkersApi() {
-        this(Configuration.getDefaultApiClient());
-    }
-
-    public CaseWorkersApi(ApiClient apiClient) {
-        this.localVarApiClient = apiClient;
-    }
-
-    public ApiClient getApiClient() {
-        return localVarApiClient;
-    }
-
-    public void setApiClient(ApiClient apiClient) {
-        this.localVarApiClient = apiClient;
-    }
-
-    /**
-     * Build call for listCaseWorkers
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns the case workers that the current user can assign to cases </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listCaseWorkersCall(final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = null;
-
-        // create path and map variables
-        String localVarPath = "/api/caseWorkers";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-        final String[] localVarAccepts = {
-            "application/json"
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call listCaseWorkersValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = listCaseWorkersCall(_callback);
-        return localVarCall;
-
-    }
-
-    /**
-     * 
-     * 
-     * @return CaseWorkerDto
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns the case workers that the current user can assign to cases </td><td>  -  </td></tr>
-     </table>
-     */
-    public CaseWorkerDto listCaseWorkers() throws ApiException {
-        ApiResponse<CaseWorkerDto> localVarResp = listCaseWorkersWithHttpInfo();
-        return localVarResp.getData();
-    }
-
-    /**
-     * 
-     * 
-     * @return ApiResponse&lt;CaseWorkerDto&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns the case workers that the current user can assign to cases </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<CaseWorkerDto> listCaseWorkersWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = listCaseWorkersValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<CaseWorkerDto>(){}.getType();
-        return localVarApiClient.execute(localVarCall, localVarReturnType);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> Returns the case workers that the current user can assign to cases </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call listCaseWorkersAsync(final ApiCallback<CaseWorkerDto> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = listCaseWorkersValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<CaseWorkerDto>(){}.getType();
-        localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
-        return localVarCall;
-    }
-    /**
-     * Build call for registerCaseWorker
-     * @param caseWorkerDto  (optional)
-     * @param _callback Callback for upload/download progress
-     * @return Call to execute
-     * @throws ApiException If fail to serialize the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The exposure was registered </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call registerCaseWorkerCall(CaseWorkerDto caseWorkerDto, final ApiCallback _callback) throws ApiException {
-        Object localVarPostBody = caseWorkerDto;
-
-        // create path and map variables
-        String localVarPath = "/api/caseWorkers";
-
-        List<Pair> localVarQueryParams = new ArrayList<Pair>();
-        List<Pair> localVarCollectionQueryParams = new ArrayList<Pair>();
-        Map<String, String> localVarHeaderParams = new HashMap<String, String>();
-        Map<String, String> localVarCookieParams = new HashMap<String, String>();
-        Map<String, Object> localVarFormParams = new HashMap<String, Object>();
-        final String[] localVarAccepts = {
-            
-        };
-        final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
-        if (localVarAccept != null) {
-            localVarHeaderParams.put("Accept", localVarAccept);
-        }
-
-        final String[] localVarContentTypes = {
-            "application/json"
-        };
-        final String localVarContentType = localVarApiClient.selectHeaderContentType(localVarContentTypes);
-        localVarHeaderParams.put("Content-Type", localVarContentType);
-
-        String[] localVarAuthNames = new String[] {  };
-        return localVarApiClient.buildCall(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarCookieParams, localVarFormParams, localVarAuthNames, _callback);
-    }
-
-    @SuppressWarnings("rawtypes")
-    private okhttp3.Call registerCaseWorkerValidateBeforeCall(CaseWorkerDto caseWorkerDto, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = registerCaseWorkerCall(caseWorkerDto, _callback);
-        return localVarCall;
-
-    }
-
-    /**
-     * 
-     * 
-     * @param caseWorkerDto  (optional)
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The exposure was registered </td><td>  -  </td></tr>
-     </table>
-     */
-    public void registerCaseWorker(CaseWorkerDto caseWorkerDto) throws ApiException {
-        registerCaseWorkerWithHttpInfo(caseWorkerDto);
-    }
-
-    /**
-     * 
-     * 
-     * @param caseWorkerDto  (optional)
-     * @return ApiResponse&lt;Void&gt;
-     * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The exposure was registered </td><td>  -  </td></tr>
-     </table>
-     */
-    public ApiResponse<Void> registerCaseWorkerWithHttpInfo(CaseWorkerDto caseWorkerDto) throws ApiException {
-        okhttp3.Call localVarCall = registerCaseWorkerValidateBeforeCall(caseWorkerDto, null);
-        return localVarApiClient.execute(localVarCall);
-    }
-
-    /**
-     *  (asynchronously)
-     * 
-     * @param caseWorkerDto  (optional)
-     * @param _callback The callback to be executed when the API call finishes
-     * @return The request call
-     * @throws ApiException If fail to process the API call, e.g. serializing the request body object
-     * @http.response.details
-     <table summary="Response Details" border="1">
-        <tr><td> Status Code </td><td> Description </td><td> Response Headers </td></tr>
-        <tr><td> 200 </td><td> The exposure was registered </td><td>  -  </td></tr>
-     </table>
-     */
-    public okhttp3.Call registerCaseWorkerAsync(CaseWorkerDto caseWorkerDto, final ApiCallback<Void> _callback) throws ApiException {
-
-        okhttp3.Call localVarCall = registerCaseWorkerValidateBeforeCall(caseWorkerDto, _callback);
-        localVarApiClient.executeAsync(localVarCall, _callback);
-        return localVarCall;
-    }
+public interface CaseWorkersApi {
+        /**
+         * 
+         * 
+         * @return CaseWorkerDto
+         */
+        @GET("/api/caseWorkers")
+        @JsonBody
+        public CaseWorkerDto listCaseWorkers(
+        ) throws IOException;
+        /**
+         * 
+         * 
+         * @param caseWorkerDto  (optional)
+         */
+        @POST("/api/caseWorkers")
+        public void registerCaseWorker(
+                @JsonBody CaseWorkerDto caseWorkerDto
+        ) throws IOException;
 }

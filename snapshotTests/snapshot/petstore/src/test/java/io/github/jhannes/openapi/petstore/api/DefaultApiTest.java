@@ -17,6 +17,7 @@ import io.github.jhannes.openapi.petstore.ApiException;
 import io.github.jhannes.openapi.petstore.model.AnyPetDto;
 import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,26 +27,21 @@ import java.util.Map;
 /**
  * API tests for DefaultApi
  */
-@Ignore
 public class DefaultApiTest {
 
     private final DefaultApi api = new DefaultApi();
 
-    
     /**
-     * 
-     *
-     * 
-     *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void petsPatchTest() throws ApiException {
-        AnyPetDto anyPetDto = null;
-        api.petsPatch(anyPetDto);
+        //
+        //AnyPetDto anyPetDto = null;
+        //
+        //api.petsPatch(anyPetDto);
 
         // TODO: test validations
     }
-    
 }

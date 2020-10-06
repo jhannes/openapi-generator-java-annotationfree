@@ -10,6 +10,7 @@ import org.actioncontroller.*;
 import org.actioncontroller.json.JsonBody;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -46,8 +47,8 @@ public interface {{classname}} {
                 @PathParam("{{baseName}}") {{{dataType}}} {{paramName}}{{/isPathParam}}{{#isQueryParam}}
                 @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isQueryParam}}{{#isBodyParam}}
                 @JsonBody {{{dataType}}} {{paramName}}{{/isBodyParam}}{{#isFormParam}}
-                @RequestParam("{{baseName}}") Optional<{{{dataType}}}> {{paramName}}{{/isFormParam}}{{#isHeaderParam}}
-                @HttpHeader("{{baseName}}") Optional<{{{dataType}}}> {{paramName}}{{/isHeaderParam}}{{#hasMore}}, {{/hasMore}}{{/allParams}}{{#responses}}{{#headers}},
+                @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isFormParam}}{{#isHeaderParam}}
+                @HttpHeader("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{#hasMore}}, {{/hasMore}}{{/allParams}}{{#responses}}{{#headers}},
                 @HttpHeader("{{baseName}}") Consumer<{{{dataType}}}> set{{nameInCamelCase}}{{/headers}}{{/responses}}
         ) throws IOException;
     {{/operation}}

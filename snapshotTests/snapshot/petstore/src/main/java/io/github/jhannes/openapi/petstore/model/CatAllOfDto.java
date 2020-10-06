@@ -55,7 +55,7 @@ public class CatAllOfDto {
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList();
+        List<String> result = new ArrayList<>();
         return result;
     }
 

@@ -58,8 +58,8 @@ public class PetDto {
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList();
-        if (isMissing(pet_type)) result.add("pet_type");
+        List<String> result = new ArrayList<>();
+        if (isMissing(getPetType())) result.add("pet_type");
         return result;
     }
 

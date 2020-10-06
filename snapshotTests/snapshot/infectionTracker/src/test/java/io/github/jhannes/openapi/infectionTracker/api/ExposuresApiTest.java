@@ -18,6 +18,7 @@ import io.github.jhannes.openapi.infectionTracker.model.ExposureDto;
 import java.util.UUID;
 import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,42 +28,34 @@ import java.util.Map;
 /**
  * API tests for ExposuresApi
  */
-@Ignore
 public class ExposuresApiTest {
 
     private final ExposuresApi api = new ExposuresApi();
 
-    
     /**
-     * 
-     *
-     * 
-     *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void listExposuresTest() throws ApiException {
-        ExposureDto response = api.listExposures();
+        //
+        //ExposureDto response = api.listExposures();
 
         // TODO: test validations
     }
-    
     /**
-     * 
-     *
-     * 
-     *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void updateExposureTest() throws ApiException {
-        UUID exposureId = null;
-        ExposureDto exposureDto = null;
-        api.updateExposure(exposureId, exposureDto);
+        //
+        //UUID exposureId = null;
+        //
+        //ExposureDto exposureDto = null;
+        //
+        //api.updateExposure(exposureId, exposureDto);
 
         // TODO: test validations
     }
-    
 }

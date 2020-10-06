@@ -39,7 +39,7 @@ public class InfectionDto {
 
     private InfectionInformationDto information;
 
-    private List<ExposureDto> registeredExposures = new ArrayList<ExposureDto>();
+    private List<ExposureDto> registeredExposures = new ArrayList<>();
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -61,10 +61,10 @@ public class InfectionDto {
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList();
-        if (isMissing(id)) result.add("id");
-        if (isMissing(information)) result.add("information");
-        if (isMissing(registeredExposures)) result.add("registeredExposures");
+        List<String> result = new ArrayList<>();
+        if (isMissing(getId())) result.add("id");
+        if (isMissing(getInformation())) result.add("information");
+        if (isMissing(getRegisteredExposures())) result.add("registeredExposures");
         return result;
     }
 

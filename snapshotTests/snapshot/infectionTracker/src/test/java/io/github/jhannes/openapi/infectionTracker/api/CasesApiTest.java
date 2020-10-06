@@ -20,6 +20,7 @@ import io.github.jhannes.openapi.infectionTracker.model.InfectionInformationDto;
 import java.util.UUID;
 import org.junit.Test;
 import org.junit.Ignore;
+import org.junit.Assert;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,74 +30,60 @@ import java.util.Map;
 /**
  * API tests for CasesApi
  */
-@Ignore
 public class CasesApiTest {
 
     private final CasesApi api = new CasesApi();
 
-    
     /**
-     * 
-     *
-     * 
-     *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void getCaseDetailsTest() throws ApiException {
-        UUID caseId = null;
-        InfectionDto response = api.getCaseDetails(caseId);
+        //
+        //UUID caseId = null;
+        //
+        //InfectionDto response = api.getCaseDetails(caseId);
 
         // TODO: test validations
     }
-    
     /**
-     * 
-     *
-     * 
-     *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void listCasesTest() throws ApiException {
-        InfectionDto response = api.listCases();
+        //
+        //InfectionDto response = api.listCases();
 
         // TODO: test validations
     }
-    
     /**
-     * 
-     *
-     * 
-     *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void newCaseTest() throws ApiException {
-        InfectionInformationDto infectionInformationDto = null;
-        api.newCase(infectionInformationDto);
+        //
+        //InfectionInformationDto infectionInformationDto = null;
+        //
+        //api.newCase(infectionInformationDto);
 
         // TODO: test validations
     }
-    
     /**
-     * 
-     *
-     * 
-     *
      * @throws ApiException
      *          if the Api call fails
      */
     @Test
     public void registerExposureTest() throws ApiException {
-        UUID caseId = null;
-        ExposureDto exposureDto = null;
-        api.registerExposure(caseId, exposureDto);
+        //
+        //UUID caseId = null;
+        //
+        //ExposureDto exposureDto = null;
+        //
+        //api.registerExposure(caseId, exposureDto);
 
         // TODO: test validations
     }
-    
 }

@@ -1,7 +1,7 @@
 /**
 * {{#description}}{{.}}{{/description}}{{^description}}{{classname}}{{/description}}
 */
-public class {{classname}} {
+public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
 {{#vars}}
     {{#isEnum}}
         {{^isContainer}}
@@ -19,41 +19,41 @@ public class {{classname}} {
 
     public static String[] readOnlyFields() {
         return new String[] {
-        {{#vars}}
+        {{#allVars}}
             {{#isReadOnly}}
                 "{{baseName}}",
             {{/isReadOnly}}
-        {{/vars}}
+        {{/allVars}}
         };
     }
 
     public static String[] writeOnlyFields() {
         return new String[] {
-        {{#vars}}
+        {{#allVars}}
             {{#isWriteOnly}}
                 "{{baseName}}",
             {{/isWriteOnly}}
-        {{/vars}}
+        {{/allVars}}
         };
     }
 
     public static String[] requiredFields() {
         return new String[] {
-        {{#vars}}
+        {{#allVars}}
             {{#required}}
                 "{{baseName}}",
             {{/required}}
-        {{/vars}}
+        {{/allVars}}
         };
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList();
-        {{#vars}}
+        List<String> result = new ArrayList<>();
+        {{#allVars}}
             {{#required}}
-        if (isMissing({{baseName}})) result.add("{{baseName}}");
+        if (isMissing({{getter}}())) result.add("{{baseName}}");
             {{/required}}
-        {{/vars}}
+        {{/allVars}}
         return result;
     }
 
