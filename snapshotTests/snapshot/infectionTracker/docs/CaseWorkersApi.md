@@ -18,28 +18,25 @@ Method | HTTP request | Description
 ### Example
 
 ```java
-// Import classes:
-import io.github.jhannes.openapi.infectionTracker.ApiClient;
-import io.github.jhannes.openapi.infectionTracker.ApiException;
-import io.github.jhannes.openapi.infectionTracker.Configuration;
+import io.github.jhannes.openapi.infectionTracker.api.*;
 import io.github.jhannes.openapi.infectionTracker.models.*;
-import io.github.jhannes.openapi.infectionTracker.api.CaseWorkersApi;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        CaseWorkersApi apiInstance = ApiClientProxy.create(CaseWorkersApi.class, httpClient);
 
-        CaseWorkersApi apiInstance = new CaseWorkersApi(defaultClient);
         try {
             CaseWorkerDto result = apiInstance.listCaseWorkers();
             System.out.println(result);
-        } catch (ApiException e) {
+        } catch (HttpClientException e) {
             System.err.println("Exception when calling CaseWorkersApi#listCaseWorkers");
-            System.err.println("Status code: " + e.getCode());
+            System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
+            System.err.println("URL: " + e.getUrl());
         }
     }
 }
@@ -77,28 +74,25 @@ No authorization required
 ### Example
 
 ```java
-// Import classes:
-import io.github.jhannes.openapi.infectionTracker.ApiClient;
-import io.github.jhannes.openapi.infectionTracker.ApiException;
-import io.github.jhannes.openapi.infectionTracker.Configuration;
+import io.github.jhannes.openapi.infectionTracker.api.*;
 import io.github.jhannes.openapi.infectionTracker.models.*;
-import io.github.jhannes.openapi.infectionTracker.api.CaseWorkersApi;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        CaseWorkersApi apiInstance = ApiClientProxy.create(CaseWorkersApi.class, httpClient);
 
-        CaseWorkersApi apiInstance = new CaseWorkersApi(defaultClient);
         CaseWorkerDto caseWorkerDto = new CaseWorkerDto(); // CaseWorkerDto | 
         try {
             apiInstance.registerCaseWorker(caseWorkerDto);
-        } catch (ApiException e) {
+        } catch (HttpClientException e) {
             System.err.println("Exception when calling CaseWorkersApi#registerCaseWorker");
-            System.err.println("Status code: " + e.getCode());
+            System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
+            System.err.println("URL: " + e.getUrl());
         }
     }
 }

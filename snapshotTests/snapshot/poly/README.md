@@ -72,27 +72,25 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 ```java
 
-import io.github.jhannes.openapi.poly.*;
-import io.github.jhannes.openapi.poly.auth.*;
-import io.github.jhannes.openapi.poly.model.*;
-import io.github.jhannes.openapi.poly.api.DefaultApi;
+import io.github.jhannes.openapi.poly.api.*;
+import io.github.jhannes.openapi.poly.models.*;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
 
-public class DefaultApiExample {
-
+public class Example {
     public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost");
-        
-        DefaultApi apiInstance = new DefaultApi(defaultClient);
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
+        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+
         try {
             AnyPartyDto result = apiInstance.partiesGet();
             System.out.println(result);
-        } catch (ApiException e) {
+        } catch (HttpClientException e) {
             System.err.println("Exception when calling DefaultApi#partiesGet");
-            System.err.println("Status code: " + e.getCode());
+            System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
+            System.err.println("URL: " + e.getUrl());
         }
     }
 }

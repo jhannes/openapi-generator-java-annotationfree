@@ -17,28 +17,25 @@ Method | HTTP request | Description
 ### Example
 
 ```java
-// Import classes:
-import io.github.jhannes.openapi.petstore.ApiClient;
-import io.github.jhannes.openapi.petstore.ApiException;
-import io.github.jhannes.openapi.petstore.Configuration;
+import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import io.github.jhannes.openapi.petstore.api.DefaultApi;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://api.example.com/v1");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://api.example.com/v1");
+        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
-        DefaultApi apiInstance = new DefaultApi(defaultClient);
         AnyPetDto anyPetDto = new AnyPetDto(); // AnyPetDto | 
         try {
             apiInstance.petsPatch(anyPetDto);
-        } catch (ApiException e) {
+        } catch (HttpClientException e) {
             System.err.println("Exception when calling DefaultApi#petsPatch");
-            System.err.println("Status code: " + e.getCode());
+            System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
+            System.err.println("URL: " + e.getUrl());
         }
     }
 }

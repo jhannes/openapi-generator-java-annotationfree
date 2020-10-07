@@ -19,28 +19,25 @@ Method | HTTP request | Description
 ### Example
 
 ```java
-// Import classes:
-import io.github.jhannes.openapi.poly.ApiClient;
-import io.github.jhannes.openapi.poly.ApiException;
-import io.github.jhannes.openapi.poly.Configuration;
+import io.github.jhannes.openapi.poly.api.*;
 import io.github.jhannes.openapi.poly.models.*;
-import io.github.jhannes.openapi.poly.api.DefaultApi;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
+        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
-        DefaultApi apiInstance = new DefaultApi(defaultClient);
         try {
             AnyPartyDto result = apiInstance.partiesGet();
             System.out.println(result);
-        } catch (ApiException e) {
+        } catch (HttpClientException e) {
             System.err.println("Exception when calling DefaultApi#partiesGet");
-            System.err.println("Status code: " + e.getCode());
+            System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
+            System.err.println("URL: " + e.getUrl());
         }
     }
 }
@@ -78,29 +75,26 @@ No authorization required
 ### Example
 
 ```java
-// Import classes:
-import io.github.jhannes.openapi.poly.ApiClient;
-import io.github.jhannes.openapi.poly.ApiException;
-import io.github.jhannes.openapi.poly.Configuration;
+import io.github.jhannes.openapi.poly.api.*;
 import io.github.jhannes.openapi.poly.models.*;
-import io.github.jhannes.openapi.poly.api.DefaultApi;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
+        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
-        DefaultApi apiInstance = new DefaultApi(defaultClient);
         UUID id = new UUID(); // UUID | 
         AnyPartyDto anyPartyDto = new AnyPartyDto(); // AnyPartyDto | 
         try {
             apiInstance.partiesIdPut(id, anyPartyDto);
-        } catch (ApiException e) {
+        } catch (HttpClientException e) {
             System.err.println("Exception when calling DefaultApi#partiesIdPut");
-            System.err.println("Status code: " + e.getCode());
+            System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
+            System.err.println("URL: " + e.getUrl());
         }
     }
 }
@@ -143,28 +137,25 @@ No authorization required
 ### Example
 
 ```java
-// Import classes:
-import io.github.jhannes.openapi.poly.ApiClient;
-import io.github.jhannes.openapi.poly.ApiException;
-import io.github.jhannes.openapi.poly.Configuration;
+import io.github.jhannes.openapi.poly.api.*;
 import io.github.jhannes.openapi.poly.models.*;
-import io.github.jhannes.openapi.poly.api.DefaultApi;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
+        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
-        DefaultApi apiInstance = new DefaultApi(defaultClient);
         AnyPartyDto anyPartyDto = new AnyPartyDto(); // AnyPartyDto | 
         try {
             apiInstance.partiesPost(anyPartyDto);
-        } catch (ApiException e) {
+        } catch (HttpClientException e) {
             System.err.println("Exception when calling DefaultApi#partiesPost");
-            System.err.println("Status code: " + e.getCode());
+            System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
+            System.err.println("URL: " + e.getUrl());
         }
     }
 }

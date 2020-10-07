@@ -79,48 +79,68 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 ```java
 {{#apiInfo}}{{#apis}}{{#-first}}{{#operations}}{{#operation}}{{#-first}}
-import {{{invokerPackage}}}.*;
-import {{{invokerPackage}}}.auth.*;
-import {{{modelPackage}}}.*;
-import {{{package}}}.{{{classname}}};
+import {{{invokerPackage}}}.api.*;
+import {{{invokerPackage}}}.models.*;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
 
-public class {{{classname}}}Example {
-
+public class Example {
     public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("{{{basePath}}}");
-        {{#hasAuthMethods}}{{#authMethods}}{{#isBasic}}{{#isBasicBasic}}
+{{#hasAuthMethods}}
+    {{#authMethods}}{{#isBasic}}{{#isBasicBasic}}
         // Configure HTTP basic authorization: {{{name}}}
-        HttpBasicAuth {{{name}}} = (HttpBasicAuth) defaultClient.getAuthentication("{{{name}}}");
-        {{{name}}}.setUsername("YOUR USERNAME");
-        {{{name}}}.setPassword("YOUR PASSWORD");{{/isBasicBasic}}{{#isBasicBearer}}
-        // Configure HTTP bearer authorization: {{{name}}}
-        HttpBearerAuth {{{name}}} = (HttpBearerAuth) defaultClient.getAuthentication("{{{name}}}");
-        {{{name}}}.setBearerToken("BEARER TOKEN");{{/isBasicBearer}}{{/isBasic}}{{#isApiKey}}
-        // Configure API key authorization: {{{name}}}
-        ApiKeyAuth {{{name}}} = (ApiKeyAuth) defaultClient.getAuthentication("{{{name}}}");
-        {{{name}}}.setApiKey("YOUR API KEY");
-        // Uncomment the following line to set a prefix for the API key, e.g. "Token" (defaults to null)
-        //{{{name}}}.setApiKeyPrefix("Token");{{/isApiKey}}{{#isOAuth}}
-        // Configure OAuth2 access token for authorization: {{{name}}}
-        OAuth {{{name}}} = (OAuth) defaultClient.getAuthentication("{{{name}}}");
-        {{{name}}}.setAccessToken("YOUR ACCESS TOKEN");{{/isOAuth}}
-        {{/authMethods}}
-        {{/hasAuthMethods}}
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("{{basePath}}") {
+            @Override
+            public ClientExchange createExchange() {
+                String authentication = "Basic " + Base64.getEncoder().encode(("USERNAME" + ":" + "PASSWORD").getBytes());
+                exchange.setHeader("Authorization", authentication);
+                return exchange;
+            }
+        };{{/isBasicBasic}}{{#isBasicBearer}}
+        // Configure HTTP basic authorization: {{{name}}}
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("{{basePath}}") {
+            @Override
+            public ClientExchange createExchange() {
+                String authentication = "Bearer " + "BEARER TOKEN";
+                exchange.setHeader("Authorization", authentication);
+                return exchange;
+            }
+        };{{/isBasicBearer}}{{/isBasic}}{{#isApiKey}}// Configure HTTP bearer authorization: {{{name}}}
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("{{basePath}}") {
+            @Override
+            public ClientExchange createExchange() {
+                exchange.setHeader("{{keyParamName}}", apiKey);
+                return exchange;
+            }
+        };{{/isApiKey}}{{#isOAuth}}
+        // Configure HTTP basic authorization: {{{name}}}
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("{{basePath}}") {
+            @Override
+            public ClientExchange createExchange() {
+                String authentication = "Bearer " + "BEARER TOKEN";
+                exchange.setHeader("Authorization", authentication);
+                return exchange;
+            }
+        };{{/isOAuth}}
+    {{/authMethods}}
+{{/hasAuthMethods}}
+{{^hasAuthMethods}}
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("{{basePath}}");
+{{/hasAuthMethods}}
+        {{{classname}}} apiInstance = ApiClientProxy.create({{{classname}}}.class, httpClient);
 
-        {{{classname}}} apiInstance = new {{{classname}}}(defaultClient);
         {{#allParams}}
         {{{dataType}}} {{{paramName}}} = {{{example}}}; // {{{dataType}}} | {{{description}}}
         {{/allParams}}
         try {
             {{#returnType}}{{{returnType}}} result = {{/returnType}}apiInstance.{{{operationId}}}({{#allParams}}{{{paramName}}}{{#hasMore}}, {{/hasMore}}{{/allParams}});{{#returnType}}
             System.out.println(result);{{/returnType}}
-        } catch (ApiException e) {
+        } catch (HttpClientException e) {
             System.err.println("Exception when calling {{{classname}}}#{{{operationId}}}");
-            System.err.println("Status code: " + e.getCode());
+            System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
+            System.err.println("URL: " + e.getUrl());
         }
     }
 }

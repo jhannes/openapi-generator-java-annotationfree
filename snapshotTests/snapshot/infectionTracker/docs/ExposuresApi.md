@@ -18,28 +18,25 @@ Method | HTTP request | Description
 ### Example
 
 ```java
-// Import classes:
-import io.github.jhannes.openapi.infectionTracker.ApiClient;
-import io.github.jhannes.openapi.infectionTracker.ApiException;
-import io.github.jhannes.openapi.infectionTracker.Configuration;
+import io.github.jhannes.openapi.infectionTracker.api.*;
 import io.github.jhannes.openapi.infectionTracker.models.*;
-import io.github.jhannes.openapi.infectionTracker.api.ExposuresApi;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        ExposuresApi apiInstance = ApiClientProxy.create(ExposuresApi.class, httpClient);
 
-        ExposuresApi apiInstance = new ExposuresApi(defaultClient);
         try {
             ExposureDto result = apiInstance.listExposures();
             System.out.println(result);
-        } catch (ApiException e) {
+        } catch (HttpClientException e) {
             System.err.println("Exception when calling ExposuresApi#listExposures");
-            System.err.println("Status code: " + e.getCode());
+            System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
+            System.err.println("URL: " + e.getUrl());
         }
     }
 }
@@ -77,29 +74,26 @@ No authorization required
 ### Example
 
 ```java
-// Import classes:
-import io.github.jhannes.openapi.infectionTracker.ApiClient;
-import io.github.jhannes.openapi.infectionTracker.ApiException;
-import io.github.jhannes.openapi.infectionTracker.Configuration;
+import io.github.jhannes.openapi.infectionTracker.api.*;
 import io.github.jhannes.openapi.infectionTracker.models.*;
-import io.github.jhannes.openapi.infectionTracker.api.ExposuresApi;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        ExposuresApi apiInstance = ApiClientProxy.create(ExposuresApi.class, httpClient);
 
-        ExposuresApi apiInstance = new ExposuresApi(defaultClient);
         UUID exposureId = new UUID(); // UUID | 
         ExposureDto exposureDto = new ExposureDto(); // ExposureDto | 
         try {
             apiInstance.updateExposure(exposureId, exposureDto);
-        } catch (ApiException e) {
+        } catch (HttpClientException e) {
             System.err.println("Exception when calling ExposuresApi#updateExposure");
-            System.err.println("Status code: " + e.getCode());
+            System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
+            System.err.println("URL: " + e.getUrl());
         }
     }
 }

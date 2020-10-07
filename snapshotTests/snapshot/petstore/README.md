@@ -72,27 +72,25 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 ```java
 
-import io.github.jhannes.openapi.petstore.*;
-import io.github.jhannes.openapi.petstore.auth.*;
-import io.github.jhannes.openapi.petstore.model.*;
-import io.github.jhannes.openapi.petstore.api.DefaultApi;
+import io.github.jhannes.openapi.petstore.api.*;
+import io.github.jhannes.openapi.petstore.models.*;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
 
-public class DefaultApiExample {
-
+public class Example {
     public static void main(String[] args) {
-        ApiClient defaultClient = Configuration.getDefaultApiClient();
-        defaultClient.setBasePath("http://api.example.com/v1");
-        
-        DefaultApi apiInstance = new DefaultApi(defaultClient);
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://api.example.com/v1");
+        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+
         AnyPetDto anyPetDto = new AnyPetDto(); // AnyPetDto | 
         try {
             apiInstance.petsPatch(anyPetDto);
-        } catch (ApiException e) {
+        } catch (HttpClientException e) {
             System.err.println("Exception when calling DefaultApi#petsPatch");
-            System.err.println("Status code: " + e.getCode());
+            System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("Response headers: " + e.getResponseHeaders());
-            e.printStackTrace();
+            System.err.println("URL: " + e.getUrl());
         }
     }
 }
