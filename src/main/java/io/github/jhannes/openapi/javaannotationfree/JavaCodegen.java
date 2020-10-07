@@ -2,7 +2,8 @@ package io.github.jhannes.openapi.javaannotationfree;
 
 import org.openapitools.codegen.CodegenDiscriminator;
 import org.openapitools.codegen.CodegenModel;
-import org.openapitools.codegen.languages.JavaClientCodegen;
+import org.openapitools.codegen.SupportingFile;
+import org.openapitools.codegen.languages.AbstractJavaCodegen;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,11 +11,18 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class JavaCodegen extends JavaClientCodegen {
+public class JavaCodegen extends AbstractJavaCodegen {
 
     public JavaCodegen() {
         super();
         embeddedTemplateDir = templateDir = "JavaAnnotationfree";
+        artifactId = "openapi-java-client";
+    }
+
+    @Override
+    public void processOpts() {
+        super.processOpts();
+        writeOptional(outputFolder, new SupportingFile("README.mustache", "", "README.md"));
     }
 
     @Override
