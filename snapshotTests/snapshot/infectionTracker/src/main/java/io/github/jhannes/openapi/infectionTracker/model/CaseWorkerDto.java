@@ -195,9 +195,9 @@ public class CaseWorkerDto {
         }
         CaseWorkerDto caseWorker = (CaseWorkerDto) o;
         return Objects.equals(this.id, caseWorker.id) &&
-            Objects.equals(this.fullName, caseWorker.fullName) &&
-            Objects.equals(this.email, caseWorker.email) &&
-            Objects.equals(this.role, caseWorker.role);
+                Objects.equals(this.fullName, caseWorker.fullName) &&
+                Objects.equals(this.email, caseWorker.email) &&
+                Objects.equals(this.role, caseWorker.role);
     }
 
     @Override
@@ -207,8 +207,8 @@ public class CaseWorkerDto {
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class CaseWorkerDto {\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("class CaseWorkerDto {\n");
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    fullName: ").append(toIndentedString(fullName)).append("\n");
         sb.append("    email: ").append(toIndentedString(email)).append("\n");
@@ -218,15 +218,14 @@ public class CaseWorkerDto {
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }
 

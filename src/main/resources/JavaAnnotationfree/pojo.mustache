@@ -150,7 +150,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
         }{{#hasVars}}
         {{classname}} {{classVarName}} = ({{classname}}) o;
         return {{#vars}}{{#isByteArray}}Arrays{{/isByteArray}}{{^isByteArray}}Objects{{/isByteArray}}.equals(this.{{baseName}}, {{classVarName}}.{{baseName}}){{#hasMore}} &&
-            {{/hasMore}}{{/vars}}{{#parent}} &&
+                {{/hasMore}}{{/vars}}{{#parent}} &&
             super.equals(o){{/parent}};{{/hasVars}}{{^hasVars}}
             return {{#parent}}super.equals(o){{/parent}}{{^parent}}true{{/parent}};{{/hasVars}}
     }
@@ -162,27 +162,26 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class {{classname}} {\n");
-    {{#parent}}
+        StringBuilder sb = new StringBuilder();
+        sb.append("class {{classname}} {\n");
+        {{#parent}}
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-    {{/parent}}
-    {{#vars}}
+        {{/parent}}
+        {{#vars}}
         sb.append("    {{baseName}}: ").append(toIndentedString({{baseName}})).append("\n");
-    {{/vars}}
+        {{/vars}}
         sb.append("}");
         return sb.toString();
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }

@@ -116,7 +116,7 @@ public class GeneralErrorDto {
         }
         GeneralErrorDto generalError = (GeneralErrorDto) o;
         return Objects.equals(this.code, generalError.code) &&
-            Objects.equals(this.description, generalError.description);
+                Objects.equals(this.description, generalError.description);
     }
 
     @Override
@@ -126,8 +126,8 @@ public class GeneralErrorDto {
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class GeneralErrorDto {\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("class GeneralErrorDto {\n");
         sb.append("    code: ").append(toIndentedString(code)).append("\n");
         sb.append("    description: ").append(toIndentedString(description)).append("\n");
         sb.append("}");
@@ -135,15 +135,14 @@ public class GeneralErrorDto {
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }
 

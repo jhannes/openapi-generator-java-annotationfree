@@ -216,12 +216,12 @@ public class PersonDto {
         }
         PersonDto person = (PersonDto) o;
         return Objects.equals(this.id, person.id) &&
-            Objects.equals(this.type, person.type) &&
-            Objects.equals(this.givenName, person.givenName) &&
-            Objects.equals(this.familyName, person.familyName) &&
-            Objects.equals(this.email, person.email) &&
-            Objects.equals(this.phone, person.phone) &&
-            Objects.equals(this.birthDate, person.birthDate);
+                Objects.equals(this.type, person.type) &&
+                Objects.equals(this.givenName, person.givenName) &&
+                Objects.equals(this.familyName, person.familyName) &&
+                Objects.equals(this.email, person.email) &&
+                Objects.equals(this.phone, person.phone) &&
+                Objects.equals(this.birthDate, person.birthDate);
     }
 
     @Override
@@ -231,8 +231,8 @@ public class PersonDto {
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class PersonDto {\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("class PersonDto {\n");
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    type: ").append(toIndentedString(type)).append("\n");
         sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
@@ -245,15 +245,14 @@ public class PersonDto {
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }
 

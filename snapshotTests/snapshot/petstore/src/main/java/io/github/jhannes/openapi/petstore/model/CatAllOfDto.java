@@ -112,7 +112,7 @@ public class CatAllOfDto {
         }
         CatAllOfDto catAllOf = (CatAllOfDto) o;
         return Objects.equals(this.hunts, catAllOf.hunts) &&
-            Objects.equals(this.age, catAllOf.age);
+                Objects.equals(this.age, catAllOf.age);
     }
 
     @Override
@@ -122,8 +122,8 @@ public class CatAllOfDto {
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class CatAllOfDto {\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("class CatAllOfDto {\n");
         sb.append("    hunts: ").append(toIndentedString(hunts)).append("\n");
         sb.append("    age: ").append(toIndentedString(age)).append("\n");
         sb.append("}");
@@ -131,15 +131,14 @@ public class CatAllOfDto {
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }
 

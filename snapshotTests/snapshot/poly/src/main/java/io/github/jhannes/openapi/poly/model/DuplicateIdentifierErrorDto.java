@@ -135,8 +135,8 @@ public class DuplicateIdentifierErrorDto {
         }
         DuplicateIdentifierErrorDto duplicateIdentifierError = (DuplicateIdentifierErrorDto) o;
         return Objects.equals(this.code, duplicateIdentifierError.code) &&
-            Objects.equals(this.identifierValue, duplicateIdentifierError.identifierValue) &&
-            Objects.equals(this.entityType, duplicateIdentifierError.entityType);
+                Objects.equals(this.identifierValue, duplicateIdentifierError.identifierValue) &&
+                Objects.equals(this.entityType, duplicateIdentifierError.entityType);
     }
 
     @Override
@@ -146,8 +146,8 @@ public class DuplicateIdentifierErrorDto {
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class DuplicateIdentifierErrorDto {\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("class DuplicateIdentifierErrorDto {\n");
         sb.append("    code: ").append(toIndentedString(code)).append("\n");
         sb.append("    identifierValue: ").append(toIndentedString(identifierValue)).append("\n");
         sb.append("    entityType: ").append(toIndentedString(entityType)).append("\n");
@@ -156,15 +156,14 @@ public class DuplicateIdentifierErrorDto {
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }
 

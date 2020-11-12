@@ -249,13 +249,13 @@ public class OrganizationDto {
         }
         OrganizationDto organization = (OrganizationDto) o;
         return Objects.equals(this.id, organization.id) &&
-            Objects.equals(this.type, organization.type) &&
-            Objects.equals(this.name, organization.name) &&
-            Objects.equals(this.organizationId, organization.organizationId) &&
-            Objects.equals(this.url, organization.url) &&
-            Objects.equals(this.email, organization.email) &&
-            Objects.equals(this.emailDomains, organization.emailDomains) &&
-            Objects.equals(this.phone, organization.phone);
+                Objects.equals(this.type, organization.type) &&
+                Objects.equals(this.name, organization.name) &&
+                Objects.equals(this.organizationId, organization.organizationId) &&
+                Objects.equals(this.url, organization.url) &&
+                Objects.equals(this.email, organization.email) &&
+                Objects.equals(this.emailDomains, organization.emailDomains) &&
+                Objects.equals(this.phone, organization.phone);
     }
 
     @Override
@@ -265,8 +265,8 @@ public class OrganizationDto {
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class OrganizationDto {\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("class OrganizationDto {\n");
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    type: ").append(toIndentedString(type)).append("\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
@@ -280,15 +280,14 @@ public class OrganizationDto {
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }
 

@@ -151,9 +151,9 @@ public class InfectionInformationDto {
         }
         InfectionInformationDto infectionInformation = (InfectionInformationDto) o;
         return Objects.equals(this.patientName, infectionInformation.patientName) &&
-            Objects.equals(this.patientPhoneNumber, infectionInformation.patientPhoneNumber) &&
-            Objects.equals(this.likelyInfectionDate, infectionInformation.likelyInfectionDate) &&
-            Objects.equals(this.notes, infectionInformation.notes);
+                Objects.equals(this.patientPhoneNumber, infectionInformation.patientPhoneNumber) &&
+                Objects.equals(this.likelyInfectionDate, infectionInformation.likelyInfectionDate) &&
+                Objects.equals(this.notes, infectionInformation.notes);
     }
 
     @Override
@@ -163,8 +163,8 @@ public class InfectionInformationDto {
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class InfectionInformationDto {\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("class InfectionInformationDto {\n");
         sb.append("    patientName: ").append(toIndentedString(patientName)).append("\n");
         sb.append("    patientPhoneNumber: ").append(toIndentedString(patientPhoneNumber)).append("\n");
         sb.append("    likelyInfectionDate: ").append(toIndentedString(likelyInfectionDate)).append("\n");
@@ -174,15 +174,14 @@ public class InfectionInformationDto {
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }
 

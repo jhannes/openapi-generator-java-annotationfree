@@ -150,8 +150,8 @@ public class IllegalEmailAddressErrorDto {
         }
         IllegalEmailAddressErrorDto illegalEmailAddressError = (IllegalEmailAddressErrorDto) o;
         return Objects.equals(this.code, illegalEmailAddressError.code) &&
-            Objects.equals(this.inputEmailAddress, illegalEmailAddressError.inputEmailAddress) &&
-            Objects.equals(this.validDomains, illegalEmailAddressError.validDomains);
+                Objects.equals(this.inputEmailAddress, illegalEmailAddressError.inputEmailAddress) &&
+                Objects.equals(this.validDomains, illegalEmailAddressError.validDomains);
     }
 
     @Override
@@ -161,8 +161,8 @@ public class IllegalEmailAddressErrorDto {
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class IllegalEmailAddressErrorDto {\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("class IllegalEmailAddressErrorDto {\n");
         sb.append("    code: ").append(toIndentedString(code)).append("\n");
         sb.append("    inputEmailAddress: ").append(toIndentedString(inputEmailAddress)).append("\n");
         sb.append("    validDomains: ").append(toIndentedString(validDomains)).append("\n");
@@ -171,15 +171,14 @@ public class IllegalEmailAddressErrorDto {
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }
 

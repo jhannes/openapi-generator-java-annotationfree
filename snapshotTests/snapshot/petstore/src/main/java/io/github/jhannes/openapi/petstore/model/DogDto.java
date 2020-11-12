@@ -151,7 +151,7 @@ public class DogDto extends PetDto {
         }
         DogDto dog = (DogDto) o;
         return Objects.equals(this.bark, dog.bark) &&
-            Objects.equals(this.breed, dog.breed) &&
+                Objects.equals(this.breed, dog.breed) &&
             super.equals(o);
     }
 
@@ -162,8 +162,8 @@ public class DogDto extends PetDto {
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class DogDto {\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("class DogDto {\n");
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    bark: ").append(toIndentedString(bark)).append("\n");
         sb.append("    breed: ").append(toIndentedString(breed)).append("\n");
@@ -172,15 +172,14 @@ public class DogDto extends PetDto {
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }
 

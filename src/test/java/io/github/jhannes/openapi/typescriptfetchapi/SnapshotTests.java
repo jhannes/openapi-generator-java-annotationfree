@@ -29,7 +29,7 @@ public class SnapshotTests {
     @TestFactory
     Stream<DynamicNode> javaAnnotationFreeSnapshots() throws IOException {
         return Stream.of(
-                snapshots(Paths.get("snapshotTests"), "java-annotationfree", Paths.get("snapshotTests").resolve("output"), Paths.get("snapshotTests").resolve("snapshot")),
+                //snapshots(Paths.get("snapshotTests"), "java-annotationfree", Paths.get("snapshotTests").resolve("output"), Paths.get("snapshotTests").resolve("snapshot")),
                 snapshots(Paths.get("localSnapshotTests"), "java-annotationfree", Paths.get("localSnapshotTests").resolve("output"), Paths.get("localSnapshotTests").resolve("snapshot"))
         );
     }
@@ -42,7 +42,9 @@ public class SnapshotTests {
         cleanDirectory(outputDir);
         return dynamicContainer(
                 "Snapshots of " + testDir,
-                Files.list(inputDir).map(spec -> createTestsForSpec(spec, generatorName, outputDir, snapshotDir))
+                Files.list(inputDir)
+                        .filter(p -> p.toFile().isFile())
+                        .map(spec -> createTestsForSpec(spec, generatorName, outputDir, snapshotDir))
         );
     }
 

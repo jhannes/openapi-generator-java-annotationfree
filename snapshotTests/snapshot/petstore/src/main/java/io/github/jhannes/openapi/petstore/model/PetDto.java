@@ -133,8 +133,8 @@ public class PetDto {
         }
         PetDto pet = (PetDto) o;
         return Objects.equals(this.pet_type, pet.pet_type) &&
-            Objects.equals(this.name, pet.name) &&
-            Objects.equals(this.birth_date, pet.birth_date);
+                Objects.equals(this.name, pet.name) &&
+                Objects.equals(this.birth_date, pet.birth_date);
     }
 
     @Override
@@ -144,8 +144,8 @@ public class PetDto {
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class PetDto {\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("class PetDto {\n");
         sb.append("    pet_type: ").append(toIndentedString(pet_type)).append("\n");
         sb.append("    name: ").append(toIndentedString(name)).append("\n");
         sb.append("    birth_date: ").append(toIndentedString(birth_date)).append("\n");
@@ -154,15 +154,14 @@ public class PetDto {
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }
 

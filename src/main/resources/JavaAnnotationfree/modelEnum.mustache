@@ -26,12 +26,19 @@ public enum {{#datatypeWithEnum}}{{{.}}}{{/datatypeWithEnum}}{{^datatypeWithEnum
         return String.valueOf(value);
     }
 
+    public static List<String> getValues() {
+        return Arrays.asList(new String[] {
+            {{#allowableValues}}{{#enumVars}}{{{value}}},
+            {{/enumVars}}{{/allowableValues}}
+        });
+    }
+
     public static {{#datatypeWithEnum}}{{{.}}}{{/datatypeWithEnum}}{{^datatypeWithEnum}}{{{classname}}}{{/datatypeWithEnum}} fromValue(String text) {
         for ({{#datatypeWithEnum}}{{{.}}}{{/datatypeWithEnum}}{{^datatypeWithEnum}}{{{classname}}}{{/datatypeWithEnum}} b : {{#datatypeWithEnum}}{{{.}}}{{/datatypeWithEnum}}{{^datatypeWithEnum}}{{{classname}}}{{/datatypeWithEnum}}.values()) {
             if (String.valueOf(b.value).equals(text)) {
                 return b;
             }
         }
-        {{#useNullForUnknownEnumValue}}return null;{{/useNullForUnknownEnumValue}}{{^useNullForUnknownEnumValue}}throw new IllegalArgumentException("Unexpected value '" + text + "'");{{/useNullForUnknownEnumValue}}
+        {{#useNullForUnknownEnumValue}}return null;{{/useNullForUnknownEnumValue}}{{^useNullForUnknownEnumValue}}throw new IllegalArgumentException("Unexpected value '" + text + "' (should be one of " + getValues() + ")");{{/useNullForUnknownEnumValue}}
     }
 }

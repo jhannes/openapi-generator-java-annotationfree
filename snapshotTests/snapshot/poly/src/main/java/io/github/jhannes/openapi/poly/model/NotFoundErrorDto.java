@@ -135,8 +135,8 @@ public class NotFoundErrorDto {
         }
         NotFoundErrorDto notFoundError = (NotFoundErrorDto) o;
         return Objects.equals(this.code, notFoundError.code) &&
-            Objects.equals(this.identifierValue, notFoundError.identifierValue) &&
-            Objects.equals(this.entityType, notFoundError.entityType);
+                Objects.equals(this.identifierValue, notFoundError.identifierValue) &&
+                Objects.equals(this.entityType, notFoundError.entityType);
     }
 
     @Override
@@ -146,8 +146,8 @@ public class NotFoundErrorDto {
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class NotFoundErrorDto {\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("class NotFoundErrorDto {\n");
         sb.append("    code: ").append(toIndentedString(code)).append("\n");
         sb.append("    identifierValue: ").append(toIndentedString(identifierValue)).append("\n");
         sb.append("    entityType: ").append(toIndentedString(entityType)).append("\n");
@@ -156,15 +156,14 @@ public class NotFoundErrorDto {
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }
 

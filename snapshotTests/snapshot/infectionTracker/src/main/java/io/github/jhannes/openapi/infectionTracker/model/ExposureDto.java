@@ -271,13 +271,13 @@ public class ExposureDto {
         }
         ExposureDto exposure = (ExposureDto) o;
         return Objects.equals(this.id, exposure.id) &&
-            Objects.equals(this.exposedPersonName, exposure.exposedPersonName) &&
-            Objects.equals(this.exposedPersonPhoneNumber, exposure.exposedPersonPhoneNumber) &&
-            Objects.equals(this.exposedDate, exposure.exposedDate) &&
-            Objects.equals(this.exposureLocation, exposure.exposureLocation) &&
-            Objects.equals(this.notes, exposure.notes) &&
-            Objects.equals(this.caseWorker, exposure.caseWorker) &&
-            Objects.equals(this.status, exposure.status);
+                Objects.equals(this.exposedPersonName, exposure.exposedPersonName) &&
+                Objects.equals(this.exposedPersonPhoneNumber, exposure.exposedPersonPhoneNumber) &&
+                Objects.equals(this.exposedDate, exposure.exposedDate) &&
+                Objects.equals(this.exposureLocation, exposure.exposureLocation) &&
+                Objects.equals(this.notes, exposure.notes) &&
+                Objects.equals(this.caseWorker, exposure.caseWorker) &&
+                Objects.equals(this.status, exposure.status);
     }
 
     @Override
@@ -287,8 +287,8 @@ public class ExposureDto {
 
     @Override
     public String toString() {
-    StringBuilder sb = new StringBuilder();
-    sb.append("class ExposureDto {\n");
+        StringBuilder sb = new StringBuilder();
+        sb.append("class ExposureDto {\n");
         sb.append("    id: ").append(toIndentedString(id)).append("\n");
         sb.append("    exposedPersonName: ").append(toIndentedString(exposedPersonName)).append("\n");
         sb.append("    exposedPersonPhoneNumber: ").append(toIndentedString(exposedPersonPhoneNumber)).append("\n");
@@ -302,15 +302,14 @@ public class ExposureDto {
     }
 
     /**
-    * Convert the given object to string with each line indented by 4 spaces
-    * (except the first line).
-    */
+     * Convert the given object to string with each line indented by 4 spaces
+     * (except the first line).
+     */
     private String toIndentedString(java.lang.Object o) {
         if (o == null) {
             return "null";
         }
         return o.toString().replace("\n", "\n    ");
     }
-
 }
 
