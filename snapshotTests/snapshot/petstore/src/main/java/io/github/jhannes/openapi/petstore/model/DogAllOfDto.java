@@ -148,21 +148,21 @@ public class DogAllOfDto {
             return false;
         }
         DogAllOfDto dogAllOf = (DogAllOfDto) o;
-        return Objects.equals(this.bark, dogAllOf.bark) &&
-                Objects.equals(this.breed, dogAllOf.breed);
+        return Objects.equals(this.getBark(), dogAllOf.getBark()) &&
+                Objects.equals(this.getBreed(), dogAllOf.getBreed());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bark, breed);
+        return Objects.hash(getBark(), getBreed());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class DogAllOfDto {\n");
-        sb.append("    bark: ").append(toIndentedString(bark)).append("\n");
-        sb.append("    breed: ").append(toIndentedString(breed)).append("\n");
+        sb.append("    bark: ").append(toIndentedString(getBark())).append("\n");
+        sb.append("    breed: ").append(toIndentedString(getBreed())).append("\n");
         sb.append("}");
         return sb.toString();
     }

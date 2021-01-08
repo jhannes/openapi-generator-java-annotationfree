@@ -248,33 +248,33 @@ public class OrganizationDto {
             return false;
         }
         OrganizationDto organization = (OrganizationDto) o;
-        return Objects.equals(this.id, organization.id) &&
-                Objects.equals(this.type, organization.type) &&
-                Objects.equals(this.name, organization.name) &&
-                Objects.equals(this.organizationId, organization.organizationId) &&
-                Objects.equals(this.url, organization.url) &&
-                Objects.equals(this.email, organization.email) &&
-                Objects.equals(this.emailDomains, organization.emailDomains) &&
-                Objects.equals(this.phone, organization.phone);
+        return Objects.equals(this.getId(), organization.getId()) &&
+                Objects.equals(this.getType(), organization.getType()) &&
+                Objects.equals(this.getName(), organization.getName()) &&
+                Objects.equals(this.getOrganizationId(), organization.getOrganizationId()) &&
+                Objects.equals(this.getUrl(), organization.getUrl()) &&
+                Objects.equals(this.getEmail(), organization.getEmail()) &&
+                Objects.equals(this.getEmailDomains(), organization.getEmailDomains()) &&
+                Objects.equals(this.getPhone(), organization.getPhone());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, name, organizationId, url, email, emailDomains, phone);
+        return Objects.hash(getId(), getType(), getName(), getOrganizationId(), getUrl(), getEmail(), getEmailDomains(), getPhone());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class OrganizationDto {\n");
-        sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    type: ").append(toIndentedString(type)).append("\n");
-        sb.append("    name: ").append(toIndentedString(name)).append("\n");
-        sb.append("    organizationId: ").append(toIndentedString(organizationId)).append("\n");
-        sb.append("    url: ").append(toIndentedString(url)).append("\n");
-        sb.append("    email: ").append(toIndentedString(email)).append("\n");
-        sb.append("    emailDomains: ").append(toIndentedString(emailDomains)).append("\n");
-        sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
+        sb.append("    id: ").append(toIndentedString(getId())).append("\n");
+        sb.append("    type: ").append(toIndentedString(getType())).append("\n");
+        sb.append("    name: ").append(toIndentedString(getName())).append("\n");
+        sb.append("    organizationId: ").append(toIndentedString(getOrganizationId())).append("\n");
+        sb.append("    url: ").append(toIndentedString(getUrl())).append("\n");
+        sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
+        sb.append("    emailDomains: ").append(toIndentedString(getEmailDomains())).append("\n");
+        sb.append("    phone: ").append(toIndentedString(getPhone())).append("\n");
         sb.append("}");
         return sb.toString();
     }

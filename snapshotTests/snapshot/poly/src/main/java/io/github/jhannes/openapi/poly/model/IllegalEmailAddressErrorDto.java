@@ -149,23 +149,23 @@ public class IllegalEmailAddressErrorDto {
             return false;
         }
         IllegalEmailAddressErrorDto illegalEmailAddressError = (IllegalEmailAddressErrorDto) o;
-        return Objects.equals(this.code, illegalEmailAddressError.code) &&
-                Objects.equals(this.inputEmailAddress, illegalEmailAddressError.inputEmailAddress) &&
-                Objects.equals(this.validDomains, illegalEmailAddressError.validDomains);
+        return Objects.equals(this.getCode(), illegalEmailAddressError.getCode()) &&
+                Objects.equals(this.getInputEmailAddress(), illegalEmailAddressError.getInputEmailAddress()) &&
+                Objects.equals(this.getValidDomains(), illegalEmailAddressError.getValidDomains());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, inputEmailAddress, validDomains);
+        return Objects.hash(getCode(), getInputEmailAddress(), getValidDomains());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class IllegalEmailAddressErrorDto {\n");
-        sb.append("    code: ").append(toIndentedString(code)).append("\n");
-        sb.append("    inputEmailAddress: ").append(toIndentedString(inputEmailAddress)).append("\n");
-        sb.append("    validDomains: ").append(toIndentedString(validDomains)).append("\n");
+        sb.append("    code: ").append(toIndentedString(getCode())).append("\n");
+        sb.append("    inputEmailAddress: ").append(toIndentedString(getInputEmailAddress())).append("\n");
+        sb.append("    validDomains: ").append(toIndentedString(getValidDomains())).append("\n");
         sb.append("}");
         return sb.toString();
     }

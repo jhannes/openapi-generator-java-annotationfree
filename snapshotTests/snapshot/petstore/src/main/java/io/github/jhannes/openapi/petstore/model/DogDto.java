@@ -150,14 +150,14 @@ public class DogDto extends PetDto {
             return false;
         }
         DogDto dog = (DogDto) o;
-        return Objects.equals(this.bark, dog.bark) &&
-                Objects.equals(this.breed, dog.breed) &&
+        return Objects.equals(this.getBark(), dog.getBark()) &&
+                Objects.equals(this.getBreed(), dog.getBreed()) &&
             super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bark, breed, super.hashCode());
+        return Objects.hash(getBark(), getBreed());
     }
 
     @Override
@@ -165,8 +165,8 @@ public class DogDto extends PetDto {
         StringBuilder sb = new StringBuilder();
         sb.append("class DogDto {\n");
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-        sb.append("    bark: ").append(toIndentedString(bark)).append("\n");
-        sb.append("    breed: ").append(toIndentedString(breed)).append("\n");
+        sb.append("    bark: ").append(toIndentedString(getBark())).append("\n");
+        sb.append("    breed: ").append(toIndentedString(getBreed())).append("\n");
         sb.append("}");
         return sb.toString();
     }

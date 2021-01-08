@@ -115,21 +115,21 @@ public class GeneralErrorDto {
             return false;
         }
         GeneralErrorDto generalError = (GeneralErrorDto) o;
-        return Objects.equals(this.code, generalError.code) &&
-                Objects.equals(this.description, generalError.description);
+        return Objects.equals(this.getCode(), generalError.getCode()) &&
+                Objects.equals(this.getDescription(), generalError.getDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, description);
+        return Objects.hash(getCode(), getDescription());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class GeneralErrorDto {\n");
-        sb.append("    code: ").append(toIndentedString(code)).append("\n");
-        sb.append("    description: ").append(toIndentedString(description)).append("\n");
+        sb.append("    code: ").append(toIndentedString(getCode())).append("\n");
+        sb.append("    description: ").append(toIndentedString(getDescription())).append("\n");
         sb.append("}");
         return sb.toString();
     }

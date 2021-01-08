@@ -32,13 +32,11 @@ Add to your `pom.xml`:
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/openapi-spec/petstore.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/openapi-spec/openapi.yaml</inputSpec>
                             <generatorName>java-annotationfree</generatorName>
                             <modelNameSuffix>Dto</modelNameSuffix>
-                            <output>target/generated-sources/openapi-java-petstore</output>
+                            <output>target/generated-sources/openapi-java</output>
                             <configOptions>
-                                <supportsES6>true</supportsES6>
-                                <withInterfaces>withInterfaces</withInterfaces>
                                 <generateModelTests>true</generateModelTests>
                             </configOptions>
                         </configuration>

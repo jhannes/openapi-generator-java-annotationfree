@@ -111,21 +111,21 @@ public class CatAllOfDto {
             return false;
         }
         CatAllOfDto catAllOf = (CatAllOfDto) o;
-        return Objects.equals(this.hunts, catAllOf.hunts) &&
-                Objects.equals(this.age, catAllOf.age);
+        return Objects.equals(this.getHunts(), catAllOf.getHunts()) &&
+                Objects.equals(this.getAge(), catAllOf.getAge());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hunts, age);
+        return Objects.hash(getHunts(), getAge());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class CatAllOfDto {\n");
-        sb.append("    hunts: ").append(toIndentedString(hunts)).append("\n");
-        sb.append("    age: ").append(toIndentedString(age)).append("\n");
+        sb.append("    hunts: ").append(toIndentedString(getHunts())).append("\n");
+        sb.append("    age: ").append(toIndentedString(getAge())).append("\n");
         sb.append("}");
         return sb.toString();
     }

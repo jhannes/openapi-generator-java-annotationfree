@@ -3,6 +3,7 @@
 */
 public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
 {{#vars}}
+    {{^isInherited}}
     {{#isEnum}}
         {{^isContainer}}
             {{>modelInnerEnum}}
@@ -15,6 +16,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
     {{/isEnum}}
 
     private {{{datatypeWithEnum}}} {{baseName}}{{#defaultValue}} = {{{.}}}{{/defaultValue}};
+    {{/isInherited}}
 {{/vars}}
 
     public static String[] readOnlyFields() {
@@ -66,6 +68,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
     }
 
 {{#vars}}
+    {{^isInherited}}
     {{#isListContainer}}
 
     public <T> {{classname}} {{name}}(Collection<T> items, Function<T, {{items.datatypeWithEnum}}> mapper) {
@@ -138,6 +141,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
         this.{{baseName}} = {{name}};
         return this;
     }
+    {{/isInherited}}
 {{/vars}}
 
     @Override
@@ -149,7 +153,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
             return false;
         }{{#hasVars}}
         {{classname}} {{classVarName}} = ({{classname}}) o;
-        return {{#vars}}{{#isByteArray}}Arrays{{/isByteArray}}{{^isByteArray}}Objects{{/isByteArray}}.equals(this.{{baseName}}, {{classVarName}}.{{baseName}}){{#hasMore}} &&
+        return {{#vars}}{{#isByteArray}}Arrays{{/isByteArray}}{{^isByteArray}}Objects{{/isByteArray}}.equals(this.{{getter}}(), {{classVarName}}.{{getter}}()){{#hasMore}} &&
                 {{/hasMore}}{{/vars}}{{#parent}} &&
             super.equals(o){{/parent}};{{/hasVars}}{{^hasVars}}
             return {{#parent}}super.equals(o){{/parent}}{{^parent}}true{{/parent}};{{/hasVars}}
@@ -157,7 +161,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
 
     @Override
     public int hashCode() {
-        return Objects.hash({{#vars}}{{^isByteArray}}{{baseName}}{{/isByteArray}}{{#isByteArray}}Arrays.hashCode({{baseName}}){{/isByteArray}}{{#hasMore}}, {{/hasMore}}{{/vars}}{{#parent}}{{#hasVars}}, {{/hasVars}}super.hashCode(){{/parent}});
+        return Objects.hash({{#vars}}{{^isByteArray}}{{getter}}(){{/isByteArray}}{{#isByteArray}}Arrays.hashCode({{getter}}()){{/isByteArray}}{{#hasMore}}, {{/hasMore}}{{/vars}});
     }
 
     @Override
@@ -168,7 +172,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         {{/parent}}
         {{#vars}}
-        sb.append("    {{baseName}}: ").append(toIndentedString({{baseName}})).append("\n");
+        sb.append("    {{baseName}}: ").append(toIndentedString({{getter}}())).append("\n");
         {{/vars}}
         sb.append("}");
         return sb.toString();

@@ -2,6 +2,7 @@ package io.github.jhannes.openapi.javaannotationfree;
 
 import org.openapitools.codegen.CodegenDiscriminator;
 import org.openapitools.codegen.CodegenModel;
+import org.openapitools.codegen.CodegenProperty;
 import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.languages.AbstractJavaCodegen;
 
@@ -48,7 +49,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
                         Set<CodegenDiscriminator.MappedModel> mappedModels = new HashSet<>();
                         HashMap<String, String> mapping = new HashMap<>();
                         for (String className : codegenModel.oneOf) {
-
                             String subtypeModel = result.entrySet().stream()
                                     .filter(e -> ((Map<String, Object>) e.getValue()).get("classname").equals(className))
                                     .map(Map.Entry::getKey)
@@ -59,6 +59,19 @@ public class JavaCodegen extends AbstractJavaCodegen {
                         }
                         codegenModel.discriminator.setMapping(mapping);
                         codegenModel.discriminator.setMappedModels(mappedModels);
+                    }
+                }
+                if (!codegenModel.allOf.isEmpty()) {
+                    if (codegenModel.parent == null) {
+                        codegenModel.parent = codegenModel.allOf.iterator().next();
+                        String parentName = codegenModel.parent.replaceAll(getModelNameSuffix() + "$", "");
+                        codegenModel.parentModel = (CodegenModel) ((List<Map<String, Object>>)((Map<String,Object>)objs.get(parentName)).get("models")).get(0).get("model");
+                        for (CodegenProperty var : codegenModel.vars) {
+                            if (codegenModel.parentModel.vars.stream().anyMatch(v -> v.name.equals(var.name))) {
+                                var.isInherited = true;
+                            }
+                        }
+
                     }
                 }
             }

@@ -134,23 +134,23 @@ public class NotFoundErrorDto {
             return false;
         }
         NotFoundErrorDto notFoundError = (NotFoundErrorDto) o;
-        return Objects.equals(this.code, notFoundError.code) &&
-                Objects.equals(this.identifierValue, notFoundError.identifierValue) &&
-                Objects.equals(this.entityType, notFoundError.entityType);
+        return Objects.equals(this.getCode(), notFoundError.getCode()) &&
+                Objects.equals(this.getIdentifierValue(), notFoundError.getIdentifierValue()) &&
+                Objects.equals(this.getEntityType(), notFoundError.getEntityType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, identifierValue, entityType);
+        return Objects.hash(getCode(), getIdentifierValue(), getEntityType());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class NotFoundErrorDto {\n");
-        sb.append("    code: ").append(toIndentedString(code)).append("\n");
-        sb.append("    identifierValue: ").append(toIndentedString(identifierValue)).append("\n");
-        sb.append("    entityType: ").append(toIndentedString(entityType)).append("\n");
+        sb.append("    code: ").append(toIndentedString(getCode())).append("\n");
+        sb.append("    identifierValue: ").append(toIndentedString(getIdentifierValue())).append("\n");
+        sb.append("    entityType: ").append(toIndentedString(getEntityType())).append("\n");
         sb.append("}");
         return sb.toString();
     }

@@ -215,31 +215,31 @@ public class PersonDto {
             return false;
         }
         PersonDto person = (PersonDto) o;
-        return Objects.equals(this.id, person.id) &&
-                Objects.equals(this.type, person.type) &&
-                Objects.equals(this.givenName, person.givenName) &&
-                Objects.equals(this.familyName, person.familyName) &&
-                Objects.equals(this.email, person.email) &&
-                Objects.equals(this.phone, person.phone) &&
-                Objects.equals(this.birthDate, person.birthDate);
+        return Objects.equals(this.getId(), person.getId()) &&
+                Objects.equals(this.getType(), person.getType()) &&
+                Objects.equals(this.getGivenName(), person.getGivenName()) &&
+                Objects.equals(this.getFamilyName(), person.getFamilyName()) &&
+                Objects.equals(this.getEmail(), person.getEmail()) &&
+                Objects.equals(this.getPhone(), person.getPhone()) &&
+                Objects.equals(this.getBirthDate(), person.getBirthDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, type, givenName, familyName, email, phone, birthDate);
+        return Objects.hash(getId(), getType(), getGivenName(), getFamilyName(), getEmail(), getPhone(), getBirthDate());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class PersonDto {\n");
-        sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    type: ").append(toIndentedString(type)).append("\n");
-        sb.append("    givenName: ").append(toIndentedString(givenName)).append("\n");
-        sb.append("    familyName: ").append(toIndentedString(familyName)).append("\n");
-        sb.append("    email: ").append(toIndentedString(email)).append("\n");
-        sb.append("    phone: ").append(toIndentedString(phone)).append("\n");
-        sb.append("    birthDate: ").append(toIndentedString(birthDate)).append("\n");
+        sb.append("    id: ").append(toIndentedString(getId())).append("\n");
+        sb.append("    type: ").append(toIndentedString(getType())).append("\n");
+        sb.append("    givenName: ").append(toIndentedString(getGivenName())).append("\n");
+        sb.append("    familyName: ").append(toIndentedString(getFamilyName())).append("\n");
+        sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
+        sb.append("    phone: ").append(toIndentedString(getPhone())).append("\n");
+        sb.append("    birthDate: ").append(toIndentedString(getBirthDate())).append("\n");
         sb.append("}");
         return sb.toString();
     }

@@ -134,23 +134,23 @@ public class DuplicateIdentifierErrorDto {
             return false;
         }
         DuplicateIdentifierErrorDto duplicateIdentifierError = (DuplicateIdentifierErrorDto) o;
-        return Objects.equals(this.code, duplicateIdentifierError.code) &&
-                Objects.equals(this.identifierValue, duplicateIdentifierError.identifierValue) &&
-                Objects.equals(this.entityType, duplicateIdentifierError.entityType);
+        return Objects.equals(this.getCode(), duplicateIdentifierError.getCode()) &&
+                Objects.equals(this.getIdentifierValue(), duplicateIdentifierError.getIdentifierValue()) &&
+                Objects.equals(this.getEntityType(), duplicateIdentifierError.getEntityType());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(code, identifierValue, entityType);
+        return Objects.hash(getCode(), getIdentifierValue(), getEntityType());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class DuplicateIdentifierErrorDto {\n");
-        sb.append("    code: ").append(toIndentedString(code)).append("\n");
-        sb.append("    identifierValue: ").append(toIndentedString(identifierValue)).append("\n");
-        sb.append("    entityType: ").append(toIndentedString(entityType)).append("\n");
+        sb.append("    code: ").append(toIndentedString(getCode())).append("\n");
+        sb.append("    identifierValue: ").append(toIndentedString(getIdentifierValue())).append("\n");
+        sb.append("    entityType: ").append(toIndentedString(getEntityType())).append("\n");
         sb.append("}");
         return sb.toString();
     }

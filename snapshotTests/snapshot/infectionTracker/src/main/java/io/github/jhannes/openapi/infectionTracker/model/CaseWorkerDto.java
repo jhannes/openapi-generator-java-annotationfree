@@ -194,25 +194,25 @@ public class CaseWorkerDto {
             return false;
         }
         CaseWorkerDto caseWorker = (CaseWorkerDto) o;
-        return Objects.equals(this.id, caseWorker.id) &&
-                Objects.equals(this.fullName, caseWorker.fullName) &&
-                Objects.equals(this.email, caseWorker.email) &&
-                Objects.equals(this.role, caseWorker.role);
+        return Objects.equals(this.getId(), caseWorker.getId()) &&
+                Objects.equals(this.getFullName(), caseWorker.getFullName()) &&
+                Objects.equals(this.getEmail(), caseWorker.getEmail()) &&
+                Objects.equals(this.getRole(), caseWorker.getRole());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, fullName, email, role);
+        return Objects.hash(getId(), getFullName(), getEmail(), getRole());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class CaseWorkerDto {\n");
-        sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    fullName: ").append(toIndentedString(fullName)).append("\n");
-        sb.append("    email: ").append(toIndentedString(email)).append("\n");
-        sb.append("    role: ").append(toIndentedString(role)).append("\n");
+        sb.append("    id: ").append(toIndentedString(getId())).append("\n");
+        sb.append("    fullName: ").append(toIndentedString(getFullName())).append("\n");
+        sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
+        sb.append("    role: ").append(toIndentedString(getRole())).append("\n");
         sb.append("}");
         return sb.toString();
     }

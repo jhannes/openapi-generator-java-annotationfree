@@ -132,23 +132,23 @@ public class PetDto {
             return false;
         }
         PetDto pet = (PetDto) o;
-        return Objects.equals(this.pet_type, pet.pet_type) &&
-                Objects.equals(this.name, pet.name) &&
-                Objects.equals(this.birth_date, pet.birth_date);
+        return Objects.equals(this.getPetType(), pet.getPetType()) &&
+                Objects.equals(this.getName(), pet.getName()) &&
+                Objects.equals(this.getBirthDate(), pet.getBirthDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(pet_type, name, birth_date);
+        return Objects.hash(getPetType(), getName(), getBirthDate());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class PetDto {\n");
-        sb.append("    pet_type: ").append(toIndentedString(pet_type)).append("\n");
-        sb.append("    name: ").append(toIndentedString(name)).append("\n");
-        sb.append("    birth_date: ").append(toIndentedString(birth_date)).append("\n");
+        sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
+        sb.append("    name: ").append(toIndentedString(getName())).append("\n");
+        sb.append("    birth_date: ").append(toIndentedString(getBirthDate())).append("\n");
         sb.append("}");
         return sb.toString();
     }

@@ -150,25 +150,25 @@ public class InfectionInformationDto {
             return false;
         }
         InfectionInformationDto infectionInformation = (InfectionInformationDto) o;
-        return Objects.equals(this.patientName, infectionInformation.patientName) &&
-                Objects.equals(this.patientPhoneNumber, infectionInformation.patientPhoneNumber) &&
-                Objects.equals(this.likelyInfectionDate, infectionInformation.likelyInfectionDate) &&
-                Objects.equals(this.notes, infectionInformation.notes);
+        return Objects.equals(this.getPatientName(), infectionInformation.getPatientName()) &&
+                Objects.equals(this.getPatientPhoneNumber(), infectionInformation.getPatientPhoneNumber()) &&
+                Objects.equals(this.getLikelyInfectionDate(), infectionInformation.getLikelyInfectionDate()) &&
+                Objects.equals(this.getNotes(), infectionInformation.getNotes());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(patientName, patientPhoneNumber, likelyInfectionDate, notes);
+        return Objects.hash(getPatientName(), getPatientPhoneNumber(), getLikelyInfectionDate(), getNotes());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class InfectionInformationDto {\n");
-        sb.append("    patientName: ").append(toIndentedString(patientName)).append("\n");
-        sb.append("    patientPhoneNumber: ").append(toIndentedString(patientPhoneNumber)).append("\n");
-        sb.append("    likelyInfectionDate: ").append(toIndentedString(likelyInfectionDate)).append("\n");
-        sb.append("    notes: ").append(toIndentedString(notes)).append("\n");
+        sb.append("    patientName: ").append(toIndentedString(getPatientName())).append("\n");
+        sb.append("    patientPhoneNumber: ").append(toIndentedString(getPatientPhoneNumber())).append("\n");
+        sb.append("    likelyInfectionDate: ").append(toIndentedString(getLikelyInfectionDate())).append("\n");
+        sb.append("    notes: ").append(toIndentedString(getNotes())).append("\n");
         sb.append("}");
         return sb.toString();
     }

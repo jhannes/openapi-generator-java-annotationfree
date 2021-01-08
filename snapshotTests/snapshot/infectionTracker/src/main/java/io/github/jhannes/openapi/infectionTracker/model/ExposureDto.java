@@ -270,33 +270,33 @@ public class ExposureDto {
             return false;
         }
         ExposureDto exposure = (ExposureDto) o;
-        return Objects.equals(this.id, exposure.id) &&
-                Objects.equals(this.exposedPersonName, exposure.exposedPersonName) &&
-                Objects.equals(this.exposedPersonPhoneNumber, exposure.exposedPersonPhoneNumber) &&
-                Objects.equals(this.exposedDate, exposure.exposedDate) &&
-                Objects.equals(this.exposureLocation, exposure.exposureLocation) &&
-                Objects.equals(this.notes, exposure.notes) &&
-                Objects.equals(this.caseWorker, exposure.caseWorker) &&
-                Objects.equals(this.status, exposure.status);
+        return Objects.equals(this.getId(), exposure.getId()) &&
+                Objects.equals(this.getExposedPersonName(), exposure.getExposedPersonName()) &&
+                Objects.equals(this.getExposedPersonPhoneNumber(), exposure.getExposedPersonPhoneNumber()) &&
+                Objects.equals(this.getExposedDate(), exposure.getExposedDate()) &&
+                Objects.equals(this.getExposureLocation(), exposure.getExposureLocation()) &&
+                Objects.equals(this.getNotes(), exposure.getNotes()) &&
+                Objects.equals(this.getCaseWorker(), exposure.getCaseWorker()) &&
+                Objects.equals(this.getStatus(), exposure.getStatus());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, exposedPersonName, exposedPersonPhoneNumber, exposedDate, exposureLocation, notes, caseWorker, status);
+        return Objects.hash(getId(), getExposedPersonName(), getExposedPersonPhoneNumber(), getExposedDate(), getExposureLocation(), getNotes(), getCaseWorker(), getStatus());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class ExposureDto {\n");
-        sb.append("    id: ").append(toIndentedString(id)).append("\n");
-        sb.append("    exposedPersonName: ").append(toIndentedString(exposedPersonName)).append("\n");
-        sb.append("    exposedPersonPhoneNumber: ").append(toIndentedString(exposedPersonPhoneNumber)).append("\n");
-        sb.append("    exposedDate: ").append(toIndentedString(exposedDate)).append("\n");
-        sb.append("    exposureLocation: ").append(toIndentedString(exposureLocation)).append("\n");
-        sb.append("    notes: ").append(toIndentedString(notes)).append("\n");
-        sb.append("    caseWorker: ").append(toIndentedString(caseWorker)).append("\n");
-        sb.append("    status: ").append(toIndentedString(status)).append("\n");
+        sb.append("    id: ").append(toIndentedString(getId())).append("\n");
+        sb.append("    exposedPersonName: ").append(toIndentedString(getExposedPersonName())).append("\n");
+        sb.append("    exposedPersonPhoneNumber: ").append(toIndentedString(getExposedPersonPhoneNumber())).append("\n");
+        sb.append("    exposedDate: ").append(toIndentedString(getExposedDate())).append("\n");
+        sb.append("    exposureLocation: ").append(toIndentedString(getExposureLocation())).append("\n");
+        sb.append("    notes: ").append(toIndentedString(getNotes())).append("\n");
+        sb.append("    caseWorker: ").append(toIndentedString(getCaseWorker())).append("\n");
+        sb.append("    status: ").append(toIndentedString(getStatus())).append("\n");
         sb.append("}");
         return sb.toString();
     }

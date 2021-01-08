@@ -113,14 +113,14 @@ public class CatDto extends PetDto {
             return false;
         }
         CatDto cat = (CatDto) o;
-        return Objects.equals(this.hunts, cat.hunts) &&
-                Objects.equals(this.age, cat.age) &&
+        return Objects.equals(this.getHunts(), cat.getHunts()) &&
+                Objects.equals(this.getAge(), cat.getAge()) &&
             super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hunts, age, super.hashCode());
+        return Objects.hash(getHunts(), getAge());
     }
 
     @Override
@@ -128,8 +128,8 @@ public class CatDto extends PetDto {
         StringBuilder sb = new StringBuilder();
         sb.append("class CatDto {\n");
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-        sb.append("    hunts: ").append(toIndentedString(hunts)).append("\n");
-        sb.append("    age: ").append(toIndentedString(age)).append("\n");
+        sb.append("    hunts: ").append(toIndentedString(getHunts())).append("\n");
+        sb.append("    age: ").append(toIndentedString(getAge())).append("\n");
         sb.append("}");
         return sb.toString();
     }
