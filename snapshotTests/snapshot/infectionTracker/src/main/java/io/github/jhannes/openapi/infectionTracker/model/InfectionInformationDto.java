@@ -13,6 +13,7 @@
 
 package io.github.jhannes.openapi.infectionTracker.model;
 
+import java.io.File;
 import java.net.URI;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
