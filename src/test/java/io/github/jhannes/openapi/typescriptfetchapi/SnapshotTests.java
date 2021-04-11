@@ -89,6 +89,8 @@ public class SnapshotTests {
                 .setModelPackage("io.github.jhannes.openapi." + modelName + ".model")
                 .setApiPackage("io.github.jhannes.openapi." + modelName + ".api")
                 .addAdditionalProperty("hideGenerationTimestamp", "true")
+                .addAdditionalProperty("generateSupportingFiles", "true")
+                .addAdditionalProperty("generateModelTests", "true")
                 .addAdditionalProperty("generateApis", "false")
                 .addAdditionalProperty("dateLibrary", "java8")
                 //.addAdditionalProperty(CodegenConstants.ARTIFACT_ID, modelName)
