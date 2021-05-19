@@ -69,7 +69,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
 
 {{#vars}}
     {{^isInherited}}
-    {{#isListContainer}}
+    {{#isArray}}
 
     public <T> {{classname}} {{name}}(Collection<T> items, Function<T, {{items.datatypeWithEnum}}> mapper) {
         return {{baseName}}(items.stream().map(mapper).collect(Collectors.toList()));
@@ -88,8 +88,8 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
         this.{{baseName}}.add({{name}}Item);
         return this;
     }
-    {{/isListContainer}}
-    {{#isMapContainer}}
+    {{/isArray}}
+    {{#isMap}}
 
     public {{classname}} put{{nameInCamelCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item) {
          {{^required}}
@@ -100,7 +100,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
          this.{{baseName}}.put(key, {{name}}Item);
          return this;
     }
-    {{/isMapContainer}}
+    {{/isMap}}
 
     /**
     {{#description}}
@@ -153,15 +153,15 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
             return false;
         }{{#hasVars}}
         {{classname}} {{classVarName}} = ({{classname}}) o;
-        return {{#vars}}{{#isByteArray}}Arrays{{/isByteArray}}{{^isByteArray}}Objects{{/isByteArray}}.equals(this.{{getter}}(), {{classVarName}}.{{getter}}()){{#hasMore}} &&
-                {{/hasMore}}{{/vars}}{{#parent}} &&
+        return {{#vars}}{{#isByteArray}}Arrays{{/isByteArray}}{{^isByteArray}}Objects{{/isByteArray}}.equals(this.{{getter}}(), {{classVarName}}.{{getter}}()){{^-last}} &&
+                {{/-last}}{{/vars}}{{#parent}} &&
             super.equals(o){{/parent}};{{/hasVars}}{{^hasVars}}
             return {{#parent}}super.equals(o){{/parent}}{{^parent}}true{{/parent}};{{/hasVars}}
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash({{#vars}}{{^isByteArray}}{{getter}}(){{/isByteArray}}{{#isByteArray}}Arrays.hashCode({{getter}}()){{/isByteArray}}{{#hasMore}}, {{/hasMore}}{{/vars}});
+        return Objects.hash({{#vars}}{{^isByteArray}}{{getter}}(){{/isByteArray}}{{#isByteArray}}Arrays.hashCode({{getter}}()){{/isByteArray}}{{^-last}}, {{/-last}}{{/vars}});
     }
 
     @Override

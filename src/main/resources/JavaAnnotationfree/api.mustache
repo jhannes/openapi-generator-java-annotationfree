@@ -48,7 +48,7 @@ public interface {{classname}} {
                 @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isQueryParam}}{{#isBodyParam}}
                 @JsonBody {{{dataType}}} {{paramName}}{{/isBodyParam}}{{#isFormParam}}
                 @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isFormParam}}{{#isHeaderParam}}
-                @HttpHeader("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{#hasMore}}, {{/hasMore}}{{/allParams}}{{#responses}}{{#headers}},
+                @HttpHeader("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}}, {{/-last}}{{/allParams}}{{#responses}}{{#headers}},
                 @HttpHeader("{{baseName}}") Consumer<{{{dataType}}}> set{{nameInCamelCase}}{{/headers}}{{/responses}}
         ) throws IOException;
     {{/operation}}

@@ -34,19 +34,19 @@ import java.util.stream.Collectors;
 public interface AnyPartyDto  {
     String getType();
 
-    static PersonDto person() {
-        return new PersonDto().type("person");
-    }
     static OrganizationDto organization() {
         return new OrganizationDto().type("organization");
+    }
+    static PersonDto person() {
+        return new PersonDto().type("person");
     }
 
     static Class<?> getType(String type) {
         switch (type) {
-        case "person":
-            return PersonDto.class;
         case "organization":
             return OrganizationDto.class;
+        case "person":
+            return PersonDto.class;
         default:
             throw new IllegalArgumentException("Illegal type " + type);
         }
