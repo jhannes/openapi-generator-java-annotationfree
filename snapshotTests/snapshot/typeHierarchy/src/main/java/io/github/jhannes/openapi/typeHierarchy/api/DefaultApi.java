@@ -14,7 +14,7 @@ package io.github.jhannes.openapi.typeHierarchy.api;
 
 import io.github.jhannes.openapi.typeHierarchy.model.*;
 
-import io.github.jhannes.openapi.typeHierarchy.model.AnyPetDto;
+import io.github.jhannes.openapi.typeHierarchy.model.PetDto;
 
 import org.actioncontroller.*;
 import org.actioncontroller.json.JsonBody;
@@ -32,10 +32,10 @@ public interface DefaultApi {
         /**
          * 
          * 
-         * @param anyPetDto  (optional)
+         * @param petDto  (optional)
          */
         @PATCH("/pets")
         public void petsPatch(
-                @JsonBody AnyPetDto anyPetDto
+                @JsonBody PetDto petDto
         ) throws IOException;
 }

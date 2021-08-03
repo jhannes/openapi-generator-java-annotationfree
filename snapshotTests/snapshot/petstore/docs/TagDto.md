@@ -1,13 +1,13 @@
 
 
-# CatDto
+# TagDto
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**hunts** | **Boolean** |  |  [optional]
-**age** | **Integer** |  |  [optional]
+**id** | **Long** |  |  [optional]
+**name** | **String** |  |  [optional]
 
 
 

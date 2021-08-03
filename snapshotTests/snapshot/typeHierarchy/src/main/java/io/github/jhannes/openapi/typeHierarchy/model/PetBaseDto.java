@@ -11,7 +11,7 @@
  */
 
 
-package io.github.jhannes.openapi.petstore.model;
+package io.github.jhannes.openapi.typeHierarchy.model;
 
 import java.io.File;
 import java.net.URI;
@@ -32,50 +32,15 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
-* DogAllOfDto
+* PetBaseDto
 */
-public class DogAllOfDto {
+public class PetBaseDto {
 
-    private Boolean bark = null;
-            
-    /**
-     * Gets or Sets breed
-     */
-    public enum BreedEnum {
-        DINGO("Dingo"),
-        
-        HUSKY("Husky"),
-        
-        RETRIEVER("Retriever"),
-        
-        SHEPHERD("Shepherd");
+    private String pet_type;
 
-        private String value;
+    private String name = null;
 
-        BreedEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static BreedEnum fromValue(String text) {
-            for (BreedEnum b : BreedEnum.values()) {
-                if (String.valueOf(b.value).equals(text)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + text + "'");
-        }
-    }
-
-    private BreedEnum breed = null;
+    private String birth_date = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -89,11 +54,13 @@ public class DogAllOfDto {
 
     public static String[] requiredFields() {
         return new String[] {
+                "pet_type",
         };
     }
 
     public List<String> missingRequiredFields() {
         List<String> result = new ArrayList<>();
+        if (isMissing(getPetType())) result.add("pet_type");
         return result;
     }
 
@@ -114,36 +81,53 @@ public class DogAllOfDto {
 
 
     /**
-     * Get bark
-     * @return bark
+     * Get pet_type
+     * @return pet_type
      */
-    public Boolean getBark() {
-        return bark;
+    public String getPetType() {
+        return pet_type;
     }
 
-    public void setBark(Boolean bark) {
-        this.bark = bark;
+    public void setPetType(String petType) {
+        this.pet_type = petType;
     }
 
-    public DogAllOfDto bark(Boolean bark) {
-        this.bark = bark;
+    public PetBaseDto petType(String petType) {
+        this.pet_type = petType;
         return this;
     }
 
     /**
-     * Get breed
-     * @return breed
+     * Get name
+     * @return name
      */
-    public BreedEnum getBreed() {
-        return breed;
+    public String getName() {
+        return name;
     }
 
-    public void setBreed(BreedEnum breed) {
-        this.breed = breed;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public DogAllOfDto breed(BreedEnum breed) {
-        this.breed = breed;
+    public PetBaseDto name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Get birth_date
+     * @return birth_date
+     */
+    public String getBirthDate() {
+        return birth_date;
+    }
+
+    public void setBirthDate(String birthDate) {
+        this.birth_date = birthDate;
+    }
+
+    public PetBaseDto birthDate(String birthDate) {
+        this.birth_date = birthDate;
         return this;
     }
 
@@ -155,22 +139,24 @@ public class DogAllOfDto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        DogAllOfDto dogAllOf = (DogAllOfDto) o;
-        return Objects.equals(this.getBark(), dogAllOf.getBark()) &&
-                Objects.equals(this.getBreed(), dogAllOf.getBreed());
+        PetBaseDto petBase = (PetBaseDto) o;
+        return Objects.equals(this.getPetType(), petBase.getPetType()) &&
+                Objects.equals(this.getName(), petBase.getName()) &&
+                Objects.equals(this.getBirthDate(), petBase.getBirthDate());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getBark(), getBreed());
+        return Objects.hash(getPetType(), getName(), getBirthDate());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class DogAllOfDto {\n");
-        sb.append("    bark: ").append(toIndentedString(getBark())).append("\n");
-        sb.append("    breed: ").append(toIndentedString(getBreed())).append("\n");
+        sb.append("class PetBaseDto {\n");
+        sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
+        sb.append("    name: ").append(toIndentedString(getName())).append("\n");
+        sb.append("    birth_date: ").append(toIndentedString(getBirthDate())).append("\n");
         sb.append("}");
         return sb.toString();
     }

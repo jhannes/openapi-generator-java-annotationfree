@@ -83,9 +83,9 @@ public class Example {
         HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://api.example.com/v1");
         DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
-        AnyPetDto anyPetDto = new AnyPetDto(); // AnyPetDto | 
+        PetDto petDto = new PetDto(); // PetDto | 
         try {
-            apiInstance.petsPatch(anyPetDto);
+            apiInstance.petsPatch(petDto);
         } catch (HttpClientException e) {
             System.err.println("Exception when calling DefaultApi#petsPatch");
             System.err.println("Status code: " + e.getStatusCode());
@@ -108,11 +108,11 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [AnyPetDto](docs/AnyPetDto.md)
  - [CatAllOfDto](docs/CatAllOfDto.md)
  - [CatDto](docs/CatDto.md)
  - [DogAllOfDto](docs/DogAllOfDto.md)
  - [DogDto](docs/DogDto.md)
+ - [PetBaseDto](docs/PetBaseDto.md)
  - [PetDto](docs/PetDto.md)
 
 

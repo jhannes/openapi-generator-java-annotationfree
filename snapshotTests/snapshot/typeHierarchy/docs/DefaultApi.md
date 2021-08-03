@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## petsPatch
 
-> petsPatch(anyPetDto)
+> petsPatch(petDto)
 
 
 
@@ -28,9 +28,9 @@ public class Example {
         HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://api.example.com/v1");
         DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
-        AnyPetDto anyPetDto = new AnyPetDto(); // AnyPetDto | 
+        PetDto petDto = new PetDto(); // PetDto | 
         try {
-            apiInstance.petsPatch(anyPetDto);
+            apiInstance.petsPatch(petDto);
         } catch (HttpClientException e) {
             System.err.println("Exception when calling DefaultApi#petsPatch");
             System.err.println("Status code: " + e.getStatusCode());
@@ -46,7 +46,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **anyPetDto** | [**AnyPetDto**](AnyPetDto.md)|  | [optional]
+ **petDto** | [**PetDto**](PetDto.md)|  | [optional]
 
 ### Return type
 

@@ -14,7 +14,7 @@
 package io.github.jhannes.openapi.typeHierarchy.api;
 
 import io.github.jhannes.openapi.typeHierarchy.ApiException;
-import io.github.jhannes.openapi.typeHierarchy.model.AnyPetDto;
+import io.github.jhannes.openapi.typeHierarchy.model.PetDto;
 import org.junit.Test;
 import org.junit.Ignore;
 import org.junit.Assert;
@@ -38,9 +38,9 @@ public class DefaultApiTest {
     @Test
     public void petsPatchTest() throws ApiException {
         //
-        //AnyPetDto anyPetDto = null;
+        //PetDto petDto = null;
         //
-        //api.petsPatch(anyPetDto);
+        //api.petsPatch(petDto);
 
         // TODO: test validations
     }

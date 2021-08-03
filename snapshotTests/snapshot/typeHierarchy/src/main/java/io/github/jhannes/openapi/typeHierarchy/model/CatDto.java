@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /**
 * CatDto
 */
-public class CatDto extends PetDto implements AnyPetDto {
+public class CatDto extends PetBaseDto implements PetDto {
 
     private Boolean hunts = null;
 

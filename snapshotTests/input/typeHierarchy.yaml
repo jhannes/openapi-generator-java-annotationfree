@@ -15,13 +15,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AnyPet'
+              $ref: '#/components/schemas/Pet'
       responses:
         '200':
           description: Updated
 components:
   schemas:
-    Pet:
+    PetBase:
       type: object
       required:
         - pet_type
@@ -36,7 +36,7 @@ components:
         propertyName: pet_type
     Dog:     # "Dog" is a value for the pet_type property (the discriminator value)
       allOf: # Combines the main `Pet` schema with `Dog`-specific properties
-        - $ref: '#/components/schemas/Pet'
+        - $ref: '#/components/schemas/PetBase'
         - type: object
           # all other properties specific to a `Dog`
           properties:
@@ -50,7 +50,7 @@ components:
       x-discriminator-value: 'ADog'
     Cat:     # "Cat" is a value for the pet_type property (the discriminator value)
       allOf: # Combines the main `Pet` schema with `Cat`-specific properties
-        - $ref: '#/components/schemas/Pet'
+        - $ref: '#/components/schemas/PetBase'
         - type: object
           # all other properties specific to a `Cat`
           properties:
@@ -61,7 +61,7 @@ components:
           discriminator:
             propertyName: pet_type
       x-discriminator-value: 'ACat'
-    AnyPet:
+    Pet:
       oneOf:
         - $ref: '#/components/schemas/Cat'
         - $ref: '#/components/schemas/Dog'
