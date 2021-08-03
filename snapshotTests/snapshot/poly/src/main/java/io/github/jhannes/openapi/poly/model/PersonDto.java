@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 */
 public class PersonDto {
 
-    private UUID id;
+    private UUID id = null;
 
     private String type;
 
@@ -44,11 +44,11 @@ public class PersonDto {
 
     private String familyName;
 
-    private String email;
+    private String email = null;
 
-    private String phone;
+    private String phone = null;
 
-    private LocalDate birthDate;
+    private LocalDate birthDate = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -77,8 +77,18 @@ public class PersonDto {
         return result;
     }
 
+    public void readOnlyFieldsWithValue(List<String> result) {
+        if (!isMissing(getId())) {
+            result.add("PersonDto.id");
+        }
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(List<?> list) {
+        return list == null || list.isEmpty();
     }
 
     private boolean isMissing(Object s) {

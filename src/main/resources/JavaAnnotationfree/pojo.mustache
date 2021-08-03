@@ -15,7 +15,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
         {{/isContainer}}
     {{/isEnum}}
 
-    private {{{datatypeWithEnum}}} {{baseName}}{{#defaultValue}} = {{{.}}}{{/defaultValue}};
+    private {{{datatypeWithEnum}}} {{baseName}}{{#required}}{{#defaultValue}} = {{{.}}}{{/defaultValue}}{{/required}}{{^required}} = null{{/required}};
     {{/isInherited}}
 {{/vars}}
 
@@ -59,8 +59,38 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
         return result;
     }
 
+    public void readOnlyFieldsWithValue(List<String> result) {
+{{#vars}}
+    {{#isReadOnly}}
+        if (!isMissing({{getter}}())) {
+            result.add("{{classname}}.{{baseName}}");
+        }
+    {{/isReadOnly}}
+    {{^isReadOnly}}
+        {{^isPrimitiveType}}
+            {{#isArray}}
+        if ({{name}} != null) {
+            {{baseName}}.forEach(o -> o.readOnlyFieldsWithValue(result));
+        }
+            {{/isArray}}
+            {{^isArray}}
+                {{#isModel}}
+        if ({{baseName}} != null) {
+            {{baseName}}.readOnlyFieldsWithValue(result);
+        }
+                {{/isModel}}
+            {{/isArray}}
+        {{/isPrimitiveType}}
+    {{/isReadOnly}}
+{{/vars}}
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(List<?> list) {
+        return list == null || list.isEmpty();
     }
 
     private boolean isMissing(Object s) {
@@ -69,7 +99,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
 
 {{#vars}}
     {{^isInherited}}
-    {{#isListContainer}}
+    {{#isArray}}
 
     public <T> {{classname}} {{name}}(Collection<T> items, Function<T, {{items.datatypeWithEnum}}> mapper) {
         return {{baseName}}(items.stream().map(mapper).collect(Collectors.toList()));
@@ -88,8 +118,8 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
         this.{{baseName}}.add({{name}}Item);
         return this;
     }
-    {{/isListContainer}}
-    {{#isMapContainer}}
+    {{/isArray}}
+    {{#isMap}}
 
     public {{classname}} put{{nameInCamelCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item) {
          {{^required}}
@@ -100,7 +130,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
          this.{{baseName}}.put(key, {{name}}Item);
          return this;
     }
-    {{/isMapContainer}}
+    {{/isMap}}
 
     /**
     {{#description}}
@@ -153,15 +183,15 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
             return false;
         }{{#hasVars}}
         {{classname}} {{classVarName}} = ({{classname}}) o;
-        return {{#vars}}{{#isByteArray}}Arrays{{/isByteArray}}{{^isByteArray}}Objects{{/isByteArray}}.equals(this.{{getter}}(), {{classVarName}}.{{getter}}()){{#hasMore}} &&
-                {{/hasMore}}{{/vars}}{{#parent}} &&
+        return {{#vars}}{{#isByteArray}}Arrays{{/isByteArray}}{{^isByteArray}}Objects{{/isByteArray}}.equals(this.{{getter}}(), {{classVarName}}.{{getter}}()){{^-last}} &&
+                {{/-last}}{{/vars}}{{#parent}} &&
             super.equals(o){{/parent}};{{/hasVars}}{{^hasVars}}
             return {{#parent}}super.equals(o){{/parent}}{{^parent}}true{{/parent}};{{/hasVars}}
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash({{#vars}}{{^isByteArray}}{{getter}}(){{/isByteArray}}{{#isByteArray}}Arrays.hashCode({{getter}}()){{/isByteArray}}{{#hasMore}}, {{/hasMore}}{{/vars}});
+        return Objects.hash({{#vars}}{{^isByteArray}}{{getter}}(){{/isByteArray}}{{#isByteArray}}Arrays.hashCode({{getter}}()){{/isByteArray}}{{^-last}}, {{/-last}}{{/vars}});
     }
 
     @Override

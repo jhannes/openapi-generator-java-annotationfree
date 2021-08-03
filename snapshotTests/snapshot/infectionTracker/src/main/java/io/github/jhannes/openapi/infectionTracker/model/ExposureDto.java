@@ -36,19 +36,19 @@ import java.util.stream.Collectors;
 */
 public class ExposureDto {
 
-    private UUID id;
+    private UUID id = null;
 
-    private String exposedPersonName;
+    private String exposedPersonName = null;
 
-    private String exposedPersonPhoneNumber;
+    private String exposedPersonPhoneNumber = null;
 
-    private LocalDate exposedDate;
+    private LocalDate exposedDate = null;
 
-    private String exposureLocation;
+    private String exposureLocation = null;
 
-    private String notes;
+    private String notes = null;
 
-    private UUID caseWorker;
+    private UUID caseWorker = null;
             
     /**
      * Gets or Sets status
@@ -114,8 +114,18 @@ public class ExposureDto {
         return result;
     }
 
+    public void readOnlyFieldsWithValue(List<String> result) {
+        if (!isMissing(getId())) {
+            result.add("ExposureDto.id");
+        }
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(List<?> list) {
+        return list == null || list.isEmpty();
     }
 
     private boolean isMissing(Object s) {

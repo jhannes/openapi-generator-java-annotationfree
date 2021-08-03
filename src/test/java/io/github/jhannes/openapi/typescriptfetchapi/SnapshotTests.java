@@ -83,7 +83,7 @@ public class SnapshotTests {
     private void generate(Path file, String generatorName, Path output, String modelName) {
         final CodegenConfigurator configurator = new CodegenConfigurator()
                 .setGeneratorName(generatorName)
-                .setInputSpec(file.toString())
+                .setInputSpec(file.toString().replaceAll("\\\\", "/"))
                 .setModelNameSuffix("Dto")
                 .setPackageName("io.github.jhannes.openapi." + modelName)
                 .setModelPackage("io.github.jhannes.openapi." + modelName + ".model")

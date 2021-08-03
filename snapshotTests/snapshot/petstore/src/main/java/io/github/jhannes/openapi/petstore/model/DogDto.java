@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 */
 public class DogDto extends PetDto {
 
-    private Boolean bark;
+    private Boolean bark = null;
             
     /**
      * Gets or Sets breed
@@ -75,7 +75,7 @@ public class DogDto extends PetDto {
         }
     }
 
-    private BreedEnum breed;
+    private BreedEnum breed = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -99,8 +99,15 @@ public class DogDto extends PetDto {
         return result;
     }
 
+    public void readOnlyFieldsWithValue(List<String> result) {
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(List<?> list) {
+        return list == null || list.isEmpty();
     }
 
     private boolean isMissing(Object s) {

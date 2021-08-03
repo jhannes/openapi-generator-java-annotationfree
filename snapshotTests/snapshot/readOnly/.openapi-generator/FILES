@@ -1,0 +1,11 @@
+.openapi-generator-ignore
+README.md
+docs/CommentDto.md
+docs/DefaultApi.md
+docs/PetDto.md
+docs/UserDto.md
+src/main/java/io/github/jhannes/openapi/readOnly/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/readOnly/model/CommentDto.java
+src/main/java/io/github/jhannes/openapi/readOnly/model/PetDto.java
+src/main/java/io/github/jhannes/openapi/readOnly/model/UserDto.java
+src/test/java/io/github/jhannes/openapi/readOnly/api/DefaultApiTest.java

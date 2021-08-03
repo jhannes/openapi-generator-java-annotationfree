@@ -23,7 +23,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
     @Override
     public void processOpts() {
         super.processOpts();
-        writeOptional(outputFolder, new SupportingFile("README.mustache", "", "README.md"));
+        supportingFiles.add(new SupportingFile("README.mustache", "", "README.md").doNotOverwrite());
     }
 
     @Override
