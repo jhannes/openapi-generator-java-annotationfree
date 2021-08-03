@@ -1,3 +1,4 @@
+[![Java CI with Maven](https://github.com/jhannes/openapi-generator-java-annotationfree/actions/workflows/maven.yml/badge.svg)](https://github.com/jhannes/openapi-generator-java-annotationfree/actions/workflows/maven.yml)
 [![Apache 2.0 License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.jhannes.openapi/openapi-generator-java-annotationfree/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.jhannes.openapi/openapi-generator-java-annotationfree)
 
@@ -56,4 +57,82 @@ Add to your `pom.xml`:
         </plugins>
     </build>
 
+```
+
+## Sample output
+
+### [Petstore model](https://github.com/jhannes/openapi-generator-java-annotationfree/tree/main/snapshotTests/snapshot/petstore/src/main/java/io/github/jhannes/openapi/petstore/model)
+
+### [Polymorphism](https://github.com/jhannes/openapi-generator-java-annotationfree/blob/main/snapshotTests/snapshot/poly/src/main/java/io/github/jhannes/openapi/poly/model/GeneralErrorDto.java)
+
+```yaml
+components:
+  schemas:
+    CreationError:
+      oneOf:
+        - $ref: '#/components/schemas/GeneralError'
+        - $ref: '#/components/schemas/DuplicateIdentifierError'
+        - $ref: '#/components/schemas/IllegalEmailAddressError'
+      discriminator:
+        propertyName: code
+    UpdateError:
+      oneOf:
+        - $ref: '#/components/schemas/GeneralError'
+        - $ref: '#/components/schemas/NotFoundError'
+        - $ref: '#/components/schemas/DuplicateIdentifierError'
+        - $ref: '#/components/schemas/IllegalEmailAddressError'
+      discriminator:
+        propertyName: code
+    GeneralError:
+      properties:
+        code:
+          type: string
+        description:
+          type: string
+      required:
+        - code
+        - description
+```
+
+```java
+public interface CreationErrorDto  {
+    String getCode();
+
+    static GeneralErrorDto GeneralError() {
+        GeneralErrorDto result = new GeneralErrorDto();
+        result.code("GeneralError");
+        return result;
+    }
+
+    static Class<? extends CreationErrorDto> getType(String type) {
+        switch (type) {
+        case "GeneralError":
+            return GeneralErrorDto.class;
+        default:
+            throw new IllegalArgumentException("Illegal code " + type);
+        }
+    }
+
+    void readOnlyFieldsWithValue(List<String> fields);
+}
+```
+
+```java
+public class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
+
+    private String code;
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public GeneralErrorDto code(String code) {
+        this.code = code;
+        return this;
+    }
+}
 ```
