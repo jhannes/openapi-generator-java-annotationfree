@@ -64,8 +64,15 @@ public class GeneralErrorDto {
         return result;
     }
 
+    public void readOnlyFieldsWithValue(List<String> result) {
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(List<?> list) {
+        return list == null || list.isEmpty();
     }
 
     private boolean isMissing(Object s) {

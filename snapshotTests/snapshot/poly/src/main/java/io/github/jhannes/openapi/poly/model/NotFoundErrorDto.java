@@ -38,7 +38,7 @@ public class NotFoundErrorDto {
 
     private String code;
 
-    private String identifierValue;
+    private String identifierValue = null;
 
     private String entityType;
 
@@ -66,8 +66,15 @@ public class NotFoundErrorDto {
         return result;
     }
 
+    public void readOnlyFieldsWithValue(List<String> result) {
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(List<?> list) {
+        return list == null || list.isEmpty();
     }
 
     private boolean isMissing(Object s) {

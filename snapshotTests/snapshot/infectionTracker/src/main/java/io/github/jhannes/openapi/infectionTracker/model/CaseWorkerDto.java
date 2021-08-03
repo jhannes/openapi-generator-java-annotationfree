@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
 */
 public class CaseWorkerDto {
 
-    private UUID id;
+    private UUID id = null;
 
     private String fullName;
 
@@ -106,8 +106,18 @@ public class CaseWorkerDto {
         return result;
     }
 
+    public void readOnlyFieldsWithValue(List<String> result) {
+        if (!isMissing(getId())) {
+            result.add("CaseWorkerDto.id");
+        }
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(List<?> list) {
+        return list == null || list.isEmpty();
     }
 
     private boolean isMissing(Object s) {

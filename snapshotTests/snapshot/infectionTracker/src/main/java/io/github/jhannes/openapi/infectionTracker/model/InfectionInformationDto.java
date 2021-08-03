@@ -36,13 +36,13 @@ import java.util.stream.Collectors;
 */
 public class InfectionInformationDto {
 
-    private String patientName;
+    private String patientName = null;
 
-    private String patientPhoneNumber;
+    private String patientPhoneNumber = null;
 
-    private LocalDate likelyInfectionDate;
+    private LocalDate likelyInfectionDate = null;
 
-    private String notes;
+    private String notes = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -64,8 +64,15 @@ public class InfectionInformationDto {
         return result;
     }
 
+    public void readOnlyFieldsWithValue(List<String> result) {
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(List<?> list) {
+        return list == null || list.isEmpty();
     }
 
     private boolean isMissing(Object s) {

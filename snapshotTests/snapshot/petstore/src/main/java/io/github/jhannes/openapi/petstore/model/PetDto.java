@@ -38,9 +38,9 @@ public class PetDto {
 
     private String pet_type;
 
-    private String name;
+    private String name = null;
 
-    private String birth_date;
+    private String birth_date = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -64,8 +64,15 @@ public class PetDto {
         return result;
     }
 
+    public void readOnlyFieldsWithValue(List<String> result) {
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(List<?> list) {
+        return list == null || list.isEmpty();
     }
 
     private boolean isMissing(Object s) {

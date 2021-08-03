@@ -36,21 +36,21 @@ import java.util.stream.Collectors;
 */
 public class OrganizationDto {
 
-    private UUID id;
+    private UUID id = null;
 
     private String type;
 
     private String name;
 
-    private String organizationId;
+    private String organizationId = null;
 
-    private URI url;
+    private URI url = null;
 
-    private String email;
+    private String email = null;
 
-    private List<String> emailDomains = new ArrayList<>();
+    private List<String> emailDomains = null;
 
-    private String phone;
+    private String phone = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -77,8 +77,18 @@ public class OrganizationDto {
         return result;
     }
 
+    public void readOnlyFieldsWithValue(List<String> result) {
+        if (!isMissing(getId())) {
+            result.add("OrganizationDto.id");
+        }
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(List<?> list) {
+        return list == null || list.isEmpty();
     }
 
     private boolean isMissing(Object s) {

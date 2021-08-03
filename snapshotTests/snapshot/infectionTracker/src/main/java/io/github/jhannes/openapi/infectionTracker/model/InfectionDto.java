@@ -69,8 +69,24 @@ public class InfectionDto {
         return result;
     }
 
+    public void readOnlyFieldsWithValue(List<String> result) {
+        if (!isMissing(getId())) {
+            result.add("InfectionDto.id");
+        }
+        if (information != null) {
+            information.readOnlyFieldsWithValue(result);
+        }
+        if (registeredExposures != null) {
+            registeredExposures.forEach(o -> o.readOnlyFieldsWithValue(result));
+        }
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(List<?> list) {
+        return list == null || list.isEmpty();
     }
 
     private boolean isMissing(Object s) {

@@ -15,7 +15,7 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
         {{/isContainer}}
     {{/isEnum}}
 
-    private {{{datatypeWithEnum}}} {{baseName}}{{#defaultValue}} = {{{.}}}{{/defaultValue}};
+    private {{{datatypeWithEnum}}} {{baseName}}{{#required}}{{#defaultValue}} = {{{.}}}{{/defaultValue}}{{/required}}{{^required}} = null{{/required}};
     {{/isInherited}}
 {{/vars}}
 
@@ -59,8 +59,38 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
         return result;
     }
 
+    public void readOnlyFieldsWithValue(List<String> result) {
+{{#vars}}
+    {{#isReadOnly}}
+        if (!isMissing({{getter}}())) {
+            result.add("{{classname}}.{{baseName}}");
+        }
+    {{/isReadOnly}}
+    {{^isReadOnly}}
+        {{^isPrimitiveType}}
+            {{#isArray}}
+        if ({{name}} != null) {
+            {{baseName}}.forEach(o -> o.readOnlyFieldsWithValue(result));
+        }
+            {{/isArray}}
+            {{^isArray}}
+                {{#isModel}}
+        if ({{baseName}} != null) {
+            {{baseName}}.readOnlyFieldsWithValue(result);
+        }
+                {{/isModel}}
+            {{/isArray}}
+        {{/isPrimitiveType}}
+    {{/isReadOnly}}
+{{/vars}}
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
+    }
+
+    private boolean isMissing(List<?> list) {
+        return list == null || list.isEmpty();
     }
 
     private boolean isMissing(Object s) {

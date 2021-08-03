@@ -1,0 +1,148 @@
+openapi: 3.0.2
+info:
+  title: Sample API
+  description: A small example to demonstrate individual problems
+  version: 0.1.9
+servers:
+  - url: /v1
+    description: Server
+paths:
+  /{storeId}/pets:
+    get:
+      operationId: listPets
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+        - name: status
+          in: query
+          style: spaceDelimited
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: tags
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+        - name: bornAfter
+          in: query
+          schema:
+            type: string
+            format: date
+      responses:
+        '200':
+          description: Successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Pet'
+    post:
+      operationId: addPet
+      parameters:
+        - name: storeId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Success
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Pet'
+  /pets/{petId}:
+    post:
+      operationId: addPetWithForm
+      parameters:
+        - name: petId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Successful
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: Updated name of the pet
+                  type: string
+                status:
+                  description: Updated status of the pet
+                  type: string
+components:
+  schemas:
+    Pet:
+      type: object
+      required:
+        - pet_type
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        pet_type:
+          type: string
+          enum:
+            - Cat
+            - Dog
+        name:
+          type: string
+        birth_date:
+          type: string
+          format: date
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        comments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Comment'
+        status:
+          type: string
+          readOnly: true
+          enum:
+            - Pending
+            - Available
+            - Sold
+    Comment:
+      type: object
+      properties:
+        title:
+          type: string
+        comment:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          $ref: '#/components/schemas/User'
+    User:
+      type: object
+      required:
+        - pet_type
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+
