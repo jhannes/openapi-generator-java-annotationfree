@@ -1,7 +1,7 @@
 /**
 * {{#description}}{{.}}{{/description}}{{^description}}{{classname}}{{/description}}
 */
-public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
+public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces}}{{#-first}} implements {{/-first}}{{^-first}}, {{/-first}}{{{.}}}{{/interfaces}} {
 {{#vars}}
     {{^isInherited}}
     {{#isEnum}}
@@ -68,11 +68,13 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
     {{/isReadOnly}}
     {{^isReadOnly}}
         {{^isPrimitiveType}}
-            {{#isArray}}
+            {{#items}}
+                {{#isModel}}
         if ({{name}} != null) {
             {{baseName}}.forEach(o -> o.readOnlyFieldsWithValue(result));
         }
-            {{/isArray}}
+                {{/isModel}}
+            {{/items}}
             {{^isArray}}
                 {{#isModel}}
         if ({{baseName}} != null) {
@@ -101,11 +103,11 @@ public class {{classname}} {{#parent}}extends {{parent}} {{/parent}}{
     {{^isInherited}}
     {{#isArray}}
 
-    public <T> {{classname}} {{name}}(Collection<T> items, Function<T, {{items.datatypeWithEnum}}> mapper) {
+    public <T> {{classname}} {{name}}(Collection<T> items, Function<T, {{{items.datatypeWithEnum}}}> mapper) {
         return {{baseName}}(items.stream().map(mapper).collect(Collectors.toList()));
     }
 
-    public <T> List<T> {{getter}}(Function<{{items.datatypeWithEnum}}, T> mapper) {
+    public <T> List<T> {{getter}}(Function<{{{items.datatypeWithEnum}}}, T> mapper) {
         return {{getter}}().stream().map(mapper).collect(Collectors.toList());
     }
 

@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /**
 * DuplicateIdentifierErrorDto
 */
-public class DuplicateIdentifierErrorDto {
+public class DuplicateIdentifierErrorDto implements CreationErrorDto, UpdateErrorDto {
 
     private String code;
 

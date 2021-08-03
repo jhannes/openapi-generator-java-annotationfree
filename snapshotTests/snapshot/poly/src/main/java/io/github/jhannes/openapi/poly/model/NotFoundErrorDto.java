@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /**
 * NotFoundErrorDto
 */
-public class NotFoundErrorDto {
+public class NotFoundErrorDto implements UpdateErrorDto {
 
     private String code;
 

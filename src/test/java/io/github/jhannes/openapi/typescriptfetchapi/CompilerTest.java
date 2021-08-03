@@ -1,36 +1,40 @@
 package io.github.jhannes.openapi.typescriptfetchapi;
 
-import difflib.DiffUtils;
-import difflib.Patch;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
 import org.openapitools.codegen.ClientOptInput;
 import org.openapitools.codegen.DefaultGenerator;
 import org.openapitools.codegen.config.CodegenConfigurator;
 
+import javax.tools.DiagnosticCollector;
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.StandardJavaFileManager;
+import javax.tools.ToolProvider;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
-public class SnapshotTests {
+public class CompilerTest {
 
     @TestFactory
     Stream<DynamicNode> javaAnnotationFreeSnapshots() throws IOException {
         return Stream.of(
-                snapshots(Paths.get("snapshotTests"), "java-annotationfree", Paths.get("snapshotTests").resolve("output"), Paths.get("snapshotTests").resolve("snapshot")),
-                snapshots(Paths.get("localSnapshotTests"), "java-annotationfree", Paths.get("localSnapshotTests").resolve("output"), Paths.get("localSnapshotTests").resolve("snapshot"))
+                snapshots(Paths.get("snapshotTests"), "java-annotationfree", Paths.get("snapshotTests").resolve("compile"), Paths.get("snapshotTests").resolve("snapshot")),
+                snapshots(Paths.get("localSnapshotTests"), "java-annotationfree", Paths.get("snapshotTests").resolve("compile"), Paths.get("snapshotTests").resolve("snapshot"))
         );
     }
 
@@ -41,49 +45,14 @@ public class SnapshotTests {
         }
         cleanDirectory(outputDir);
         return dynamicContainer(
-                "Snapshots of " + testDir,
+                "Verifications of " + testDir,
                 Files.list(inputDir)
                         .filter(p -> p.toFile().isFile())
-                        .map(spec -> createTestsForSpec(spec, generatorName, outputDir, snapshotDir))
+                        .map(spec -> dynamicContainer("Verify " + spec, Arrays.asList(
+                                dynamicTest("Generate " + spec, () -> generate(spec, generatorName, outputDir, getModelName(spec))),
+                                dynamicTest("java " + spec, () -> compile(outputDir.resolve(getModelName(spec))))
+                        )))
         );
-    }
-
-    private DynamicNode createTestsForSpec(Path spec, String generatorName, Path outputDir, Path snapshotDir) {
-        try {
-            generate(spec, generatorName, outputDir, getModelName(spec));
-        } catch (Exception e) {
-            return dynamicTest("Generator for " + spec, () -> {
-                throw e;
-            });
-        }
-
-        List<Path> files;
-        try (Stream<Path> list = Files.walk(outputDir.resolve(getModelName(spec)))) {
-            files = list.filter(this::isTextOutput).collect(Collectors.toList());
-        } catch (IOException e) {
-            return dynamicTest("Snapshots for " + spec, () -> assertNull(e));
-        }
-        return dynamicContainer("Snapshots for " + spec, Stream.of(
-                dynamicTest("Files", () -> compareFiles(outputDir, snapshotDir, getModelName(spec))),
-                dynamicContainer("File contents in " + outputDir, files.stream().map(file ->
-                        dynamicTest("file " + outputDir.relativize(file), () -> diff(file, snapshotDir.resolve(outputDir.relativize(file))))
-                ))));
-    }
-
-    private void compareFiles(Path output, Path snapshotDir, String modelName) throws IOException {
-        String outputFiles = Files.walk(output.resolve(modelName)).map(path -> output.relativize(path).toString()).collect(Collectors.joining("\n"));
-        String snapshotFiles = Files.walk(snapshotDir.resolve(modelName)).map(path -> snapshotDir.relativize(path).toString()).collect(Collectors.joining("\n"));
-        assertEquals(snapshotFiles, outputFiles);
-    }
-
-    private boolean isTextOutput(Path path) {
-        return Files.isRegularFile(path) && !path.toString().endsWith(".jar");
-    }
-
-    private void diff(Path file, Path snapshot) throws IOException {
-        assertTrue(Files.exists(snapshot), "Missing " + snapshot);
-        Patch<String> diff = DiffUtils.diff(Files.readAllLines(file), Files.readAllLines(snapshot));
-        assertEquals("", diff.getDeltas().stream().map(Object::toString).collect(Collectors.joining("\n")));
     }
 
     private void generate(Path file, String generatorName, Path output, String modelName) {
@@ -99,7 +68,6 @@ public class SnapshotTests {
                 .addAdditionalProperty("generateModelTests", "true")
                 .addAdditionalProperty("generateApis", "false")
                 .addAdditionalProperty("dateLibrary", "java8")
-                //.addAdditionalProperty(CodegenConstants.ARTIFACT_ID, modelName)
                 .setOutputDir(output.resolve(modelName).toString());
 
         final ClientOptInput clientOptInput = configurator.toClientOptInput();
@@ -107,12 +75,41 @@ public class SnapshotTests {
         generator.opts(clientOptInput).generate();
     }
 
+
     private String getModelName(Path file) {
         String filename = file.getFileName().toString();
         int lastDot = filename.lastIndexOf('.');
         return lastDot < 0 ? filename : filename.substring(0, lastDot);
     }
 
+    private void compile(Path path) throws IOException {
+        JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+        try (StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null)) {
+
+            List<Path> files = Files.find(
+                    path.resolve("src/main/java"),
+                    999,
+                    (p, fa) -> !p.toString().contains(File.separator + "api" + File.separator) // Ignore files with action-controller dependency
+                            && p.getFileName().toString().endsWith(".java")
+                            && fa.isRegularFile()
+            ).collect(Collectors.toList());
+
+            DiagnosticCollector<JavaFileObject> diagnosticListener = new DiagnosticCollector<>();
+            JavaCompiler.CompilationTask task = compiler.getTask(
+                    null,
+                    fileManager,
+                    diagnosticListener,
+                    List.of("-d", "target/testCompile/" + path.getFileName()),
+                    null,
+                    fileManager.getJavaFileObjectsFromPaths(files)
+            );
+            Boolean result = task.call();
+            if (!diagnosticListener.getDiagnostics().isEmpty()) {
+                fail(diagnosticListener.getDiagnostics().toString());
+            }
+            assertTrue(result);
+        }
+    }
 
     private void cleanDirectory(Path directory) throws IOException {
         if (Files.isDirectory(directory)) {

@@ -35,19 +35,27 @@ public interface UpdateErrorDto  {
     String getCode();
 
     static IllegalEmailAddressErrorDto IllegalEmailAddressError() {
-        return new IllegalEmailAddressErrorDto().code("IllegalEmailAddressError");
+        IllegalEmailAddressErrorDto result = new IllegalEmailAddressErrorDto();
+        result.code("IllegalEmailAddressError");
+        return result;
     }
     static DuplicateIdentifierErrorDto DuplicateIdentifierError() {
-        return new DuplicateIdentifierErrorDto().code("DuplicateIdentifierError");
+        DuplicateIdentifierErrorDto result = new DuplicateIdentifierErrorDto();
+        result.code("DuplicateIdentifierError");
+        return result;
     }
     static GeneralErrorDto GeneralError() {
-        return new GeneralErrorDto().code("GeneralError");
+        GeneralErrorDto result = new GeneralErrorDto();
+        result.code("GeneralError");
+        return result;
     }
     static NotFoundErrorDto NotFoundError() {
-        return new NotFoundErrorDto().code("NotFoundError");
+        NotFoundErrorDto result = new NotFoundErrorDto();
+        result.code("NotFoundError");
+        return result;
     }
 
-    static Class<?> getType(String type) {
+    static Class<? extends UpdateErrorDto> getType(String type) {
         switch (type) {
         case "IllegalEmailAddressError":
             return IllegalEmailAddressErrorDto.class;
@@ -61,5 +69,7 @@ public interface UpdateErrorDto  {
             throw new IllegalArgumentException("Illegal code " + type);
         }
     }
+
+    void readOnlyFieldsWithValue(List<String> fields);
 }
 

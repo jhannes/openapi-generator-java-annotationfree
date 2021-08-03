@@ -35,13 +35,17 @@ public interface AnyPetDto  {
     String getPetType();
 
     static CatDto Cat() {
-        return new CatDto().petType("Cat");
+        CatDto result = new CatDto();
+        result.petType("Cat");
+        return result;
     }
     static DogDto Dog() {
-        return new DogDto().petType("Dog");
+        DogDto result = new DogDto();
+        result.petType("Dog");
+        return result;
     }
 
-    static Class<?> getType(String type) {
+    static Class<? extends AnyPetDto> getType(String type) {
         switch (type) {
         case "Cat":
             return CatDto.class;
@@ -51,5 +55,7 @@ public interface AnyPetDto  {
             throw new IllegalArgumentException("Illegal petType " + type);
         }
     }
+
+    void readOnlyFieldsWithValue(List<String> fields);
 }
 

@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /**
 * IllegalEmailAddressErrorDto
 */
-public class IllegalEmailAddressErrorDto {
+public class IllegalEmailAddressErrorDto implements CreationErrorDto, UpdateErrorDto {
 
     private String code;
 

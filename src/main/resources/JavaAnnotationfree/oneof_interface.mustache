@@ -5,14 +5,16 @@ public interface {{classname}} {{#vendorExtensions.x-implements}}{{#-first}}exte
 
 {{#discriminator}}
     {{#mappedModels}}
-    static {{modelName}} {{mappingName}}() {
-        return new {{modelName}}().{{discriminator.propertyName}}("{{mappingName}}");
+    static {{{modelName}}} {{mappingName}}() {
+        {{{modelName}}} result = new {{{modelName}}}();
+        result.{{discriminator.propertyName}}("{{mappingName}}");
+        return result;
     }
     {{/mappedModels}}
 {{/discriminator}}
 
 {{#discriminator}}
-    static Class<?> getType(String type) {
+    static Class<? extends {{{classname}}}> getType(String type) {
         switch (type) {
 {{#mappedModels}}
         case "{{mappingName}}":
@@ -23,4 +25,6 @@ public interface {{classname}} {{#vendorExtensions.x-implements}}{{#-first}}exte
         }
     }
 {{/discriminator}}
+
+    void readOnlyFieldsWithValue(List<String> fields);
 }

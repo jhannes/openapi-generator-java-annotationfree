@@ -35,13 +35,17 @@ public interface AnyPartyDto  {
     String getType();
 
     static OrganizationDto organization() {
-        return new OrganizationDto().type("organization");
+        OrganizationDto result = new OrganizationDto();
+        result.type("organization");
+        return result;
     }
     static PersonDto person() {
-        return new PersonDto().type("person");
+        PersonDto result = new PersonDto();
+        result.type("person");
+        return result;
     }
 
-    static Class<?> getType(String type) {
+    static Class<? extends AnyPartyDto> getType(String type) {
         switch (type) {
         case "organization":
             return OrganizationDto.class;
@@ -51,5 +55,7 @@ public interface AnyPartyDto  {
             throw new IllegalArgumentException("Illegal type " + type);
         }
     }
+
+    void readOnlyFieldsWithValue(List<String> fields);
 }
 

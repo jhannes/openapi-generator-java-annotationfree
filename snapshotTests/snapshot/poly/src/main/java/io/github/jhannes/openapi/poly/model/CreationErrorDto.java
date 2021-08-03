@@ -35,16 +35,22 @@ public interface CreationErrorDto  {
     String getCode();
 
     static IllegalEmailAddressErrorDto IllegalEmailAddressError() {
-        return new IllegalEmailAddressErrorDto().code("IllegalEmailAddressError");
+        IllegalEmailAddressErrorDto result = new IllegalEmailAddressErrorDto();
+        result.code("IllegalEmailAddressError");
+        return result;
     }
     static DuplicateIdentifierErrorDto DuplicateIdentifierError() {
-        return new DuplicateIdentifierErrorDto().code("DuplicateIdentifierError");
+        DuplicateIdentifierErrorDto result = new DuplicateIdentifierErrorDto();
+        result.code("DuplicateIdentifierError");
+        return result;
     }
     static GeneralErrorDto GeneralError() {
-        return new GeneralErrorDto().code("GeneralError");
+        GeneralErrorDto result = new GeneralErrorDto();
+        result.code("GeneralError");
+        return result;
     }
 
-    static Class<?> getType(String type) {
+    static Class<? extends CreationErrorDto> getType(String type) {
         switch (type) {
         case "IllegalEmailAddressError":
             return IllegalEmailAddressErrorDto.class;
@@ -56,5 +62,7 @@ public interface CreationErrorDto  {
             throw new IllegalArgumentException("Illegal code " + type);
         }
     }
+
+    void readOnlyFieldsWithValue(List<String> fields);
 }
 

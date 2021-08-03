@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /**
 * DogDto
 */
-public class DogDto extends PetDto {
+public class DogDto extends PetDto implements AnyPetDto {
 
     private Boolean bark = null;
             

@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /**
 * PersonDto
 */
-public class PersonDto {
+public class PersonDto implements AnyPartyDto {
 
     private UUID id = null;
 

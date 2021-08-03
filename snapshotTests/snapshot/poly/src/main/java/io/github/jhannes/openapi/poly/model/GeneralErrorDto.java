@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /**
 * GeneralErrorDto
 */
-public class GeneralErrorDto {
+public class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
 
     private String code;
 
