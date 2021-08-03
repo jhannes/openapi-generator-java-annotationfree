@@ -1,3 +1,6 @@
+[![Apache 2.0 License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.jhannes.openapi/openapi-generator-java-annotationfree/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.jhannes.openapi/openapi-generator-java-annotationfree)
+
 # OpenAPI Generator for TypeScript client library using Fetch API and API interfaces
 
 ## Overview
@@ -24,7 +27,7 @@ Add to your `pom.xml`:
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>4.3.1</version>
+                <version>5.2.0</version>
                 <executions>
                     <execution>
                         <id>petstore-java</id>
@@ -46,7 +49,7 @@ Add to your `pom.xml`:
                     <dependency>
                         <groupId>io.github.jhannes.openapi</groupId>
                         <artifactId>openapi-generator-java-annotationfree</artifactId>
-                        <version>0.1.0</version>
+                        <version>0.2.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
