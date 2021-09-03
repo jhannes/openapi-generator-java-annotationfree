@@ -1,5 +1,8 @@
 package io.github.jhannes.openapi.javaannotationfree;
 
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.media.ComposedSchema;
+import io.swagger.v3.oas.models.media.Schema;
 import org.openapitools.codegen.CodegenDiscriminator;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenProperty;
@@ -9,6 +12,7 @@ import org.openapitools.codegen.languages.AbstractJavaCodegen;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -17,7 +21,6 @@ import java.util.stream.Collectors;
 public class JavaCodegen extends AbstractJavaCodegen {
 
     public JavaCodegen() {
-        super();
         embeddedTemplateDir = templateDir = "JavaAnnotationfree";
         artifactId = "openapi-java-client";
     }
@@ -36,6 +39,39 @@ public class JavaCodegen extends AbstractJavaCodegen {
     @Override
     public String getLibrary() {
         return "action-controller";
+    }
+
+    @Override
+    public void processOpenAPI(OpenAPI openAPI) {
+        for (Schema<?> schema : openAPI.getComponents().getSchemas().values()) {
+            if (schema instanceof ComposedSchema) {
+                ComposedSchema composedSchema = (ComposedSchema) schema;
+                if (composedSchema.getAllOf() != null) {
+                    for (Iterator<Schema> iterator = composedSchema.getAllOf().iterator(); iterator.hasNext(); ) {
+                        Schema parentSchema = iterator.next();
+                        String $ref = parentSchema.get$ref();
+                        if ($ref.endsWith("_allOf")) {
+                            assert $ref.startsWith("#/components/schemas/");
+                            Schema parent = openAPI.getComponents().getSchemas().get($ref.substring("#/components/schemas/".length()));
+                            if (schema.getProperties() == null) {
+                                schema.setProperties(parent.getProperties());
+                            } else if (parentSchema.getProperties() != null) {
+                                schema.getProperties().putAll(parent.getProperties());
+                            }
+                            if (schema.getRequired() == null) {
+                                schema.setRequired(parent.getRequired());
+                            } else if (parent.getRequired() != null) {
+                                schema.getRequired().addAll(parent.getRequired());
+                            }
+                            
+                            iterator.remove();
+                        }
+                    }
+                }
+            }
+        }
+        openAPI.getComponents().getSchemas().entrySet().removeIf(model -> model.getKey().endsWith("_allOf"));
+        super.processOpenAPI(openAPI);
     }
 
     @Override

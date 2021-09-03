@@ -32,8 +32,6 @@ components:
           type: string
         birth_date:
           type: string
-      discriminator:
-        propertyName: pet_type
     Dog:     # "Dog" is a value for the pet_type property (the discriminator value)
       allOf: # Combines the main `Pet` schema with `Dog`-specific properties
         - $ref: '#/components/schemas/PetBase'

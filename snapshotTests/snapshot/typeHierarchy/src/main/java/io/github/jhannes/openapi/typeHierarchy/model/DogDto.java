@@ -150,6 +150,24 @@ public class DogDto extends PetBaseDto implements PetDto {
     }
 
     @Override
+    public DogDto petType(String petType) {
+        super.petType(petType);
+        return this;
+    }
+
+    @Override
+    public DogDto name(String name) {
+        super.name(name);
+        return this;
+    }
+
+    @Override
+    public DogDto birthDate(String birthDate) {
+        super.birthDate(birthDate);
+        return this;
+    }
+
+    @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
             return true;
@@ -160,12 +178,15 @@ public class DogDto extends PetBaseDto implements PetDto {
         DogDto dog = (DogDto) o;
         return Objects.equals(this.getBark(), dog.getBark()) &&
                 Objects.equals(this.getBreed(), dog.getBreed()) &&
+                Objects.equals(this.getPetType(), dog.getPetType()) &&
+                Objects.equals(this.getName(), dog.getName()) &&
+                Objects.equals(this.getBirthDate(), dog.getBirthDate()) &&
             super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getBark(), getBreed());
+        return Objects.hash(getBark(), getBreed(), getPetType(), getName(), getBirthDate());
     }
 
     @Override
@@ -175,6 +196,9 @@ public class DogDto extends PetBaseDto implements PetDto {
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    bark: ").append(toIndentedString(getBark())).append("\n");
         sb.append("    breed: ").append(toIndentedString(getBreed())).append("\n");
+        sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
+        sb.append("    name: ").append(toIndentedString(getName())).append("\n");
+        sb.append("    birth_date: ").append(toIndentedString(getBirthDate())).append("\n");
         sb.append("}");
         return sb.toString();
     }

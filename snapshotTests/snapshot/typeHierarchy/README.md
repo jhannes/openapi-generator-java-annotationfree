@@ -108,9 +108,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
- - [CatAllOfDto](docs/CatAllOfDto.md)
  - [CatDto](docs/CatDto.md)
- - [DogAllOfDto](docs/DogAllOfDto.md)
  - [DogDto](docs/DogDto.md)
  - [PetBaseDto](docs/PetBaseDto.md)
  - [PetDto](docs/PetDto.md)

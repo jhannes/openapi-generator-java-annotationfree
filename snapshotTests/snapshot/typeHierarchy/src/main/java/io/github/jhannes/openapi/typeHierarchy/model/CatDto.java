@@ -113,6 +113,24 @@ public class CatDto extends PetBaseDto implements PetDto {
     }
 
     @Override
+    public CatDto petType(String petType) {
+        super.petType(petType);
+        return this;
+    }
+
+    @Override
+    public CatDto name(String name) {
+        super.name(name);
+        return this;
+    }
+
+    @Override
+    public CatDto birthDate(String birthDate) {
+        super.birthDate(birthDate);
+        return this;
+    }
+
+    @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
             return true;
@@ -123,12 +141,15 @@ public class CatDto extends PetBaseDto implements PetDto {
         CatDto cat = (CatDto) o;
         return Objects.equals(this.getHunts(), cat.getHunts()) &&
                 Objects.equals(this.getAge(), cat.getAge()) &&
+                Objects.equals(this.getPetType(), cat.getPetType()) &&
+                Objects.equals(this.getName(), cat.getName()) &&
+                Objects.equals(this.getBirthDate(), cat.getBirthDate()) &&
             super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getHunts(), getAge());
+        return Objects.hash(getHunts(), getAge(), getPetType(), getName(), getBirthDate());
     }
 
     @Override
@@ -138,6 +159,9 @@ public class CatDto extends PetBaseDto implements PetDto {
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    hunts: ").append(toIndentedString(getHunts())).append("\n");
         sb.append("    age: ").append(toIndentedString(getAge())).append("\n");
+        sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
+        sb.append("    name: ").append(toIndentedString(getName())).append("\n");
+        sb.append("    birth_date: ").append(toIndentedString(getBirthDate())).append("\n");
         sb.append("}");
         return sb.toString();
     }

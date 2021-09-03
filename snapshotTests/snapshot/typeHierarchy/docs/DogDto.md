@@ -8,6 +8,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bark** | **Boolean** |  |  [optional]
 **breed** | [**BreedEnum**](#BreedEnum) |  |  [optional]
+**petType** | **String** |  | 
+**name** | **String** |  |  [optional]
+**birthDate** | **String** |  |  [optional]
 
 
 

@@ -28,10 +28,10 @@ public class SnapshotTests {
 
     @TestFactory
     Stream<DynamicNode> javaAnnotationFreeSnapshots() throws IOException {
-        return Stream.of(
+        return Stream.of(new DynamicNode[]{
                 snapshots(Paths.get("snapshotTests"), "java-annotationfree", Paths.get("snapshotTests").resolve("output"), Paths.get("snapshotTests").resolve("snapshot")),
-                snapshots(Paths.get("localSnapshotTests"), "java-annotationfree", Paths.get("localSnapshotTests").resolve("output"), Paths.get("localSnapshotTests").resolve("snapshot"))
-        );
+                snapshots(Paths.get("localSnapshotTests"), "java-annotationfree", Paths.get("localSnapshotTests").resolve("output"), Paths.get("localSnapshotTests").resolve("snapshot")),
+        });
     }
 
     private DynamicNode snapshots(Path testDir, String generatorName, Path outputDir, Path snapshotDir) throws IOException {
@@ -86,7 +86,7 @@ public class SnapshotTests {
         assertEquals("", diff.getDeltas().stream().map(Object::toString).collect(Collectors.joining("\n")));
     }
 
-    private void generate(Path file, String generatorName, Path output, String modelName) {
+    static void generate(Path file, String generatorName, Path output, String modelName) {
         final CodegenConfigurator configurator = new CodegenConfigurator()
                 .setGeneratorName(generatorName)
                 .setInputSpec(file.toString().replaceAll("\\\\", "/"))

@@ -41,21 +41,21 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
 
     public static String[] requiredFields() {
         return new String[] {
-        {{#allVars}}
+        {{#vars}}
             {{#required}}
                 "{{baseName}}",
             {{/required}}
-        {{/allVars}}
+        {{/vars}}
         };
     }
 
     public List<String> missingRequiredFields() {
         List<String> result = new ArrayList<>();
-        {{#allVars}}
+        {{#vars}}
             {{#required}}
         if (isMissing({{getter}}())) result.add("{{baseName}}");
             {{/required}}
-        {{/allVars}}
+        {{/vars}}
         return result;
     }
 
@@ -177,11 +177,13 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
     {{#isInherited}}
     {{#isArray}}
 
+    @Override
     public <T> {{classname}} {{name}}(Collection<T> items, Function<T, {{{items.datatypeWithEnum}}}> mapper) {
         super.{{name}}(items, mapper);
         return this;
     }
 
+    @Override
     public {{classname}} add{{nameInCamelCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item) {
         super.add{{nameInCamelCase}}Item({{name}}Item);
         return this;
@@ -189,12 +191,14 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
     {{/isArray}}
     {{#isMap}}
 
+    @Override
     public {{classname}} put{{nameInCamelCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item) {
         super.put{{nameInCamelCase}}Item(key, {{name}}Item)
         return this;
     }
     {{/isMap}}
 
+    @Override
     public {{classname}} {{name}}({{{datatypeWithEnum}}} {{name}}) {
         super.{{name}}({{name}});
         return this;
