@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**addPet**](PetApi.md#addPet) | **POST** /pet | Add a new pet to the store
 [**deletePet**](PetApi.md#deletePet) | **DELETE** /pet/{petId} | Deletes a pet
+[**downloadImage**](PetApi.md#downloadImage) | **GET** /pet/{petId}/image | downloads image
 [**findPetsByStatus**](PetApi.md#findPetsByStatus) | **GET** /pet/findByStatus | Finds Pets by status
 [**findPetsByTags**](PetApi.md#findPetsByTags) | **GET** /pet/findByTags | Finds Pets by tags
 [**getPetById**](PetApi.md#getPetById) | **GET** /pet/{petId} | Find pet by ID
@@ -151,6 +152,66 @@ null (empty response body)
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **400** | Invalid pet value |  -  |
+
+
+## downloadImage
+
+> File downloadImage(petId)
+
+downloads image
+
+### Example
+
+```java
+import io.github.jhannes.openapi.petstore.api.*;
+import io.github.jhannes.openapi.petstore.models.*;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
+
+public class Example {
+    public static void main(String[] args) {
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
+        PetApi apiInstance = ApiClientProxy.create(PetApi.class, httpClient);
+
+        Long petId = 56L; // Long | 
+        try {
+            File result = apiInstance.downloadImage(petId);
+            System.out.println(result);
+        } catch (HttpClientException e) {
+            System.err.println("Exception when calling PetApi#downloadImage");
+            System.err.println("Status code: " + e.getStatusCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("URL: " + e.getUrl());
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **petId** | **Long**|  |
+
+### Return type
+
+[**File**](File.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: image/jpeg
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | The primary pet image |  -  |
 
 
 ## findPetsByStatus

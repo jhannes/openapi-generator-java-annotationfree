@@ -65,6 +65,21 @@ public class PetApiTest {
         // TODO: test validations
     }
     /**
+     * downloads image
+     *
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void downloadImageTest() throws ApiException {
+        //
+        //Long petId = null;
+        //
+        //File response = api.downloadImage(petId);
+
+        // TODO: test validations
+    }
+    /**
      * Finds Pets by status
      *
      * Multiple status values can be provided with comma separated strings

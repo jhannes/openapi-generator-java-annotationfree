@@ -52,6 +52,17 @@ public interface PetApi {
                 @HttpHeader("api_key") Optional<String> apiKey
         ) throws IOException;
         /**
+         * downloads image
+         * 
+         * @param petId  (required)
+         * @return File
+         */
+        @GET("/pet/{petId}/image")
+        @JsonBody
+        public File downloadImage(
+                @PathParam("petId") Long petId
+        ) throws IOException;
+        /**
          * Finds Pets by status
          * Multiple status values can be provided with comma separated strings
          * @param status Status values that need to be considered for filter (optional

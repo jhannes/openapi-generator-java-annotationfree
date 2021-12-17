@@ -264,6 +264,27 @@ paths:
                   description: "file to upload"
                   type: "string"
                   format: "binary"
+  /pet/{petId}/image:
+    get:
+      tags:
+        - "pet"
+      operationId: "downloadImage"
+      summary: "downloads image"
+      parameters:
+        - name: "petId"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
+            format: "int64"
+      responses:
+        "200":
+          description: "The primary pet image"
+          content:
+            image/jpeg:
+              schema:
+                type: "string"
+                format: "binary"
   /store/inventory:
     get:
       tags:
