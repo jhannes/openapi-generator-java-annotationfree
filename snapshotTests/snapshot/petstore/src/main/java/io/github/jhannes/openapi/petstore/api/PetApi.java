@@ -58,8 +58,8 @@ public interface PetApi {
          * @return File
          */
         @GET("/pet/{petId}/image")
-        @JsonBody
-        public File downloadImage(
+        @ContentBody
+        public byte[] downloadImage(
                 @PathParam("petId") Long petId
         ) throws IOException;
         /**

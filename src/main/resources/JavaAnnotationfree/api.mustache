@@ -42,9 +42,10 @@ public interface {{classname}} {
         {{#isDeprecated}}
             @Deprecated
         {{/isDeprecated}}
-        @{{httpMethod}}("{{path}}"){{#returnType}}
-        @JsonBody{{/returnType}}
-        public {{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}{{operationId}}({{#allParams}}{{#isPathParam}}
+        @{{httpMethod}}("{{path}}"){{#isResponseFile}}
+        @ContentBody{{/isResponseFile}}{{^isResponseFile}}{{#returnType}}
+        @JsonBody{{/returnType}}{{/isResponseFile}}
+        public {{#isResponseFile}}byte[] {{/isResponseFile}}{{^isResponseFile}}{{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}{{/isResponseFile}}{{operationId}}({{#allParams}}{{#isPathParam}}
                 @PathParam("{{baseName}}") {{{dataType}}} {{paramName}}{{/isPathParam}}{{#isQueryParam}}
                 @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isQueryParam}}{{#isBodyParam}}
                 @JsonBody {{{dataType}}} {{paramName}}{{/isBodyParam}}{{#isFormParam}}
