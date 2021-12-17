@@ -16,8 +16,9 @@ import io.github.jhannes.openapi.infectionTracker.model.*;
 
 import io.github.jhannes.openapi.infectionTracker.model.CaseWorkerDto;
 
-import org.actioncontroller.*;
-import org.actioncontroller.json.JsonBody;
+import org.actioncontroller.actions.*;
+import org.actioncontroller.values.*;
+import org.actioncontroller.values.json.JsonBody;
 
 import java.io.IOException;
 import java.net.URI;

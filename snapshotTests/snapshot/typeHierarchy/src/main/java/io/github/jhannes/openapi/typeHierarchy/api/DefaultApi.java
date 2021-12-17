@@ -16,8 +16,9 @@ import io.github.jhannes.openapi.typeHierarchy.model.*;
 
 import io.github.jhannes.openapi.typeHierarchy.model.PetDto;
 
-import org.actioncontroller.*;
-import org.actioncontroller.json.JsonBody;
+import org.actioncontroller.actions.*;
+import org.actioncontroller.values.*;
+import org.actioncontroller.values.json.JsonBody;
 
 import java.io.IOException;
 import java.net.URI;
@@ -34,8 +35,8 @@ public interface DefaultApi {
          * 
          * @param petDto  (optional)
          */
-        @PATCH("/pets")
-        public void petsPatch(
+        @POST("/pets")
+        public void petsPost(
                 @JsonBody PetDto petDto
         ) throws IOException;
 }

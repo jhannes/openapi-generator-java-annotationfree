@@ -85,9 +85,9 @@ public class Example {
 
         PetDto petDto = new PetDto(); // PetDto | 
         try {
-            apiInstance.petsPatch(petDto);
+            apiInstance.petsPost(petDto);
         } catch (HttpClientException e) {
-            System.err.println("Exception when calling DefaultApi#petsPatch");
+            System.err.println("Exception when calling DefaultApi#petsPost");
             System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("URL: " + e.getUrl());
@@ -103,7 +103,7 @@ All URIs are relative to *http://api.example.com/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**petsPatch**](docs/DefaultApi.md#petsPatch) | **PATCH** /pets | 
+*DefaultApi* | [**petsPost**](docs/DefaultApi.md#petsPost) | **POST** /pets | 
 
 
 ## Documentation for Models

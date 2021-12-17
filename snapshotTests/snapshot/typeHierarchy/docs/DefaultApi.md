@@ -4,13 +4,13 @@ All URIs are relative to *http://api.example.com/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**petsPatch**](DefaultApi.md#petsPatch) | **PATCH** /pets | 
+[**petsPost**](DefaultApi.md#petsPost) | **POST** /pets | 
 
 
 
-## petsPatch
+## petsPost
 
-> petsPatch(petDto)
+> petsPost(petDto)
 
 
 
@@ -30,9 +30,9 @@ public class Example {
 
         PetDto petDto = new PetDto(); // PetDto | 
         try {
-            apiInstance.petsPatch(petDto);
+            apiInstance.petsPost(petDto);
         } catch (HttpClientException e) {
-            System.err.println("Exception when calling DefaultApi#petsPatch");
+            System.err.println("Exception when calling DefaultApi#petsPost");
             System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("URL: " + e.getUrl());

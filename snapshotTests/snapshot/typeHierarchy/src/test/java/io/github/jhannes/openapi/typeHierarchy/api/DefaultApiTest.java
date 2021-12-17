@@ -36,11 +36,11 @@ public class DefaultApiTest {
      *          if the Api call fails
      */
     @Test
-    public void petsPatchTest() throws ApiException {
+    public void petsPostTest() throws ApiException {
         //
         //PetDto petDto = null;
         //
-        //api.petsPatch(petDto);
+        //api.petsPost(petDto);
 
         // TODO: test validations
     }

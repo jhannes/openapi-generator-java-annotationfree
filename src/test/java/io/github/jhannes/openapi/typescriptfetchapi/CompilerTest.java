@@ -32,25 +32,24 @@ public class CompilerTest {
 
     @TestFactory
     Stream<DynamicNode> javaAnnotationFreeSnapshots() throws IOException {
-        return Stream.of(
-                snapshots(Paths.get("snapshotTests"), "java-annotationfree", Paths.get("snapshotTests").resolve("compile"), Paths.get("snapshotTests").resolve("snapshot")),
-                snapshots(Paths.get("localSnapshotTests"), "java-annotationfree", Paths.get("snapshotTests").resolve("compile"), Paths.get("snapshotTests").resolve("snapshot"))
-        );
+        List<DynamicNode> testSuites = new ArrayList<>();
+        testSuites.add(snapshots(Paths.get("snapshotTests"), "java-annotationfree", Paths.get("snapshotTests").resolve("compile")));
+        if (Files.isDirectory(Paths.get("localSnapshotTests"))) {
+            testSuites.add(snapshots(Paths.get("localSnapshotTests"), "java-annotationfree", Paths.get("localSnapshotTests").resolve("compile")));
+        }
+        return testSuites.stream();
     }
 
-    private DynamicNode snapshots(Path testDir, String generatorName, Path outputDir, Path snapshotDir) throws IOException {
+    private DynamicNode snapshots(Path testDir, String generatorName, Path outputDir) throws IOException {
         Path inputDir = testDir.resolve("input");
-        if (!Files.isDirectory(inputDir)) {
-            return dynamicTest("No snapshots for " + testDir, () -> {});
-        }
         cleanDirectory(outputDir);
         return dynamicContainer(
-                "Verifications of " + testDir,
+                "Compiling of " + testDir,
                 Files.list(inputDir)
                         .filter(p -> p.toFile().isFile())
-                        .map(spec -> dynamicContainer("Verify " + spec, Arrays.asList(
+                        .map(spec -> dynamicContainer("Compile " + spec, Arrays.asList(
                                 dynamicTest("Generate " + spec, () -> generate(spec, generatorName, outputDir, getModelName(spec))),
-                                dynamicTest("java " + spec, () -> compile(outputDir.resolve(getModelName(spec))))
+                                dynamicTest("javac " + spec, () -> compile(outputDir.resolve(getModelName(spec))))
                         )))
         );
     }
@@ -83,16 +82,20 @@ public class CompilerTest {
     }
 
     private void compile(Path path) throws IOException {
+        String actionControllerPath = Stream.of(System.getProperty("java.class.path").split(System.getProperty("path.separator")))
+                .filter(s -> s.contains("action-controller"))
+                .findFirst().orElseThrow(() -> new RuntimeException("Can't find action-controller in classpath"));
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         try (StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null)) {
 
             List<Path> files = Files.find(
                     path.resolve("src/main/java"),
                     999,
-                    (p, fa) -> !p.toString().contains(File.separator + "api" + File.separator) // Ignore files with action-controller dependency
-                            && p.getFileName().toString().endsWith(".java")
-                            && fa.isRegularFile()
+                    (p, fa) -> p.getFileName().toString().endsWith(".java") && fa.isRegularFile()
             ).collect(Collectors.toList());
+
+            List<String> options = List.of("-cp", actionControllerPath, "-d", path.resolve("target/compile").toString());
+            System.out.println("javac " + String.join(" " , options) + " " + files.stream().map(Path::toString).collect(Collectors.joining(" ")));
 
             DiagnosticCollector<JavaFileObject> diagnosticListener = new DiagnosticCollector<>();
             JavaCompiler.CompilationTask task = compiler.getTask(
@@ -113,6 +116,7 @@ public class CompilerTest {
 
     private void cleanDirectory(Path directory) throws IOException {
         if (Files.isDirectory(directory)) {
+            System.out.println("rm -r " + directory);
             try (Stream<Path> walk = Files.walk(directory)) {
                 walk.sorted(Comparator.reverseOrder())
                         .map(Path::toFile)

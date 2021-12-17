@@ -36,7 +36,7 @@ public class SnapshotTests {
 
     private DynamicNode snapshots(Path testDir, String generatorName, Path outputDir, Path snapshotDir) throws IOException {
         Path inputDir = testDir.resolve("input");
-        if (!Files.isDirectory(inputDir)) {
+        if (!Files.isDirectory(snapshotDir)) {
             return dynamicTest("No snapshots for " + testDir, () -> {});
         }
         cleanDirectory(outputDir);

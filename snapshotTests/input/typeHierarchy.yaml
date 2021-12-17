@@ -10,7 +10,7 @@ servers:
     description: Optional server description, e.g. Internal staging server for testing
 paths:
   /pets:
-    patch:
+    post:
       requestBody:
         content:
           application/json:
