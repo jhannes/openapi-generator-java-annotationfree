@@ -68,13 +68,20 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
     {{/isReadOnly}}
     {{^isReadOnly}}
         {{^isPrimitiveType}}
-            {{#items}}
-                {{#isModel}}
-        if ({{name}} != null) {
+            {{^isMap}}
+                {{#items}}
+                    {{#isModel}}
+        if ({{baseName}} != null) {
             {{baseName}}.forEach(o -> o.readOnlyFieldsWithValue(result));
         }
-                {{/isModel}}
-            {{/items}}
+                    {{/isModel}}
+                {{/items}}
+            {{/isMap}}
+            {{#isMap}}
+        if ({{baseName}} != null) {
+            {{baseName}}.values().forEach(o -> o.readOnlyFieldsWithValue(result));
+        }
+            {{/isMap}}
             {{^isArray}}
                 {{#isModel}}
         if ({{baseName}} != null) {
