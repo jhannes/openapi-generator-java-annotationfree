@@ -41,6 +41,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
         return "action-controller";
     }
 
+    @SuppressWarnings({"rawtypes", "unchecked"})
     @Override
     public void processOpenAPI(OpenAPI openAPI) {
         for (Schema<?> schema : openAPI.getComponents().getSchemas().values()) {
@@ -63,7 +64,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                             } else if (parent.getRequired() != null) {
                                 schema.getRequired().addAll(parent.getRequired());
                             }
-                            
+
                             iterator.remove();
                         }
                     }
@@ -74,6 +75,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
         super.processOpenAPI(openAPI);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public Map<String, Object> postProcessAllModels(Map<String, Object> objs) {
         Map<String, Object> result = super.postProcessAllModels(objs);
@@ -115,6 +117,22 @@ public class JavaCodegen extends AbstractJavaCodegen {
                             var.isInherited = true;
                         }
                     }
+                }
+            }
+            for (CodegenProperty variable : codegenModel.vars) {
+                if (variable.get_enum() != null && variable.get_enum().size() == 1) {
+                    variable.defaultValue = "\"" + variable.get_enum().get(0) + "\"";
+                    variable.dataType = "\"" + variable.get_enum().get(0) + "\"";
+                    variable.datatypeWithEnum = "String";
+                    variable.isEnum = false;
+                }
+            }
+            for (CodegenProperty variable : codegenModel.allVars) {
+                if (variable.get_enum() != null && variable.get_enum().size() == 1) {
+                    variable.defaultValue = "\"" + variable.get_enum().get(0) + "\"";
+                    variable.dataType = "\"" + variable.get_enum().get(0) + "\"";
+                    variable.datatypeWithEnum = "String";
+                    variable.isEnum = false;
                 }
             }
         }

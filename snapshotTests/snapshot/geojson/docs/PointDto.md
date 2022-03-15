@@ -1,12 +1,13 @@
 
 
-# PetStoreDto
+# PointDto
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**pets** | [**Map<String, PetDto>**](PetDto.md) |  |  [optional]
+**type** | **"Point"** |  | 
+**coordinates** | **List<Double>** | Point in 3D space | 
 
 
 

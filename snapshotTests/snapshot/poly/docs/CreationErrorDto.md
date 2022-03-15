@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **identifierValue** | **String** |  |  [optional]
 **entityType** | **String** |  | 
 **inputEmailAddress** | **String** |  | 
-**validDomains** | **List&lt;String&gt;** |  | 
+**validDomains** | **List<String>** |  | 
 
 
 

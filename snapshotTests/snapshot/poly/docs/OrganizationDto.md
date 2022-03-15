@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **organizationId** | **String** |  |  [optional]
 **url** | [**URI**](URI.md) |  |  [optional]
 **email** | **String** |  |  [optional]
-**emailDomains** | **List&lt;String&gt;** |  |  [optional]
+**emailDomains** | **List<String>** |  |  [optional]
 **phone** | **String** |  |  [optional]
 
 

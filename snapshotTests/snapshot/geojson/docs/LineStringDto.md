@@ -1,12 +1,13 @@
 
 
-# PetStoreDto
+# LineStringDto
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**pets** | [**Map<String, PetDto>**](PetDto.md) |  |  [optional]
+**type** | **"LineString"** |  | 
+**coordinates** | [**List<List<Double>>**](List.md) |  | 
 
 
 

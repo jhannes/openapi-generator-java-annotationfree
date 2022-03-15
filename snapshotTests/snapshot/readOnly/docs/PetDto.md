@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **name** | **String** |  |  [optional]
 **birthDate** | [**LocalDate**](LocalDate.md) |  |  [optional]
 **createdAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional] [readonly]
-**comments** | [**List&lt;CommentDto&gt;**](CommentDto.md) |  |  [optional]
+**comments** | [**List<CommentDto>**](CommentDto.md) |  |  [optional]
 **status** | [**StatusEnum**](#StatusEnum) |  |  [optional] [readonly]
 
 
