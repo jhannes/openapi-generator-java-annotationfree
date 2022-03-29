@@ -84,10 +84,10 @@ public class Example {
         DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
         try {
-            GeometryCollectionDto result = apiInstance.getLocation();
+            GeometryDto result = apiInstance.getGeometry();
             System.out.println(result);
         } catch (HttpClientException e) {
-            System.err.println("Exception when calling DefaultApi#getLocation");
+            System.err.println("Exception when calling DefaultApi#getGeometry");
             System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("URL: " + e.getUrl());
@@ -103,7 +103,9 @@ All URIs are relative to *http://localhost/v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DefaultApi* | [**getGeometry**](docs/DefaultApi.md#getGeometry) | **GET** /geometry | 
 *DefaultApi* | [**getLocation**](docs/DefaultApi.md#getLocation) | **GET** /collection | 
+*DefaultApi* | [**getPolygon**](docs/DefaultApi.md#getPolygon) | **GET** /polygon | 
 
 
 ## Documentation for Models

@@ -15,6 +15,8 @@ package io.github.jhannes.openapi.geojson.api;
 
 import io.github.jhannes.openapi.geojson.ApiException;
 import io.github.jhannes.openapi.geojson.model.GeometryCollectionDto;
+import io.github.jhannes.openapi.geojson.model.GeometryDto;
+import io.github.jhannes.openapi.geojson.model.PolygonDto;
 import org.junit.Test;
 import org.junit.Ignore;
 import org.junit.Assert;
@@ -36,9 +38,31 @@ public class DefaultApiTest {
      *          if the Api call fails
      */
     @Test
+    public void getGeometryTest() throws ApiException {
+        //
+        //GeometryDto response = api.getGeometry();
+
+        // TODO: test validations
+    }
+    /**
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
     public void getLocationTest() throws ApiException {
         //
         //GeometryCollectionDto response = api.getLocation();
+
+        // TODO: test validations
+    }
+    /**
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void getPolygonTest() throws ApiException {
+        //
+        //PolygonDto response = api.getPolygon();
 
         // TODO: test validations
     }
