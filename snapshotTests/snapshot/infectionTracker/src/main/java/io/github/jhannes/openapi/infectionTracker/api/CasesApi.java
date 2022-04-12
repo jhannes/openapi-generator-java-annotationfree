@@ -33,44 +33,44 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public interface CasesApi {
-        /**
-         * 
-         * 
-         * @param caseId  (required)
-         * @return InfectionDto
-         */
-        @GET("/api/cases/{caseId}")
-        @JsonBody
-        public InfectionDto getCaseDetails(
-                @PathParam("caseId") UUID caseId
-        ) throws IOException;
-        /**
-         * 
-         * 
-         * @return InfectionDto
-         */
-        @GET("/api/cases")
-        @JsonBody
-        public InfectionDto listCases(
-        ) throws IOException;
-        /**
-         * 
-         * 
-         * @param infectionInformationDto  (optional)
-         */
-        @POST("/api/cases")
-        public void newCase(
-                @JsonBody InfectionInformationDto infectionInformationDto
-        ) throws IOException;
-        /**
-         * 
-         * 
-         * @param caseId  (required)
-         * @param exposureDto  (optional)
-         */
-        @POST("/api/cases/{caseId}/exposures")
-        public void registerExposure(
-                @PathParam("caseId") UUID caseId, 
-                @JsonBody ExposureDto exposureDto
-        ) throws IOException;
+    /**
+     * 
+     * 
+     * @param caseId  (required)
+     * @return InfectionDto
+     */
+    @GET("/api/cases/{caseId}")
+    @JsonBody
+    public InfectionDto getCaseDetails(
+            @PathParam("caseId") UUID caseId
+    ) throws IOException;
+    /**
+     * 
+     * 
+     * @return InfectionDto
+     */
+    @GET("/api/cases")
+    @JsonBody
+    public InfectionDto listCases(
+    ) throws IOException;
+    /**
+     * 
+     * 
+     * @param infectionInformationDto  (optional)
+     */
+    @POST("/api/cases")
+    public void newCase(
+            @JsonBody InfectionInformationDto infectionInformationDto
+    ) throws IOException;
+    /**
+     * 
+     * 
+     * @param caseId  (required)
+     * @param exposureDto  (optional)
+     */
+    @POST("/api/cases/{caseId}/exposures")
+    public void registerExposure(
+            @PathParam("caseId") UUID caseId, 
+            @JsonBody ExposureDto exposureDto
+    ) throws IOException;
 }

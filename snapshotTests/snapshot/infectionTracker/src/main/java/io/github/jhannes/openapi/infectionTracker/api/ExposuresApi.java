@@ -31,24 +31,24 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public interface ExposuresApi {
-        /**
-         * 
-         * 
-         * @return ExposureDto
-         */
-        @GET("/api/exposures")
-        @JsonBody
-        public ExposureDto listExposures(
-        ) throws IOException;
-        /**
-         * 
-         * 
-         * @param exposureId  (required)
-         * @param exposureDto  (optional)
-         */
-        @PUT("/api/exposures/{exposureId}")
-        public void updateExposure(
-                @PathParam("exposureId") UUID exposureId, 
-                @JsonBody ExposureDto exposureDto
-        ) throws IOException;
+    /**
+     * 
+     * 
+     * @return ExposureDto
+     */
+    @GET("/api/exposures")
+    @JsonBody
+    public ExposureDto listExposures(
+    ) throws IOException;
+    /**
+     * 
+     * 
+     * @param exposureId  (required)
+     * @param exposureDto  (optional)
+     */
+    @PUT("/api/exposures/{exposureId}")
+    public void updateExposure(
+            @PathParam("exposureId") UUID exposureId, 
+            @JsonBody ExposureDto exposureDto
+    ) throws IOException;
 }

@@ -33,33 +33,33 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public interface DefaultApi {
-        /**
-         * 
-         * 
-         * @return AnyPartyDto
-         */
-        @GET("/parties")
-        @JsonBody
-        public AnyPartyDto partiesGet(
-        ) throws IOException;
-        /**
-         * 
-         * 
-         * @param id  (required)
-         * @param anyPartyDto  (optional)
-         */
-        @PUT("/parties/{id}")
-        public void partiesIdPut(
-                @PathParam("id") UUID id, 
-                @JsonBody AnyPartyDto anyPartyDto
-        ) throws IOException;
-        /**
-         * 
-         * 
-         * @param anyPartyDto  (optional)
-         */
-        @POST("/parties")
-        public void partiesPost(
-                @JsonBody AnyPartyDto anyPartyDto
-        ) throws IOException;
+    /**
+     * 
+     * 
+     * @return AnyPartyDto
+     */
+    @GET("/parties")
+    @JsonBody
+    public AnyPartyDto partiesGet(
+    ) throws IOException;
+    /**
+     * 
+     * 
+     * @param id  (required)
+     * @param anyPartyDto  (optional)
+     */
+    @PUT("/parties/{id}")
+    public void partiesIdPut(
+            @PathParam("id") UUID id, 
+            @JsonBody AnyPartyDto anyPartyDto
+    ) throws IOException;
+    /**
+     * 
+     * 
+     * @param anyPartyDto  (optional)
+     */
+    @POST("/parties")
+    public void partiesPost(
+            @JsonBody AnyPartyDto anyPartyDto
+    ) throws IOException;
 }

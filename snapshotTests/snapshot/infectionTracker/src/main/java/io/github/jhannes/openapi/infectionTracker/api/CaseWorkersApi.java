@@ -30,22 +30,22 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public interface CaseWorkersApi {
-        /**
-         * 
-         * 
-         * @return CaseWorkerDto
-         */
-        @GET("/api/caseWorkers")
-        @JsonBody
-        public CaseWorkerDto listCaseWorkers(
-        ) throws IOException;
-        /**
-         * 
-         * 
-         * @param caseWorkerDto  (optional)
-         */
-        @POST("/api/caseWorkers")
-        public void registerCaseWorker(
-                @JsonBody CaseWorkerDto caseWorkerDto
-        ) throws IOException;
+    /**
+     * 
+     * 
+     * @return CaseWorkerDto
+     */
+    @GET("/api/caseWorkers")
+    @JsonBody
+    public CaseWorkerDto listCaseWorkers(
+    ) throws IOException;
+    /**
+     * 
+     * 
+     * @param caseWorkerDto  (optional)
+     */
+    @POST("/api/caseWorkers")
+    public void registerCaseWorker(
+            @JsonBody CaseWorkerDto caseWorkerDto
+    ) throws IOException;
 }

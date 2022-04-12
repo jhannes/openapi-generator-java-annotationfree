@@ -32,31 +32,31 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public interface DefaultApi {
-        /**
-         * 
-         * 
-         * @return GeometryDto
-         */
-        @GET("/geometry")
-        @JsonBody
-        public GeometryDto getGeometry(
-        ) throws IOException;
-        /**
-         * 
-         * 
-         * @return GeometryCollectionDto
-         */
-        @GET("/collection")
-        @JsonBody
-        public GeometryCollectionDto getLocation(
-        ) throws IOException;
-        /**
-         * 
-         * 
-         * @return PolygonDto
-         */
-        @GET("/polygon")
-        @JsonBody
-        public PolygonDto getPolygon(
-        ) throws IOException;
+    /**
+     * 
+     * 
+     * @return GeometryDto
+     */
+    @GET("/geometry")
+    @JsonBody
+    public GeometryDto getGeometry(
+    ) throws IOException;
+    /**
+     * 
+     * 
+     * @return GeometryCollectionDto
+     */
+    @GET("/collection")
+    @JsonBody
+    public GeometryCollectionDto getLocation(
+    ) throws IOException;
+    /**
+     * 
+     * 
+     * @return PolygonDto
+     */
+    @GET("/polygon")
+    @JsonBody
+    public PolygonDto getPolygon(
+    ) throws IOException;
 }

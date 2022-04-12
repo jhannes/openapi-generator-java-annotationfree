@@ -30,13 +30,13 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public interface DefaultApi {
-        /**
-         * 
-         * 
-         * @param petDto  (optional)
-         */
-        @POST("/pets")
-        public void petsPost(
-                @JsonBody PetDto petDto
-        ) throws IOException;
+    /**
+     * 
+     * 
+     * @param petDto  (optional)
+     */
+    @POST("/pets")
+    public void petsPost(
+            @JsonBody PetDto petDto
+    ) throws IOException;
 }

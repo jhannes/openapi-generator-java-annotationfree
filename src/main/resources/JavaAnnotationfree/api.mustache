@@ -21,38 +21,38 @@ import java.util.function.Consumer;
 
 {{#operations}}
 public interface {{classname}} {
-    {{#operation}}
-        /**
-         * {{summary}}
-         * {{notes}}
-        {{#allParams}}
-         * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/isContainer}}{{/required}}
-        {{/allParams}}
-        {{#returnType}}
-         * @return {{returnType}}
-        {{/returnType}}
-        {{#isDeprecated}}
-         * @deprecated
-        {{/isDeprecated}}
-        {{#externalDocs}}
-         * {{description}}
-         * @see <a href="{{url}}">{{summary}} Documentation</a>
-        {{/externalDocs}}
-         */
-        {{#isDeprecated}}
-            @Deprecated
-        {{/isDeprecated}}
-        @{{httpMethod}}("{{path}}"){{#isResponseFile}}
-        @ContentBody{{/isResponseFile}}{{^isResponseFile}}{{#returnType}}
-        @JsonBody{{/returnType}}{{/isResponseFile}}
-        public {{#isResponseFile}}byte[] {{/isResponseFile}}{{^isResponseFile}}{{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}{{/isResponseFile}}{{operationId}}({{#allParams}}{{#isPathParam}}
-                @PathParam("{{baseName}}") {{{dataType}}} {{paramName}}{{/isPathParam}}{{#isQueryParam}}
-                @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isQueryParam}}{{#isBodyParam}}
-                @JsonBody {{{dataType}}} {{paramName}}{{/isBodyParam}}{{#isFormParam}}
-                @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isFormParam}}{{#isHeaderParam}}
-                @HttpHeader("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}}, {{/-last}}{{/allParams}}{{#responses}}{{#headers}},
-                @HttpHeader("{{baseName}}") Consumer<{{{dataType}}}> set{{nameInCamelCase}}{{/headers}}{{/responses}}
-        ) throws IOException;
-    {{/operation}}
+{{#operation}}
+    /**
+     * {{summary}}
+     * {{notes}}
+    {{#allParams}}
+     * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/isContainer}}{{/required}}
+    {{/allParams}}
+    {{#returnType}}
+     * @return {{returnType}}
+    {{/returnType}}
+    {{#isDeprecated}}
+     * @deprecated
+    {{/isDeprecated}}
+    {{#externalDocs}}
+     * {{description}}
+     * @see <a href="{{url}}">{{summary}} Documentation</a>
+    {{/externalDocs}}
+     */
+    {{#isDeprecated}}
+        @Deprecated
+    {{/isDeprecated}}
+    @{{httpMethod}}("{{path}}"){{#isResponseFile}}
+    @ContentBody{{/isResponseFile}}{{^isResponseFile}}{{#returnType}}
+    @JsonBody{{/returnType}}{{/isResponseFile}}
+    public {{#isResponseFile}}byte[] {{/isResponseFile}}{{^isResponseFile}}{{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}{{/isResponseFile}}{{operationId}}({{#allParams}}{{#isPathParam}}
+            @PathParam("{{baseName}}") {{{dataType}}} {{paramName}}{{/isPathParam}}{{#isQueryParam}}
+            @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isQueryParam}}{{#isBodyParam}}
+            @JsonBody {{{dataType}}} {{paramName}}{{/isBodyParam}}{{#isFormParam}}
+            @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isFormParam}}{{#isHeaderParam}}
+            @HttpHeader("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}}, {{/-last}}{{/allParams}}{{#responses}}{{#headers}},
+            @HttpHeader("{{baseName}}") Consumer<{{{dataType}}}> set{{nameInCamelCase}}{{/headers}}{{/responses}}
+    ) throws IOException;
+{{/operation}}
 }
 {{/operations}}
