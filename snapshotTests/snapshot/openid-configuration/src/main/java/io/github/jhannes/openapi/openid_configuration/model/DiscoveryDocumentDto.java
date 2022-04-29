@@ -345,7 +345,7 @@ public class DiscoveryDocumentDto {
     }
 
     public <T> DiscoveryDocumentDto responseTypesSupported(Collection<T> items, Function<T, ResponseTypesSupportedEnum> mapper) {
-        return response_types_supported(items.stream().map(mapper).collect(Collectors.toList()));
+        return responseTypesSupported(items.stream().map(mapper).collect(Collectors.toList()));
     }
 
     public <T> List<T> getResponseTypesSupported(Function<ResponseTypesSupportedEnum, T> mapper) {
@@ -378,7 +378,7 @@ public class DiscoveryDocumentDto {
     }
 
     public <T> DiscoveryDocumentDto responseModesSupported(Collection<T> items, Function<T, ResponseModesSupportedEnum> mapper) {
-        return response_modes_supported(items.stream().map(mapper).collect(Collectors.toList()));
+        return responseModesSupported(items.stream().map(mapper).collect(Collectors.toList()));
     }
 
     public <T> List<T> getResponseModesSupported(Function<ResponseModesSupportedEnum, T> mapper) {
@@ -411,7 +411,7 @@ public class DiscoveryDocumentDto {
     }
 
     public <T> DiscoveryDocumentDto subjectTypesSupported(Collection<T> items, Function<T, SubjectTypesSupportedEnum> mapper) {
-        return subject_types_supported(items.stream().map(mapper).collect(Collectors.toList()));
+        return subjectTypesSupported(items.stream().map(mapper).collect(Collectors.toList()));
     }
 
     public <T> List<T> getSubjectTypesSupported(Function<SubjectTypesSupportedEnum, T> mapper) {
@@ -444,7 +444,7 @@ public class DiscoveryDocumentDto {
     }
 
     public <T> DiscoveryDocumentDto codeChallengeMethodsSupported(Collection<T> items, Function<T, CodeChallengeMethodsSupportedEnum> mapper) {
-        return code_challenge_methods_supported(items.stream().map(mapper).collect(Collectors.toList()));
+        return codeChallengeMethodsSupported(items.stream().map(mapper).collect(Collectors.toList()));
     }
 
     public <T> List<T> getCodeChallengeMethodsSupported(Function<CodeChallengeMethodsSupportedEnum, T> mapper) {
@@ -477,7 +477,7 @@ public class DiscoveryDocumentDto {
     }
 
     public <T> DiscoveryDocumentDto idTokenSigningAlgValuesSupported(Collection<T> items, Function<T, IdTokenSigningAlgValuesSupportedEnum> mapper) {
-        return id_token_signing_alg_values_supported(items.stream().map(mapper).collect(Collectors.toList()));
+        return idTokenSigningAlgValuesSupported(items.stream().map(mapper).collect(Collectors.toList()));
     }
 
     public <T> List<T> getIdTokenSigningAlgValuesSupported(Function<IdTokenSigningAlgValuesSupportedEnum, T> mapper) {

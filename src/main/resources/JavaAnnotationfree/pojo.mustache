@@ -111,7 +111,7 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
     {{#isArray}}
 
     public <T> {{classname}} {{name}}(Collection<T> items, Function<T, {{{items.datatypeWithEnum}}}> mapper) {
-        return {{baseName}}(items.stream().map(mapper).collect(Collectors.toList()));
+        return {{name}}(items.stream().map(mapper).collect(Collectors.toList()));
     }
 
     public <T> List<T> {{getter}}(Function<{{{items.datatypeWithEnum}}}, T> mapper) {
