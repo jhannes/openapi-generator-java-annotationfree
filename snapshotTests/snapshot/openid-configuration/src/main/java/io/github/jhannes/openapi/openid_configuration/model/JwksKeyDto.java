@@ -76,7 +76,7 @@ public class JwksKeyDto {
     }
 
     private boolean isMissing(List<?> list) {
-        return list == null || list.isEmpty();
+        return list == null;
     }
 
     private boolean isMissing(Object s) {

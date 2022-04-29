@@ -99,7 +99,7 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
     }
 
     private boolean isMissing(List<?> list) {
-        return list == null || list.isEmpty();
+        return list == null;
     }
 
     private boolean isMissing(Object s) {
