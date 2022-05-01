@@ -151,7 +151,7 @@ public class SampleModelData {
     }
 
     public Long randomLong(String propertyName) {
-        return random.nextLong(10000L);
+        return random.nextLong() % 10000L;
     }
 
     public Integer randomInteger(String propertyName) {
