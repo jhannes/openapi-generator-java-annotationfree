@@ -41,37 +41,12 @@ public class SampleModelData {
     }
 
     public CaseWorkerDto sampleCaseWorkerDto(String propertyName) {
-
         return new CaseWorkerDto()
-
-
-
-
-            .id(randomUUID("id", "uuid"))
-
-
-
-
-
-
+            .id(randomUUID("id"))
             .fullName(randomString("fullName"))
-
-
-
-
-
-
             .email(randomString("email", "email"))
-
-
-
-
             .role(sampleCaseWorkerDtoRoleEnum("role"))
-
-
-
             ;
-
     }
 
     public List<CaseWorkerDto> sampleListOfCaseWorkerDto(String propertyName) {
@@ -80,78 +55,23 @@ public class SampleModelData {
 
     public CaseWorkerDto.RoleEnum sampleCaseWorkerDtoRoleEnum(String propertyName) {
         return pickOne(new CaseWorkerDto.RoleEnum[] {
-
             CaseWorkerDto.RoleEnum.ADMINISTRATOR,
-
             CaseWorkerDto.RoleEnum.INTERVIEWER,
-
             CaseWorkerDto.RoleEnum.FOLLOWUP,
-
         });
     }
 
-
-
     public ExposureDto sampleExposureDto(String propertyName) {
-
         return new ExposureDto()
-
-
-
-
-            .id(randomUUID("id", "uuid"))
-
-
-
-
-
-
+            .id(randomUUID("id"))
             .exposedPersonName(randomString("exposedPersonName"))
-
-
-
-
-
-
             .exposedPersonPhoneNumber(randomString("exposedPersonPhoneNumber", "phone"))
-
-
-
-
             .exposedDate(sampleLocalDate("exposedDate"))
-
-
-
-
-
-
-
-
             .exposureLocation(randomString("exposureLocation"))
-
-
-
-
-
-
             .notes(randomString("notes"))
-
-
-
-
-
-
-            .caseWorker(randomUUID("caseWorker", "uuid"))
-
-
-
-
+            .caseWorker(randomUUID("caseWorker"))
             .status(sampleExposureDtoStatusEnum("status"))
-
-
-
             ;
-
     }
 
     public List<ExposureDto> sampleListOfExposureDto(String propertyName) {
@@ -160,95 +80,38 @@ public class SampleModelData {
 
     public ExposureDto.StatusEnum sampleExposureDtoStatusEnum(String propertyName) {
         return pickOne(new ExposureDto.StatusEnum[] {
-
             ExposureDto.StatusEnum.UNIDENTIFIED,
-
             ExposureDto.StatusEnum.IDENTIFIED,
-
             ExposureDto.StatusEnum.CONTACTED,
-
             ExposureDto.StatusEnum.TESTED,
-
             ExposureDto.StatusEnum.INFECTED,
-
         });
     }
 
-
-
     public InfectionDto sampleInfectionDto(String propertyName) {
-
         return new InfectionDto()
-
-
-
-
-            .id(randomUUID("id", "uuid"))
-
-
-
-
+            .id(randomUUID("id"))
             .information(sampleInfectionInformationDto("information"))
-
-
-
-
-
             .registeredExposures(sampleListOfExposureDto("registeredExposures"))
-
-
-
             ;
-
     }
 
     public List<InfectionDto> sampleListOfInfectionDto(String propertyName) {
         return sampleList(() -> sampleInfectionDto(propertyName), propertyName);
     }
 
-
-
     public InfectionInformationDto sampleInfectionInformationDto(String propertyName) {
-
         return new InfectionInformationDto()
-
-
-
-
             .patientName(randomString("patientName"))
-
-
-
-
-
-
             .patientPhoneNumber(randomString("patientPhoneNumber", "phone"))
-
-
-
-
             .likelyInfectionDate(sampleLocalDate("likelyInfectionDate"))
-
-
-
-
-
-
-
-
             .notes(randomString("notes"))
-
-
             ;
-
     }
 
     public List<InfectionInformationDto> sampleListOfInfectionInformationDto(String propertyName) {
         return sampleList(() -> sampleInfectionInformationDto(propertyName), propertyName);
     }
-
-
-
 
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName) {
         return sampleList(supplier, propertyName, 1, 1);
@@ -259,20 +122,20 @@ public class SampleModelData {
     }
 
     public String randomString(String propertyName, String dataFormat) {
-        return "str" + randomUUID(propertyName, dataFormat);
+        return "str" + randomUUID(propertyName);
     }
 
     public String randomString(String propertyName) {
         return randomString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName, String dataFormat) {
+    public UUID randomUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public URI randomURI(String propertyName, String dataFormat) {
+    public URI randomURI(String propertyName) {
         return asURI("https://" +
             pickOne(List.of("a", "b", "c")) +
             ".example." +

@@ -41,78 +41,25 @@ public class SampleModelData {
     }
 
     public CategoryDto sampleCategoryDto(String propertyName) {
-
         return new CategoryDto()
-
-
-
             .id(randomLong("id"))
-
-
-
-
-
-
-
             .name(randomString("name"))
-
-
             ;
-
     }
 
     public List<CategoryDto> sampleListOfCategoryDto(String propertyName) {
         return sampleList(() -> sampleCategoryDto(propertyName), propertyName);
     }
 
-
-
     public OrderDto sampleOrderDto(String propertyName) {
-
         return new OrderDto()
-
-
-
             .id(randomLong("id"))
-
-
-
-
-
-
             .petId(randomLong("petId"))
-
-
-
-
-
-
             .quantity(randomInteger("quantity"))
-
-
-
-
-
             .shipDate(sampleOffsetDateTime("shipDate"))
-
-
-
-
-
-
             .status(sampleOrderDtoStatusEnum("status"))
-
-
-
-
-
-
             .complete(randomBoolean("complete"))
-
-
-
             ;
-
     }
 
     public List<OrderDto> sampleListOfOrderDto(String propertyName) {
@@ -121,60 +68,21 @@ public class SampleModelData {
 
     public OrderDto.StatusEnum sampleOrderDtoStatusEnum(String propertyName) {
         return pickOne(new OrderDto.StatusEnum[] {
-
             OrderDto.StatusEnum.PLACED,
-
             OrderDto.StatusEnum.APPROVED,
-
             OrderDto.StatusEnum.DELIVERED,
-
         });
     }
 
-
-
     public PetDto samplePetDto(String propertyName) {
-
         return new PetDto()
-
-
-
             .id(randomLong("id"))
-
-
-
-
-
             .category(sampleCategoryDto("category"))
-
-
-
-
-
-
-
-
             .name(randomString("name"))
-
-
-
-
             .photoUrls(sampleList(() -> randomString("photoUrls"), "photoUrls"))
-
-
-
             .tags(sampleListOfTagDto("tags"))
-
-
-
-
-
             .status(samplePetDtoStatusEnum("status"))
-
-
-
             ;
-
     }
 
     public List<PetDto> sampleListOfPetDto(String propertyName) {
@@ -183,114 +91,39 @@ public class SampleModelData {
 
     public PetDto.StatusEnum samplePetDtoStatusEnum(String propertyName) {
         return pickOne(new PetDto.StatusEnum[] {
-
             PetDto.StatusEnum.AVAILABLE,
-
             PetDto.StatusEnum.PENDING,
-
             PetDto.StatusEnum.SOLD,
-
         });
     }
 
-
-
     public TagDto sampleTagDto(String propertyName) {
-
         return new TagDto()
-
-
-
             .id(randomLong("id"))
-
-
-
-
-
-
-
             .name(randomString("name"))
-
-
             ;
-
     }
 
     public List<TagDto> sampleListOfTagDto(String propertyName) {
         return sampleList(() -> sampleTagDto(propertyName), propertyName);
     }
 
-
-
     public UserDto sampleUserDto(String propertyName) {
-
         return new UserDto()
-
-
-
             .id(randomLong("id"))
-
-
-
-
-
-
-
             .username(randomString("username"))
-
-
-
-
-
-
             .firstName(randomString("firstName"))
-
-
-
-
-
-
             .lastName(randomString("lastName"))
-
-
-
-
-
-
             .email(randomString("email"))
-
-
-
-
-
-
             .password(randomString("password"))
-
-
-
-
-
-
             .phone(randomString("phone"))
-
-
-
-
-
             .userStatus(randomInteger("userStatus"))
-
-
-
             ;
-
     }
 
     public List<UserDto> sampleListOfUserDto(String propertyName) {
         return sampleList(() -> sampleUserDto(propertyName), propertyName);
     }
-
-
-
 
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName) {
         return sampleList(supplier, propertyName, 1, 1);
@@ -301,20 +134,20 @@ public class SampleModelData {
     }
 
     public String randomString(String propertyName, String dataFormat) {
-        return "str" + randomUUID(propertyName, dataFormat);
+        return "str" + randomUUID(propertyName);
     }
 
     public String randomString(String propertyName) {
         return randomString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName, String dataFormat) {
+    public UUID randomUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public URI randomURI(String propertyName, String dataFormat) {
+    public URI randomURI(String propertyName) {
         return asURI("https://" +
             pickOne(List.of("a", "b", "c")) +
             ".example." +

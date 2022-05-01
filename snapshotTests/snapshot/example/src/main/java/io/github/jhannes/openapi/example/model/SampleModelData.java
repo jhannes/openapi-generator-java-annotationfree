@@ -41,39 +41,16 @@ public class SampleModelData {
     }
 
     public PetDto samplePetDto(String propertyName) {
-
         return new PetDto()
-
-
-
-
             .petType(randomString("petType"))
-
-
-
-
-
-
             .name(randomString("name"))
-
-
-
-
             .birthDate(sampleLocalDate("birthDate"))
-
-
-
-
             ;
-
     }
 
     public List<PetDto> sampleListOfPetDto(String propertyName) {
         return sampleList(() -> samplePetDto(propertyName), propertyName);
     }
-
-
-
 
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName) {
         return sampleList(supplier, propertyName, 1, 1);
@@ -84,20 +61,20 @@ public class SampleModelData {
     }
 
     public String randomString(String propertyName, String dataFormat) {
-        return "str" + randomUUID(propertyName, dataFormat);
+        return "str" + randomUUID(propertyName);
     }
 
     public String randomString(String propertyName) {
         return randomString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName, String dataFormat) {
+    public UUID randomUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public URI randomURI(String propertyName, String dataFormat) {
+    public URI randomURI(String propertyName) {
         return asURI("https://" +
             pickOne(List.of("a", "b", "c")) +
             ".example." +

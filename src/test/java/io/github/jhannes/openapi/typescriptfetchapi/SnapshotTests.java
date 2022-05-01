@@ -1,6 +1,9 @@
 package io.github.jhannes.openapi.typescriptfetchapi;
 
+import difflib.DeleteDelta;
+import difflib.Delta;
 import difflib.DiffUtils;
+import difflib.InsertDelta;
 import difflib.Patch;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
@@ -13,53 +16,54 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class SnapshotTests {
 
+    public static final Path SNAPSHOT_ROOT = Paths.get("snapshotTests");
+    public static final Path LOCAL_SNAPSHOT_ROOT = Paths.get("localSnapshotTests");
+
     @TestFactory
     Stream<DynamicNode> javaAnnotationFreeSnapshots() throws IOException {
-        return Stream.of(new DynamicNode[]{
-                snapshots(Paths.get("snapshotTests"), "java-annotationfree", Paths.get("snapshotTests").resolve("output"), Paths.get("snapshotTests").resolve("snapshot")),
-                snapshots(Paths.get("localSnapshotTests"), "java-annotationfree", Paths.get("localSnapshotTests").resolve("output"), Paths.get("localSnapshotTests").resolve("snapshot")),
-        });
+        List<DynamicNode> testSuites = new ArrayList<>();
+        testSuites.add(snapshots(SNAPSHOT_ROOT, SNAPSHOT_ROOT.resolve("output"), SNAPSHOT_ROOT.resolve("snapshot")));
+        if (Files.isDirectory(SnapshotTests.LOCAL_SNAPSHOT_ROOT)) {
+            testSuites.add(snapshots(LOCAL_SNAPSHOT_ROOT, LOCAL_SNAPSHOT_ROOT.resolve("output"), LOCAL_SNAPSHOT_ROOT.resolve("snapshot")));
+        }
+        return testSuites.stream();
     }
 
-    private DynamicNode snapshots(Path testDir, String generatorName, Path outputDir, Path snapshotDir) throws IOException {
+    private DynamicNode snapshots(Path testDir, Path outputDir, Path snapshotDir) throws IOException {
         Path inputDir = testDir.resolve("input");
         if (!Files.isDirectory(snapshotDir)) {
             return dynamicTest("No snapshots for " + testDir, () -> {});
         }
-        cleanDirectory(outputDir);
-
-
         return dynamicContainer(
                 "Snapshots of " + testDir,
                 Files.list(inputDir)
                         .filter(p -> p.toFile().isFile())
-                        .map(spec -> {
-                            String modelName = getModelName(spec);
-                            return createTestsForSpec(modelName, spec, generatorName, outputDir.resolve(modelName), snapshotDir.resolve(modelName));
-                        })
+                        .map(spec -> createTestsForSpec(spec, outputDir, snapshotDir))
         );
     }
 
-    static DynamicNode createTestsForSpec(String modelName, Path spec, String generatorName, Path outputDir, Path snapshotDir) {
+    static DynamicNode createTestsForSpec(Path spec, Path outputRoot, Path snapshotRoot) {
+        String modelName = getModelName(spec);
+        CodegenConfigurator configurator = createConfigurator(modelName, spec, outputRoot.resolve(modelName));
+        return createTests(spec, outputRoot.resolve(modelName), snapshotRoot.resolve(modelName), configurator);
+    }
+
+    private static CodegenConfigurator createConfigurator(String modelName, Path spec, Path outputDir) {
         try {
             if (spec.getFileName().toString().endsWith(".link")) {
                 spec = Paths.get(Files.readAllLines(spec).get(0));
@@ -67,8 +71,8 @@ public class SnapshotTests {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return createTests(spec, outputDir, snapshotDir, new CodegenConfigurator()
-                .setGeneratorName(generatorName)
+        return new CodegenConfigurator()
+                .setGeneratorName("java-annotationfree")
                 .setInputSpec(spec.toString().replaceAll("\\\\", "/"))
                 .setModelNameSuffix("Dto")
                 .setPackageName("io.github.jhannes.openapi." + modelName)
@@ -79,12 +83,12 @@ public class SnapshotTests {
                 .addAdditionalProperty("generateModelTests", "true")
                 .addAdditionalProperty("generateApis", "false")
                 .addAdditionalProperty("dateLibrary", "java8")
-                //.addAdditionalProperty(CodegenConstants.ARTIFACT_ID, modelName)
-                .setOutputDir(outputDir.toString()));
+                .setOutputDir(outputDir.toString());
     }
 
     static DynamicNode createTests(Path spec, Path outputDir, Path snapshotDir, CodegenConfigurator configurator) {
         try {
+            cleanDirectory(outputDir);
             generate(configurator);
         } catch (Exception e) {
             return dynamicTest("Generator for " + spec, () -> {
@@ -101,7 +105,7 @@ public class SnapshotTests {
         return dynamicContainer("Snapshots for " + spec, Stream.of(
                 dynamicTest("Files", () -> compareFiles(outputDir, snapshotDir)),
                 dynamicContainer("File contents in " + outputDir, files.stream().map(file ->
-                        dynamicTest("file " + outputDir.relativize(file), () -> diff(file, snapshotDir.resolve(outputDir.relativize(file))))
+                        dynamicTest("file " + outputDir.relativize(file), () -> diff(snapshotDir.resolve(outputDir.relativize(file)), file))
                 ))));
     }
 
@@ -118,7 +122,24 @@ public class SnapshotTests {
     private static void diff(Path file, Path snapshot) throws IOException {
         assertTrue(Files.exists(snapshot), "Missing " + snapshot);
         Patch<String> diff = DiffUtils.diff(Files.readAllLines(file), Files.readAllLines(snapshot));
-        assertEquals("", diff.getDeltas().stream().map(Object::toString).collect(Collectors.joining("\n")));
+        if (!diff.getDeltas().isEmpty()) {
+            List<Delta<String>> significantDiff = diff.getDeltas().stream().filter(delta -> !whitespaceOnly(delta)).collect(Collectors.toList());
+            if (significantDiff.isEmpty()) {
+                fail("whitespace difference: " + diff.getDeltas());
+            } else {
+                fail("significant difference: " + significantDiff.stream().map(Object::toString).collect(Collectors.joining("\n")));
+            }
+        }
+    }
+
+    private static boolean whitespaceOnly(Delta<String> delta) {
+        if (delta instanceof InsertDelta) {
+            return delta.getRevised().getLines().stream().allMatch(s -> s == null || s.trim().length() == 0);
+        } else if (delta instanceof DeleteDelta) {
+            return delta.getOriginal().getLines().stream().allMatch(s -> s == null || s.trim().length() == 0);
+        } else {
+            return false;
+        }
     }
 
     static void generate(CodegenConfigurator configurator) {

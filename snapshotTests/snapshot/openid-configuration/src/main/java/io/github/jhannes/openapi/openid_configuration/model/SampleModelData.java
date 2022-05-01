@@ -41,72 +41,19 @@ public class SampleModelData {
     }
 
     public DiscoveryDocumentDto sampleDiscoveryDocumentDto(String propertyName) {
-
         return new DiscoveryDocumentDto()
-
-
-
-
             .issuer(randomString("issuer"))
-
-
-
-
-
-
             .authorizationEndpoint(randomString("authorizationEndpoint", "url"))
-
-
-
-
-
-
             .tokenEndpoint(randomString("tokenEndpoint", "url"))
-
-
-
-
-
-
             .endSessionEndpoint(randomString("endSessionEndpoint", "url"))
-
-
-
-
-
-
             .jwksUri(randomString("jwksUri", "url"))
-
-
-
-
             .responseTypesSupported(sampleList(() -> sampleDiscoveryDocumentDtoResponseTypesSupportedEnum("responseTypesSupported"), "responseTypesSupported"))
-
-
-
             .responseModesSupported(sampleList(() -> sampleDiscoveryDocumentDtoResponseModesSupportedEnum("responseModesSupported"), "responseModesSupported"))
-
-
-
             .subjectTypesSupported(sampleList(() -> sampleDiscoveryDocumentDtoSubjectTypesSupportedEnum("subjectTypesSupported"), "subjectTypesSupported"))
-
-
-
             .codeChallengeMethodsSupported(sampleList(() -> sampleDiscoveryDocumentDtoCodeChallengeMethodsSupportedEnum("codeChallengeMethodsSupported"), "codeChallengeMethodsSupported"))
-
-
-
             .idTokenSigningAlgValuesSupported(sampleList(() -> sampleDiscoveryDocumentDtoIdTokenSigningAlgValuesSupportedEnum("idTokenSigningAlgValuesSupported"), "idTokenSigningAlgValuesSupported"))
-
-
-
-
-
             .xSsoFrame(randomString("xSsoFrame", "url"))
-
-
             ;
-
     }
 
     public List<DiscoveryDocumentDto> sampleListOfDiscoveryDocumentDto(String propertyName) {
@@ -163,225 +110,72 @@ public class SampleModelData {
         });
     }
 
-
-
     public JwksDocumentDto sampleJwksDocumentDto(String propertyName) {
-
         return new JwksDocumentDto()
-
             .keys(sampleListOfJwksKeyDto("keys"))
-
-
-
             ;
-
     }
 
     public List<JwksDocumentDto> sampleListOfJwksDocumentDto(String propertyName) {
         return sampleList(() -> sampleJwksDocumentDto(propertyName), propertyName);
     }
 
-
-
     public JwksKeyDto sampleJwksKeyDto(String propertyName) {
-
         return new JwksKeyDto()
-
-
-
-
             .kty(randomString("kty"))
-
-
-
-
-
-
             .use(randomString("use"))
-
-
-
-
-
-
             .kid(randomString("kid"))
-
-
-
-
-
-
             .x5c(randomString("x5c"))
-
-
             ;
-
     }
 
     public List<JwksKeyDto> sampleListOfJwksKeyDto(String propertyName) {
         return sampleList(() -> sampleJwksKeyDto(propertyName), propertyName);
     }
 
-
-
     public JwtHeaderDto sampleJwtHeaderDto(String propertyName) {
-
         return new JwtHeaderDto()
-
-
-
-
             .typ(randomString("typ"))
-
-
-
-
-
-
             .kid(randomString("kid"))
-
-
-
-
-
-
             .alg(randomString("alg"))
-
-
             ;
-
     }
 
     public List<JwtHeaderDto> sampleListOfJwtHeaderDto(String propertyName) {
         return sampleList(() -> sampleJwtHeaderDto(propertyName), propertyName);
     }
 
-
-
     public JwtPayloadDto sampleJwtPayloadDto(String propertyName) {
-
         return new JwtPayloadDto()
-
-
-
-
             .iss(randomString("iss", "url"))
-
-
-
-
-
-
             .sub(randomString("sub"))
-
-
-
-
-
-
             .aud(randomString("aud"))
-
-
-
-
-
-
             .name(randomString("name"))
-
-
-
-
-
-
             .email(randomString("email"))
-
-
-
-
-
-
             .orgId(randomString("orgId"))
-
-
-
-
-
-
             .org(randomString("org"))
-
-
-
-
-
-
             .pid(randomString("pid"))
-
-
             ;
-
     }
 
     public List<JwtPayloadDto> sampleListOfJwtPayloadDto(String propertyName) {
         return sampleList(() -> sampleJwtPayloadDto(propertyName), propertyName);
     }
 
-
-
     public TokenResponseDto sampleTokenResponseDto(String propertyName) {
-
         return new TokenResponseDto()
-
-
-
-
             .accessToken(randomString("accessToken"))
-
-
-
-
-
-
             .tokenType(randomString("tokenType"))
-
-
-
-
-
             .expiresIn(randomInteger("expiresIn"))
-
-
-
-
-
-
-
             .scope(randomString("scope"))
-
-
-
-
-
-
             .idToken(randomString("idToken"))
-
-
-
-
-
-
             .refreshToken(randomString("refreshToken"))
-
-
             ;
-
     }
 
     public List<TokenResponseDto> sampleListOfTokenResponseDto(String propertyName) {
         return sampleList(() -> sampleTokenResponseDto(propertyName), propertyName);
     }
-
-
-
 
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName) {
         return sampleList(supplier, propertyName, 1, 1);
@@ -392,20 +186,20 @@ public class SampleModelData {
     }
 
     public String randomString(String propertyName, String dataFormat) {
-        return "str" + randomUUID(propertyName, dataFormat);
+        return "str" + randomUUID(propertyName);
     }
 
     public String randomString(String propertyName) {
         return randomString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName, String dataFormat) {
+    public UUID randomUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public URI randomURI(String propertyName, String dataFormat) {
+    public URI randomURI(String propertyName) {
         return asURI("https://" +
             pickOne(List.of("a", "b", "c")) +
             ".example." +

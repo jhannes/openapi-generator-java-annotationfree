@@ -33,67 +33,31 @@ public class SampleModelData {
     }
 
 {{#models}}
-{{#model}}
-    public {{classname}} sample{{classname}}(String propertyName) {
-{{#oneOf}}
-{{#-first}}
-        //noinspection unchecked
-        List<Supplier<{{classname}}>> factories = List.of(
-{{/-first}}
-{{#discriminator}}{{#-first}}{{#mappedModels}}
-            () -> sample{{modelName}}(propertyName){{^-last}},{{/-last}}
-{{/mappedModels}}{{/-first}}{{/discriminator}}
-{{#-last}}
-        );
-        return pickOne(factories).get();
-{{/-last}}
-{{/oneOf}}
-{{#isEnum}}
+{{#model}}{{#isEnum}}    public {{classname}} sample{{classname}}(String propertyName) {
         return pickOne(new {{classname}}[] {
-{{#allowableValues}}{{#enumVars}}
-            {{classname}}.{{name}},
-{{/enumVars}}{{/allowableValues}}
-        });
-{{/isEnum}}
-{{^oneOf}}{{^isEnum}}
-        return new {{classname}}()
-{{#vars}}
-{{#isArray}}
-{{^items.isArray}}{{^items.isPrimitiveType}}{{^items.isEnum}}{{^items.isString}}
-            .{{name}}(sampleListOf{{{items.datatypeWithEnum}}}("{{name}}"))
-{{/items.isString}}{{/items.isEnum}}{{/items.isPrimitiveType}}{{/items.isArray}}
-{{^items.isArray}}{{#items.isPrimitiveType}}{{^items.isEnum}}
-            .{{name}}(sampleList(() -> random{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}), "{{name}}"))
-{{/items.isEnum}}{{/items.isPrimitiveType}}{{/items.isArray}}
-{{#items.isEnum}}
-            .{{name}}(sampleList(() -> sample{{classname}}{{items.datatypeWithEnum}}("{{name}}"), "{{name}}"))
-{{/items.isEnum}}
-{{#items.isArray}}
-            //.{{name}} is too complex to map ({{{items.datatypeWithEnum}}})
-{{/items.isArray}}
-{{/isArray}}
-{{#isMap}}
-            //.{{name}} is too complex to map ({{{datatypeWithEnum}}})
-{{/isMap}}
-{{^isArray}}{{^isMap}}
-{{^isPrimitiveType}}{{^isString}}
-            .{{name}}(sample{{{datatypeWithEnum}}}("{{name}}"))
-{{/isString}}{{/isPrimitiveType}}
-{{#isEnum}}
-            .{{name}}(sample{{classname}}{{datatypeWithEnum}}("{{name}}"))
-{{/isEnum}}
-{{#isPrimitiveType}}{{^isEnum}}{{^isString}}
-            .{{name}}(random{{datatypeWithEnum}}("{{name}}"))
-{{/isString}}{{/isEnum}}{{/isPrimitiveType}}
-{{#isString}}{{^isEnum}}
-            .{{name}}(random{{datatypeWithEnum}}("{{name}}"{{#isString}}{{#dataFormat}}, "{{dataFormat}}"{{/dataFormat}}{{/isString}}))
-{{/isEnum}}{{/isString}}
-{{/isMap}}{{/isArray}}
-{{/vars}}
-            ;
-{{/isEnum}}{{/oneOf}}
+{{#allowableValues}}{{#enumVars}}            {{classname}}.{{name}},
+{{/enumVars}}{{/allowableValues}}        });
     }
 
+{{/isEnum}}{{^isEnum}}    public {{classname}} sample{{classname}}(String propertyName) {
+{{#oneOf}}{{#-first}}        //noinspection unchecked
+        List<Supplier<{{classname}}>> factories = List.of({{/-first}}{{#discriminator}}{{#-first}}{{#mappedModels}}
+            () -> sample{{modelName}}(propertyName){{^-last}},{{/-last}}{{/mappedModels}}{{/-first}}{{/discriminator}}{{#-last}}
+        );
+        return pickOne(factories).get();{{/-last}}{{/oneOf}}{{^oneOf}}        return new {{classname}}(){{#vars}}{{^isArray}}{{^isMap}}{{^isPrimitiveType}}{{^isString}}
+            .{{name}}(sample{{{datatypeWithEnum}}}("{{name}}")){{/isString}}{{/isPrimitiveType}}{{#isPrimitiveType}}{{^isString}}
+            .{{name}}(random{{datatypeWithEnum}}("{{name}}")){{/isString}}{{/isPrimitiveType}}{{#isString}}{{#isEnum}}
+            .{{name}}(sample{{classname}}{{datatypeWithEnum}}("{{name}}")){{/isEnum}}{{^isEnum}}
+            .{{name}}(random{{datatypeWithEnum}}("{{name}}"{{#isPrimitiveType}}{{#dataFormat}}, "{{dataFormat}}"{{/dataFormat}}{{/isPrimitiveType}})){{/isEnum}}{{/isString}}{{/isMap}}{{/isArray}}{{#isArray}}{{^items.isArray}}{{^items.isPrimitiveType}}{{#items.isString}}
+            .{{name}}(sampleList(() -> random{{{items.datatypeWithEnum}}}("{{name}}"), "{{name}}")){{/items.isString}}{{^items.isString}}
+            .{{name}}(sampleListOf{{{items.datatypeWithEnum}}}("{{name}}")){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}
+            .{{name}}(sampleList(() -> {{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}random{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}, "{{name}}")){{/items.isPrimitiveType}}{{/items.isArray}}{{#items.isArray}}
+            //.{{name}} is too complex to map ({{{items.datatypeWithEnum}}}){{/items.isArray}}{{/isArray}}{{#isMap}}
+            //.{{name}} is too complex to map ({{{datatypeWithEnum}}}){{/isMap}}{{/vars}}
+            ;{{/oneOf}}
+    }
+
+{{/isEnum}}
     public List<{{classname}}> sampleListOf{{classname}}(String propertyName) {
         return sampleList(() -> sample{{classname}}(propertyName), propertyName);
     }
@@ -110,18 +74,13 @@ public class SampleModelData {
 {{^isArray}}
     public {{classname}}.{{datatypeWithEnum}} sample{{classname}}{{datatypeWithEnum}}(String propertyName) {
         return pickOne(new {{classname}}.{{datatypeWithEnum}}[] {
-{{#allowableValues}}{{#enumVars}}
-            {{classname}}.{{datatypeWithEnum}}.{{name}},
-{{/enumVars}}{{/allowableValues}}
-        });
+{{#allowableValues}}{{#enumVars}}            {{classname}}.{{datatypeWithEnum}}.{{name}},
+{{/enumVars}}{{/allowableValues}}        });
     }
 {{/isArray}}
 {{/isEnum}}{{/vars}}
-
-
 {{/model}}
 {{/models}}
-
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName) {
         return sampleList(supplier, propertyName, 1, 1);
     }
@@ -131,20 +90,20 @@ public class SampleModelData {
     }
 
     public String randomString(String propertyName, String dataFormat) {
-        return "str" + randomUUID(propertyName, dataFormat);
+        return "str" + randomUUID(propertyName);
     }
 
     public String randomString(String propertyName) {
         return randomString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName, String dataFormat) {
+    public UUID randomUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public URI randomURI(String propertyName, String dataFormat) {
+    public URI randomURI(String propertyName) {
         return asURI("https://" +
             pickOne(List.of("a", "b", "c")) +
             ".example." +

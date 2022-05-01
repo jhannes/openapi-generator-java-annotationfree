@@ -31,16 +31,16 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 public class CompilerTest {
 
     @TestFactory
-    Stream<DynamicNode> javaAnnotationFreeSnapshots() throws IOException {
+    Stream<DynamicNode> exampleSpecifications() throws IOException {
         List<DynamicNode> testSuites = new ArrayList<>();
-        testSuites.add(snapshots(Paths.get("snapshotTests"), "java-annotationfree", Paths.get("snapshotTests").resolve("compile")));
-        if (Files.isDirectory(Paths.get("localSnapshotTests"))) {
-            testSuites.add(snapshots(Paths.get("localSnapshotTests"), "java-annotationfree", Paths.get("localSnapshotTests").resolve("compile")));
+        testSuites.add(compileSpec(SnapshotTests.SNAPSHOT_ROOT, SnapshotTests.SNAPSHOT_ROOT.resolve("compile")));
+        if (Files.isDirectory(SnapshotTests.LOCAL_SNAPSHOT_ROOT)) {
+            testSuites.add(compileSpec(SnapshotTests.LOCAL_SNAPSHOT_ROOT, SnapshotTests.LOCAL_SNAPSHOT_ROOT.resolve("compile")));
         }
         return testSuites.stream();
     }
 
-    private DynamicNode snapshots(Path testDir, String generatorName, Path outputDir) throws IOException {
+    private DynamicNode compileSpec(Path testDir, Path outputDir) throws IOException {
         Path inputDir = testDir.resolve("input");
         cleanDirectory(outputDir);
         return dynamicContainer(
@@ -48,18 +48,18 @@ public class CompilerTest {
                 Files.list(inputDir)
                         .filter(p -> p.toFile().isFile())
                         .map(spec -> dynamicContainer("Compile " + spec, Arrays.asList(
-                                dynamicTest("Generate " + spec, () -> generate(spec, generatorName, outputDir, getModelName(spec))),
+                                dynamicTest("Generate " + spec, () -> generate(spec, outputDir, getModelName(spec))),
                                 dynamicTest("javac " + spec, () -> compile(outputDir.resolve(getModelName(spec))))
                         )))
         );
     }
 
-    private void generate(Path file, String generatorName, Path output, String modelName) throws IOException {
+    private void generate(Path file, Path output, String modelName) throws IOException {
         if (file.getFileName().toString().endsWith(".link")) {
             file = Paths.get(Files.readAllLines(file).get(0));
         }
         final CodegenConfigurator configurator = new CodegenConfigurator()
-                .setGeneratorName(generatorName)
+                .setGeneratorName("java-annotationfree")
                 .setInputSpec(file.toString().replaceAll("\\\\", "/"))
                 .setModelNameSuffix("Dto")
                 .setPackageName("io.github.jhannes.openapi." + modelName)

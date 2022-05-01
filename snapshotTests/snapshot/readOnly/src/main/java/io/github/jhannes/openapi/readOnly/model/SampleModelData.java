@@ -41,96 +41,28 @@ public class SampleModelData {
     }
 
     public CommentDto sampleCommentDto(String propertyName) {
-
         return new CommentDto()
-
-
-
-
             .title(randomString("title"))
-
-
-
-
-
-
             .comment(randomString("comment"))
-
-
-
-
             .createdAt(sampleOffsetDateTime("createdAt"))
-
-
-
-
-
-
             .user(sampleUserDto("user"))
-
-
-
-
             ;
-
     }
 
     public List<CommentDto> sampleListOfCommentDto(String propertyName) {
         return sampleList(() -> sampleCommentDto(propertyName), propertyName);
     }
 
-
-
     public PetDto samplePetDto(String propertyName) {
-
         return new PetDto()
-
-
-
-
-            .id(randomUUID("id", "uuid"))
-
-
-
-
+            .id(randomUUID("id"))
             .petType(samplePetDtoPetTypeEnum("petType"))
-
-
-
-
-
-
-
             .name(randomString("name"))
-
-
-
-
             .birthDate(sampleLocalDate("birthDate"))
-
-
-
-
-
-
             .createdAt(sampleOffsetDateTime("createdAt"))
-
-
-
-
-
             .comments(sampleListOfCommentDto("comments"))
-
-
-
-
-
             .status(samplePetDtoStatusEnum("status"))
-
-
-
             ;
-
     }
 
     public List<PetDto> sampleListOfPetDto(String propertyName) {
@@ -139,55 +71,29 @@ public class SampleModelData {
 
     public PetDto.PetTypeEnum samplePetDtoPetTypeEnum(String propertyName) {
         return pickOne(new PetDto.PetTypeEnum[] {
-
             PetDto.PetTypeEnum.CAT,
-
             PetDto.PetTypeEnum.DOG,
-
         });
     }
 
     public PetDto.StatusEnum samplePetDtoStatusEnum(String propertyName) {
         return pickOne(new PetDto.StatusEnum[] {
-
             PetDto.StatusEnum.PENDING,
-
             PetDto.StatusEnum.AVAILABLE,
-
             PetDto.StatusEnum.SOLD,
-
         });
     }
 
-
-
     public UserDto sampleUserDto(String propertyName) {
-
         return new UserDto()
-
-
-
-
-            .id(randomUUID("id", "uuid"))
-
-
-
-
-
-
+            .id(randomUUID("id"))
             .name(randomString("name"))
-
-
             ;
-
     }
 
     public List<UserDto> sampleListOfUserDto(String propertyName) {
         return sampleList(() -> sampleUserDto(propertyName), propertyName);
     }
-
-
-
 
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName) {
         return sampleList(supplier, propertyName, 1, 1);
@@ -198,20 +104,20 @@ public class SampleModelData {
     }
 
     public String randomString(String propertyName, String dataFormat) {
-        return "str" + randomUUID(propertyName, dataFormat);
+        return "str" + randomUUID(propertyName);
     }
 
     public String randomString(String propertyName) {
         return randomString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName, String dataFormat) {
+    public UUID randomUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public URI randomURI(String propertyName, String dataFormat) {
+    public URI randomURI(String propertyName) {
         return asURI("https://" +
             pickOne(List.of("a", "b", "c")) +
             ".example." +

@@ -41,126 +41,62 @@ public class SampleModelData {
     }
 
     public GeometryCollectionDto sampleGeometryCollectionDto(String propertyName) {
-
         return new GeometryCollectionDto()
-
-
-
-
             .type(randomString("type"))
-
-
-
             .geometries(sampleListOfGeometryDto("geometries"))
-
-
-
             ;
-
     }
 
     public List<GeometryCollectionDto> sampleListOfGeometryCollectionDto(String propertyName) {
         return sampleList(() -> sampleGeometryCollectionDto(propertyName), propertyName);
     }
 
-
-
     public GeometryDto sampleGeometryDto(String propertyName) {
         //noinspection unchecked
         List<Supplier<GeometryDto>> factories = List.of(
-
             () -> samplePointDto(propertyName),
-
             () -> samplePolygonDto(propertyName),
-
             () -> sampleLineStringDto(propertyName)
-
-
-
         );
         return pickOne(factories).get();
-
     }
 
     public List<GeometryDto> sampleListOfGeometryDto(String propertyName) {
         return sampleList(() -> sampleGeometryDto(propertyName), propertyName);
     }
 
-
-
     public LineStringDto sampleLineStringDto(String propertyName) {
-
         return new LineStringDto()
-
-
-
-
             .type(randomString("type"))
-
-
-
-
             //.coordinates is too complex to map (List<Double>)
-
             ;
-
     }
 
     public List<LineStringDto> sampleListOfLineStringDto(String propertyName) {
         return sampleList(() -> sampleLineStringDto(propertyName), propertyName);
     }
 
-
-
     public PointDto samplePointDto(String propertyName) {
-
         return new PointDto()
-
-
-
-
             .type(randomString("type"))
-
-
-
-
             .coordinates(sampleList(() -> randomDouble("coordinates"), "coordinates"))
-
-
             ;
-
     }
 
     public List<PointDto> sampleListOfPointDto(String propertyName) {
         return sampleList(() -> samplePointDto(propertyName), propertyName);
     }
 
-
-
     public PolygonDto samplePolygonDto(String propertyName) {
-
         return new PolygonDto()
-
-
-
-
             .type(randomString("type"))
-
-
-
-
             //.coordinates is too complex to map (List<List<Double>>)
-
             ;
-
     }
 
     public List<PolygonDto> sampleListOfPolygonDto(String propertyName) {
         return sampleList(() -> samplePolygonDto(propertyName), propertyName);
     }
-
-
-
 
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName) {
         return sampleList(supplier, propertyName, 1, 1);
@@ -171,20 +107,20 @@ public class SampleModelData {
     }
 
     public String randomString(String propertyName, String dataFormat) {
-        return "str" + randomUUID(propertyName, dataFormat);
+        return "str" + randomUUID(propertyName);
     }
 
     public String randomString(String propertyName) {
         return randomString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName, String dataFormat) {
+    public UUID randomUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public URI randomURI(String propertyName, String dataFormat) {
+    public URI randomURI(String propertyName) {
         return asURI("https://" +
             pickOne(List.of("a", "b", "c")) +
             ".example." +

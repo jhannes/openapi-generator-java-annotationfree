@@ -44,328 +44,124 @@ public class SampleModelData {
     public AnyPartyDto sampleAnyPartyDto(String propertyName) {
         //noinspection unchecked
         List<Supplier<AnyPartyDto>> factories = List.of(
-
             () -> sampleOrganizationDto(propertyName),
-
             () -> samplePersonDto(propertyName)
-
-
         );
         return pickOne(factories).get();
-
     }
 
     public List<AnyPartyDto> sampleListOfAnyPartyDto(String propertyName) {
         return sampleList(() -> sampleAnyPartyDto(propertyName), propertyName);
     }
 
-
-
     public CreationErrorDto sampleCreationErrorDto(String propertyName) {
         //noinspection unchecked
         List<Supplier<CreationErrorDto>> factories = List.of(
-
             () -> sampleIllegalEmailAddressErrorDto(propertyName),
-
             () -> sampleDuplicateIdentifierErrorDto(propertyName),
-
             () -> sampleGeneralErrorDto(propertyName)
-
-
-
         );
         return pickOne(factories).get();
-
     }
 
     public List<CreationErrorDto> sampleListOfCreationErrorDto(String propertyName) {
         return sampleList(() -> sampleCreationErrorDto(propertyName), propertyName);
     }
 
-
-
     public DuplicateIdentifierErrorDto sampleDuplicateIdentifierErrorDto(String propertyName) {
-
         return new DuplicateIdentifierErrorDto()
-
-
-
-
             .code(randomString("code"))
-
-
-
-
-
-
             .identifierValue(randomString("identifierValue"))
-
-
-
-
-
-
             .entityType(randomString("entityType"))
-
-
             ;
-
     }
 
     public List<DuplicateIdentifierErrorDto> sampleListOfDuplicateIdentifierErrorDto(String propertyName) {
         return sampleList(() -> sampleDuplicateIdentifierErrorDto(propertyName), propertyName);
     }
 
-
-
     public GeneralErrorDto sampleGeneralErrorDto(String propertyName) {
-
         return new GeneralErrorDto()
-
-
-
-
             .code(randomString("code"))
-
-
-
-
-
-
             .description(randomString("description"))
-
-
             ;
-
     }
 
     public List<GeneralErrorDto> sampleListOfGeneralErrorDto(String propertyName) {
         return sampleList(() -> sampleGeneralErrorDto(propertyName), propertyName);
     }
 
-
-
     public IllegalEmailAddressErrorDto sampleIllegalEmailAddressErrorDto(String propertyName) {
-
         return new IllegalEmailAddressErrorDto()
-
-
-
-
             .code(randomString("code"))
-
-
-
-
-
-
             .inputEmailAddress(randomString("inputEmailAddress"))
-
-
-
-
             .validDomains(sampleList(() -> randomString("validDomains"), "validDomains"))
-
-
             ;
-
     }
 
     public List<IllegalEmailAddressErrorDto> sampleListOfIllegalEmailAddressErrorDto(String propertyName) {
         return sampleList(() -> sampleIllegalEmailAddressErrorDto(propertyName), propertyName);
     }
 
-
-
     public NotFoundErrorDto sampleNotFoundErrorDto(String propertyName) {
-
         return new NotFoundErrorDto()
-
-
-
-
             .code(randomString("code"))
-
-
-
-
-
-
             .identifierValue(randomString("identifierValue"))
-
-
-
-
-
-
             .entityType(randomString("entityType"))
-
-
             ;
-
     }
 
     public List<NotFoundErrorDto> sampleListOfNotFoundErrorDto(String propertyName) {
         return sampleList(() -> sampleNotFoundErrorDto(propertyName), propertyName);
     }
 
-
-
     public OrganizationDto sampleOrganizationDto(String propertyName) {
-
         return new OrganizationDto()
-
-
-
-
-            .id(randomUUID("id", "uuid"))
-
-
-
-
-
-
+            .id(randomUUID("id"))
             .type(randomString("type"))
-
-
-
-
-
-
             .name(randomString("name"))
-
-
-
-
-
-
             .organizationId(randomString("organizationId"))
-
-
-
-
-
-
-            .url(randomURI("url", "uri"))
-
-
-
-
-
-
+            .url(randomURI("url"))
             .email(randomString("email", "email"))
-
-
-
-
             .emailDomains(sampleList(() -> randomString("emailDomains"), "emailDomains"))
-
-
-
-
-
-
             .phone(randomString("phone", "phone"))
-
-
             ;
-
     }
 
     public List<OrganizationDto> sampleListOfOrganizationDto(String propertyName) {
         return sampleList(() -> sampleOrganizationDto(propertyName), propertyName);
     }
 
-
-
     public PersonDto samplePersonDto(String propertyName) {
-
         return new PersonDto()
-
-
-
-
-            .id(randomUUID("id", "uuid"))
-
-
-
-
-
-
+            .id(randomUUID("id"))
             .type(randomString("type"))
-
-
-
-
-
-
             .givenName(randomString("givenName"))
-
-
-
-
-
-
             .familyName(randomString("familyName"))
-
-
-
-
-
-
             .email(randomString("email", "email"))
-
-
-
-
-
-
             .phone(randomString("phone", "phone"))
-
-
-
-
             .birthDate(sampleLocalDate("birthDate"))
-
-
-
-
             ;
-
     }
 
     public List<PersonDto> sampleListOfPersonDto(String propertyName) {
         return sampleList(() -> samplePersonDto(propertyName), propertyName);
     }
 
-
-
     public UpdateErrorDto sampleUpdateErrorDto(String propertyName) {
         //noinspection unchecked
         List<Supplier<UpdateErrorDto>> factories = List.of(
-
             () -> sampleIllegalEmailAddressErrorDto(propertyName),
-
             () -> sampleDuplicateIdentifierErrorDto(propertyName),
-
             () -> sampleGeneralErrorDto(propertyName),
-
             () -> sampleNotFoundErrorDto(propertyName)
-
-
-
-
         );
         return pickOne(factories).get();
-
     }
 
     public List<UpdateErrorDto> sampleListOfUpdateErrorDto(String propertyName) {
         return sampleList(() -> sampleUpdateErrorDto(propertyName), propertyName);
     }
-
-
-
 
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName) {
         return sampleList(supplier, propertyName, 1, 1);
@@ -376,20 +172,20 @@ public class SampleModelData {
     }
 
     public String randomString(String propertyName, String dataFormat) {
-        return "str" + randomUUID(propertyName, dataFormat);
+        return "str" + randomUUID(propertyName);
     }
 
     public String randomString(String propertyName) {
         return randomString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName, String dataFormat) {
+    public UUID randomUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public URI randomURI(String propertyName, String dataFormat) {
+    public URI randomURI(String propertyName) {
         return asURI("https://" +
             pickOne(List.of("a", "b", "c")) +
             ".example." +
