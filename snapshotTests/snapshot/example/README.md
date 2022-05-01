@@ -112,6 +112,7 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [PetDto](docs/PetDto.md)
+ - [PetTypeDto](docs/PetTypeDto.md)
 
 
 ## Documentation for Authorization

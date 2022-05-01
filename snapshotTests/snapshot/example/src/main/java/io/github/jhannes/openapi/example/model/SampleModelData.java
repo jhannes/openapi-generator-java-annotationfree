@@ -42,7 +42,7 @@ public class SampleModelData {
 
     public PetDto samplePetDto(String propertyName) {
         return new PetDto()
-            .petType(randomString("petType"))
+            .petType(samplePetTypeDto("petType"))
             .name(randomString("name"))
             .birthDate(sampleLocalDate("birthDate"))
             ;
@@ -50,6 +50,18 @@ public class SampleModelData {
 
     public List<PetDto> sampleListOfPetDto(String propertyName) {
         return sampleList(() -> samplePetDto(propertyName), propertyName);
+    }
+
+    public PetTypeDto samplePetTypeDto(String propertyName) {
+        return pickOne(new PetTypeDto[] {
+            PetTypeDto.CAT,
+            PetTypeDto.DOG,
+            PetTypeDto.BIRD,
+        });
+    }
+
+    public List<PetTypeDto> sampleListOfPetTypeDto(String propertyName) {
+        return sampleList(() -> samplePetTypeDto(propertyName), propertyName);
     }
 
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName) {

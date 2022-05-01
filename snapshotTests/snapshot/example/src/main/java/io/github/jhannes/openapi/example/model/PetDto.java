@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 */
 public class PetDto {
 
-    private String pet_type;
+    private PetTypeDto pet_type;
 
     private String name = null;
 
@@ -83,15 +83,15 @@ public class PetDto {
      * Get pet_type
      * @return pet_type
      */
-    public String getPetType() {
+    public PetTypeDto getPetType() {
         return pet_type;
     }
 
-    public void setPetType(String petType) {
+    public void setPetType(PetTypeDto petType) {
         this.pet_type = petType;
     }
 
-    public PetDto petType(String petType) {
+    public PetDto petType(PetTypeDto petType) {
         this.pet_type = petType;
         return this;
     }

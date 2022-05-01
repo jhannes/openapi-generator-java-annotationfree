@@ -93,9 +93,15 @@ components:
         - pet_type
       properties:
         pet_type:
-          type: string
+          $ref: "#/components/schemas/PetType"
         name:
           type: string
         birth_date:
           type: string
           format: date
+    PetType:
+      type: string
+      enum:
+        - cat
+        - dog
+        - bird

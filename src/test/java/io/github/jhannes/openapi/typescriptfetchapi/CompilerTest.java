@@ -1,5 +1,6 @@
 package io.github.jhannes.openapi.typescriptfetchapi;
 
+import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
 import org.openapitools.codegen.ClientOptInput;
@@ -40,21 +41,25 @@ public class CompilerTest {
         return testSuites.stream();
     }
 
-    private DynamicNode compileSpec(Path testDir, Path outputDir) throws IOException {
+    static DynamicNode compileSpec(Path testDir, Path outputDir) throws IOException {
         Path inputDir = testDir.resolve("input");
         cleanDirectory(outputDir);
         return dynamicContainer(
                 "Compiling of " + testDir,
                 Files.list(inputDir)
                         .filter(p -> p.toFile().isFile())
-                        .map(spec -> dynamicContainer("Compile " + spec, Arrays.asList(
-                                dynamicTest("Generate " + spec, () -> generate(spec, outputDir, getModelName(spec))),
-                                dynamicTest("javac " + spec, () -> compile(outputDir.resolve(getModelName(spec))))
-                        )))
+                        .map(spec -> createTestFromSpec(spec, outputDir))
         );
     }
 
-    private void generate(Path file, Path output, String modelName) throws IOException {
+    static DynamicContainer createTestFromSpec(Path spec, Path outputDir) {
+        return dynamicContainer("Compile " + spec, Arrays.asList(
+                dynamicTest("Generate " + spec, () -> generate(spec, outputDir, getModelName(spec))),
+                dynamicTest("javac " + spec, () -> compile(outputDir.resolve(getModelName(spec))))
+        ));
+    }
+
+    static void generate(Path file, Path output, String modelName) throws IOException {
         if (file.getFileName().toString().endsWith(".link")) {
             file = Paths.get(Files.readAllLines(file).get(0));
         }
@@ -78,13 +83,13 @@ public class CompilerTest {
     }
 
 
-    private String getModelName(Path file) {
+    private static String getModelName(Path file) {
         String filename = file.getFileName().toString();
         int lastDot = filename.lastIndexOf('.');
         return lastDot < 0 ? filename : filename.substring(0, lastDot);
     }
 
-    private void compile(Path path) throws IOException {
+    static void compile(Path path) throws IOException {
         String actionControllerPath = Stream.of(System.getProperty("java.class.path").split(System.getProperty("path.separator")))
                 .filter(s -> s.contains("action-controller"))
                 .findFirst().orElseThrow(() -> new RuntimeException("Can't find action-controller in classpath"));
@@ -117,7 +122,7 @@ public class CompilerTest {
         }
     }
 
-    private void cleanDirectory(Path directory) throws IOException {
+    static void cleanDirectory(Path directory) throws IOException {
         if (Files.isDirectory(directory)) {
             System.out.println("rm -r " + directory);
             try (Stream<Path> walk = Files.walk(directory)) {
