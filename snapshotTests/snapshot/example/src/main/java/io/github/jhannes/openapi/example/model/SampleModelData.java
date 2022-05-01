@@ -65,11 +65,29 @@ public class SampleModelData {
     }
 
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName) {
-        return sampleList(supplier, propertyName, 1, 1);
+        return sampleList(supplier, propertyName, 1, 4);
     }
 
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName, int min, int max) {
-        return List.of(supplier.get());
+        List<T> result = new ArrayList<>();
+        int count = min + random.nextInt(max - min);
+        for (int i=0; i<count; i++) {
+            result.add(supplier.get());
+        }
+        return result;
+    }
+
+    public <T> Map<String, T> sampleMap(Supplier<T> supplier, String propertyName) {
+        return sampleMap(supplier, propertyName, 1, 4);
+    }
+
+    public <T> Map<String, T> sampleMap(Supplier<T> supplier, String propertyName, int min, int max) {
+        Map<String, T> result = new HashMap<>();
+        int count = min + random.nextInt(max - min);
+        for (int i=0; i<count; i++) {
+            result.put(randomString(propertyName), supplier.get());
+        }
+        return result;
     }
 
     public String randomString(String propertyName, String dataFormat) {

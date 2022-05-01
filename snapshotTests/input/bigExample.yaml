@@ -99,10 +99,9 @@ components:
         birth_date:
           type: string
           format: date
-    MapOfPets:
-      additionalProperties:
-        $ref: "#/components/schemas/Pet"
     PetStore:
       properties:
         pets:
-          $ref: "#/components/schemas/MapOfPets"
+          format: uuid
+          additionalProperties:
+            $ref: "#/components/schemas/Pet"
