@@ -54,7 +54,10 @@ public class CompilerTest {
         );
     }
 
-    private void generate(Path file, String generatorName, Path output, String modelName) {
+    private void generate(Path file, String generatorName, Path output, String modelName) throws IOException {
+        if (file.getFileName().toString().endsWith(".link")) {
+            file = Paths.get(Files.readAllLines(file).get(0));
+        }
         final CodegenConfigurator configurator = new CodegenConfigurator()
                 .setGeneratorName(generatorName)
                 .setInputSpec(file.toString().replaceAll("\\\\", "/"))

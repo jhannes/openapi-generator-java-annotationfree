@@ -14,6 +14,7 @@ src/main/java/io/github/jhannes/openapi/infectionTracker/model/CaseWorkerDto.jav
 src/main/java/io/github/jhannes/openapi/infectionTracker/model/ExposureDto.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/model/InfectionDto.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/model/InfectionInformationDto.java
+src/main/java/io/github/jhannes/openapi/infectionTracker/model/SampleModelData.java
 src/test/java/io/github/jhannes/openapi/infectionTracker/api/CaseWorkersApiTest.java
 src/test/java/io/github/jhannes/openapi/infectionTracker/api/CasesApiTest.java
 src/test/java/io/github/jhannes/openapi/infectionTracker/api/ExposuresApiTest.java

@@ -3,12 +3,14 @@ package io.github.jhannes.openapi.javaannotationfree;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.media.ComposedSchema;
 import io.swagger.v3.oas.models.media.Schema;
+import org.openapitools.codegen.CodegenConstants;
 import org.openapitools.codegen.CodegenDiscriminator;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenProperty;
 import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.languages.AbstractJavaCodegen;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,6 +31,10 @@ public class JavaCodegen extends AbstractJavaCodegen {
     public void processOpts() {
         super.processOpts();
         supportingFiles.add(new SupportingFile("README.mustache", "", "README.md").doNotOverwrite());
+
+        if (additionalProperties.get(CodegenConstants.GENERATE_MODEL_TESTS) == Boolean.TRUE) {
+            supportingFiles.add(new SupportingFile("sample_model_data.mustache",  sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "SampleModelData.java"));
+        }
     }
 
     @Override
