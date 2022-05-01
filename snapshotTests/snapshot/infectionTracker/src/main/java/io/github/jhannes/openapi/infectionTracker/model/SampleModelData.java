@@ -170,7 +170,7 @@ public class SampleModelData {
     }
 
     public Double randomDouble(String propertyName) {
-        return random.nextDouble(10000.0);
+        return random.nextDouble() * 10000.0;
     }
 
     public Boolean randomBoolean(String propertyName) {
