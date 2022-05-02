@@ -61,6 +61,15 @@ public class SampleModelData {
     }
 
     protected final Random random;
+    protected final Map<String, Supplier<String>> dataFormatFactories = new HashMap<>(Map.of(
+        "email", this::randomEmail,
+        "phone", this::randomPhoneNumber
+    ));
+    protected final Map<String, Supplier<String>> propertyNameFactories = new HashMap<>(Map.of(
+        "givenName", this::randomGivenName,
+        "familyName", this::randomFamilyName,
+        "personName", this::randomPersonName
+    ));
 
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName) {
         return sampleList(supplier, propertyName, 1, 4);
@@ -89,6 +98,12 @@ public class SampleModelData {
     }
 
     public String randomString(String propertyName, String dataFormat) {
+        if (dataFormatFactories.containsKey(dataFormat)) {
+            return dataFormatFactories.get(dataFormat).get();
+        }
+        if (propertyNameFactories.containsKey(propertyName)) {
+            return propertyNameFactories.get(propertyName).get();
+        }
         return "str" + randomUUID(propertyName);
     }
 
@@ -100,14 +115,6 @@ public class SampleModelData {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
-    }
-
-    public URI randomURI(String propertyName) {
-        return asURI("https://" +
-            pickOne(List.of("a", "b", "c")) +
-            ".example." +
-            pickOne(List.of("com", "net", "io"))
-        );
     }
 
     public Long randomLong(String propertyName) {
@@ -152,6 +159,42 @@ public class SampleModelData {
 
     public OffsetDateTime sampleOffsetDateTime(String propertyName) {
         return sampleZonedDateTime(propertyName).toOffsetDateTime();
+    }
+
+    public URI randomURI(String propertyName) {
+        return asURI("https://" + randomDomainName());
+    }
+
+    public String randomDomainName() {
+        return pickOne(List.of("a", "b", "c")) +
+            ".example." +
+            pickOne(List.of("com", "net", "io"));
+    }
+
+    public String randomEmail() {
+        return (
+            randomGivenName().toLowerCase() +
+            "." +
+            randomFamilyName().toLowerCase() +
+            "@" +
+            randomDomainName()
+        );
+    }
+
+    public String randomPersonName() {
+        return randomGivenName() + " " + randomFamilyName();
+    }
+
+    public String randomGivenName() {
+        return pickOne(List.of("James", "Mary", "John", "Patricia", "Robert", "Jennifer", "Linda"));
+    }
+
+    public String randomFamilyName() {
+        return pickOne(List.of("Smith", "Williams", "Johnson", "Jones", "Brown", "Davis", "Wilson"));
+    }
+
+    public String randomPhoneNumber() {
+        return "636-555-" + (1000 + random.nextInt(9000));
     }
 
     public <T> T pickOne(T[] alternatives) {
