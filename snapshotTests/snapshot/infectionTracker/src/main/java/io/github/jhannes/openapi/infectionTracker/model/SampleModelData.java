@@ -54,11 +54,7 @@ public class SampleModelData {
     }
 
     public CaseWorkerDto.RoleEnum sampleCaseWorkerDtoRoleEnum(String propertyName) {
-        return pickOne(new CaseWorkerDto.RoleEnum[] {
-            CaseWorkerDto.RoleEnum.ADMINISTRATOR,
-            CaseWorkerDto.RoleEnum.INTERVIEWER,
-            CaseWorkerDto.RoleEnum.FOLLOWUP,
-        });
+        return pickOne(CaseWorkerDto.RoleEnum.values());
     }
 
     public ExposureDto sampleExposureDto(String propertyName) {
@@ -79,13 +75,7 @@ public class SampleModelData {
     }
 
     public ExposureDto.StatusEnum sampleExposureDtoStatusEnum(String propertyName) {
-        return pickOne(new ExposureDto.StatusEnum[] {
-            ExposureDto.StatusEnum.UNIDENTIFIED,
-            ExposureDto.StatusEnum.IDENTIFIED,
-            ExposureDto.StatusEnum.CONTACTED,
-            ExposureDto.StatusEnum.TESTED,
-            ExposureDto.StatusEnum.INFECTED,
-        });
+        return pickOne(ExposureDto.StatusEnum.values());
     }
 
     public InfectionDto sampleInfectionDto(String propertyName) {

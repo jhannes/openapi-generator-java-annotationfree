@@ -70,18 +70,11 @@ public class SampleModelData {
     }
 
     public PetDto.PetTypeEnum samplePetDtoPetTypeEnum(String propertyName) {
-        return pickOne(new PetDto.PetTypeEnum[] {
-            PetDto.PetTypeEnum.CAT,
-            PetDto.PetTypeEnum.DOG,
-        });
+        return pickOne(PetDto.PetTypeEnum.values());
     }
 
     public PetDto.StatusEnum samplePetDtoStatusEnum(String propertyName) {
-        return pickOne(new PetDto.StatusEnum[] {
-            PetDto.StatusEnum.PENDING,
-            PetDto.StatusEnum.AVAILABLE,
-            PetDto.StatusEnum.SOLD,
-        });
+        return pickOne(PetDto.StatusEnum.values());
     }
 
     public UserDto sampleUserDto(String propertyName) {

@@ -69,12 +69,7 @@ public class SampleModelData {
     }
 
     public DogDto.BreedEnum sampleDogDtoBreedEnum(String propertyName) {
-        return pickOne(new DogDto.BreedEnum[] {
-            DogDto.BreedEnum.DINGO,
-            DogDto.BreedEnum.HUSKY,
-            DogDto.BreedEnum.RETRIEVER,
-            DogDto.BreedEnum.SHEPHERD,
-        });
+        return pickOne(DogDto.BreedEnum.values());
     }
 
     public PetBaseDto samplePetBaseDto(String propertyName) {
@@ -90,7 +85,6 @@ public class SampleModelData {
     }
 
     public PetDto samplePetDto(String propertyName) {
-        //noinspection unchecked
         List<Supplier<PetDto>> factories = List.of(
             () -> sampleCatDto(propertyName),
             () -> sampleDogDto(propertyName)

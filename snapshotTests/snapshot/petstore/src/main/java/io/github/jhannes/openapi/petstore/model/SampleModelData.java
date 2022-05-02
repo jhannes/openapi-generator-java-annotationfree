@@ -67,11 +67,7 @@ public class SampleModelData {
     }
 
     public OrderDto.StatusEnum sampleOrderDtoStatusEnum(String propertyName) {
-        return pickOne(new OrderDto.StatusEnum[] {
-            OrderDto.StatusEnum.PLACED,
-            OrderDto.StatusEnum.APPROVED,
-            OrderDto.StatusEnum.DELIVERED,
-        });
+        return pickOne(OrderDto.StatusEnum.values());
     }
 
     public PetDto samplePetDto(String propertyName) {
@@ -90,11 +86,7 @@ public class SampleModelData {
     }
 
     public PetDto.StatusEnum samplePetDtoStatusEnum(String propertyName) {
-        return pickOne(new PetDto.StatusEnum[] {
-            PetDto.StatusEnum.AVAILABLE,
-            PetDto.StatusEnum.PENDING,
-            PetDto.StatusEnum.SOLD,
-        });
+        return pickOne(PetDto.StatusEnum.values());
     }
 
     public TagDto sampleTagDto(String propertyName) {

@@ -61,53 +61,23 @@ public class SampleModelData {
     }
 
     public DiscoveryDocumentDto.ResponseTypesSupportedEnum sampleDiscoveryDocumentDtoResponseTypesSupportedEnum(String propertyName) {
-        return pickOne(new DiscoveryDocumentDto.ResponseTypesSupportedEnum[] {
-
-            DiscoveryDocumentDto.ResponseTypesSupportedEnum.CODE,
-
-            DiscoveryDocumentDto.ResponseTypesSupportedEnum.TOKEN,
-
-            DiscoveryDocumentDto.ResponseTypesSupportedEnum.ID_TOKEN,
-
-        });
+        return pickOne(DiscoveryDocumentDto.ResponseTypesSupportedEnum.values());
     }
 
     public DiscoveryDocumentDto.ResponseModesSupportedEnum sampleDiscoveryDocumentDtoResponseModesSupportedEnum(String propertyName) {
-        return pickOne(new DiscoveryDocumentDto.ResponseModesSupportedEnum[] {
-
-            DiscoveryDocumentDto.ResponseModesSupportedEnum.QUERY,
-
-            DiscoveryDocumentDto.ResponseModesSupportedEnum.FRAGMENT,
-
-        });
+        return pickOne(DiscoveryDocumentDto.ResponseModesSupportedEnum.values());
     }
 
     public DiscoveryDocumentDto.SubjectTypesSupportedEnum sampleDiscoveryDocumentDtoSubjectTypesSupportedEnum(String propertyName) {
-        return pickOne(new DiscoveryDocumentDto.SubjectTypesSupportedEnum[] {
-
-            DiscoveryDocumentDto.SubjectTypesSupportedEnum.PAIRWISE,
-
-            DiscoveryDocumentDto.SubjectTypesSupportedEnum.PUBLIC,
-
-        });
+        return pickOne(DiscoveryDocumentDto.SubjectTypesSupportedEnum.values());
     }
 
     public DiscoveryDocumentDto.CodeChallengeMethodsSupportedEnum sampleDiscoveryDocumentDtoCodeChallengeMethodsSupportedEnum(String propertyName) {
-        return pickOne(new DiscoveryDocumentDto.CodeChallengeMethodsSupportedEnum[] {
-
-            DiscoveryDocumentDto.CodeChallengeMethodsSupportedEnum.S256,
-
-            DiscoveryDocumentDto.CodeChallengeMethodsSupportedEnum.PLAIN,
-
-        });
+        return pickOne(DiscoveryDocumentDto.CodeChallengeMethodsSupportedEnum.values());
     }
 
     public DiscoveryDocumentDto.IdTokenSigningAlgValuesSupportedEnum sampleDiscoveryDocumentDtoIdTokenSigningAlgValuesSupportedEnum(String propertyName) {
-        return pickOne(new DiscoveryDocumentDto.IdTokenSigningAlgValuesSupportedEnum[] {
-
-            DiscoveryDocumentDto.IdTokenSigningAlgValuesSupportedEnum.RS256,
-
-        });
+        return pickOne(DiscoveryDocumentDto.IdTokenSigningAlgValuesSupportedEnum.values());
     }
 
     public JwksDocumentDto sampleJwksDocumentDto(String propertyName) {

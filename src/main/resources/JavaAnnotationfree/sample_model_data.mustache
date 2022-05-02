@@ -34,14 +34,11 @@ public class SampleModelData {
 
 {{#models}}
 {{#model}}{{#isEnum}}    public {{classname}} sample{{classname}}(String propertyName) {
-        return pickOne(new {{classname}}[] {
-{{#allowableValues}}{{#enumVars}}            {{classname}}.{{name}},
-{{/enumVars}}{{/allowableValues}}        });
+        return pickOne({{classname}}.values());
     }
 
 {{/isEnum}}{{^isEnum}}    public {{classname}} sample{{classname}}(String propertyName) {
-{{#oneOf}}{{#-first}}        //noinspection unchecked
-        List<Supplier<{{classname}}>> factories = List.of({{/-first}}{{#discriminator}}{{#-first}}{{#mappedModels}}
+{{#oneOf}}{{#-first}}        List<Supplier<{{classname}}>> factories = List.of({{/-first}}{{#discriminator}}{{#-first}}{{#mappedModels}}
             () -> sample{{modelName}}(propertyName){{^-last}},{{/-last}}{{/mappedModels}}{{/-first}}{{/discriminator}}{{#-last}}
         );
         return pickOne(factories).get();{{/-last}}{{/oneOf}}{{^oneOf}}        return new {{classname}}(){{#vars}}{{^isArray}}{{^isMap}}{{^isPrimitiveType}}{{^isString}}
@@ -52,7 +49,7 @@ public class SampleModelData {
             .{{name}}(sampleList(() -> random{{{items.datatypeWithEnum}}}("{{name}}"), "{{name}}")){{/items.isString}}{{^items.isString}}
             .{{name}}(sampleListOf{{{items.datatypeWithEnum}}}("{{name}}")){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}
             .{{name}}(sampleList(() -> {{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}random{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}, "{{name}}")){{/items.isPrimitiveType}}{{/items.isArray}}{{#items.isArray}}
-            //.{{name}} is too complex to map ({{{items.datatypeWithEnum}}}){{/items.isArray}}{{/isArray}}{{#isMap}}
+            //.{{name}} is too complex to map ({{{datatypeWithEnum}}}){{/items.isArray}}{{/isArray}}{{#isMap}}
             .{{name}}(sampleMap(() -> {{^items.isPrimitiveType}}{{^items.isString}}sample{{{items.datatypeWithEnum}}}("{{name}}"){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}{{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}random{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}{{/items.isPrimitiveType}}, "{{name}}")){{/isMap}}{{/vars}}
             ;{{/oneOf}}
     }
@@ -64,18 +61,12 @@ public class SampleModelData {
 {{#vars}}{{#isEnum}}
 {{#isArray}}
     public {{classname}}.{{items.datatypeWithEnum}} sample{{classname}}{{items.datatypeWithEnum}}(String propertyName) {
-        return pickOne(new {{classname}}.{{items.datatypeWithEnum}}[] {
-{{#allowableValues}}{{#enumVars}}
-            {{classname}}.{{items.datatypeWithEnum}}.{{name}},
-{{/enumVars}}{{/allowableValues}}
-        });
+        return pickOne({{classname}}.{{items.datatypeWithEnum}}.values());
     }
 {{/isArray}}
 {{^isArray}}
     public {{classname}}.{{datatypeWithEnum}} sample{{classname}}{{datatypeWithEnum}}(String propertyName) {
-        return pickOne(new {{classname}}.{{datatypeWithEnum}}[] {
-{{#allowableValues}}{{#enumVars}}            {{classname}}.{{datatypeWithEnum}}.{{name}},
-{{/enumVars}}{{/allowableValues}}        });
+        return pickOne({{classname}}.{{datatypeWithEnum}}.values());
     }
 {{/isArray}}
 {{/isEnum}}{{/vars}}

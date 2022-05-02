@@ -53,11 +53,7 @@ public class SampleModelData {
     }
 
     public PetTypeDto samplePetTypeDto(String propertyName) {
-        return pickOne(new PetTypeDto[] {
-            PetTypeDto.CAT,
-            PetTypeDto.DOG,
-            PetTypeDto.BIRD,
-        });
+        return pickOne(PetTypeDto.values());
     }
 
     public List<PetTypeDto> sampleListOfPetTypeDto(String propertyName) {

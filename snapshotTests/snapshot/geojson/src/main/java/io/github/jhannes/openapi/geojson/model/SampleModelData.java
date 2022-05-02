@@ -52,7 +52,6 @@ public class SampleModelData {
     }
 
     public GeometryDto sampleGeometryDto(String propertyName) {
-        //noinspection unchecked
         List<Supplier<GeometryDto>> factories = List.of(
             () -> samplePointDto(propertyName),
             () -> samplePolygonDto(propertyName),
@@ -68,7 +67,7 @@ public class SampleModelData {
     public LineStringDto sampleLineStringDto(String propertyName) {
         return new LineStringDto()
             .type(randomString("type"))
-            //.coordinates is too complex to map (List<Double>)
+            //.coordinates is too complex to map (List<List<Double>>)
             ;
     }
 
@@ -90,7 +89,7 @@ public class SampleModelData {
     public PolygonDto samplePolygonDto(String propertyName) {
         return new PolygonDto()
             .type(randomString("type"))
-            //.coordinates is too complex to map (List<List<Double>>)
+            //.coordinates is too complex to map (List<List<List<Double>>>)
             ;
     }
 

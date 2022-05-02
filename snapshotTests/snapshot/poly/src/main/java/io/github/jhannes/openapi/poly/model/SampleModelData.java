@@ -42,7 +42,6 @@ public class SampleModelData {
     }
 
     public AnyPartyDto sampleAnyPartyDto(String propertyName) {
-        //noinspection unchecked
         List<Supplier<AnyPartyDto>> factories = List.of(
             () -> sampleOrganizationDto(propertyName),
             () -> samplePersonDto(propertyName)
@@ -55,7 +54,6 @@ public class SampleModelData {
     }
 
     public CreationErrorDto sampleCreationErrorDto(String propertyName) {
-        //noinspection unchecked
         List<Supplier<CreationErrorDto>> factories = List.of(
             () -> sampleIllegalEmailAddressErrorDto(propertyName),
             () -> sampleDuplicateIdentifierErrorDto(propertyName),
@@ -149,7 +147,6 @@ public class SampleModelData {
     }
 
     public UpdateErrorDto sampleUpdateErrorDto(String propertyName) {
-        //noinspection unchecked
         List<Supplier<UpdateErrorDto>> factories = List.of(
             () -> sampleIllegalEmailAddressErrorDto(propertyName),
             () -> sampleDuplicateIdentifierErrorDto(propertyName),
