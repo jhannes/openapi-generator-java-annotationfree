@@ -35,8 +35,6 @@ import java.util.UUID;
  */
 public class SampleModelData {
 
-    protected final Random random;
-
     public SampleModelData(long seed) {
         this.random = new Random(seed);
     }
@@ -160,6 +158,8 @@ public class SampleModelData {
         return sampleList(() -> sampleUpdateErrorDto(propertyName), propertyName);
     }
 
+    protected final Random random;
+
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName) {
         return sampleList(supplier, propertyName, 1, 4);
     }
@@ -271,4 +271,5 @@ public class SampleModelData {
             throw new RuntimeException(e);
         }
     }
+
 }
