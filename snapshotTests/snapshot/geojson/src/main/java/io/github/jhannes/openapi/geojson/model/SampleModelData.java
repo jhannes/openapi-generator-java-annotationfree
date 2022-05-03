@@ -40,7 +40,7 @@ public class SampleModelData {
 
     public GeometryCollectionDto sampleGeometryCollectionDto(String propertyName) {
         return new GeometryCollectionDto()
-            .type(randomString("type"))
+            .type("GeometryCollection")
             .geometries(sampleListOfGeometryDto("geometries"))
             ;
     }
@@ -64,7 +64,7 @@ public class SampleModelData {
 
     public LineStringDto sampleLineStringDto(String propertyName) {
         return new LineStringDto()
-            .type(randomString("type"))
+            .type("LineString")
             //.coordinates is too complex to map (List<List<Double>>)
             ;
     }
@@ -75,7 +75,7 @@ public class SampleModelData {
 
     public PointDto samplePointDto(String propertyName) {
         return new PointDto()
-            .type(randomString("type"))
+            .type("Point")
             .coordinates(sampleList(() -> randomDouble("coordinates"), "coordinates"))
             ;
     }
@@ -86,7 +86,7 @@ public class SampleModelData {
 
     public PolygonDto samplePolygonDto(String propertyName) {
         return new PolygonDto()
-            .type(randomString("type"))
+            .type("Polygon")
             //.coordinates is too complex to map (List<List<List<Double>>>)
             ;
     }

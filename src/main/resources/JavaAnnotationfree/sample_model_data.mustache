@@ -43,7 +43,7 @@ public class SampleModelData {
             .{{name}}(sample{{{datatypeWithEnum}}}("{{name}}")){{/isString}}{{/isPrimitiveType}}{{#isPrimitiveType}}{{^isString}}
             .{{name}}(random{{datatypeWithEnum}}("{{name}}")){{/isString}}{{/isPrimitiveType}}{{#isString}}{{#isEnum}}
             .{{name}}(sample{{classname}}{{datatypeWithEnum}}("{{name}}")){{/isEnum}}{{^isEnum}}
-            .{{name}}(random{{datatypeWithEnum}}("{{name}}"{{#isPrimitiveType}}{{#dataFormat}}, "{{dataFormat}}"{{/dataFormat}}{{/isPrimitiveType}})){{/isEnum}}{{/isString}}{{/isMap}}{{/isArray}}{{#isArray}}{{^items.isArray}}{{^items.isPrimitiveType}}{{#items.isString}}
+            .{{name}}({{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}random{{datatypeWithEnum}}("{{name}}"{{#isPrimitiveType}}{{#dataFormat}}, "{{dataFormat}}"{{/dataFormat}}{{/isPrimitiveType}}){{/defaultValue}}){{/isEnum}}{{/isString}}{{/isMap}}{{/isArray}}{{#isArray}}{{^items.isArray}}{{^items.isPrimitiveType}}{{#items.isString}}
             .{{name}}(sampleList(() -> random{{{items.datatypeWithEnum}}}("{{name}}"), "{{name}}")){{/items.isString}}{{^items.isString}}
             .{{name}}(sampleListOf{{{items.datatypeWithEnum}}}("{{name}}")){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}
             .{{name}}(sampleList(() -> {{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}random{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}, "{{name}}")){{/items.isPrimitiveType}}{{/items.isArray}}{{#items.isArray}}
