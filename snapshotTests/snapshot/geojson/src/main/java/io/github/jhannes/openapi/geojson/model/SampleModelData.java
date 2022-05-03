@@ -32,7 +32,7 @@ import java.util.UUID;
 /**
  * Model tests for GeoJSON
  */
-public class SampleModelData {
+public abstract class SampleModelData {
 
     public SampleModelData(long seed) {
         this.random = new Random(seed);
@@ -65,9 +65,12 @@ public class SampleModelData {
     public LineStringDto sampleLineStringDto(String propertyName) {
         return new LineStringDto()
             .type("LineString")
-            //.coordinates is too complex to map (List<List<Double>>)
+            .coordinates(coordinatesForLineStringDto())
             ;
     }
+
+    public abstract List<List<Double>> coordinatesForLineStringDto();
+
 
     public List<LineStringDto> sampleListOfLineStringDto(String propertyName) {
         return sampleList(() -> sampleLineStringDto(propertyName), propertyName);
@@ -87,9 +90,12 @@ public class SampleModelData {
     public PolygonDto samplePolygonDto(String propertyName) {
         return new PolygonDto()
             .type("Polygon")
-            //.coordinates is too complex to map (List<List<List<Double>>>)
+            .coordinates(coordinatesForPolygonDto())
             ;
     }
+
+    public abstract List<List<List<Double>>> coordinatesForPolygonDto();
+
 
     public List<PolygonDto> sampleListOfPolygonDto(String propertyName) {
         return sampleList(() -> samplePolygonDto(propertyName), propertyName);

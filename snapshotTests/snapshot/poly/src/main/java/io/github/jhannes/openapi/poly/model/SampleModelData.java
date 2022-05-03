@@ -33,7 +33,7 @@ import java.util.UUID;
 /**
  * Model tests for Poly API
  */
-public class SampleModelData {
+public abstract class SampleModelData {
 
     public SampleModelData(long seed) {
         this.random = new Random(seed);

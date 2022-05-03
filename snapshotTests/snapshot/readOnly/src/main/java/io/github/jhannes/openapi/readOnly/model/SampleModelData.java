@@ -32,7 +32,7 @@ import java.util.UUID;
 /**
  * Model tests for Sample API
  */
-public class SampleModelData {
+public abstract class SampleModelData {
 
     public SampleModelData(long seed) {
         this.random = new Random(seed);

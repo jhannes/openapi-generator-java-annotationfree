@@ -24,7 +24,7 @@ import java.util.UUID;
 /**
  * Model tests for {{appName}}
  */
-public class SampleModelData {
+public abstract class SampleModelData {
 
     public SampleModelData(long seed) {
         this.random = new Random(seed);
@@ -34,12 +34,14 @@ public class SampleModelData {
 {{#model}}{{#isEnum}}    public {{classname}} sample{{classname}}(String propertyName) {
         return pickOne({{classname}}.values());
     }
-
-{{/isEnum}}{{^isEnum}}    public {{classname}} sample{{classname}}(String propertyName) {
-{{#oneOf}}{{#-first}}        List<Supplier<{{classname}}>> factories = List.of({{/-first}}{{#discriminator}}{{#-first}}{{#mappedModels}}
+{{/isEnum}}{{^isEnum}}{{#oneOf}}{{#-first}}    public {{classname}} sample{{classname}}(String propertyName) {
+        List<Supplier<{{classname}}>> factories = List.of({{/-first}}{{#discriminator}}{{#-first}}{{#mappedModels}}
             () -> sample{{modelName}}(propertyName){{^-last}},{{/-last}}{{/mappedModels}}{{/-first}}{{/discriminator}}{{#-last}}
         );
-        return pickOne(factories).get();{{/-last}}{{/oneOf}}{{^oneOf}}        return new {{classname}}(){{#vars}}{{^isArray}}{{^isMap}}{{^isPrimitiveType}}{{^isString}}
+        return pickOne(factories).get();
+    }
+{{/-last}}{{/oneOf}}{{/isEnum}}{{^isEnum}}{{^oneOf}}    public {{classname}} sample{{classname}}(String propertyName) {
+        return new {{classname}}(){{#vars}}{{^isArray}}{{^isMap}}{{^isPrimitiveType}}{{^isString}}
             .{{name}}(sample{{{datatypeWithEnum}}}("{{name}}")){{/isString}}{{/isPrimitiveType}}{{#isPrimitiveType}}{{^isString}}
             .{{name}}(random{{datatypeWithEnum}}("{{name}}")){{/isString}}{{/isPrimitiveType}}{{#isString}}{{#isEnum}}
             .{{name}}(sample{{classname}}{{datatypeWithEnum}}("{{name}}")){{/isEnum}}{{^isEnum}}
@@ -47,12 +49,14 @@ public class SampleModelData {
             .{{name}}(sampleList(() -> random{{{items.datatypeWithEnum}}}("{{name}}"), "{{name}}")){{/items.isString}}{{^items.isString}}
             .{{name}}(sampleListOf{{{items.datatypeWithEnum}}}("{{name}}")){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}
             .{{name}}(sampleList(() -> {{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}random{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}, "{{name}}")){{/items.isPrimitiveType}}{{/items.isArray}}{{#items.isArray}}
-            //.{{name}} is too complex to map ({{{datatypeWithEnum}}}){{/items.isArray}}{{/isArray}}{{#isMap}}
+            .{{name}}({{name}}For{{classname}}()){{/items.isArray}}{{/isArray}}{{#isMap}}
             .{{name}}(sampleMap(() -> {{^items.isPrimitiveType}}{{^items.isString}}sample{{{items.datatypeWithEnum}}}("{{name}}"){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}{{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}random{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}{{/items.isPrimitiveType}}, "{{name}}")){{/isMap}}{{/vars}}
-            ;{{/oneOf}}
-    }
+            ;
+    }{{#vars}}{{#isArray}}{{#items.isArray}}
 
-{{/isEnum}}
+    public abstract {{{datatypeWithEnum}}} {{name}}For{{classname}}();
+{{/items.isArray}}{{/isArray}}{{/vars}}
+{{/oneOf}}{{/isEnum}}
     public List<{{classname}}> sampleListOf{{classname}}(String propertyName) {
         return sampleList(() -> sample{{classname}}(propertyName), propertyName);
     }
