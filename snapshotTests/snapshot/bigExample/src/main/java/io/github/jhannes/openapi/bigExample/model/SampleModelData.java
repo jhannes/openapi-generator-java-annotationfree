@@ -50,8 +50,7 @@ public class SampleModelData {
         return new PetDto()
             .petType(randomString("petType"))
             .name(randomString("name"))
-            .birthDate(sampleLocalDate("birthDate"))
-            ;
+            .birthDate(sampleLocalDate("birthDate"));
     }
 
     public List<PetDto> sampleListOfPetDto(String propertyName) {
@@ -68,8 +67,7 @@ public class SampleModelData {
 
     public PetStoreDto samplePetStoreDto() {
         return new PetStoreDto()
-            .pets(sampleMap(() -> samplePetDto("pets"), "pets"))
-            ;
+            .pets(sampleMap(() -> samplePetDto("pets"), "pets"));
     }
 
     public List<PetStoreDto> sampleListOfPetStoreDto(String propertyName) {

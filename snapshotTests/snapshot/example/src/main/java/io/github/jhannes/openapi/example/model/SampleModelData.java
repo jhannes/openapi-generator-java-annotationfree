@@ -50,8 +50,7 @@ public class SampleModelData {
         return new PetDto()
             .petType(samplePetTypeDto("petType"))
             .name(randomString("name"))
-            .birthDate(sampleLocalDate("birthDate"))
-            ;
+            .birthDate(sampleLocalDate("birthDate"));
     }
 
     public List<PetDto> sampleListOfPetDto(String propertyName) {

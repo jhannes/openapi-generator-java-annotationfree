@@ -49,8 +49,7 @@ public class SampleModelData {
     public CategoryDto sampleCategoryDto() {
         return new CategoryDto()
             .id(randomLong("id"))
-            .name(randomString("name"))
-            ;
+            .name(randomString("name"));
     }
 
     public List<CategoryDto> sampleListOfCategoryDto(String propertyName) {
@@ -72,8 +71,7 @@ public class SampleModelData {
             .quantity(randomInteger("quantity"))
             .shipDate(sampleOffsetDateTime("shipDate"))
             .status(sampleOrderDtoStatusEnum("status"))
-            .complete(randomBoolean("complete"))
-            ;
+            .complete(randomBoolean("complete"));
     }
 
     public List<OrderDto> sampleListOfOrderDto(String propertyName) {
@@ -99,8 +97,7 @@ public class SampleModelData {
             .name(randomString("name"))
             .photoUrls(sampleList(() -> randomString("photoUrls"), "photoUrls"))
             .tags(sampleListOfTagDto("tags"))
-            .status(samplePetDtoStatusEnum("status"))
-            ;
+            .status(samplePetDtoStatusEnum("status"));
     }
 
     public List<PetDto> sampleListOfPetDto(String propertyName) {
@@ -122,8 +119,7 @@ public class SampleModelData {
     public TagDto sampleTagDto() {
         return new TagDto()
             .id(randomLong("id"))
-            .name(randomString("name"))
-            ;
+            .name(randomString("name"));
     }
 
     public List<TagDto> sampleListOfTagDto(String propertyName) {
@@ -147,8 +143,7 @@ public class SampleModelData {
             .email(randomString("email"))
             .password(randomString("password"))
             .phone(randomString("phone"))
-            .userStatus(randomInteger("userStatus"))
-            ;
+            .userStatus(randomInteger("userStatus"));
     }
 
     public List<UserDto> sampleListOfUserDto(String propertyName) {

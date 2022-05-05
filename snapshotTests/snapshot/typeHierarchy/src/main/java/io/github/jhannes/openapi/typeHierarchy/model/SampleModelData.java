@@ -52,8 +52,7 @@ public class SampleModelData {
             .age(randomInteger("age"))
             .petType(randomString("petType"))
             .name(randomString("name"))
-            .birthDate(randomString("birthDate"))
-            ;
+            .birthDate(randomString("birthDate"));
     }
 
     public List<CatDto> sampleListOfCatDto(String propertyName) {
@@ -74,8 +73,7 @@ public class SampleModelData {
             .breed(sampleDogDtoBreedEnum("breed"))
             .petType(randomString("petType"))
             .name(randomString("name"))
-            .birthDate(randomString("birthDate"))
-            ;
+            .birthDate(randomString("birthDate"));
     }
 
     public List<DogDto> sampleListOfDogDto(String propertyName) {
@@ -98,8 +96,7 @@ public class SampleModelData {
         return new PetBaseDto()
             .petType(randomString("petType"))
             .name(randomString("name"))
-            .birthDate(randomString("birthDate"))
-            ;
+            .birthDate(randomString("birthDate"));
     }
 
     public List<PetBaseDto> sampleListOfPetBaseDto(String propertyName) {

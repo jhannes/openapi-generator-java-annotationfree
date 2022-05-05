@@ -51,8 +51,7 @@ public class SampleModelData {
             .id(randomUUID("id"))
             .fullName(randomString("fullName"))
             .email(randomString("email", "email"))
-            .role(sampleCaseWorkerDtoRoleEnum("role"))
-            ;
+            .role(sampleCaseWorkerDtoRoleEnum("role"));
     }
 
     public List<CaseWorkerDto> sampleListOfCaseWorkerDto(String propertyName) {
@@ -80,8 +79,7 @@ public class SampleModelData {
             .exposureLocation(randomString("exposureLocation"))
             .notes(randomString("notes"))
             .caseWorker(randomUUID("caseWorker"))
-            .status(sampleExposureDtoStatusEnum("status"))
-            ;
+            .status(sampleExposureDtoStatusEnum("status"));
     }
 
     public List<ExposureDto> sampleListOfExposureDto(String propertyName) {
@@ -104,8 +102,7 @@ public class SampleModelData {
         return new InfectionDto()
             .id(randomUUID("id"))
             .information(sampleInfectionInformationDto("information"))
-            .registeredExposures(sampleListOfExposureDto("registeredExposures"))
-            ;
+            .registeredExposures(sampleListOfExposureDto("registeredExposures"));
     }
 
     public List<InfectionDto> sampleListOfInfectionDto(String propertyName) {
@@ -125,8 +122,7 @@ public class SampleModelData {
             .patientName(randomString("patientName"))
             .patientPhoneNumber(randomString("patientPhoneNumber", "phone"))
             .likelyInfectionDate(sampleLocalDate("likelyInfectionDate"))
-            .notes(randomString("notes"))
-            ;
+            .notes(randomString("notes"));
     }
 
     public List<InfectionInformationDto> sampleListOfInfectionInformationDto(String propertyName) {

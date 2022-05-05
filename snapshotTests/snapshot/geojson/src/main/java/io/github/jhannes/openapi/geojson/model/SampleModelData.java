@@ -49,8 +49,7 @@ public class SampleModelData {
     public GeometryCollectionDto sampleGeometryCollectionDto() {
         return new GeometryCollectionDto()
             .type("GeometryCollection")
-            .geometries(sampleListOfGeometryDto("geometries"))
-            ;
+            .geometries(sampleListOfGeometryDto("geometries"));
     }
 
     public List<GeometryCollectionDto> sampleListOfGeometryCollectionDto(String propertyName) {
@@ -89,8 +88,12 @@ public class SampleModelData {
     public LineStringDto sampleLineStringDto() {
         return new LineStringDto()
             .type("LineString")
-            //.coordinates is too complex to map (List<List<Double>>)
-            ;
+            .coordinates(coordinatesForLineStringDto());
+    }
+
+    public List<List<Double>> coordinatesForLineStringDto() {
+        // Too complex to generate automatically. Subclass and override to customize
+        return null;
     }
 
     public List<LineStringDto> sampleListOfLineStringDto(String propertyName) {
@@ -108,8 +111,7 @@ public class SampleModelData {
     public PointDto samplePointDto() {
         return new PointDto()
             .type("Point")
-            .coordinates(sampleList(() -> randomDouble("coordinates"), "coordinates"))
-            ;
+            .coordinates(sampleList(() -> randomDouble("coordinates"), "coordinates"));
     }
 
     public List<PointDto> sampleListOfPointDto(String propertyName) {
@@ -127,8 +129,12 @@ public class SampleModelData {
     public PolygonDto samplePolygonDto() {
         return new PolygonDto()
             .type("Polygon")
-            //.coordinates is too complex to map (List<List<List<Double>>>)
-            ;
+            .coordinates(coordinatesForPolygonDto());
+    }
+
+    public List<List<List<Double>>> coordinatesForPolygonDto() {
+        // Too complex to generate automatically. Subclass and override to customize
+        return null;
     }
 
     public List<PolygonDto> sampleListOfPolygonDto(String propertyName) {

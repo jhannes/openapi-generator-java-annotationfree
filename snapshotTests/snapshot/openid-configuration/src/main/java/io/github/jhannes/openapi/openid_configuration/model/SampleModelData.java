@@ -58,8 +58,7 @@ public class SampleModelData {
             .subjectTypesSupported(sampleList(() -> sampleDiscoveryDocumentDtoSubjectTypesSupportedEnum("subjectTypesSupported"), "subjectTypesSupported"))
             .codeChallengeMethodsSupported(sampleList(() -> sampleDiscoveryDocumentDtoCodeChallengeMethodsSupportedEnum("codeChallengeMethodsSupported"), "codeChallengeMethodsSupported"))
             .idTokenSigningAlgValuesSupported(sampleList(() -> sampleDiscoveryDocumentDtoIdTokenSigningAlgValuesSupportedEnum("idTokenSigningAlgValuesSupported"), "idTokenSigningAlgValuesSupported"))
-            .xSsoFrame(randomString("xSsoFrame", "url"))
-            ;
+            .xSsoFrame(randomString("xSsoFrame", "url"));
     }
 
     public List<DiscoveryDocumentDto> sampleListOfDiscoveryDocumentDto(String propertyName) {
@@ -96,8 +95,7 @@ public class SampleModelData {
 
     public JwksDocumentDto sampleJwksDocumentDto() {
         return new JwksDocumentDto()
-            .keys(sampleListOfJwksKeyDto("keys"))
-            ;
+            .keys(sampleListOfJwksKeyDto("keys"));
     }
 
     public List<JwksDocumentDto> sampleListOfJwksDocumentDto(String propertyName) {
@@ -117,8 +115,7 @@ public class SampleModelData {
             .kty(randomString("kty"))
             .use(randomString("use"))
             .kid(randomString("kid"))
-            .x5c(randomString("x5c"))
-            ;
+            .x5c(randomString("x5c"));
     }
 
     public List<JwksKeyDto> sampleListOfJwksKeyDto(String propertyName) {
@@ -137,8 +134,7 @@ public class SampleModelData {
         return new JwtHeaderDto()
             .typ(randomString("typ"))
             .kid(randomString("kid"))
-            .alg(randomString("alg"))
-            ;
+            .alg(randomString("alg"));
     }
 
     public List<JwtHeaderDto> sampleListOfJwtHeaderDto(String propertyName) {
@@ -162,8 +158,7 @@ public class SampleModelData {
             .email(randomString("email"))
             .orgId(randomString("orgId"))
             .org(randomString("org"))
-            .pid(randomString("pid"))
-            ;
+            .pid(randomString("pid"));
     }
 
     public List<JwtPayloadDto> sampleListOfJwtPayloadDto(String propertyName) {
@@ -185,8 +180,7 @@ public class SampleModelData {
             .expiresIn(randomInteger("expiresIn"))
             .scope(randomString("scope"))
             .idToken(randomString("idToken"))
-            .refreshToken(randomString("refreshToken"))
-            ;
+            .refreshToken(randomString("refreshToken"));
     }
 
     public List<TokenResponseDto> sampleListOfTokenResponseDto(String propertyName) {

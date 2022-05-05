@@ -92,8 +92,7 @@ public class SampleModelData {
         return new DuplicateIdentifierErrorDto()
             .code(randomString("code"))
             .identifierValue(randomString("identifierValue"))
-            .entityType(randomString("entityType"))
-            ;
+            .entityType(randomString("entityType"));
     }
 
     public List<DuplicateIdentifierErrorDto> sampleListOfDuplicateIdentifierErrorDto(String propertyName) {
@@ -111,8 +110,7 @@ public class SampleModelData {
     public GeneralErrorDto sampleGeneralErrorDto() {
         return new GeneralErrorDto()
             .code(randomString("code"))
-            .description(randomString("description"))
-            ;
+            .description(randomString("description"));
     }
 
     public List<GeneralErrorDto> sampleListOfGeneralErrorDto(String propertyName) {
@@ -131,8 +129,7 @@ public class SampleModelData {
         return new IllegalEmailAddressErrorDto()
             .code(randomString("code"))
             .inputEmailAddress(randomString("inputEmailAddress"))
-            .validDomains(sampleList(() -> randomString("validDomains"), "validDomains"))
-            ;
+            .validDomains(sampleList(() -> randomString("validDomains"), "validDomains"));
     }
 
     public List<IllegalEmailAddressErrorDto> sampleListOfIllegalEmailAddressErrorDto(String propertyName) {
@@ -151,8 +148,7 @@ public class SampleModelData {
         return new NotFoundErrorDto()
             .code(randomString("code"))
             .identifierValue(randomString("identifierValue"))
-            .entityType(randomString("entityType"))
-            ;
+            .entityType(randomString("entityType"));
     }
 
     public List<NotFoundErrorDto> sampleListOfNotFoundErrorDto(String propertyName) {
@@ -176,8 +172,7 @@ public class SampleModelData {
             .url(randomURI("url"))
             .email(randomString("email", "email"))
             .emailDomains(sampleList(() -> randomString("emailDomains"), "emailDomains"))
-            .phone(randomString("phone", "phone"))
-            ;
+            .phone(randomString("phone", "phone"));
     }
 
     public List<OrganizationDto> sampleListOfOrganizationDto(String propertyName) {
@@ -200,8 +195,7 @@ public class SampleModelData {
             .familyName(randomString("familyName"))
             .email(randomString("email", "email"))
             .phone(randomString("phone", "phone"))
-            .birthDate(sampleLocalDate("birthDate"))
-            ;
+            .birthDate(sampleLocalDate("birthDate"));
     }
 
     public List<PersonDto> sampleListOfPersonDto(String propertyName) {

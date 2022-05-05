@@ -51,8 +51,7 @@ public class SampleModelData {
             .title(randomString("title"))
             .comment(randomString("comment"))
             .createdAt(sampleOffsetDateTime("createdAt"))
-            .user(sampleUserDto("user"))
-            ;
+            .user(sampleUserDto("user"));
     }
 
     public List<CommentDto> sampleListOfCommentDto(String propertyName) {
@@ -75,8 +74,7 @@ public class SampleModelData {
             .birthDate(sampleLocalDate("birthDate"))
             .createdAt(sampleOffsetDateTime("createdAt"))
             .comments(sampleListOfCommentDto("comments"))
-            .status(samplePetDtoStatusEnum("status"))
-            ;
+            .status(samplePetDtoStatusEnum("status"));
     }
 
     public List<PetDto> sampleListOfPetDto(String propertyName) {
@@ -102,8 +100,7 @@ public class SampleModelData {
     public UserDto sampleUserDto() {
         return new UserDto()
             .id(randomUUID("id"))
-            .name(randomString("name"))
-            ;
+            .name(randomString("name"));
     }
 
     public List<UserDto> sampleListOfUserDto(String propertyName) {
