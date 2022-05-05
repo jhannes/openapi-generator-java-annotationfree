@@ -34,11 +34,19 @@ import java.util.UUID;
  */
 public class SampleModelData {
 
+    public SampleModelData(Random random) {
+        this.random = random;
+    }
+
     public SampleModelData(long seed) {
-        this.random = new Random(seed);
+        this(new Random(seed));
     }
 
     public DiscoveryDocumentDto sampleDiscoveryDocumentDto(String propertyName) {
+        return sampleDiscoveryDocumentDto();
+    }
+
+    public DiscoveryDocumentDto sampleDiscoveryDocumentDto() {
         return new DiscoveryDocumentDto()
             .issuer(randomString("issuer"))
             .authorizationEndpoint(randomString("authorizationEndpoint", "url"))
@@ -55,7 +63,11 @@ public class SampleModelData {
     }
 
     public List<DiscoveryDocumentDto> sampleListOfDiscoveryDocumentDto(String propertyName) {
-        return sampleList(() -> sampleDiscoveryDocumentDto(propertyName), propertyName);
+        return sampleListOfDiscoveryDocumentDto();
+    }
+
+    public List<DiscoveryDocumentDto> sampleListOfDiscoveryDocumentDto() {
+        return sampleList(() -> sampleDiscoveryDocumentDto());
     }
 
     public DiscoveryDocumentDto.ResponseTypesSupportedEnum sampleDiscoveryDocumentDtoResponseTypesSupportedEnum(String propertyName) {
@@ -79,16 +91,28 @@ public class SampleModelData {
     }
 
     public JwksDocumentDto sampleJwksDocumentDto(String propertyName) {
+        return sampleJwksDocumentDto();
+    }
+
+    public JwksDocumentDto sampleJwksDocumentDto() {
         return new JwksDocumentDto()
             .keys(sampleListOfJwksKeyDto("keys"))
             ;
     }
 
     public List<JwksDocumentDto> sampleListOfJwksDocumentDto(String propertyName) {
-        return sampleList(() -> sampleJwksDocumentDto(propertyName), propertyName);
+        return sampleListOfJwksDocumentDto();
+    }
+
+    public List<JwksDocumentDto> sampleListOfJwksDocumentDto() {
+        return sampleList(() -> sampleJwksDocumentDto());
     }
 
     public JwksKeyDto sampleJwksKeyDto(String propertyName) {
+        return sampleJwksKeyDto();
+    }
+
+    public JwksKeyDto sampleJwksKeyDto() {
         return new JwksKeyDto()
             .kty(randomString("kty"))
             .use(randomString("use"))
@@ -98,10 +122,18 @@ public class SampleModelData {
     }
 
     public List<JwksKeyDto> sampleListOfJwksKeyDto(String propertyName) {
-        return sampleList(() -> sampleJwksKeyDto(propertyName), propertyName);
+        return sampleListOfJwksKeyDto();
+    }
+
+    public List<JwksKeyDto> sampleListOfJwksKeyDto() {
+        return sampleList(() -> sampleJwksKeyDto());
     }
 
     public JwtHeaderDto sampleJwtHeaderDto(String propertyName) {
+        return sampleJwtHeaderDto();
+    }
+
+    public JwtHeaderDto sampleJwtHeaderDto() {
         return new JwtHeaderDto()
             .typ(randomString("typ"))
             .kid(randomString("kid"))
@@ -110,10 +142,18 @@ public class SampleModelData {
     }
 
     public List<JwtHeaderDto> sampleListOfJwtHeaderDto(String propertyName) {
-        return sampleList(() -> sampleJwtHeaderDto(propertyName), propertyName);
+        return sampleListOfJwtHeaderDto();
+    }
+
+    public List<JwtHeaderDto> sampleListOfJwtHeaderDto() {
+        return sampleList(() -> sampleJwtHeaderDto());
     }
 
     public JwtPayloadDto sampleJwtPayloadDto(String propertyName) {
+        return sampleJwtPayloadDto();
+    }
+
+    public JwtPayloadDto sampleJwtPayloadDto() {
         return new JwtPayloadDto()
             .iss(randomString("iss", "url"))
             .sub(randomString("sub"))
@@ -127,10 +167,18 @@ public class SampleModelData {
     }
 
     public List<JwtPayloadDto> sampleListOfJwtPayloadDto(String propertyName) {
-        return sampleList(() -> sampleJwtPayloadDto(propertyName), propertyName);
+        return sampleListOfJwtPayloadDto();
+    }
+
+    public List<JwtPayloadDto> sampleListOfJwtPayloadDto() {
+        return sampleList(() -> sampleJwtPayloadDto());
     }
 
     public TokenResponseDto sampleTokenResponseDto(String propertyName) {
+        return sampleTokenResponseDto();
+    }
+
+    public TokenResponseDto sampleTokenResponseDto() {
         return new TokenResponseDto()
             .accessToken(randomString("accessToken"))
             .tokenType(randomString("tokenType"))
@@ -142,7 +190,11 @@ public class SampleModelData {
     }
 
     public List<TokenResponseDto> sampleListOfTokenResponseDto(String propertyName) {
-        return sampleList(() -> sampleTokenResponseDto(propertyName), propertyName);
+        return sampleListOfTokenResponseDto();
+    }
+
+    public List<TokenResponseDto> sampleListOfTokenResponseDto() {
+        return sampleList(() -> sampleTokenResponseDto());
     }
 
     protected final Random random;
@@ -160,7 +212,15 @@ public class SampleModelData {
         return sampleList(supplier, propertyName, 1, 4);
     }
 
+    public <T> List<T> sampleList(Supplier<T> supplier) {
+        return sampleList(supplier, 1, 4);
+    }
+
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName, int min, int max) {
+        return sampleList(supplier, min, max);
+    }
+
+    public <T> List<T> sampleList(Supplier<T> supplier, int min, int max) {
         List<T> result = new ArrayList<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {

@@ -34,11 +34,19 @@ import java.util.UUID;
  */
 public class SampleModelData {
 
+    public SampleModelData(Random random) {
+        this.random = random;
+    }
+
     public SampleModelData(long seed) {
-        this.random = new Random(seed);
+        this(new Random(seed));
     }
 
     public CaseWorkerDto sampleCaseWorkerDto(String propertyName) {
+        return sampleCaseWorkerDto();
+    }
+
+    public CaseWorkerDto sampleCaseWorkerDto() {
         return new CaseWorkerDto()
             .id(randomUUID("id"))
             .fullName(randomString("fullName"))
@@ -48,7 +56,11 @@ public class SampleModelData {
     }
 
     public List<CaseWorkerDto> sampleListOfCaseWorkerDto(String propertyName) {
-        return sampleList(() -> sampleCaseWorkerDto(propertyName), propertyName);
+        return sampleListOfCaseWorkerDto();
+    }
+
+    public List<CaseWorkerDto> sampleListOfCaseWorkerDto() {
+        return sampleList(() -> sampleCaseWorkerDto());
     }
 
     public CaseWorkerDto.RoleEnum sampleCaseWorkerDtoRoleEnum(String propertyName) {
@@ -56,6 +68,10 @@ public class SampleModelData {
     }
 
     public ExposureDto sampleExposureDto(String propertyName) {
+        return sampleExposureDto();
+    }
+
+    public ExposureDto sampleExposureDto() {
         return new ExposureDto()
             .id(randomUUID("id"))
             .exposedPersonName(randomString("exposedPersonName"))
@@ -69,7 +85,11 @@ public class SampleModelData {
     }
 
     public List<ExposureDto> sampleListOfExposureDto(String propertyName) {
-        return sampleList(() -> sampleExposureDto(propertyName), propertyName);
+        return sampleListOfExposureDto();
+    }
+
+    public List<ExposureDto> sampleListOfExposureDto() {
+        return sampleList(() -> sampleExposureDto());
     }
 
     public ExposureDto.StatusEnum sampleExposureDtoStatusEnum(String propertyName) {
@@ -77,6 +97,10 @@ public class SampleModelData {
     }
 
     public InfectionDto sampleInfectionDto(String propertyName) {
+        return sampleInfectionDto();
+    }
+
+    public InfectionDto sampleInfectionDto() {
         return new InfectionDto()
             .id(randomUUID("id"))
             .information(sampleInfectionInformationDto("information"))
@@ -85,10 +109,18 @@ public class SampleModelData {
     }
 
     public List<InfectionDto> sampleListOfInfectionDto(String propertyName) {
-        return sampleList(() -> sampleInfectionDto(propertyName), propertyName);
+        return sampleListOfInfectionDto();
+    }
+
+    public List<InfectionDto> sampleListOfInfectionDto() {
+        return sampleList(() -> sampleInfectionDto());
     }
 
     public InfectionInformationDto sampleInfectionInformationDto(String propertyName) {
+        return sampleInfectionInformationDto();
+    }
+
+    public InfectionInformationDto sampleInfectionInformationDto() {
         return new InfectionInformationDto()
             .patientName(randomString("patientName"))
             .patientPhoneNumber(randomString("patientPhoneNumber", "phone"))
@@ -98,7 +130,11 @@ public class SampleModelData {
     }
 
     public List<InfectionInformationDto> sampleListOfInfectionInformationDto(String propertyName) {
-        return sampleList(() -> sampleInfectionInformationDto(propertyName), propertyName);
+        return sampleListOfInfectionInformationDto();
+    }
+
+    public List<InfectionInformationDto> sampleListOfInfectionInformationDto() {
+        return sampleList(() -> sampleInfectionInformationDto());
     }
 
     protected final Random random;
@@ -116,7 +152,15 @@ public class SampleModelData {
         return sampleList(supplier, propertyName, 1, 4);
     }
 
+    public <T> List<T> sampleList(Supplier<T> supplier) {
+        return sampleList(supplier, 1, 4);
+    }
+
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName, int min, int max) {
+        return sampleList(supplier, min, max);
+    }
+
+    public <T> List<T> sampleList(Supplier<T> supplier, int min, int max) {
         List<T> result = new ArrayList<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {

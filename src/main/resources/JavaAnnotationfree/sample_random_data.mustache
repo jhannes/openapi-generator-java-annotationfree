@@ -13,7 +13,15 @@
         return sampleList(supplier, propertyName, 1, 4);
     }
 
+    public <T> List<T> sampleList(Supplier<T> supplier) {
+        return sampleList(supplier, 1, 4);
+    }
+
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName, int min, int max) {
+        return sampleList(supplier, min, max);
+    }
+
+    public <T> List<T> sampleList(Supplier<T> supplier, int min, int max) {
         List<T> result = new ArrayList<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {

@@ -34,11 +34,19 @@ import java.util.UUID;
  */
 public class SampleModelData {
 
+    public SampleModelData(Random random) {
+        this.random = random;
+    }
+
     public SampleModelData(long seed) {
-        this.random = new Random(seed);
+        this(new Random(seed));
     }
 
     public GeometryCollectionDto sampleGeometryCollectionDto(String propertyName) {
+        return sampleGeometryCollectionDto();
+    }
+
+    public GeometryCollectionDto sampleGeometryCollectionDto() {
         return new GeometryCollectionDto()
             .type("GeometryCollection")
             .geometries(sampleListOfGeometryDto("geometries"))
@@ -46,23 +54,39 @@ public class SampleModelData {
     }
 
     public List<GeometryCollectionDto> sampleListOfGeometryCollectionDto(String propertyName) {
-        return sampleList(() -> sampleGeometryCollectionDto(propertyName), propertyName);
+        return sampleListOfGeometryCollectionDto();
+    }
+
+    public List<GeometryCollectionDto> sampleListOfGeometryCollectionDto() {
+        return sampleList(() -> sampleGeometryCollectionDto());
     }
 
     public GeometryDto sampleGeometryDto(String propertyName) {
+        return sampleGeometryDto();
+    }
+
+    public GeometryDto sampleGeometryDto() {
         List<Supplier<GeometryDto>> factories = List.of(
-            () -> samplePointDto(propertyName),
-            () -> samplePolygonDto(propertyName),
-            () -> sampleLineStringDto(propertyName)
+            () -> samplePointDto(),
+            () -> samplePolygonDto(),
+            () -> sampleLineStringDto()
         );
         return pickOne(factories).get();
     }
 
     public List<GeometryDto> sampleListOfGeometryDto(String propertyName) {
-        return sampleList(() -> sampleGeometryDto(propertyName), propertyName);
+        return sampleListOfGeometryDto();
+    }
+
+    public List<GeometryDto> sampleListOfGeometryDto() {
+        return sampleList(() -> sampleGeometryDto());
     }
 
     public LineStringDto sampleLineStringDto(String propertyName) {
+        return sampleLineStringDto();
+    }
+
+    public LineStringDto sampleLineStringDto() {
         return new LineStringDto()
             .type("LineString")
             //.coordinates is too complex to map (List<List<Double>>)
@@ -70,10 +94,18 @@ public class SampleModelData {
     }
 
     public List<LineStringDto> sampleListOfLineStringDto(String propertyName) {
-        return sampleList(() -> sampleLineStringDto(propertyName), propertyName);
+        return sampleListOfLineStringDto();
+    }
+
+    public List<LineStringDto> sampleListOfLineStringDto() {
+        return sampleList(() -> sampleLineStringDto());
     }
 
     public PointDto samplePointDto(String propertyName) {
+        return samplePointDto();
+    }
+
+    public PointDto samplePointDto() {
         return new PointDto()
             .type("Point")
             .coordinates(sampleList(() -> randomDouble("coordinates"), "coordinates"))
@@ -81,10 +113,18 @@ public class SampleModelData {
     }
 
     public List<PointDto> sampleListOfPointDto(String propertyName) {
-        return sampleList(() -> samplePointDto(propertyName), propertyName);
+        return sampleListOfPointDto();
+    }
+
+    public List<PointDto> sampleListOfPointDto() {
+        return sampleList(() -> samplePointDto());
     }
 
     public PolygonDto samplePolygonDto(String propertyName) {
+        return samplePolygonDto();
+    }
+
+    public PolygonDto samplePolygonDto() {
         return new PolygonDto()
             .type("Polygon")
             //.coordinates is too complex to map (List<List<List<Double>>>)
@@ -92,7 +132,11 @@ public class SampleModelData {
     }
 
     public List<PolygonDto> sampleListOfPolygonDto(String propertyName) {
-        return sampleList(() -> samplePolygonDto(propertyName), propertyName);
+        return sampleListOfPolygonDto();
+    }
+
+    public List<PolygonDto> sampleListOfPolygonDto() {
+        return sampleList(() -> samplePolygonDto());
     }
 
     protected final Random random;
@@ -110,7 +154,15 @@ public class SampleModelData {
         return sampleList(supplier, propertyName, 1, 4);
     }
 
+    public <T> List<T> sampleList(Supplier<T> supplier) {
+        return sampleList(supplier, 1, 4);
+    }
+
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName, int min, int max) {
+        return sampleList(supplier, min, max);
+    }
+
+    public <T> List<T> sampleList(Supplier<T> supplier, int min, int max) {
         List<T> result = new ArrayList<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {

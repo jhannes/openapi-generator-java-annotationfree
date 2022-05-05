@@ -34,11 +34,19 @@ import java.util.UUID;
  */
 public class SampleModelData {
 
+    public SampleModelData(Random random) {
+        this.random = random;
+    }
+
     public SampleModelData(long seed) {
-        this.random = new Random(seed);
+        this(new Random(seed));
     }
 
     public PetDto samplePetDto(String propertyName) {
+        return samplePetDto();
+    }
+
+    public PetDto samplePetDto() {
         return new PetDto()
             .petType(randomString("petType"))
             .name(randomString("name"))
@@ -47,17 +55,29 @@ public class SampleModelData {
     }
 
     public List<PetDto> sampleListOfPetDto(String propertyName) {
-        return sampleList(() -> samplePetDto(propertyName), propertyName);
+        return sampleListOfPetDto();
+    }
+
+    public List<PetDto> sampleListOfPetDto() {
+        return sampleList(() -> samplePetDto());
     }
 
     public PetStoreDto samplePetStoreDto(String propertyName) {
+        return samplePetStoreDto();
+    }
+
+    public PetStoreDto samplePetStoreDto() {
         return new PetStoreDto()
             .pets(sampleMap(() -> samplePetDto("pets"), "pets"))
             ;
     }
 
     public List<PetStoreDto> sampleListOfPetStoreDto(String propertyName) {
-        return sampleList(() -> samplePetStoreDto(propertyName), propertyName);
+        return sampleListOfPetStoreDto();
+    }
+
+    public List<PetStoreDto> sampleListOfPetStoreDto() {
+        return sampleList(() -> samplePetStoreDto());
     }
 
     protected final Random random;
@@ -75,7 +95,15 @@ public class SampleModelData {
         return sampleList(supplier, propertyName, 1, 4);
     }
 
+    public <T> List<T> sampleList(Supplier<T> supplier) {
+        return sampleList(supplier, 1, 4);
+    }
+
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName, int min, int max) {
+        return sampleList(supplier, min, max);
+    }
+
+    public <T> List<T> sampleList(Supplier<T> supplier, int min, int max) {
         List<T> result = new ArrayList<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {

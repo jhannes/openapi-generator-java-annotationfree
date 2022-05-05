@@ -35,36 +35,60 @@ import java.util.UUID;
  */
 public class SampleModelData {
 
+    public SampleModelData(Random random) {
+        this.random = random;
+    }
+
     public SampleModelData(long seed) {
-        this.random = new Random(seed);
+        this(new Random(seed));
     }
 
     public AnyPartyDto sampleAnyPartyDto(String propertyName) {
+        return sampleAnyPartyDto();
+    }
+
+    public AnyPartyDto sampleAnyPartyDto() {
         List<Supplier<AnyPartyDto>> factories = List.of(
-            () -> sampleOrganizationDto(propertyName),
-            () -> samplePersonDto(propertyName)
+            () -> sampleOrganizationDto(),
+            () -> samplePersonDto()
         );
         return pickOne(factories).get();
     }
 
     public List<AnyPartyDto> sampleListOfAnyPartyDto(String propertyName) {
-        return sampleList(() -> sampleAnyPartyDto(propertyName), propertyName);
+        return sampleListOfAnyPartyDto();
+    }
+
+    public List<AnyPartyDto> sampleListOfAnyPartyDto() {
+        return sampleList(() -> sampleAnyPartyDto());
     }
 
     public CreationErrorDto sampleCreationErrorDto(String propertyName) {
+        return sampleCreationErrorDto();
+    }
+
+    public CreationErrorDto sampleCreationErrorDto() {
         List<Supplier<CreationErrorDto>> factories = List.of(
-            () -> sampleIllegalEmailAddressErrorDto(propertyName),
-            () -> sampleDuplicateIdentifierErrorDto(propertyName),
-            () -> sampleGeneralErrorDto(propertyName)
+            () -> sampleIllegalEmailAddressErrorDto(),
+            () -> sampleDuplicateIdentifierErrorDto(),
+            () -> sampleGeneralErrorDto()
         );
         return pickOne(factories).get();
     }
 
     public List<CreationErrorDto> sampleListOfCreationErrorDto(String propertyName) {
-        return sampleList(() -> sampleCreationErrorDto(propertyName), propertyName);
+        return sampleListOfCreationErrorDto();
+    }
+
+    public List<CreationErrorDto> sampleListOfCreationErrorDto() {
+        return sampleList(() -> sampleCreationErrorDto());
     }
 
     public DuplicateIdentifierErrorDto sampleDuplicateIdentifierErrorDto(String propertyName) {
+        return sampleDuplicateIdentifierErrorDto();
+    }
+
+    public DuplicateIdentifierErrorDto sampleDuplicateIdentifierErrorDto() {
         return new DuplicateIdentifierErrorDto()
             .code(randomString("code"))
             .identifierValue(randomString("identifierValue"))
@@ -73,10 +97,18 @@ public class SampleModelData {
     }
 
     public List<DuplicateIdentifierErrorDto> sampleListOfDuplicateIdentifierErrorDto(String propertyName) {
-        return sampleList(() -> sampleDuplicateIdentifierErrorDto(propertyName), propertyName);
+        return sampleListOfDuplicateIdentifierErrorDto();
+    }
+
+    public List<DuplicateIdentifierErrorDto> sampleListOfDuplicateIdentifierErrorDto() {
+        return sampleList(() -> sampleDuplicateIdentifierErrorDto());
     }
 
     public GeneralErrorDto sampleGeneralErrorDto(String propertyName) {
+        return sampleGeneralErrorDto();
+    }
+
+    public GeneralErrorDto sampleGeneralErrorDto() {
         return new GeneralErrorDto()
             .code(randomString("code"))
             .description(randomString("description"))
@@ -84,10 +116,18 @@ public class SampleModelData {
     }
 
     public List<GeneralErrorDto> sampleListOfGeneralErrorDto(String propertyName) {
-        return sampleList(() -> sampleGeneralErrorDto(propertyName), propertyName);
+        return sampleListOfGeneralErrorDto();
+    }
+
+    public List<GeneralErrorDto> sampleListOfGeneralErrorDto() {
+        return sampleList(() -> sampleGeneralErrorDto());
     }
 
     public IllegalEmailAddressErrorDto sampleIllegalEmailAddressErrorDto(String propertyName) {
+        return sampleIllegalEmailAddressErrorDto();
+    }
+
+    public IllegalEmailAddressErrorDto sampleIllegalEmailAddressErrorDto() {
         return new IllegalEmailAddressErrorDto()
             .code(randomString("code"))
             .inputEmailAddress(randomString("inputEmailAddress"))
@@ -96,10 +136,18 @@ public class SampleModelData {
     }
 
     public List<IllegalEmailAddressErrorDto> sampleListOfIllegalEmailAddressErrorDto(String propertyName) {
-        return sampleList(() -> sampleIllegalEmailAddressErrorDto(propertyName), propertyName);
+        return sampleListOfIllegalEmailAddressErrorDto();
+    }
+
+    public List<IllegalEmailAddressErrorDto> sampleListOfIllegalEmailAddressErrorDto() {
+        return sampleList(() -> sampleIllegalEmailAddressErrorDto());
     }
 
     public NotFoundErrorDto sampleNotFoundErrorDto(String propertyName) {
+        return sampleNotFoundErrorDto();
+    }
+
+    public NotFoundErrorDto sampleNotFoundErrorDto() {
         return new NotFoundErrorDto()
             .code(randomString("code"))
             .identifierValue(randomString("identifierValue"))
@@ -108,10 +156,18 @@ public class SampleModelData {
     }
 
     public List<NotFoundErrorDto> sampleListOfNotFoundErrorDto(String propertyName) {
-        return sampleList(() -> sampleNotFoundErrorDto(propertyName), propertyName);
+        return sampleListOfNotFoundErrorDto();
+    }
+
+    public List<NotFoundErrorDto> sampleListOfNotFoundErrorDto() {
+        return sampleList(() -> sampleNotFoundErrorDto());
     }
 
     public OrganizationDto sampleOrganizationDto(String propertyName) {
+        return sampleOrganizationDto();
+    }
+
+    public OrganizationDto sampleOrganizationDto() {
         return new OrganizationDto()
             .id(randomUUID("id"))
             .type(randomString("type"))
@@ -125,10 +181,18 @@ public class SampleModelData {
     }
 
     public List<OrganizationDto> sampleListOfOrganizationDto(String propertyName) {
-        return sampleList(() -> sampleOrganizationDto(propertyName), propertyName);
+        return sampleListOfOrganizationDto();
+    }
+
+    public List<OrganizationDto> sampleListOfOrganizationDto() {
+        return sampleList(() -> sampleOrganizationDto());
     }
 
     public PersonDto samplePersonDto(String propertyName) {
+        return samplePersonDto();
+    }
+
+    public PersonDto samplePersonDto() {
         return new PersonDto()
             .id(randomUUID("id"))
             .type(randomString("type"))
@@ -141,21 +205,33 @@ public class SampleModelData {
     }
 
     public List<PersonDto> sampleListOfPersonDto(String propertyName) {
-        return sampleList(() -> samplePersonDto(propertyName), propertyName);
+        return sampleListOfPersonDto();
+    }
+
+    public List<PersonDto> sampleListOfPersonDto() {
+        return sampleList(() -> samplePersonDto());
     }
 
     public UpdateErrorDto sampleUpdateErrorDto(String propertyName) {
+        return sampleUpdateErrorDto();
+    }
+
+    public UpdateErrorDto sampleUpdateErrorDto() {
         List<Supplier<UpdateErrorDto>> factories = List.of(
-            () -> sampleIllegalEmailAddressErrorDto(propertyName),
-            () -> sampleDuplicateIdentifierErrorDto(propertyName),
-            () -> sampleGeneralErrorDto(propertyName),
-            () -> sampleNotFoundErrorDto(propertyName)
+            () -> sampleIllegalEmailAddressErrorDto(),
+            () -> sampleDuplicateIdentifierErrorDto(),
+            () -> sampleGeneralErrorDto(),
+            () -> sampleNotFoundErrorDto()
         );
         return pickOne(factories).get();
     }
 
     public List<UpdateErrorDto> sampleListOfUpdateErrorDto(String propertyName) {
-        return sampleList(() -> sampleUpdateErrorDto(propertyName), propertyName);
+        return sampleListOfUpdateErrorDto();
+    }
+
+    public List<UpdateErrorDto> sampleListOfUpdateErrorDto() {
+        return sampleList(() -> sampleUpdateErrorDto());
     }
 
     protected final Random random;
@@ -173,7 +249,15 @@ public class SampleModelData {
         return sampleList(supplier, propertyName, 1, 4);
     }
 
+    public <T> List<T> sampleList(Supplier<T> supplier) {
+        return sampleList(supplier, 1, 4);
+    }
+
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName, int min, int max) {
+        return sampleList(supplier, min, max);
+    }
+
+    public <T> List<T> sampleList(Supplier<T> supplier, int min, int max) {
         List<T> result = new ArrayList<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {

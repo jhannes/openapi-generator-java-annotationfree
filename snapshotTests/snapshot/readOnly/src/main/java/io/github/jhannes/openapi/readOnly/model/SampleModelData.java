@@ -34,11 +34,19 @@ import java.util.UUID;
  */
 public class SampleModelData {
 
+    public SampleModelData(Random random) {
+        this.random = random;
+    }
+
     public SampleModelData(long seed) {
-        this.random = new Random(seed);
+        this(new Random(seed));
     }
 
     public CommentDto sampleCommentDto(String propertyName) {
+        return sampleCommentDto();
+    }
+
+    public CommentDto sampleCommentDto() {
         return new CommentDto()
             .title(randomString("title"))
             .comment(randomString("comment"))
@@ -48,10 +56,18 @@ public class SampleModelData {
     }
 
     public List<CommentDto> sampleListOfCommentDto(String propertyName) {
-        return sampleList(() -> sampleCommentDto(propertyName), propertyName);
+        return sampleListOfCommentDto();
+    }
+
+    public List<CommentDto> sampleListOfCommentDto() {
+        return sampleList(() -> sampleCommentDto());
     }
 
     public PetDto samplePetDto(String propertyName) {
+        return samplePetDto();
+    }
+
+    public PetDto samplePetDto() {
         return new PetDto()
             .id(randomUUID("id"))
             .petType(samplePetDtoPetTypeEnum("petType"))
@@ -64,7 +80,11 @@ public class SampleModelData {
     }
 
     public List<PetDto> sampleListOfPetDto(String propertyName) {
-        return sampleList(() -> samplePetDto(propertyName), propertyName);
+        return sampleListOfPetDto();
+    }
+
+    public List<PetDto> sampleListOfPetDto() {
+        return sampleList(() -> samplePetDto());
     }
 
     public PetDto.PetTypeEnum samplePetDtoPetTypeEnum(String propertyName) {
@@ -76,6 +96,10 @@ public class SampleModelData {
     }
 
     public UserDto sampleUserDto(String propertyName) {
+        return sampleUserDto();
+    }
+
+    public UserDto sampleUserDto() {
         return new UserDto()
             .id(randomUUID("id"))
             .name(randomString("name"))
@@ -83,7 +107,11 @@ public class SampleModelData {
     }
 
     public List<UserDto> sampleListOfUserDto(String propertyName) {
-        return sampleList(() -> sampleUserDto(propertyName), propertyName);
+        return sampleListOfUserDto();
+    }
+
+    public List<UserDto> sampleListOfUserDto() {
+        return sampleList(() -> sampleUserDto());
     }
 
     protected final Random random;
@@ -101,7 +129,15 @@ public class SampleModelData {
         return sampleList(supplier, propertyName, 1, 4);
     }
 
+    public <T> List<T> sampleList(Supplier<T> supplier) {
+        return sampleList(supplier, 1, 4);
+    }
+
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName, int min, int max) {
+        return sampleList(supplier, min, max);
+    }
+
+    public <T> List<T> sampleList(Supplier<T> supplier, int min, int max) {
         List<T> result = new ArrayList<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {

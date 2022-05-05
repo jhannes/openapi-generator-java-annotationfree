@@ -34,11 +34,19 @@ import java.util.UUID;
  */
 public class SampleModelData {
 
+    public SampleModelData(Random random) {
+        this.random = random;
+    }
+
     public SampleModelData(long seed) {
-        this.random = new Random(seed);
+        this(new Random(seed));
     }
 
     public CatDto sampleCatDto(String propertyName) {
+        return sampleCatDto();
+    }
+
+    public CatDto sampleCatDto() {
         return new CatDto()
             .hunts(randomBoolean("hunts"))
             .age(randomInteger("age"))
@@ -49,10 +57,18 @@ public class SampleModelData {
     }
 
     public List<CatDto> sampleListOfCatDto(String propertyName) {
-        return sampleList(() -> sampleCatDto(propertyName), propertyName);
+        return sampleListOfCatDto();
+    }
+
+    public List<CatDto> sampleListOfCatDto() {
+        return sampleList(() -> sampleCatDto());
     }
 
     public DogDto sampleDogDto(String propertyName) {
+        return sampleDogDto();
+    }
+
+    public DogDto sampleDogDto() {
         return new DogDto()
             .bark(randomBoolean("bark"))
             .breed(sampleDogDtoBreedEnum("breed"))
@@ -63,7 +79,11 @@ public class SampleModelData {
     }
 
     public List<DogDto> sampleListOfDogDto(String propertyName) {
-        return sampleList(() -> sampleDogDto(propertyName), propertyName);
+        return sampleListOfDogDto();
+    }
+
+    public List<DogDto> sampleListOfDogDto() {
+        return sampleList(() -> sampleDogDto());
     }
 
     public DogDto.BreedEnum sampleDogDtoBreedEnum(String propertyName) {
@@ -71,6 +91,10 @@ public class SampleModelData {
     }
 
     public PetBaseDto samplePetBaseDto(String propertyName) {
+        return samplePetBaseDto();
+    }
+
+    public PetBaseDto samplePetBaseDto() {
         return new PetBaseDto()
             .petType(randomString("petType"))
             .name(randomString("name"))
@@ -79,19 +103,31 @@ public class SampleModelData {
     }
 
     public List<PetBaseDto> sampleListOfPetBaseDto(String propertyName) {
-        return sampleList(() -> samplePetBaseDto(propertyName), propertyName);
+        return sampleListOfPetBaseDto();
+    }
+
+    public List<PetBaseDto> sampleListOfPetBaseDto() {
+        return sampleList(() -> samplePetBaseDto());
     }
 
     public PetDto samplePetDto(String propertyName) {
+        return samplePetDto();
+    }
+
+    public PetDto samplePetDto() {
         List<Supplier<PetDto>> factories = List.of(
-            () -> sampleCatDto(propertyName),
-            () -> sampleDogDto(propertyName)
+            () -> sampleCatDto(),
+            () -> sampleDogDto()
         );
         return pickOne(factories).get();
     }
 
     public List<PetDto> sampleListOfPetDto(String propertyName) {
-        return sampleList(() -> samplePetDto(propertyName), propertyName);
+        return sampleListOfPetDto();
+    }
+
+    public List<PetDto> sampleListOfPetDto() {
+        return sampleList(() -> samplePetDto());
     }
 
     protected final Random random;
@@ -109,7 +145,15 @@ public class SampleModelData {
         return sampleList(supplier, propertyName, 1, 4);
     }
 
+    public <T> List<T> sampleList(Supplier<T> supplier) {
+        return sampleList(supplier, 1, 4);
+    }
+
     public <T> List<T> sampleList(Supplier<T> supplier, String propertyName, int min, int max) {
+        return sampleList(supplier, min, max);
+    }
+
+    public <T> List<T> sampleList(Supplier<T> supplier, int min, int max) {
         List<T> result = new ArrayList<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {

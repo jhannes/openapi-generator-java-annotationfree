@@ -26,21 +26,29 @@ import java.util.UUID;
  */
 public class SampleModelData {
 
+    public SampleModelData(Random random) {
+        this.random = random;
+    }
+
     public SampleModelData(long seed) {
-        this.random = new Random(seed);
+        this(new Random(seed));
     }
 
 {{#models}}
-{{#model}}{{#isEnum}}    public {{classname}} sample{{classname}}(String propertyName) {
+{{#model}}    public {{classname}} sample{{classname}}(String propertyName) {
+        return sample{{classname}}();
+    }
+
+{{#isEnum}}    public {{classname}} sample{{classname}}() {
         return pickOne({{classname}}.values());
     }
-{{/isEnum}}{{^isEnum}}{{#oneOf}}{{#-first}}    public {{classname}} sample{{classname}}(String propertyName) {
+{{/isEnum}}{{^isEnum}}{{#oneOf}}{{#-first}}    public {{classname}} sample{{classname}}() {
         List<Supplier<{{classname}}>> factories = List.of({{/-first}}{{#discriminator}}{{#-first}}{{#mappedModels}}
-            () -> sample{{modelName}}(propertyName){{^-last}},{{/-last}}{{/mappedModels}}{{/-first}}{{/discriminator}}{{#-last}}
+            () -> sample{{modelName}}(){{^-last}},{{/-last}}{{/mappedModels}}{{/-first}}{{/discriminator}}{{#-last}}
         );
         return pickOne(factories).get();
     }
-{{/-last}}{{/oneOf}}{{/isEnum}}{{^isEnum}}{{^oneOf}}    public {{classname}} sample{{classname}}(String propertyName) {
+{{/-last}}{{/oneOf}}{{/isEnum}}{{^isEnum}}{{^oneOf}}    public {{classname}} sample{{classname}}() {
         return new {{classname}}(){{#vars}}{{^isArray}}{{^isMap}}{{^isPrimitiveType}}{{^isString}}
             .{{name}}(sample{{{datatypeWithEnum}}}("{{name}}")){{/isString}}{{/isPrimitiveType}}{{#isPrimitiveType}}{{^isString}}
             .{{name}}(random{{datatypeWithEnum}}("{{name}}")){{/isString}}{{/isPrimitiveType}}{{#isString}}{{#isEnum}}
@@ -55,7 +63,11 @@ public class SampleModelData {
     }
 {{/oneOf}}{{/isEnum}}
     public List<{{classname}}> sampleListOf{{classname}}(String propertyName) {
-        return sampleList(() -> sample{{classname}}(propertyName), propertyName);
+        return sampleListOf{{classname}}();
+    }
+
+    public List<{{classname}}> sampleListOf{{classname}}() {
+        return sampleList(() -> sample{{classname}}());
     }
 {{#vars}}{{#isEnum}}
 {{#isArray}}
