@@ -7,6 +7,7 @@ docs/ExposureDto.md
 docs/ExposuresApi.md
 docs/InfectionDto.md
 docs/InfectionInformationDto.md
+docs/UserRoleDto.md
 src/main/java/io/github/jhannes/openapi/infectionTracker/api/CaseWorkersApi.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/api/CasesApi.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/api/ExposuresApi.java
@@ -15,6 +16,7 @@ src/main/java/io/github/jhannes/openapi/infectionTracker/model/ExposureDto.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/model/InfectionDto.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/model/InfectionInformationDto.java
 src/main/java/io/github/jhannes/openapi/infectionTracker/model/SampleModelData.java
+src/main/java/io/github/jhannes/openapi/infectionTracker/model/UserRoleDto.java
 src/test/java/io/github/jhannes/openapi/infectionTracker/api/CaseWorkersApiTest.java
 src/test/java/io/github/jhannes/openapi/infectionTracker/api/CasesApiTest.java
 src/test/java/io/github/jhannes/openapi/infectionTracker/api/ExposuresApiTest.java

@@ -140,6 +140,28 @@
         "tags": [
           "Exposures"
         ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "exposureDate",
+            "explode": false,
+            "style": "pipeDelimited",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "format": "date"
+              }
+            }
+          },
+          {
+            "in": "query",
+            "name": "maxCount",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "List exposures that the case worker can follow up",
@@ -247,16 +269,19 @@
             "format": "email"
           },
           "role": {
-            "type": "string",
-            "enum": [
-              "administrator",
-              "interviewer",
-              "followup"
-            ]
+            "$ref": "#/components/schemas/UserRole"
           }
         },
         "required": [
           "fullName", "email", "role"
+        ]
+      },
+      "UserRole": {
+        "type": "string",
+        "enum": [
+          "administrator",
+          "interviewer",
+          "followup"
         ]
       },
       "Infection": {
@@ -323,6 +348,10 @@
               "tested",
               "infected"
             ]
+          },
+          "delayAfterInfection": {
+            "type": "integer",
+            "enum": [-1, 0, 1, 2, 3, 4]
           }
         },
         "required": ["status"]

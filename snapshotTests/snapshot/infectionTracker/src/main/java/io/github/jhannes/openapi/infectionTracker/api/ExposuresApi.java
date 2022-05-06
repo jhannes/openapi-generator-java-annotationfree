@@ -14,6 +14,7 @@ package io.github.jhannes.openapi.infectionTracker.api;
 import io.github.jhannes.openapi.infectionTracker.model.*;
 
 import io.github.jhannes.openapi.infectionTracker.model.ExposureDto;
+import java.time.LocalDate;
 import java.util.UUID;
 
 import org.actioncontroller.actions.*;
@@ -33,11 +34,15 @@ public interface ExposuresApi {
     /**
      * 
      * 
+     * @param exposureDate  (optional
+     * @param maxCount  (optional)
      * @return ExposureDto
      */
     @GET("/api/exposures")
     @JsonBody
     public ExposureDto listExposures(
+            @RequestParam("exposureDate") Optional<List<LocalDate>> exposureDate, 
+            @RequestParam("maxCount") Optional<Integer> maxCount
     ) throws IOException;
     /**
      * 

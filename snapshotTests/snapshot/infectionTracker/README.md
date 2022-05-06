@@ -119,6 +119,7 @@ Class | Method | HTTP request | Description
  - [ExposureDto](docs/ExposureDto.md)
  - [InfectionDto](docs/InfectionDto.md)
  - [InfectionInformationDto](docs/InfectionInformationDto.md)
+ - [UserRoleDto](docs/UserRoleDto.md)
 
 
 ## Documentation for Authorization

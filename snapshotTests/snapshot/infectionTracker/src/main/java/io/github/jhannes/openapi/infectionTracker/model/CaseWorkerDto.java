@@ -41,42 +41,7 @@ public class CaseWorkerDto {
 
     private String email;
 
-    /**
-     * Gets or Sets role
-     */
-    public enum RoleEnum {
-        ADMINISTRATOR("administrator"),
-
-        INTERVIEWER("interviewer"),
-
-        FOLLOWUP("followup");
-
-        private String value;
-
-        RoleEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static RoleEnum fromValue(String text) {
-            for (RoleEnum b : RoleEnum.values()) {
-                if (String.valueOf(b.value).equals(text)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + text + "'");
-        }
-    }
-
-    private RoleEnum role;
+    private UserRoleDto role;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -182,15 +147,15 @@ public class CaseWorkerDto {
      * Get role
      * @return role
      */
-    public RoleEnum getRole() {
+    public UserRoleDto getRole() {
         return role;
     }
 
-    public void setRole(RoleEnum role) {
+    public void setRole(UserRoleDto role) {
         this.role = role;
     }
 
-    public CaseWorkerDto role(RoleEnum role) {
+    public CaseWorkerDto role(UserRoleDto role) {
         this.role = role;
         return this;
     }

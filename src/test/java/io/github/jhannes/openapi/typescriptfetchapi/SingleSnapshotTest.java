@@ -9,7 +9,7 @@ public class SingleSnapshotTest {
 
     @TestFactory
     DynamicNode javaAnnotationFreeSnapshots() {
-        Path spec = SnapshotTests.SNAPSHOT_ROOT.resolve("input/typeHierarchy.yaml");
+        Path spec = SnapshotTests.SNAPSHOT_ROOT.resolve("input/infectionTracker.json");
         return SnapshotTests.createTestsForSpec(spec);
     }
 

@@ -11,7 +11,7 @@ Method | HTTP request | Description
 
 ## listExposures
 
-> ExposureDto listExposures()
+> ExposureDto listExposures(exposureDate, maxCount)
 
 
 
@@ -29,8 +29,10 @@ public class Example {
         HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
         ExposuresApi apiInstance = ApiClientProxy.create(ExposuresApi.class, httpClient);
 
+        List<LocalDate> exposureDate = Arrays.asList(); // List<LocalDate> | 
+        Integer maxCount = 56; // Integer | 
         try {
-            ExposureDto result = apiInstance.listExposures();
+            ExposureDto result = apiInstance.listExposures(exposureDate, maxCount);
             System.out.println(result);
         } catch (HttpClientException e) {
             System.err.println("Exception when calling ExposuresApi#listExposures");
@@ -44,7 +46,11 @@ public class Example {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **exposureDate** | [**List&lt;LocalDate&gt;**](LocalDate.md)|  | [optional]
+ **maxCount** | **Integer**|  | [optional]
 
 ### Return type
 

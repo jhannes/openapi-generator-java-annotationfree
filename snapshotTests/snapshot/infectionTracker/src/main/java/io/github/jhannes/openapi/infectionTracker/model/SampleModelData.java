@@ -51,7 +51,7 @@ public class SampleModelData {
             .id(randomUUID("id"))
             .fullName(randomString("fullName"))
             .email(randomString("email", "email"))
-            .role(sampleCaseWorkerDtoRoleEnum("role"));
+            .role(sampleUserRoleDto("role"));
     }
 
     public List<CaseWorkerDto> sampleListOfCaseWorkerDto(String propertyName) {
@@ -60,10 +60,6 @@ public class SampleModelData {
 
     public List<CaseWorkerDto> sampleListOfCaseWorkerDto() {
         return sampleList(() -> sampleCaseWorkerDto());
-    }
-
-    public CaseWorkerDto.RoleEnum sampleCaseWorkerDtoRoleEnum(String propertyName) {
-        return pickOne(CaseWorkerDto.RoleEnum.values());
     }
 
     public ExposureDto sampleExposureDto(String propertyName) {
@@ -79,7 +75,8 @@ public class SampleModelData {
             .exposureLocation(randomString("exposureLocation"))
             .notes(randomString("notes"))
             .caseWorker(randomUUID("caseWorker"))
-            .status(sampleExposureDtoStatusEnum("status"));
+            .status(sampleExposureDtoStatusEnum("status"))
+            .delayAfterInfection(sampleExposureDtoDelayAfterInfectionEnum("delayAfterInfection"));
     }
 
     public List<ExposureDto> sampleListOfExposureDto(String propertyName) {
@@ -92,6 +89,10 @@ public class SampleModelData {
 
     public ExposureDto.StatusEnum sampleExposureDtoStatusEnum(String propertyName) {
         return pickOne(ExposureDto.StatusEnum.values());
+    }
+
+    public ExposureDto.DelayAfterInfectionEnum sampleExposureDtoDelayAfterInfectionEnum(String propertyName) {
+        return pickOne(ExposureDto.DelayAfterInfectionEnum.values());
     }
 
     public InfectionDto sampleInfectionDto(String propertyName) {
@@ -131,6 +132,22 @@ public class SampleModelData {
 
     public List<InfectionInformationDto> sampleListOfInfectionInformationDto() {
         return sampleList(() -> sampleInfectionInformationDto());
+    }
+
+    public UserRoleDto sampleUserRoleDto(String propertyName) {
+        return sampleUserRoleDto();
+    }
+
+    public UserRoleDto sampleUserRoleDto() {
+        return pickOne(UserRoleDto.values());
+    }
+
+    public List<UserRoleDto> sampleListOfUserRoleDto(String propertyName) {
+        return sampleListOfUserRoleDto();
+    }
+
+    public List<UserRoleDto> sampleListOfUserRoleDto() {
+        return sampleList(() -> sampleUserRoleDto());
     }
 
     protected final Random random;

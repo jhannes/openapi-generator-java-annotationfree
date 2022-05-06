@@ -90,6 +90,49 @@ public class ExposureDto {
 
     private StatusEnum status;
 
+    /**
+     * Gets or Sets delayAfterInfection
+     */
+    public enum DelayAfterInfectionEnum {
+        NUMBER_MINUS_1(-1),
+
+        NUMBER_0(0),
+
+        NUMBER_1(1),
+
+        NUMBER_2(2),
+
+        NUMBER_3(3),
+
+        NUMBER_4(4);
+
+        private Integer value;
+
+        DelayAfterInfectionEnum(Integer value) {
+            this.value = value;
+        }
+
+        public Integer getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static DelayAfterInfectionEnum fromValue(String text) {
+            for (DelayAfterInfectionEnum b : DelayAfterInfectionEnum.values()) {
+                if (String.valueOf(b.value).equals(text)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + text + "'");
+        }
+    }
+
+    private DelayAfterInfectionEnum delayAfterInfection = null;
+
     public static String[] readOnlyFields() {
         return new String[] {
                 "id",
@@ -271,6 +314,23 @@ public class ExposureDto {
         return this;
     }
 
+    /**
+     * Get delayAfterInfection
+     * @return delayAfterInfection
+     */
+    public DelayAfterInfectionEnum getDelayAfterInfection() {
+        return delayAfterInfection;
+    }
+
+    public void setDelayAfterInfection(DelayAfterInfectionEnum delayAfterInfection) {
+        this.delayAfterInfection = delayAfterInfection;
+    }
+
+    public ExposureDto delayAfterInfection(DelayAfterInfectionEnum delayAfterInfection) {
+        this.delayAfterInfection = delayAfterInfection;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -287,12 +347,13 @@ public class ExposureDto {
                 Objects.equals(this.getExposureLocation(), exposure.getExposureLocation()) &&
                 Objects.equals(this.getNotes(), exposure.getNotes()) &&
                 Objects.equals(this.getCaseWorker(), exposure.getCaseWorker()) &&
-                Objects.equals(this.getStatus(), exposure.getStatus());
+                Objects.equals(this.getStatus(), exposure.getStatus()) &&
+                Objects.equals(this.getDelayAfterInfection(), exposure.getDelayAfterInfection());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getExposedPersonName(), getExposedPersonPhoneNumber(), getExposedDate(), getExposureLocation(), getNotes(), getCaseWorker(), getStatus());
+        return Objects.hash(getId(), getExposedPersonName(), getExposedPersonPhoneNumber(), getExposedDate(), getExposureLocation(), getNotes(), getCaseWorker(), getStatus(), getDelayAfterInfection());
     }
 
     @Override
@@ -307,6 +368,7 @@ public class ExposureDto {
         sb.append("    notes: ").append(toIndentedString(getNotes())).append("\n");
         sb.append("    caseWorker: ").append(toIndentedString(getCaseWorker())).append("\n");
         sb.append("    status: ").append(toIndentedString(getStatus())).append("\n");
+        sb.append("    delayAfterInfection: ").append(toIndentedString(getDelayAfterInfection())).append("\n");
         sb.append("}");
         return sb.toString();
     }

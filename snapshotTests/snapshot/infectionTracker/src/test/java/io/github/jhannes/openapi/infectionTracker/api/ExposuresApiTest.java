@@ -14,6 +14,7 @@ package io.github.jhannes.openapi.infectionTracker.api;
 
 import io.github.jhannes.openapi.infectionTracker.ApiException;
 import io.github.jhannes.openapi.infectionTracker.model.ExposureDto;
+import java.time.LocalDate;
 import java.util.UUID;
 import org.junit.Test;
 import org.junit.Ignore;
@@ -38,7 +39,11 @@ public class ExposuresApiTest {
     @Test
     public void listExposuresTest() throws ApiException {
         //
-        //ExposureDto response = api.listExposures();
+        //List<LocalDate> exposureDate = null;
+        //
+        //Integer maxCount = null;
+        //
+        //ExposureDto response = api.listExposures(exposureDate, maxCount);
 
         // TODO: test validations
     }
