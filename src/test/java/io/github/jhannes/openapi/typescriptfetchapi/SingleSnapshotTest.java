@@ -9,8 +9,8 @@ public class SingleSnapshotTest {
 
     @TestFactory
     DynamicNode javaAnnotationFreeSnapshots() {
-        Path path = SnapshotTests.SNAPSHOT_ROOT;
-        return SnapshotTests.createTestsForSpec(path.resolve("input/bigExample.yaml"), path.resolve("output"), path.resolve("snapshot"));
+        Path spec = SnapshotTests.SNAPSHOT_ROOT.resolve("input/typeHierarchy.yaml");
+        return SnapshotTests.createTestsForSpec(spec);
     }
 
 }

@@ -42,15 +42,15 @@ public class OrderDto {
     private Integer quantity = null;
 
     private OffsetDateTime shipDate = null;
-            
+
     /**
      * Order Status
      */
     public enum StatusEnum {
         PLACED("placed"),
-        
+
         APPROVED("approved"),
-        
+
         DELIVERED("delivered");
 
         private String value;

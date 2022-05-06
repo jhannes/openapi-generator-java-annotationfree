@@ -44,15 +44,15 @@ public class DiscoveryDocumentDto {
     private String end_session_endpoint = null;
 
     private String jwks_uri = null;
-                
+
     /**
      * Gets or Sets responseTypesSupported
      */
     public enum ResponseTypesSupportedEnum {
         CODE("code"),
-        
+
         TOKEN("token"),
-        
+
         ID_TOKEN("id_token");
 
         private String value;
@@ -81,13 +81,13 @@ public class DiscoveryDocumentDto {
     }
 
     private List<ResponseTypesSupportedEnum> response_types_supported = null;
-                
+
     /**
      * Gets or Sets responseModesSupported
      */
     public enum ResponseModesSupportedEnum {
         QUERY("query"),
-        
+
         FRAGMENT("fragment");
 
         private String value;
@@ -116,13 +116,13 @@ public class DiscoveryDocumentDto {
     }
 
     private List<ResponseModesSupportedEnum> response_modes_supported = null;
-                
+
     /**
      * Gets or Sets subjectTypesSupported
      */
     public enum SubjectTypesSupportedEnum {
         PAIRWISE("pairwise"),
-        
+
         PUBLIC("public");
 
         private String value;
@@ -151,13 +151,13 @@ public class DiscoveryDocumentDto {
     }
 
     private List<SubjectTypesSupportedEnum> subject_types_supported = null;
-                
+
     /**
      * Gets or Sets codeChallengeMethodsSupported
      */
     public enum CodeChallengeMethodsSupportedEnum {
         S256("S256"),
-        
+
         PLAIN("plain");
 
         private String value;
@@ -186,7 +186,7 @@ public class DiscoveryDocumentDto {
     }
 
     private List<CodeChallengeMethodsSupportedEnum> code_challenge_methods_supported = null;
-                
+
     /**
      * Gets or Sets idTokenSigningAlgValuesSupported
      */

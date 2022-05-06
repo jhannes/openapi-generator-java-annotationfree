@@ -9,8 +9,8 @@ public class SingleCompileTest {
 
     @TestFactory
     DynamicNode javaAnnotationFreeSnapshots() {
-        Path path = SnapshotTests.SNAPSHOT_ROOT;
-        return CompilerTest.createTestFromSpec(path.resolve("input/petstore.yaml"), path.resolve("compile"));
+        Path spec = SnapshotTests.SNAPSHOT_ROOT.resolve("input/typeHierarchy.yaml");
+        return CompilerTest.createTestFromSpec(spec);
     }
 
 }

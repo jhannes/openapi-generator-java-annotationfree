@@ -37,15 +37,16 @@ public class SnapshotTests {
     @TestFactory
     Stream<DynamicNode> javaAnnotationFreeSnapshots() throws IOException {
         List<DynamicNode> testSuites = new ArrayList<>();
-        testSuites.add(snapshots(SNAPSHOT_ROOT, SNAPSHOT_ROOT.resolve("output"), SNAPSHOT_ROOT.resolve("snapshot")));
+        testSuites.add(snapshots(SNAPSHOT_ROOT));
         if (Files.isDirectory(SnapshotTests.LOCAL_SNAPSHOT_ROOT)) {
-            testSuites.add(snapshots(LOCAL_SNAPSHOT_ROOT, LOCAL_SNAPSHOT_ROOT.resolve("output"), LOCAL_SNAPSHOT_ROOT.resolve("snapshot")));
+            testSuites.add(snapshots(LOCAL_SNAPSHOT_ROOT));
         }
         return testSuites.stream();
     }
 
-    private DynamicNode snapshots(Path testDir, Path outputDir, Path snapshotDir) throws IOException {
+    private DynamicNode snapshots(Path testDir) throws IOException {
         Path inputDir = testDir.resolve("input");
+        Path snapshotDir = testDir.resolve("snapshot");
         if (!Files.isDirectory(snapshotDir)) {
             return dynamicTest("No snapshots for " + testDir, () -> {});
         }
@@ -53,8 +54,12 @@ public class SnapshotTests {
                 "Snapshots of " + testDir,
                 Files.list(inputDir)
                         .filter(p -> p.toFile().isFile())
-                        .map(spec -> createTestsForSpec(spec, outputDir, snapshotDir))
+                        .map(SnapshotTests::createTestsForSpec)
         );
+    }
+
+    public static DynamicNode createTestsForSpec(Path spec) {
+        return createTestsForSpec(spec, spec.getParent().getParent().resolve("output"), spec.getParent().getParent().resolve("snapshot"));
     }
 
     static DynamicNode createTestsForSpec(Path spec, Path outputRoot, Path snapshotRoot) {

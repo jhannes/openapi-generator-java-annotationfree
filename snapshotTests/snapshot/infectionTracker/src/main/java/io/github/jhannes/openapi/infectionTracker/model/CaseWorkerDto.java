@@ -40,15 +40,15 @@ public class CaseWorkerDto {
     private String fullName;
 
     private String email;
-            
+
     /**
      * Gets or Sets role
      */
     public enum RoleEnum {
         ADMINISTRATOR("administrator"),
-        
+
         INTERVIEWER("interviewer"),
-        
+
         FOLLOWUP("followup");
 
         private String value;

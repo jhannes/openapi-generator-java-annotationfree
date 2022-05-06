@@ -6,12 +6,15 @@ import io.swagger.v3.oas.models.media.Schema;
 import org.openapitools.codegen.CodegenConstants;
 import org.openapitools.codegen.CodegenDiscriminator;
 import org.openapitools.codegen.CodegenModel;
+import org.openapitools.codegen.CodegenOperation;
 import org.openapitools.codegen.CodegenProperty;
+import org.openapitools.codegen.CodegenResponse;
 import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.languages.AbstractJavaCodegen;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -35,6 +38,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
         if (additionalProperties.get(CodegenConstants.GENERATE_MODEL_TESTS) == Boolean.TRUE) {
             supportingFiles.add(new SupportingFile("sample_model_data.mustache",  sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "SampleModelData.java"));
         }
+        additionalProperties.put("curly", "{");
     }
 
     @Override
@@ -79,6 +83,37 @@ public class JavaCodegen extends AbstractJavaCodegen {
         }
         openAPI.getComponents().getSchemas().entrySet().removeIf(model -> model.getKey().endsWith("_allOf"));
         super.processOpenAPI(openAPI);
+    }
+
+    @Override
+    protected void updatePropertyForMap(CodegenProperty property, CodegenProperty innerProperty) {
+        // Perhaps I can retain format
+        super.updatePropertyForMap(property, innerProperty);
+    }
+
+
+    @Override
+    public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
+        objs = super.postProcessOperationsWithModels(objs, allModels);
+
+        Set<String> exceptionPayloads = new HashSet<>();
+
+        //noinspection unchecked
+        List<CodegenOperation> operations = (List<CodegenOperation>) ((Map<String, Object>) objs.get("operations")).get("operation");
+        for (CodegenOperation operation : operations) {
+            for (CodegenResponse response : operation.responses) {
+                if (response.is4xx && response.dataType != null) {
+                    exceptionPayloads.add(response.dataType);
+                    ((Collection<String>)operation.vendorExtensions.get("x-java-import")).add(response.dataType);
+                }
+            }
+
+
+
+        }
+        //objs.put("exceptionPayloads", exceptionPayloads);
+
+        return objs;
     }
 
     @SuppressWarnings("unchecked")

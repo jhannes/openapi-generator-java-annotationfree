@@ -4,17 +4,17 @@
 public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces}}{{#-first}} implements {{/-first}}{{^-first}}, {{/-first}}{{{.}}}{{/interfaces}} {
 {{#vars}}
     {{^isInherited}}
+
     {{#isEnum}}
         {{^isContainer}}
-            {{>modelInnerEnum}}
+{{>modelInnerEnum}}
         {{/isContainer}}
         {{#isContainer}}
             {{#mostInnerItems}}
-                {{>modelInnerEnum}}
+{{>modelInnerEnum}}
             {{/mostInnerItems}}
         {{/isContainer}}
     {{/isEnum}}
-
     private {{{datatypeWithEnum}}} {{baseName}}{{#required}}{{#defaultValue}} = {{{.}}}{{/defaultValue}}{{/required}}{{^required}} = null{{/required}};
     {{/isInherited}}
 {{/vars}}
@@ -50,17 +50,23 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList<>();
+        List<String> result = {{#parent}}super.missingRequiredFields(){{/parent}}{{^parent}}new ArrayList<>(){{/parent}};
         {{#vars}}
             {{#required}}
+                {{^isInherited}}
         if (isMissing({{getter}}())) result.add("{{baseName}}");
+                {{/isInherited}}
             {{/required}}
         {{/vars}}
         return result;
     }
 
     public void readOnlyFieldsWithValue(List<String> result) {
+{{#parent}}
+        super.readOnlyFieldsWithValue(result);
+{{/parent}}
 {{#vars}}
+    {{^isInherited}}
     {{#isReadOnly}}
         if (!isMissing({{getter}}())) {
             result.add("{{classname}}.{{baseName}}");
@@ -91,6 +97,7 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
             {{/isArray}}
         {{/isPrimitiveType}}
     {{/isReadOnly}}
+    {{/isInherited}}
 {{/vars}}
     }
 

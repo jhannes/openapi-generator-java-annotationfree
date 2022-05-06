@@ -8,9 +8,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bark** | **Boolean** |  |  [optional]
 **breed** | [**BreedEnum**](#BreedEnum) |  |  [optional]
+**id** | **String** |  |  [optional] [readonly]
 **petType** | **String** |  | 
 **name** | **String** |  |  [optional]
 **birthDate** | **String** |  |  [optional]
+**ownerAddress** | [**AddressDto**](AddressDto.md) |  |  [optional]
 
 
 

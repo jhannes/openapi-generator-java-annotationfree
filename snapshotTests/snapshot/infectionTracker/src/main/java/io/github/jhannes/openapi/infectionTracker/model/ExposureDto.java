@@ -48,19 +48,19 @@ public class ExposureDto {
     private String notes = null;
 
     private UUID caseWorker = null;
-            
+
     /**
      * Gets or Sets status
      */
     public enum StatusEnum {
         UNIDENTIFIED("unidentified"),
-        
+
         IDENTIFIED("identified"),
-        
+
         CONTACTED("contacted"),
-        
+
         TESTED("tested"),
-        
+
         INFECTED("infected");
 
         private String value;

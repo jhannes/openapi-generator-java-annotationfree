@@ -42,6 +42,26 @@ public class SampleModelData {
         this(new Random(seed));
     }
 
+    public AddressDto sampleAddressDto(String propertyName) {
+        return sampleAddressDto();
+    }
+
+    public AddressDto sampleAddressDto() {
+        return new AddressDto()
+            .addressLine1(randomString("addressLine1"))
+            .addressLine2(randomString("addressLine2"))
+            .city(randomString("city"))
+            .country(randomString("country"));
+    }
+
+    public List<AddressDto> sampleListOfAddressDto(String propertyName) {
+        return sampleListOfAddressDto();
+    }
+
+    public List<AddressDto> sampleListOfAddressDto() {
+        return sampleList(() -> sampleAddressDto());
+    }
+
     public CatDto sampleCatDto(String propertyName) {
         return sampleCatDto();
     }
@@ -50,9 +70,11 @@ public class SampleModelData {
         return new CatDto()
             .hunts(randomBoolean("hunts"))
             .age(randomInteger("age"))
+            .id(randomString("id"))
             .petType(randomString("petType"))
             .name(randomString("name"))
-            .birthDate(randomString("birthDate"));
+            .birthDate(randomString("birthDate"))
+            .ownerAddress(sampleAddressDto("ownerAddress"));
     }
 
     public List<CatDto> sampleListOfCatDto(String propertyName) {
@@ -71,9 +93,11 @@ public class SampleModelData {
         return new DogDto()
             .bark(randomBoolean("bark"))
             .breed(sampleDogDtoBreedEnum("breed"))
+            .id(randomString("id"))
             .petType(randomString("petType"))
             .name(randomString("name"))
-            .birthDate(randomString("birthDate"));
+            .birthDate(randomString("birthDate"))
+            .ownerAddress(sampleAddressDto("ownerAddress"));
     }
 
     public List<DogDto> sampleListOfDogDto(String propertyName) {
@@ -94,9 +118,11 @@ public class SampleModelData {
 
     public PetBaseDto samplePetBaseDto() {
         return new PetBaseDto()
+            .id(randomString("id"))
             .petType(randomString("petType"))
             .name(randomString("name"))
-            .birthDate(randomString("birthDate"));
+            .birthDate(randomString("birthDate"))
+            .ownerAddress(sampleAddressDto("ownerAddress"));
     }
 
     public List<PetBaseDto> sampleListOfPetBaseDto(String propertyName) {

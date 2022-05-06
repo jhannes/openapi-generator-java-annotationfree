@@ -44,15 +44,15 @@ public class PetDto {
     private List<String> photoUrls = new ArrayList<>();
 
     private List<TagDto> tags = null;
-            
+
     /**
      * pet status in the store
      */
     public enum StatusEnum {
         AVAILABLE("available"),
-        
+
         PENDING("pending"),
-        
+
         SOLD("sold");
 
         private String value;

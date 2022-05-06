@@ -108,6 +108,7 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [AddressDto](docs/AddressDto.md)
  - [CatDto](docs/CatDto.md)
  - [DogDto](docs/DogDto.md)
  - [PetBaseDto](docs/PetBaseDto.md)

@@ -41,6 +41,7 @@ public class CatDto extends PetBaseDto implements PetDto {
 
     public static String[] readOnlyFields() {
         return new String[] {
+                "id",
         };
     }
 
@@ -56,12 +57,15 @@ public class CatDto extends PetBaseDto implements PetDto {
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList<>();
-        if (isMissing(getPetType())) result.add("pet_type");
+        List<String> result = super.missingRequiredFields();
         return result;
     }
 
     public void readOnlyFieldsWithValue(List<String> result) {
+        super.readOnlyFieldsWithValue(result);
+        if (!isMissing(getAge())) {
+            result.add("CatDto.age");
+        }
     }
 
     private boolean isMissing(String s) {
@@ -96,18 +100,26 @@ public class CatDto extends PetBaseDto implements PetDto {
 
     /**
      * Get age
+     * read only
      * @return age
      */
     public Integer getAge() {
         return age;
     }
 
+    /** <strong>read only</strong> */
     public void setAge(Integer age) {
         this.age = age;
     }
 
     public CatDto age(Integer age) {
         this.age = age;
+        return this;
+    }
+
+    @Override
+    public CatDto id(String id) {
+        super.id(id);
         return this;
     }
 
@@ -130,6 +142,12 @@ public class CatDto extends PetBaseDto implements PetDto {
     }
 
     @Override
+    public CatDto ownerAddress(AddressDto ownerAddress) {
+        super.ownerAddress(ownerAddress);
+        return this;
+    }
+
+    @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
             return true;
@@ -140,15 +158,17 @@ public class CatDto extends PetBaseDto implements PetDto {
         CatDto cat = (CatDto) o;
         return Objects.equals(this.getHunts(), cat.getHunts()) &&
                 Objects.equals(this.getAge(), cat.getAge()) &&
+                Objects.equals(this.getId(), cat.getId()) &&
                 Objects.equals(this.getPetType(), cat.getPetType()) &&
                 Objects.equals(this.getName(), cat.getName()) &&
                 Objects.equals(this.getBirthDate(), cat.getBirthDate()) &&
+                Objects.equals(this.getOwnerAddress(), cat.getOwnerAddress()) &&
             super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getHunts(), getAge(), getPetType(), getName(), getBirthDate());
+        return Objects.hash(getHunts(), getAge(), getId(), getPetType(), getName(), getBirthDate(), getOwnerAddress());
     }
 
     @Override
@@ -158,9 +178,11 @@ public class CatDto extends PetBaseDto implements PetDto {
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    hunts: ").append(toIndentedString(getHunts())).append("\n");
         sb.append("    age: ").append(toIndentedString(getAge())).append("\n");
+        sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("    birth_date: ").append(toIndentedString(getBirthDate())).append("\n");
+        sb.append("    ownerAddress: ").append(toIndentedString(getOwnerAddress())).append("\n");
         sb.append("}");
         return sb.toString();
     }

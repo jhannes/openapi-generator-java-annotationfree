@@ -36,13 +36,13 @@ import java.util.stream.Collectors;
 public class PetDto {
 
     private UUID id = null;
-            
+
     /**
      * Gets or Sets petType
      */
     public enum PetTypeEnum {
         CAT("Cat"),
-        
+
         DOG("Dog");
 
         private String value;
@@ -79,15 +79,15 @@ public class PetDto {
     private OffsetDateTime created_at = null;
 
     private List<CommentDto> comments = null;
-            
+
     /**
      * Gets or Sets status
      */
     public enum StatusEnum {
         PENDING("Pending"),
-        
+
         AVAILABLE("Available"),
-        
+
         SOLD("Sold");
 
         private String value;

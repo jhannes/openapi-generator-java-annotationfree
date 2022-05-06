@@ -34,22 +34,26 @@ public class CompilerTest {
     @TestFactory
     Stream<DynamicNode> exampleSpecifications() throws IOException {
         List<DynamicNode> testSuites = new ArrayList<>();
-        testSuites.add(compileSpec(SnapshotTests.SNAPSHOT_ROOT, SnapshotTests.SNAPSHOT_ROOT.resolve("compile")));
+        testSuites.add(compileSpec(SnapshotTests.SNAPSHOT_ROOT));
         if (Files.isDirectory(SnapshotTests.LOCAL_SNAPSHOT_ROOT)) {
-            testSuites.add(compileSpec(SnapshotTests.LOCAL_SNAPSHOT_ROOT, SnapshotTests.LOCAL_SNAPSHOT_ROOT.resolve("compile")));
+            testSuites.add(compileSpec(SnapshotTests.LOCAL_SNAPSHOT_ROOT));
         }
         return testSuites.stream();
     }
 
-    static DynamicNode compileSpec(Path testDir, Path outputDir) throws IOException {
+    static DynamicNode compileSpec(Path testDir) throws IOException {
         Path inputDir = testDir.resolve("input");
-        cleanDirectory(outputDir);
+        cleanDirectory(testDir.resolve("compile"));
         return dynamicContainer(
                 "Compiling of " + testDir,
                 Files.list(inputDir)
                         .filter(p -> p.toFile().isFile())
-                        .map(spec -> createTestFromSpec(spec, outputDir))
+                        .map(CompilerTest::createTestFromSpec)
         );
+    }
+
+    public static DynamicNode createTestFromSpec(Path spec) {
+        return createTestFromSpec(spec, spec.getParent().getParent().resolve("compile"));
     }
 
     static DynamicContainer createTestFromSpec(Path spec, Path outputDir) {
