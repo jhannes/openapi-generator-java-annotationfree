@@ -32,8 +32,6 @@ import java.util.function.Consumer;
 
 public interface DefaultApi {
     /**
-     * 
-     * 
      * @return GeometryDto
      */
     @GET("/geometry")
@@ -41,8 +39,6 @@ public interface DefaultApi {
     public GeometryDto getGeometry(
     ) throws IOException;
     /**
-     * 
-     * 
      * @return GeometryCollectionDto
      */
     @GET("/collection")
@@ -50,8 +46,6 @@ public interface DefaultApi {
     public GeometryCollectionDto getLocation(
     ) throws IOException;
     /**
-     * 
-     * 
      * @return PolygonDto
      */
     @GET("/polygon")

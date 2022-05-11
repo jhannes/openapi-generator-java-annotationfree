@@ -35,8 +35,6 @@ import java.util.function.Consumer;
 
 public interface DefaultApi {
     /**
-     * 
-     * 
      * @param logMessageDto  (optional)
      */
     @POST("/log")
@@ -44,8 +42,6 @@ public interface DefaultApi {
             @JsonBody LogMessageDto logMessageDto
     ) throws IOException;
     /**
-     * 
-     * 
      * @return AnyPartyDto
      */
     @GET("/parties")
@@ -53,19 +49,15 @@ public interface DefaultApi {
     public AnyPartyDto partiesGet(
     ) throws IOException;
     /**
-     * 
-     * 
      * @param id  (required)
      * @param anyPartyDto  (optional)
      */
     @PUT("/parties/{id}")
     public void partiesIdPut(
-            @PathParam("id") UUID id, 
+            @PathParam("id") UUID id,
             @JsonBody AnyPartyDto anyPartyDto
     ) throws IOException;
     /**
-     * 
-     * 
      * @param anyPartyDto  (optional)
      */
     @POST("/parties")

@@ -23,8 +23,12 @@ import java.util.function.Consumer;
 public interface {{classname}} {
 {{#operation}}
     /**
+    {{#summary}}
      * {{summary}}
+    {{/summary}}
+    {{#notes}}
      * {{notes}}
+    {{/notes}}
     {{#allParams}}
      * @param {{paramName}} {{description}}{{#required}} (required){{/required}}{{^required}} (optional{{^isContainer}}{{#defaultValue}}, default to {{.}}{{/defaultValue}}){{/isContainer}}{{/required}}
     {{/allParams}}
@@ -50,7 +54,7 @@ public interface {{classname}} {
             @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isQueryParam}}{{#isBodyParam}}
             @JsonBody {{{dataType}}} {{paramName}}{{/isBodyParam}}{{#isFormParam}}
             @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isFormParam}}{{#isHeaderParam}}
-            @HttpHeader("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}}, {{/-last}}{{/allParams}}{{#responses}}{{#headers}},
+            @HttpHeader("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}},{{/-last}}{{/allParams}}{{#responses}}{{#headers}},
             @HttpHeader("{{baseName}}") Consumer<{{{dataType}}}> set{{nameInCamelCase}}{{/headers}}{{/responses}}
     ) throws IOException;
 {{/operation}}

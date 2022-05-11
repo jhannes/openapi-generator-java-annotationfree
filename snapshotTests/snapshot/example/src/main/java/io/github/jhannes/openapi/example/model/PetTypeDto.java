@@ -36,9 +36,7 @@ import java.util.stream.Collectors;
 public enum PetTypeDto {
 
     CAT("cat"),
-    
     DOG("dog"),
-    
     BIRD("bird");
 
     private String value;
@@ -61,7 +59,6 @@ public enum PetTypeDto {
             "cat",
             "dog",
             "bird",
-            
         });
     }
 

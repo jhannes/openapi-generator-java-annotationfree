@@ -36,9 +36,7 @@ import java.util.stream.Collectors;
 public enum UserRoleDto {
 
     ADMINISTRATOR("administrator"),
-    
     INTERVIEWER("interviewer"),
-    
     FOLLOWUP("followup");
 
     private String value;
@@ -61,7 +59,6 @@ public enum UserRoleDto {
             "administrator",
             "interviewer",
             "followup",
-            
         });
     }
 

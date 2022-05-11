@@ -40,7 +40,6 @@ public interface UserApi {
     ) throws IOException;
     /**
      * Creates list of users with given input array
-     * 
      * @param userDto List of user object (optional
      */
     @POST("/user/createWithArray")
@@ -49,7 +48,6 @@ public interface UserApi {
     ) throws IOException;
     /**
      * Creates list of users with given input array
-     * 
      * @param userDto List of user object (optional
      */
     @POST("/user/createWithList")
@@ -67,7 +65,6 @@ public interface UserApi {
     ) throws IOException;
     /**
      * Get user by user name
-     * 
      * @param username The name that needs to be fetched. Use user1 for testing.  (required)
      * @return UserDto
      */
@@ -78,7 +75,6 @@ public interface UserApi {
     ) throws IOException;
     /**
      * Logs user into the system
-     * 
      * @param username The user name for login (optional)
      * @param password The password for login in clear text (optional)
      * @return String
@@ -86,12 +82,11 @@ public interface UserApi {
     @GET("/user/login")
     @JsonBody
     public String loginUser(
-            @RequestParam("username") Optional<String> username, 
+            @RequestParam("username") Optional<String> username,
             @RequestParam("password") Optional<String> password
     ) throws IOException;
     /**
      * Logs out current logged in user session
-     * 
      */
     @GET("/user/logout")
     public void logoutUser(
@@ -104,7 +99,7 @@ public interface UserApi {
      */
     @PUT("/user/{username}")
     public void updateUser(
-            @PathParam("username") String username, 
+            @PathParam("username") String username,
             @JsonBody UserDto userDto
     ) throws IOException;
 }

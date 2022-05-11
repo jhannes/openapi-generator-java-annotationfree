@@ -30,8 +30,6 @@ import java.util.function.Consumer;
 
 public interface CaseWorkersApi {
     /**
-     * 
-     * 
      * @return CaseWorkerDto
      */
     @GET("/api/caseWorkers")
@@ -39,8 +37,6 @@ public interface CaseWorkersApi {
     public CaseWorkerDto listCaseWorkers(
     ) throws IOException;
     /**
-     * 
-     * 
      * @param caseWorkerDto  (optional)
      */
     @POST("/api/caseWorkers")

@@ -32,8 +32,6 @@ import java.util.function.Consumer;
 
 public interface ExposuresApi {
     /**
-     * 
-     * 
      * @param exposureDate  (optional
      * @param maxCount  (optional)
      * @return ExposureDto
@@ -41,18 +39,16 @@ public interface ExposuresApi {
     @GET("/api/exposures")
     @JsonBody
     public ExposureDto listExposures(
-            @RequestParam("exposureDate") Optional<List<LocalDate>> exposureDate, 
+            @RequestParam("exposureDate") Optional<List<LocalDate>> exposureDate,
             @RequestParam("maxCount") Optional<Integer> maxCount
     ) throws IOException;
     /**
-     * 
-     * 
      * @param exposureId  (required)
      * @param exposureDto  (optional)
      */
     @PUT("/api/exposures/{exposureId}")
     public void updateExposure(
-            @PathParam("exposureId") UUID exposureId, 
+            @PathParam("exposureId") UUID exposureId,
             @JsonBody ExposureDto exposureDto
     ) throws IOException;
 }

@@ -32,7 +32,6 @@ import java.util.function.Consumer;
 public interface PetApi {
     /**
      * Add a new pet to the store
-     * 
      * @param petDto Pet object that needs to be added to the store (optional)
      */
     @POST("/pet")
@@ -41,18 +40,16 @@ public interface PetApi {
     ) throws IOException;
     /**
      * Deletes a pet
-     * 
      * @param petId Pet id to delete (required)
      * @param apiKey  (optional)
      */
     @DELETE("/pet/{petId}")
     public void deletePet(
-            @PathParam("petId") Long petId, 
+            @PathParam("petId") Long petId,
             @HttpHeader("api_key") Optional<String> apiKey
     ) throws IOException;
     /**
      * downloads image
-     * 
      * @param petId  (required)
      * @return File
      */
@@ -98,7 +95,6 @@ public interface PetApi {
     ) throws IOException;
     /**
      * Update an existing pet
-     * 
      * @param petDto Pet object that needs to be added to the store (optional)
      */
     @PUT("/pet")
@@ -107,28 +103,26 @@ public interface PetApi {
     ) throws IOException;
     /**
      * Updates a pet in the store with form data
-     * 
      * @param petId ID of pet that needs to be updated (required)
      * @param name Updated name of the pet (optional)
      * @param status Updated status of the pet (optional)
      */
     @POST("/pet/{petId}")
     public void updatePetWithForm(
-            @PathParam("petId") String petId, 
-            @RequestParam("name") Optional<String> name, 
+            @PathParam("petId") String petId,
+            @RequestParam("name") Optional<String> name,
             @RequestParam("status") Optional<String> status
     ) throws IOException;
     /**
      * uploads an image
-     * 
      * @param petId ID of pet to update (required)
      * @param additionalMetadata Additional data to pass to server (optional)
      * @param file file to upload (optional)
      */
     @POST("/pet/{petId}/uploadImage")
     public void uploadFile(
-            @PathParam("petId") Long petId, 
-            @RequestParam("additionalMetadata") Optional<String> additionalMetadata, 
+            @PathParam("petId") Long petId,
+            @RequestParam("additionalMetadata") Optional<String> additionalMetadata,
             @RequestParam("file") Optional<File> file
     ) throws IOException;
 }

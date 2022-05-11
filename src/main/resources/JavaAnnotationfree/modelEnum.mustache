@@ -2,14 +2,17 @@
 * {{^description}}Gets or Sets {{{name}}}{{/description}}{{#description}}{{description}}{{/description}}
 */
 public enum {{#datatypeWithEnum}}{{{.}}}{{/datatypeWithEnum}}{{^datatypeWithEnum}}{{{classname}}}{{/datatypeWithEnum}} {
-{{#allowableValues}}{{#enumVars}}
-    {{#enumDescription}}
+
+    {{#allowableValues}}
+        {{#enumVars}}
+            {{#enumDescription}}
         /**
         * {{enumDescription}}
         */
-    {{/enumDescription}}
-    {{{name}}}({{{value}}}){{^-last}},
-    {{/-last}}{{#-last}};{{/-last}}{{/enumVars}}{{/allowableValues}}
+            {{/enumDescription}}
+    {{{name}}}({{{value}}}){{^-last}},{{/-last}}{{#-last}};{{/-last}}
+        {{/enumVars}}
+    {{/allowableValues}}
 
     private {{{dataType}}} value;
 
@@ -28,8 +31,11 @@ public enum {{#datatypeWithEnum}}{{{.}}}{{/datatypeWithEnum}}{{^datatypeWithEnum
 
     public static List<String> getValues() {
         return Arrays.asList(new String[] {
-            {{#allowableValues}}{{#enumVars}}{{{value}}},
-            {{/enumVars}}{{/allowableValues}}
+        {{#allowableValues}}
+            {{#enumVars}}
+            {{{value}}},
+            {{/enumVars}}
+        {{/allowableValues}}
         });
     }
 

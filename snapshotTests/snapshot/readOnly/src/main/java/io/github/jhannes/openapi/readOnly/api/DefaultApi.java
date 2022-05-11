@@ -32,32 +32,26 @@ import java.util.function.Consumer;
 
 public interface DefaultApi {
     /**
-     * 
-     * 
      * @param storeId  (required)
      * @param petDto  (optional)
      */
     @POST("/{storeId}/pets")
     public void addPet(
-            @PathParam("storeId") UUID storeId, 
+            @PathParam("storeId") UUID storeId,
             @JsonBody PetDto petDto
     ) throws IOException;
     /**
-     * 
-     * 
      * @param petId  (required)
      * @param name Updated name of the pet (optional)
      * @param status Updated status of the pet (optional)
      */
     @POST("/pets/{petId}")
     public void addPetWithForm(
-            @PathParam("petId") UUID petId, 
-            @RequestParam("name") Optional<String> name, 
+            @PathParam("petId") UUID petId,
+            @RequestParam("name") Optional<String> name,
             @RequestParam("status") Optional<String> status
     ) throws IOException;
     /**
-     * 
-     * 
      * @param storeId  (required)
      * @param status  (optional
      * @param tags  (optional
@@ -67,9 +61,9 @@ public interface DefaultApi {
     @GET("/{storeId}/pets")
     @JsonBody
     public PetDto listPets(
-            @PathParam("storeId") UUID storeId, 
-            @RequestParam("status") Optional<List<String>> status, 
-            @RequestParam("tags") Optional<List<String>> tags, 
+            @PathParam("storeId") UUID storeId,
+            @RequestParam("status") Optional<List<String>> status,
+            @RequestParam("tags") Optional<List<String>> tags,
             @RequestParam("bornAfter") Optional<LocalDate> bornAfter
     ) throws IOException;
 }

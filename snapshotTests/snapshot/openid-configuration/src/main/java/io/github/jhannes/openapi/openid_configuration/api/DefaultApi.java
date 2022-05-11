@@ -31,8 +31,6 @@ import java.util.function.Consumer;
 
 public interface DefaultApi {
     /**
-     * 
-     * 
      * @return JwksDocumentDto
      */
     @GET("/.well-known/keys")
@@ -40,8 +38,6 @@ public interface DefaultApi {
     public JwksDocumentDto wellKnownKeysGet(
     ) throws IOException;
     /**
-     * 
-     * 
      * @return DiscoveryDocumentDto
      */
     @GET("/.well-known/openid-configuration")

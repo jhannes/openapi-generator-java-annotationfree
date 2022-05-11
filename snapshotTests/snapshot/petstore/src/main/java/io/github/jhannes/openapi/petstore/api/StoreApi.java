@@ -63,7 +63,6 @@ public interface StoreApi {
     ) throws IOException;
     /**
      * Place an order for a pet
-     * 
      * @param orderDto order placed for purchasing the pet (optional)
      * @return OrderDto
      */

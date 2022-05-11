@@ -33,8 +33,6 @@ import java.util.function.Consumer;
 
 public interface CasesApi {
     /**
-     * 
-     * 
      * @param caseId  (required)
      * @return InfectionDto
      */
@@ -44,8 +42,6 @@ public interface CasesApi {
             @PathParam("caseId") UUID caseId
     ) throws IOException;
     /**
-     * 
-     * 
      * @return InfectionDto
      */
     @GET("/api/cases")
@@ -53,8 +49,6 @@ public interface CasesApi {
     public InfectionDto listCases(
     ) throws IOException;
     /**
-     * 
-     * 
      * @param infectionInformationDto  (optional)
      */
     @POST("/api/cases")
@@ -62,14 +56,12 @@ public interface CasesApi {
             @JsonBody InfectionInformationDto infectionInformationDto
     ) throws IOException;
     /**
-     * 
-     * 
      * @param caseId  (required)
      * @param exposureDto  (optional)
      */
     @POST("/api/cases/{caseId}/exposures")
     public void registerExposure(
-            @PathParam("caseId") UUID caseId, 
+            @PathParam("caseId") UUID caseId,
             @JsonBody ExposureDto exposureDto
     ) throws IOException;
 }
