@@ -234,6 +234,12 @@ public class SampleModelData {
         return random.nextBoolean();
     }
 
+    public Object randomObject(String propertyName) {
+        Map<String, String> result = new HashMap<>();
+        result.put(randomString(propertyName + ".key"), randomString(propertyName + ".value"));
+        return result;
+    }
+
     public LocalDate sampleLocalDate(String propertyName) {
         return LocalDate.of(2022, 1, 1).plusDays(random.nextInt(1000));
     }

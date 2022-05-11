@@ -9,7 +9,7 @@ public class SingleCompileTest {
 
     @TestFactory
     DynamicNode javaAnnotationFreeSnapshots() {
-        Path spec = SnapshotTests.SNAPSHOT_ROOT.resolve("input/typeHierarchy.yaml");
+        Path spec = SnapshotTests.LOCAL_SNAPSHOT_ROOT.resolve("input/frrmobil.link");
         return CompilerTest.createTestFromSpec(spec);
     }
 

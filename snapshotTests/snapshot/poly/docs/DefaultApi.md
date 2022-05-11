@@ -4,10 +4,70 @@ All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**logMessage**](DefaultApi.md#logMessage) | **POST** /log | 
 [**partiesGet**](DefaultApi.md#partiesGet) | **GET** /parties | 
 [**partiesIdPut**](DefaultApi.md#partiesIdPut) | **PUT** /parties/{id} | 
 [**partiesPost**](DefaultApi.md#partiesPost) | **POST** /parties | 
 
+
+
+## logMessage
+
+> logMessage(logMessageDto)
+
+
+
+### Example
+
+```java
+import io.github.jhannes.openapi.poly.api.*;
+import io.github.jhannes.openapi.poly.models.*;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
+
+public class Example {
+    public static void main(String[] args) {
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
+        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+
+        LogMessageDto logMessageDto = new LogMessageDto(); // LogMessageDto | 
+        try {
+            apiInstance.logMessage(logMessageDto);
+        } catch (HttpClientException e) {
+            System.err.println("Exception when calling DefaultApi#logMessage");
+            System.err.println("Status code: " + e.getStatusCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("URL: " + e.getUrl());
+        }
+    }
+}
+```
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **logMessageDto** | [**LogMessageDto**](LogMessageDto.md)|  | [optional]
+
+### Return type
+
+null (empty response body)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: Not defined
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Log message was saved |  -  |
 
 
 ## partiesGet

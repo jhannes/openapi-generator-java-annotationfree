@@ -16,6 +16,7 @@ package io.github.jhannes.openapi.poly.api;
 import io.github.jhannes.openapi.poly.ApiException;
 import io.github.jhannes.openapi.poly.model.AnyPartyDto;
 import io.github.jhannes.openapi.poly.model.CreationErrorDto;
+import io.github.jhannes.openapi.poly.model.LogMessageDto;
 import java.util.UUID;
 import io.github.jhannes.openapi.poly.model.UpdateErrorDto;
 import org.junit.Test;
@@ -34,6 +35,19 @@ public class DefaultApiTest {
 
     private final DefaultApi api = new DefaultApi();
 
+    /**
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void logMessageTest() throws ApiException {
+        //
+        //LogMessageDto logMessageDto = null;
+        //
+        //api.logMessage(logMessageDto);
+
+        // TODO: test validations
+    }
     /**
      * @throws ApiException
      *          if the Api call fails

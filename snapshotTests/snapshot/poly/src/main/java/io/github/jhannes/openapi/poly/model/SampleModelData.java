@@ -140,6 +140,24 @@ public class SampleModelData {
         return sampleList(() -> sampleIllegalEmailAddressErrorDto());
     }
 
+    public LogMessageDto sampleLogMessageDto(String propertyName) {
+        return sampleLogMessageDto();
+    }
+
+    public LogMessageDto sampleLogMessageDto() {
+        return new LogMessageDto()
+            .message(randomString("message"))
+            .error(randomObject("error"));
+    }
+
+    public List<LogMessageDto> sampleListOfLogMessageDto(String propertyName) {
+        return sampleListOfLogMessageDto();
+    }
+
+    public List<LogMessageDto> sampleListOfLogMessageDto() {
+        return sampleList(() -> sampleLogMessageDto());
+    }
+
     public NotFoundErrorDto sampleNotFoundErrorDto(String propertyName) {
         return sampleNotFoundErrorDto();
     }
@@ -307,6 +325,12 @@ public class SampleModelData {
 
     public Boolean randomBoolean(String propertyName) {
         return random.nextBoolean();
+    }
+
+    public Object randomObject(String propertyName) {
+        Map<String, String> result = new HashMap<>();
+        result.put(randomString(propertyName + ".key"), randomString(propertyName + ".value"));
+        return result;
     }
 
     public LocalDate sampleLocalDate(String propertyName) {

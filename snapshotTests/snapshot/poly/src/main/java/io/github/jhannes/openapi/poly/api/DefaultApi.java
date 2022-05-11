@@ -16,6 +16,7 @@ import io.github.jhannes.openapi.poly.model.*;
 
 import io.github.jhannes.openapi.poly.model.AnyPartyDto;
 import io.github.jhannes.openapi.poly.model.CreationErrorDto;
+import io.github.jhannes.openapi.poly.model.LogMessageDto;
 import java.util.UUID;
 import io.github.jhannes.openapi.poly.model.UpdateErrorDto;
 
@@ -33,6 +34,15 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public interface DefaultApi {
+    /**
+     * 
+     * 
+     * @param logMessageDto  (optional)
+     */
+    @POST("/log")
+    public void logMessage(
+            @JsonBody LogMessageDto logMessageDto
+    ) throws IOException;
     /**
      * 
      * 

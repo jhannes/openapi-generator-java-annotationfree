@@ -83,11 +83,11 @@ public class Example {
         HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
         DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
+        LogMessageDto logMessageDto = new LogMessageDto(); // LogMessageDto | 
         try {
-            AnyPartyDto result = apiInstance.partiesGet();
-            System.out.println(result);
+            apiInstance.logMessage(logMessageDto);
         } catch (HttpClientException e) {
-            System.err.println("Exception when calling DefaultApi#partiesGet");
+            System.err.println("Exception when calling DefaultApi#logMessage");
             System.err.println("Status code: " + e.getStatusCode());
             System.err.println("Reason: " + e.getResponseBody());
             System.err.println("URL: " + e.getUrl());
@@ -103,6 +103,7 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DefaultApi* | [**logMessage**](docs/DefaultApi.md#logMessage) | **POST** /log | 
 *DefaultApi* | [**partiesGet**](docs/DefaultApi.md#partiesGet) | **GET** /parties | 
 *DefaultApi* | [**partiesIdPut**](docs/DefaultApi.md#partiesIdPut) | **PUT** /parties/{id} | 
 *DefaultApi* | [**partiesPost**](docs/DefaultApi.md#partiesPost) | **POST** /parties | 
@@ -115,6 +116,7 @@ Class | Method | HTTP request | Description
  - [DuplicateIdentifierErrorDto](docs/DuplicateIdentifierErrorDto.md)
  - [GeneralErrorDto](docs/GeneralErrorDto.md)
  - [IllegalEmailAddressErrorDto](docs/IllegalEmailAddressErrorDto.md)
+ - [LogMessageDto](docs/LogMessageDto.md)
  - [NotFoundErrorDto](docs/NotFoundErrorDto.md)
  - [OrganizationDto](docs/OrganizationDto.md)
  - [PersonDto](docs/PersonDto.md)
