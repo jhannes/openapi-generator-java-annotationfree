@@ -49,10 +49,9 @@ public class DiscoveryDocumentDto {
      * Gets or Sets responseTypesSupported
      */
     public enum ResponseTypesSupportedEnum {
+
         CODE("code"),
-
         TOKEN("token"),
-
         ID_TOKEN("id_token");
 
         private String value;
@@ -86,8 +85,8 @@ public class DiscoveryDocumentDto {
      * Gets or Sets responseModesSupported
      */
     public enum ResponseModesSupportedEnum {
-        QUERY("query"),
 
+        QUERY("query"),
         FRAGMENT("fragment");
 
         private String value;
@@ -121,8 +120,8 @@ public class DiscoveryDocumentDto {
      * Gets or Sets subjectTypesSupported
      */
     public enum SubjectTypesSupportedEnum {
-        PAIRWISE("pairwise"),
 
+        PAIRWISE("pairwise"),
         PUBLIC("public");
 
         private String value;
@@ -156,8 +155,8 @@ public class DiscoveryDocumentDto {
      * Gets or Sets codeChallengeMethodsSupported
      */
     public enum CodeChallengeMethodsSupportedEnum {
-        S256("S256"),
 
+        S256("S256"),
         PLAIN("plain");
 
         private String value;
@@ -191,6 +190,7 @@ public class DiscoveryDocumentDto {
      * Gets or Sets idTokenSigningAlgValuesSupported
      */
     public enum IdTokenSigningAlgValuesSupportedEnum {
+
         RS256("RS256");
 
         private String value;

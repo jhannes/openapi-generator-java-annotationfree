@@ -49,10 +49,9 @@ public class PetDto {
      * pet status in the store
      */
     public enum StatusEnum {
+
         AVAILABLE("available"),
-
         PENDING("pending"),
-
         SOLD("sold");
 
         private String value;

@@ -41,8 +41,8 @@ public class PetDto {
      * Gets or Sets petType
      */
     public enum PetTypeEnum {
-        CAT("Cat"),
 
+        CAT("Cat"),
         DOG("Dog");
 
         private String value;
@@ -84,10 +84,9 @@ public class PetDto {
      * Gets or Sets status
      */
     public enum StatusEnum {
+
         PENDING("Pending"),
-
         AVAILABLE("Available"),
-
         SOLD("Sold");
 
         private String value;

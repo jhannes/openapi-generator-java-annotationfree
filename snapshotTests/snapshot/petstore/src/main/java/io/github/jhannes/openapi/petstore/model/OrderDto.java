@@ -47,10 +47,9 @@ public class OrderDto {
      * Order Status
      */
     public enum StatusEnum {
+
         PLACED("placed"),
-
         APPROVED("approved"),
-
         DELIVERED("delivered");
 
         private String value;

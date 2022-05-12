@@ -34,6 +34,7 @@ INFECTED | &quot;infected&quot;
 
 Name | Value
 ---- | -----
+NUMBER_MINUS_2 | -2
 NUMBER_MINUS_1 | -1
 NUMBER_0 | 0
 NUMBER_1 | 1

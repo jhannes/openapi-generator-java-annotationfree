@@ -53,14 +53,11 @@ public class ExposureDto {
      * Gets or Sets status
      */
     public enum StatusEnum {
+
         UNIDENTIFIED("unidentified"),
-
         IDENTIFIED("identified"),
-
         CONTACTED("contacted"),
-
         TESTED("tested"),
-
         INFECTED("infected");
 
         private String value;
@@ -94,16 +91,13 @@ public class ExposureDto {
      * Gets or Sets delayAfterInfection
      */
     public enum DelayAfterInfectionEnum {
+
+        NUMBER_MINUS_2(-2),
         NUMBER_MINUS_1(-1),
-
         NUMBER_0(0),
-
         NUMBER_1(1),
-
         NUMBER_2(2),
-
         NUMBER_3(3),
-
         NUMBER_4(4);
 
         private Integer value;
