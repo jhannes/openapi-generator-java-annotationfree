@@ -113,6 +113,10 @@
         return sampleZonedDateTime(propertyName).toOffsetDateTime();
     }
 
+    public Instant sampleInstant(String propertyName) {
+        return sampleZonedDateTime(propertyName).toInstant();
+    }
+
     public URI randomURI(String propertyName) {
         return asURI("https://" + randomDomainName());
     }

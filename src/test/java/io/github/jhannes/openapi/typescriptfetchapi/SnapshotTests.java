@@ -14,7 +14,6 @@ import org.openapitools.codegen.config.CodegenConfigurator;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,14 +28,11 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class SnapshotTests extends AbstractSnapshotTest {
 
-    public static final Path SNAPSHOT_ROOT = Paths.get("snapshotTests");
-    public static final Path LOCAL_SNAPSHOT_ROOT = Paths.get("localSnapshotTests");
-
     @TestFactory
     Stream<DynamicNode> javaAnnotationFreeSnapshots() throws IOException {
         List<DynamicNode> testSuites = new ArrayList<>();
         testSuites.add(snapshots(SNAPSHOT_ROOT));
-        if (Files.isDirectory(SnapshotTests.LOCAL_SNAPSHOT_ROOT)) {
+        if (Files.isDirectory(AbstractSnapshotTest.LOCAL_SNAPSHOT_ROOT)) {
             testSuites.add(snapshots(LOCAL_SNAPSHOT_ROOT));
         }
         return testSuites.stream();

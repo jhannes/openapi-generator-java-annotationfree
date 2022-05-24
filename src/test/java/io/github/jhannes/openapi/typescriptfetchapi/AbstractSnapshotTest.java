@@ -11,6 +11,9 @@ import java.util.Comparator;
 import java.util.stream.Stream;
 
 public class AbstractSnapshotTest {
+    public static final Path SNAPSHOT_ROOT = Paths.get("snapshotTests");
+    public static final Path LOCAL_SNAPSHOT_ROOT = Paths.get("localSnapshotTests");
+
     protected static CodegenConfigurator createConfigurator(String modelName, Path spec, Path outputDir) {
         try {
             if (spec.getFileName().toString().endsWith(".link")) {

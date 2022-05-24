@@ -31,9 +31,9 @@ public class CompilerTest extends AbstractSnapshotTest {
     @TestFactory
     Stream<DynamicNode> exampleSpecifications() throws IOException {
         List<DynamicNode> testSuites = new ArrayList<>();
-        testSuites.add(compileSpec(SnapshotTests.SNAPSHOT_ROOT));
-        if (Files.isDirectory(SnapshotTests.LOCAL_SNAPSHOT_ROOT)) {
-            testSuites.add(compileSpec(SnapshotTests.LOCAL_SNAPSHOT_ROOT));
+        testSuites.add(compileSpec(AbstractSnapshotTest.SNAPSHOT_ROOT));
+        if (Files.isDirectory(AbstractSnapshotTest.LOCAL_SNAPSHOT_ROOT)) {
+            testSuites.add(compileSpec(AbstractSnapshotTest.LOCAL_SNAPSHOT_ROOT));
         }
         return testSuites.stream();
     }

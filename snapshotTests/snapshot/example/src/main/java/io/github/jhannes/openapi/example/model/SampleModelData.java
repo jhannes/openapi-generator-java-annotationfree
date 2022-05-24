@@ -13,6 +13,7 @@ package io.github.jhannes.openapi.example.model;
 
 
 import java.net.URI;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -190,6 +191,10 @@ public class SampleModelData {
 
     public OffsetDateTime sampleOffsetDateTime(String propertyName) {
         return sampleZonedDateTime(propertyName).toOffsetDateTime();
+    }
+
+    public Instant sampleInstant(String propertyName) {
+        return sampleZonedDateTime(propertyName).toInstant();
     }
 
     public URI randomURI(String propertyName) {
