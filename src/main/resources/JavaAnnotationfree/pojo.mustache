@@ -68,7 +68,7 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
 {{#vars}}
     {{^isInherited}}
     {{#isReadOnly}}
-        if (!isMissing({{getter}}())) {
+        if (!isMissing({{getter}}()){{#isArray}} && !{{getter}}().isEmpty(){{/isArray}}) {
             result.add("{{classname}}.{{baseName}}");
         }
     {{/isReadOnly}}

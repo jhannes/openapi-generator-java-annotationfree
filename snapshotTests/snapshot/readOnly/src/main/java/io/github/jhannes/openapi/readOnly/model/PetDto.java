@@ -149,7 +149,7 @@ public class PetDto {
         if (!isMissing(getCreatedAt())) {
             result.add("PetDto.created_at");
         }
-        if (!isMissing(getComments())) {
+        if (!isMissing(getComments()) && !getComments().isEmpty()) {
             result.add("PetDto.comments");
         }
         if (!isMissing(getStatus())) {

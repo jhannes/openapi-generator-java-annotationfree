@@ -82,7 +82,7 @@ public class OrganizationDto implements AnyPartyDto {
         if (!isMissing(getId())) {
             result.add("OrganizationDto.id");
         }
-        if (!isMissing(getEmailDomains())) {
+        if (!isMissing(getEmailDomains()) && !getEmailDomains().isEmpty()) {
             result.add("OrganizationDto.emailDomains");
         }
     }
