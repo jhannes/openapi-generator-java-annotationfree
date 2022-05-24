@@ -15,6 +15,7 @@ package io.github.jhannes.openapi.bigExample.api;
 import io.github.jhannes.openapi.bigExample.ApiException;
 import java.time.LocalDate;
 import io.github.jhannes.openapi.bigExample.model.PetDto;
+import io.github.jhannes.openapi.bigExample.model.PetLocationsDto;
 import java.util.UUID;
 import org.junit.Test;
 import org.junit.Ignore;
@@ -61,6 +62,17 @@ public class DefaultApiTest {
         //String status = null;
         //
         //api.addPetWithForm(petId, name, status);
+
+        // TODO: test validations
+    }
+    /**
+     * @throws ApiException
+     *          if the Api call fails
+     */
+    @Test
+    public void getPetLocationsTest() throws ApiException {
+        //
+        //PetLocationsDto response = api.getPetLocations();
 
         // TODO: test validations
     }

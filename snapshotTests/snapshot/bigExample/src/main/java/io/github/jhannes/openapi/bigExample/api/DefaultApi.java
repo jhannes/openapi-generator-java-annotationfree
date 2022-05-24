@@ -15,6 +15,7 @@ import io.github.jhannes.openapi.bigExample.model.*;
 
 import java.time.LocalDate;
 import io.github.jhannes.openapi.bigExample.model.PetDto;
+import io.github.jhannes.openapi.bigExample.model.PetLocationsDto;
 import java.util.UUID;
 
 import org.actioncontroller.actions.*;
@@ -50,6 +51,13 @@ public interface DefaultApi {
             @PathParam("petId") UUID petId,
             @RequestParam("name") Optional<String> name,
             @RequestParam("status") Optional<String> status
+    ) throws IOException;
+    /**
+     * @return PetLocationsDto
+     */
+    @GET("/pet/locations")
+    @JsonBody
+    public PetLocationsDto getPetLocations(
     ) throws IOException;
     /**
      * @param storeId  (required)

@@ -106,12 +106,14 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *DefaultApi* | [**addPet**](docs/DefaultApi.md#addPet) | **POST** /{storeId}/pets | 
 *DefaultApi* | [**addPetWithForm**](docs/DefaultApi.md#addPetWithForm) | **POST** /pets/{petId} | 
+*DefaultApi* | [**getPetLocations**](docs/DefaultApi.md#getPetLocations) | **GET** /pet/locations | 
 *DefaultApi* | [**listPets**](docs/DefaultApi.md#listPets) | **GET** /{storeId}/pets | 
 
 
 ## Documentation for Models
 
  - [PetDto](docs/PetDto.md)
+ - [PetLocationsDto](docs/PetLocationsDto.md)
  - [PetStoreDto](docs/PetStoreDto.md)
 
 

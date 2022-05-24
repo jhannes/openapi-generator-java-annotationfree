@@ -53,18 +53,19 @@ public class SampleModelData {
             .{{name}}(sample{{{datatypeWithEnum}}}("{{name}}")){{/isString}}{{/isPrimitiveType}}{{#isPrimitiveType}}{{^isString}}{{^isEnum}}
             .{{name}}(random{{datatypeWithEnum}}("{{name}}")){{/isEnum}}{{/isString}}{{/isPrimitiveType}}{{#isEnum}}
             .{{name}}(sample{{classname}}{{datatypeWithEnum}}("{{name}}")){{/isEnum}}{{#isString}}{{^isEnum}}
-            .{{name}}({{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}random{{datatypeWithEnum}}("{{name}}"{{#isPrimitiveType}}{{#dataFormat}}, "{{dataFormat}}"{{/dataFormat}}{{/isPrimitiveType}}){{/defaultValue}}){{/isEnum}}{{/isString}}{{/isMap}}{{/isArray}}{{#isArray}}{{^items.isArray}}{{^items.isPrimitiveType}}{{#items.isString}}
+            .{{name}}({{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}random{{datatypeWithEnum}}("{{name}}"{{#isPrimitiveType}}{{#dataFormat}}, "{{dataFormat}}"{{/dataFormat}}{{/isPrimitiveType}}){{/defaultValue}}){{/isEnum}}{{/isString}}{{/isMap}}{{/isArray}}{{#isArray}}{{#items.isContainer}}
+            .{{name}}({{name}}For{{classname}}()){{/items.isContainer}}{{^items.isContainer}}{{^items.isPrimitiveType}}{{#items.isString}}
             .{{name}}(sampleList(() -> random{{{items.datatypeWithEnum}}}("{{name}}"), "{{name}}")){{/items.isString}}{{^items.isString}}
             .{{name}}(sampleListOf{{{items.datatypeWithEnum}}}("{{name}}")){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}
-            .{{name}}(sampleList(() -> {{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}random{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}, "{{name}}")){{/items.isPrimitiveType}}{{/items.isArray}}{{#items.isArray}}
-            .{{name}}({{name}}For{{classname}}()){{/items.isArray}}{{/isArray}}{{#isMap}}
-            .{{name}}(sampleMap(() -> {{^items.isPrimitiveType}}{{^items.isString}}sample{{{items.datatypeWithEnum}}}("{{name}}"){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}{{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}random{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}{{/items.isPrimitiveType}}, "{{name}}")){{/isMap}}{{/vars}};
-    }{{#vars}}{{#isArray}}{{#items.isArray}}
+            .{{name}}(sampleList(() -> {{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}random{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}, "{{name}}")){{/items.isPrimitiveType}}{{/items.isContainer}}{{/isArray}}{{#isMap}}{{#items.isContainer}}
+            .{{name}}({{name}}For{{classname}}()){{/items.isContainer}}{{^items.isContainer}}
+            .{{name}}(sampleMap(() -> {{^items.isPrimitiveType}}{{^items.isString}}sample{{{items.datatypeWithEnum}}}("{{name}}"){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}{{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}random{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}{{/items.isPrimitiveType}}, "{{name}}")){{/items.isContainer}}{{/isMap}}{{/vars}};
+    }{{#vars}}{{#isContainer}}{{#items.isContainer}}
 
     public {{{datatypeWithEnum}}} {{name}}For{{classname}}() {
         // Too complex to generate automatically. Subclass and override to customize
         return null;
-    }{{/items.isArray}}{{/isArray}}{{/vars}}
+    }{{/items.isContainer}}{{/isContainer}}{{/vars}}
 {{/oneOf}}{{/isEnum}}
     public List<{{classname}}> sampleListOf{{classname}}(String propertyName) {
         return sampleListOf{{classname}}();

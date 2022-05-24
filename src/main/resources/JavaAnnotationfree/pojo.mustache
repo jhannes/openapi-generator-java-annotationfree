@@ -68,7 +68,7 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
 {{#vars}}
     {{^isInherited}}
     {{#isReadOnly}}
-        if (!isMissing({{getter}}()){{#isArray}} && !{{getter}}().isEmpty(){{/isArray}}) {
+        if (!isMissing({{getter}}()){{#isContainer}} && !{{getter}}().isEmpty(){{/isContainer}}) {
             result.add("{{classname}}.{{baseName}}");
         }
     {{/isReadOnly}}
@@ -84,9 +84,11 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
                 {{/items}}
             {{/isMap}}
             {{#isMap}}
+                {{^items.isContainer}}
         if ({{baseName}} != null) {
             {{baseName}}.values().forEach(o -> o.readOnlyFieldsWithValue(result));
         }
+                {{/items.isContainer}}
             {{/isMap}}
             {{^isArray}}
                 {{#isModel}}

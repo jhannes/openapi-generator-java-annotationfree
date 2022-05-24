@@ -61,6 +61,28 @@ public class SampleModelData {
         return sampleList(() -> samplePetDto());
     }
 
+    public PetLocationsDto samplePetLocationsDto(String propertyName) {
+        return samplePetLocationsDto();
+    }
+
+    public PetLocationsDto samplePetLocationsDto() {
+        return new PetLocationsDto()
+            .locations(locationsForPetLocationsDto());
+    }
+
+    public Map<String, Map<String, List<Double>>> locationsForPetLocationsDto() {
+        // Too complex to generate automatically. Subclass and override to customize
+        return null;
+    }
+
+    public List<PetLocationsDto> sampleListOfPetLocationsDto(String propertyName) {
+        return sampleListOfPetLocationsDto();
+    }
+
+    public List<PetLocationsDto> sampleListOfPetLocationsDto() {
+        return sampleList(() -> samplePetLocationsDto());
+    }
+
     public PetStoreDto samplePetStoreDto(String propertyName) {
         return samplePetStoreDto();
     }

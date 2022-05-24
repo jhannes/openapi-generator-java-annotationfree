@@ -6,6 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**addPet**](DefaultApi.md#addPet) | **POST** /{storeId}/pets | 
 [**addPetWithForm**](DefaultApi.md#addPetWithForm) | **POST** /pets/{petId} | 
+[**getPetLocations**](DefaultApi.md#getPetLocations) | **GET** /pet/locations | 
 [**listPets**](DefaultApi.md#listPets) | **GET** /{storeId}/pets | 
 
 
@@ -132,6 +133,62 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Successful |  -  |
+
+
+## getPetLocations
+
+> PetLocationsDto getPetLocations()
+
+
+
+### Example
+
+```java
+import io.github.jhannes.openapi.bigExample.api.*;
+import io.github.jhannes.openapi.bigExample.models.*;
+import org.actioncontroller.client.ApiClientProxy;
+import org.actioncontroller.client.HttpClientException;
+import org.actioncontroller.client.HttpURLConnectionApiClient;
+
+public class Example {
+    public static void main(String[] args) {
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/v1");
+        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+
+        try {
+            PetLocationsDto result = apiInstance.getPetLocations();
+            System.out.println(result);
+        } catch (HttpClientException e) {
+            System.err.println("Exception when calling DefaultApi#getPetLocations");
+            System.err.println("Status code: " + e.getStatusCode());
+            System.err.println("Reason: " + e.getResponseBody());
+            System.err.println("URL: " + e.getUrl());
+        }
+    }
+}
+```
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**PetLocationsDto**](PetLocationsDto.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+### HTTP response details
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+| **200** | Returns the pet locations |  -  |
 
 
 ## listPets

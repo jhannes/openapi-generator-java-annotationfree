@@ -12,14 +12,11 @@ import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
-public class CompilerTest {
+public class CompilerTest extends AbstractSnapshotTest {
 
     @TestFactory
     Stream<DynamicNode> exampleSpecifications() throws IOException {
@@ -63,23 +60,9 @@ public class CompilerTest {
         ));
     }
 
-    static void generate(Path file, Path output, String modelName) throws IOException {
-        if (file.getFileName().toString().endsWith(".link")) {
-            file = Paths.get(Files.readAllLines(file).get(0));
-        }
-        final CodegenConfigurator configurator = new CodegenConfigurator()
-                .setGeneratorName("java-annotationfree")
-                .setInputSpec(file.toString().replaceAll("\\\\", "/"))
-                .setModelNameSuffix("Dto")
-                .setPackageName("io.github.jhannes.openapi." + modelName)
-                .setModelPackage("io.github.jhannes.openapi." + modelName + ".model")
-                .setApiPackage("io.github.jhannes.openapi." + modelName + ".api")
-                .addAdditionalProperty("hideGenerationTimestamp", "true")
-                .addAdditionalProperty("generateSupportingFiles", "true")
-                .addAdditionalProperty("generateModelTests", "true")
-                .addAdditionalProperty("generateApis", "false")
-                .addAdditionalProperty("dateLibrary", "java8")
-                .setOutputDir(output.resolve(modelName).toString());
+    static void generate(Path spec, Path outputRoot, String modelName) {
+        Path outputDir = outputRoot.resolve(modelName);
+        final CodegenConfigurator configurator = createConfigurator(modelName, spec, outputDir);
 
         final ClientOptInput clientOptInput = configurator.toClientOptInput();
         DefaultGenerator generator = new DefaultGenerator();
@@ -123,17 +106,6 @@ public class CompilerTest {
                 fail(diagnosticListener.getDiagnostics().toString());
             }
             assertTrue(result);
-        }
-    }
-
-    static void cleanDirectory(Path directory) throws IOException {
-        if (Files.isDirectory(directory)) {
-            System.out.println("rm -r " + directory);
-            try (Stream<Path> walk = Files.walk(directory)) {
-                walk.sorted(Comparator.reverseOrder())
-                        .map(Path::toFile)
-                        .forEach(File::delete);
-            }
         }
     }
 

@@ -85,6 +85,16 @@ paths:
                 status:
                   description: Updated status of the pet
                   type: string
+  /pet/locations:
+    get:
+      operationId: getPetLocations
+      responses:
+        200:
+          description: Returns the pet locations
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PetLocations'
 components:
   schemas:
     Pet:
@@ -105,3 +115,16 @@ components:
           format: uuid
           additionalProperties:
             $ref: "#/components/schemas/Pet"
+    PetLocations:
+      properties:
+        locations:
+          additionalProperties:
+            description: object with location history, indexed by petId
+            additionalProperties:
+              description: object with the location history of one pet, indexed by timestamp
+              type: array
+              minItems: 2
+              maxItems: 2
+              items:
+                type: number
+                format: double
