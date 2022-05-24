@@ -172,6 +172,10 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
+### Error type
+
+[**UpdateErrorDto**](UpdateErrorDto.md)
+
 ### Authorization
 
 No authorization required
@@ -185,7 +189,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The party was updated |  -  |
-| **400** | Something went wrong |  -  |
+| **400** | Something went wrong, type: [**UpdateErrorDto**](UpdateErrorDto.md) |  -  |
 
 
 ## partiesPost
@@ -232,6 +236,10 @@ Name | Type | Description  | Notes
 
 null (empty response body)
 
+### Error type
+
+[**CreationErrorDto**](CreationErrorDto.md)
+
 ### Authorization
 
 No authorization required
@@ -245,5 +253,5 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The party was created |  -  |
-| **400** | Something went wrong |  -  |
+| **400** | Something went wrong, type: [**CreationErrorDto**](CreationErrorDto.md) |  -  |
 

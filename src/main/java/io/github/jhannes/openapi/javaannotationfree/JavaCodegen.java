@@ -111,7 +111,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
 
 
         }
-        //objs.put("exceptionPayloads", exceptionPayloads);
+        objs.put("exceptionPayloads", exceptionPayloads);
 
         return objs;
     }

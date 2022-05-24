@@ -9,7 +9,7 @@ public class SingleCompileTest {
 
     @TestFactory
     DynamicNode javaAnnotationFreeSnapshots() {
-        Path spec = SnapshotTests.SNAPSHOT_ROOT.resolve("input/infectionTracker.json");
+        Path spec = SnapshotTests.SNAPSHOT_ROOT.resolve("input/poly.yaml");
         return CompilerTest.createTestFromSpec(spec);
     }
 

@@ -34,6 +34,36 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 public interface DefaultApi {
+
+    class CreationErrorDtoException extends RuntimeException {
+
+        private final CreationErrorDto payload;
+
+        public CreationErrorDtoException(String message, CreationErrorDto payload) {
+            super(message);
+            this.payload = payload;
+        }
+
+        public CreationErrorDto getPayload() {
+            return payload;
+        }
+    }
+
+
+    class UpdateErrorDtoException extends RuntimeException {
+
+        private final UpdateErrorDto payload;
+
+        public UpdateErrorDtoException(String message, UpdateErrorDto payload) {
+            super(message);
+            this.payload = payload;
+        }
+
+        public UpdateErrorDto getPayload() {
+            return payload;
+        }
+    }
+
     /**
      * @param logMessageDto  (optional)
      */
@@ -56,12 +86,12 @@ public interface DefaultApi {
     public void partiesIdPut(
             @PathParam("id") UUID id,
             @JsonBody AnyPartyDto anyPartyDto
-    ) throws IOException;
+    ) throws IOException, UpdateErrorDtoException;
     /**
      * @param anyPartyDto  (optional)
      */
     @POST("/parties")
     public void partiesPost(
             @JsonBody AnyPartyDto anyPartyDto
-    ) throws IOException;
+    ) throws IOException, CreationErrorDtoException;
 }

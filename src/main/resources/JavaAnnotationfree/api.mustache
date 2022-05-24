@@ -21,6 +21,23 @@ import java.util.function.Consumer;
 
 {{#operations}}
 public interface {{classname}} {
+{{#exceptionPayloads}}
+
+    class {{.}}Exception extends RuntimeException {
+
+        private final {{.}} payload;
+
+        public {{.}}Exception(String message, {{.}} payload) {
+            super(message);
+            this.payload = payload;
+        }
+
+        public {{.}} getPayload() {
+            return payload;
+        }
+    }
+
+{{/exceptionPayloads}}
 {{#operation}}
     /**
     {{#summary}}
@@ -56,7 +73,7 @@ public interface {{classname}} {
             @RequestParam("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isFormParam}}{{#isHeaderParam}}
             @HttpHeader("{{baseName}}") {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}},{{/-last}}{{/allParams}}{{#responses}}{{#headers}},
             @HttpHeader("{{baseName}}") Consumer<{{{dataType}}}> set{{nameInCamelCase}}{{/headers}}{{/responses}}
-    ) throws IOException;
+    ) throws IOException{{#responses}}{{#is4xx}}{{#dataType}}, {{dataType}}Exception{{/dataType}}{{/is4xx}}{{/responses}};
 {{/operation}}
 }
 {{/operations}}

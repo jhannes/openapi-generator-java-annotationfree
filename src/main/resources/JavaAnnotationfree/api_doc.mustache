@@ -101,6 +101,16 @@ Name | Type | Description  | Notes
 ### Return type
 
 {{#returnType}}{{#returnTypeIsPrimitive}}**{{returnType}}**{{/returnTypeIsPrimitive}}{{^returnTypeIsPrimitive}}[**{{returnType}}**]({{returnBaseType}}.md){{/returnTypeIsPrimitive}}{{/returnType}}{{^returnType}}null (empty response body){{/returnType}}
+{{#responses}}
+    {{#is4xx}}
+        {{#dataType}}
+
+### Error type
+
+[**{{dataType}}**]({{dataType}}.md)
+        {{/dataType}}
+    {{/is4xx}}
+{{/responses}}
 
 ### Authorization
 
@@ -116,7 +126,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 {{#responses}}
-| **{{code}}** | {{message}} | {{#headers}} * {{baseName}} - {{description}} <br> {{/headers}}{{^headers.0}} - {{/headers.0}} |
+| **{{code}}** | {{message}}{{#is4xx}}{{#dataType}}, type: [**{{dataType}}**]({{dataType}}.md){{/dataType}}{{/is4xx}} | {{#headers}} * {{baseName}} - {{description}} <br> {{/headers}}{{^headers.0}} - {{/headers.0}} |
 {{/responses}}
 {{/responses.0}}
 
