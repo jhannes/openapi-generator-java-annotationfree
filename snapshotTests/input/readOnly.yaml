@@ -112,6 +112,7 @@ components:
           readOnly: true
         comments:
           type: array
+          readOnly: true
           items:
             $ref: '#/components/schemas/Comment'
         status:

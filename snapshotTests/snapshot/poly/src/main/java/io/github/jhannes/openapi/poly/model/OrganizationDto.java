@@ -55,6 +55,7 @@ public class OrganizationDto implements AnyPartyDto {
     public static String[] readOnlyFields() {
         return new String[] {
                 "id",
+                "emailDomains",
         };
     }
 
@@ -80,6 +81,9 @@ public class OrganizationDto implements AnyPartyDto {
     public void readOnlyFieldsWithValue(List<String> result) {
         if (!isMissing(getId())) {
             result.add("OrganizationDto.id");
+        }
+        if (!isMissing(getEmailDomains())) {
+            result.add("OrganizationDto.emailDomains");
         }
     }
 
@@ -218,12 +222,14 @@ public class OrganizationDto implements AnyPartyDto {
 
     /**
      * Get emailDomains
+     * read only
      * @return emailDomains
      */
     public List<String> getEmailDomains() {
         return emailDomains;
     }
 
+    /** <strong>read only</strong> */
     public void setEmailDomains(List<String> emailDomains) {
         this.emailDomains = emailDomains;
     }

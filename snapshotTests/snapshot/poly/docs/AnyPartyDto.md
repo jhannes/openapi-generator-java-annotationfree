@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **name** | **String** |  | 
 **organizationId** | **String** |  |  [optional]
 **url** | [**URI**](URI.md) |  |  [optional]
-**emailDomains** | **List<String>** |  |  [optional]
+**emailDomains** | **List<String>** |  |  [optional] [readonly]
 
 
 

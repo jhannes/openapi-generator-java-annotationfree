@@ -120,6 +120,7 @@ public class PetDto {
         return new String[] {
                 "id",
                 "created_at",
+                "comments",
                 "status",
         };
     }
@@ -148,8 +149,8 @@ public class PetDto {
         if (!isMissing(getCreatedAt())) {
             result.add("PetDto.created_at");
         }
-        if (comments != null) {
-            comments.forEach(o -> o.readOnlyFieldsWithValue(result));
+        if (!isMissing(getComments())) {
+            result.add("PetDto.comments");
         }
         if (!isMissing(getStatus())) {
             result.add("PetDto.status");
@@ -276,12 +277,14 @@ public class PetDto {
 
     /**
      * Get comments
+     * read only
      * @return comments
      */
     public List<CommentDto> getComments() {
         return comments;
     }
 
+    /** <strong>read only</strong> */
     public void setComments(List<CommentDto> comments) {
         this.comments = comments;
     }
