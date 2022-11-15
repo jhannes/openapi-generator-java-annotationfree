@@ -34,29 +34,36 @@ import java.util.stream.Collectors;
 public interface CreationErrorDto  {
     String getCode();
 
-    static IllegalEmailAddressErrorDto IllegalEmailAddressError() {
-        IllegalEmailAddressErrorDto result = new IllegalEmailAddressErrorDto();
-        result.code("IllegalEmailAddressError");
-        return result;
-    }
-    static DuplicateIdentifierErrorDto DuplicateIdentifierError() {
+    static DuplicateIdentifierErrorDto duplicateIdentifier() {
         DuplicateIdentifierErrorDto result = new DuplicateIdentifierErrorDto();
-        result.code("DuplicateIdentifierError");
+        result.code("duplicateIdentifier");
         return result;
     }
-    static GeneralErrorDto GeneralError() {
+    static GeneralErrorDto generalError() {
         GeneralErrorDto result = new GeneralErrorDto();
-        result.code("GeneralError");
+        result.code("generalError");
+        return result;
+    }
+    static IllegalEmailAddressErrorDto illegalAddress() {
+        IllegalEmailAddressErrorDto result = new IllegalEmailAddressErrorDto();
+        result.code("illegalAddress");
+        return result;
+    }
+    static GeneralErrorDto networkError() {
+        GeneralErrorDto result = new GeneralErrorDto();
+        result.code("networkError");
         return result;
     }
 
     static Class<? extends CreationErrorDto> getType(String type) {
         switch (type) {
-        case "IllegalEmailAddressError":
-            return IllegalEmailAddressErrorDto.class;
-        case "DuplicateIdentifierError":
+        case "duplicateIdentifier":
             return DuplicateIdentifierErrorDto.class;
-        case "GeneralError":
+        case "generalError":
+            return GeneralErrorDto.class;
+        case "illegalAddress":
+            return IllegalEmailAddressErrorDto.class;
+        case "networkError":
             return GeneralErrorDto.class;
         default:
             throw new IllegalArgumentException("Illegal code " + type);

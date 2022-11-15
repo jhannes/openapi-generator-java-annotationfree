@@ -70,9 +70,10 @@ public class SampleModelData {
 
     public CreationErrorDto sampleCreationErrorDto() {
         List<Supplier<CreationErrorDto>> factories = List.of(
-            () -> sampleIllegalEmailAddressErrorDto().code("IllegalEmailAddressError"),
-            () -> sampleDuplicateIdentifierErrorDto().code("DuplicateIdentifierError"),
-            () -> sampleGeneralErrorDto().code("GeneralError")
+            () -> sampleDuplicateIdentifierErrorDto().code("duplicateIdentifier"),
+            () -> sampleGeneralErrorDto().code("generalError"),
+            () -> sampleIllegalEmailAddressErrorDto().code("illegalAddress"),
+            () -> sampleGeneralErrorDto().code("networkError")
         );
         return pickOne(factories).get();
     }
@@ -231,10 +232,11 @@ public class SampleModelData {
 
     public UpdateErrorDto sampleUpdateErrorDto() {
         List<Supplier<UpdateErrorDto>> factories = List.of(
-            () -> sampleIllegalEmailAddressErrorDto().code("IllegalEmailAddressError"),
-            () -> sampleDuplicateIdentifierErrorDto().code("DuplicateIdentifierError"),
-            () -> sampleGeneralErrorDto().code("GeneralError"),
-            () -> sampleNotFoundErrorDto().code("NotFoundError")
+            () -> sampleDuplicateIdentifierErrorDto().code("duplicateIdentifier"),
+            () -> sampleGeneralErrorDto().code("generalError"),
+            () -> sampleIllegalEmailAddressErrorDto().code("illegalAddress"),
+            () -> sampleGeneralErrorDto().code("networkError"),
+            () -> sampleNotFoundErrorDto().code("notFound")
         );
         return pickOne(factories).get();
     }
