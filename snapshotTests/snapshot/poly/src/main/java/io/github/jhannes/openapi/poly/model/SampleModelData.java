@@ -50,8 +50,8 @@ public class SampleModelData {
 
     public AnyPartyDto sampleAnyPartyDto() {
         List<Supplier<AnyPartyDto>> factories = List.of(
-            () -> sampleOrganizationDto(),
-            () -> samplePersonDto()
+            () -> sampleOrganizationDto().type("organization"),
+            () -> samplePersonDto().type("person")
         );
         return pickOne(factories).get();
     }
@@ -70,9 +70,9 @@ public class SampleModelData {
 
     public CreationErrorDto sampleCreationErrorDto() {
         List<Supplier<CreationErrorDto>> factories = List.of(
-            () -> sampleIllegalEmailAddressErrorDto(),
-            () -> sampleDuplicateIdentifierErrorDto(),
-            () -> sampleGeneralErrorDto()
+            () -> sampleIllegalEmailAddressErrorDto().code("IllegalEmailAddressError"),
+            () -> sampleDuplicateIdentifierErrorDto().code("DuplicateIdentifierError"),
+            () -> sampleGeneralErrorDto().code("GeneralError")
         );
         return pickOne(factories).get();
     }
@@ -231,10 +231,10 @@ public class SampleModelData {
 
     public UpdateErrorDto sampleUpdateErrorDto() {
         List<Supplier<UpdateErrorDto>> factories = List.of(
-            () -> sampleIllegalEmailAddressErrorDto(),
-            () -> sampleDuplicateIdentifierErrorDto(),
-            () -> sampleGeneralErrorDto(),
-            () -> sampleNotFoundErrorDto()
+            () -> sampleIllegalEmailAddressErrorDto().code("IllegalEmailAddressError"),
+            () -> sampleDuplicateIdentifierErrorDto().code("DuplicateIdentifierError"),
+            () -> sampleGeneralErrorDto().code("GeneralError"),
+            () -> sampleNotFoundErrorDto().code("NotFoundError")
         );
         return pickOne(factories).get();
     }

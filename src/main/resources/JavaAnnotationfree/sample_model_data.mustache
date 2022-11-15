@@ -45,7 +45,7 @@ public class SampleModelData {
     }
 {{/isEnum}}{{^isEnum}}{{#oneOf}}{{#-first}}    public {{classname}} sample{{classname}}() {
         List<Supplier<{{classname}}>> factories = List.of({{/-first}}{{#discriminator}}{{#-first}}{{#mappedModels}}
-            () -> sample{{modelName}}(){{^-last}},{{/-last}}{{/mappedModels}}{{/-first}}{{/discriminator}}{{#-last}}
+            () -> sample{{modelName}}().{{discriminator.propertyName}}("{{mappingName}}"){{^-last}},{{/-last}}{{/mappedModels}}{{/-first}}{{/discriminator}}{{#-last}}
         );
         return pickOne(factories).get();
     }
