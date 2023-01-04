@@ -1,4 +1,4 @@
-public interface {{classname}} {{#vendorExtensions.x-implements}}{{#-first}}extends {{{.}}}{{/-first}}{{^-first}}, {{{.}}}{{/-first}}{{/vendorExtensions.x-implements}} {
+public interface {{classname}} {{^vendorExtensions.x-implements}}{{#interfaces}}{{#-first}}extends {{/-first}}{{^-first}}, {{/-first}}{{{.}}}{{/interfaces}}{{/vendorExtensions.x-implements}}{{#vendorExtensions.x-implements}}{{#-first}}extends {{{.}}}{{/-first}}{{^-first}}, {{{.}}}{{/-first}}{{/vendorExtensions.x-implements}} {
     {{#discriminator}}
     {{propertyType}} {{propertyGetter}}();
     {{/discriminator}}

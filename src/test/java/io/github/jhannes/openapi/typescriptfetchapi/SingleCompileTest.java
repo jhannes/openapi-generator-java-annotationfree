@@ -9,7 +9,7 @@ public class SingleCompileTest {
 
     @TestFactory
     DynamicNode javaAnnotationFreeSnapshots() {
-        Path spec = AbstractSnapshotTest.SNAPSHOT_ROOT.resolve("input/bigExample.yaml");
+        Path spec = AbstractSnapshotTest.SNAPSHOT_ROOT.resolve("input/websockets.yaml");
         return CompilerTest.createTestFromSpec(spec);
     }
 

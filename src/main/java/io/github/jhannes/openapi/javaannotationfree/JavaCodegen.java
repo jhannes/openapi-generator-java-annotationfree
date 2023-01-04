@@ -143,7 +143,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                     mapping.put(subtype, className);
                     mappedModels.add(new CodegenDiscriminator.MappedModel(subtype, className));
                 }
-                if (codegenModel.discriminator.getMapping() == null) {
+                if (codegenModel.discriminator != null && codegenModel.discriminator.getMapping() == null) {
                     codegenModel.discriminator.setMapping(mapping);
                     codegenModel.discriminator.setMappedModels(mappedModels);
                 }
