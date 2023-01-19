@@ -1,0 +1,78 @@
+/**
+* {{#description}}{{.}}{{/description}}{{^description}}{{classname}}{{/description}}
+*/
+public interface {{classname}}{{#interfaces}}{{#-first}} extends {{/-first}}{{^-first}}, {{/-first}}{{{.}}}{{/interfaces}} {
+
+    List<String> missingRequiredFields();
+
+    void readOnlyFieldsWithValue(List<String> result);
+
+{{#vars}}
+    {{^isInherited}}
+    {{#isArray}}
+
+    <T> {{classname}} {{name}}(Collection<T> items, Function<T, {{{items.datatypeWithEnum}}}> mapper);
+
+    <T> List<T> {{getter}}(Function<{{{items.datatypeWithEnum}}}, T> mapper);
+
+    {{classname}} add{{nameInCamelCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item);
+    {{/isArray}}
+    {{#isMap}}
+
+    {{classname}} put{{nameInCamelCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item);
+    {{/isMap}}
+
+    /**
+    {{#description}}
+     * {{description}}
+    {{/description}}
+    {{^description}}
+     * Get {{baseName}}
+    {{/description}}
+    {{#example}}
+     * example: {{example}}
+    {{/example}}
+    {{#minimum}}
+     * minimum: {{minimum}}
+    {{/minimum}}
+    {{#maximum}}
+     * maximum: {{maximum}}
+    {{/maximum}}
+    {{#isReadOnly}}
+     * read only
+    {{/isReadOnly}}
+     * @return {{baseName}}
+     */
+    {{#vendorExtensions.extraAnnotation}}
+        {{{vendorExtensions.extraAnnotation}}}
+    {{/vendorExtensions.extraAnnotation}}
+    {{{datatypeWithEnum}}} {{getter}}();
+
+    {{#isReadOnly}}
+    /** <strong>read only</strong> */
+    {{/isReadOnly}}
+    void {{setter}}({{{datatypeWithEnum}}} {{name}});
+
+    {{classname}} {{name}}({{{datatypeWithEnum}}} {{name}});
+    {{/isInherited}}
+    {{#isInherited}}
+    {{#isArray}}
+
+    @Override
+    <T> {{classname}} {{name}}(Collection<T> items, Function<T, {{{items.datatypeWithEnum}}}> mapper);
+
+    @Override
+    {{classname}} add{{nameInCamelCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item);
+    {{/isArray}}
+    {{#isMap}}
+
+    @Override
+    public {{classname}} put{{nameInCamelCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item);
+    {{/isMap}}
+
+    @Override
+    public {{classname}} {{name}}({{{datatypeWithEnum}}} {{name}});
+    {{/isInherited}}
+{{/vars}}
+
+}

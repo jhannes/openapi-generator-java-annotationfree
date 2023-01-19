@@ -22,6 +22,6 @@ import java.util.stream.Collectors;
 
 {{#models}}
 {{#model}}
-{{#isEnum}}{{>modelEnum}}{{/isEnum}}{{^isEnum}}{{#oneOf}}{{#-first}}{{>oneof_interface}}{{/-first}}{{/oneOf}}{{^oneOf}}{{>pojo}}{{/oneOf}}{{/isEnum}}
+{{#isEnum}}{{>modelEnum}}{{/isEnum}}{{^isEnum}}{{#oneOf}}{{#-first}}{{>oneof_interface}}{{/-first}}{{/oneOf}}{{^oneOf}}{{#isMixin}}{{>mixin}}{{/isMixin}}{{^isMixin}}{{>pojo}}{{/isMixin}}{{/oneOf}}{{/isEnum}}
 {{/model}}
 {{/models}}

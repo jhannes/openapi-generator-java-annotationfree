@@ -14,6 +14,8 @@ import org.openapitools.codegen.languages.AbstractJavaCodegen;
 import org.openapitools.codegen.model.ModelMap;
 import org.openapitools.codegen.model.ModelsMap;
 import org.openapitools.codegen.model.OperationsMap;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -28,9 +30,13 @@ import java.util.stream.Collectors;
 
 public class JavaCodegen extends AbstractJavaCodegen {
 
+    private final Logger LOGGER = LoggerFactory.getLogger(AbstractJavaCodegen.class);
+    private Set<String> mixinInterfaces = new HashSet<>();
+
     public JavaCodegen() {
         embeddedTemplateDir = templateDir = "JavaAnnotationfree";
         artifactId = "openapi-java-client";
+        supportsMixins = true;
     }
 
     @Override
@@ -112,15 +118,10 @@ public class JavaCodegen extends AbstractJavaCodegen {
     public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
         Map<String, ModelsMap> result = super.postProcessAllModels(objs);
 
-        Map<String, CodegenModel> allModels = new HashMap<>();
-        for (Map.Entry<String, ModelsMap> entry : result.entrySet()) {
-            ModelsMap inner = entry.getValue();
-            for (ModelMap model : inner.getModels()) {
-                allModels.put(model.getModel().classname, model.getModel());
-            }
-        }
+        Map<String, CodegenModel> allModels = getAllModels(objs);
 
         Map<String, List<CodegenModel>> interfacesOfSubtypes = new HashMap<>();
+        Set<String> multiplyInheritedTypes = new HashSet<>();
         for (CodegenModel codegenModel : allModels.values()) {
             if (!codegenModel.oneOf.isEmpty()) {
                 Set<CodegenDiscriminator.MappedModel> mappedModels = new HashSet<>();
@@ -138,9 +139,17 @@ public class JavaCodegen extends AbstractJavaCodegen {
                     codegenModel.discriminator.setMappedModels(mappedModels);
                 }
             }
-            // Mark inherited variables from allOf
             if (!codegenModel.allOf.isEmpty()) {
-                if (codegenModel.parent == null) {
+                if (codegenModel.allOf.size() >= 2) {
+                    //codegenModel.interfaces = new ArrayList<>(codegenModel.allOf);
+                    List<String> interfaceNames = new ArrayList<>();
+                    for (CodegenModel supertype : codegenModel.interfaceModels) {
+                        multiplyInheritedTypes.add(supertype.name);
+                        interfaceNames.add(supertype.name + "Interface");
+                    }
+                    codegenModel.interfaces = interfaceNames;
+                } else if (codegenModel.parent == null) {
+                    // Mark inherited variables from allOf
                     codegenModel.parent = codegenModel.allOf.iterator().next();
                     codegenModel.parentModel = allModels.get(codegenModel.parent);
                     for (CodegenProperty var : codegenModel.vars) {
@@ -168,6 +177,27 @@ public class JavaCodegen extends AbstractJavaCodegen {
             }
         }
 
+        for (String type : multiplyInheritedTypes) {
+            CodegenModel dtoModel = result.get(type).getModels().get(0).getModel();
+
+            CodegenModel interfaceModel = new CodegenModel() {
+                public boolean isMixin = true;
+            };
+            interfaceModel.classname = type + "Interface";
+            interfaceModel.vars.addAll(dtoModel.vars);
+            interfaceModel.allVars.addAll(dtoModel.allVars);
+
+            ModelMap modelMap = new ModelMap();
+            modelMap.setModel(interfaceModel);
+            ModelsMap models = new ModelsMap();
+            models.putAll(result.get(type));
+            models.setModels(List.of(modelMap));
+            result.put(interfaceModel.classname, models);
+
+            dtoModel.interfaces = List.of(interfaceModel.classname);
+            mixinInterfaces.add(interfaceModel.classname);
+        }
+
         // Only support interfaces from oneOfModels
         for (Map.Entry<String, CodegenModel> modelEntry : allModels.entrySet()) {
             modelEntry.getValue().interfaceModels = interfacesOfSubtypes.get(modelEntry.getKey());
@@ -175,10 +205,31 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 modelEntry.getValue().interfaces = modelEntry.getValue().interfaceModels.stream()
                         .map(CodegenModel::getClassname)
                         .collect(Collectors.toList());
-            } else {
+            } else if (!modelEntry.getValue().oneOf.isEmpty()) {
                 modelEntry.getValue().interfaces = null;
             }
         }
         return result;
+    }
+
+    @Override
+    public String toModelName(String name) {
+        return mixinInterfaces.contains(name) ? name : super.toModelName(name);
+    }
+
+    @Override
+    public String toAllOfName(List<String> names, ComposedSchema composedSchema) {
+        Map<String, Object> exts = composedSchema.getExtensions();
+        if (exts != null && exts.containsKey("x-all-of-name")) {
+            return (String) exts.get("x-all-of-name");
+        }
+        if (names.size() == 0) {
+            this.LOGGER.error("allOf has no member defined: {}. Default to ERROR_ALLOF_SCHEMA", composedSchema);
+            return "ERROR_ALLOF_SCHEMA";
+        } else if (names.size() == 1) {
+            return names.get(0);
+        } else {
+            return "oneOf<" + String.join(",", names) + ">";
+        }
     }
 }

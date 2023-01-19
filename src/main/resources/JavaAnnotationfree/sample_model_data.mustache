@@ -36,7 +36,9 @@ public class SampleModelData {
     }
 
 {{#models}}
-{{#model}}    public {{classname}} sample{{classname}}(String propertyName) {
+{{#model}}
+{{^isMixin}}
+    public {{classname}} sample{{classname}}(String propertyName) {
         return sample{{classname}}();
     }
 
@@ -87,6 +89,7 @@ public class SampleModelData {
     }
 {{/isArray}}
 {{/isEnum}}{{/vars}}
+{{/isMixin}}
 {{/model}}
 {{/models}}
 {{>sample_random_data}}
