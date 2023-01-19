@@ -11,6 +11,9 @@ import org.openapitools.codegen.CodegenProperty;
 import org.openapitools.codegen.CodegenResponse;
 import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.languages.AbstractJavaCodegen;
+import org.openapitools.codegen.model.ModelMap;
+import org.openapitools.codegen.model.ModelsMap;
+import org.openapitools.codegen.model.OperationsMap;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -85,48 +88,35 @@ public class JavaCodegen extends AbstractJavaCodegen {
         super.processOpenAPI(openAPI);
     }
 
-    @Override
-    protected void updatePropertyForMap(CodegenProperty property, CodegenProperty innerProperty) {
-        // Perhaps I can retain format
-        super.updatePropertyForMap(property, innerProperty);
-    }
-
 
     @Override
-    public Map<String, Object> postProcessOperationsWithModels(Map<String, Object> objs, List<Object> allModels) {
+    public OperationsMap postProcessOperationsWithModels(OperationsMap objs, List<ModelMap> allModels) {
         objs = super.postProcessOperationsWithModels(objs, allModels);
 
         Set<String> exceptionPayloads = new HashSet<>();
 
-        //noinspection unchecked
-        List<CodegenOperation> operations = (List<CodegenOperation>) ((Map<String, Object>) objs.get("operations")).get("operation");
-        for (CodegenOperation operation : operations) {
+        for (CodegenOperation operation : (objs.getOperations()).getOperation()) {
             for (CodegenResponse response : operation.responses) {
                 if (response.is4xx && response.dataType != null) {
                     exceptionPayloads.add(response.dataType);
                     ((Collection<String>)operation.vendorExtensions.get("x-java-import")).add(response.dataType);
                 }
             }
-
-
-
         }
         //objs.put("exceptionPayloads", exceptionPayloads);
 
         return objs;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public Map<String, Object> postProcessAllModels(Map<String, Object> objs) {
-        Map<String, Object> result = super.postProcessAllModels(objs);
+    public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
+        Map<String, ModelsMap> result = super.postProcessAllModels(objs);
 
         Map<String, CodegenModel> allModels = new HashMap<>();
-        for (Map.Entry<String, Object> entry : result.entrySet()) {
-            Map<String, Object> inner = (Map<String, Object>) entry.getValue();
-            for (Map<String, Object> model : (List<Map<String, Object>>) inner.get("models")) {
-                CodegenModel codegenModel = (CodegenModel) model.get("model");
-                allModels.put(codegenModel.classname, codegenModel);
+        for (Map.Entry<String, ModelsMap> entry : result.entrySet()) {
+            ModelsMap inner = entry.getValue();
+            for (ModelMap model : inner.getModels()) {
+                allModels.put(model.getModel().classname, model.getModel());
             }
         }
 

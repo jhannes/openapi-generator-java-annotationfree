@@ -176,9 +176,9 @@ public class PetApiTest {
         //
         //String additionalMetadata = null;
         //
-        //File file = null;
+        //File _file = null;
         //
-        //api.uploadFile(petId, additionalMetadata, file);
+        //api.uploadFile(petId, additionalMetadata, _file);
 
         // TODO: test validations
     }

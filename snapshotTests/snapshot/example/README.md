@@ -80,10 +80,10 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/v1");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/v1");
         DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
-        UUID storeId = new UUID(); // UUID | 
+        UUID storeId = UUID.randomUUID(); // UUID | 
         PetDto petDto = new PetDto(); // PetDto | 
         try {
             apiInstance.addPet(storeId, petDto);
@@ -100,7 +100,7 @@ public class Example {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost/v1*
+All URIs are relative to */v1*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

@@ -146,7 +146,7 @@ public class Example {
         HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
         DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
-        UUID id = new UUID(); // UUID | 
+        UUID id = UUID.randomUUID(); // UUID | 
         AnyPartyDto anyPartyDto = new AnyPartyDto(); // AnyPartyDto | 
         try {
             apiInstance.partiesIdPut(id, anyPartyDto);
@@ -165,7 +165,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | [**UUID**](.md)|  |
+ **id** | **UUID**|  |
  **anyPartyDto** | [**AnyPartyDto**](AnyPartyDto.md)|  | [optional]
 
 ### Return type

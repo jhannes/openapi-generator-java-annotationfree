@@ -1,6 +1,6 @@
 # CaseWorkersApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to */api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -26,7 +26,7 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
         CaseWorkersApi apiInstance = ApiClientProxy.create(CaseWorkersApi.class, httpClient);
 
         try {
@@ -82,7 +82,7 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
         CaseWorkersApi apiInstance = ApiClientProxy.create(CaseWorkersApi.class, httpClient);
 
         CaseWorkerDto caseWorkerDto = new CaseWorkerDto(); // CaseWorkerDto | 

@@ -117,7 +117,7 @@ public interface PetApi {
      * uploads an image
      * @param petId ID of pet to update (required)
      * @param additionalMetadata Additional data to pass to server (optional)
-     * @param file file to upload (optional)
+     * @param _file file to upload (optional)
      */
     @POST("/pet/{petId}/uploadImage")
     public void uploadFile(

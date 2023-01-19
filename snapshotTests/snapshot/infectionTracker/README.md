@@ -80,7 +80,7 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
         CaseWorkersApi apiInstance = ApiClientProxy.create(CaseWorkersApi.class, httpClient);
 
         try {
@@ -99,7 +99,7 @@ public class Example {
 
 ## Documentation for API Endpoints
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to */api*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------

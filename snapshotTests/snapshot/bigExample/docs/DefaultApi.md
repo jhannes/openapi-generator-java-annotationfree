@@ -1,6 +1,6 @@
 # DefaultApi
 
-All URIs are relative to *http://localhost/v1*
+All URIs are relative to */v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -28,10 +28,10 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/v1");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/v1");
         DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
-        UUID storeId = new UUID(); // UUID | 
+        UUID storeId = UUID.randomUUID(); // UUID | 
         PetDto petDto = new PetDto(); // PetDto | 
         try {
             apiInstance.addPet(storeId, petDto);
@@ -50,7 +50,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storeId** | [**UUID**](.md)|  |
+ **storeId** | **UUID**|  |
  **petDto** | [**PetDto**](PetDto.md)|  | [optional]
 
 ### Return type
@@ -89,10 +89,10 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/v1");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/v1");
         DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
-        UUID petId = new UUID(); // UUID | 
+        UUID petId = UUID.randomUUID(); // UUID | 
         String name = "name_example"; // String | Updated name of the pet
         String status = "status_example"; // String | Updated status of the pet
         try {
@@ -112,7 +112,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **petId** | [**UUID**](.md)|  |
+ **petId** | **UUID**|  |
  **name** | **String**| Updated name of the pet | [optional]
  **status** | **String**| Updated status of the pet | [optional]
 
@@ -152,7 +152,7 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/v1");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/v1");
         DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
         try {
@@ -208,13 +208,13 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/v1");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/v1");
         DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
 
-        UUID storeId = new UUID(); // UUID | 
+        UUID storeId = UUID.randomUUID(); // UUID | 
         List<String> status = Arrays.asList(); // List<String> | 
         List<String> tags = Arrays.asList(); // List<String> | 
-        LocalDate bornAfter = new LocalDate(); // LocalDate | 
+        LocalDate bornAfter = LocalDate.now(); // LocalDate | 
         try {
             PetDto result = apiInstance.listPets(storeId, status, tags, bornAfter);
             System.out.println(result);
@@ -233,7 +233,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **storeId** | [**UUID**](.md)|  |
+ **storeId** | **UUID**|  |
  **status** | [**List&lt;String&gt;**](String.md)|  | [optional]
  **tags** | [**List&lt;String&gt;**](String.md)|  | [optional]
  **bornAfter** | **LocalDate**|  | [optional]

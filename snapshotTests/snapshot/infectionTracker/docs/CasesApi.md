@@ -1,6 +1,6 @@
 # CasesApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to */api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -28,10 +28,10 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
         CasesApi apiInstance = ApiClientProxy.create(CasesApi.class, httpClient);
 
-        UUID caseId = new UUID(); // UUID | 
+        UUID caseId = UUID.randomUUID(); // UUID | 
         try {
             InfectionDto result = apiInstance.getCaseDetails(caseId);
             System.out.println(result);
@@ -50,7 +50,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **caseId** | [**UUID**](.md)|  |
+ **caseId** | **UUID**|  |
 
 ### Return type
 
@@ -88,7 +88,7 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
         CasesApi apiInstance = ApiClientProxy.create(CasesApi.class, httpClient);
 
         try {
@@ -144,7 +144,7 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
         CasesApi apiInstance = ApiClientProxy.create(CasesApi.class, httpClient);
 
         InfectionInformationDto infectionInformationDto = new InfectionInformationDto(); // InfectionInformationDto | 
@@ -203,10 +203,10 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
         CasesApi apiInstance = ApiClientProxy.create(CasesApi.class, httpClient);
 
-        UUID caseId = new UUID(); // UUID | 
+        UUID caseId = UUID.randomUUID(); // UUID | 
         ExposureDto exposureDto = new ExposureDto(); // ExposureDto | 
         try {
             apiInstance.registerExposure(caseId, exposureDto);
@@ -225,7 +225,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **caseId** | [**UUID**](.md)|  |
+ **caseId** | **UUID**|  |
  **exposureDto** | [**ExposureDto**](ExposureDto.md)|  | [optional]
 
 ### Return type

@@ -1,6 +1,6 @@
 # ExposuresApi
 
-All URIs are relative to *http://localhost/api*
+All URIs are relative to */api*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
@@ -26,7 +26,7 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
         ExposuresApi apiInstance = ApiClientProxy.create(ExposuresApi.class, httpClient);
 
         List<LocalDate> exposureDate = Arrays.asList(); // List<LocalDate> | 
@@ -88,10 +88,10 @@ import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost/api");
+        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
         ExposuresApi apiInstance = ApiClientProxy.create(ExposuresApi.class, httpClient);
 
-        UUID exposureId = new UUID(); // UUID | 
+        UUID exposureId = UUID.randomUUID(); // UUID | 
         ExposureDto exposureDto = new ExposureDto(); // ExposureDto | 
         try {
             apiInstance.updateExposure(exposureId, exposureDto);
@@ -110,7 +110,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **exposureId** | [**UUID**](.md)|  |
+ **exposureId** | **UUID**|  |
  **exposureDto** | [**ExposureDto**](ExposureDto.md)|  | [optional]
 
 ### Return type
