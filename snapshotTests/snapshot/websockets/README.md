@@ -108,8 +108,10 @@ Class | Method | HTTP request | Description
 
 ## Documentation for Models
 
+ - [ChangeTrackedDto](docs/ChangeTrackedDto.md)
  - [CreatePersonCommandDto](docs/CreatePersonCommandDto.md)
  - [PersonDto](docs/PersonDto.md)
+ - [PersonSnapshotDto](docs/PersonSnapshotDto.md)
  - [SubscribeDto](docs/SubscribeDto.md)
  - [UnsubscribeDto](docs/UnsubscribeDto.md)
  - [UpdatePersonCommandDto](docs/UpdatePersonCommandDto.md)

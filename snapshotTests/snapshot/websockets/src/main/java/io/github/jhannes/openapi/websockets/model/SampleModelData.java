@@ -44,6 +44,26 @@ public class SampleModelData {
         this(new Random(seed));
     }
 
+    public ChangeTrackedDto sampleChangeTrackedDto(String propertyName) {
+        return sampleChangeTrackedDto();
+    }
+
+    public ChangeTrackedDto sampleChangeTrackedDto() {
+        return new ChangeTrackedDto()
+            .createdAt(sampleOffsetDateTime("createdAt"))
+            .createdBy(randomString("createdBy", "username"))
+            .updatedAt(sampleOffsetDateTime("updatedAt"))
+            .updatedBy(randomString("updatedBy", "username"));
+    }
+
+    public List<ChangeTrackedDto> sampleListOfChangeTrackedDto(String propertyName) {
+        return sampleListOfChangeTrackedDto();
+    }
+
+    public List<ChangeTrackedDto> sampleListOfChangeTrackedDto() {
+        return sampleList(() -> sampleChangeTrackedDto());
+    }
+
     public CreatePersonCommandDto sampleCreatePersonCommandDto(String propertyName) {
         return sampleCreatePersonCommandDto();
     }
@@ -84,6 +104,33 @@ public class SampleModelData {
 
     public List<PersonDto> sampleListOfPersonDto() {
         return sampleList(() -> samplePersonDto());
+    }
+
+    public PersonSnapshotDto samplePersonSnapshotDto(String propertyName) {
+        return samplePersonSnapshotDto();
+    }
+
+    public PersonSnapshotDto samplePersonSnapshotDto() {
+        return new PersonSnapshotDto()
+            .createdAt(sampleOffsetDateTime("createdAt"))
+            .createdBy(randomString("createdBy", "username"))
+            .updatedAt(sampleOffsetDateTime("updatedAt"))
+            .updatedBy(randomString("updatedBy", "username"))
+            .id(randomUUID("id"))
+            .type(randomString("type"))
+            .givenName(randomString("givenName"))
+            .familyName(randomString("familyName"))
+            .email(randomString("email", "email"))
+            .phone(randomString("phone", "phone"))
+            .birthDate(sampleLocalDate("birthDate"));
+    }
+
+    public List<PersonSnapshotDto> sampleListOfPersonSnapshotDto(String propertyName) {
+        return sampleListOfPersonSnapshotDto();
+    }
+
+    public List<PersonSnapshotDto> sampleListOfPersonSnapshotDto() {
+        return sampleList(() -> samplePersonSnapshotDto());
     }
 
     public SubscribeDto sampleSubscribeDto(String propertyName) {

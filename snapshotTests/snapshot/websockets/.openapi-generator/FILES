@@ -1,8 +1,10 @@
 .openapi-generator-ignore
 README.md
+docs/ChangeTrackedDto.md
 docs/CreatePersonCommandDto.md
 docs/DefaultApi.md
 docs/PersonDto.md
+docs/PersonSnapshotDto.md
 docs/SubscribeDto.md
 docs/UnsubscribeDto.md
 docs/UpdatePersonCommandDto.md
@@ -10,8 +12,10 @@ docs/WebSocketCommandDto.md
 docs/WebSocketMessageDto.md
 docs/WebSocketRequestDto.md
 src/main/java/io/github/jhannes/openapi/websockets/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/websockets/model/ChangeTrackedDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/CreatePersonCommandDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/PersonDto.java
+src/main/java/io/github/jhannes/openapi/websockets/model/PersonSnapshotDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/SampleModelData.java
 src/main/java/io/github/jhannes/openapi/websockets/model/SubscribeDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/UnsubscribeDto.java
