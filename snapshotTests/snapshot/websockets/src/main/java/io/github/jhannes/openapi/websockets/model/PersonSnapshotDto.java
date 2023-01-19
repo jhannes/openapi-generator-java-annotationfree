@@ -36,9 +36,9 @@ import java.util.stream.Collectors;
 */
 public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterface {
 
-    private String createdBy = null;
+    private OffsetDateTime createdAt;
 
-    private OffsetDateTime createdAt = null;
+    private String createdBy;
 
     private OffsetDateTime updatedAt = null;
 
@@ -81,6 +81,8 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
 
     public List<String> missingRequiredFields() {
         List<String> result = new ArrayList<>();
+        if (isMissing(getCreatedAt())) result.add("createdAt");
+        if (isMissing(getCreatedBy())) result.add("createdBy");
         if (isMissing(getType())) result.add("type");
         if (isMissing(getGivenName())) result.add("givenName");
         if (isMissing(getFamilyName())) result.add("familyName");
@@ -105,22 +107,6 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         return s == null;
     }
 
-    /**
-     * Get createdBy
-     * @return createdBy
-     */
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public PersonSnapshotDto createdAt(OffsetDateTime createdAt) {
-        this.createdAt = createdAt;
-        return this;
-    }
 
     /**
      * Get createdAt
@@ -132,6 +118,23 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
 
     public void setCreatedAt(OffsetDateTime createdAt) {
         this.createdAt = createdAt;
+    }
+
+    public PersonSnapshotDto createdAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+        return this;
+    }
+
+    /**
+     * Get createdBy
+     * @return createdBy
+     */
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
     }
 
     public PersonSnapshotDto createdBy(String createdBy) {
@@ -313,8 +316,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
                 Objects.equals(this.getFamilyName(), personSnapshot.getFamilyName()) &&
                 Objects.equals(this.getEmail(), personSnapshot.getEmail()) &&
                 Objects.equals(this.getPhone(), personSnapshot.getPhone()) &&
-                Objects.equals(this.getBirthDate(), personSnapshot.getBirthDate()) &&
-            super.equals(o);
+                Objects.equals(this.getBirthDate(), personSnapshot.getBirthDate());
     }
 
     @Override
@@ -326,7 +328,6 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class PersonSnapshotDto {\n");
-        sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    createdAt: ").append(toIndentedString(getCreatedAt())).append("\n");
         sb.append("    createdBy: ").append(toIndentedString(getCreatedBy())).append("\n");
         sb.append("    updatedAt: ").append(toIndentedString(getUpdatedAt())).append("\n");
