@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /**
 * ChangeTrackedDto
 */
-public class ChangeTrackedDto {
+public class ChangeTrackedDto implements ChangeTrackedInterface {
 
     private OffsetDateTime createdAt;
 

@@ -34,7 +34,15 @@ import java.util.stream.Collectors;
 /**
 * PersonSnapshotDto
 */
-public class PersonSnapshotDto extends ChangeTrackedDto {
+public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterface {
+
+    private String createdBy = null;
+
+    private OffsetDateTime createdAt = null;
+
+    private OffsetDateTime updatedAt = null;
+
+    private String updatedBy = null;
 
     private UUID id = null;
 
@@ -72,7 +80,7 @@ public class PersonSnapshotDto extends ChangeTrackedDto {
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = super.missingRequiredFields();
+        List<String> result = new ArrayList<>();
         if (isMissing(getType())) result.add("type");
         if (isMissing(getGivenName())) result.add("givenName");
         if (isMissing(getFamilyName())) result.add("familyName");
@@ -80,7 +88,6 @@ public class PersonSnapshotDto extends ChangeTrackedDto {
     }
 
     public void readOnlyFieldsWithValue(List<String> result) {
-        super.readOnlyFieldsWithValue(result);
         if (!isMissing(getId())) {
             result.add("PersonSnapshotDto.id");
         }
@@ -98,28 +105,71 @@ public class PersonSnapshotDto extends ChangeTrackedDto {
         return s == null;
     }
 
+    /**
+     * Get createdBy
+     * @return createdBy
+     */
+    public String getCreatedBy() {
+        return createdBy;
+    }
 
-    @Override
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
     public PersonSnapshotDto createdAt(OffsetDateTime createdAt) {
-        super.createdAt(createdAt);
+        this.createdAt = createdAt;
         return this;
     }
 
-    @Override
+    /**
+     * Get createdAt
+     * @return createdAt
+     */
+    public OffsetDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(OffsetDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public PersonSnapshotDto createdBy(String createdBy) {
-        super.createdBy(createdBy);
+        this.createdBy = createdBy;
         return this;
     }
 
-    @Override
+    /**
+     * Get updatedAt
+     * @return updatedAt
+     */
+    public OffsetDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(OffsetDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     public PersonSnapshotDto updatedAt(OffsetDateTime updatedAt) {
-        super.updatedAt(updatedAt);
+        this.updatedAt = updatedAt;
         return this;
     }
 
-    @Override
+    /**
+     * Get updatedBy
+     * @return updatedBy
+     */
+    public String getUpdatedBy() {
+        return updatedBy;
+    }
+
+    public void setUpdatedBy(String updatedBy) {
+        this.updatedBy = updatedBy;
+    }
+
     public PersonSnapshotDto updatedBy(String updatedBy) {
-        super.updatedBy(updatedBy);
+        this.updatedBy = updatedBy;
         return this;
     }
 

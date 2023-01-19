@@ -70,7 +70,7 @@ public class CompilerTest extends AbstractSnapshotTest {
     }
 
 
-    private static String getModelName(Path file) {
+    static String getModelName(Path file) {
         String filename = file.getFileName().toString();
         int lastDot = filename.lastIndexOf('.');
         return lastDot < 0 ? filename : filename.substring(0, lastDot);
