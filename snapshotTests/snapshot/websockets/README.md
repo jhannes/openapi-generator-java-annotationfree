@@ -114,6 +114,7 @@ Class | Method | HTTP request | Description
  - [PersonDto](docs/PersonDto.md)
  - [PersonInterface](docs/PersonInterface.md)
  - [PersonSnapshotDto](docs/PersonSnapshotDto.md)
+ - [StringSnapshotDto](docs/StringSnapshotDto.md)
  - [SubscribeDto](docs/SubscribeDto.md)
  - [UnsubscribeDto](docs/UnsubscribeDto.md)
  - [UpdatePersonCommandDto](docs/UpdatePersonCommandDto.md)

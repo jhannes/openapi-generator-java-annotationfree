@@ -112,3 +112,10 @@ components:
       allOf:
       - $ref: "#/components/schemas/ChangeTracked"
       - $ref: "#/components/schemas/Person"
+    StringSnapshot:
+      allOf:
+      - $ref: "#/components/schemas/ChangeTracked"
+      - type: object
+        properties:
+          name:
+            type: string

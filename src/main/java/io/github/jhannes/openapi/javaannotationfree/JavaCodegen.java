@@ -157,6 +157,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                             var.isInherited = true;
                         }
                     }
+                    codegenModel.interfaces = null;
                 }
             }
             for (CodegenProperty variable : codegenModel.vars) {

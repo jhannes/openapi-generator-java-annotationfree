@@ -133,6 +133,27 @@ public class SampleModelData {
         return sampleList(() -> samplePersonSnapshotDto());
     }
 
+    public StringSnapshotDto sampleStringSnapshotDto(String propertyName) {
+        return sampleStringSnapshotDto();
+    }
+
+    public StringSnapshotDto sampleStringSnapshotDto() {
+        return new StringSnapshotDto()
+            .name(randomString("name"))
+            .createdAt(sampleOffsetDateTime("createdAt"))
+            .createdBy(randomString("createdBy", "username"))
+            .updatedAt(sampleOffsetDateTime("updatedAt"))
+            .updatedBy(randomString("updatedBy", "username"));
+    }
+
+    public List<StringSnapshotDto> sampleListOfStringSnapshotDto(String propertyName) {
+        return sampleListOfStringSnapshotDto();
+    }
+
+    public List<StringSnapshotDto> sampleListOfStringSnapshotDto() {
+        return sampleList(() -> sampleStringSnapshotDto());
+    }
+
     public SubscribeDto sampleSubscribeDto(String propertyName) {
         return sampleSubscribeDto();
     }
