@@ -83,6 +83,16 @@ public class PersonDto implements PersonInterface {
         }
     }
 
+    public void mergeFrom(PersonDto target) {
+        if (target.getId() != null) this.setId(target.getId());
+        if (target.getType() != null) this.setType(target.getType());
+        if (target.getGivenName() != null) this.setGivenName(target.getGivenName());
+        if (target.getFamilyName() != null) this.setFamilyName(target.getFamilyName());
+        if (target.getEmail() != null) this.setEmail(target.getEmail());
+        if (target.getPhone() != null) this.setPhone(target.getPhone());
+        if (target.getBirthDate() != null) this.setBirthDate(target.getBirthDate());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

@@ -74,6 +74,12 @@ public class CreatePersonCommandDto implements WebSocketCommandDto {
         }
     }
 
+    public void mergeFrom(CreatePersonCommandDto target) {
+        if (target.getCommand() != null) this.setCommand(target.getCommand());
+        if (target.getId() != null) this.setId(target.getId());
+        if (target.getPerson() != null) this.setPerson(target.getPerson());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

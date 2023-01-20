@@ -157,6 +157,16 @@ public class PetDto {
         }
     }
 
+    public void mergeFrom(PetDto target) {
+        if (target.getId() != null) this.setId(target.getId());
+        if (target.getPetType() != null) this.setPetType(target.getPetType());
+        if (target.getName() != null) this.setName(target.getName());
+        if (target.getBirthDate() != null) this.setBirthDate(target.getBirthDate());
+        if (target.getCreatedAt() != null) this.setCreatedAt(target.getCreatedAt());
+        if (target.getComments() != null) this.setComments(target.getComments());
+        if (target.getStatus() != null) this.setStatus(target.getStatus());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

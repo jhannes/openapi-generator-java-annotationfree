@@ -68,6 +68,12 @@ public class CatDto extends PetBaseDto implements PetDto {
         }
     }
 
+    public void mergeFrom(CatDto target) {
+        super.mergeFrom(target);
+        if (target.getHunts() != null) this.setHunts(target.getHunts());
+        if (target.getAge() != null) this.setAge(target.getAge());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

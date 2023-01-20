@@ -66,6 +66,11 @@ public class UserDto {
         }
     }
 
+    public void mergeFrom(UserDto target) {
+        if (target.getId() != null) this.setId(target.getId());
+        if (target.getName() != null) this.setName(target.getName());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }
