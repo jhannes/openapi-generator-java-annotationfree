@@ -69,6 +69,12 @@ public class NotFoundErrorDto implements UpdateErrorDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
+    public void mergeFrom(NotFoundErrorDto target) {
+        if (target.getCode() != null) this.setCode(target.getCode());
+        if (target.getIdentifierValue() != null) this.setIdentifierValue(target.getIdentifierValue());
+        if (target.getEntityType() != null) this.setEntityType(target.getEntityType());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

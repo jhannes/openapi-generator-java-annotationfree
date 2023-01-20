@@ -62,6 +62,11 @@ public class TagDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
+    public void mergeFrom(TagDto target) {
+        if (target.getId() != null) this.setId(target.getId());
+        if (target.getName() != null) this.setName(target.getName());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

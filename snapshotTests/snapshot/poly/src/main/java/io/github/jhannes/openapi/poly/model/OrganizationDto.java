@@ -87,6 +87,17 @@ public class OrganizationDto implements AnyPartyDto {
         }
     }
 
+    public void mergeFrom(OrganizationDto target) {
+        if (target.getId() != null) this.setId(target.getId());
+        if (target.getType() != null) this.setType(target.getType());
+        if (target.getName() != null) this.setName(target.getName());
+        if (target.getOrganizationId() != null) this.setOrganizationId(target.getOrganizationId());
+        if (target.getUrl() != null) this.setUrl(target.getUrl());
+        if (target.getEmail() != null) this.setEmail(target.getEmail());
+        if (target.getEmailDomains() != null) this.setEmailDomains(target.getEmailDomains());
+        if (target.getPhone() != null) this.setPhone(target.getPhone());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

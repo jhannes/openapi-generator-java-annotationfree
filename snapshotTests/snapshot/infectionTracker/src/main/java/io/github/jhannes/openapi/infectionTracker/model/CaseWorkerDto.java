@@ -76,6 +76,13 @@ public class CaseWorkerDto {
         }
     }
 
+    public void mergeFrom(CaseWorkerDto target) {
+        if (target.getId() != null) this.setId(target.getId());
+        if (target.getFullName() != null) this.setFullName(target.getFullName());
+        if (target.getEmail() != null) this.setEmail(target.getEmail());
+        if (target.getRole() != null) this.setRole(target.getRole());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

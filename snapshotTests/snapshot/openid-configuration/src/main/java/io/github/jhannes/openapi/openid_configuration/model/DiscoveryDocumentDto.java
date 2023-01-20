@@ -245,6 +245,20 @@ public class DiscoveryDocumentDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
+    public void mergeFrom(DiscoveryDocumentDto target) {
+        if (target.getIssuer() != null) this.setIssuer(target.getIssuer());
+        if (target.getAuthorizationEndpoint() != null) this.setAuthorizationEndpoint(target.getAuthorizationEndpoint());
+        if (target.getTokenEndpoint() != null) this.setTokenEndpoint(target.getTokenEndpoint());
+        if (target.getEndSessionEndpoint() != null) this.setEndSessionEndpoint(target.getEndSessionEndpoint());
+        if (target.getJwksUri() != null) this.setJwksUri(target.getJwksUri());
+        if (target.getResponseTypesSupported() != null) this.setResponseTypesSupported(target.getResponseTypesSupported());
+        if (target.getResponseModesSupported() != null) this.setResponseModesSupported(target.getResponseModesSupported());
+        if (target.getSubjectTypesSupported() != null) this.setSubjectTypesSupported(target.getSubjectTypesSupported());
+        if (target.getCodeChallengeMethodsSupported() != null) this.setCodeChallengeMethodsSupported(target.getCodeChallengeMethodsSupported());
+        if (target.getIdTokenSigningAlgValuesSupported() != null) this.setIdTokenSigningAlgValuesSupported(target.getIdTokenSigningAlgValuesSupported());
+        if (target.getxSsoFrame() != null) this.setxSsoFrame(target.getxSsoFrame());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

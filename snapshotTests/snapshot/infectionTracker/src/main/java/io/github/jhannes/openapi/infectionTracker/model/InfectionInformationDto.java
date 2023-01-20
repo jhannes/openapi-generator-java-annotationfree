@@ -66,6 +66,13 @@ public class InfectionInformationDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
+    public void mergeFrom(InfectionInformationDto target) {
+        if (target.getPatientName() != null) this.setPatientName(target.getPatientName());
+        if (target.getPatientPhoneNumber() != null) this.setPatientPhoneNumber(target.getPatientPhoneNumber());
+        if (target.getLikelyInfectionDate() != null) this.setLikelyInfectionDate(target.getLikelyInfectionDate());
+        if (target.getNotes() != null) this.setNotes(target.getNotes());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

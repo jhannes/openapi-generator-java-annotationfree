@@ -100,6 +100,12 @@ public class DogDto extends PetBaseDto implements PetDto {
         super.readOnlyFieldsWithValue(result);
     }
 
+    public void mergeFrom(DogDto target) {
+        super.mergeFrom(target);
+        if (target.getBark() != null) this.setBark(target.getBark());
+        if (target.getBreed() != null) this.setBreed(target.getBreed());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

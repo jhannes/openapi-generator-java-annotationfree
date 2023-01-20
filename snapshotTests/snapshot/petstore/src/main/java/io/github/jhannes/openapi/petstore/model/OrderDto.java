@@ -104,6 +104,15 @@ public class OrderDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
+    public void mergeFrom(OrderDto target) {
+        if (target.getId() != null) this.setId(target.getId());
+        if (target.getPetId() != null) this.setPetId(target.getPetId());
+        if (target.getQuantity() != null) this.setQuantity(target.getQuantity());
+        if (target.getShipDate() != null) this.setShipDate(target.getShipDate());
+        if (target.getStatus() != null) this.setStatus(target.getStatus());
+        if (target.getComplete() != null) this.setComplete(target.getComplete());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

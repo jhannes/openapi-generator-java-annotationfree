@@ -63,6 +63,10 @@ public class PetStoreDto {
         }
     }
 
+    public void mergeFrom(PetStoreDto target) {
+        if (target.getPets() != null) this.setPets(target.getPets());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }

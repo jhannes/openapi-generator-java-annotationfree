@@ -74,6 +74,17 @@ public class UserDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
+    public void mergeFrom(UserDto target) {
+        if (target.getId() != null) this.setId(target.getId());
+        if (target.getUsername() != null) this.setUsername(target.getUsername());
+        if (target.getFirstName() != null) this.setFirstName(target.getFirstName());
+        if (target.getLastName() != null) this.setLastName(target.getLastName());
+        if (target.getEmail() != null) this.setEmail(target.getEmail());
+        if (target.getPassword() != null) this.setPassword(target.getPassword());
+        if (target.getPhone() != null) this.setPhone(target.getPhone());
+        if (target.getUserStatus() != null) this.setUserStatus(target.getUserStatus());
+    }
+
     private boolean isMissing(String s) {
         return s == null || s.isEmpty();
     }
