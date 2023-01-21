@@ -1,4 +1,4 @@
-package io.github.jhannes.openapi.typescriptfetchapi;
+package io.github.jhannes.openapi.javaannotationfree;
 
 import difflib.DeleteDelta;
 import difflib.Delta;
@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 public class SnapshotTests extends AbstractSnapshotTest {
 
     @TestFactory
-    Stream<DynamicNode> javaAnnotationFreeSnapshots() throws IOException {
+    Stream<DynamicNode> outputsShouldMatchSnapshots() throws IOException {
         List<DynamicNode> testSuites = new ArrayList<>();
         testSuites.add(snapshots(SNAPSHOT_ROOT));
         if (Files.isDirectory(AbstractSnapshotTest.LOCAL_SNAPSHOT_ROOT)) {
@@ -53,7 +53,7 @@ public class SnapshotTests extends AbstractSnapshotTest {
     }
 
     public static DynamicNode createTestsForSpec(Path spec) {
-        return createTestsForSpec(spec, spec.getParent().getParent().resolve("output"), spec.getParent().getParent().resolve("snapshot"));
+        return createTestsForSpec(spec, targetDir(spec, "output"), targetDir(spec, "snapshot"));
     }
 
     static DynamicNode createTestsForSpec(Path spec, Path outputRoot, Path snapshotRoot) {

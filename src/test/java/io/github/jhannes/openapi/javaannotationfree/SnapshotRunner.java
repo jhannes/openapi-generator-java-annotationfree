@@ -1,4 +1,4 @@
-package io.github.jhannes.openapi.typescriptfetchapi;
+package io.github.jhannes.openapi.javaannotationfree;
 
 import difflib.Delta;
 import difflib.DiffUtils;
@@ -18,9 +18,9 @@ import java.util.stream.Stream;
 
 public class SnapshotRunner {
 
-    private Path output;
-    private Path input;
-    private Path snapshotDir;
+    private final Path output;
+    private final Path input;
+    private final Path snapshotDir;
 
     public SnapshotRunner(Path testDir) {
         output = testDir.resolve("output");
@@ -47,9 +47,7 @@ public class SnapshotRunner {
         }
 
 
-        Files.list(input).forEach(file -> {
-            generate(file);
-        });
+        Files.list(input).forEach(this::generate);
 
         try (Stream<Path> list = Files.walk(output)) {
             list.forEach(file -> {

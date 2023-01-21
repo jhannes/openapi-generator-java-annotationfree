@@ -1,4 +1,4 @@
-package io.github.jhannes.openapi.typescriptfetchapi;
+package io.github.jhannes.openapi.javaannotationfree;
 
 import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicNode;
@@ -29,7 +29,7 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 public class CompilerTest extends AbstractSnapshotTest {
 
     @TestFactory
-    Stream<DynamicNode> exampleSpecifications() throws IOException {
+    Stream<DynamicNode> outputsFromSpecsShouldCompile() throws IOException {
         List<DynamicNode> testSuites = new ArrayList<>();
         testSuites.add(compileSpec(AbstractSnapshotTest.SNAPSHOT_ROOT));
         if (Files.isDirectory(AbstractSnapshotTest.LOCAL_SNAPSHOT_ROOT)) {
@@ -40,9 +40,8 @@ public class CompilerTest extends AbstractSnapshotTest {
 
     static DynamicNode compileSpec(Path testDir) throws IOException {
         Path inputDir = testDir.resolve("input");
-        cleanDirectory(testDir.resolve("compile"));
         return dynamicContainer(
-                "Compiling of " + testDir,
+                "Output should compile: " + testDir,
                 Files.list(inputDir)
                         .filter(p -> p.toFile().isFile())
                         .map(CompilerTest::createTestFromSpec)
@@ -50,11 +49,12 @@ public class CompilerTest extends AbstractSnapshotTest {
     }
 
     public static DynamicNode createTestFromSpec(Path spec) {
-        return createTestFromSpec(spec, spec.getParent().getParent().resolve("compile"));
+        return createTestFromSpec(spec, targetDir(spec, "compile"));
     }
 
     static DynamicContainer createTestFromSpec(Path spec, Path outputDir) {
         return dynamicContainer("Compile " + spec, Arrays.asList(
+                dynamicTest("Clean " + spec, () -> cleanDirectory(outputDir)),
                 dynamicTest("Generate " + spec, () -> generate(spec, outputDir, getModelName(spec))),
                 dynamicTest("javac " + spec, () -> compile(outputDir.resolve(getModelName(spec))))
         ));

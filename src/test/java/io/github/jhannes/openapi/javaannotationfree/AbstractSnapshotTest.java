@@ -1,4 +1,4 @@
-package io.github.jhannes.openapi.typescriptfetchapi;
+package io.github.jhannes.openapi.javaannotationfree;
 
 import org.openapitools.codegen.config.CodegenConfigurator;
 
@@ -46,5 +46,9 @@ public class AbstractSnapshotTest {
                         .forEach(File::delete);
             }
         }
+    }
+
+    static Path targetDir(Path spec, String compile) {
+        return spec.getParent().getParent().resolve(compile);
     }
 }
