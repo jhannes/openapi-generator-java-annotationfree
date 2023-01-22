@@ -56,7 +56,7 @@ public class SnapshotTests extends AbstractSnapshotTest {
         return createTestsForSpec(spec, targetDir(spec, "output"), targetDir(spec, "snapshot"));
     }
 
-    static DynamicNode createTestsForSpec(Path spec, Path outputRoot, Path snapshotRoot) {
+    private static DynamicNode createTestsForSpec(Path spec, Path outputRoot, Path snapshotRoot) {
         String modelName = getModelName(spec);
         CodegenConfigurator configurator = AbstractSnapshotTest.createConfigurator(modelName, spec, outputRoot.resolve(modelName));
         return createTests(spec, outputRoot.resolve(modelName), snapshotRoot.resolve(modelName), configurator);
