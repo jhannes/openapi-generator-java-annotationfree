@@ -70,11 +70,12 @@ public class AddressDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(AddressDto target) {
+    public AddressDto mergeFrom(AddressDto target) {
         if (target.getAddressLine1() != null) this.setAddressLine1(target.getAddressLine1());
         if (target.getAddressLine2() != null) this.setAddressLine2(target.getAddressLine2());
         if (target.getCity() != null) this.setCity(target.getCity());
         if (target.getCountry() != null) this.setCountry(target.getCountry());
+        return this;
     }
 
     private boolean isMissing(String s) {

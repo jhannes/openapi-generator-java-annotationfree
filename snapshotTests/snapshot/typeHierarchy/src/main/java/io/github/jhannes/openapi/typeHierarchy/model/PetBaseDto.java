@@ -77,12 +77,13 @@ public class PetBaseDto {
         }
     }
 
-    public void mergeFrom(PetBaseDto target) {
+    public PetBaseDto mergeFrom(PetBaseDto target) {
         if (target.getId() != null) this.setId(target.getId());
         if (target.getPetType() != null) this.setPetType(target.getPetType());
         if (target.getName() != null) this.setName(target.getName());
         if (target.getBirthDate() != null) this.setBirthDate(target.getBirthDate());
         if (target.getOwnerAddress() != null) this.setOwnerAddress(target.getOwnerAddress());
+        return this;
     }
 
     private boolean isMissing(String s) {

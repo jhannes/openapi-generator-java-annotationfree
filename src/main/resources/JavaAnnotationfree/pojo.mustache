@@ -103,7 +103,7 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
 {{/vars}}
     }
 
-    public void mergeFrom({{classname}} target) {
+    public {{classname}} mergeFrom({{classname}} target) {
 {{#parent}}
         super.mergeFrom(target);
 {{/parent}}
@@ -112,6 +112,7 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
         if (target.{{getter}}() != null) this.{{setter}}(target.{{getter}}());
     {{/isInherited}}
 {{/vars}}
+        return this;
     }
 
     private boolean isMissing(String s) {

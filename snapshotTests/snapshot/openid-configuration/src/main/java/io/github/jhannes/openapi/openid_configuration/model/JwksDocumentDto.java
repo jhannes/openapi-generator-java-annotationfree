@@ -63,8 +63,9 @@ public class JwksDocumentDto {
         }
     }
 
-    public void mergeFrom(JwksDocumentDto target) {
+    public JwksDocumentDto mergeFrom(JwksDocumentDto target) {
         if (target.getKeys() != null) this.setKeys(target.getKeys());
+        return this;
     }
 
     private boolean isMissing(String s) {

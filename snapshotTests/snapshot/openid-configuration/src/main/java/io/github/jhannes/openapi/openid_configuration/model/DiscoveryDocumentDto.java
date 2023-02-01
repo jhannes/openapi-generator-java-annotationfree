@@ -245,7 +245,7 @@ public class DiscoveryDocumentDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(DiscoveryDocumentDto target) {
+    public DiscoveryDocumentDto mergeFrom(DiscoveryDocumentDto target) {
         if (target.getIssuer() != null) this.setIssuer(target.getIssuer());
         if (target.getAuthorizationEndpoint() != null) this.setAuthorizationEndpoint(target.getAuthorizationEndpoint());
         if (target.getTokenEndpoint() != null) this.setTokenEndpoint(target.getTokenEndpoint());
@@ -257,6 +257,7 @@ public class DiscoveryDocumentDto {
         if (target.getCodeChallengeMethodsSupported() != null) this.setCodeChallengeMethodsSupported(target.getCodeChallengeMethodsSupported());
         if (target.getIdTokenSigningAlgValuesSupported() != null) this.setIdTokenSigningAlgValuesSupported(target.getIdTokenSigningAlgValuesSupported());
         if (target.getxSsoFrame() != null) this.setxSsoFrame(target.getxSsoFrame());
+        return this;
     }
 
     private boolean isMissing(String s) {

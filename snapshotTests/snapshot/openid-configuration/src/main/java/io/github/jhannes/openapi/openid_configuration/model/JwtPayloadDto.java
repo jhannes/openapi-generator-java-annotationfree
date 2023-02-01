@@ -80,7 +80,7 @@ public class JwtPayloadDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(JwtPayloadDto target) {
+    public JwtPayloadDto mergeFrom(JwtPayloadDto target) {
         if (target.getIss() != null) this.setIss(target.getIss());
         if (target.getSub() != null) this.setSub(target.getSub());
         if (target.getAud() != null) this.setAud(target.getAud());
@@ -89,6 +89,7 @@ public class JwtPayloadDto {
         if (target.getOrgId() != null) this.setOrgId(target.getOrgId());
         if (target.getOrg() != null) this.setOrg(target.getOrg());
         if (target.getPid() != null) this.setPid(target.getPid());
+        return this;
     }
 
     private boolean isMissing(String s) {

@@ -80,10 +80,11 @@ public class InfectionDto {
         }
     }
 
-    public void mergeFrom(InfectionDto target) {
+    public InfectionDto mergeFrom(InfectionDto target) {
         if (target.getId() != null) this.setId(target.getId());
         if (target.getInformation() != null) this.setInformation(target.getInformation());
         if (target.getRegisteredExposures() != null) this.setRegisteredExposures(target.getRegisteredExposures());
+        return this;
     }
 
     private boolean isMissing(String s) {

@@ -73,11 +73,12 @@ public class CommentDto {
         }
     }
 
-    public void mergeFrom(CommentDto target) {
+    public CommentDto mergeFrom(CommentDto target) {
         if (target.getTitle() != null) this.setTitle(target.getTitle());
         if (target.getComment() != null) this.setComment(target.getComment());
         if (target.getCreatedAt() != null) this.setCreatedAt(target.getCreatedAt());
         if (target.getUser() != null) this.setUser(target.getUser());
+        return this;
     }
 
     private boolean isMissing(String s) {

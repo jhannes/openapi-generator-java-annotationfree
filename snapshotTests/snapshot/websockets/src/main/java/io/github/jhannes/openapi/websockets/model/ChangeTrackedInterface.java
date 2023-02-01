@@ -81,11 +81,12 @@ public interface ChangeTrackedInterface {
 
     ChangeTrackedInterface updatedBy(String updatedBy);
 
-    default void mergeFrom(ChangeTrackedInterface target) {
+    default ChangeTrackedInterface mergeFrom(ChangeTrackedInterface target) {
         if (target.getCreatedAt() != null) this.setCreatedAt(target.getCreatedAt());
         if (target.getCreatedBy() != null) this.setCreatedBy(target.getCreatedBy());
         if (target.getUpdatedAt() != null) this.setUpdatedAt(target.getUpdatedAt());
         if (target.getUpdatedBy() != null) this.setUpdatedBy(target.getUpdatedBy());
+        return this;
     }
 }
 

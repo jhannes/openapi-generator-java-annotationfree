@@ -66,9 +66,10 @@ public class UserDto {
         }
     }
 
-    public void mergeFrom(UserDto target) {
+    public UserDto mergeFrom(UserDto target) {
         if (target.getId() != null) this.setId(target.getId());
         if (target.getName() != null) this.setName(target.getName());
+        return this;
     }
 
     private boolean isMissing(String s) {

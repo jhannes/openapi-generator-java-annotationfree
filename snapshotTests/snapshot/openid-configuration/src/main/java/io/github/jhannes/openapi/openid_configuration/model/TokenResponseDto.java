@@ -74,13 +74,14 @@ public class TokenResponseDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(TokenResponseDto target) {
+    public TokenResponseDto mergeFrom(TokenResponseDto target) {
         if (target.getAccessToken() != null) this.setAccessToken(target.getAccessToken());
         if (target.getTokenType() != null) this.setTokenType(target.getTokenType());
         if (target.getExpiresIn() != null) this.setExpiresIn(target.getExpiresIn());
         if (target.getScope() != null) this.setScope(target.getScope());
         if (target.getIdToken() != null) this.setIdToken(target.getIdToken());
         if (target.getRefreshToken() != null) this.setRefreshToken(target.getRefreshToken());
+        return this;
     }
 
     private boolean isMissing(String s) {

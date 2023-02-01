@@ -66,9 +66,10 @@ public class PointDto implements GeometryDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(PointDto target) {
+    public PointDto mergeFrom(PointDto target) {
         if (target.getType() != null) this.setType(target.getType());
         if (target.getCoordinates() != null) this.setCoordinates(target.getCoordinates());
+        return this;
     }
 
     private boolean isMissing(String s) {

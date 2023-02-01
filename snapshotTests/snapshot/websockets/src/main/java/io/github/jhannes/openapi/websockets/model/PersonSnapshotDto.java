@@ -95,7 +95,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         }
     }
 
-    public void mergeFrom(PersonSnapshotDto target) {
+    public PersonSnapshotDto mergeFrom(PersonSnapshotDto target) {
         if (target.getCreatedAt() != null) this.setCreatedAt(target.getCreatedAt());
         if (target.getCreatedBy() != null) this.setCreatedBy(target.getCreatedBy());
         if (target.getUpdatedAt() != null) this.setUpdatedAt(target.getUpdatedAt());
@@ -107,6 +107,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         if (target.getEmail() != null) this.setEmail(target.getEmail());
         if (target.getPhone() != null) this.setPhone(target.getPhone());
         if (target.getBirthDate() != null) this.setBirthDate(target.getBirthDate());
+        return this;
     }
 
     private boolean isMissing(String s) {

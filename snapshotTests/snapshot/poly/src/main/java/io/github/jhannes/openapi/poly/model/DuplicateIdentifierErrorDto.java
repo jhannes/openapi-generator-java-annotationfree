@@ -69,10 +69,11 @@ public class DuplicateIdentifierErrorDto implements CreationErrorDto, UpdateErro
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(DuplicateIdentifierErrorDto target) {
+    public DuplicateIdentifierErrorDto mergeFrom(DuplicateIdentifierErrorDto target) {
         if (target.getCode() != null) this.setCode(target.getCode());
         if (target.getIdentifierValue() != null) this.setIdentifierValue(target.getIdentifierValue());
         if (target.getEntityType() != null) this.setEntityType(target.getEntityType());
+        return this;
     }
 
     private boolean isMissing(String s) {

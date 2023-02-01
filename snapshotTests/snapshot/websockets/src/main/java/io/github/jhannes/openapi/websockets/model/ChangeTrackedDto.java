@@ -71,11 +71,12 @@ public class ChangeTrackedDto implements ChangeTrackedInterface {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(ChangeTrackedDto target) {
+    public ChangeTrackedDto mergeFrom(ChangeTrackedDto target) {
         if (target.getCreatedAt() != null) this.setCreatedAt(target.getCreatedAt());
         if (target.getCreatedBy() != null) this.setCreatedBy(target.getCreatedBy());
         if (target.getUpdatedAt() != null) this.setUpdatedAt(target.getUpdatedAt());
         if (target.getUpdatedBy() != null) this.setUpdatedBy(target.getUpdatedBy());
+        return this;
     }
 
     private boolean isMissing(String s) {

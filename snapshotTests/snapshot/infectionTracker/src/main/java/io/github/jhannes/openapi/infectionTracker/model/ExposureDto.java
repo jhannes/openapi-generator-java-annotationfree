@@ -156,7 +156,7 @@ public class ExposureDto {
         }
     }
 
-    public void mergeFrom(ExposureDto target) {
+    public ExposureDto mergeFrom(ExposureDto target) {
         if (target.getId() != null) this.setId(target.getId());
         if (target.getExposedPersonName() != null) this.setExposedPersonName(target.getExposedPersonName());
         if (target.getExposedPersonPhoneNumber() != null) this.setExposedPersonPhoneNumber(target.getExposedPersonPhoneNumber());
@@ -166,6 +166,7 @@ public class ExposureDto {
         if (target.getCaseWorker() != null) this.setCaseWorker(target.getCaseWorker());
         if (target.getStatus() != null) this.setStatus(target.getStatus());
         if (target.getDelayAfterInfection() != null) this.setDelayAfterInfection(target.getDelayAfterInfection());
+        return this;
     }
 
     private boolean isMissing(String s) {

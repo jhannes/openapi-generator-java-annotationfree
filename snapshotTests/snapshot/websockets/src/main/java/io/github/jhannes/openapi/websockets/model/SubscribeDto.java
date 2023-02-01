@@ -63,8 +63,9 @@ public class SubscribeDto implements WebSocketRequestDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(SubscribeDto target) {
+    public SubscribeDto mergeFrom(SubscribeDto target) {
         if (target.getRequest() != null) this.setRequest(target.getRequest());
+        return this;
     }
 
     private boolean isMissing(String s) {

@@ -113,7 +113,7 @@ public interface PersonInterface {
 
     PersonInterface birthDate(LocalDate birthDate);
 
-    default void mergeFrom(PersonInterface target) {
+    default PersonInterface mergeFrom(PersonInterface target) {
         if (target.getId() != null) this.setId(target.getId());
         if (target.getType() != null) this.setType(target.getType());
         if (target.getGivenName() != null) this.setGivenName(target.getGivenName());
@@ -121,6 +121,7 @@ public interface PersonInterface {
         if (target.getEmail() != null) this.setEmail(target.getEmail());
         if (target.getPhone() != null) this.setPhone(target.getPhone());
         if (target.getBirthDate() != null) this.setBirthDate(target.getBirthDate());
+        return this;
     }
 }
 
