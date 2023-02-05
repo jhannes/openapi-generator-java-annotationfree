@@ -70,12 +70,12 @@ public class AddressDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public AddressDto mergeFrom(AddressDto target) {
-        if (target.getAddressLine1() != null) this.setAddressLine1(target.getAddressLine1());
-        if (target.getAddressLine2() != null) this.setAddressLine2(target.getAddressLine2());
-        if (target.getCity() != null) this.setCity(target.getCity());
-        if (target.getCountry() != null) this.setCountry(target.getCountry());
-        return this;
+    public AddressDto copyTo(AddressDto target) {
+        if (this.getAddressLine1() != null) target.setAddressLine1(this.getAddressLine1());
+        if (this.getAddressLine2() != null) target.setAddressLine2(this.getAddressLine2());
+        if (this.getCity() != null) target.setCity(this.getCity());
+        if (this.getCountry() != null) target.setCountry(this.getCountry());
+        return target;
     }
 
     private boolean isMissing(String s) {

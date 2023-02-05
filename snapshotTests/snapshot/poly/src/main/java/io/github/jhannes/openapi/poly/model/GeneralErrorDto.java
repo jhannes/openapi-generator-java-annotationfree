@@ -67,10 +67,10 @@ public class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public GeneralErrorDto mergeFrom(GeneralErrorDto target) {
-        if (target.getCode() != null) this.setCode(target.getCode());
-        if (target.getDescription() != null) this.setDescription(target.getDescription());
-        return this;
+    public GeneralErrorDto copyTo(GeneralErrorDto target) {
+        if (this.getCode() != null) target.setCode(this.getCode());
+        if (this.getDescription() != null) target.setDescription(this.getDescription());
+        return target;
     }
 
     private boolean isMissing(String s) {

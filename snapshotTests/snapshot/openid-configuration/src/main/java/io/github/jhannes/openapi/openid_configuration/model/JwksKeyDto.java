@@ -70,12 +70,12 @@ public class JwksKeyDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public JwksKeyDto mergeFrom(JwksKeyDto target) {
-        if (target.getKty() != null) this.setKty(target.getKty());
-        if (target.getUse() != null) this.setUse(target.getUse());
-        if (target.getKid() != null) this.setKid(target.getKid());
-        if (target.getX5c() != null) this.setX5c(target.getX5c());
-        return this;
+    public JwksKeyDto copyTo(JwksKeyDto target) {
+        if (this.getKty() != null) target.setKty(this.getKty());
+        if (this.getUse() != null) target.setUse(this.getUse());
+        if (this.getKid() != null) target.setKid(this.getKid());
+        if (this.getX5c() != null) target.setX5c(this.getX5c());
+        return target;
     }
 
     private boolean isMissing(String s) {

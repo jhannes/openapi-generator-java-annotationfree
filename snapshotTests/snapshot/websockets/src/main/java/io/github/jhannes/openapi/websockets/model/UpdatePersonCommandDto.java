@@ -74,11 +74,11 @@ public class UpdatePersonCommandDto implements WebSocketCommandDto {
         }
     }
 
-    public UpdatePersonCommandDto mergeFrom(UpdatePersonCommandDto target) {
-        if (target.getCommand() != null) this.setCommand(target.getCommand());
-        if (target.getId() != null) this.setId(target.getId());
-        if (target.getPerson() != null) this.setPerson(target.getPerson());
-        return this;
+    public UpdatePersonCommandDto copyTo(UpdatePersonCommandDto target) {
+        if (this.getCommand() != null) target.setCommand(this.getCommand());
+        if (this.getId() != null) target.setId(this.getId());
+        if (this.getPerson() != null) target.setPerson(this.getPerson());
+        return target;
     }
 
     private boolean isMissing(String s) {

@@ -60,9 +60,9 @@ public class PetLocationsDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public PetLocationsDto mergeFrom(PetLocationsDto target) {
-        if (target.getLocations() != null) this.setLocations(target.getLocations());
-        return this;
+    public PetLocationsDto copyTo(PetLocationsDto target) {
+        if (this.getLocations() != null) target.setLocations(this.getLocations());
+        return target;
     }
 
     private boolean isMissing(String s) {

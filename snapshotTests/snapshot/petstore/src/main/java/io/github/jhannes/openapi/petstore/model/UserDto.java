@@ -74,16 +74,16 @@ public class UserDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public UserDto mergeFrom(UserDto target) {
-        if (target.getId() != null) this.setId(target.getId());
-        if (target.getUsername() != null) this.setUsername(target.getUsername());
-        if (target.getFirstName() != null) this.setFirstName(target.getFirstName());
-        if (target.getLastName() != null) this.setLastName(target.getLastName());
-        if (target.getEmail() != null) this.setEmail(target.getEmail());
-        if (target.getPassword() != null) this.setPassword(target.getPassword());
-        if (target.getPhone() != null) this.setPhone(target.getPhone());
-        if (target.getUserStatus() != null) this.setUserStatus(target.getUserStatus());
-        return this;
+    public UserDto copyTo(UserDto target) {
+        if (this.getId() != null) target.setId(this.getId());
+        if (this.getUsername() != null) target.setUsername(this.getUsername());
+        if (this.getFirstName() != null) target.setFirstName(this.getFirstName());
+        if (this.getLastName() != null) target.setLastName(this.getLastName());
+        if (this.getEmail() != null) target.setEmail(this.getEmail());
+        if (this.getPassword() != null) target.setPassword(this.getPassword());
+        if (this.getPhone() != null) target.setPhone(this.getPhone());
+        if (this.getUserStatus() != null) target.setUserStatus(this.getUserStatus());
+        return target;
     }
 
     private boolean isMissing(String s) {

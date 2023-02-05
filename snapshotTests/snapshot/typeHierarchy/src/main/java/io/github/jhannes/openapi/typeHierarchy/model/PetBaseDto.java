@@ -77,13 +77,13 @@ public class PetBaseDto {
         }
     }
 
-    public PetBaseDto mergeFrom(PetBaseDto target) {
-        if (target.getId() != null) this.setId(target.getId());
-        if (target.getPetType() != null) this.setPetType(target.getPetType());
-        if (target.getName() != null) this.setName(target.getName());
-        if (target.getBirthDate() != null) this.setBirthDate(target.getBirthDate());
-        if (target.getOwnerAddress() != null) this.setOwnerAddress(target.getOwnerAddress());
-        return this;
+    public PetBaseDto copyTo(PetBaseDto target) {
+        if (this.getId() != null) target.setId(this.getId());
+        if (this.getPetType() != null) target.setPetType(this.getPetType());
+        if (this.getName() != null) target.setName(this.getName());
+        if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
+        if (this.getOwnerAddress() != null) target.setOwnerAddress(this.getOwnerAddress());
+        return target;
     }
 
     private boolean isMissing(String s) {

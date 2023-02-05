@@ -95,19 +95,19 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         }
     }
 
-    public PersonSnapshotDto mergeFrom(PersonSnapshotDto target) {
-        if (target.getCreatedAt() != null) this.setCreatedAt(target.getCreatedAt());
-        if (target.getCreatedBy() != null) this.setCreatedBy(target.getCreatedBy());
-        if (target.getUpdatedAt() != null) this.setUpdatedAt(target.getUpdatedAt());
-        if (target.getUpdatedBy() != null) this.setUpdatedBy(target.getUpdatedBy());
-        if (target.getId() != null) this.setId(target.getId());
-        if (target.getType() != null) this.setType(target.getType());
-        if (target.getGivenName() != null) this.setGivenName(target.getGivenName());
-        if (target.getFamilyName() != null) this.setFamilyName(target.getFamilyName());
-        if (target.getEmail() != null) this.setEmail(target.getEmail());
-        if (target.getPhone() != null) this.setPhone(target.getPhone());
-        if (target.getBirthDate() != null) this.setBirthDate(target.getBirthDate());
-        return this;
+    public PersonSnapshotDto copyTo(PersonSnapshotDto target) {
+        if (this.getCreatedAt() != null) target.setCreatedAt(this.getCreatedAt());
+        if (this.getCreatedBy() != null) target.setCreatedBy(this.getCreatedBy());
+        if (this.getUpdatedAt() != null) target.setUpdatedAt(this.getUpdatedAt());
+        if (this.getUpdatedBy() != null) target.setUpdatedBy(this.getUpdatedBy());
+        if (this.getId() != null) target.setId(this.getId());
+        if (this.getType() != null) target.setType(this.getType());
+        if (this.getGivenName() != null) target.setGivenName(this.getGivenName());
+        if (this.getFamilyName() != null) target.setFamilyName(this.getFamilyName());
+        if (this.getEmail() != null) target.setEmail(this.getEmail());
+        if (this.getPhone() != null) target.setPhone(this.getPhone());
+        if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
+        return target;
     }
 
     private boolean isMissing(String s) {

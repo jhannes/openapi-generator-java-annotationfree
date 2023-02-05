@@ -75,10 +75,10 @@ public interface {{classname}}{{#interfaces}}{{#-first}} extends {{/-first}}{{^-
     {{/isInherited}}
 {{/vars}}
 
-    default {{classname}} mergeFrom({{classname}} target) {
+    default {{classname}} copyTo({{classname}} target) {
 {{#vars}}
-        if (target.{{getter}}() != null) this.{{setter}}(target.{{getter}}());
+        if (this.{{getter}}() != null) target.{{setter}}(this.{{getter}}());
 {{/vars}}
-        return this;
+        return target;
     }
 }

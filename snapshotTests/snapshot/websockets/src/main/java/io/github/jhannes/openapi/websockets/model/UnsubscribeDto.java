@@ -63,9 +63,9 @@ public class UnsubscribeDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public UnsubscribeDto mergeFrom(UnsubscribeDto target) {
-        if (target.getRequest() != null) this.setRequest(target.getRequest());
-        return this;
+    public UnsubscribeDto copyTo(UnsubscribeDto target) {
+        if (this.getRequest() != null) target.setRequest(this.getRequest());
+        return target;
     }
 
     private boolean isMissing(String s) {

@@ -74,14 +74,14 @@ public class TokenResponseDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public TokenResponseDto mergeFrom(TokenResponseDto target) {
-        if (target.getAccessToken() != null) this.setAccessToken(target.getAccessToken());
-        if (target.getTokenType() != null) this.setTokenType(target.getTokenType());
-        if (target.getExpiresIn() != null) this.setExpiresIn(target.getExpiresIn());
-        if (target.getScope() != null) this.setScope(target.getScope());
-        if (target.getIdToken() != null) this.setIdToken(target.getIdToken());
-        if (target.getRefreshToken() != null) this.setRefreshToken(target.getRefreshToken());
-        return this;
+    public TokenResponseDto copyTo(TokenResponseDto target) {
+        if (this.getAccessToken() != null) target.setAccessToken(this.getAccessToken());
+        if (this.getTokenType() != null) target.setTokenType(this.getTokenType());
+        if (this.getExpiresIn() != null) target.setExpiresIn(this.getExpiresIn());
+        if (this.getScope() != null) target.setScope(this.getScope());
+        if (this.getIdToken() != null) target.setIdToken(this.getIdToken());
+        if (this.getRefreshToken() != null) target.setRefreshToken(this.getRefreshToken());
+        return target;
     }
 
     private boolean isMissing(String s) {

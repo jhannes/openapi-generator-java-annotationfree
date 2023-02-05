@@ -114,14 +114,14 @@ public class PetDto {
         }
     }
 
-    public PetDto mergeFrom(PetDto target) {
-        if (target.getId() != null) this.setId(target.getId());
-        if (target.getCategory() != null) this.setCategory(target.getCategory());
-        if (target.getName() != null) this.setName(target.getName());
-        if (target.getPhotoUrls() != null) this.setPhotoUrls(target.getPhotoUrls());
-        if (target.getTags() != null) this.setTags(target.getTags());
-        if (target.getStatus() != null) this.setStatus(target.getStatus());
-        return this;
+    public PetDto copyTo(PetDto target) {
+        if (this.getId() != null) target.setId(this.getId());
+        if (this.getCategory() != null) target.setCategory(this.getCategory());
+        if (this.getName() != null) target.setName(this.getName());
+        if (this.getPhotoUrls() != null) target.setPhotoUrls(this.getPhotoUrls());
+        if (this.getTags() != null) target.setTags(this.getTags());
+        if (this.getStatus() != null) target.setStatus(this.getStatus());
+        return target;
     }
 
     private boolean isMissing(String s) {

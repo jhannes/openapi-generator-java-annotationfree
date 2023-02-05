@@ -156,17 +156,17 @@ public class ExposureDto {
         }
     }
 
-    public ExposureDto mergeFrom(ExposureDto target) {
-        if (target.getId() != null) this.setId(target.getId());
-        if (target.getExposedPersonName() != null) this.setExposedPersonName(target.getExposedPersonName());
-        if (target.getExposedPersonPhoneNumber() != null) this.setExposedPersonPhoneNumber(target.getExposedPersonPhoneNumber());
-        if (target.getExposedDate() != null) this.setExposedDate(target.getExposedDate());
-        if (target.getExposureLocation() != null) this.setExposureLocation(target.getExposureLocation());
-        if (target.getNotes() != null) this.setNotes(target.getNotes());
-        if (target.getCaseWorker() != null) this.setCaseWorker(target.getCaseWorker());
-        if (target.getStatus() != null) this.setStatus(target.getStatus());
-        if (target.getDelayAfterInfection() != null) this.setDelayAfterInfection(target.getDelayAfterInfection());
-        return this;
+    public ExposureDto copyTo(ExposureDto target) {
+        if (this.getId() != null) target.setId(this.getId());
+        if (this.getExposedPersonName() != null) target.setExposedPersonName(this.getExposedPersonName());
+        if (this.getExposedPersonPhoneNumber() != null) target.setExposedPersonPhoneNumber(this.getExposedPersonPhoneNumber());
+        if (this.getExposedDate() != null) target.setExposedDate(this.getExposedDate());
+        if (this.getExposureLocation() != null) target.setExposureLocation(this.getExposureLocation());
+        if (this.getNotes() != null) target.setNotes(this.getNotes());
+        if (this.getCaseWorker() != null) target.setCaseWorker(this.getCaseWorker());
+        if (this.getStatus() != null) target.setStatus(this.getStatus());
+        if (this.getDelayAfterInfection() != null) target.setDelayAfterInfection(this.getDelayAfterInfection());
+        return target;
     }
 
     private boolean isMissing(String s) {

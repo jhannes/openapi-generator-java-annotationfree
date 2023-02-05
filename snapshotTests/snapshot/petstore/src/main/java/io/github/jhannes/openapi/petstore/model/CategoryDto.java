@@ -62,10 +62,10 @@ public class CategoryDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public CategoryDto mergeFrom(CategoryDto target) {
-        if (target.getId() != null) this.setId(target.getId());
-        if (target.getName() != null) this.setName(target.getName());
-        return this;
+    public CategoryDto copyTo(CategoryDto target) {
+        if (this.getId() != null) target.setId(this.getId());
+        if (this.getName() != null) target.setName(this.getName());
+        return target;
     }
 
     private boolean isMissing(String s) {

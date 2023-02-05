@@ -66,10 +66,10 @@ public class LineStringDto implements GeometryDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public LineStringDto mergeFrom(LineStringDto target) {
-        if (target.getType() != null) this.setType(target.getType());
-        if (target.getCoordinates() != null) this.setCoordinates(target.getCoordinates());
-        return this;
+    public LineStringDto copyTo(LineStringDto target) {
+        if (this.getType() != null) target.setType(this.getType());
+        if (this.getCoordinates() != null) target.setCoordinates(this.getCoordinates());
+        return target;
     }
 
     private boolean isMissing(String s) {

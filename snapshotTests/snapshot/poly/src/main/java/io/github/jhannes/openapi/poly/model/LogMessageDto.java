@@ -65,10 +65,10 @@ public class LogMessageDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public LogMessageDto mergeFrom(LogMessageDto target) {
-        if (target.getMessage() != null) this.setMessage(target.getMessage());
-        if (target.getError() != null) this.setError(target.getError());
-        return this;
+    public LogMessageDto copyTo(LogMessageDto target) {
+        if (this.getMessage() != null) target.setMessage(this.getMessage());
+        if (this.getError() != null) target.setError(this.getError());
+        return target;
     }
 
     private boolean isMissing(String s) {

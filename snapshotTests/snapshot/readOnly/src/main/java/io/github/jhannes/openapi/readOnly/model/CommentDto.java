@@ -73,12 +73,12 @@ public class CommentDto {
         }
     }
 
-    public CommentDto mergeFrom(CommentDto target) {
-        if (target.getTitle() != null) this.setTitle(target.getTitle());
-        if (target.getComment() != null) this.setComment(target.getComment());
-        if (target.getCreatedAt() != null) this.setCreatedAt(target.getCreatedAt());
-        if (target.getUser() != null) this.setUser(target.getUser());
-        return this;
+    public CommentDto copyTo(CommentDto target) {
+        if (this.getTitle() != null) target.setTitle(this.getTitle());
+        if (this.getComment() != null) target.setComment(this.getComment());
+        if (this.getCreatedAt() != null) target.setCreatedAt(this.getCreatedAt());
+        if (this.getUser() != null) target.setUser(this.getUser());
+        return target;
     }
 
     private boolean isMissing(String s) {
