@@ -74,7 +74,7 @@ public class TokenResponseDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public TokenResponseDto copyTo(TokenResponseDto target) {
+    public <T extends TokenResponseDto> T copyTo(T target) {
         if (this.getAccessToken() != null) target.setAccessToken(this.getAccessToken());
         if (this.getTokenType() != null) target.setTokenType(this.getTokenType());
         if (this.getExpiresIn() != null) target.setExpiresIn(this.getExpiresIn());

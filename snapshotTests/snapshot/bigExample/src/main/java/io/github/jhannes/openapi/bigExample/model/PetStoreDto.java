@@ -63,7 +63,7 @@ public class PetStoreDto {
         }
     }
 
-    public PetStoreDto copyTo(PetStoreDto target) {
+    public <T extends PetStoreDto> T copyTo(T target) {
         if (this.getPets() != null) target.setPets(this.getPets());
         return target;
     }

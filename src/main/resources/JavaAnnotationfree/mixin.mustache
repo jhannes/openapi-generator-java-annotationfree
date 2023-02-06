@@ -75,7 +75,7 @@ public interface {{classname}}{{#interfaces}}{{#-first}} extends {{/-first}}{{^-
     {{/isInherited}}
 {{/vars}}
 
-    default {{classname}} copyTo({{classname}} target) {
+    default <T extends {{classname}}> T copyTo(T target) {
 {{#vars}}
         if (this.{{getter}}() != null) target.{{setter}}(this.{{getter}}());
 {{/vars}}

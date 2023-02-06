@@ -70,7 +70,7 @@ public class AddressDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public AddressDto copyTo(AddressDto target) {
+    public <T extends AddressDto> T copyTo(T target) {
         if (this.getAddressLine1() != null) target.setAddressLine1(this.getAddressLine1());
         if (this.getAddressLine2() != null) target.setAddressLine2(this.getAddressLine2());
         if (this.getCity() != null) target.setCity(this.getCity());

@@ -71,7 +71,7 @@ public class ChangeTrackedDto implements ChangeTrackedInterface {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public ChangeTrackedDto copyTo(ChangeTrackedDto target) {
+    public <T extends ChangeTrackedDto> T copyTo(T target) {
         if (this.getCreatedAt() != null) target.setCreatedAt(this.getCreatedAt());
         if (this.getCreatedBy() != null) target.setCreatedBy(this.getCreatedBy());
         if (this.getUpdatedAt() != null) target.setUpdatedAt(this.getUpdatedAt());

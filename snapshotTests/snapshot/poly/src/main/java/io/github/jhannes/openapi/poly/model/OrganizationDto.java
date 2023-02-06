@@ -87,7 +87,7 @@ public class OrganizationDto implements AnyPartyDto {
         }
     }
 
-    public OrganizationDto copyTo(OrganizationDto target) {
+    public <T extends OrganizationDto> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getType() != null) target.setType(this.getType());
         if (this.getName() != null) target.setName(this.getName());

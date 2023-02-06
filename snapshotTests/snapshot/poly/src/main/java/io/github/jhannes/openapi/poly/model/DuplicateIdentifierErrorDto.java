@@ -69,7 +69,7 @@ public class DuplicateIdentifierErrorDto implements CreationErrorDto, UpdateErro
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public DuplicateIdentifierErrorDto copyTo(DuplicateIdentifierErrorDto target) {
+    public <T extends DuplicateIdentifierErrorDto> T copyTo(T target) {
         if (this.getCode() != null) target.setCode(this.getCode());
         if (this.getIdentifierValue() != null) target.setIdentifierValue(this.getIdentifierValue());
         if (this.getEntityType() != null) target.setEntityType(this.getEntityType());

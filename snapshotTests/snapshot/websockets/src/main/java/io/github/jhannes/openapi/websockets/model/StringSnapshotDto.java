@@ -64,7 +64,7 @@ public class StringSnapshotDto extends ChangeTrackedDto {
         super.readOnlyFieldsWithValue(result);
     }
 
-    public StringSnapshotDto copyTo(StringSnapshotDto target) {
+    public <T extends StringSnapshotDto> T copyTo(T target) {
         super.copyTo(target);
         if (this.getName() != null) target.setName(this.getName());
         return target;

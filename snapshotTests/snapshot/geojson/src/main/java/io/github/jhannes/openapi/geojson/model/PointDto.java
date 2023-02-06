@@ -66,7 +66,7 @@ public class PointDto implements GeometryDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public PointDto copyTo(PointDto target) {
+    public <T extends PointDto> T copyTo(T target) {
         if (this.getType() != null) target.setType(this.getType());
         if (this.getCoordinates() != null) target.setCoordinates(this.getCoordinates());
         return target;

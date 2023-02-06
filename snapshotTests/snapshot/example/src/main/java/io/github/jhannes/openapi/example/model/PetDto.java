@@ -66,7 +66,7 @@ public class PetDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public PetDto copyTo(PetDto target) {
+    public <T extends PetDto> T copyTo(T target) {
         if (this.getPetType() != null) target.setPetType(this.getPetType());
         if (this.getName() != null) target.setName(this.getName());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());

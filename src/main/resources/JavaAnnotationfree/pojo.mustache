@@ -103,7 +103,7 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
 {{/vars}}
     }
 
-    public {{classname}} copyTo({{classname}} target) {
+    public <T extends {{classname}}> T copyTo(T target) {
 {{#parent}}
         super.copyTo(target);
 {{/parent}}

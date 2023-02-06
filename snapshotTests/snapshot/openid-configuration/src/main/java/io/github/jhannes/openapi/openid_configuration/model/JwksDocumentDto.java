@@ -63,7 +63,7 @@ public class JwksDocumentDto {
         }
     }
 
-    public JwksDocumentDto copyTo(JwksDocumentDto target) {
+    public <T extends JwksDocumentDto> T copyTo(T target) {
         if (this.getKeys() != null) target.setKeys(this.getKeys());
         return target;
     }

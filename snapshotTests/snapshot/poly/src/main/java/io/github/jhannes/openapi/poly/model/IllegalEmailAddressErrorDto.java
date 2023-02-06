@@ -71,7 +71,7 @@ public class IllegalEmailAddressErrorDto implements CreationErrorDto, UpdateErro
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public IllegalEmailAddressErrorDto copyTo(IllegalEmailAddressErrorDto target) {
+    public <T extends IllegalEmailAddressErrorDto> T copyTo(T target) {
         if (this.getCode() != null) target.setCode(this.getCode());
         if (this.getInputEmailAddress() != null) target.setInputEmailAddress(this.getInputEmailAddress());
         if (this.getValidDomains() != null) target.setValidDomains(this.getValidDomains());

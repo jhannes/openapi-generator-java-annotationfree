@@ -66,7 +66,7 @@ public class InfectionInformationDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public InfectionInformationDto copyTo(InfectionInformationDto target) {
+    public <T extends InfectionInformationDto> T copyTo(T target) {
         if (this.getPatientName() != null) target.setPatientName(this.getPatientName());
         if (this.getPatientPhoneNumber() != null) target.setPatientPhoneNumber(this.getPatientPhoneNumber());
         if (this.getLikelyInfectionDate() != null) target.setLikelyInfectionDate(this.getLikelyInfectionDate());

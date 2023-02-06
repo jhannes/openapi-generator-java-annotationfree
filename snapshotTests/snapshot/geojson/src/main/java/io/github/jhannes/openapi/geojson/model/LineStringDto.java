@@ -66,7 +66,7 @@ public class LineStringDto implements GeometryDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public LineStringDto copyTo(LineStringDto target) {
+    public <T extends LineStringDto> T copyTo(T target) {
         if (this.getType() != null) target.setType(this.getType());
         if (this.getCoordinates() != null) target.setCoordinates(this.getCoordinates());
         return target;

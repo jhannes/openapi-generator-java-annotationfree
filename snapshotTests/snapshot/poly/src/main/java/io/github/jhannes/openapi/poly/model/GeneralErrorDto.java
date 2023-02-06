@@ -67,7 +67,7 @@ public class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public GeneralErrorDto copyTo(GeneralErrorDto target) {
+    public <T extends GeneralErrorDto> T copyTo(T target) {
         if (this.getCode() != null) target.setCode(this.getCode());
         if (this.getDescription() != null) target.setDescription(this.getDescription());
         return target;

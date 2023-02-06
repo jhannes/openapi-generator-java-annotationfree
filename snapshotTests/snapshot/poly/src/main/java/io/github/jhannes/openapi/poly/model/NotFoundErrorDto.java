@@ -69,7 +69,7 @@ public class NotFoundErrorDto implements UpdateErrorDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public NotFoundErrorDto copyTo(NotFoundErrorDto target) {
+    public <T extends NotFoundErrorDto> T copyTo(T target) {
         if (this.getCode() != null) target.setCode(this.getCode());
         if (this.getIdentifierValue() != null) target.setIdentifierValue(this.getIdentifierValue());
         if (this.getEntityType() != null) target.setEntityType(this.getEntityType());

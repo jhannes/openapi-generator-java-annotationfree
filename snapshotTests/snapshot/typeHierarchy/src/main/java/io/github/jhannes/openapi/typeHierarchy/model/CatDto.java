@@ -68,7 +68,7 @@ public class CatDto extends PetBaseDto implements PetDto {
         }
     }
 
-    public CatDto copyTo(CatDto target) {
+    public <T extends CatDto> T copyTo(T target) {
         super.copyTo(target);
         if (this.getHunts() != null) target.setHunts(this.getHunts());
         if (this.getAge() != null) target.setAge(this.getAge());

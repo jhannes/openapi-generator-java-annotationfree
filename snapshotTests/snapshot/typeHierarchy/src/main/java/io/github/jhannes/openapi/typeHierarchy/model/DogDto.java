@@ -100,7 +100,7 @@ public class DogDto extends PetBaseDto implements PetDto {
         super.readOnlyFieldsWithValue(result);
     }
 
-    public DogDto copyTo(DogDto target) {
+    public <T extends DogDto> T copyTo(T target) {
         super.copyTo(target);
         if (this.getBark() != null) target.setBark(this.getBark());
         if (this.getBreed() != null) target.setBreed(this.getBreed());

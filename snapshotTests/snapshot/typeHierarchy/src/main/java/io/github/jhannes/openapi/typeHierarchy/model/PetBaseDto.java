@@ -77,7 +77,7 @@ public class PetBaseDto {
         }
     }
 
-    public PetBaseDto copyTo(PetBaseDto target) {
+    public <T extends PetBaseDto> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getPetType() != null) target.setPetType(this.getPetType());
         if (this.getName() != null) target.setName(this.getName());

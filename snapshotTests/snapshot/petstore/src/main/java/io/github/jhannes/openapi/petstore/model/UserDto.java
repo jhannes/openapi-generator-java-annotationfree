@@ -74,7 +74,7 @@ public class UserDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public UserDto copyTo(UserDto target) {
+    public <T extends UserDto> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getUsername() != null) target.setUsername(this.getUsername());
         if (this.getFirstName() != null) target.setFirstName(this.getFirstName());

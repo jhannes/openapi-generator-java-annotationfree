@@ -73,7 +73,7 @@ public class CommentDto {
         }
     }
 
-    public CommentDto copyTo(CommentDto target) {
+    public <T extends CommentDto> T copyTo(T target) {
         if (this.getTitle() != null) target.setTitle(this.getTitle());
         if (this.getComment() != null) target.setComment(this.getComment());
         if (this.getCreatedAt() != null) target.setCreatedAt(this.getCreatedAt());

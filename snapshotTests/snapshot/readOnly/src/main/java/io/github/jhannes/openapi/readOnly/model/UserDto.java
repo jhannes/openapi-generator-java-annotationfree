@@ -66,7 +66,7 @@ public class UserDto {
         }
     }
 
-    public UserDto copyTo(UserDto target) {
+    public <T extends UserDto> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getName() != null) target.setName(this.getName());
         return target;

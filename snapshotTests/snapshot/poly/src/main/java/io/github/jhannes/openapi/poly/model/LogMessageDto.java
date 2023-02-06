@@ -65,7 +65,7 @@ public class LogMessageDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public LogMessageDto copyTo(LogMessageDto target) {
+    public <T extends LogMessageDto> T copyTo(T target) {
         if (this.getMessage() != null) target.setMessage(this.getMessage());
         if (this.getError() != null) target.setError(this.getError());
         return target;

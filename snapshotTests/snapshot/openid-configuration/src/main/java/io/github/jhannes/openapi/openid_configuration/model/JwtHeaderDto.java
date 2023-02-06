@@ -64,7 +64,7 @@ public class JwtHeaderDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public JwtHeaderDto copyTo(JwtHeaderDto target) {
+    public <T extends JwtHeaderDto> T copyTo(T target) {
         if (this.getTyp() != null) target.setTyp(this.getTyp());
         if (this.getKid() != null) target.setKid(this.getKid());
         if (this.getAlg() != null) target.setAlg(this.getAlg());

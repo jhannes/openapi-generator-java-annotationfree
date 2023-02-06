@@ -95,7 +95,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         }
     }
 
-    public PersonSnapshotDto copyTo(PersonSnapshotDto target) {
+    public <T extends PersonSnapshotDto> T copyTo(T target) {
         if (this.getCreatedAt() != null) target.setCreatedAt(this.getCreatedAt());
         if (this.getCreatedBy() != null) target.setCreatedBy(this.getCreatedBy());
         if (this.getUpdatedAt() != null) target.setUpdatedAt(this.getUpdatedAt());

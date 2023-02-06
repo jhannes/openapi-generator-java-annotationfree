@@ -70,7 +70,7 @@ public class JwksKeyDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public JwksKeyDto copyTo(JwksKeyDto target) {
+    public <T extends JwksKeyDto> T copyTo(T target) {
         if (this.getKty() != null) target.setKty(this.getKty());
         if (this.getUse() != null) target.setUse(this.getUse());
         if (this.getKid() != null) target.setKid(this.getKid());

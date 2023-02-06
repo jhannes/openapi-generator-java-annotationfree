@@ -76,7 +76,7 @@ public class CaseWorkerDto {
         }
     }
 
-    public CaseWorkerDto copyTo(CaseWorkerDto target) {
+    public <T extends CaseWorkerDto> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getFullName() != null) target.setFullName(this.getFullName());
         if (this.getEmail() != null) target.setEmail(this.getEmail());

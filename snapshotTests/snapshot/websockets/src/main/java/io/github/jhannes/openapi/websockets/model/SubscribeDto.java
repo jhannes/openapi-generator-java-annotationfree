@@ -63,7 +63,7 @@ public class SubscribeDto implements WebSocketRequestDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public SubscribeDto copyTo(SubscribeDto target) {
+    public <T extends SubscribeDto> T copyTo(T target) {
         if (this.getRequest() != null) target.setRequest(this.getRequest());
         return target;
     }

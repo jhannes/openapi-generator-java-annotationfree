@@ -156,7 +156,7 @@ public class ExposureDto {
         }
     }
 
-    public ExposureDto copyTo(ExposureDto target) {
+    public <T extends ExposureDto> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getExposedPersonName() != null) target.setExposedPersonName(this.getExposedPersonName());
         if (this.getExposedPersonPhoneNumber() != null) target.setExposedPersonPhoneNumber(this.getExposedPersonPhoneNumber());

@@ -245,7 +245,7 @@ public class DiscoveryDocumentDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public DiscoveryDocumentDto copyTo(DiscoveryDocumentDto target) {
+    public <T extends DiscoveryDocumentDto> T copyTo(T target) {
         if (this.getIssuer() != null) target.setIssuer(this.getIssuer());
         if (this.getAuthorizationEndpoint() != null) target.setAuthorizationEndpoint(this.getAuthorizationEndpoint());
         if (this.getTokenEndpoint() != null) target.setTokenEndpoint(this.getTokenEndpoint());

@@ -74,7 +74,7 @@ public class UpdatePersonCommandDto implements WebSocketCommandDto {
         }
     }
 
-    public UpdatePersonCommandDto copyTo(UpdatePersonCommandDto target) {
+    public <T extends UpdatePersonCommandDto> T copyTo(T target) {
         if (this.getCommand() != null) target.setCommand(this.getCommand());
         if (this.getId() != null) target.setId(this.getId());
         if (this.getPerson() != null) target.setPerson(this.getPerson());

@@ -60,7 +60,7 @@ public class PetLocationsDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public PetLocationsDto copyTo(PetLocationsDto target) {
+    public <T extends PetLocationsDto> T copyTo(T target) {
         if (this.getLocations() != null) target.setLocations(this.getLocations());
         return target;
     }

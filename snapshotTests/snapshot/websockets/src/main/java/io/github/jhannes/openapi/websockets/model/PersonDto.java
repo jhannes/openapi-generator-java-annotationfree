@@ -83,7 +83,7 @@ public class PersonDto implements PersonInterface {
         }
     }
 
-    public PersonDto copyTo(PersonDto target) {
+    public <T extends PersonDto> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getType() != null) target.setType(this.getType());
         if (this.getGivenName() != null) target.setGivenName(this.getGivenName());

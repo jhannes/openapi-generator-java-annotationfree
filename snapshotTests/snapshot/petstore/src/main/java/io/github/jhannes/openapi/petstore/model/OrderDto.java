@@ -104,7 +104,7 @@ public class OrderDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public OrderDto copyTo(OrderDto target) {
+    public <T extends OrderDto> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getPetId() != null) target.setPetId(this.getPetId());
         if (this.getQuantity() != null) target.setQuantity(this.getQuantity());

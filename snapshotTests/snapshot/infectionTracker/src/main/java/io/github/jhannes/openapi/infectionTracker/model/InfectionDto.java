@@ -80,7 +80,7 @@ public class InfectionDto {
         }
     }
 
-    public InfectionDto copyTo(InfectionDto target) {
+    public <T extends InfectionDto> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getInformation() != null) target.setInformation(this.getInformation());
         if (this.getRegisteredExposures() != null) target.setRegisteredExposures(this.getRegisteredExposures());

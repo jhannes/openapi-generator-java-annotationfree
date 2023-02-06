@@ -81,7 +81,7 @@ public interface ChangeTrackedInterface {
 
     ChangeTrackedInterface updatedBy(String updatedBy);
 
-    default ChangeTrackedInterface copyTo(ChangeTrackedInterface target) {
+    default <T extends ChangeTrackedInterface> T copyTo(T target) {
         if (this.getCreatedAt() != null) target.setCreatedAt(this.getCreatedAt());
         if (this.getCreatedBy() != null) target.setCreatedBy(this.getCreatedBy());
         if (this.getUpdatedAt() != null) target.setUpdatedAt(this.getUpdatedAt());

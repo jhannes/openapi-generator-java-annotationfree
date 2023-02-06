@@ -69,7 +69,7 @@ public class GeometryCollectionDto {
         }
     }
 
-    public GeometryCollectionDto copyTo(GeometryCollectionDto target) {
+    public <T extends GeometryCollectionDto> T copyTo(T target) {
         if (this.getType() != null) target.setType(this.getType());
         if (this.getGeometries() != null) target.setGeometries(this.getGeometries());
         return target;

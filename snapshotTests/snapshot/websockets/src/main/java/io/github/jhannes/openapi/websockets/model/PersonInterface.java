@@ -113,7 +113,7 @@ public interface PersonInterface {
 
     PersonInterface birthDate(LocalDate birthDate);
 
-    default PersonInterface copyTo(PersonInterface target) {
+    default <T extends PersonInterface> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getType() != null) target.setType(this.getType());
         if (this.getGivenName() != null) target.setGivenName(this.getGivenName());

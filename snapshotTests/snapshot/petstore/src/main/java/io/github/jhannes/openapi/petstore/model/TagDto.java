@@ -62,7 +62,7 @@ public class TagDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public TagDto copyTo(TagDto target) {
+    public <T extends TagDto> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getName() != null) target.setName(this.getName());
         return target;

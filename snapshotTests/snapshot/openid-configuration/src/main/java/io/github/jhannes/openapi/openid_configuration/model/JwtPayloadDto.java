@@ -80,7 +80,7 @@ public class JwtPayloadDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public JwtPayloadDto copyTo(JwtPayloadDto target) {
+    public <T extends JwtPayloadDto> T copyTo(T target) {
         if (this.getIss() != null) target.setIss(this.getIss());
         if (this.getSub() != null) target.setSub(this.getSub());
         if (this.getAud() != null) target.setAud(this.getAud());
