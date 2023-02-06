@@ -103,15 +103,16 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
 {{/vars}}
     }
 
-    public void mergeFrom({{classname}} target) {
+    public <T extends {{classname}}> T copyTo(T target) {
 {{#parent}}
-        super.mergeFrom(target);
+        super.copyTo(target);
 {{/parent}}
 {{#vars}}
     {{^isInherited}}
-        if (target.{{getter}}() != null) this.{{setter}}(target.{{getter}}());
+        if (this.{{getter}}() != null) target.{{setter}}(this.{{getter}}());
     {{/isInherited}}
 {{/vars}}
+        return target;
     }
 
     private boolean isMissing(String s) {

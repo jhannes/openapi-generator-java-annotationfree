@@ -87,15 +87,16 @@ public class OrganizationDto implements AnyPartyDto {
         }
     }
 
-    public void mergeFrom(OrganizationDto target) {
-        if (target.getId() != null) this.setId(target.getId());
-        if (target.getType() != null) this.setType(target.getType());
-        if (target.getName() != null) this.setName(target.getName());
-        if (target.getOrganizationId() != null) this.setOrganizationId(target.getOrganizationId());
-        if (target.getUrl() != null) this.setUrl(target.getUrl());
-        if (target.getEmail() != null) this.setEmail(target.getEmail());
-        if (target.getEmailDomains() != null) this.setEmailDomains(target.getEmailDomains());
-        if (target.getPhone() != null) this.setPhone(target.getPhone());
+    public <T extends OrganizationDto> T copyTo(T target) {
+        if (this.getId() != null) target.setId(this.getId());
+        if (this.getType() != null) target.setType(this.getType());
+        if (this.getName() != null) target.setName(this.getName());
+        if (this.getOrganizationId() != null) target.setOrganizationId(this.getOrganizationId());
+        if (this.getUrl() != null) target.setUrl(this.getUrl());
+        if (this.getEmail() != null) target.setEmail(this.getEmail());
+        if (this.getEmailDomains() != null) target.setEmailDomains(this.getEmailDomains());
+        if (this.getPhone() != null) target.setPhone(this.getPhone());
+        return target;
     }
 
     private boolean isMissing(String s) {

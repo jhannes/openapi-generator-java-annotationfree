@@ -100,10 +100,11 @@ public class DogDto extends PetBaseDto implements PetDto {
         super.readOnlyFieldsWithValue(result);
     }
 
-    public void mergeFrom(DogDto target) {
-        super.mergeFrom(target);
-        if (target.getBark() != null) this.setBark(target.getBark());
-        if (target.getBreed() != null) this.setBreed(target.getBreed());
+    public <T extends DogDto> T copyTo(T target) {
+        super.copyTo(target);
+        if (this.getBark() != null) target.setBark(this.getBark());
+        if (this.getBreed() != null) target.setBreed(this.getBreed());
+        return target;
     }
 
     private boolean isMissing(String s) {

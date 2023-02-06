@@ -76,11 +76,12 @@ public class CaseWorkerDto {
         }
     }
 
-    public void mergeFrom(CaseWorkerDto target) {
-        if (target.getId() != null) this.setId(target.getId());
-        if (target.getFullName() != null) this.setFullName(target.getFullName());
-        if (target.getEmail() != null) this.setEmail(target.getEmail());
-        if (target.getRole() != null) this.setRole(target.getRole());
+    public <T extends CaseWorkerDto> T copyTo(T target) {
+        if (this.getId() != null) target.setId(this.getId());
+        if (this.getFullName() != null) target.setFullName(this.getFullName());
+        if (this.getEmail() != null) target.setEmail(this.getEmail());
+        if (this.getRole() != null) target.setRole(this.getRole());
+        return target;
     }
 
     private boolean isMissing(String s) {

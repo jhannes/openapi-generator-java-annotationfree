@@ -104,13 +104,14 @@ public class OrderDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(OrderDto target) {
-        if (target.getId() != null) this.setId(target.getId());
-        if (target.getPetId() != null) this.setPetId(target.getPetId());
-        if (target.getQuantity() != null) this.setQuantity(target.getQuantity());
-        if (target.getShipDate() != null) this.setShipDate(target.getShipDate());
-        if (target.getStatus() != null) this.setStatus(target.getStatus());
-        if (target.getComplete() != null) this.setComplete(target.getComplete());
+    public <T extends OrderDto> T copyTo(T target) {
+        if (this.getId() != null) target.setId(this.getId());
+        if (this.getPetId() != null) target.setPetId(this.getPetId());
+        if (this.getQuantity() != null) target.setQuantity(this.getQuantity());
+        if (this.getShipDate() != null) target.setShipDate(this.getShipDate());
+        if (this.getStatus() != null) target.setStatus(this.getStatus());
+        if (this.getComplete() != null) target.setComplete(this.getComplete());
+        return target;
     }
 
     private boolean isMissing(String s) {

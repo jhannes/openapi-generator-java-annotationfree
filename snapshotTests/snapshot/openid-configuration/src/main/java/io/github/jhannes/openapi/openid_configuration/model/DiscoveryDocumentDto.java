@@ -245,18 +245,19 @@ public class DiscoveryDocumentDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(DiscoveryDocumentDto target) {
-        if (target.getIssuer() != null) this.setIssuer(target.getIssuer());
-        if (target.getAuthorizationEndpoint() != null) this.setAuthorizationEndpoint(target.getAuthorizationEndpoint());
-        if (target.getTokenEndpoint() != null) this.setTokenEndpoint(target.getTokenEndpoint());
-        if (target.getEndSessionEndpoint() != null) this.setEndSessionEndpoint(target.getEndSessionEndpoint());
-        if (target.getJwksUri() != null) this.setJwksUri(target.getJwksUri());
-        if (target.getResponseTypesSupported() != null) this.setResponseTypesSupported(target.getResponseTypesSupported());
-        if (target.getResponseModesSupported() != null) this.setResponseModesSupported(target.getResponseModesSupported());
-        if (target.getSubjectTypesSupported() != null) this.setSubjectTypesSupported(target.getSubjectTypesSupported());
-        if (target.getCodeChallengeMethodsSupported() != null) this.setCodeChallengeMethodsSupported(target.getCodeChallengeMethodsSupported());
-        if (target.getIdTokenSigningAlgValuesSupported() != null) this.setIdTokenSigningAlgValuesSupported(target.getIdTokenSigningAlgValuesSupported());
-        if (target.getxSsoFrame() != null) this.setxSsoFrame(target.getxSsoFrame());
+    public <T extends DiscoveryDocumentDto> T copyTo(T target) {
+        if (this.getIssuer() != null) target.setIssuer(this.getIssuer());
+        if (this.getAuthorizationEndpoint() != null) target.setAuthorizationEndpoint(this.getAuthorizationEndpoint());
+        if (this.getTokenEndpoint() != null) target.setTokenEndpoint(this.getTokenEndpoint());
+        if (this.getEndSessionEndpoint() != null) target.setEndSessionEndpoint(this.getEndSessionEndpoint());
+        if (this.getJwksUri() != null) target.setJwksUri(this.getJwksUri());
+        if (this.getResponseTypesSupported() != null) target.setResponseTypesSupported(this.getResponseTypesSupported());
+        if (this.getResponseModesSupported() != null) target.setResponseModesSupported(this.getResponseModesSupported());
+        if (this.getSubjectTypesSupported() != null) target.setSubjectTypesSupported(this.getSubjectTypesSupported());
+        if (this.getCodeChallengeMethodsSupported() != null) target.setCodeChallengeMethodsSupported(this.getCodeChallengeMethodsSupported());
+        if (this.getIdTokenSigningAlgValuesSupported() != null) target.setIdTokenSigningAlgValuesSupported(this.getIdTokenSigningAlgValuesSupported());
+        if (this.getxSsoFrame() != null) target.setxSsoFrame(this.getxSsoFrame());
+        return target;
     }
 
     private boolean isMissing(String s) {

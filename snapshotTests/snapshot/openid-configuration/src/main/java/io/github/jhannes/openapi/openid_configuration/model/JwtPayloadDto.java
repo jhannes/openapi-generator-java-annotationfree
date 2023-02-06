@@ -80,15 +80,16 @@ public class JwtPayloadDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(JwtPayloadDto target) {
-        if (target.getIss() != null) this.setIss(target.getIss());
-        if (target.getSub() != null) this.setSub(target.getSub());
-        if (target.getAud() != null) this.setAud(target.getAud());
-        if (target.getName() != null) this.setName(target.getName());
-        if (target.getEmail() != null) this.setEmail(target.getEmail());
-        if (target.getOrgId() != null) this.setOrgId(target.getOrgId());
-        if (target.getOrg() != null) this.setOrg(target.getOrg());
-        if (target.getPid() != null) this.setPid(target.getPid());
+    public <T extends JwtPayloadDto> T copyTo(T target) {
+        if (this.getIss() != null) target.setIss(this.getIss());
+        if (this.getSub() != null) target.setSub(this.getSub());
+        if (this.getAud() != null) target.setAud(this.getAud());
+        if (this.getName() != null) target.setName(this.getName());
+        if (this.getEmail() != null) target.setEmail(this.getEmail());
+        if (this.getOrgId() != null) target.setOrgId(this.getOrgId());
+        if (this.getOrg() != null) target.setOrg(this.getOrg());
+        if (this.getPid() != null) target.setPid(this.getPid());
+        return target;
     }
 
     private boolean isMissing(String s) {

@@ -63,8 +63,9 @@ public class PetStoreDto {
         }
     }
 
-    public void mergeFrom(PetStoreDto target) {
-        if (target.getPets() != null) this.setPets(target.getPets());
+    public <T extends PetStoreDto> T copyTo(T target) {
+        if (this.getPets() != null) target.setPets(this.getPets());
+        return target;
     }
 
     private boolean isMissing(String s) {

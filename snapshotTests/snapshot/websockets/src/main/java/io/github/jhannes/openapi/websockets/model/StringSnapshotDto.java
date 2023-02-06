@@ -64,9 +64,10 @@ public class StringSnapshotDto extends ChangeTrackedDto {
         super.readOnlyFieldsWithValue(result);
     }
 
-    public void mergeFrom(StringSnapshotDto target) {
-        super.mergeFrom(target);
-        if (target.getName() != null) this.setName(target.getName());
+    public <T extends StringSnapshotDto> T copyTo(T target) {
+        super.copyTo(target);
+        if (this.getName() != null) target.setName(this.getName());
+        return target;
     }
 
     private boolean isMissing(String s) {

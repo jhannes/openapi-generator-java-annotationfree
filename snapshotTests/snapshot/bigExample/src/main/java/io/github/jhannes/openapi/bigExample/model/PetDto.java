@@ -66,10 +66,11 @@ public class PetDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(PetDto target) {
-        if (target.getPetType() != null) this.setPetType(target.getPetType());
-        if (target.getName() != null) this.setName(target.getName());
-        if (target.getBirthDate() != null) this.setBirthDate(target.getBirthDate());
+    public <T extends PetDto> T copyTo(T target) {
+        if (this.getPetType() != null) target.setPetType(this.getPetType());
+        if (this.getName() != null) target.setName(this.getName());
+        if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
+        return target;
     }
 
     private boolean isMissing(String s) {

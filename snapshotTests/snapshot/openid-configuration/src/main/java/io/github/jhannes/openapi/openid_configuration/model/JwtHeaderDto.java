@@ -64,10 +64,11 @@ public class JwtHeaderDto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public void mergeFrom(JwtHeaderDto target) {
-        if (target.getTyp() != null) this.setTyp(target.getTyp());
-        if (target.getKid() != null) this.setKid(target.getKid());
-        if (target.getAlg() != null) this.setAlg(target.getAlg());
+    public <T extends JwtHeaderDto> T copyTo(T target) {
+        if (this.getTyp() != null) target.setTyp(this.getTyp());
+        if (this.getKid() != null) target.setKid(this.getKid());
+        if (this.getAlg() != null) target.setAlg(this.getAlg());
+        return target;
     }
 
     private boolean isMissing(String s) {

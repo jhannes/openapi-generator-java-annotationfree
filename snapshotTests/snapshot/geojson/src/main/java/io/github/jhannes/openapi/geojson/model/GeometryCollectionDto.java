@@ -69,9 +69,10 @@ public class GeometryCollectionDto {
         }
     }
 
-    public void mergeFrom(GeometryCollectionDto target) {
-        if (target.getType() != null) this.setType(target.getType());
-        if (target.getGeometries() != null) this.setGeometries(target.getGeometries());
+    public <T extends GeometryCollectionDto> T copyTo(T target) {
+        if (this.getType() != null) target.setType(this.getType());
+        if (this.getGeometries() != null) target.setGeometries(this.getGeometries());
+        return target;
     }
 
     private boolean isMissing(String s) {
