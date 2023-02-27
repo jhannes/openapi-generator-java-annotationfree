@@ -31,7 +31,7 @@ import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public interface WebSocketRequestDto extends WebSocketMessageDto {
+public interface WebSocketRequestDto  {
     String getRequest();
 
     static SubscribeDto Subscribe() {
