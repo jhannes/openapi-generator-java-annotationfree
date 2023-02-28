@@ -134,7 +134,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                     } else if (
                         codegenModel.discriminator != null
                         && subModel.discriminator != null 
-                        && subModel.discriminator.getPropertyName() == codegenModel.discriminator.getPropertyName()
+                        && subModel.discriminator.getPropertyName().equals(codegenModel.discriminator.getPropertyName())
                     ) {
                         subModel.discriminator.getMappedModels().forEach(o -> mappedModels.add(o));
                         subModel.discriminator.getMapping().forEach((key, val) -> mapping.put(key, val));
