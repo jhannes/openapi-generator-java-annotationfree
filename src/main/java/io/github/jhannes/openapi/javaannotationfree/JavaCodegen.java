@@ -127,12 +127,24 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 Set<CodegenDiscriminator.MappedModel> mappedModels = new HashSet<>();
                 HashMap<String, String> mapping = new HashMap<>();
                 for (String className : codegenModel.oneOf) {
+                    CodegenModel subModel = allModels.get(className);
+                    if (subModel.oneOf.isEmpty()){
+                        mappedModels.add(new CodegenDiscriminator.MappedModel(subModel.name, className));
+                        mapping.put(subModel.name, className);
+                    } else if (
+                        codegenModel.discriminator != null
+                        && subModel.discriminator != null 
+                        && subModel.discriminator.getPropertyName().equals(codegenModel.discriminator.getPropertyName())
+                    ) {
+                        subModel.discriminator.getMappedModels().forEach(o -> mappedModels.add(o));
+                        subModel.discriminator.getMapping().forEach((key, val) -> mapping.put(key, val));
+                    } else if (codegenModel != null || subModel.discriminator != null) {
+                        //not matching discriminators, cannot be matched from spec
+                        continue;
+                    }
                     interfacesOfSubtypes
-                            .computeIfAbsent(className, k -> new ArrayList<>())
-                            .add(codegenModel);
-                    String subtype = allModels.get(className).name;
-                    mapping.put(subtype, className);
-                    mappedModels.add(new CodegenDiscriminator.MappedModel(subtype, className));
+                        .computeIfAbsent(className, k -> new ArrayList<>())
+                        .add(codegenModel);
                 }
                 if (codegenModel.discriminator != null && codegenModel.discriminator.getMapping() == null) {
                     codegenModel.discriminator.setMapping(mapping);

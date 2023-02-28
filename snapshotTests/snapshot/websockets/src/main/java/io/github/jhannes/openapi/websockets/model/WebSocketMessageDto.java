@@ -32,8 +32,29 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public interface WebSocketMessageDto  {
+    String getCommand();
 
+    static UpdatePersonCommandDto updatePerson() {
+        UpdatePersonCommandDto result = new UpdatePersonCommandDto();
+        result.command("updatePerson");
+        return result;
+    }
+    static CreatePersonCommandDto createPerson() {
+        CreatePersonCommandDto result = new CreatePersonCommandDto();
+        result.command("createPerson");
+        return result;
+    }
 
+    static Class<? extends WebSocketMessageDto> getType(String type) {
+        switch (type) {
+        case "updatePerson":
+            return UpdatePersonCommandDto.class;
+        case "createPerson":
+            return CreatePersonCommandDto.class;
+        default:
+            throw new IllegalArgumentException("Illegal command " + type);
+        }
+    }
 
     void readOnlyFieldsWithValue(List<String> fields);
 }
