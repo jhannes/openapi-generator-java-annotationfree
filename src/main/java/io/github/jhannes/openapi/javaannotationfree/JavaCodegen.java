@@ -114,6 +114,40 @@ public class JavaCodegen extends AbstractJavaCodegen {
         return objs;
     }
 
+
+    public void postProcessOneOf(CodegenModel codegenModel, Map<String, List<CodegenModel>> interfacesOfSubtypes, Map<String, CodegenModel> allModels) {
+        Set<CodegenDiscriminator.MappedModel> mappedModels = new HashSet<>();
+        HashMap<String, String> mapping = new HashMap<>();
+        for (String className : codegenModel.oneOf) {
+            CodegenModel subModel = allModels.get(className);
+            if (subModel.oneOf.isEmpty()){
+                mappedModels.add(new CodegenDiscriminator.MappedModel(subModel.name, className));
+                mapping.put(subModel.name, className);
+            } else if (
+                codegenModel.discriminator != null
+                && subModel.discriminator != null 
+                && subModel.discriminator.getPropertyName().equals(codegenModel.discriminator.getPropertyName())
+            ) {
+                if (subModel.discriminator.getMapping() == null) {
+                    postProcessOneOf(subModel, interfacesOfSubtypes, allModels);
+                }
+                subModel.discriminator.getMappedModels().forEach(o -> mappedModels.add(o));
+                subModel.discriminator.getMapping().forEach((key, val) -> mapping.put(key, val));
+            } else if (codegenModel.discriminator != null && subModel.discriminator != null) {
+                //not matching discriminators, cannot be matched from spec
+                continue;
+            }
+            List<CodegenModel> subtypeInterfaces = interfacesOfSubtypes.computeIfAbsent(className, k -> new ArrayList<>());
+            if (!subtypeInterfaces.contains(codegenModel)) {
+                subtypeInterfaces.add(codegenModel);
+            }
+        }
+        if (codegenModel.discriminator != null && codegenModel.discriminator.getMapping() == null) {
+            codegenModel.discriminator.setMapping(mapping);
+            codegenModel.discriminator.setMappedModels(mappedModels);
+        }
+    }
+
     @Override
     public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
         Map<String, ModelsMap> result = super.postProcessAllModels(objs);
@@ -124,32 +158,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
         Set<String> multiplyInheritedTypes = new HashSet<>();
         for (CodegenModel codegenModel : allModels.values()) {
             if (!codegenModel.oneOf.isEmpty()) {
-                Set<CodegenDiscriminator.MappedModel> mappedModels = new HashSet<>();
-                HashMap<String, String> mapping = new HashMap<>();
-                for (String className : codegenModel.oneOf) {
-                    CodegenModel subModel = allModels.get(className);
-                    if (subModel.oneOf.isEmpty()){
-                        mappedModels.add(new CodegenDiscriminator.MappedModel(subModel.name, className));
-                        mapping.put(subModel.name, className);
-                    } else if (
-                        codegenModel.discriminator != null
-                        && subModel.discriminator != null 
-                        && subModel.discriminator.getPropertyName().equals(codegenModel.discriminator.getPropertyName())
-                    ) {
-                        subModel.discriminator.getMappedModels().forEach(o -> mappedModels.add(o));
-                        subModel.discriminator.getMapping().forEach((key, val) -> mapping.put(key, val));
-                    } else if (codegenModel != null || subModel.discriminator != null) {
-                        //not matching discriminators, cannot be matched from spec
-                        continue;
-                    }
-                    interfacesOfSubtypes
-                        .computeIfAbsent(className, k -> new ArrayList<>())
-                        .add(codegenModel);
-                }
-                if (codegenModel.discriminator != null && codegenModel.discriminator.getMapping() == null) {
-                    codegenModel.discriminator.setMapping(mapping);
-                    codegenModel.discriminator.setMappedModels(mappedModels);
-                }
+                postProcessOneOf(codegenModel, interfacesOfSubtypes, allModels);
             }
             if (!codegenModel.allOf.isEmpty()) {
                 if (codegenModel.allOf.size() >= 2) {
