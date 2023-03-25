@@ -14,17 +14,23 @@ public class AbstractSnapshotTest {
     public static final Path SNAPSHOT_ROOT = Paths.get("snapshotTests");
     public static final Path LOCAL_SNAPSHOT_ROOT = Paths.get("localSnapshotTests");
 
-    protected static CodegenConfigurator createConfigurator(String modelName, Path spec, Path outputDir) {
+    protected static CodegenConfigurator createConfigurator(String modelName, Path input, Path outputDir) {
+        String spec = input.toString();
         try {
-            if (spec.getFileName().toString().endsWith(".link")) {
-                spec = Paths.get(Files.readAllLines(spec).get(0));
+            if (input.getFileName().toString().endsWith(".link")) {
+                String path = Files.readAllLines(input).get(0);
+                if (path.matches("https?://.*")) {
+                    spec = path;
+                } else {
+                    spec = Paths.get(path).toString();
+                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
         return new CodegenConfigurator()
                 .setGeneratorName("java-annotationfree")
-                .setInputSpec(spec.toString().replaceAll("\\\\", "/"))
+                .setInputSpec(spec.replaceAll("\\\\", "/"))
                 .setModelNameSuffix("Dto")
                 .setPackageName("io.github.jhannes.openapi." + modelName)
                 .setModelPackage("io.github.jhannes.openapi." + modelName + ".model")
