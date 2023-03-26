@@ -16,6 +16,7 @@ import io.github.jhannes.openapi.petstore.model.PetDto;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -84,7 +85,9 @@ public class HttpPetApi implements PetApi {
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
-        return jsonb.fromJson(connection.getInputStream(), File.class);
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        connection.getInputStream().transferTo(buffer);
+        return buffer.toByteArray();
     }
 
     @Override
@@ -100,6 +103,7 @@ public class HttpPetApi implements PetApi {
         return jsonb.fromJson(connection.getInputStream(), getParameterizedType(List.class, new Type[]{ PetDto.class }));
     }
 
+    @SuppressWarnings("deprecation")
     @Override
     public List<PetDto> findPetsByTags(
             Optional<List<String>> tags

@@ -77,9 +77,6 @@ public class CompilerTest extends AbstractSnapshotTest {
     }
 
     static void compile(Path path) throws IOException {
-        String actionControllerPath = Stream.of(System.getProperty("java.class.path").split(System.getProperty("path.separator")))
-                .filter(s -> s.contains("action-controller"))
-                .findFirst().orElseThrow(() -> new RuntimeException("Can't find action-controller in classpath"));
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
         try (StandardJavaFileManager fileManager = compiler.getStandardFileManager(null, null, null)) {
 
@@ -89,7 +86,7 @@ public class CompilerTest extends AbstractSnapshotTest {
                     (p, fa) -> p.getFileName().toString().endsWith(".java") && fa.isRegularFile()
             ).collect(Collectors.toList());
 
-            List<String> options = List.of("-cp", actionControllerPath, "-d", path.resolve("target/compile").toString());
+            List<String> options = List.of("-Xlint:deprecation", "-d", path.resolve("target/compile").toString());
             System.out.println("javac " + String.join(" " , options) + " " + files.stream().map(Path::toString).collect(Collectors.joining(" ")));
 
             DiagnosticCollector<JavaFileObject> diagnosticListener = new DiagnosticCollector<>();
@@ -97,7 +94,7 @@ public class CompilerTest extends AbstractSnapshotTest {
                     null,
                     fileManager,
                     diagnosticListener,
-                    List.of("-d", "target/testCompile/" + path.getFileName()),
+                    List.of("-Xlint:deprecation", "-d", "target/testCompile/" + path.getFileName()),
                     null,
                     fileManager.getJavaFileObjectsFromPaths(files)
             );

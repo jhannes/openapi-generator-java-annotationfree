@@ -6,6 +6,7 @@ package {{package}};
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -38,6 +39,9 @@ public class Http{{classname}} implements {{classname}} {
     }
 
 {{/-first}}
+    {{#isDeprecated}}
+    @SuppressWarnings("deprecation")
+    {{/isDeprecated}}
     @Override
     public {{#isResponseFile}}byte[] {{/isResponseFile}}{{^isResponseFile}}{{#returnType}}{{{returnType}}} {{/returnType}}{{^returnType}}void {{/returnType}}{{/isResponseFile}}{{operationId}}({{#allParams}}{{#isPathParam}}
             {{{dataType}}} {{paramName}}{{/isPathParam}}{{#isQueryParam}}
@@ -60,12 +64,19 @@ public class Http{{classname}} implements {{classname}} {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
     {{#returnType}}
+    {{#isResponseFile}}
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        connection.getInputStream().transferTo(buffer);
+        return buffer.toByteArray();
+    {{/isResponseFile}}
+    {{^isResponseFile}}
     {{#returnContainer}}
         return jsonb.fromJson(connection.getInputStream(), getParameterizedType(List.class, new Type[]{ {{returnBaseType}}.class }));
     {{/returnContainer}}
     {{^returnContainer}}
         return jsonb.fromJson(connection.getInputStream(), {{returnType}}.class);
     {{/returnContainer}}
+    {{/isResponseFile}}
     {{/returnType}}
     }
 
