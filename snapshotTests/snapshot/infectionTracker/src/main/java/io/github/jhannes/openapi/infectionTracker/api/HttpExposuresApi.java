@@ -24,6 +24,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +37,10 @@ public class HttpExposuresApi implements ExposuresApi {
     private final Jsonb jsonb;
 
     private final URL baseUrl;
+
+    public HttpExposuresApi() throws MalformedURLException {
+        this(new URL("/api"));
+    }
 
     public HttpExposuresApi(URL baseUrl) {
         this(baseUrl, JsonbBuilder.create());
@@ -51,7 +56,11 @@ public class HttpExposuresApi implements ExposuresApi {
             Optional<List<LocalDate>> exposureDate,
             Optional<Integer> maxCount
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/exposures");
+        List<String> queryParameters = new ArrayList<>();
+        exposureDate.ifPresent(p -> queryParameters.add("exposureDate=" + encode(String.valueOf(p), UTF_8)));
+        maxCount.ifPresent(p -> queryParameters.add("maxCount=" + encode(String.valueOf(p), UTF_8)));
+        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        URL url = new URL(baseUrl + "/api/exposures" + query);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {

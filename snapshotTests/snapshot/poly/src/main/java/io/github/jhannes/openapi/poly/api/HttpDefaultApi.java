@@ -27,6 +27,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,10 @@ public class HttpDefaultApi implements DefaultApi {
     private final Jsonb jsonb;
 
     private final URL baseUrl;
+
+    public HttpDefaultApi() throws MalformedURLException {
+        this(new URL("http://localhost"));
+    }
 
     public HttpDefaultApi(URL baseUrl) {
         this(baseUrl, JsonbBuilder.create());

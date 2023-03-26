@@ -22,6 +22,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +35,10 @@ public class HttpCoverPhotosApi implements CoverPhotosApi {
     private final Jsonb jsonb;
 
     private final URL baseUrl;
+
+    public HttpCoverPhotosApi() throws MalformedURLException {
+        this(new URL("http://localhost"));
+    }
 
     public HttpCoverPhotosApi(URL baseUrl) {
         this(baseUrl, JsonbBuilder.create());

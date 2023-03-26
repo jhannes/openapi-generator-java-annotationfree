@@ -25,6 +25,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +38,10 @@ public class HttpCasesApi implements CasesApi {
     private final Jsonb jsonb;
 
     private final URL baseUrl;
+
+    public HttpCasesApi() throws MalformedURLException {
+        this(new URL("/api"));
+    }
 
     public HttpCasesApi(URL baseUrl) {
         this(baseUrl, JsonbBuilder.create());

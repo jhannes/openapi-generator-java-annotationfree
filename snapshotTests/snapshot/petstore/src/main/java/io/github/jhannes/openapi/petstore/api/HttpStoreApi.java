@@ -23,6 +23,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,10 @@ public class HttpStoreApi implements StoreApi {
     private final Jsonb jsonb;
 
     private final URL baseUrl;
+
+    public HttpStoreApi() throws MalformedURLException {
+        this(new URL("http://petstore.swagger.io/v2"));
+    }
 
     public HttpStoreApi(URL baseUrl) {
         this(baseUrl, JsonbBuilder.create());
@@ -62,7 +67,10 @@ public class HttpStoreApi implements StoreApi {
     public Map<String, Integer> getInventory(
             Optional<OffsetDateTime> effectiveDateTime
     ) throws IOException {
-        URL url = new URL(baseUrl + "/store/inventory");
+        List<String> queryParameters = new ArrayList<>();
+        effectiveDateTime.ifPresent(p -> queryParameters.add("effectiveDateTime=" + encode(String.valueOf(p), UTF_8)));
+        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        URL url = new URL(baseUrl + "/store/inventory" + query);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {

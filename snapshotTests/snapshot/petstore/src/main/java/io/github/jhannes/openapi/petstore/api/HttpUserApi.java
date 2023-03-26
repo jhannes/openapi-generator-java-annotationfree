@@ -22,6 +22,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +35,10 @@ public class HttpUserApi implements UserApi {
     private final Jsonb jsonb;
 
     private final URL baseUrl;
+
+    public HttpUserApi() throws MalformedURLException {
+        this(new URL("http://petstore.swagger.io/v2"));
+    }
 
     public HttpUserApi(URL baseUrl) {
         this(baseUrl, JsonbBuilder.create());
@@ -121,7 +126,11 @@ public class HttpUserApi implements UserApi {
             Optional<String> username,
             Optional<String> password
     ) throws IOException {
-        URL url = new URL(baseUrl + "/user/login");
+        List<String> queryParameters = new ArrayList<>();
+        username.ifPresent(p -> queryParameters.add("username=" + encode(String.valueOf(p), UTF_8)));
+        password.ifPresent(p -> queryParameters.add("password=" + encode(String.valueOf(p), UTF_8)));
+        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        URL url = new URL(baseUrl + "/user/login" + query);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {

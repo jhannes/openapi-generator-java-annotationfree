@@ -25,6 +25,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +38,10 @@ public class HttpDefaultApi implements DefaultApi {
     private final Jsonb jsonb;
 
     private final URL baseUrl;
+
+    public HttpDefaultApi() throws MalformedURLException {
+        this(new URL("/v1"));
+    }
 
     public HttpDefaultApi(URL baseUrl) {
         this(baseUrl, JsonbBuilder.create());
@@ -98,8 +103,13 @@ public class HttpDefaultApi implements DefaultApi {
             Optional<List<String>> tags,
             Optional<LocalDate> bornAfter
     ) throws IOException {
+        List<String> queryParameters = new ArrayList<>();
+        status.ifPresent(p -> queryParameters.add("status=" + encode(String.valueOf(p), UTF_8)));
+        tags.ifPresent(p -> queryParameters.add("tags=" + encode(String.valueOf(p), UTF_8)));
+        bornAfter.ifPresent(p -> queryParameters.add("bornAfter=" + encode(String.valueOf(p), UTF_8)));
+        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
         URL url = new URL(baseUrl + "/{storeId}/pets"
-                .replace("{storeId}", encode(String.valueOf(storeId), UTF_8)));
+                .replace("{storeId}", encode(String.valueOf(storeId), UTF_8)) + query);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {

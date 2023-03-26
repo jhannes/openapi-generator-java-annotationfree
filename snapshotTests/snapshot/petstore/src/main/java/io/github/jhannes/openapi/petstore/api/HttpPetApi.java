@@ -23,6 +23,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
@@ -35,6 +36,10 @@ public class HttpPetApi implements PetApi {
     private final Jsonb jsonb;
 
     private final URL baseUrl;
+
+    public HttpPetApi() throws MalformedURLException {
+        this(new URL("http://petstore.swagger.io/v2"));
+    }
 
     public HttpPetApi(URL baseUrl) {
         this(baseUrl, JsonbBuilder.create());
@@ -94,7 +99,10 @@ public class HttpPetApi implements PetApi {
     public List<PetDto> findPetsByStatus(
             Optional<List<String>> status
     ) throws IOException {
-        URL url = new URL(baseUrl + "/pet/findByStatus");
+        List<String> queryParameters = new ArrayList<>();
+        status.ifPresent(p -> queryParameters.add("status=" + encode(String.valueOf(p), UTF_8)));
+        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        URL url = new URL(baseUrl + "/pet/findByStatus" + query);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
@@ -108,7 +116,10 @@ public class HttpPetApi implements PetApi {
     public List<PetDto> findPetsByTags(
             Optional<List<String>> tags
     ) throws IOException {
-        URL url = new URL(baseUrl + "/pet/findByTags");
+        List<String> queryParameters = new ArrayList<>();
+        tags.ifPresent(p -> queryParameters.add("tags=" + encode(String.valueOf(p), UTF_8)));
+        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        URL url = new URL(baseUrl + "/pet/findByTags" + query);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {

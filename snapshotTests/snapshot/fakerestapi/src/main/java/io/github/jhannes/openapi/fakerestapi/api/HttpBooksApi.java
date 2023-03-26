@@ -22,6 +22,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
@@ -34,6 +35,10 @@ public class HttpBooksApi implements BooksApi {
     private final Jsonb jsonb;
 
     private final URL baseUrl;
+
+    public HttpBooksApi() throws MalformedURLException {
+        this(new URL("http://localhost"));
+    }
 
     public HttpBooksApi(URL baseUrl) {
         this(baseUrl, JsonbBuilder.create());
