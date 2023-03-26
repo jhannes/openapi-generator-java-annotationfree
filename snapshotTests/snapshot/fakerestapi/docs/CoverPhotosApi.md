@@ -24,24 +24,18 @@ Method | HTTP request | Description
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        CoverPhotosApi apiInstance = ApiClientProxy.create(CoverPhotosApi.class, httpClient);
+        CoverPhotosApi client = new HttpCoverPhotosApi();
 
         Integer idBook = 56; // Integer | 
         try {
-            List<CoverPhotoDto> result = apiInstance.apiV1CoverPhotosBooksCoversIdBookGet(idBook);
+            List<CoverPhotoDto> result = client.apiV1CoverPhotosBooksCoversIdBookGet(idBook);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling CoverPhotosApi#apiV1CoverPhotosBooksCoversIdBookGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -84,23 +78,17 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        CoverPhotosApi apiInstance = ApiClientProxy.create(CoverPhotosApi.class, httpClient);
+        CoverPhotosApi client = new HttpCoverPhotosApi();
 
         try {
-            List<CoverPhotoDto> result = apiInstance.apiV1CoverPhotosGet();
+            List<CoverPhotoDto> result = client.apiV1CoverPhotosGet();
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling CoverPhotosApi#apiV1CoverPhotosGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -140,23 +128,17 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        CoverPhotosApi apiInstance = ApiClientProxy.create(CoverPhotosApi.class, httpClient);
+        CoverPhotosApi client = new HttpCoverPhotosApi();
 
         Integer id = 56; // Integer | 
         try {
-            apiInstance.apiV1CoverPhotosIdDelete(id);
-        } catch (HttpClientException e) {
+            client.apiV1CoverPhotosIdDelete(id);
+        } catch (IOException e) {
             System.err.println("Exception when calling CoverPhotosApi#apiV1CoverPhotosIdDelete");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -199,24 +181,18 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        CoverPhotosApi apiInstance = ApiClientProxy.create(CoverPhotosApi.class, httpClient);
+        CoverPhotosApi client = new HttpCoverPhotosApi();
 
         Integer id = 56; // Integer | 
         try {
-            CoverPhotoDto result = apiInstance.apiV1CoverPhotosIdGet(id);
+            CoverPhotoDto result = client.apiV1CoverPhotosIdGet(id);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling CoverPhotosApi#apiV1CoverPhotosIdGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -259,25 +235,19 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        CoverPhotosApi apiInstance = ApiClientProxy.create(CoverPhotosApi.class, httpClient);
+        CoverPhotosApi client = new HttpCoverPhotosApi();
 
         Integer id = 56; // Integer | 
         CoverPhotoDto coverPhotoDto = new CoverPhotoDto(); // CoverPhotoDto | 
         try {
-            CoverPhotoDto result = apiInstance.apiV1CoverPhotosIdPut(id, coverPhotoDto);
+            CoverPhotoDto result = client.apiV1CoverPhotosIdPut(id, coverPhotoDto);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling CoverPhotosApi#apiV1CoverPhotosIdPut");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -321,24 +291,18 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        CoverPhotosApi apiInstance = ApiClientProxy.create(CoverPhotosApi.class, httpClient);
+        CoverPhotosApi client = new HttpCoverPhotosApi();
 
         CoverPhotoDto coverPhotoDto = new CoverPhotoDto(); // CoverPhotoDto | 
         try {
-            CoverPhotoDto result = apiInstance.apiV1CoverPhotosPost(coverPhotoDto);
+            CoverPhotoDto result = client.apiV1CoverPhotosPost(coverPhotoDto);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling CoverPhotosApi#apiV1CoverPhotosPost");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

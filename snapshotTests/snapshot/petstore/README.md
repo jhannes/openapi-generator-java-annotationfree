@@ -74,9 +74,6 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
@@ -90,16 +87,13 @@ public class Example {
                 return exchange;
             }
         };
-        PetApi apiInstance = ApiClientProxy.create(PetApi.class, httpClient);
 
         PetDto petDto = new PetDto(); // PetDto | Pet object that needs to be added to the store
         try {
-            apiInstance.addPet(petDto);
-        } catch (HttpClientException e) {
+            client.addPet(petDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling PetApi#addPet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

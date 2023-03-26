@@ -74,23 +74,17 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 import io.github.jhannes.openapi.infectionTracker.api.*;
 import io.github.jhannes.openapi.infectionTracker.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
-        CaseWorkersApi apiInstance = ApiClientProxy.create(CaseWorkersApi.class, httpClient);
+        CaseWorkersApi client = new HttpCaseWorkersApi();
 
         try {
-            CaseWorkerDto result = apiInstance.listCaseWorkers();
+            CaseWorkerDto result = client.listCaseWorkers();
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling CaseWorkersApi#listCaseWorkers");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

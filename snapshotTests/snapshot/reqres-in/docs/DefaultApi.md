@@ -26,24 +26,18 @@ Creates a session
 ```java
 import io.github.jhannes.openapi.reqres_in.api.*;
 import io.github.jhannes.openapi.reqres_in.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("https://reqres.in/api");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         LoginPostRequestDto loginPostRequestDto = new LoginPostRequestDto(); // LoginPostRequestDto | 
         try {
-            LoginPost200ResponseDto result = apiInstance.loginPost(loginPostRequestDto);
+            LoginPost200ResponseDto result = client.loginPost(loginPostRequestDto);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#loginPost");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -87,22 +81,16 @@ Ends a session
 ```java
 import io.github.jhannes.openapi.reqres_in.api.*;
 import io.github.jhannes.openapi.reqres_in.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("https://reqres.in/api");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         try {
-            apiInstance.logoutPost();
-        } catch (HttpClientException e) {
+            client.logoutPost();
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#logoutPost");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -142,24 +130,18 @@ Creates a user
 ```java
 import io.github.jhannes.openapi.reqres_in.api.*;
 import io.github.jhannes.openapi.reqres_in.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("https://reqres.in/api");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         LoginPostRequestDto loginPostRequestDto = new LoginPostRequestDto(); // LoginPostRequestDto | 
         try {
-            RegisterPost200ResponseDto result = apiInstance.registerPost(loginPostRequestDto);
+            RegisterPost200ResponseDto result = client.registerPost(loginPostRequestDto);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#registerPost");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -203,25 +185,19 @@ Fetches a user list
 ```java
 import io.github.jhannes.openapi.reqres_in.api.*;
 import io.github.jhannes.openapi.reqres_in.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("https://reqres.in/api");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         Integer page = 56; // Integer | 
         Integer perPage = 56; // Integer | 
         try {
-            UsersGet200ResponseDto result = apiInstance.usersGet(page, perPage);
+            UsersGet200ResponseDto result = client.usersGet(page, perPage);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#usersGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -265,23 +241,17 @@ Deletes a user
 ```java
 import io.github.jhannes.openapi.reqres_in.api.*;
 import io.github.jhannes.openapi.reqres_in.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("https://reqres.in/api");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         Integer id = 56; // Integer | 
         try {
-            apiInstance.usersIdDelete(id);
-        } catch (HttpClientException e) {
+            client.usersIdDelete(id);
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#usersIdDelete");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -324,24 +294,18 @@ Fetches a user
 ```java
 import io.github.jhannes.openapi.reqres_in.api.*;
 import io.github.jhannes.openapi.reqres_in.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("https://reqres.in/api");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         Integer id = 56; // Integer | 
         try {
-            UsersIdDelete200ResponseDto result = apiInstance.usersIdGet(id);
+            UsersIdDelete200ResponseDto result = client.usersIdGet(id);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#usersIdGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -384,24 +348,18 @@ Updates a user
 ```java
 import io.github.jhannes.openapi.reqres_in.api.*;
 import io.github.jhannes.openapi.reqres_in.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("https://reqres.in/api");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         Integer id = 56; // Integer | 
         try {
-            UsersIdDelete200Response1Dto result = apiInstance.usersIdPatch(id);
+            UsersIdDelete200Response1Dto result = client.usersIdPatch(id);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#usersIdPatch");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -444,24 +402,18 @@ Updates a user
 ```java
 import io.github.jhannes.openapi.reqres_in.api.*;
 import io.github.jhannes.openapi.reqres_in.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("https://reqres.in/api");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         Integer id = 56; // Integer | 
         try {
-            UsersIdDelete200Response1Dto result = apiInstance.usersIdPut(id);
+            UsersIdDelete200Response1Dto result = client.usersIdPut(id);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#usersIdPut");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

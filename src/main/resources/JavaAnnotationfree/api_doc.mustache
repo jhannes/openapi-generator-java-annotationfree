@@ -25,37 +25,34 @@ Method | HTTP request | Description
 ```java
 import {{{invokerPackage}}}.api.*;
 import {{{invokerPackage}}}.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
 {{#hasAuthMethods}}
     {{#authMethods}}{{#isBasic}}{{#isBasicBasic}}
         // Configure HTTP basic authorization: {{{name}}}
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("{{basePath}}") {
-            @Override
-            public ClientExchange createExchange() {
+        {{{classname}}} client = new Http{{{classname}}}() {
+            protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+                HttpURLConnection connection = super.openConnection(relativeUrl);
                 String authentication = "Basic " + Base64.getEncoder().encode(("USERNAME" + ":" + "PASSWORD").getBytes());
-                exchange.setHeader("Authorization", authentication);
-                return exchange;
+                connection.setRequestParameter("Authorization", authentication);
+                return connection;
             }
         };{{/isBasicBasic}}{{#isBasicBearer}}
         // Configure HTTP basic authorization: {{{name}}}
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("{{basePath}}") {
-            @Override
-            public ClientExchange createExchange() {
+        {{{classname}}} client = new Http{{{classname}}}() {
+            protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+                HttpURLConnection connection = super.openConnection(relativeUrl);
                 String authentication = "Bearer " + "BEARER TOKEN";
-                exchange.setHeader("Authorization", authentication);
-                return exchange;
+                connection.setRequestParameter("Authorization", authentication);
+                return connection;
             }
         };{{/isBasicBearer}}{{/isBasic}}{{#isApiKey}}// Configure HTTP bearer authorization: {{{name}}}
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("{{basePath}}") {
-            @Override
-            public ClientExchange createExchange() {
-                exchange.setHeader("{{keyParamName}}", apiKey);
-                return exchange;
+        {{{classname}}} client = new Http{{{classname}}}() {
+            protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+                HttpURLConnection connection = super.openConnection(relativeUrl);
+                connection.setRequestParameter("{{keyParamName}}", apiKey);
+                return connection;
             }
         };{{/isApiKey}}{{#isOAuth}}
         // Configure HTTP basic authorization: {{{name}}}
@@ -70,21 +67,18 @@ public class Example {
     {{/authMethods}}
 {{/hasAuthMethods}}
 {{^hasAuthMethods}}
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("{{basePath}}");
+        {{{classname}}} client = new Http{{{classname}}}();
 {{/hasAuthMethods}}
-        {{{classname}}} apiInstance = ApiClientProxy.create({{{classname}}}.class, httpClient);
 
         {{#allParams}}
         {{{dataType}}} {{{paramName}}} = {{{example}}}; // {{{dataType}}} | {{{description}}}
         {{/allParams}}
         try {
-            {{#returnType}}{{{returnType}}} result = {{/returnType}}apiInstance.{{{operationId}}}({{#allParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/allParams}});{{#returnType}}
+            {{#returnType}}{{{returnType}}} result = {{/returnType}}client.{{{operationId}}}({{#allParams}}{{{paramName}}}{{^-last}}, {{/-last}}{{/allParams}});{{#returnType}}
             System.out.println(result);{{/returnType}}
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling {{{classname}}}#{{{operationId}}}");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

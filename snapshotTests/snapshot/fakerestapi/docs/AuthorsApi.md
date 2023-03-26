@@ -24,24 +24,18 @@ Method | HTTP request | Description
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        AuthorsApi apiInstance = ApiClientProxy.create(AuthorsApi.class, httpClient);
+        AuthorsApi client = new HttpAuthorsApi();
 
         Integer idBook = 56; // Integer | 
         try {
-            List<AuthorDto> result = apiInstance.apiV1AuthorsAuthorsBooksIdBookGet(idBook);
+            List<AuthorDto> result = client.apiV1AuthorsAuthorsBooksIdBookGet(idBook);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling AuthorsApi#apiV1AuthorsAuthorsBooksIdBookGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -84,23 +78,17 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        AuthorsApi apiInstance = ApiClientProxy.create(AuthorsApi.class, httpClient);
+        AuthorsApi client = new HttpAuthorsApi();
 
         try {
-            List<AuthorDto> result = apiInstance.apiV1AuthorsGet();
+            List<AuthorDto> result = client.apiV1AuthorsGet();
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling AuthorsApi#apiV1AuthorsGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -140,23 +128,17 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        AuthorsApi apiInstance = ApiClientProxy.create(AuthorsApi.class, httpClient);
+        AuthorsApi client = new HttpAuthorsApi();
 
         Integer id = 56; // Integer | 
         try {
-            apiInstance.apiV1AuthorsIdDelete(id);
-        } catch (HttpClientException e) {
+            client.apiV1AuthorsIdDelete(id);
+        } catch (IOException e) {
             System.err.println("Exception when calling AuthorsApi#apiV1AuthorsIdDelete");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -199,24 +181,18 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        AuthorsApi apiInstance = ApiClientProxy.create(AuthorsApi.class, httpClient);
+        AuthorsApi client = new HttpAuthorsApi();
 
         Integer id = 56; // Integer | 
         try {
-            AuthorDto result = apiInstance.apiV1AuthorsIdGet(id);
+            AuthorDto result = client.apiV1AuthorsIdGet(id);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling AuthorsApi#apiV1AuthorsIdGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -259,25 +235,19 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        AuthorsApi apiInstance = ApiClientProxy.create(AuthorsApi.class, httpClient);
+        AuthorsApi client = new HttpAuthorsApi();
 
         Integer id = 56; // Integer | 
         AuthorDto authorDto = new AuthorDto(); // AuthorDto | 
         try {
-            AuthorDto result = apiInstance.apiV1AuthorsIdPut(id, authorDto);
+            AuthorDto result = client.apiV1AuthorsIdPut(id, authorDto);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling AuthorsApi#apiV1AuthorsIdPut");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -321,24 +291,18 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        AuthorsApi apiInstance = ApiClientProxy.create(AuthorsApi.class, httpClient);
+        AuthorsApi client = new HttpAuthorsApi();
 
         AuthorDto authorDto = new AuthorDto(); // AuthorDto | 
         try {
-            AuthorDto result = apiInstance.apiV1AuthorsPost(authorDto);
+            AuthorDto result = client.apiV1AuthorsPost(authorDto);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling AuthorsApi#apiV1AuthorsPost");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

@@ -22,24 +22,18 @@ Method | HTTP request | Description
 ```java
 import io.github.jhannes.openapi.infectionTracker.api.*;
 import io.github.jhannes.openapi.infectionTracker.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
-        CasesApi apiInstance = ApiClientProxy.create(CasesApi.class, httpClient);
+        CasesApi client = new HttpCasesApi();
 
         UUID caseId = UUID.randomUUID(); // UUID | 
         try {
-            InfectionDto result = apiInstance.getCaseDetails(caseId);
+            InfectionDto result = client.getCaseDetails(caseId);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling CasesApi#getCaseDetails");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -82,23 +76,17 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.infectionTracker.api.*;
 import io.github.jhannes.openapi.infectionTracker.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
-        CasesApi apiInstance = ApiClientProxy.create(CasesApi.class, httpClient);
+        CasesApi client = new HttpCasesApi();
 
         try {
-            InfectionDto result = apiInstance.listCases();
+            InfectionDto result = client.listCases();
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling CasesApi#listCases");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -138,23 +126,17 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.infectionTracker.api.*;
 import io.github.jhannes.openapi.infectionTracker.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
-        CasesApi apiInstance = ApiClientProxy.create(CasesApi.class, httpClient);
+        CasesApi client = new HttpCasesApi();
 
         InfectionInformationDto infectionInformationDto = new InfectionInformationDto(); // InfectionInformationDto | 
         try {
-            apiInstance.newCase(infectionInformationDto);
-        } catch (HttpClientException e) {
+            client.newCase(infectionInformationDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling CasesApi#newCase");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -197,24 +179,18 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.infectionTracker.api.*;
 import io.github.jhannes.openapi.infectionTracker.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
-        CasesApi apiInstance = ApiClientProxy.create(CasesApi.class, httpClient);
+        CasesApi client = new HttpCasesApi();
 
         UUID caseId = UUID.randomUUID(); // UUID | 
         ExposureDto exposureDto = new ExposureDto(); // ExposureDto | 
         try {
-            apiInstance.registerExposure(caseId, exposureDto);
-        } catch (HttpClientException e) {
+            client.registerExposure(caseId, exposureDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling CasesApi#registerExposure");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

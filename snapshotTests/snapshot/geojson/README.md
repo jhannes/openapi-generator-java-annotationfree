@@ -74,23 +74,17 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 import io.github.jhannes.openapi.geojson.api.*;
 import io.github.jhannes.openapi.geojson.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/v1");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         try {
-            GeometryDto result = apiInstance.getGeometry();
+            GeometryDto result = client.getGeometry();
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#getGeometry");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

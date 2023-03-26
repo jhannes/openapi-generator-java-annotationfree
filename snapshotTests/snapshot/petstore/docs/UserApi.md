@@ -28,23 +28,17 @@ This can only be done by the logged in user.
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
-        UserApi apiInstance = ApiClientProxy.create(UserApi.class, httpClient);
+        UserApi client = new HttpUserApi();
 
         UserDto userDto = new UserDto(); // UserDto | Created user object
         try {
-            apiInstance.createUser(userDto);
-        } catch (HttpClientException e) {
+            client.createUser(userDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling UserApi#createUser");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -87,23 +81,17 @@ Creates list of users with given input array
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
-        UserApi apiInstance = ApiClientProxy.create(UserApi.class, httpClient);
+        UserApi client = new HttpUserApi();
 
         List<UserDto> userDto = Arrays.asList(); // List<UserDto> | List of user object
         try {
-            apiInstance.createUsersWithArrayInput(userDto);
-        } catch (HttpClientException e) {
+            client.createUsersWithArrayInput(userDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling UserApi#createUsersWithArrayInput");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -146,23 +134,17 @@ Creates list of users with given input array
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
-        UserApi apiInstance = ApiClientProxy.create(UserApi.class, httpClient);
+        UserApi client = new HttpUserApi();
 
         List<UserDto> userDto = Arrays.asList(); // List<UserDto> | List of user object
         try {
-            apiInstance.createUsersWithListInput(userDto);
-        } catch (HttpClientException e) {
+            client.createUsersWithListInput(userDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling UserApi#createUsersWithListInput");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -207,23 +189,17 @@ This can only be done by the logged in user.
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
-        UserApi apiInstance = ApiClientProxy.create(UserApi.class, httpClient);
+        UserApi client = new HttpUserApi();
 
         String username = "username_example"; // String | The name that needs to be deleted
         try {
-            apiInstance.deleteUser(username);
-        } catch (HttpClientException e) {
+            client.deleteUser(username);
+        } catch (IOException e) {
             System.err.println("Exception when calling UserApi#deleteUser");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -267,24 +243,18 @@ Get user by user name
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
-        UserApi apiInstance = ApiClientProxy.create(UserApi.class, httpClient);
+        UserApi client = new HttpUserApi();
 
         String username = "username_example"; // String | The name that needs to be fetched. Use user1 for testing. 
         try {
-            UserDto result = apiInstance.getUserByName(username);
+            UserDto result = client.getUserByName(username);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling UserApi#getUserByName");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -329,25 +299,19 @@ Logs user into the system
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
-        UserApi apiInstance = ApiClientProxy.create(UserApi.class, httpClient);
+        UserApi client = new HttpUserApi();
 
         String username = "username_example"; // String | The user name for login
         String password = "password_example"; // String | The password for login in clear text
         try {
-            String result = apiInstance.loginUser(username, password);
+            String result = client.loginUser(username, password);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling UserApi#loginUser");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -392,22 +356,16 @@ Logs out current logged in user session
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
-        UserApi apiInstance = ApiClientProxy.create(UserApi.class, httpClient);
+        UserApi client = new HttpUserApi();
 
         try {
-            apiInstance.logoutUser();
-        } catch (HttpClientException e) {
+            client.logoutUser();
+        } catch (IOException e) {
             System.err.println("Exception when calling UserApi#logoutUser");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -449,24 +407,18 @@ This can only be done by the logged in user.
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
-        UserApi apiInstance = ApiClientProxy.create(UserApi.class, httpClient);
+        UserApi client = new HttpUserApi();
 
         String username = "username_example"; // String | name that need to be deleted
         UserDto userDto = new UserDto(); // UserDto | Updated user object
         try {
-            apiInstance.updateUser(username, userDto);
-        } catch (HttpClientException e) {
+            client.updateUser(username, userDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling UserApi#updateUser");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

@@ -74,24 +74,18 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 import io.github.jhannes.openapi.reqres_in.api.*;
 import io.github.jhannes.openapi.reqres_in.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("https://reqres.in/api");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         LoginPostRequestDto loginPostRequestDto = new LoginPostRequestDto(); // LoginPostRequestDto | 
         try {
-            LoginPost200ResponseDto result = apiInstance.loginPost(loginPostRequestDto);
+            LoginPost200ResponseDto result = client.loginPost(loginPostRequestDto);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#loginPost");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

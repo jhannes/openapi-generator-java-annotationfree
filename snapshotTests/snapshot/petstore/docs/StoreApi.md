@@ -24,23 +24,17 @@ For valid response try integer IDs with value &lt; 1000. Anything above 1000 or 
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
-        StoreApi apiInstance = ApiClientProxy.create(StoreApi.class, httpClient);
+        StoreApi client = new HttpStoreApi();
 
         String orderId = "orderId_example"; // String | ID of the order that needs to be deleted
         try {
-            apiInstance.deleteOrder(orderId);
-        } catch (HttpClientException e) {
+            client.deleteOrder(orderId);
+        } catch (IOException e) {
             System.err.println("Exception when calling StoreApi#deleteOrder");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -86,31 +80,25 @@ Returns a map of status codes to quantities
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
     // Configure HTTP bearer authorization: api_key
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2") {
-            @Override
-            public ClientExchange createExchange() {
-                exchange.setHeader("api_key", apiKey);
-                return exchange;
+        StoreApi client = new HttpStoreApi() {
+            protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+                HttpURLConnection connection = super.openConnection(relativeUrl);
+                connection.setRequestParameter("api_key", apiKey);
+                return connection;
             }
         };
-        StoreApi apiInstance = ApiClientProxy.create(StoreApi.class, httpClient);
 
         OffsetDateTime effectiveDateTime = OffsetDateTime.now(); // OffsetDateTime | 
         try {
-            Map<String, Integer> result = apiInstance.getInventory(effectiveDateTime);
+            Map<String, Integer> result = client.getInventory(effectiveDateTime);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling StoreApi#getInventory");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -155,24 +143,18 @@ For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other val
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
-        StoreApi apiInstance = ApiClientProxy.create(StoreApi.class, httpClient);
+        StoreApi client = new HttpStoreApi();
 
         String orderId = "orderId_example"; // String | ID of pet that needs to be fetched
         try {
-            OrderDto result = apiInstance.getOrderById(orderId);
+            OrderDto result = client.getOrderById(orderId);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling StoreApi#getOrderById");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -217,24 +199,18 @@ Place an order for a pet
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
-        StoreApi apiInstance = ApiClientProxy.create(StoreApi.class, httpClient);
+        StoreApi client = new HttpStoreApi();
 
         OrderDto orderDto = new OrderDto(); // OrderDto | order placed for purchasing the pet
         try {
-            OrderDto result = apiInstance.placeOrder(orderDto);
+            OrderDto result = client.placeOrder(orderDto);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling StoreApi#placeOrder");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

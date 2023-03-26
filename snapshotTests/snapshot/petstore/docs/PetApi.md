@@ -27,9 +27,6 @@ Add a new pet to the store
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
@@ -43,16 +40,13 @@ public class Example {
                 return exchange;
             }
         };
-        PetApi apiInstance = ApiClientProxy.create(PetApi.class, httpClient);
 
         PetDto petDto = new PetDto(); // PetDto | Pet object that needs to be added to the store
         try {
-            apiInstance.addPet(petDto);
-        } catch (HttpClientException e) {
+            client.addPet(petDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling PetApi#addPet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -95,9 +89,6 @@ Deletes a pet
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
@@ -111,17 +102,14 @@ public class Example {
                 return exchange;
             }
         };
-        PetApi apiInstance = ApiClientProxy.create(PetApi.class, httpClient);
 
         Long petId = 56L; // Long | Pet id to delete
         String apiKey = "apiKey_example"; // String | 
         try {
-            apiInstance.deletePet(petId, apiKey);
-        } catch (HttpClientException e) {
+            client.deletePet(petId, apiKey);
+        } catch (IOException e) {
             System.err.println("Exception when calling PetApi#deletePet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -165,24 +153,18 @@ downloads image
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2");
-        PetApi apiInstance = ApiClientProxy.create(PetApi.class, httpClient);
+        PetApi client = new HttpPetApi();
 
         Long petId = 56L; // Long | 
         try {
-            File result = apiInstance.downloadImage(petId);
+            File result = client.downloadImage(petId);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling PetApi#downloadImage");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -227,9 +209,6 @@ Multiple status values can be provided with comma separated strings
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
@@ -243,17 +222,14 @@ public class Example {
                 return exchange;
             }
         };
-        PetApi apiInstance = ApiClientProxy.create(PetApi.class, httpClient);
 
         List<String> status = Arrays.asList(); // List<String> | Status values that need to be considered for filter
         try {
-            List<PetDto> result = apiInstance.findPetsByStatus(status);
+            List<PetDto> result = client.findPetsByStatus(status);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling PetApi#findPetsByStatus");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -299,9 +275,6 @@ Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
@@ -315,17 +288,14 @@ public class Example {
                 return exchange;
             }
         };
-        PetApi apiInstance = ApiClientProxy.create(PetApi.class, httpClient);
 
         List<String> tags = Arrays.asList(); // List<String> | Tags to filter by
         try {
-            List<PetDto> result = apiInstance.findPetsByTags(tags);
+            List<PetDto> result = client.findPetsByTags(tags);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling PetApi#findPetsByTags");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -371,18 +341,15 @@ Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API erro
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
     // Configure HTTP bearer authorization: api_key
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2") {
-            @Override
-            public ClientExchange createExchange() {
-                exchange.setHeader("api_key", apiKey);
-                return exchange;
+        PetApi client = new HttpPetApi() {
+            protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+                HttpURLConnection connection = super.openConnection(relativeUrl);
+                connection.setRequestParameter("api_key", apiKey);
+                return connection;
             }
         };
 
@@ -395,17 +362,14 @@ public class Example {
                 return exchange;
             }
         };
-        PetApi apiInstance = ApiClientProxy.create(PetApi.class, httpClient);
 
         Long petId = 56L; // Long | ID of pet that needs to be fetched
         try {
-            PetDto result = apiInstance.getPetById(petId);
+            PetDto result = client.getPetById(petId);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling PetApi#getPetById");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -450,9 +414,6 @@ Update an existing pet
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
@@ -466,16 +427,13 @@ public class Example {
                 return exchange;
             }
         };
-        PetApi apiInstance = ApiClientProxy.create(PetApi.class, httpClient);
 
         PetDto petDto = new PetDto(); // PetDto | Pet object that needs to be added to the store
         try {
-            apiInstance.updatePet(petDto);
-        } catch (HttpClientException e) {
+            client.updatePet(petDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling PetApi#updatePet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -520,9 +478,6 @@ Updates a pet in the store with form data
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
@@ -536,18 +491,15 @@ public class Example {
                 return exchange;
             }
         };
-        PetApi apiInstance = ApiClientProxy.create(PetApi.class, httpClient);
 
         String petId = "petId_example"; // String | ID of pet that needs to be updated
         String name = "name_example"; // String | Updated name of the pet
         String status = "status_example"; // String | Updated status of the pet
         try {
-            apiInstance.updatePetWithForm(petId, name, status);
-        } catch (HttpClientException e) {
+            client.updatePetWithForm(petId, name, status);
+        } catch (IOException e) {
             System.err.println("Exception when calling PetApi#updatePetWithForm");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -592,9 +544,6 @@ uploads an image
 ```java
 import io.github.jhannes.openapi.petstore.api.*;
 import io.github.jhannes.openapi.petstore.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
@@ -608,18 +557,15 @@ public class Example {
                 return exchange;
             }
         };
-        PetApi apiInstance = ApiClientProxy.create(PetApi.class, httpClient);
 
         Long petId = 56L; // Long | ID of pet to update
         String additionalMetadata = "additionalMetadata_example"; // String | Additional data to pass to server
         File _file = new File("/path/to/file"); // File | file to upload
         try {
-            apiInstance.uploadFile(petId, additionalMetadata, _file);
-        } catch (HttpClientException e) {
+            client.uploadFile(petId, additionalMetadata, _file);
+        } catch (IOException e) {
             System.err.println("Exception when calling PetApi#uploadFile");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

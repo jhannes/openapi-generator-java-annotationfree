@@ -74,23 +74,17 @@ Please follow the [installation](#installation) instruction and execute the foll
 
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        ActivitiesApi apiInstance = ApiClientProxy.create(ActivitiesApi.class, httpClient);
+        ActivitiesApi client = new HttpActivitiesApi();
 
         try {
-            List<ActivityDto> result = apiInstance.apiV1ActivitiesGet();
+            List<ActivityDto> result = client.apiV1ActivitiesGet();
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling ActivitiesApi#apiV1ActivitiesGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

@@ -22,24 +22,18 @@ Method | HTTP request | Description
 ```java
 import io.github.jhannes.openapi.bigExample.api.*;
 import io.github.jhannes.openapi.bigExample.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/v1");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         UUID storeId = UUID.randomUUID(); // UUID | 
         PetDto petDto = new PetDto(); // PetDto | 
         try {
-            apiInstance.addPet(storeId, petDto);
-        } catch (HttpClientException e) {
+            client.addPet(storeId, petDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#addPet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -83,25 +77,19 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.bigExample.api.*;
 import io.github.jhannes.openapi.bigExample.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/v1");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         UUID petId = UUID.randomUUID(); // UUID | 
         String name = "name_example"; // String | Updated name of the pet
         String status = "status_example"; // String | Updated status of the pet
         try {
-            apiInstance.addPetWithForm(petId, name, status);
-        } catch (HttpClientException e) {
+            client.addPetWithForm(petId, name, status);
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#addPetWithForm");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -146,23 +134,17 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.bigExample.api.*;
 import io.github.jhannes.openapi.bigExample.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/v1");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         try {
-            PetLocationsDto result = apiInstance.getPetLocations();
+            PetLocationsDto result = client.getPetLocations();
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#getPetLocations");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -202,27 +184,21 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.bigExample.api.*;
 import io.github.jhannes.openapi.bigExample.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/v1");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         UUID storeId = UUID.randomUUID(); // UUID | 
         List<String> status = Arrays.asList(); // List<String> | 
         List<String> tags = Arrays.asList(); // List<String> | 
         LocalDate bornAfter = LocalDate.now(); // LocalDate | 
         try {
-            PetDto result = apiInstance.listPets(storeId, status, tags, bornAfter);
+            PetDto result = client.listPets(storeId, status, tags, bornAfter);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#listPets");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

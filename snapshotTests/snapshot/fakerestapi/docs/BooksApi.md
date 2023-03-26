@@ -23,23 +23,17 @@ Method | HTTP request | Description
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        BooksApi apiInstance = ApiClientProxy.create(BooksApi.class, httpClient);
+        BooksApi client = new HttpBooksApi();
 
         try {
-            List<BookDto> result = apiInstance.apiV1BooksGet();
+            List<BookDto> result = client.apiV1BooksGet();
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling BooksApi#apiV1BooksGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -79,23 +73,17 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        BooksApi apiInstance = ApiClientProxy.create(BooksApi.class, httpClient);
+        BooksApi client = new HttpBooksApi();
 
         Integer id = 56; // Integer | 
         try {
-            apiInstance.apiV1BooksIdDelete(id);
-        } catch (HttpClientException e) {
+            client.apiV1BooksIdDelete(id);
+        } catch (IOException e) {
             System.err.println("Exception when calling BooksApi#apiV1BooksIdDelete");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -138,24 +126,18 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        BooksApi apiInstance = ApiClientProxy.create(BooksApi.class, httpClient);
+        BooksApi client = new HttpBooksApi();
 
         Integer id = 56; // Integer | 
         try {
-            BookDto result = apiInstance.apiV1BooksIdGet(id);
+            BookDto result = client.apiV1BooksIdGet(id);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling BooksApi#apiV1BooksIdGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -198,24 +180,18 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        BooksApi apiInstance = ApiClientProxy.create(BooksApi.class, httpClient);
+        BooksApi client = new HttpBooksApi();
 
         Integer id = 56; // Integer | 
         BookDto bookDto = new BookDto(); // BookDto | 
         try {
-            apiInstance.apiV1BooksIdPut(id, bookDto);
-        } catch (HttpClientException e) {
+            client.apiV1BooksIdPut(id, bookDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling BooksApi#apiV1BooksIdPut");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -259,23 +235,17 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        BooksApi apiInstance = ApiClientProxy.create(BooksApi.class, httpClient);
+        BooksApi client = new HttpBooksApi();
 
         BookDto bookDto = new BookDto(); // BookDto | 
         try {
-            apiInstance.apiV1BooksPost(bookDto);
-        } catch (HttpClientException e) {
+            client.apiV1BooksPost(bookDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling BooksApi#apiV1BooksPost");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

@@ -23,23 +23,17 @@ Method | HTTP request | Description
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        ActivitiesApi apiInstance = ApiClientProxy.create(ActivitiesApi.class, httpClient);
+        ActivitiesApi client = new HttpActivitiesApi();
 
         try {
-            List<ActivityDto> result = apiInstance.apiV1ActivitiesGet();
+            List<ActivityDto> result = client.apiV1ActivitiesGet();
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling ActivitiesApi#apiV1ActivitiesGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -79,23 +73,17 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        ActivitiesApi apiInstance = ApiClientProxy.create(ActivitiesApi.class, httpClient);
+        ActivitiesApi client = new HttpActivitiesApi();
 
         Integer id = 56; // Integer | 
         try {
-            apiInstance.apiV1ActivitiesIdDelete(id);
-        } catch (HttpClientException e) {
+            client.apiV1ActivitiesIdDelete(id);
+        } catch (IOException e) {
             System.err.println("Exception when calling ActivitiesApi#apiV1ActivitiesIdDelete");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -138,24 +126,18 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        ActivitiesApi apiInstance = ApiClientProxy.create(ActivitiesApi.class, httpClient);
+        ActivitiesApi client = new HttpActivitiesApi();
 
         Integer id = 56; // Integer | 
         try {
-            List<ActivityDto> result = apiInstance.apiV1ActivitiesIdGet(id);
+            List<ActivityDto> result = client.apiV1ActivitiesIdGet(id);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling ActivitiesApi#apiV1ActivitiesIdGet");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -198,25 +180,19 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        ActivitiesApi apiInstance = ApiClientProxy.create(ActivitiesApi.class, httpClient);
+        ActivitiesApi client = new HttpActivitiesApi();
 
         Integer id = 56; // Integer | 
         ActivityDto activityDto = new ActivityDto(); // ActivityDto | 
         try {
-            ActivityDto result = apiInstance.apiV1ActivitiesIdPut(id, activityDto);
+            ActivityDto result = client.apiV1ActivitiesIdPut(id, activityDto);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling ActivitiesApi#apiV1ActivitiesIdPut");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -260,24 +236,18 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.fakerestapi.api.*;
 import io.github.jhannes.openapi.fakerestapi.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://localhost");
-        ActivitiesApi apiInstance = ApiClientProxy.create(ActivitiesApi.class, httpClient);
+        ActivitiesApi client = new HttpActivitiesApi();
 
         ActivityDto activityDto = new ActivityDto(); // ActivityDto | 
         try {
-            ActivityDto result = apiInstance.apiV1ActivitiesPost(activityDto);
+            ActivityDto result = client.apiV1ActivitiesPost(activityDto);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling ActivitiesApi#apiV1ActivitiesPost");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

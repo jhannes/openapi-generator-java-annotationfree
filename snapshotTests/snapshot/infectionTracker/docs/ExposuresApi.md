@@ -20,25 +20,19 @@ Method | HTTP request | Description
 ```java
 import io.github.jhannes.openapi.infectionTracker.api.*;
 import io.github.jhannes.openapi.infectionTracker.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
-        ExposuresApi apiInstance = ApiClientProxy.create(ExposuresApi.class, httpClient);
+        ExposuresApi client = new HttpExposuresApi();
 
         List<LocalDate> exposureDate = Arrays.asList(); // List<LocalDate> | 
         Integer maxCount = 56; // Integer | 
         try {
-            ExposureDto result = apiInstance.listExposures(exposureDate, maxCount);
+            ExposureDto result = client.listExposures(exposureDate, maxCount);
             System.out.println(result);
-        } catch (HttpClientException e) {
+        } catch (IOException e) {
             System.err.println("Exception when calling ExposuresApi#listExposures");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
@@ -82,24 +76,18 @@ No authorization required
 ```java
 import io.github.jhannes.openapi.infectionTracker.api.*;
 import io.github.jhannes.openapi.infectionTracker.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("/api");
-        ExposuresApi apiInstance = ApiClientProxy.create(ExposuresApi.class, httpClient);
+        ExposuresApi client = new HttpExposuresApi();
 
         UUID exposureId = UUID.randomUUID(); // UUID | 
         ExposureDto exposureDto = new ExposureDto(); // ExposureDto | 
         try {
-            apiInstance.updateExposure(exposureId, exposureDto);
-        } catch (HttpClientException e) {
+            client.updateExposure(exposureId, exposureDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling ExposuresApi#updateExposure");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }

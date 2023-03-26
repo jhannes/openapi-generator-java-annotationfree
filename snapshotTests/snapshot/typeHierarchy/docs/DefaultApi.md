@@ -19,23 +19,17 @@ Method | HTTP request | Description
 ```java
 import io.github.jhannes.openapi.typeHierarchy.api.*;
 import io.github.jhannes.openapi.typeHierarchy.models.*;
-import org.actioncontroller.client.ApiClientProxy;
-import org.actioncontroller.client.HttpClientException;
-import org.actioncontroller.client.HttpURLConnectionApiClient;
 
 public class Example {
     public static void main(String[] args) {
-        HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://api.example.com/v1");
-        DefaultApi apiInstance = ApiClientProxy.create(DefaultApi.class, httpClient);
+        DefaultApi client = new HttpDefaultApi();
 
         PetDto petDto = new PetDto(); // PetDto | 
         try {
-            apiInstance.petsPost(petDto);
-        } catch (HttpClientException e) {
+            client.petsPost(petDto);
+        } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#petsPost");
-            System.err.println("Status code: " + e.getStatusCode());
-            System.err.println("Reason: " + e.getResponseBody());
-            System.err.println("URL: " + e.getUrl());
+            e.printStackTrace();
         }
     }
 }
