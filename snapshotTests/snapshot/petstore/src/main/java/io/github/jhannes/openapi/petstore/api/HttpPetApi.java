@@ -160,6 +160,12 @@ public class HttpPetApi implements PetApi {
         HttpURLConnection connection = openConnection("/pet/{petId}"
                 .replace("{petId}", encode(String.valueOf(petId), UTF_8)));
         connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        connection.setDoOutput(true);
+        List<String> formParameters = new ArrayList<>();
+        name.ifPresent(p -> formParameters.add("name=" + encode(String.valueOf(p), UTF_8)));
+        status.ifPresent(p -> formParameters.add("status=" + encode(String.valueOf(p), UTF_8)));
+        connection.getOutputStream().write(String.join("&", formParameters).getBytes());
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
@@ -174,6 +180,12 @@ public class HttpPetApi implements PetApi {
         HttpURLConnection connection = openConnection("/pet/{petId}/uploadImage"
                 .replace("{petId}", encode(String.valueOf(petId), UTF_8)));
         connection.setRequestMethod("POST");
+        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        connection.setDoOutput(true);
+        List<String> formParameters = new ArrayList<>();
+        additionalMetadata.ifPresent(p -> formParameters.add("additionalMetadata=" + encode(String.valueOf(p), UTF_8)));
+        file.ifPresent(p -> formParameters.add("file=" + encode(String.valueOf(p), UTF_8)));
+        connection.getOutputStream().write(String.join("&", formParameters).getBytes());
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
