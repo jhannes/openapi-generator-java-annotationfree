@@ -13,6 +13,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +29,12 @@ public class Http{{classname}} implements {{classname}} {
     private final Jsonb jsonb;
 
     private final URL baseUrl;
+{{#basePath}}
+
+    public Http{{classname}}() throws MalformedURLException {
+        this(new URL("{{basePath}}"));
+    }
+{{/basePath}}
 
     public Http{{classname}}(URL baseUrl) {
         this(baseUrl, JsonbBuilder.create());
@@ -51,8 +58,15 @@ public class Http{{classname}} implements {{classname}} {
             {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}},{{/-last}}{{/allParams}}{{#responses}}{{#headers}},
             Consumer<{{{dataType}}}> set{{nameInCamelCase}}{{/headers}}{{/responses}}
     ) throws IOException {
+        {{#hasQueryParams}}
+        List<String> queryParameters = new ArrayList<>();
+        {{#queryParams}}
+        {{baseName}}.ifPresent(p -> queryParameters.add("{{baseName}}=" + encode(String.valueOf(p), UTF_8)));
+        {{/queryParams}}
+        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        {{/hasQueryParams}}
         URL url = new URL(baseUrl + "{{path}}"{{#pathParams}}
-                .replace("{{curly}}{{paramName}}}", encode(String.valueOf({{paramName}}), UTF_8)){{/pathParams}});
+                .replace("{{curly}}{{paramName}}}", encode(String.valueOf({{paramName}}), UTF_8)){{/pathParams}}{{#hasQueryParams}} + query{{/hasQueryParams}});
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("{{httpMethod}}");
         {{#bodyParam}}

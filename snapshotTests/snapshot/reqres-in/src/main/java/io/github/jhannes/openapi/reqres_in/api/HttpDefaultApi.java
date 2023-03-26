@@ -28,6 +28,7 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
@@ -40,6 +41,10 @@ public class HttpDefaultApi implements DefaultApi {
     private final Jsonb jsonb;
 
     private final URL baseUrl;
+
+    public HttpDefaultApi() throws MalformedURLException {
+        this(new URL("https://reqres.in/api"));
+    }
 
     public HttpDefaultApi(URL baseUrl) {
         this(baseUrl, JsonbBuilder.create());
@@ -98,7 +103,11 @@ public class HttpDefaultApi implements DefaultApi {
             Optional<Integer> page,
             Optional<Integer> per_page
     ) throws IOException {
-        URL url = new URL(baseUrl + "/users");
+        List<String> queryParameters = new ArrayList<>();
+        page.ifPresent(p -> queryParameters.add("page=" + encode(String.valueOf(p), UTF_8)));
+        per_page.ifPresent(p -> queryParameters.add("per_page=" + encode(String.valueOf(p), UTF_8)));
+        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        URL url = new URL(baseUrl + "/users" + query);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
