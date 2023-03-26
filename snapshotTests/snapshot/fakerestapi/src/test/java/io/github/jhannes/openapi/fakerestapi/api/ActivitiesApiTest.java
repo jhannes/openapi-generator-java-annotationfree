@@ -12,87 +12,52 @@
 
 package io.github.jhannes.openapi.fakerestapi.api;
 
-import io.github.jhannes.openapi.fakerestapi.ApiException;
 import io.github.jhannes.openapi.fakerestapi.model.ActivityDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.fakerestapi.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for ActivitiesApi
  */
 public class ActivitiesApiTest {
 
-    private final ActivitiesApi api = new ActivitiesApi();
+    private final ActivitiesApi api = new ActivitiesHttpApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void apiV1ActivitiesGetTest() throws ApiException {
-        //
-        //List<ActivityDto> response = api.apiV1ActivitiesGet();
-
-        // TODO: test validations
+    public ActivitiesApiTest() throws MalformedURLException {
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void apiV1ActivitiesIdDeleteTest() throws ApiException {
-        //
-        //Integer id = null;
-        //
-        //api.apiV1ActivitiesIdDelete(id);
 
-        // TODO: test validations
+    @Test
+    public void apiV1ActivitiesGetTest() throws IOException {
+        List<ActivityDto> response = api.apiV1ActivitiesGet();
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void apiV1ActivitiesIdGetTest() throws ApiException {
-        //
-        //Integer id = null;
-        //
-        //List<ActivityDto> response = api.apiV1ActivitiesIdGet(id);
 
-        // TODO: test validations
+    @Test
+    public void apiV1ActivitiesIdDeleteTest() throws IOException {
+        api.apiV1ActivitiesIdDelete(1);
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void apiV1ActivitiesIdPutTest() throws ApiException {
-        //
-        //Integer id = null;
-        //
-        //ActivityDto activityDto = null;
-        //
-        //ActivityDto response = api.apiV1ActivitiesIdPut(id, activityDto);
 
-        // TODO: test validations
+    @Test
+    public void apiV1ActivitiesIdGetTest() throws IOException {
+        ActivityDto response = api.apiV1ActivitiesIdGet(1);
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
-    @Test
-    public void apiV1ActivitiesPostTest() throws ApiException {
-        //
-        //ActivityDto activityDto = null;
-        //
-        //ActivityDto response = api.apiV1ActivitiesPost(activityDto);
 
-        // TODO: test validations
+    @Test
+    public void apiV1ActivitiesIdPutTest() throws IOException {
+        ActivityDto activityDto = sampleData.sampleActivityDto();
+        ActivityDto response = api.apiV1ActivitiesIdPut(1, activityDto);
+    }
+
+    @Test
+    public void apiV1ActivitiesPostTest() throws IOException {
+        ActivityDto activityDto = sampleData.sampleActivityDto();
+        ActivityDto response = api.apiV1ActivitiesPost(activityDto);
     }
 }

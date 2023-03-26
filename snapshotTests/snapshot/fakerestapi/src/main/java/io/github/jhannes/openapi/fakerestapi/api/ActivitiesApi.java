@@ -11,65 +11,20 @@
 
 package io.github.jhannes.openapi.fakerestapi.api;
 
-import io.github.jhannes.openapi.fakerestapi.model.*;
-
 import io.github.jhannes.openapi.fakerestapi.model.ActivityDto;
 
-import org.actioncontroller.actions.*;
-import org.actioncontroller.values.*;
-import org.actioncontroller.values.json.JsonBody;
-
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Consumer;
 
 public interface ActivitiesApi {
-    /**
-     * @return List&lt;ActivityDto&gt;
-     */
-    @GET("/api/v1/Activities")
-    @JsonBody
-    public List<ActivityDto> apiV1ActivitiesGet(
-    ) throws IOException;
-    /**
-     * @param id  (required)
-     */
-    @DELETE("/api/v1/Activities/{id}")
-    public void apiV1ActivitiesIdDelete(
-            @PathParam("id") Integer id
-    ) throws IOException;
-    /**
-     * @param id  (required)
-     * @return List&lt;ActivityDto&gt;
-     */
-    @GET("/api/v1/Activities/{id}")
-    @JsonBody
-    public List<ActivityDto> apiV1ActivitiesIdGet(
-            @PathParam("id") Integer id
-    ) throws IOException;
-    /**
-     * @param id  (required)
-     * @param activityDto  (optional)
-     * @return ActivityDto
-     */
-    @PUT("/api/v1/Activities/{id}")
-    @JsonBody
-    public ActivityDto apiV1ActivitiesIdPut(
-            @PathParam("id") Integer id,
-            @JsonBody ActivityDto activityDto
-    ) throws IOException;
-    /**
-     * @param activityDto  (optional)
-     * @return ActivityDto
-     */
-    @POST("/api/v1/Activities")
-    @JsonBody
-    public ActivityDto apiV1ActivitiesPost(
-            @JsonBody ActivityDto activityDto
-    ) throws IOException;
+    List<ActivityDto> apiV1ActivitiesGet() throws IOException;
+
+    void apiV1ActivitiesIdDelete(Integer id) throws IOException;
+
+    ActivityDto apiV1ActivitiesIdGet(Integer id) throws IOException;
+
+    ActivityDto apiV1ActivitiesIdPut(Integer id, ActivityDto activityDto) throws IOException;
+
+    public ActivityDto apiV1ActivitiesPost(ActivityDto activityDto) throws IOException;
 }
+
