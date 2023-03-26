@@ -68,6 +68,9 @@ public class Http{{classname}} implements {{classname}} {
         HttpURLConnection connection = openConnection("{{path}}"{{#pathParams}}
                 .replace("{{curly}}{{paramName}}}", encode(String.valueOf({{paramName}}), UTF_8)){{/pathParams}}{{#hasQueryParams}} + query{{/hasQueryParams}});
         connection.setRequestMethod("{{httpMethod}}");
+        {{#headerParams}}
+        {{paramName}}.ifPresent(p -> connection.setRequestProperty("{{baseName}}", String.valueOf(p)));
+        {{/headerParams}}
         {{#bodyParam}}
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);

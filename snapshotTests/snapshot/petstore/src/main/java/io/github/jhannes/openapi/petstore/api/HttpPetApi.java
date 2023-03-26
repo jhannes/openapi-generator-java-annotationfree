@@ -72,6 +72,7 @@ public class HttpPetApi implements PetApi {
         HttpURLConnection connection = openConnection("/pet/{petId}"
                 .replace("{petId}", encode(String.valueOf(petId), UTF_8)));
         connection.setRequestMethod("DELETE");
+        apiKey.ifPresent(p -> connection.setRequestProperty("api_key", String.valueOf(p)));
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
