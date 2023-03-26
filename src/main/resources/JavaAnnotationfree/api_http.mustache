@@ -65,9 +65,8 @@ public class Http{{classname}} implements {{classname}} {
         {{/queryParams}}
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
         {{/hasQueryParams}}
-        URL url = new URL(baseUrl + "{{path}}"{{#pathParams}}
+        HttpURLConnection connection = openConnection("{{path}}"{{#pathParams}}
                 .replace("{{curly}}{{paramName}}}", encode(String.valueOf({{paramName}}), UTF_8)){{/pathParams}}{{#hasQueryParams}} + query{{/hasQueryParams}});
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("{{httpMethod}}");
         {{#bodyParam}}
         connection.setRequestProperty("Content-Type", "application/json");
@@ -95,6 +94,10 @@ public class Http{{classname}} implements {{classname}} {
     }
 
 {{/operation}}
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
+    }
+
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {
         return new ParameterizedType() {
             @Override

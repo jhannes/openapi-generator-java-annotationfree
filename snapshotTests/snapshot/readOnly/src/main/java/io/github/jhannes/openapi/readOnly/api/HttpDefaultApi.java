@@ -56,9 +56,8 @@ public class HttpDefaultApi implements DefaultApi {
             UUID storeId,
             PetDto petDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/{storeId}/pets"
+        HttpURLConnection connection = openConnection("/{storeId}/pets"
                 .replace("{storeId}", encode(String.valueOf(storeId), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -74,9 +73,8 @@ public class HttpDefaultApi implements DefaultApi {
             Optional<String> name,
             Optional<String> status
     ) throws IOException {
-        URL url = new URL(baseUrl + "/pets/{petId}"
+        HttpURLConnection connection = openConnection("/pets/{petId}"
                 .replace("{petId}", encode(String.valueOf(petId), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -95,14 +93,17 @@ public class HttpDefaultApi implements DefaultApi {
         tags.ifPresent(p -> queryParameters.add("tags=" + encode(String.valueOf(p), UTF_8)));
         bornAfter.ifPresent(p -> queryParameters.add("bornAfter=" + encode(String.valueOf(p), UTF_8)));
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        URL url = new URL(baseUrl + "/{storeId}/pets"
+        HttpURLConnection connection = openConnection("/{storeId}/pets"
                 .replace("{storeId}", encode(String.valueOf(storeId), UTF_8)) + query);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
         return jsonb.fromJson(connection.getInputStream(), PetDto.class);
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

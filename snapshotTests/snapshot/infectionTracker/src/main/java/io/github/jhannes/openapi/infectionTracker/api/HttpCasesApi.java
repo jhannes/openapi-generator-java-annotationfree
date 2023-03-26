@@ -56,9 +56,8 @@ public class HttpCasesApi implements CasesApi {
     public InfectionDto getCaseDetails(
             UUID caseId
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/cases/{caseId}"
+        HttpURLConnection connection = openConnection("/api/cases/{caseId}"
                 .replace("{caseId}", encode(String.valueOf(caseId), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -69,8 +68,7 @@ public class HttpCasesApi implements CasesApi {
     @Override
     public InfectionDto listCases(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/cases");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/cases");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -82,8 +80,7 @@ public class HttpCasesApi implements CasesApi {
     public void newCase(
             InfectionInformationDto infectionInformationDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/cases");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/cases");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -98,9 +95,8 @@ public class HttpCasesApi implements CasesApi {
             UUID caseId,
             ExposureDto exposureDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/cases/{caseId}/exposures"
+        HttpURLConnection connection = openConnection("/api/cases/{caseId}/exposures"
                 .replace("{caseId}", encode(String.valueOf(caseId), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -108,6 +104,10 @@ public class HttpCasesApi implements CasesApi {
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

@@ -53,13 +53,16 @@ public class HttpDefaultApi implements DefaultApi {
     @Override
     public WebSocketCommandDto commandsGet(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/commands");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/commands");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
         return jsonb.fromJson(connection.getInputStream(), WebSocketCommandDto.class);
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

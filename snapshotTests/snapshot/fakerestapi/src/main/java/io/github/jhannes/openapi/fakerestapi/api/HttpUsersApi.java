@@ -52,8 +52,7 @@ public class HttpUsersApi implements UsersApi {
     @Override
     public List<UserDto> apiV1UsersGet(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Users");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/v1/Users");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -65,9 +64,8 @@ public class HttpUsersApi implements UsersApi {
     public void apiV1UsersIdDelete(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Users/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/Users/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -78,9 +76,8 @@ public class HttpUsersApi implements UsersApi {
     public void apiV1UsersIdGet(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Users/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/Users/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -92,9 +89,8 @@ public class HttpUsersApi implements UsersApi {
             Integer id,
             UserDto userDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Users/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/Users/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("PUT");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -108,8 +104,7 @@ public class HttpUsersApi implements UsersApi {
     public void apiV1UsersPost(
             UserDto userDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Users");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/v1/Users");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -117,6 +112,10 @@ public class HttpUsersApi implements UsersApi {
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

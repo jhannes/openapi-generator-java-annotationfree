@@ -59,8 +59,7 @@ public class HttpDefaultApi implements DefaultApi {
     public LoginPost200ResponseDto loginPost(
             LoginPostRequestDto loginPostRequestDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/login");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/login");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -74,8 +73,7 @@ public class HttpDefaultApi implements DefaultApi {
     @Override
     public void logoutPost(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/logout");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/logout");
         connection.setRequestMethod("POST");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -86,8 +84,7 @@ public class HttpDefaultApi implements DefaultApi {
     public RegisterPost200ResponseDto registerPost(
             LoginPostRequestDto loginPostRequestDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/register");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/register");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -107,8 +104,7 @@ public class HttpDefaultApi implements DefaultApi {
         page.ifPresent(p -> queryParameters.add("page=" + encode(String.valueOf(p), UTF_8)));
         per_page.ifPresent(p -> queryParameters.add("per_page=" + encode(String.valueOf(p), UTF_8)));
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        URL url = new URL(baseUrl + "/users" + query);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/users" + query);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -120,9 +116,8 @@ public class HttpDefaultApi implements DefaultApi {
     public void usersIdDelete(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/users/{id}"
+        HttpURLConnection connection = openConnection("/users/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -133,9 +128,8 @@ public class HttpDefaultApi implements DefaultApi {
     public UsersIdDelete200ResponseDto usersIdGet(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/users/{id}"
+        HttpURLConnection connection = openConnection("/users/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -147,9 +141,8 @@ public class HttpDefaultApi implements DefaultApi {
     public UsersIdDelete200Response1Dto usersIdPatch(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/users/{id}"
+        HttpURLConnection connection = openConnection("/users/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("PATCH");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -161,14 +154,17 @@ public class HttpDefaultApi implements DefaultApi {
     public UsersIdDelete200Response1Dto usersIdPut(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/users/{id}"
+        HttpURLConnection connection = openConnection("/users/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("PUT");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
         return jsonb.fromJson(connection.getInputStream(), UsersIdDelete200Response1Dto.class);
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

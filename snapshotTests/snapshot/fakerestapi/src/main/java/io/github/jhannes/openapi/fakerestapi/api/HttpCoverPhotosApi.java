@@ -53,9 +53,8 @@ public class HttpCoverPhotosApi implements CoverPhotosApi {
     public List<CoverPhotoDto> apiV1CoverPhotosBooksCoversIdBookGet(
             Integer idBook
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/CoverPhotos/books/covers/{idBook}"
+        HttpURLConnection connection = openConnection("/api/v1/CoverPhotos/books/covers/{idBook}"
                 .replace("{idBook}", encode(String.valueOf(idBook), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -66,8 +65,7 @@ public class HttpCoverPhotosApi implements CoverPhotosApi {
     @Override
     public List<CoverPhotoDto> apiV1CoverPhotosGet(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/CoverPhotos");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/v1/CoverPhotos");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -79,9 +77,8 @@ public class HttpCoverPhotosApi implements CoverPhotosApi {
     public void apiV1CoverPhotosIdDelete(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/CoverPhotos/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/CoverPhotos/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -92,9 +89,8 @@ public class HttpCoverPhotosApi implements CoverPhotosApi {
     public CoverPhotoDto apiV1CoverPhotosIdGet(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/CoverPhotos/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/CoverPhotos/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -107,9 +103,8 @@ public class HttpCoverPhotosApi implements CoverPhotosApi {
             Integer id,
             CoverPhotoDto coverPhotoDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/CoverPhotos/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/CoverPhotos/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("PUT");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -124,8 +119,7 @@ public class HttpCoverPhotosApi implements CoverPhotosApi {
     public CoverPhotoDto apiV1CoverPhotosPost(
             CoverPhotoDto coverPhotoDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/CoverPhotos");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/v1/CoverPhotos");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -134,6 +128,10 @@ public class HttpCoverPhotosApi implements CoverPhotosApi {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
         return jsonb.fromJson(connection.getInputStream(), CoverPhotoDto.class);
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

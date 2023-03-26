@@ -54,8 +54,7 @@ public class HttpDefaultApi implements DefaultApi {
     @Override
     public GeometryDto getGeometry(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/geometry");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/geometry");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -66,8 +65,7 @@ public class HttpDefaultApi implements DefaultApi {
     @Override
     public GeometryCollectionDto getLocation(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/collection");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/collection");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -78,13 +76,16 @@ public class HttpDefaultApi implements DefaultApi {
     @Override
     public PolygonDto getPolygon(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/polygon");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/polygon");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
         return jsonb.fromJson(connection.getInputStream(), PolygonDto.class);
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

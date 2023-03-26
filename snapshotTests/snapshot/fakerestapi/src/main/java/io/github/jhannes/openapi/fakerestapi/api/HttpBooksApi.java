@@ -52,8 +52,7 @@ public class HttpBooksApi implements BooksApi {
     @Override
     public List<BookDto> apiV1BooksGet(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Books");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/v1/Books");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -65,9 +64,8 @@ public class HttpBooksApi implements BooksApi {
     public void apiV1BooksIdDelete(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Books/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/Books/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -78,9 +76,8 @@ public class HttpBooksApi implements BooksApi {
     public BookDto apiV1BooksIdGet(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Books/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/Books/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -93,9 +90,8 @@ public class HttpBooksApi implements BooksApi {
             Integer id,
             BookDto bookDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Books/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/Books/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("PUT");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -109,8 +105,7 @@ public class HttpBooksApi implements BooksApi {
     public void apiV1BooksPost(
             BookDto bookDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Books");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/v1/Books");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -118,6 +113,10 @@ public class HttpBooksApi implements BooksApi {
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

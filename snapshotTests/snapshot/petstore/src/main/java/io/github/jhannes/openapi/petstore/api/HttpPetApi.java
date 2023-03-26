@@ -54,8 +54,7 @@ public class HttpPetApi implements PetApi {
     public void addPet(
             PetDto petDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/pet");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/pet");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -70,9 +69,8 @@ public class HttpPetApi implements PetApi {
             Long petId,
             Optional<String> apiKey
     ) throws IOException {
-        URL url = new URL(baseUrl + "/pet/{petId}"
+        HttpURLConnection connection = openConnection("/pet/{petId}"
                 .replace("{petId}", encode(String.valueOf(petId), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -83,9 +81,8 @@ public class HttpPetApi implements PetApi {
     public byte[] downloadImage(
             Long petId
     ) throws IOException {
-        URL url = new URL(baseUrl + "/pet/{petId}/image"
+        HttpURLConnection connection = openConnection("/pet/{petId}/image"
                 .replace("{petId}", encode(String.valueOf(petId), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -102,8 +99,7 @@ public class HttpPetApi implements PetApi {
         List<String> queryParameters = new ArrayList<>();
         status.ifPresent(p -> queryParameters.add("status=" + encode(String.valueOf(p), UTF_8)));
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        URL url = new URL(baseUrl + "/pet/findByStatus" + query);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/pet/findByStatus" + query);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -119,8 +115,7 @@ public class HttpPetApi implements PetApi {
         List<String> queryParameters = new ArrayList<>();
         tags.ifPresent(p -> queryParameters.add("tags=" + encode(String.valueOf(p), UTF_8)));
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        URL url = new URL(baseUrl + "/pet/findByTags" + query);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/pet/findByTags" + query);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -132,9 +127,8 @@ public class HttpPetApi implements PetApi {
     public PetDto getPetById(
             Long petId
     ) throws IOException {
-        URL url = new URL(baseUrl + "/pet/{petId}"
+        HttpURLConnection connection = openConnection("/pet/{petId}"
                 .replace("{petId}", encode(String.valueOf(petId), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -146,8 +140,7 @@ public class HttpPetApi implements PetApi {
     public void updatePet(
             PetDto petDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/pet");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/pet");
         connection.setRequestMethod("PUT");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -163,9 +156,8 @@ public class HttpPetApi implements PetApi {
             Optional<String> name,
             Optional<String> status
     ) throws IOException {
-        URL url = new URL(baseUrl + "/pet/{petId}"
+        HttpURLConnection connection = openConnection("/pet/{petId}"
                 .replace("{petId}", encode(String.valueOf(petId), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -178,13 +170,16 @@ public class HttpPetApi implements PetApi {
             Optional<String> additionalMetadata,
             Optional<File> file
     ) throws IOException {
-        URL url = new URL(baseUrl + "/pet/{petId}/uploadImage"
+        HttpURLConnection connection = openConnection("/pet/{petId}/uploadImage"
                 .replace("{petId}", encode(String.valueOf(petId), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("POST");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

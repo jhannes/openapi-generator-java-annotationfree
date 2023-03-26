@@ -58,8 +58,7 @@ public class HttpDefaultApi implements DefaultApi {
     public void logMessage(
             LogMessageDto logMessageDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/log");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/log");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -72,8 +71,7 @@ public class HttpDefaultApi implements DefaultApi {
     @Override
     public AnyPartyDto partiesGet(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/parties");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/parties");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -86,9 +84,8 @@ public class HttpDefaultApi implements DefaultApi {
             UUID id,
             AnyPartyDto anyPartyDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/parties/{id}"
+        HttpURLConnection connection = openConnection("/parties/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("PUT");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -102,8 +99,7 @@ public class HttpDefaultApi implements DefaultApi {
     public void partiesPost(
             AnyPartyDto anyPartyDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/parties");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/parties");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -111,6 +107,10 @@ public class HttpDefaultApi implements DefaultApi {
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

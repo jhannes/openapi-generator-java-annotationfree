@@ -53,8 +53,7 @@ public class HttpUserApi implements UserApi {
     public void createUser(
             UserDto userDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/user");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/user");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -68,8 +67,7 @@ public class HttpUserApi implements UserApi {
     public void createUsersWithArrayInput(
             List<UserDto> userDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/user/createWithArray");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/user/createWithArray");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -83,8 +81,7 @@ public class HttpUserApi implements UserApi {
     public void createUsersWithListInput(
             List<UserDto> userDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/user/createWithList");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/user/createWithList");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -98,9 +95,8 @@ public class HttpUserApi implements UserApi {
     public void deleteUser(
             String username
     ) throws IOException {
-        URL url = new URL(baseUrl + "/user/{username}"
+        HttpURLConnection connection = openConnection("/user/{username}"
                 .replace("{username}", encode(String.valueOf(username), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -111,9 +107,8 @@ public class HttpUserApi implements UserApi {
     public UserDto getUserByName(
             String username
     ) throws IOException {
-        URL url = new URL(baseUrl + "/user/{username}"
+        HttpURLConnection connection = openConnection("/user/{username}"
                 .replace("{username}", encode(String.valueOf(username), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -130,8 +125,7 @@ public class HttpUserApi implements UserApi {
         username.ifPresent(p -> queryParameters.add("username=" + encode(String.valueOf(p), UTF_8)));
         password.ifPresent(p -> queryParameters.add("password=" + encode(String.valueOf(p), UTF_8)));
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        URL url = new URL(baseUrl + "/user/login" + query);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/user/login" + query);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -142,8 +136,7 @@ public class HttpUserApi implements UserApi {
     @Override
     public void logoutUser(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/user/logout");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/user/logout");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -155,9 +148,8 @@ public class HttpUserApi implements UserApi {
             String username,
             UserDto userDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/user/{username}"
+        HttpURLConnection connection = openConnection("/user/{username}"
                 .replace("{username}", encode(String.valueOf(username), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("PUT");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -165,6 +157,10 @@ public class HttpUserApi implements UserApi {
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

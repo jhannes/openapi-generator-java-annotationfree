@@ -53,8 +53,7 @@ public class HttpDefaultApi implements DefaultApi {
     @Override
     public JwksDocumentDto wellKnownKeysGet(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/.well-known/keys");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/.well-known/keys");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -65,13 +64,16 @@ public class HttpDefaultApi implements DefaultApi {
     @Override
     public DiscoveryDocumentDto wellKnownOpenidConfigurationGet(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/.well-known/openid-configuration");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/.well-known/openid-configuration");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
         return jsonb.fromJson(connection.getInputStream(), DiscoveryDocumentDto.class);
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

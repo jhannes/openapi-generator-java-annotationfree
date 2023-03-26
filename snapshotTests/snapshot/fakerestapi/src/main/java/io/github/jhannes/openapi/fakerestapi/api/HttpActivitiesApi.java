@@ -52,8 +52,7 @@ public class HttpActivitiesApi implements ActivitiesApi {
     @Override
     public List<ActivityDto> apiV1ActivitiesGet(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Activities");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/v1/Activities");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -65,9 +64,8 @@ public class HttpActivitiesApi implements ActivitiesApi {
     public void apiV1ActivitiesIdDelete(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Activities/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/Activities/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -78,9 +76,8 @@ public class HttpActivitiesApi implements ActivitiesApi {
     public List<ActivityDto> apiV1ActivitiesIdGet(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Activities/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/Activities/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -93,9 +90,8 @@ public class HttpActivitiesApi implements ActivitiesApi {
             Integer id,
             ActivityDto activityDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Activities/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/Activities/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("PUT");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -110,8 +106,7 @@ public class HttpActivitiesApi implements ActivitiesApi {
     public ActivityDto apiV1ActivitiesPost(
             ActivityDto activityDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Activities");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/v1/Activities");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -120,6 +115,10 @@ public class HttpActivitiesApi implements ActivitiesApi {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
         return jsonb.fromJson(connection.getInputStream(), ActivityDto.class);
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

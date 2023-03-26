@@ -54,9 +54,8 @@ public class HttpStoreApi implements StoreApi {
     public void deleteOrder(
             String orderId
     ) throws IOException {
-        URL url = new URL(baseUrl + "/store/order/{orderId}"
+        HttpURLConnection connection = openConnection("/store/order/{orderId}"
                 .replace("{orderId}", encode(String.valueOf(orderId), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -70,8 +69,7 @@ public class HttpStoreApi implements StoreApi {
         List<String> queryParameters = new ArrayList<>();
         effectiveDateTime.ifPresent(p -> queryParameters.add("effectiveDateTime=" + encode(String.valueOf(p), UTF_8)));
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        URL url = new URL(baseUrl + "/store/inventory" + query);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/store/inventory" + query);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -83,9 +81,8 @@ public class HttpStoreApi implements StoreApi {
     public OrderDto getOrderById(
             String orderId
     ) throws IOException {
-        URL url = new URL(baseUrl + "/store/order/{orderId}"
+        HttpURLConnection connection = openConnection("/store/order/{orderId}"
                 .replace("{orderId}", encode(String.valueOf(orderId), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -97,8 +94,7 @@ public class HttpStoreApi implements StoreApi {
     public OrderDto placeOrder(
             OrderDto orderDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/store/order");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/store/order");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -107,6 +103,10 @@ public class HttpStoreApi implements StoreApi {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
         return jsonb.fromJson(connection.getInputStream(), OrderDto.class);
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

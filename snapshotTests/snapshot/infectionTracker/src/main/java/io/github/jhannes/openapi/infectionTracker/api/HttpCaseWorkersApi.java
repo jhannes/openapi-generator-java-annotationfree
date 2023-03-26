@@ -52,8 +52,7 @@ public class HttpCaseWorkersApi implements CaseWorkersApi {
     @Override
     public CaseWorkerDto listCaseWorkers(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/caseWorkers");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/caseWorkers");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -65,8 +64,7 @@ public class HttpCaseWorkersApi implements CaseWorkersApi {
     public void registerCaseWorker(
             CaseWorkerDto caseWorkerDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/caseWorkers");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/caseWorkers");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -74,6 +72,10 @@ public class HttpCaseWorkersApi implements CaseWorkersApi {
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {

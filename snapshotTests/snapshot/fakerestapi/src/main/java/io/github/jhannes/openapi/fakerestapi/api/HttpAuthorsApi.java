@@ -53,9 +53,8 @@ public class HttpAuthorsApi implements AuthorsApi {
     public List<AuthorDto> apiV1AuthorsAuthorsBooksIdBookGet(
             Integer idBook
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Authors/authors/books/{idBook}"
+        HttpURLConnection connection = openConnection("/api/v1/Authors/authors/books/{idBook}"
                 .replace("{idBook}", encode(String.valueOf(idBook), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -66,8 +65,7 @@ public class HttpAuthorsApi implements AuthorsApi {
     @Override
     public List<AuthorDto> apiV1AuthorsGet(
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Authors");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/v1/Authors");
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -79,9 +77,8 @@ public class HttpAuthorsApi implements AuthorsApi {
     public void apiV1AuthorsIdDelete(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Authors/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/Authors/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("DELETE");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -92,9 +89,8 @@ public class HttpAuthorsApi implements AuthorsApi {
     public AuthorDto apiV1AuthorsIdGet(
             Integer id
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Authors/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/Authors/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -107,9 +103,8 @@ public class HttpAuthorsApi implements AuthorsApi {
             Integer id,
             AuthorDto authorDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Authors/{id}"
+        HttpURLConnection connection = openConnection("/api/v1/Authors/{id}"
                 .replace("{id}", encode(String.valueOf(id), UTF_8)));
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("PUT");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -124,8 +119,7 @@ public class HttpAuthorsApi implements AuthorsApi {
     public AuthorDto apiV1AuthorsPost(
             AuthorDto authorDto
     ) throws IOException {
-        URL url = new URL(baseUrl + "/api/v1/Authors");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        HttpURLConnection connection = openConnection("/api/v1/Authors");
         connection.setRequestMethod("POST");
         connection.setRequestProperty("Content-Type", "application/json");
         connection.setDoOutput(true);
@@ -134,6 +128,10 @@ public class HttpAuthorsApi implements AuthorsApi {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
         return jsonb.fromJson(connection.getInputStream(), AuthorDto.class);
+    }
+
+    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
     }
 
     private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {
