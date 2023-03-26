@@ -2,13 +2,20 @@
 [![Apache 2.0 License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.jhannes.openapi/openapi-generator-java-annotationfree/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.jhannes.openapi/openapi-generator-java-annotationfree)
 
-# OpenAPI Generator for TypeScript client library using Fetch API and API interfaces
+# OpenAPI Generator for Java with support for nested allOf-types and multiple inheritance with oneOf
 
-## Overview
+This generates creates Java classes without framework-specified annotations for implementing and using OpenAPI APIs in Java. It supports many of the more advanced features of the OpenAPI spec
 
-This is a boiler-plate project to generate your own project derived from an OpenAPI specification.
-Its goal is to get you started with the basic plumbing so you can put in your own logic.
-It won't work without your changes applied.
+## Features
+
+* Generates POJOs without reliance on framework specified annotations
+* Models are generated with convenient methods for checking missing required fields and read-only fields with values and to copy between objects
+* Implements type polymorphism with `oneOf`-types, even supporting multiple inheritance for classes that are included in multiple `oneOf`-types
+* Implements inheritance with `allOf`-types, including multiple levels of inheritance
+* Generates client code using HttpURLConnection for HTTP and JSONB for JSON deserialization
+* Supports optional, repeated and binary request parameters
+* Generates SampleData which can provide randomized model data, accepting a seed to generate the same data every time
+
 
 ## What's OpenAPI
 
@@ -50,7 +57,7 @@ Add to your `pom.xml`:
                     <dependency>
                         <groupId>io.github.jhannes.openapi</groupId>
                         <artifactId>openapi-generator-java-annotationfree</artifactId>
-                        <version>0.4.2</version>
+                        <version>0.5.0</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -136,3 +143,9 @@ public class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
     }
 }
 ```
+
+## Contribution
+
+Pull requests are welcome. In order to safely support changes, the project comes with a large set of OpenAPI specs for which snapshot tests are generated. If a change produces different output for one of the included specs the tests fail until the snapshots are updated.
+
+For an effective development process, see [FocusedExampleTest](https://github.com/jhannes/openapi-generator-java-annotationfree/blob/main/src/test/java/io/github/jhannes/openapi/javaannotationfree/FocusedExampleTest.java)

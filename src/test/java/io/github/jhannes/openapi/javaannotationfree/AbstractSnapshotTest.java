@@ -38,7 +38,7 @@ public class AbstractSnapshotTest {
                 .addAdditionalProperty("hideGenerationTimestamp", "true")
                 .addAdditionalProperty("generateSupportingFiles", "true")
                 .addAdditionalProperty("generateModelTests", "true")
-                .addAdditionalProperty("generateApis", "false")
+                .addAdditionalProperty("generateApis", "true")
                 .addAdditionalProperty("dateLibrary", "java8")
                 .setOutputDir(outputDir.toString());
     }
