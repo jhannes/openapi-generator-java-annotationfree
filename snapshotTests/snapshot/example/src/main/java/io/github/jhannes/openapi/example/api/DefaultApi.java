@@ -31,25 +31,25 @@ public interface DefaultApi {
     ) throws IOException;
     /**
      * @param petId  (path) (required)
-     * @param name Updated name of the pet (optional)
+     * @param name Updated name of the pet (required)
      * @param status Updated status of the pet (optional)
      */
     void addPetWithForm(
             UUID petId,
-            Optional<String> name,
+            String name,
             Optional<String> status
     ) throws IOException;
     /**
      * @param storeId  (path) (required)
-     * @param status  (query) (optional
+     * @param status  (query) (required)
+     * @param bornAfter  (query) (required)
      * @param tags  (query) (optional
-     * @param bornAfter  (query) (optional)
      * @return PetDto
      */
     PetDto listPets(
             UUID storeId,
-            Optional<List<String>> status,
-            Optional<List<String>> tags,
-            Optional<LocalDate> bornAfter
+            List<String> status,
+            LocalDate bornAfter,
+            Optional<List<String>> tags
     ) throws IOException;
 }

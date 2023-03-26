@@ -61,7 +61,22 @@ public class Http{{classname}} implements {{classname}} {
         {{#hasQueryParams}}
         List<String> queryParameters = new ArrayList<>();
         {{#queryParams}}
+        {{#required}}
+            {{#isContainer}}
+        {{baseName}}.forEach(p -> queryParameters.add("{{baseName}}=" + encode(String.valueOf(p), UTF_8)));
+            {{/isContainer}}
+            {{^isContainer}}
+        queryParameters.add("{{baseName}}=" + encode(String.valueOf({{baseName}}), UTF_8));
+          {{/isContainer}}
+        {{/required}}
+        {{^required}}
+            {{#isContainer}}
+        {{baseName}}.ifPresent(list -> list.forEach(p -> queryParameters.add("{{baseName}}=" + encode(String.valueOf(p), UTF_8))));
+            {{/isContainer}}
+            {{^isContainer}}
         {{baseName}}.ifPresent(p -> queryParameters.add("{{baseName}}=" + encode(String.valueOf(p), UTF_8)));
+            {{/isContainer}}
+        {{/required}}
         {{/queryParams}}
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
         {{/hasQueryParams}}
@@ -76,7 +91,12 @@ public class Http{{classname}} implements {{classname}} {
         connection.setDoOutput(true);
         List<String> formParameters = new ArrayList<>();
         {{#formParams}}
+        {{#required}}
+        formParameters.add("{{baseName}}=" + encode(String.valueOf({{baseName}}), UTF_8));
+        {{/required}}
+        {{^required}}
         {{baseName}}.ifPresent(p -> formParameters.add("{{baseName}}=" + encode(String.valueOf(p), UTF_8)));
+        {{/required}}
         {{/formParams}}
         connection.getOutputStream().write(String.join("&", formParameters).getBytes());
         {{/hasFormParams}}

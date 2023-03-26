@@ -98,7 +98,7 @@ public class HttpPetApi implements PetApi {
             Optional<List<String>> status
     ) throws IOException {
         List<String> queryParameters = new ArrayList<>();
-        status.ifPresent(p -> queryParameters.add("status=" + encode(String.valueOf(p), UTF_8)));
+        status.ifPresent(list -> list.forEach(p -> queryParameters.add("status=" + encode(String.valueOf(p), UTF_8))));
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
         HttpURLConnection connection = openConnection("/pet/findByStatus" + query);
         connection.setRequestMethod("GET");
@@ -114,7 +114,7 @@ public class HttpPetApi implements PetApi {
             Optional<List<String>> tags
     ) throws IOException {
         List<String> queryParameters = new ArrayList<>();
-        tags.ifPresent(p -> queryParameters.add("tags=" + encode(String.valueOf(p), UTF_8)));
+        tags.ifPresent(list -> list.forEach(p -> queryParameters.add("tags=" + encode(String.valueOf(p), UTF_8))));
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
         HttpURLConnection connection = openConnection("/pet/findByTags" + query);
         connection.setRequestMethod("GET");

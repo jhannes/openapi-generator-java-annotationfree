@@ -70,7 +70,7 @@ public class HttpDefaultApi implements DefaultApi {
     @Override
     public void addPetWithForm(
             UUID petId,
-            Optional<String> name,
+            String name,
             Optional<String> status
     ) throws IOException {
         HttpURLConnection connection = openConnection("/pets/{petId}"
@@ -79,7 +79,7 @@ public class HttpDefaultApi implements DefaultApi {
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         connection.setDoOutput(true);
         List<String> formParameters = new ArrayList<>();
-        name.ifPresent(p -> formParameters.add("name=" + encode(String.valueOf(p), UTF_8)));
+        formParameters.add("name=" + encode(String.valueOf(name), UTF_8));
         status.ifPresent(p -> formParameters.add("status=" + encode(String.valueOf(p), UTF_8)));
         connection.getOutputStream().write(String.join("&", formParameters).getBytes());
         if (connection.getResponseCode() >= 300) {
@@ -90,14 +90,14 @@ public class HttpDefaultApi implements DefaultApi {
     @Override
     public PetDto listPets(
             UUID storeId,
-            Optional<List<String>> status,
-            Optional<List<String>> tags,
-            Optional<LocalDate> bornAfter
+            List<String> status,
+            LocalDate bornAfter,
+            Optional<List<String>> tags
     ) throws IOException {
         List<String> queryParameters = new ArrayList<>();
-        status.ifPresent(p -> queryParameters.add("status=" + encode(String.valueOf(p), UTF_8)));
-        tags.ifPresent(p -> queryParameters.add("tags=" + encode(String.valueOf(p), UTF_8)));
-        bornAfter.ifPresent(p -> queryParameters.add("bornAfter=" + encode(String.valueOf(p), UTF_8)));
+        status.forEach(p -> queryParameters.add("status=" + encode(String.valueOf(p), UTF_8)));
+        tags.ifPresent(list -> list.forEach(p -> queryParameters.add("tags=" + encode(String.valueOf(p), UTF_8))));
+        queryParameters.add("bornAfter=" + encode(String.valueOf(bornAfter), UTF_8));
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
         HttpURLConnection connection = openConnection("/{storeId}/pets"
                 .replace("{storeId}", encode(String.valueOf(storeId), UTF_8)) + query);

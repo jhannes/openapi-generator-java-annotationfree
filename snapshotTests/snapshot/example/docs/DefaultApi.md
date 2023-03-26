@@ -112,7 +112,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **petId** | **UUID**|  |
- **name** | **String**| Updated name of the pet | [optional]
+ **name** | **String**| Updated name of the pet |
  **status** | **String**| Updated status of the pet | [optional]
 
 ### Return type
@@ -136,7 +136,7 @@ No authorization required
 
 ## listPets
 
-> PetDto listPets(storeId, status, tags, bornAfter)
+> PetDto listPets(storeId, status, bornAfter, tags)
 
 
 
@@ -156,10 +156,10 @@ public class Example {
 
         UUID storeId = UUID.randomUUID(); // UUID | 
         List<String> status = Arrays.asList(); // List<String> | 
-        List<String> tags = Arrays.asList(); // List<String> | 
         LocalDate bornAfter = LocalDate.now(); // LocalDate | 
+        List<String> tags = Arrays.asList(); // List<String> | 
         try {
-            PetDto result = apiInstance.listPets(storeId, status, tags, bornAfter);
+            PetDto result = apiInstance.listPets(storeId, status, bornAfter, tags);
             System.out.println(result);
         } catch (HttpClientException e) {
             System.err.println("Exception when calling DefaultApi#listPets");
@@ -177,9 +177,9 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **storeId** | **UUID**|  |
- **status** | [**List&lt;String&gt;**](String.md)|  | [optional]
+ **status** | [**List&lt;String&gt;**](String.md)|  |
+ **bornAfter** | **LocalDate**|  |
  **tags** | [**List&lt;String&gt;**](String.md)|  | [optional]
- **bornAfter** | **LocalDate**|  | [optional]
 
 ### Return type
 

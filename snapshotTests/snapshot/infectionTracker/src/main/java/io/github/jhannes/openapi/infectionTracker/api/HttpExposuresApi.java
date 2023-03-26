@@ -57,7 +57,7 @@ public class HttpExposuresApi implements ExposuresApi {
             Optional<Integer> maxCount
     ) throws IOException {
         List<String> queryParameters = new ArrayList<>();
-        exposureDate.ifPresent(p -> queryParameters.add("exposureDate=" + encode(String.valueOf(p), UTF_8)));
+        exposureDate.ifPresent(list -> list.forEach(p -> queryParameters.add("exposureDate=" + encode(String.valueOf(p), UTF_8))));
         maxCount.ifPresent(p -> queryParameters.add("maxCount=" + encode(String.valueOf(p), UTF_8)));
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
         HttpURLConnection connection = openConnection("/api/exposures" + query);

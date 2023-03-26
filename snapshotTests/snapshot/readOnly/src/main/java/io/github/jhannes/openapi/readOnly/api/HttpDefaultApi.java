@@ -95,8 +95,8 @@ public class HttpDefaultApi implements DefaultApi {
             Optional<LocalDate> bornAfter
     ) throws IOException {
         List<String> queryParameters = new ArrayList<>();
-        status.ifPresent(p -> queryParameters.add("status=" + encode(String.valueOf(p), UTF_8)));
-        tags.ifPresent(p -> queryParameters.add("tags=" + encode(String.valueOf(p), UTF_8)));
+        status.ifPresent(list -> list.forEach(p -> queryParameters.add("status=" + encode(String.valueOf(p), UTF_8))));
+        tags.ifPresent(list -> list.forEach(p -> queryParameters.add("tags=" + encode(String.valueOf(p), UTF_8))));
         bornAfter.ifPresent(p -> queryParameters.add("bornAfter=" + encode(String.valueOf(p), UTF_8)));
         String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
         HttpURLConnection connection = openConnection("/{storeId}/pets"

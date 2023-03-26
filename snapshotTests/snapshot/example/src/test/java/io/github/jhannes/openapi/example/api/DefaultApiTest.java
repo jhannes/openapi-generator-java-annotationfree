@@ -57,9 +57,9 @@ public class DefaultApiTest {
     public void listPetsTest() throws IOException {
         //UUID storeId = null;
         //List<String> status = null;
-        //List<String> tags = null;
         //LocalDate bornAfter = null;
-        //PetDto response = api.listPets(storeId, status, tags, bornAfter);
+        //List<String> tags = null;
+        //PetDto response = api.listPets(storeId, status, bornAfter, tags);
         // TODO: test validations
     }
 
