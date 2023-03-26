@@ -12,45 +12,39 @@
 
 package io.github.jhannes.openapi.openid_configuration.api;
 
-import io.github.jhannes.openapi.openid_configuration.ApiException;
 import io.github.jhannes.openapi.openid_configuration.model.DiscoveryDocumentDto;
 import io.github.jhannes.openapi.openid_configuration.model.JwksDocumentDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.openid_configuration.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for DefaultApi
  */
 public class DefaultApiTest {
 
-    private final DefaultApi api = new DefaultApi();
+    private final DefaultApi api = new HttpDefaultApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public DefaultApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void wellKnownKeysGetTest() throws ApiException {
-        //
+    public void wellKnownKeysGetTest() throws IOException {
         //JwksDocumentDto response = api.wellKnownKeysGet();
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void wellKnownOpenidConfigurationGetTest() throws ApiException {
-        //
+    public void wellKnownOpenidConfigurationGetTest() throws IOException {
         //DiscoveryDocumentDto response = api.wellKnownOpenidConfigurationGet();
-
         // TODO: test validations
     }
+
 }

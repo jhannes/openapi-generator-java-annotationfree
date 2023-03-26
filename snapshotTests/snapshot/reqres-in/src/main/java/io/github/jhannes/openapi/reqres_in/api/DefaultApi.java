@@ -11,8 +11,6 @@
 
 package io.github.jhannes.openapi.reqres_in.api;
 
-import io.github.jhannes.openapi.reqres_in.model.*;
-
 import io.github.jhannes.openapi.reqres_in.model.LoginPost200ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.LoginPost400ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.LoginPostRequestDto;
@@ -21,18 +19,10 @@ import io.github.jhannes.openapi.reqres_in.model.UsersGet200ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.UsersIdDelete200Response1Dto;
 import io.github.jhannes.openapi.reqres_in.model.UsersIdDelete200ResponseDto;
 
-import org.actioncontroller.actions.*;
-import org.actioncontroller.values.*;
-import org.actioncontroller.values.json.JsonBody;
-
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public interface DefaultApi {
     /**
@@ -40,75 +30,61 @@ public interface DefaultApi {
      * @param loginPostRequestDto  (required)
      * @return LoginPost200ResponseDto
      */
-    @POST("/login")
-    @JsonBody
-    public LoginPost200ResponseDto loginPost(
-            @JsonBody LoginPostRequestDto loginPostRequestDto
+    LoginPost200ResponseDto loginPost(
+            LoginPostRequestDto loginPostRequestDto
     ) throws IOException;
     /**
      * Ends a session
      */
-    @POST("/logout")
-    public void logoutPost(
+    void logoutPost(
     ) throws IOException;
     /**
      * Creates a user
      * @param loginPostRequestDto  (required)
      * @return RegisterPost200ResponseDto
      */
-    @POST("/register")
-    @JsonBody
-    public RegisterPost200ResponseDto registerPost(
-            @JsonBody LoginPostRequestDto loginPostRequestDto
+    RegisterPost200ResponseDto registerPost(
+            LoginPostRequestDto loginPostRequestDto
     ) throws IOException;
     /**
      * Fetches a user list
-     * @param page  (optional)
-     * @param perPage  (optional)
+     * @param page  (query) (optional)
+     * @param perPage  (query) (optional)
      * @return UsersGet200ResponseDto
      */
-    @GET("/users")
-    @JsonBody
-    public UsersGet200ResponseDto usersGet(
-            @RequestParam("page") Optional<Integer> page,
-            @RequestParam("per_page") Optional<Integer> per_page
+    UsersGet200ResponseDto usersGet(
+            Optional<Integer> page,
+            Optional<Integer> per_page
     ) throws IOException;
     /**
      * Deletes a user
-     * @param id  (required)
+     * @param id  (path) (required)
      */
-    @DELETE("/users/{id}")
-    public void usersIdDelete(
-            @PathParam("id") Integer id
+    void usersIdDelete(
+            Integer id
     ) throws IOException;
     /**
      * Fetches a user
-     * @param id  (required)
+     * @param id  (path) (required)
      * @return UsersIdDelete200ResponseDto
      */
-    @GET("/users/{id}")
-    @JsonBody
-    public UsersIdDelete200ResponseDto usersIdGet(
-            @PathParam("id") Integer id
+    UsersIdDelete200ResponseDto usersIdGet(
+            Integer id
     ) throws IOException;
     /**
      * Updates a user
-     * @param id  (required)
+     * @param id  (path) (required)
      * @return UsersIdDelete200Response1Dto
      */
-    @PATCH("/users/{id}")
-    @JsonBody
-    public UsersIdDelete200Response1Dto usersIdPatch(
-            @PathParam("id") Integer id
+    UsersIdDelete200Response1Dto usersIdPatch(
+            Integer id
     ) throws IOException;
     /**
      * Updates a user
-     * @param id  (required)
+     * @param id  (path) (required)
      * @return UsersIdDelete200Response1Dto
      */
-    @PUT("/users/{id}")
-    @JsonBody
-    public UsersIdDelete200Response1Dto usersIdPut(
-            @PathParam("id") Integer id
+    UsersIdDelete200Response1Dto usersIdPut(
+            Integer id
     ) throws IOException;
 }

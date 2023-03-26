@@ -11,45 +11,29 @@
 
 package io.github.jhannes.openapi.geojson.api;
 
-import io.github.jhannes.openapi.geojson.model.*;
-
 import io.github.jhannes.openapi.geojson.model.GeometryCollectionDto;
 import io.github.jhannes.openapi.geojson.model.GeometryDto;
 import io.github.jhannes.openapi.geojson.model.PolygonDto;
 
-import org.actioncontroller.actions.*;
-import org.actioncontroller.values.*;
-import org.actioncontroller.values.json.JsonBody;
-
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public interface DefaultApi {
     /**
      * @return GeometryDto
      */
-    @GET("/geometry")
-    @JsonBody
-    public GeometryDto getGeometry(
+    GeometryDto getGeometry(
     ) throws IOException;
     /**
      * @return GeometryCollectionDto
      */
-    @GET("/collection")
-    @JsonBody
-    public GeometryCollectionDto getLocation(
+    GeometryCollectionDto getLocation(
     ) throws IOException;
     /**
      * @return PolygonDto
      */
-    @GET("/polygon")
-    @JsonBody
-    public PolygonDto getPolygon(
+    PolygonDto getPolygon(
     ) throws IOException;
 }

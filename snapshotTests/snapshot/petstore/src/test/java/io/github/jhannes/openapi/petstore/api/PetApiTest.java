@@ -12,174 +12,95 @@
 
 package io.github.jhannes.openapi.petstore.api;
 
-import io.github.jhannes.openapi.petstore.ApiException;
 import java.io.File;
 import io.github.jhannes.openapi.petstore.model.PetDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.petstore.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for PetApi
  */
 public class PetApiTest {
 
-    private final PetApi api = new PetApi();
+    private final PetApi api = new HttpPetApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * Add a new pet to the store
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public PetApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void addPetTest() throws ApiException {
-        //
+    public void addPetTest() throws IOException {
         //PetDto petDto = null;
-        //
         //api.addPet(petDto);
-
         // TODO: test validations
     }
-    /**
-     * Deletes a pet
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void deletePetTest() throws ApiException {
-        //
+    public void deletePetTest() throws IOException {
         //Long petId = null;
-        //
         //String apiKey = null;
-        //
         //api.deletePet(petId, apiKey);
-
         // TODO: test validations
     }
-    /**
-     * downloads image
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void downloadImageTest() throws ApiException {
-        //
+    public void downloadImageTest() throws IOException {
         //Long petId = null;
-        //
         //File response = api.downloadImage(petId);
-
         // TODO: test validations
     }
-    /**
-     * Finds Pets by status
-     *
-     * Multiple status values can be provided with comma separated strings
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void findPetsByStatusTest() throws ApiException {
-        //
+    public void findPetsByStatusTest() throws IOException {
         //List<String> status = null;
-        //
         //List<PetDto> response = api.findPetsByStatus(status);
-
         // TODO: test validations
     }
-    /**
-     * Finds Pets by tags
-     *
-     * Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void findPetsByTagsTest() throws ApiException {
-        //
+    public void findPetsByTagsTest() throws IOException {
         //List<String> tags = null;
-        //
         //List<PetDto> response = api.findPetsByTags(tags);
-
         // TODO: test validations
     }
-    /**
-     * Find pet by ID
-     *
-     * Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void getPetByIdTest() throws ApiException {
-        //
+    public void getPetByIdTest() throws IOException {
         //Long petId = null;
-        //
         //PetDto response = api.getPetById(petId);
-
         // TODO: test validations
     }
-    /**
-     * Update an existing pet
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void updatePetTest() throws ApiException {
-        //
+    public void updatePetTest() throws IOException {
         //PetDto petDto = null;
-        //
         //api.updatePet(petDto);
-
         // TODO: test validations
     }
-    /**
-     * Updates a pet in the store with form data
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void updatePetWithFormTest() throws ApiException {
-        //
+    public void updatePetWithFormTest() throws IOException {
         //String petId = null;
-        //
         //String name = null;
-        //
         //String status = null;
-        //
         //api.updatePetWithForm(petId, name, status);
-
         // TODO: test validations
     }
-    /**
-     * uploads an image
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void uploadFileTest() throws ApiException {
-        //
+    public void uploadFileTest() throws IOException {
         //Long petId = null;
-        //
         //String additionalMetadata = null;
-        //
         //File _file = null;
-        //
         //api.uploadFile(petId, additionalMetadata, _file);
-
         // TODO: test validations
     }
+
 }

@@ -12,89 +12,55 @@
 
 package io.github.jhannes.openapi.petstore.api;
 
-import io.github.jhannes.openapi.petstore.ApiException;
 import java.time.OffsetDateTime;
 import io.github.jhannes.openapi.petstore.model.OrderDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.petstore.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for StoreApi
  */
 public class StoreApiTest {
 
-    private final StoreApi api = new StoreApi();
+    private final StoreApi api = new HttpStoreApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * Delete purchase order by ID
-     *
-     * For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public StoreApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void deleteOrderTest() throws ApiException {
-        //
+    public void deleteOrderTest() throws IOException {
         //String orderId = null;
-        //
         //api.deleteOrder(orderId);
-
         // TODO: test validations
     }
-    /**
-     * Returns pet inventories by status
-     *
-     * Returns a map of status codes to quantities
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void getInventoryTest() throws ApiException {
-        //
+    public void getInventoryTest() throws IOException {
         //OffsetDateTime effectiveDateTime = null;
-        //
         //Map<String, Integer> response = api.getInventory(effectiveDateTime);
-
         // TODO: test validations
     }
-    /**
-     * Find purchase order by ID
-     *
-     * For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generated exceptions
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void getOrderByIdTest() throws ApiException {
-        //
+    public void getOrderByIdTest() throws IOException {
         //String orderId = null;
-        //
         //OrderDto response = api.getOrderById(orderId);
-
         // TODO: test validations
     }
-    /**
-     * Place an order for a pet
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void placeOrderTest() throws ApiException {
-        //
+    public void placeOrderTest() throws IOException {
         //OrderDto orderDto = null;
-        //
         //OrderDto response = api.placeOrder(orderDto);
-
         // TODO: test validations
     }
+
 }

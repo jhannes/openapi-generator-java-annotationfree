@@ -12,75 +12,55 @@
 
 package io.github.jhannes.openapi.readOnly.api;
 
-import io.github.jhannes.openapi.readOnly.ApiException;
 import java.time.LocalDate;
 import io.github.jhannes.openapi.readOnly.model.PetDto;
 import java.util.UUID;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.readOnly.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for DefaultApi
  */
 public class DefaultApiTest {
 
-    private final DefaultApi api = new DefaultApi();
+    private final DefaultApi api = new HttpDefaultApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public DefaultApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void addPetTest() throws ApiException {
-        //
+    public void addPetTest() throws IOException {
         //UUID storeId = null;
-        //
         //PetDto petDto = null;
-        //
         //api.addPet(storeId, petDto);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void addPetWithFormTest() throws ApiException {
-        //
+    public void addPetWithFormTest() throws IOException {
         //UUID petId = null;
-        //
         //String name = null;
-        //
         //String status = null;
-        //
         //api.addPetWithForm(petId, name, status);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void listPetsTest() throws ApiException {
-        //
+    public void listPetsTest() throws IOException {
         //UUID storeId = null;
-        //
         //List<String> status = null;
-        //
         //List<String> tags = null;
-        //
         //LocalDate bornAfter = null;
-        //
         //PetDto response = api.listPets(storeId, status, tags, bornAfter);
-
         // TODO: test validations
     }
+
 }

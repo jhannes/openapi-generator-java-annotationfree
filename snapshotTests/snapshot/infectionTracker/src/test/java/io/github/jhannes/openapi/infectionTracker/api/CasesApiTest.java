@@ -12,77 +12,57 @@
 
 package io.github.jhannes.openapi.infectionTracker.api;
 
-import io.github.jhannes.openapi.infectionTracker.ApiException;
 import io.github.jhannes.openapi.infectionTracker.model.ExposureDto;
 import io.github.jhannes.openapi.infectionTracker.model.InfectionDto;
 import io.github.jhannes.openapi.infectionTracker.model.InfectionInformationDto;
 import java.util.UUID;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.infectionTracker.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for CasesApi
  */
 public class CasesApiTest {
 
-    private final CasesApi api = new CasesApi();
+    private final CasesApi api = new HttpCasesApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public CasesApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void getCaseDetailsTest() throws ApiException {
-        //
+    public void getCaseDetailsTest() throws IOException {
         //UUID caseId = null;
-        //
         //InfectionDto response = api.getCaseDetails(caseId);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void listCasesTest() throws ApiException {
-        //
+    public void listCasesTest() throws IOException {
         //InfectionDto response = api.listCases();
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void newCaseTest() throws ApiException {
-        //
+    public void newCaseTest() throws IOException {
         //InfectionInformationDto infectionInformationDto = null;
-        //
         //api.newCase(infectionInformationDto);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void registerExposureTest() throws ApiException {
-        //
+    public void registerExposureTest() throws IOException {
         //UUID caseId = null;
-        //
         //ExposureDto exposureDto = null;
-        //
         //api.registerExposure(caseId, exposureDto);
-
         // TODO: test validations
     }
+
 }

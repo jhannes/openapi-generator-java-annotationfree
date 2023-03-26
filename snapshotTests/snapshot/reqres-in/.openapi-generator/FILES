@@ -11,6 +11,7 @@ docs/UsersGet200ResponseDto.md
 docs/UsersIdDelete200Response1Dto.md
 docs/UsersIdDelete200ResponseDto.md
 src/main/java/io/github/jhannes/openapi/reqres_in/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/reqres_in/api/HttpDefaultApi.java
 src/main/java/io/github/jhannes/openapi/reqres_in/model/LoginPost200ResponseDto.java
 src/main/java/io/github/jhannes/openapi/reqres_in/model/LoginPost400ResponseDto.java
 src/main/java/io/github/jhannes/openapi/reqres_in/model/LoginPostRequestDto.java

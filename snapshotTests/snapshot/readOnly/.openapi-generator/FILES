@@ -5,6 +5,7 @@ docs/DefaultApi.md
 docs/PetDto.md
 docs/UserDto.md
 src/main/java/io/github/jhannes/openapi/readOnly/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/readOnly/api/HttpDefaultApi.java
 src/main/java/io/github/jhannes/openapi/readOnly/model/CommentDto.java
 src/main/java/io/github/jhannes/openapi/readOnly/model/PetDto.java
 src/main/java/io/github/jhannes/openapi/readOnly/model/SampleModelData.java

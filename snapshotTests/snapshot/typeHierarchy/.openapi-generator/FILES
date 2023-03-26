@@ -7,6 +7,7 @@ docs/DogDto.md
 docs/PetBaseDto.md
 docs/PetDto.md
 src/main/java/io/github/jhannes/openapi/typeHierarchy/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/typeHierarchy/api/HttpDefaultApi.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/model/AddressDto.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/model/CatDto.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/model/DogDto.java

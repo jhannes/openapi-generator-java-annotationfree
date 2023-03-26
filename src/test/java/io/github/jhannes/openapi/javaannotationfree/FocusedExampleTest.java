@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
  */
 public class FocusedExampleTest {
 
-    public static final Path SPEC = AbstractSnapshotTest.SNAPSHOT_ROOT.resolve("input/fakerestapi.link");
+    public static final Path SPEC = AbstractSnapshotTest.SNAPSHOT_ROOT.resolve("input/petstore.yaml");
 
     @TestFactory
     DynamicNode snapshotShouldCompile() {

@@ -5,6 +5,7 @@ docs/PetDto.md
 docs/PetLocationsDto.md
 docs/PetStoreDto.md
 src/main/java/io/github/jhannes/openapi/bigExample/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/bigExample/api/HttpDefaultApi.java
 src/main/java/io/github/jhannes/openapi/bigExample/model/PetDto.java
 src/main/java/io/github/jhannes/openapi/bigExample/model/PetLocationsDto.java
 src/main/java/io/github/jhannes/openapi/bigExample/model/PetStoreDto.java

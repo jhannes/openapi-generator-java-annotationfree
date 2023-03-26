@@ -12,46 +12,39 @@
 
 package io.github.jhannes.openapi.infectionTracker.api;
 
-import io.github.jhannes.openapi.infectionTracker.ApiException;
 import io.github.jhannes.openapi.infectionTracker.model.CaseWorkerDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.infectionTracker.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for CaseWorkersApi
  */
 public class CaseWorkersApiTest {
 
-    private final CaseWorkersApi api = new CaseWorkersApi();
+    private final CaseWorkersApi api = new HttpCaseWorkersApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public CaseWorkersApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void listCaseWorkersTest() throws ApiException {
-        //
+    public void listCaseWorkersTest() throws IOException {
         //CaseWorkerDto response = api.listCaseWorkers();
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void registerCaseWorkerTest() throws ApiException {
-        //
+    public void registerCaseWorkerTest() throws IOException {
         //CaseWorkerDto caseWorkerDto = null;
-        //
         //api.registerCaseWorker(caseWorkerDto);
-
         // TODO: test validations
     }
+
 }

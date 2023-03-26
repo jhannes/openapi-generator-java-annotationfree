@@ -12,54 +12,44 @@
 
 package io.github.jhannes.openapi.infectionTracker.api;
 
-import io.github.jhannes.openapi.infectionTracker.ApiException;
 import io.github.jhannes.openapi.infectionTracker.model.ExposureDto;
 import java.time.LocalDate;
 import java.util.UUID;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.infectionTracker.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for ExposuresApi
  */
 public class ExposuresApiTest {
 
-    private final ExposuresApi api = new ExposuresApi();
+    private final ExposuresApi api = new HttpExposuresApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public ExposuresApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void listExposuresTest() throws ApiException {
-        //
+    public void listExposuresTest() throws IOException {
         //List<LocalDate> exposureDate = null;
-        //
         //Integer maxCount = null;
-        //
         //ExposureDto response = api.listExposures(exposureDate, maxCount);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void updateExposureTest() throws ApiException {
-        //
+    public void updateExposureTest() throws IOException {
         //UUID exposureId = null;
-        //
         //ExposureDto exposureDto = null;
-        //
         //api.updateExposure(exposureId, exposureDto);
-
         // TODO: test validations
     }
+
 }

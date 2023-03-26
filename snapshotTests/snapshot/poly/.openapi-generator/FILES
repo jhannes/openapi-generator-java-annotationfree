@@ -12,6 +12,7 @@ docs/OrganizationDto.md
 docs/PersonDto.md
 docs/UpdateErrorDto.md
 src/main/java/io/github/jhannes/openapi/poly/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/poly/api/HttpDefaultApi.java
 src/main/java/io/github/jhannes/openapi/poly/model/AnyPartyDto.java
 src/main/java/io/github/jhannes/openapi/poly/model/CreationErrorDto.java
 src/main/java/io/github/jhannes/openapi/poly/model/DuplicateIdentifierErrorDto.java

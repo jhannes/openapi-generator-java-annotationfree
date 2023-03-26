@@ -15,6 +15,7 @@ docs/WebSocketCommandDto.md
 docs/WebSocketMessageDto.md
 docs/WebSocketRequestDto.md
 src/main/java/io/github/jhannes/openapi/websockets/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/websockets/api/HttpDefaultApi.java
 src/main/java/io/github/jhannes/openapi/websockets/model/ChangeTrackedDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/ChangeTrackedInterface.java
 src/main/java/io/github/jhannes/openapi/websockets/model/CreatePersonCommandDto.java

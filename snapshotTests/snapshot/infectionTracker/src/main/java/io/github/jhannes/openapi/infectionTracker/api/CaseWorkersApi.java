@@ -11,36 +11,23 @@
 
 package io.github.jhannes.openapi.infectionTracker.api;
 
-import io.github.jhannes.openapi.infectionTracker.model.*;
-
 import io.github.jhannes.openapi.infectionTracker.model.CaseWorkerDto;
 
-import org.actioncontroller.actions.*;
-import org.actioncontroller.values.*;
-import org.actioncontroller.values.json.JsonBody;
-
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public interface CaseWorkersApi {
     /**
      * @return CaseWorkerDto
      */
-    @GET("/api/caseWorkers")
-    @JsonBody
-    public CaseWorkerDto listCaseWorkers(
+    CaseWorkerDto listCaseWorkers(
     ) throws IOException;
     /**
      * @param caseWorkerDto  (optional)
      */
-    @POST("/api/caseWorkers")
-    public void registerCaseWorker(
-            @JsonBody CaseWorkerDto caseWorkerDto
+    void registerCaseWorker(
+            CaseWorkerDto caseWorkerDto
     ) throws IOException;
 }

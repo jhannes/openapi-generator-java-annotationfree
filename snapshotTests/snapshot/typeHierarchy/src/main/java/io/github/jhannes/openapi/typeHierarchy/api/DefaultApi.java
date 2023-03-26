@@ -11,29 +11,18 @@
 
 package io.github.jhannes.openapi.typeHierarchy.api;
 
-import io.github.jhannes.openapi.typeHierarchy.model.*;
-
 import io.github.jhannes.openapi.typeHierarchy.model.PetDto;
 
-import org.actioncontroller.actions.*;
-import org.actioncontroller.values.*;
-import org.actioncontroller.values.json.JsonBody;
-
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public interface DefaultApi {
     /**
      * @param petDto  (optional)
      */
-    @POST("/pets")
-    public void petsPost(
-            @JsonBody PetDto petDto
+    void petsPost(
+            PetDto petDto
     ) throws IOException;
 }

@@ -8,6 +8,7 @@ docs/JwtHeaderDto.md
 docs/JwtPayloadDto.md
 docs/TokenResponseDto.md
 src/main/java/io/github/jhannes/openapi/openid_configuration/api/DefaultApi.java
+src/main/java/io/github/jhannes/openapi/openid_configuration/api/HttpDefaultApi.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/DiscoveryDocumentDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/JwksDocumentDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/JwksKeyDto.java

@@ -8,6 +8,9 @@ docs/StoreApi.md
 docs/TagDto.md
 docs/UserApi.md
 docs/UserDto.md
+src/main/java/io/github/jhannes/openapi/petstore/api/HttpPetApi.java
+src/main/java/io/github/jhannes/openapi/petstore/api/HttpStoreApi.java
+src/main/java/io/github/jhannes/openapi/petstore/api/HttpUserApi.java
 src/main/java/io/github/jhannes/openapi/petstore/api/PetApi.java
 src/main/java/io/github/jhannes/openapi/petstore/api/StoreApi.java
 src/main/java/io/github/jhannes/openapi/petstore/api/UserApi.java

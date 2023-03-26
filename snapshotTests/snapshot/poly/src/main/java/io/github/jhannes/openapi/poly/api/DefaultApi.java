@@ -12,56 +12,41 @@
 
 package io.github.jhannes.openapi.poly.api;
 
-import io.github.jhannes.openapi.poly.model.*;
-
 import io.github.jhannes.openapi.poly.model.AnyPartyDto;
 import io.github.jhannes.openapi.poly.model.CreationErrorDto;
 import io.github.jhannes.openapi.poly.model.LogMessageDto;
 import java.util.UUID;
 import io.github.jhannes.openapi.poly.model.UpdateErrorDto;
 
-import org.actioncontroller.actions.*;
-import org.actioncontroller.values.*;
-import org.actioncontroller.values.json.JsonBody;
-
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public interface DefaultApi {
     /**
      * @param logMessageDto  (optional)
      */
-    @POST("/log")
-    public void logMessage(
-            @JsonBody LogMessageDto logMessageDto
+    void logMessage(
+            LogMessageDto logMessageDto
     ) throws IOException;
     /**
      * @return AnyPartyDto
      */
-    @GET("/parties")
-    @JsonBody
-    public AnyPartyDto partiesGet(
+    AnyPartyDto partiesGet(
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      * @param anyPartyDto  (optional)
      */
-    @PUT("/parties/{id}")
-    public void partiesIdPut(
-            @PathParam("id") UUID id,
-            @JsonBody AnyPartyDto anyPartyDto
+    void partiesIdPut(
+            UUID id,
+            AnyPartyDto anyPartyDto
     ) throws IOException;
     /**
      * @param anyPartyDto  (optional)
      */
-    @POST("/parties")
-    public void partiesPost(
-            @JsonBody AnyPartyDto anyPartyDto
+    void partiesPost(
+            AnyPartyDto anyPartyDto
     ) throws IOException;
 }

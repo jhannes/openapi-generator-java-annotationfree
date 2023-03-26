@@ -11,44 +11,31 @@
 
 package io.github.jhannes.openapi.infectionTracker.api;
 
-import io.github.jhannes.openapi.infectionTracker.model.*;
-
 import io.github.jhannes.openapi.infectionTracker.model.ExposureDto;
 import java.time.LocalDate;
 import java.util.UUID;
 
-import org.actioncontroller.actions.*;
-import org.actioncontroller.values.*;
-import org.actioncontroller.values.json.JsonBody;
-
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 public interface ExposuresApi {
     /**
-     * @param exposureDate  (optional
-     * @param maxCount  (optional)
+     * @param exposureDate  (query) (optional
+     * @param maxCount  (query) (optional)
      * @return ExposureDto
      */
-    @GET("/api/exposures")
-    @JsonBody
-    public ExposureDto listExposures(
-            @RequestParam("exposureDate") Optional<List<LocalDate>> exposureDate,
-            @RequestParam("maxCount") Optional<Integer> maxCount
+    ExposureDto listExposures(
+            Optional<List<LocalDate>> exposureDate,
+            Optional<Integer> maxCount
     ) throws IOException;
     /**
-     * @param exposureId  (required)
+     * @param exposureId  (path) (required)
      * @param exposureDto  (optional)
      */
-    @PUT("/api/exposures/{exposureId}")
-    public void updateExposure(
-            @PathParam("exposureId") UUID exposureId,
-            @JsonBody ExposureDto exposureDto
+    void updateExposure(
+            UUID exposureId,
+            ExposureDto exposureDto
     ) throws IOException;
 }

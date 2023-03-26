@@ -12,57 +12,46 @@
 
 package io.github.jhannes.openapi.geojson.api;
 
-import io.github.jhannes.openapi.geojson.ApiException;
 import io.github.jhannes.openapi.geojson.model.GeometryCollectionDto;
 import io.github.jhannes.openapi.geojson.model.GeometryDto;
 import io.github.jhannes.openapi.geojson.model.PolygonDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.geojson.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for DefaultApi
  */
 public class DefaultApiTest {
 
-    private final DefaultApi api = new DefaultApi();
+    private final DefaultApi api = new HttpDefaultApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public DefaultApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void getGeometryTest() throws ApiException {
-        //
+    public void getGeometryTest() throws IOException {
         //GeometryDto response = api.getGeometry();
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void getLocationTest() throws ApiException {
-        //
+    public void getLocationTest() throws IOException {
         //GeometryCollectionDto response = api.getLocation();
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void getPolygonTest() throws ApiException {
-        //
+    public void getPolygonTest() throws IOException {
         //PolygonDto response = api.getPolygon();
-
         // TODO: test validations
     }
+
 }

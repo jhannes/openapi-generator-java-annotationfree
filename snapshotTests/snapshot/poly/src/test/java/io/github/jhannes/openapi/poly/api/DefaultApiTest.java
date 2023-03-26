@@ -13,78 +13,58 @@
 
 package io.github.jhannes.openapi.poly.api;
 
-import io.github.jhannes.openapi.poly.ApiException;
 import io.github.jhannes.openapi.poly.model.AnyPartyDto;
 import io.github.jhannes.openapi.poly.model.CreationErrorDto;
 import io.github.jhannes.openapi.poly.model.LogMessageDto;
 import java.util.UUID;
 import io.github.jhannes.openapi.poly.model.UpdateErrorDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.poly.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for DefaultApi
  */
 public class DefaultApiTest {
 
-    private final DefaultApi api = new DefaultApi();
+    private final DefaultApi api = new HttpDefaultApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public DefaultApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void logMessageTest() throws ApiException {
-        //
+    public void logMessageTest() throws IOException {
         //LogMessageDto logMessageDto = null;
-        //
         //api.logMessage(logMessageDto);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void partiesGetTest() throws ApiException {
-        //
+    public void partiesGetTest() throws IOException {
         //AnyPartyDto response = api.partiesGet();
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void partiesIdPutTest() throws ApiException {
-        //
+    public void partiesIdPutTest() throws IOException {
         //UUID id = null;
-        //
         //AnyPartyDto anyPartyDto = null;
-        //
         //api.partiesIdPut(id, anyPartyDto);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void partiesPostTest() throws ApiException {
-        //
+    public void partiesPostTest() throws IOException {
         //AnyPartyDto anyPartyDto = null;
-        //
         //api.partiesPost(anyPartyDto);
-
         // TODO: test validations
     }
+
 }

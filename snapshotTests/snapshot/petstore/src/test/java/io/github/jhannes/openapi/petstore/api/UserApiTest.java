@@ -12,150 +12,83 @@
 
 package io.github.jhannes.openapi.petstore.api;
 
-import io.github.jhannes.openapi.petstore.ApiException;
 import io.github.jhannes.openapi.petstore.model.UserDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.petstore.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for UserApi
  */
 public class UserApiTest {
 
-    private final UserApi api = new UserApi();
+    private final UserApi api = new HttpUserApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * Create user
-     *
-     * This can only be done by the logged in user.
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public UserApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void createUserTest() throws ApiException {
-        //
+    public void createUserTest() throws IOException {
         //UserDto userDto = null;
-        //
         //api.createUser(userDto);
-
         // TODO: test validations
     }
-    /**
-     * Creates list of users with given input array
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void createUsersWithArrayInputTest() throws ApiException {
-        //
+    public void createUsersWithArrayInputTest() throws IOException {
         //List<UserDto> userDto = null;
-        //
         //api.createUsersWithArrayInput(userDto);
-
         // TODO: test validations
     }
-    /**
-     * Creates list of users with given input array
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void createUsersWithListInputTest() throws ApiException {
-        //
+    public void createUsersWithListInputTest() throws IOException {
         //List<UserDto> userDto = null;
-        //
         //api.createUsersWithListInput(userDto);
-
         // TODO: test validations
     }
-    /**
-     * Delete user
-     *
-     * This can only be done by the logged in user.
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void deleteUserTest() throws ApiException {
-        //
+    public void deleteUserTest() throws IOException {
         //String username = null;
-        //
         //api.deleteUser(username);
-
         // TODO: test validations
     }
-    /**
-     * Get user by user name
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void getUserByNameTest() throws ApiException {
-        //
+    public void getUserByNameTest() throws IOException {
         //String username = null;
-        //
         //UserDto response = api.getUserByName(username);
-
         // TODO: test validations
     }
-    /**
-     * Logs user into the system
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void loginUserTest() throws ApiException {
-        //
+    public void loginUserTest() throws IOException {
         //String username = null;
-        //
         //String password = null;
-        //
         //String response = api.loginUser(username, password);
-
         // TODO: test validations
     }
-    /**
-     * Logs out current logged in user session
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void logoutUserTest() throws ApiException {
-        //
+    public void logoutUserTest() throws IOException {
         //api.logoutUser();
-
         // TODO: test validations
     }
-    /**
-     * Updated user
-     *
-     * This can only be done by the logged in user.
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void updateUserTest() throws ApiException {
-        //
+    public void updateUserTest() throws IOException {
         //String username = null;
-        //
         //UserDto userDto = null;
-        //
         //api.updateUser(username, userDto);
-
         // TODO: test validations
     }
+
 }

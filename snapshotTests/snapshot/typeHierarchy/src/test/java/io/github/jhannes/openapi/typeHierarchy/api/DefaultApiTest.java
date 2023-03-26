@@ -12,35 +12,33 @@
 
 package io.github.jhannes.openapi.typeHierarchy.api;
 
-import io.github.jhannes.openapi.typeHierarchy.ApiException;
 import io.github.jhannes.openapi.typeHierarchy.model.PetDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.typeHierarchy.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for DefaultApi
  */
 public class DefaultApiTest {
 
-    private final DefaultApi api = new DefaultApi();
+    private final DefaultApi api = new HttpDefaultApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public DefaultApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void petsPostTest() throws ApiException {
-        //
+    public void petsPostTest() throws IOException {
         //PetDto petDto = null;
-        //
         //api.petsPost(petDto);
-
         // TODO: test validations
     }
+
 }

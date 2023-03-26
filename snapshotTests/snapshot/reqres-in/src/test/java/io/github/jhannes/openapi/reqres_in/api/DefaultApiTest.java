@@ -12,7 +12,6 @@
 
 package io.github.jhannes.openapi.reqres_in.api;
 
-import io.github.jhannes.openapi.reqres_in.ApiException;
 import io.github.jhannes.openapi.reqres_in.model.LoginPost200ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.LoginPost400ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.LoginPostRequestDto;
@@ -20,140 +19,81 @@ import io.github.jhannes.openapi.reqres_in.model.RegisterPost200ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.UsersGet200ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.UsersIdDelete200Response1Dto;
 import io.github.jhannes.openapi.reqres_in.model.UsersIdDelete200ResponseDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.reqres_in.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for DefaultApi
  */
 public class DefaultApiTest {
 
-    private final DefaultApi api = new DefaultApi();
+    private final DefaultApi api = new HttpDefaultApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * Creates a session
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public DefaultApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void loginPostTest() throws ApiException {
-        //
+    public void loginPostTest() throws IOException {
         //LoginPostRequestDto loginPostRequestDto = null;
-        //
         //LoginPost200ResponseDto response = api.loginPost(loginPostRequestDto);
-
         // TODO: test validations
     }
-    /**
-     * Ends a session
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void logoutPostTest() throws ApiException {
-        //
+    public void logoutPostTest() throws IOException {
         //api.logoutPost();
-
         // TODO: test validations
     }
-    /**
-     * Creates a user
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void registerPostTest() throws ApiException {
-        //
+    public void registerPostTest() throws IOException {
         //LoginPostRequestDto loginPostRequestDto = null;
-        //
         //RegisterPost200ResponseDto response = api.registerPost(loginPostRequestDto);
-
         // TODO: test validations
     }
-    /**
-     * Fetches a user list
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void usersGetTest() throws ApiException {
-        //
+    public void usersGetTest() throws IOException {
         //Integer page = null;
-        //
         //Integer perPage = null;
-        //
         //UsersGet200ResponseDto response = api.usersGet(page, perPage);
-
         // TODO: test validations
     }
-    /**
-     * Deletes a user
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void usersIdDeleteTest() throws ApiException {
-        //
+    public void usersIdDeleteTest() throws IOException {
         //Integer id = null;
-        //
         //api.usersIdDelete(id);
-
         // TODO: test validations
     }
-    /**
-     * Fetches a user
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void usersIdGetTest() throws ApiException {
-        //
+    public void usersIdGetTest() throws IOException {
         //Integer id = null;
-        //
         //UsersIdDelete200ResponseDto response = api.usersIdGet(id);
-
         // TODO: test validations
     }
-    /**
-     * Updates a user
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void usersIdPatchTest() throws ApiException {
-        //
+    public void usersIdPatchTest() throws IOException {
         //Integer id = null;
-        //
         //UsersIdDelete200Response1Dto response = api.usersIdPatch(id);
-
         // TODO: test validations
     }
-    /**
-     * Updates a user
-     *
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void usersIdPutTest() throws ApiException {
-        //
+    public void usersIdPutTest() throws IOException {
         //Integer id = null;
-        //
         //UsersIdDelete200Response1Dto response = api.usersIdPut(id);
-
         // TODO: test validations
     }
+
 }

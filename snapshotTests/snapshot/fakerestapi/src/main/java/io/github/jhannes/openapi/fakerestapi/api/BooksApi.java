@@ -14,7 +14,9 @@ package io.github.jhannes.openapi.fakerestapi.api;
 import io.github.jhannes.openapi.fakerestapi.model.BookDto;
 
 import java.io.IOException;
+import java.util.Map;
 import java.util.List;
+import java.util.Optional;
 
 public interface BooksApi {
     /**
