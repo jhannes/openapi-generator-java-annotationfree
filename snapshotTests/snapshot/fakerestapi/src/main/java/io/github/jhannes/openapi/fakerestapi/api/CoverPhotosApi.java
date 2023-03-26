@@ -11,74 +11,51 @@
 
 package io.github.jhannes.openapi.fakerestapi.api;
 
-import io.github.jhannes.openapi.fakerestapi.model.*;
-
 import io.github.jhannes.openapi.fakerestapi.model.CoverPhotoDto;
 
-import org.actioncontroller.actions.*;
-import org.actioncontroller.values.*;
-import org.actioncontroller.values.json.JsonBody;
-
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Consumer;
 
 public interface CoverPhotosApi {
     /**
-     * @param idBook  (required)
+     * @param idBook  (path) (required)
      * @return List&lt;CoverPhotoDto&gt;
      */
-    @GET("/api/v1/CoverPhotos/books/covers/{idBook}")
-    @JsonBody
-    public List<CoverPhotoDto> apiV1CoverPhotosBooksCoversIdBookGet(
-            @PathParam("idBook") Integer idBook
+    List<CoverPhotoDto> apiV1CoverPhotosBooksCoversIdBookGet(
+            Integer idBook
     ) throws IOException;
     /**
      * @return List&lt;CoverPhotoDto&gt;
      */
-    @GET("/api/v1/CoverPhotos")
-    @JsonBody
-    public List<CoverPhotoDto> apiV1CoverPhotosGet(
+    List<CoverPhotoDto> apiV1CoverPhotosGet(
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      */
-    @DELETE("/api/v1/CoverPhotos/{id}")
-    public void apiV1CoverPhotosIdDelete(
-            @PathParam("id") Integer id
+    void apiV1CoverPhotosIdDelete(
+            Integer id
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      * @return CoverPhotoDto
      */
-    @GET("/api/v1/CoverPhotos/{id}")
-    @JsonBody
-    public CoverPhotoDto apiV1CoverPhotosIdGet(
-            @PathParam("id") Integer id
+    CoverPhotoDto apiV1CoverPhotosIdGet(
+            Integer id
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      * @param coverPhotoDto  (optional)
      * @return CoverPhotoDto
      */
-    @PUT("/api/v1/CoverPhotos/{id}")
-    @JsonBody
-    public CoverPhotoDto apiV1CoverPhotosIdPut(
-            @PathParam("id") Integer id,
-            @JsonBody CoverPhotoDto coverPhotoDto
+    CoverPhotoDto apiV1CoverPhotosIdPut(
+            Integer id,
+            CoverPhotoDto coverPhotoDto
     ) throws IOException;
     /**
      * @param coverPhotoDto  (optional)
      * @return CoverPhotoDto
      */
-    @POST("/api/v1/CoverPhotos")
-    @JsonBody
-    public CoverPhotoDto apiV1CoverPhotosPost(
-            @JsonBody CoverPhotoDto coverPhotoDto
+    CoverPhotoDto apiV1CoverPhotosPost(
+            CoverPhotoDto coverPhotoDto
     ) throws IOException;
 }

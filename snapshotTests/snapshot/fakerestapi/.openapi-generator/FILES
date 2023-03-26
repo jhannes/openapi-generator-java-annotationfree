@@ -14,6 +14,11 @@ src/main/java/io/github/jhannes/openapi/fakerestapi/api/ActivitiesApi.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/api/AuthorsApi.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/api/BooksApi.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/api/CoverPhotosApi.java
+src/main/java/io/github/jhannes/openapi/fakerestapi/api/HttpActivitiesApi.java
+src/main/java/io/github/jhannes/openapi/fakerestapi/api/HttpAuthorsApi.java
+src/main/java/io/github/jhannes/openapi/fakerestapi/api/HttpBooksApi.java
+src/main/java/io/github/jhannes/openapi/fakerestapi/api/HttpCoverPhotosApi.java
+src/main/java/io/github/jhannes/openapi/fakerestapi/api/HttpUsersApi.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/api/UsersApi.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/model/ActivityDto.java
 src/main/java/io/github/jhannes/openapi/fakerestapi/model/AuthorDto.java

@@ -12,87 +12,61 @@
 
 package io.github.jhannes.openapi.fakerestapi.api;
 
-import io.github.jhannes.openapi.fakerestapi.ApiException;
 import io.github.jhannes.openapi.fakerestapi.model.UserDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.fakerestapi.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for UsersApi
  */
 public class UsersApiTest {
 
-    private final UsersApi api = new UsersApi();
+    private final UsersApi api = new HttpUsersApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public UsersApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void apiV1UsersGetTest() throws ApiException {
-        //
+    public void apiV1UsersGetTest() throws IOException {
         //List<UserDto> response = api.apiV1UsersGet();
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1UsersIdDeleteTest() throws ApiException {
-        //
+    public void apiV1UsersIdDeleteTest() throws IOException {
         //Integer id = null;
-        //
         //api.apiV1UsersIdDelete(id);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1UsersIdGetTest() throws ApiException {
-        //
+    public void apiV1UsersIdGetTest() throws IOException {
         //Integer id = null;
-        //
         //api.apiV1UsersIdGet(id);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1UsersIdPutTest() throws ApiException {
-        //
+    public void apiV1UsersIdPutTest() throws IOException {
         //Integer id = null;
-        //
         //UserDto userDto = null;
-        //
         //api.apiV1UsersIdPut(id, userDto);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1UsersPostTest() throws ApiException {
-        //
+    public void apiV1UsersPostTest() throws IOException {
         //UserDto userDto = null;
-        //
         //api.apiV1UsersPost(userDto);
-
         // TODO: test validations
     }
+
 }

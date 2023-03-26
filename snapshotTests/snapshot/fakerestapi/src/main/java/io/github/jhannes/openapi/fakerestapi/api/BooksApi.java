@@ -11,61 +11,42 @@
 
 package io.github.jhannes.openapi.fakerestapi.api;
 
-import io.github.jhannes.openapi.fakerestapi.model.*;
-
 import io.github.jhannes.openapi.fakerestapi.model.BookDto;
 
-import org.actioncontroller.actions.*;
-import org.actioncontroller.values.*;
-import org.actioncontroller.values.json.JsonBody;
-
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Consumer;
 
 public interface BooksApi {
     /**
      * @return List&lt;BookDto&gt;
      */
-    @GET("/api/v1/Books")
-    @JsonBody
-    public List<BookDto> apiV1BooksGet(
+    List<BookDto> apiV1BooksGet(
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      */
-    @DELETE("/api/v1/Books/{id}")
-    public void apiV1BooksIdDelete(
-            @PathParam("id") Integer id
+    void apiV1BooksIdDelete(
+            Integer id
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      * @return BookDto
      */
-    @GET("/api/v1/Books/{id}")
-    @JsonBody
-    public BookDto apiV1BooksIdGet(
-            @PathParam("id") Integer id
+    BookDto apiV1BooksIdGet(
+            Integer id
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      * @param bookDto  (optional)
      */
-    @PUT("/api/v1/Books/{id}")
-    public void apiV1BooksIdPut(
-            @PathParam("id") Integer id,
-            @JsonBody BookDto bookDto
+    void apiV1BooksIdPut(
+            Integer id,
+            BookDto bookDto
     ) throws IOException;
     /**
      * @param bookDto  (optional)
      */
-    @POST("/api/v1/Books")
-    public void apiV1BooksPost(
-            @JsonBody BookDto bookDto
+    void apiV1BooksPost(
+            BookDto bookDto
     ) throws IOException;
 }

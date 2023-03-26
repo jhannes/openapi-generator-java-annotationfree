@@ -28,7 +28,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
  */
 public class ActivitiesApiTest {
 
-    private final ActivitiesApi api = new ActivitiesHttpApi();
+    private final ActivitiesApi api = new HttpActivitiesApi();
     private final SampleModelData sampleData = new SampleModelData(-1);
 
     public ActivitiesApiTest() throws MalformedURLException {
@@ -36,28 +36,37 @@ public class ActivitiesApiTest {
 
     @Test
     public void apiV1ActivitiesGetTest() throws IOException {
-        List<ActivityDto> response = api.apiV1ActivitiesGet();
+        //List<ActivityDto> response = api.apiV1ActivitiesGet();
+        // TODO: test validations
     }
 
     @Test
     public void apiV1ActivitiesIdDeleteTest() throws IOException {
-        api.apiV1ActivitiesIdDelete(1);
+        //Integer id = null;
+        //api.apiV1ActivitiesIdDelete(id);
+        // TODO: test validations
     }
 
     @Test
     public void apiV1ActivitiesIdGetTest() throws IOException {
-        ActivityDto response = api.apiV1ActivitiesIdGet(1);
+        //Integer id = null;
+        //List<ActivityDto> response = api.apiV1ActivitiesIdGet(id);
+        // TODO: test validations
     }
 
     @Test
     public void apiV1ActivitiesIdPutTest() throws IOException {
-        ActivityDto activityDto = sampleData.sampleActivityDto();
-        ActivityDto response = api.apiV1ActivitiesIdPut(1, activityDto);
+        //Integer id = null;
+        //ActivityDto activityDto = null;
+        //ActivityDto response = api.apiV1ActivitiesIdPut(id, activityDto);
+        // TODO: test validations
     }
 
     @Test
     public void apiV1ActivitiesPostTest() throws IOException {
-        ActivityDto activityDto = sampleData.sampleActivityDto();
-        ActivityDto response = api.apiV1ActivitiesPost(activityDto);
+        //ActivityDto activityDto = null;
+        //ActivityDto response = api.apiV1ActivitiesPost(activityDto);
+        // TODO: test validations
     }
+
 }

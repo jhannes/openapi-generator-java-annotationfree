@@ -12,87 +12,61 @@
 
 package io.github.jhannes.openapi.fakerestapi.api;
 
-import io.github.jhannes.openapi.fakerestapi.ApiException;
 import io.github.jhannes.openapi.fakerestapi.model.BookDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.fakerestapi.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for BooksApi
  */
 public class BooksApiTest {
 
-    private final BooksApi api = new BooksApi();
+    private final BooksApi api = new HttpBooksApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public BooksApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void apiV1BooksGetTest() throws ApiException {
-        //
+    public void apiV1BooksGetTest() throws IOException {
         //List<BookDto> response = api.apiV1BooksGet();
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1BooksIdDeleteTest() throws ApiException {
-        //
+    public void apiV1BooksIdDeleteTest() throws IOException {
         //Integer id = null;
-        //
         //api.apiV1BooksIdDelete(id);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1BooksIdGetTest() throws ApiException {
-        //
+    public void apiV1BooksIdGetTest() throws IOException {
         //Integer id = null;
-        //
         //BookDto response = api.apiV1BooksIdGet(id);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1BooksIdPutTest() throws ApiException {
-        //
+    public void apiV1BooksIdPutTest() throws IOException {
         //Integer id = null;
-        //
         //BookDto bookDto = null;
-        //
         //api.apiV1BooksIdPut(id, bookDto);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1BooksPostTest() throws ApiException {
-        //
+    public void apiV1BooksPostTest() throws IOException {
         //BookDto bookDto = null;
-        //
         //api.apiV1BooksPost(bookDto);
-
         // TODO: test validations
     }
+
 }

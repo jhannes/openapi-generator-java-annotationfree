@@ -17,14 +17,38 @@ import java.io.IOException;
 import java.util.List;
 
 public interface ActivitiesApi {
-    List<ActivityDto> apiV1ActivitiesGet() throws IOException;
-
-    void apiV1ActivitiesIdDelete(Integer id) throws IOException;
-
-    ActivityDto apiV1ActivitiesIdGet(Integer id) throws IOException;
-
-    ActivityDto apiV1ActivitiesIdPut(Integer id, ActivityDto activityDto) throws IOException;
-
-    public ActivityDto apiV1ActivitiesPost(ActivityDto activityDto) throws IOException;
+    /**
+     * @return List&lt;ActivityDto&gt;
+     */
+    List<ActivityDto> apiV1ActivitiesGet(
+    ) throws IOException;
+    /**
+     * @param id  (path) (required)
+     */
+    void apiV1ActivitiesIdDelete(
+            Integer id
+    ) throws IOException;
+    /**
+     * @param id  (path) (required)
+     * @return List&lt;ActivityDto&gt;
+     */
+    List<ActivityDto> apiV1ActivitiesIdGet(
+            Integer id
+    ) throws IOException;
+    /**
+     * @param id  (path) (required)
+     * @param activityDto  (optional)
+     * @return ActivityDto
+     */
+    ActivityDto apiV1ActivitiesIdPut(
+            Integer id,
+            ActivityDto activityDto
+    ) throws IOException;
+    /**
+     * @param activityDto  (optional)
+     * @return ActivityDto
+     */
+    ActivityDto apiV1ActivitiesPost(
+            ActivityDto activityDto
+    ) throws IOException;
 }
-

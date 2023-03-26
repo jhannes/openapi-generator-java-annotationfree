@@ -12,100 +12,68 @@
 
 package io.github.jhannes.openapi.fakerestapi.api;
 
-import io.github.jhannes.openapi.fakerestapi.ApiException;
 import io.github.jhannes.openapi.fakerestapi.model.CoverPhotoDto;
-import org.junit.Test;
-import org.junit.Ignore;
-import org.junit.Assert;
+import io.github.jhannes.openapi.fakerestapi.model.SampleModelData;
+import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
-import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
  * API tests for CoverPhotosApi
  */
 public class CoverPhotosApiTest {
 
-    private final CoverPhotosApi api = new CoverPhotosApi();
+    private final CoverPhotosApi api = new HttpCoverPhotosApi();
+    private final SampleModelData sampleData = new SampleModelData(-1);
 
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+    public CoverPhotosApiTest() throws MalformedURLException {
+    }
+
     @Test
-    public void apiV1CoverPhotosBooksCoversIdBookGetTest() throws ApiException {
-        //
+    public void apiV1CoverPhotosBooksCoversIdBookGetTest() throws IOException {
         //Integer idBook = null;
-        //
         //List<CoverPhotoDto> response = api.apiV1CoverPhotosBooksCoversIdBookGet(idBook);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1CoverPhotosGetTest() throws ApiException {
-        //
+    public void apiV1CoverPhotosGetTest() throws IOException {
         //List<CoverPhotoDto> response = api.apiV1CoverPhotosGet();
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1CoverPhotosIdDeleteTest() throws ApiException {
-        //
+    public void apiV1CoverPhotosIdDeleteTest() throws IOException {
         //Integer id = null;
-        //
         //api.apiV1CoverPhotosIdDelete(id);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1CoverPhotosIdGetTest() throws ApiException {
-        //
+    public void apiV1CoverPhotosIdGetTest() throws IOException {
         //Integer id = null;
-        //
         //CoverPhotoDto response = api.apiV1CoverPhotosIdGet(id);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1CoverPhotosIdPutTest() throws ApiException {
-        //
+    public void apiV1CoverPhotosIdPutTest() throws IOException {
         //Integer id = null;
-        //
         //CoverPhotoDto coverPhotoDto = null;
-        //
         //CoverPhotoDto response = api.apiV1CoverPhotosIdPut(id, coverPhotoDto);
-
         // TODO: test validations
     }
-    /**
-     * @throws ApiException
-     *          if the Api call fails
-     */
+
     @Test
-    public void apiV1CoverPhotosPostTest() throws ApiException {
-        //
+    public void apiV1CoverPhotosPostTest() throws IOException {
         //CoverPhotoDto coverPhotoDto = null;
-        //
         //CoverPhotoDto response = api.apiV1CoverPhotosPost(coverPhotoDto);
-
         // TODO: test validations
     }
+
 }

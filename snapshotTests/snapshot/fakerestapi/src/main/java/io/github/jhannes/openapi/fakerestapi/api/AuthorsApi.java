@@ -11,74 +11,51 @@
 
 package io.github.jhannes.openapi.fakerestapi.api;
 
-import io.github.jhannes.openapi.fakerestapi.model.*;
-
 import io.github.jhannes.openapi.fakerestapi.model.AuthorDto;
 
-import org.actioncontroller.actions.*;
-import org.actioncontroller.values.*;
-import org.actioncontroller.values.json.JsonBody;
-
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Consumer;
 
 public interface AuthorsApi {
     /**
-     * @param idBook  (required)
+     * @param idBook  (path) (required)
      * @return List&lt;AuthorDto&gt;
      */
-    @GET("/api/v1/Authors/authors/books/{idBook}")
-    @JsonBody
-    public List<AuthorDto> apiV1AuthorsAuthorsBooksIdBookGet(
-            @PathParam("idBook") Integer idBook
+    List<AuthorDto> apiV1AuthorsAuthorsBooksIdBookGet(
+            Integer idBook
     ) throws IOException;
     /**
      * @return List&lt;AuthorDto&gt;
      */
-    @GET("/api/v1/Authors")
-    @JsonBody
-    public List<AuthorDto> apiV1AuthorsGet(
+    List<AuthorDto> apiV1AuthorsGet(
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      */
-    @DELETE("/api/v1/Authors/{id}")
-    public void apiV1AuthorsIdDelete(
-            @PathParam("id") Integer id
+    void apiV1AuthorsIdDelete(
+            Integer id
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      * @return AuthorDto
      */
-    @GET("/api/v1/Authors/{id}")
-    @JsonBody
-    public AuthorDto apiV1AuthorsIdGet(
-            @PathParam("id") Integer id
+    AuthorDto apiV1AuthorsIdGet(
+            Integer id
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      * @param authorDto  (optional)
      * @return AuthorDto
      */
-    @PUT("/api/v1/Authors/{id}")
-    @JsonBody
-    public AuthorDto apiV1AuthorsIdPut(
-            @PathParam("id") Integer id,
-            @JsonBody AuthorDto authorDto
+    AuthorDto apiV1AuthorsIdPut(
+            Integer id,
+            AuthorDto authorDto
     ) throws IOException;
     /**
      * @param authorDto  (optional)
      * @return AuthorDto
      */
-    @POST("/api/v1/Authors")
-    @JsonBody
-    public AuthorDto apiV1AuthorsPost(
-            @JsonBody AuthorDto authorDto
+    AuthorDto apiV1AuthorsPost(
+            AuthorDto authorDto
     ) throws IOException;
 }

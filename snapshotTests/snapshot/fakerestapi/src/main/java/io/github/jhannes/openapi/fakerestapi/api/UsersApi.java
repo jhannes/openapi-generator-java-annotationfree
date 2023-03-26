@@ -11,59 +11,41 @@
 
 package io.github.jhannes.openapi.fakerestapi.api;
 
-import io.github.jhannes.openapi.fakerestapi.model.*;
-
 import io.github.jhannes.openapi.fakerestapi.model.UserDto;
 
-import org.actioncontroller.actions.*;
-import org.actioncontroller.values.*;
-import org.actioncontroller.values.json.JsonBody;
-
 import java.io.IOException;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Consumer;
 
 public interface UsersApi {
     /**
      * @return List&lt;UserDto&gt;
      */
-    @GET("/api/v1/Users")
-    @JsonBody
-    public List<UserDto> apiV1UsersGet(
+    List<UserDto> apiV1UsersGet(
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      */
-    @DELETE("/api/v1/Users/{id}")
-    public void apiV1UsersIdDelete(
-            @PathParam("id") Integer id
+    void apiV1UsersIdDelete(
+            Integer id
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      */
-    @GET("/api/v1/Users/{id}")
-    public void apiV1UsersIdGet(
-            @PathParam("id") Integer id
+    void apiV1UsersIdGet(
+            Integer id
     ) throws IOException;
     /**
-     * @param id  (required)
+     * @param id  (path) (required)
      * @param userDto  (optional)
      */
-    @PUT("/api/v1/Users/{id}")
-    public void apiV1UsersIdPut(
-            @PathParam("id") Integer id,
-            @JsonBody UserDto userDto
+    void apiV1UsersIdPut(
+            Integer id,
+            UserDto userDto
     ) throws IOException;
     /**
      * @param userDto  (optional)
      */
-    @POST("/api/v1/Users")
-    public void apiV1UsersPost(
-            @JsonBody UserDto userDto
+    void apiV1UsersPost(
+            UserDto userDto
     ) throws IOException;
 }
