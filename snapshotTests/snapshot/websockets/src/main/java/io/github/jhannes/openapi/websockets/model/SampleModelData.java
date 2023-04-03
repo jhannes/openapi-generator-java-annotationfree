@@ -51,9 +51,9 @@ public class SampleModelData {
     public ChangeTrackedDto sampleChangeTrackedDto() {
         return new ChangeTrackedDto()
             .createdAt(sampleOffsetDateTime("createdAt"))
-            .createdBy(randomString("createdBy", "username"))
+            .createdBy(sampleString("createdBy", "username"))
             .updatedAt(sampleOffsetDateTime("updatedAt"))
-            .updatedBy(randomString("updatedBy", "username"));
+            .updatedBy(sampleString("updatedBy", "username"));
     }
 
     public List<ChangeTrackedDto> sampleListOfChangeTrackedDto(String propertyName) {
@@ -71,7 +71,7 @@ public class SampleModelData {
     public CreatePersonCommandDto sampleCreatePersonCommandDto() {
         return new CreatePersonCommandDto()
             .command("createPerson")
-            .id(randomUUID("id"))
+            .id(sampleUUID("id"))
             .person(samplePersonDto("person"));
     }
 
@@ -89,12 +89,12 @@ public class SampleModelData {
 
     public PersonDto samplePersonDto() {
         return new PersonDto()
-            .id(randomUUID("id"))
-            .type(randomString("type"))
-            .givenName(randomString("givenName"))
-            .familyName(randomString("familyName"))
-            .email(randomString("email", "email"))
-            .phone(randomString("phone", "phone"))
+            .id(sampleUUID("id"))
+            .type(sampleString("type"))
+            .givenName(sampleString("givenName"))
+            .familyName(sampleString("familyName"))
+            .email(sampleString("email", "email"))
+            .phone(sampleString("phone", "phone"))
             .birthDate(sampleLocalDate("birthDate"));
     }
 
@@ -113,15 +113,15 @@ public class SampleModelData {
     public PersonSnapshotDto samplePersonSnapshotDto() {
         return new PersonSnapshotDto()
             .createdAt(sampleOffsetDateTime("createdAt"))
-            .createdBy(randomString("createdBy", "username"))
+            .createdBy(sampleString("createdBy", "username"))
             .updatedAt(sampleOffsetDateTime("updatedAt"))
-            .updatedBy(randomString("updatedBy", "username"))
-            .id(randomUUID("id"))
-            .type(randomString("type"))
-            .givenName(randomString("givenName"))
-            .familyName(randomString("familyName"))
-            .email(randomString("email", "email"))
-            .phone(randomString("phone", "phone"))
+            .updatedBy(sampleString("updatedBy", "username"))
+            .id(sampleUUID("id"))
+            .type(sampleString("type"))
+            .givenName(sampleString("givenName"))
+            .familyName(sampleString("familyName"))
+            .email(sampleString("email", "email"))
+            .phone(sampleString("phone", "phone"))
             .birthDate(sampleLocalDate("birthDate"));
     }
 
@@ -139,11 +139,11 @@ public class SampleModelData {
 
     public StringSnapshotDto sampleStringSnapshotDto() {
         return new StringSnapshotDto()
-            .name(randomString("name"))
+            .name(sampleString("name"))
             .createdAt(sampleOffsetDateTime("createdAt"))
-            .createdBy(randomString("createdBy", "username"))
+            .createdBy(sampleString("createdBy", "username"))
             .updatedAt(sampleOffsetDateTime("updatedAt"))
-            .updatedBy(randomString("updatedBy", "username"));
+            .updatedBy(sampleString("updatedBy", "username"));
     }
 
     public List<StringSnapshotDto> sampleListOfStringSnapshotDto(String propertyName) {
@@ -195,7 +195,7 @@ public class SampleModelData {
     public UpdatePersonCommandDto sampleUpdatePersonCommandDto() {
         return new UpdatePersonCommandDto()
             .command("updatePerson")
-            .id(randomUUID("id"))
+            .id(sampleUUID("id"))
             .person(samplePersonDto("person"));
     }
 
@@ -306,50 +306,50 @@ public class SampleModelData {
         Map<String, T> result = new HashMap<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {
-            result.put(randomString(propertyName), supplier.get());
+            result.put(sampleString(propertyName), supplier.get());
         }
         return result;
     }
 
-    public String randomString(String propertyName, String dataFormat) {
+    public String sampleString(String propertyName, String dataFormat) {
         if (dataFormatFactories.containsKey(dataFormat)) {
             return dataFormatFactories.get(dataFormat).get();
         }
         if (propertyNameFactories.containsKey(propertyName)) {
             return propertyNameFactories.get(propertyName).get();
         }
-        return "str" + randomUUID(propertyName);
+        return "str" + sampleUUID(propertyName);
     }
 
-    public String randomString(String propertyName) {
-        return randomString(propertyName, null);
+    public String sampleString(String propertyName) {
+        return sampleString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName) {
+    public UUID sampleUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public Long randomLong(String propertyName) {
+    public Long sampleLong(String propertyName) {
         return random.nextLong() % 10000L;
     }
 
-    public Integer randomInteger(String propertyName) {
+    public Integer sampleInteger(String propertyName) {
         return random.nextInt(10000);
     }
 
-    public Double randomDouble(String propertyName) {
+    public Double sampleDouble(String propertyName) {
         return random.nextDouble() * 10000.0;
     }
 
-    public Boolean randomBoolean(String propertyName) {
+    public Boolean sampleBoolean(String propertyName) {
         return random.nextBoolean();
     }
 
-    public Object randomObject(String propertyName) {
+    public Object sampleObject(String propertyName) {
         Map<String, String> result = new HashMap<>();
-        result.put(randomString(propertyName + ".key"), randomString(propertyName + ".value"));
+        result.put(sampleString(propertyName + ".key"), sampleString(propertyName + ".value"));
         return result;
     }
 
@@ -385,7 +385,7 @@ public class SampleModelData {
         return sampleZonedDateTime(propertyName).toInstant();
     }
 
-    public URI randomURI(String propertyName) {
+    public URI sampleURI(String propertyName) {
         return asURI("https://" + randomDomainName());
     }
 

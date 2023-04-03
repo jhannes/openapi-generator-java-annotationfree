@@ -50,7 +50,7 @@ public class SampleModelData {
     public PetDto samplePetDto() {
         return new PetDto()
             .petType(samplePetTypeDto("petType"))
-            .name(randomString("name"))
+            .name(sampleString("name"))
             .birthDate(sampleLocalDate("birthDate"));
     }
 
@@ -118,50 +118,50 @@ public class SampleModelData {
         Map<String, T> result = new HashMap<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {
-            result.put(randomString(propertyName), supplier.get());
+            result.put(sampleString(propertyName), supplier.get());
         }
         return result;
     }
 
-    public String randomString(String propertyName, String dataFormat) {
+    public String sampleString(String propertyName, String dataFormat) {
         if (dataFormatFactories.containsKey(dataFormat)) {
             return dataFormatFactories.get(dataFormat).get();
         }
         if (propertyNameFactories.containsKey(propertyName)) {
             return propertyNameFactories.get(propertyName).get();
         }
-        return "str" + randomUUID(propertyName);
+        return "str" + sampleUUID(propertyName);
     }
 
-    public String randomString(String propertyName) {
-        return randomString(propertyName, null);
+    public String sampleString(String propertyName) {
+        return sampleString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName) {
+    public UUID sampleUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public Long randomLong(String propertyName) {
+    public Long sampleLong(String propertyName) {
         return random.nextLong() % 10000L;
     }
 
-    public Integer randomInteger(String propertyName) {
+    public Integer sampleInteger(String propertyName) {
         return random.nextInt(10000);
     }
 
-    public Double randomDouble(String propertyName) {
+    public Double sampleDouble(String propertyName) {
         return random.nextDouble() * 10000.0;
     }
 
-    public Boolean randomBoolean(String propertyName) {
+    public Boolean sampleBoolean(String propertyName) {
         return random.nextBoolean();
     }
 
-    public Object randomObject(String propertyName) {
+    public Object sampleObject(String propertyName) {
         Map<String, String> result = new HashMap<>();
-        result.put(randomString(propertyName + ".key"), randomString(propertyName + ".value"));
+        result.put(sampleString(propertyName + ".key"), sampleString(propertyName + ".value"));
         return result;
     }
 
@@ -197,7 +197,7 @@ public class SampleModelData {
         return sampleZonedDateTime(propertyName).toInstant();
     }
 
-    public URI randomURI(String propertyName) {
+    public URI sampleURI(String propertyName) {
         return asURI("https://" + randomDomainName());
     }
 

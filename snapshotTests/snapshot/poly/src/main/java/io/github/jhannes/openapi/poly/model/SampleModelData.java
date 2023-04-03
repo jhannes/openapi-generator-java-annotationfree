@@ -92,9 +92,9 @@ public class SampleModelData {
 
     public DuplicateIdentifierErrorDto sampleDuplicateIdentifierErrorDto() {
         return new DuplicateIdentifierErrorDto()
-            .code(randomString("code"))
-            .identifierValue(randomString("identifierValue"))
-            .entityType(randomString("entityType"));
+            .code(sampleString("code"))
+            .identifierValue(sampleString("identifierValue"))
+            .entityType(sampleString("entityType"));
     }
 
     public List<DuplicateIdentifierErrorDto> sampleListOfDuplicateIdentifierErrorDto(String propertyName) {
@@ -111,8 +111,8 @@ public class SampleModelData {
 
     public GeneralErrorDto sampleGeneralErrorDto() {
         return new GeneralErrorDto()
-            .code(randomString("code"))
-            .description(randomString("description"));
+            .code(sampleString("code"))
+            .description(sampleString("description"));
     }
 
     public List<GeneralErrorDto> sampleListOfGeneralErrorDto(String propertyName) {
@@ -129,9 +129,9 @@ public class SampleModelData {
 
     public IllegalEmailAddressErrorDto sampleIllegalEmailAddressErrorDto() {
         return new IllegalEmailAddressErrorDto()
-            .code(randomString("code"))
-            .inputEmailAddress(randomString("inputEmailAddress"))
-            .validDomains(sampleList(() -> randomString("validDomains"), "validDomains"));
+            .code(sampleString("code"))
+            .inputEmailAddress(sampleString("inputEmailAddress"))
+            .validDomains(sampleList(() -> sampleString("validDomains"), "validDomains"));
     }
 
     public List<IllegalEmailAddressErrorDto> sampleListOfIllegalEmailAddressErrorDto(String propertyName) {
@@ -148,8 +148,8 @@ public class SampleModelData {
 
     public LogMessageDto sampleLogMessageDto() {
         return new LogMessageDto()
-            .message(randomString("message"))
-            .error(randomObject("error"));
+            .message(sampleString("message"))
+            .error(sampleObject("error"));
     }
 
     public List<LogMessageDto> sampleListOfLogMessageDto(String propertyName) {
@@ -166,9 +166,9 @@ public class SampleModelData {
 
     public NotFoundErrorDto sampleNotFoundErrorDto() {
         return new NotFoundErrorDto()
-            .code(randomString("code"))
-            .identifierValue(randomString("identifierValue"))
-            .entityType(randomString("entityType"));
+            .code(sampleString("code"))
+            .identifierValue(sampleString("identifierValue"))
+            .entityType(sampleString("entityType"));
     }
 
     public List<NotFoundErrorDto> sampleListOfNotFoundErrorDto(String propertyName) {
@@ -185,14 +185,14 @@ public class SampleModelData {
 
     public OrganizationDto sampleOrganizationDto() {
         return new OrganizationDto()
-            .id(randomUUID("id"))
-            .type(randomString("type"))
-            .name(randomString("name"))
-            .organizationId(randomString("organizationId"))
-            .url(randomURI("url"))
-            .email(randomString("email", "email"))
-            .emailDomains(sampleList(() -> randomString("emailDomains"), "emailDomains"))
-            .phone(randomString("phone", "phone"));
+            .id(sampleUUID("id"))
+            .type(sampleString("type"))
+            .name(sampleString("name"))
+            .organizationId(sampleString("organizationId"))
+            .url(sampleURI("url"))
+            .email(sampleString("email", "email"))
+            .emailDomains(sampleList(() -> sampleString("emailDomains"), "emailDomains"))
+            .phone(sampleString("phone", "phone"));
     }
 
     public List<OrganizationDto> sampleListOfOrganizationDto(String propertyName) {
@@ -209,12 +209,12 @@ public class SampleModelData {
 
     public PersonDto samplePersonDto() {
         return new PersonDto()
-            .id(randomUUID("id"))
-            .type(randomString("type"))
-            .givenName(randomString("givenName"))
-            .familyName(randomString("familyName"))
-            .email(randomString("email", "email"))
-            .phone(randomString("phone", "phone"))
+            .id(sampleUUID("id"))
+            .type(sampleString("type"))
+            .givenName(sampleString("givenName"))
+            .familyName(sampleString("familyName"))
+            .email(sampleString("email", "email"))
+            .phone(sampleString("phone", "phone"))
             .birthDate(sampleLocalDate("birthDate"));
     }
 
@@ -289,50 +289,50 @@ public class SampleModelData {
         Map<String, T> result = new HashMap<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {
-            result.put(randomString(propertyName), supplier.get());
+            result.put(sampleString(propertyName), supplier.get());
         }
         return result;
     }
 
-    public String randomString(String propertyName, String dataFormat) {
+    public String sampleString(String propertyName, String dataFormat) {
         if (dataFormatFactories.containsKey(dataFormat)) {
             return dataFormatFactories.get(dataFormat).get();
         }
         if (propertyNameFactories.containsKey(propertyName)) {
             return propertyNameFactories.get(propertyName).get();
         }
-        return "str" + randomUUID(propertyName);
+        return "str" + sampleUUID(propertyName);
     }
 
-    public String randomString(String propertyName) {
-        return randomString(propertyName, null);
+    public String sampleString(String propertyName) {
+        return sampleString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName) {
+    public UUID sampleUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public Long randomLong(String propertyName) {
+    public Long sampleLong(String propertyName) {
         return random.nextLong() % 10000L;
     }
 
-    public Integer randomInteger(String propertyName) {
+    public Integer sampleInteger(String propertyName) {
         return random.nextInt(10000);
     }
 
-    public Double randomDouble(String propertyName) {
+    public Double sampleDouble(String propertyName) {
         return random.nextDouble() * 10000.0;
     }
 
-    public Boolean randomBoolean(String propertyName) {
+    public Boolean sampleBoolean(String propertyName) {
         return random.nextBoolean();
     }
 
-    public Object randomObject(String propertyName) {
+    public Object sampleObject(String propertyName) {
         Map<String, String> result = new HashMap<>();
-        result.put(randomString(propertyName + ".key"), randomString(propertyName + ".value"));
+        result.put(sampleString(propertyName + ".key"), sampleString(propertyName + ".value"));
         return result;
     }
 
@@ -368,7 +368,7 @@ public class SampleModelData {
         return sampleZonedDateTime(propertyName).toInstant();
     }
 
-    public URI randomURI(String propertyName) {
+    public URI sampleURI(String propertyName) {
         return asURI("https://" + randomDomainName());
     }
 

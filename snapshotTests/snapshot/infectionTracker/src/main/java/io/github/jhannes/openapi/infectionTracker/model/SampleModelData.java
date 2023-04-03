@@ -49,9 +49,9 @@ public class SampleModelData {
 
     public CaseWorkerDto sampleCaseWorkerDto() {
         return new CaseWorkerDto()
-            .id(randomUUID("id"))
-            .fullName(randomString("fullName"))
-            .email(randomString("email", "email"))
+            .id(sampleUUID("id"))
+            .fullName(sampleString("fullName"))
+            .email(sampleString("email", "email"))
             .role(sampleUserRoleDto("role"));
     }
 
@@ -69,13 +69,13 @@ public class SampleModelData {
 
     public ExposureDto sampleExposureDto() {
         return new ExposureDto()
-            .id(randomUUID("id"))
-            .exposedPersonName(randomString("exposedPersonName"))
-            .exposedPersonPhoneNumber(randomString("exposedPersonPhoneNumber", "phone"))
+            .id(sampleUUID("id"))
+            .exposedPersonName(sampleString("exposedPersonName"))
+            .exposedPersonPhoneNumber(sampleString("exposedPersonPhoneNumber", "phone"))
             .exposedDate(sampleLocalDate("exposedDate"))
-            .exposureLocation(randomString("exposureLocation"))
-            .notes(randomString("notes"))
-            .caseWorker(randomUUID("caseWorker"))
+            .exposureLocation(sampleString("exposureLocation"))
+            .notes(sampleString("notes"))
+            .caseWorker(sampleUUID("caseWorker"))
             .status(sampleExposureDtoStatusEnum("status"))
             .delayAfterInfection(sampleExposureDtoDelayAfterInfectionEnum("delayAfterInfection"));
     }
@@ -102,7 +102,7 @@ public class SampleModelData {
 
     public InfectionDto sampleInfectionDto() {
         return new InfectionDto()
-            .id(randomUUID("id"))
+            .id(sampleUUID("id"))
             .information(sampleInfectionInformationDto("information"))
             .registeredExposures(sampleListOfExposureDto("registeredExposures"));
     }
@@ -121,10 +121,10 @@ public class SampleModelData {
 
     public InfectionInformationDto sampleInfectionInformationDto() {
         return new InfectionInformationDto()
-            .patientName(randomString("patientName"))
-            .patientPhoneNumber(randomString("patientPhoneNumber", "phone"))
+            .patientName(sampleString("patientName"))
+            .patientPhoneNumber(sampleString("patientPhoneNumber", "phone"))
             .likelyInfectionDate(sampleLocalDate("likelyInfectionDate"))
-            .notes(randomString("notes"));
+            .notes(sampleString("notes"));
     }
 
     public List<InfectionInformationDto> sampleListOfInfectionInformationDto(String propertyName) {
@@ -191,50 +191,50 @@ public class SampleModelData {
         Map<String, T> result = new HashMap<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {
-            result.put(randomString(propertyName), supplier.get());
+            result.put(sampleString(propertyName), supplier.get());
         }
         return result;
     }
 
-    public String randomString(String propertyName, String dataFormat) {
+    public String sampleString(String propertyName, String dataFormat) {
         if (dataFormatFactories.containsKey(dataFormat)) {
             return dataFormatFactories.get(dataFormat).get();
         }
         if (propertyNameFactories.containsKey(propertyName)) {
             return propertyNameFactories.get(propertyName).get();
         }
-        return "str" + randomUUID(propertyName);
+        return "str" + sampleUUID(propertyName);
     }
 
-    public String randomString(String propertyName) {
-        return randomString(propertyName, null);
+    public String sampleString(String propertyName) {
+        return sampleString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName) {
+    public UUID sampleUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public Long randomLong(String propertyName) {
+    public Long sampleLong(String propertyName) {
         return random.nextLong() % 10000L;
     }
 
-    public Integer randomInteger(String propertyName) {
+    public Integer sampleInteger(String propertyName) {
         return random.nextInt(10000);
     }
 
-    public Double randomDouble(String propertyName) {
+    public Double sampleDouble(String propertyName) {
         return random.nextDouble() * 10000.0;
     }
 
-    public Boolean randomBoolean(String propertyName) {
+    public Boolean sampleBoolean(String propertyName) {
         return random.nextBoolean();
     }
 
-    public Object randomObject(String propertyName) {
+    public Object sampleObject(String propertyName) {
         Map<String, String> result = new HashMap<>();
-        result.put(randomString(propertyName + ".key"), randomString(propertyName + ".value"));
+        result.put(sampleString(propertyName + ".key"), sampleString(propertyName + ".value"));
         return result;
     }
 
@@ -270,7 +270,7 @@ public class SampleModelData {
         return sampleZonedDateTime(propertyName).toInstant();
     }
 
-    public URI randomURI(String propertyName) {
+    public URI sampleURI(String propertyName) {
         return asURI("https://" + randomDomainName());
     }
 

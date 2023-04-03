@@ -49,8 +49,8 @@ public class SampleModelData {
 
     public CategoryDto sampleCategoryDto() {
         return new CategoryDto()
-            .id(randomLong("id"))
-            .name(randomString("name"));
+            .id(sampleLong("id"))
+            .name(sampleString("name"));
     }
 
     public List<CategoryDto> sampleListOfCategoryDto(String propertyName) {
@@ -67,12 +67,12 @@ public class SampleModelData {
 
     public OrderDto sampleOrderDto() {
         return new OrderDto()
-            .id(randomLong("id"))
-            .petId(randomLong("petId"))
-            .quantity(randomInteger("quantity"))
+            .id(sampleLong("id"))
+            .petId(sampleLong("petId"))
+            .quantity(sampleInteger("quantity"))
             .shipDate(sampleOffsetDateTime("shipDate"))
             .status(sampleOrderDtoStatusEnum("status"))
-            .complete(randomBoolean("complete"));
+            .complete(sampleBoolean("complete"));
     }
 
     public List<OrderDto> sampleListOfOrderDto(String propertyName) {
@@ -93,10 +93,10 @@ public class SampleModelData {
 
     public PetDto samplePetDto() {
         return new PetDto()
-            .id(randomLong("id"))
+            .id(sampleLong("id"))
             .category(sampleCategoryDto("category"))
-            .name(randomString("name"))
-            .photoUrls(sampleList(() -> randomString("photoUrls"), "photoUrls"))
+            .name(sampleString("name"))
+            .photoUrls(sampleList(() -> sampleString("photoUrls"), "photoUrls"))
             .tags(sampleListOfTagDto("tags"))
             .status(samplePetDtoStatusEnum("status"));
     }
@@ -119,8 +119,8 @@ public class SampleModelData {
 
     public TagDto sampleTagDto() {
         return new TagDto()
-            .id(randomLong("id"))
-            .name(randomString("name"));
+            .id(sampleLong("id"))
+            .name(sampleString("name"));
     }
 
     public List<TagDto> sampleListOfTagDto(String propertyName) {
@@ -137,14 +137,14 @@ public class SampleModelData {
 
     public UserDto sampleUserDto() {
         return new UserDto()
-            .id(randomLong("id"))
-            .username(randomString("username"))
-            .firstName(randomString("firstName"))
-            .lastName(randomString("lastName"))
-            .email(randomString("email"))
-            .password(randomString("password"))
-            .phone(randomString("phone"))
-            .userStatus(randomInteger("userStatus"));
+            .id(sampleLong("id"))
+            .username(sampleString("username"))
+            .firstName(sampleString("firstName"))
+            .lastName(sampleString("lastName"))
+            .email(sampleString("email"))
+            .password(sampleString("password"))
+            .phone(sampleString("phone"))
+            .userStatus(sampleInteger("userStatus"));
     }
 
     public List<UserDto> sampleListOfUserDto(String propertyName) {
@@ -195,50 +195,50 @@ public class SampleModelData {
         Map<String, T> result = new HashMap<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {
-            result.put(randomString(propertyName), supplier.get());
+            result.put(sampleString(propertyName), supplier.get());
         }
         return result;
     }
 
-    public String randomString(String propertyName, String dataFormat) {
+    public String sampleString(String propertyName, String dataFormat) {
         if (dataFormatFactories.containsKey(dataFormat)) {
             return dataFormatFactories.get(dataFormat).get();
         }
         if (propertyNameFactories.containsKey(propertyName)) {
             return propertyNameFactories.get(propertyName).get();
         }
-        return "str" + randomUUID(propertyName);
+        return "str" + sampleUUID(propertyName);
     }
 
-    public String randomString(String propertyName) {
-        return randomString(propertyName, null);
+    public String sampleString(String propertyName) {
+        return sampleString(propertyName, null);
     }
 
-    public UUID randomUUID(String propertyName) {
+    public UUID sampleUUID(String propertyName) {
         byte[] bytes = new byte[16];
         random.nextBytes(bytes);
         return UUID.nameUUIDFromBytes(bytes);
     }
 
-    public Long randomLong(String propertyName) {
+    public Long sampleLong(String propertyName) {
         return random.nextLong() % 10000L;
     }
 
-    public Integer randomInteger(String propertyName) {
+    public Integer sampleInteger(String propertyName) {
         return random.nextInt(10000);
     }
 
-    public Double randomDouble(String propertyName) {
+    public Double sampleDouble(String propertyName) {
         return random.nextDouble() * 10000.0;
     }
 
-    public Boolean randomBoolean(String propertyName) {
+    public Boolean sampleBoolean(String propertyName) {
         return random.nextBoolean();
     }
 
-    public Object randomObject(String propertyName) {
+    public Object sampleObject(String propertyName) {
         Map<String, String> result = new HashMap<>();
-        result.put(randomString(propertyName + ".key"), randomString(propertyName + ".value"));
+        result.put(sampleString(propertyName + ".key"), sampleString(propertyName + ".value"));
         return result;
     }
 
@@ -274,7 +274,7 @@ public class SampleModelData {
         return sampleZonedDateTime(propertyName).toInstant();
     }
 
-    public URI randomURI(String propertyName) {
+    public URI sampleURI(String propertyName) {
         return asURI("https://" + randomDomainName());
     }
 
