@@ -89,6 +89,16 @@ public class SampleModelData {
 {{/isArray}}
 {{/isEnum}}{{/vars}}
 {{/isMixin}}
+{{#isMixin}}
+{{#vars}}
+{{#isEnum}}
+    public {{classname}}.{{datatypeWithEnum}} sample{{datatypeWithEnum}}(String propertyName) {
+        return pickOne({{classname}}.{{datatypeWithEnum}}.values());
+    }
+
+{{/isEnum}}
+{{/vars}}
+{{/isMixin}}
 {{/model}}
 {{/models}}
 {{>sample_random_data}}

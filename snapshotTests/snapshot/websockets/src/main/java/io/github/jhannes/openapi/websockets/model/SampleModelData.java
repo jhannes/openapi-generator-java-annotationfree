@@ -95,7 +95,8 @@ public class SampleModelData {
             .familyName(sampleString("familyName"))
             .email(sampleString("email", "email"))
             .phone(sampleString("phone", "phone"))
-            .birthDate(sampleLocalDate("birthDate"));
+            .birthDate(sampleLocalDate("birthDate"))
+            .gender(sampleGenderEnum("gender"));
     }
 
     public List<PersonDto> sampleListOfPersonDto(String propertyName) {
@@ -104,6 +105,10 @@ public class SampleModelData {
 
     public List<PersonDto> sampleListOfPersonDto() {
         return sampleList(() -> samplePersonDto());
+    }
+
+    public PersonInterface.GenderEnum sampleGenderEnum(String propertyName) {
+        return pickOne(PersonInterface.GenderEnum.values());
     }
 
     public PersonSnapshotDto samplePersonSnapshotDto(String propertyName) {
@@ -122,7 +127,8 @@ public class SampleModelData {
             .familyName(sampleString("familyName"))
             .email(sampleString("email", "email"))
             .phone(sampleString("phone", "phone"))
-            .birthDate(sampleLocalDate("birthDate"));
+            .birthDate(sampleLocalDate("birthDate"))
+            .gender(sampleGenderEnum("gender"));
     }
 
     public List<PersonSnapshotDto> sampleListOfPersonSnapshotDto(String propertyName) {

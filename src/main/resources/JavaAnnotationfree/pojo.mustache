@@ -14,6 +14,7 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
 {{>modelInnerEnum}}
             {{/mostInnerItems}}
         {{/isContainer}}
+
     {{/isEnum}}
     private {{{datatypeWithEnum}}} {{baseName}}{{#required}}{{#defaultValue}} = {{{.}}}{{/defaultValue}}{{/required}}{{^required}} = null{{/required}};
     {{/isInherited}}

@@ -2,6 +2,21 @@
 * {{#description}}{{.}}{{/description}}{{^description}}{{classname}}{{/description}}
 */
 public interface {{classname}}{{#interfaces}}{{#-first}} extends {{/-first}}{{^-first}}, {{/-first}}{{{.}}}{{/interfaces}} {
+{{#vars}}
+    {{^isInherited}}
+    {{#isEnum}}
+
+        {{^isContainer}}
+{{>modelInnerEnum}}
+        {{/isContainer}}
+        {{#isContainer}}
+            {{#mostInnerItems}}
+{{>modelInnerEnum}}
+            {{/mostInnerItems}}
+        {{/isContainer}}
+    {{/isEnum}}
+    {{/isInherited}}
+{{/vars}}
 
     List<String> missingRequiredFields();
 

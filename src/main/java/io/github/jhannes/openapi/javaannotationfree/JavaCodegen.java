@@ -134,8 +134,8 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 if (subModel.discriminator.getMapping() == null) {
                     postProcessOneOf(subModel, interfacesOfSubtypes, allModels);
                 }
-                subModel.discriminator.getMappedModels().forEach(o -> mappedModels.add(o));
-                subModel.discriminator.getMapping().forEach((key, val) -> mapping.put(key, val));
+                mappedModels.addAll(subModel.discriminator.getMappedModels());
+                mapping.putAll(subModel.discriminator.getMapping());
             } else if (codegenModel.discriminator != null && subModel.discriminator != null) {
                 //not matching discriminators, cannot be matched from spec
                 continue;
@@ -209,8 +209,12 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 public boolean isMixin = true;
             };
             interfaceModel.classname = type + "Interface";
-            interfaceModel.vars.addAll(dtoModel.vars);
-            interfaceModel.allVars.addAll(dtoModel.allVars);
+            for (CodegenProperty property : dtoModel.vars) {
+                interfaceModel.vars.add(property.clone());
+            }
+            for (CodegenProperty property : dtoModel.allVars) {
+                interfaceModel.allVars.add(property.clone());
+            }
 
             ModelMap modelMap = new ModelMap();
             modelMap.setModel(interfaceModel);
@@ -221,6 +225,23 @@ public class JavaCodegen extends AbstractJavaCodegen {
 
             dtoModel.interfaces = List.of(interfaceModel.classname);
             mixinInterfaces.add(interfaceModel.classname);
+
+            for (CodegenModel codegenModel : allModels.values()) {
+                if (codegenModel.interfaces != null && codegenModel.interfaces.contains(interfaceModel.classname)) {
+                    for (CodegenProperty property : codegenModel.vars) {
+                        if (property.isEnum) {
+                            property.isEnum = false;
+                            property.dataType = property.datatypeWithEnum;
+                        }
+                    }
+                    for (CodegenProperty property : codegenModel.allVars) {
+                        if (property.isEnum) {
+                            property.isEnum = false;
+                            property.dataType = property.datatypeWithEnum;
+                        }
+                    }
+                }
+            }
         }
 
         // Only support interfaces from oneOfModels
