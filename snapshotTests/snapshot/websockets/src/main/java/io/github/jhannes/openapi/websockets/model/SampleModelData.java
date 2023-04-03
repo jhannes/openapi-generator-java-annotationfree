@@ -139,6 +139,23 @@ public class SampleModelData {
         return sampleList(() -> samplePersonSnapshotDto());
     }
 
+    public RecipientDto sampleRecipientDto(String propertyName) {
+        return sampleRecipientDto();
+    }
+
+    public RecipientDto sampleRecipientDto() {
+        return new RecipientDto()
+            .email(sampleString("email", "email"));
+    }
+
+    public List<RecipientDto> sampleListOfRecipientDto(String propertyName) {
+        return sampleListOfRecipientDto();
+    }
+
+    public List<RecipientDto> sampleListOfRecipientDto() {
+        return sampleList(() -> sampleRecipientDto());
+    }
+
     public StringSnapshotDto sampleStringSnapshotDto(String propertyName) {
         return sampleStringSnapshotDto();
     }

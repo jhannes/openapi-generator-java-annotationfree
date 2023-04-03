@@ -68,6 +68,11 @@ components:
         person:
           $ref: "#/components/schemas/Person"
       required: [ command, id, person ]
+    Recipient:
+      properties:
+        email:
+          type: string
+          format: email
     Person:
       properties:
         id:
