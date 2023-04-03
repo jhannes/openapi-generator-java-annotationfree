@@ -36,6 +36,41 @@ import java.util.stream.Collectors;
 */
 public interface PersonInterface {
 
+    /**
+     * Gets or Sets gender
+     */
+    public enum GenderEnum {
+
+        MALE("male"),
+        FEMALE("female"),
+        OTHER("other"),
+        UNSPECIFIED("unspecified");
+
+        private String value;
+
+        GenderEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static GenderEnum fromValue(String text) {
+            for (GenderEnum b : GenderEnum.values()) {
+                if (String.valueOf(b.value).equals(text)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + text + "'");
+        }
+    }
+
     List<String> missingRequiredFields();
 
     void readOnlyFieldsWithValue(List<String> result);
