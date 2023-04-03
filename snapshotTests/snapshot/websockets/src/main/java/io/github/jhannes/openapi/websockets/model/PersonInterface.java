@@ -113,6 +113,16 @@ public interface PersonInterface {
 
     PersonInterface birthDate(LocalDate birthDate);
 
+    /**
+     * Get gender
+     * @return gender
+     */
+    GenderEnum getGender();
+
+    void setGender(GenderEnum gender);
+
+    PersonInterface gender(GenderEnum gender);
+
     default <T extends PersonInterface> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getType() != null) target.setType(this.getType());
@@ -121,6 +131,7 @@ public interface PersonInterface {
         if (this.getEmail() != null) target.setEmail(this.getEmail());
         if (this.getPhone() != null) target.setPhone(this.getPhone());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
+        if (this.getGender() != null) target.setGender(this.getGender());
         return target;
     }
 }

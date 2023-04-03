@@ -50,6 +50,43 @@ public class PersonDto implements PersonInterface {
 
     private LocalDate birthDate = null;
 
+    /**
+     * Gets or Sets gender
+     */
+    public enum GenderEnum {
+
+        MALE("male"),
+        FEMALE("female"),
+        OTHER("other"),
+        UNSPECIFIED("unspecified");
+
+        private String value;
+
+        GenderEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static GenderEnum fromValue(String text) {
+            for (GenderEnum b : GenderEnum.values()) {
+                if (String.valueOf(b.value).equals(text)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + text + "'");
+        }
+    }
+
+    private GenderEnum gender = null;
+
     public static String[] readOnlyFields() {
         return new String[] {
                 "id",
@@ -91,6 +128,7 @@ public class PersonDto implements PersonInterface {
         if (this.getEmail() != null) target.setEmail(this.getEmail());
         if (this.getPhone() != null) target.setPhone(this.getPhone());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
+        if (this.getGender() != null) target.setGender(this.getGender());
         return target;
     }
 
@@ -228,6 +266,23 @@ public class PersonDto implements PersonInterface {
         return this;
     }
 
+    /**
+     * Get gender
+     * @return gender
+     */
+    public GenderEnum getGender() {
+        return gender;
+    }
+
+    public void setGender(GenderEnum gender) {
+        this.gender = gender;
+    }
+
+    public PersonDto gender(GenderEnum gender) {
+        this.gender = gender;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -243,12 +298,13 @@ public class PersonDto implements PersonInterface {
                 Objects.equals(this.getFamilyName(), person.getFamilyName()) &&
                 Objects.equals(this.getEmail(), person.getEmail()) &&
                 Objects.equals(this.getPhone(), person.getPhone()) &&
-                Objects.equals(this.getBirthDate(), person.getBirthDate());
+                Objects.equals(this.getBirthDate(), person.getBirthDate()) &&
+                Objects.equals(this.getGender(), person.getGender());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getType(), getGivenName(), getFamilyName(), getEmail(), getPhone(), getBirthDate());
+        return Objects.hash(getId(), getType(), getGivenName(), getFamilyName(), getEmail(), getPhone(), getBirthDate(), getGender());
     }
 
     @Override
@@ -262,6 +318,7 @@ public class PersonDto implements PersonInterface {
         sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
         sb.append("    phone: ").append(toIndentedString(getPhone())).append("\n");
         sb.append("    birthDate: ").append(toIndentedString(getBirthDate())).append("\n");
+        sb.append("    gender: ").append(toIndentedString(getGender())).append("\n");
         sb.append("}");
         return sb.toString();
     }
