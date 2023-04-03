@@ -89,6 +89,9 @@ components:
         birthDate:
           type: string
           format: date
+        gender:
+          type: string
+          enum: [male, female, other, unspecified]
       required:
         - type
         - givenName
