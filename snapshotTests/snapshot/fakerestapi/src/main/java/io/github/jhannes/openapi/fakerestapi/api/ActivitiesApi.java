@@ -32,9 +32,9 @@ public interface ActivitiesApi {
     ) throws IOException;
     /**
      * @param id  (path) (required)
-     * @return List&lt;ActivityDto&gt;
+     * @return ActivityDto
      */
-    List<ActivityDto> apiV1ActivitiesIdGet(
+    ActivityDto apiV1ActivitiesIdGet(
             Integer id
     ) throws IOException;
     /**

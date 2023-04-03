@@ -73,7 +73,7 @@ public class HttpActivitiesApi implements ActivitiesApi {
     }
 
     @Override
-    public List<ActivityDto> apiV1ActivitiesIdGet(
+    public ActivityDto apiV1ActivitiesIdGet(
             Integer id
     ) throws IOException {
         HttpURLConnection connection = openConnection("/api/v1/Activities/{id}"
@@ -82,7 +82,7 @@ public class HttpActivitiesApi implements ActivitiesApi {
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
-        return jsonb.fromJson(connection.getInputStream(), getParameterizedType(List.class, new Type[]{ ActivityDto.class }));
+        return jsonb.fromJson(connection.getInputStream(), ActivityDto.class);
     }
 
     @Override

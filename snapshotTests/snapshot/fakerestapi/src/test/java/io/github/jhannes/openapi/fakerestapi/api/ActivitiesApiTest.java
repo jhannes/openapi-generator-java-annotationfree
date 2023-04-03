@@ -50,7 +50,7 @@ public class ActivitiesApiTest {
     @Test
     public void apiV1ActivitiesIdGetTest() throws IOException {
         //Integer id = null;
-        //List<ActivityDto> response = api.apiV1ActivitiesIdGet(id);
+        //ActivityDto response = api.apiV1ActivitiesIdGet(id);
         // TODO: test validations
     }
 

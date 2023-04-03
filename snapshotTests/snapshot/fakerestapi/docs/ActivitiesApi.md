@@ -117,7 +117,7 @@ No authorization required
 
 ## apiV1ActivitiesIdGet
 
-> List&lt;ActivityDto&gt; apiV1ActivitiesIdGet(id)
+> ActivityDto apiV1ActivitiesIdGet(id)
 
 
 
@@ -133,7 +133,7 @@ public class Example {
 
         Integer id = 56; // Integer | 
         try {
-            List<ActivityDto> result = client.apiV1ActivitiesIdGet(id);
+            ActivityDto result = client.apiV1ActivitiesIdGet(id);
             System.out.println(result);
         } catch (IOException e) {
             System.err.println("Exception when calling ActivitiesApi#apiV1ActivitiesIdGet");
@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**List&lt;ActivityDto&gt;**](ActivityDto.md)
+[**ActivityDto**](ActivityDto.md)
 
 ### Authorization
 
