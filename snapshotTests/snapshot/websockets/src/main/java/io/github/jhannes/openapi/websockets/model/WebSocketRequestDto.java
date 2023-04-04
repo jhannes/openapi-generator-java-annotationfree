@@ -40,12 +40,12 @@ public interface WebSocketRequestDto  {
         return result;
     }
 
-    static Class<? extends WebSocketRequestDto> getType(String type) {
-        switch (type) {
+    static Class<? extends WebSocketRequestDto> getType(String request) {
+        switch (request) {
         case "Subscribe":
             return SubscribeDto.class;
         default:
-            throw new IllegalArgumentException("Illegal request " + type);
+            throw new IllegalArgumentException("Illegal request " + request);
         }
     }
 

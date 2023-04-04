@@ -1,5 +1,4 @@
 
-
 # CaseWorkerDto
 
 ## Properties

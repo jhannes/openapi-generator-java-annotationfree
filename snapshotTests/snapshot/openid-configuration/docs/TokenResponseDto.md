@@ -1,5 +1,4 @@
 
-
 # TokenResponseDto
 
 Token response according to https://www.oauth.com/oauth2-servers/access-tokens/access-token-response/

@@ -1,5 +1,4 @@
 
-
 # GeneralErrorDto
 
 ## Properties

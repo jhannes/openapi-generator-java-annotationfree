@@ -1,5 +1,4 @@
 
-
 # SubscribeDto
 
 ## Properties

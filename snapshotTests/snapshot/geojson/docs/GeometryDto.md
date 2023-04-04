@@ -1,13 +1,12 @@
 
+# GeometryDto oneOf-interface
 
-# GeometryDto
+## Discriminator type
 
-## Properties
-
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**type** | **"Polygon"** |  | 
-**coordinates** | [**List<List<List<Double>>>**](List.md) |  | 
-
+type  | Type          |
+----------------- | ------------- |
+"Point" | [**PointDto**](PointDto.md) |
+"Polygon" | [**PolygonDto**](PolygonDto.md) |
+"LineString" | [**LineStringDto**](LineStringDto.md) |
 
 

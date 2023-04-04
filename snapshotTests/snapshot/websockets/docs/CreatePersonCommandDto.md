@@ -1,5 +1,4 @@
 
-
 # CreatePersonCommandDto
 
 ## Properties

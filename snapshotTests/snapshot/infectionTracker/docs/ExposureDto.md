@@ -1,5 +1,4 @@
 
-
 # ExposureDto
 
 ## Properties

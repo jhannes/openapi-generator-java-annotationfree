@@ -1,5 +1,4 @@
 
-
 # ChangeTrackedDto
 
 ## Properties

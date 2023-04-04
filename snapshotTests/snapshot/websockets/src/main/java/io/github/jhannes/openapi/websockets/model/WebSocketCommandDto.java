@@ -45,14 +45,14 @@ public interface WebSocketCommandDto extends WebSocketMessageDto {
         return result;
     }
 
-    static Class<? extends WebSocketCommandDto> getType(String type) {
-        switch (type) {
+    static Class<? extends WebSocketCommandDto> getType(String command) {
+        switch (command) {
         case "createPerson":
             return CreatePersonCommandDto.class;
         case "updatePerson":
             return UpdatePersonCommandDto.class;
         default:
-            throw new IllegalArgumentException("Illegal command " + type);
+            throw new IllegalArgumentException("Illegal command " + command);
         }
     }
 

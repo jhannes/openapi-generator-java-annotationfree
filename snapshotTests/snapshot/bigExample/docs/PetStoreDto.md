@@ -1,5 +1,4 @@
 
-
 # PetStoreDto
 
 ## Properties

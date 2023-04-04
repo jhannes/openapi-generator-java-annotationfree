@@ -1,5 +1,4 @@
 
-
 # LogMessageDto
 
 ## Properties

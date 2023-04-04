@@ -1,5 +1,4 @@
 
-
 # AuthorDto
 
 ## Properties

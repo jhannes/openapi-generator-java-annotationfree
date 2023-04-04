@@ -1,12 +1,10 @@
 
+# WebSocketRequestDto oneOf-interface
 
-# WebSocketRequestDto
+## Discriminator request
 
-## Properties
-
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**request** | **"Subscribe"** |  | 
-
+request  | Type          |
+----------------- | ------------- |
+"Subscribe" | [**SubscribeDto**](SubscribeDto.md) |
 
 

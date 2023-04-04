@@ -1,5 +1,4 @@
 
-
 # PersonSnapshotDto
 
 ## Properties

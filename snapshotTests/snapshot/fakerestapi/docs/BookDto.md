@@ -1,5 +1,4 @@
 
-
 # BookDto
 
 ## Properties

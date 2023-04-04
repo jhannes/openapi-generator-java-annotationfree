@@ -1,5 +1,4 @@
 
-
 # RegisterPost200ResponseDto
 
 ## Properties

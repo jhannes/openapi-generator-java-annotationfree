@@ -1,17 +1,13 @@
 
+# CreationErrorDto oneOf-interface
 
-# CreationErrorDto
+## Discriminator code
 
-## Properties
-
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**code** | **String** |  | 
-**description** | **String** |  | 
-**identifierValue** | **String** |  |  [optional]
-**entityType** | **String** |  | 
-**inputEmailAddress** | **String** |  | 
-**validDomains** | **List<String>** |  | 
-
+code  | Type          |
+----------------- | ------------- |
+"duplicateIdentifier" | [**DuplicateIdentifierErrorDto**](DuplicateIdentifierErrorDto.md) |
+"generalError" | [**GeneralErrorDto**](GeneralErrorDto.md) |
+"illegalAddress" | [**IllegalEmailAddressErrorDto**](IllegalEmailAddressErrorDto.md) |
+"networkError" | [**GeneralErrorDto**](GeneralErrorDto.md) |
 
 

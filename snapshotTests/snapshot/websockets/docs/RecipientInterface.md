@@ -1,5 +1,4 @@
 
-
 # RecipientInterface
 
 ## Properties

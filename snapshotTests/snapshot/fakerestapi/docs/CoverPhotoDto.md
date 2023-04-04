@@ -1,5 +1,4 @@
 
-
 # CoverPhotoDto
 
 ## Properties

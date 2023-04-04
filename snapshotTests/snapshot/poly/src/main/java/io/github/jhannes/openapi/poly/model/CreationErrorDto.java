@@ -55,8 +55,8 @@ public interface CreationErrorDto  {
         return result;
     }
 
-    static Class<? extends CreationErrorDto> getType(String type) {
-        switch (type) {
+    static Class<? extends CreationErrorDto> getType(String code) {
+        switch (code) {
         case "duplicateIdentifier":
             return DuplicateIdentifierErrorDto.class;
         case "generalError":
@@ -66,7 +66,7 @@ public interface CreationErrorDto  {
         case "networkError":
             return GeneralErrorDto.class;
         default:
-            throw new IllegalArgumentException("Illegal code " + type);
+            throw new IllegalArgumentException("Illegal code " + code);
         }
     }
 

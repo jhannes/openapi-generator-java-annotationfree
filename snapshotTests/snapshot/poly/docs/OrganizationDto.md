@@ -1,5 +1,4 @@
 
-
 # OrganizationDto
 
 ## Properties
