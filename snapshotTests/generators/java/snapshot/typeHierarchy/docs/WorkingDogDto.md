@@ -1,15 +1,20 @@
 
 
-# DogAllOfDto
+# WorkingDogDto
 
 
 ## Properties
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
+|**id** | **String** |  |  [optional] [readonly] |
+|**name** | **String** |  |  |
+|**birthDate** | **String** |  |  [optional] |
+|**ownerAddress** | [**AddressDto**](AddressDto.md) |  |  [optional] |
 |**petType** | [**PetTypeEnum**](#PetTypeEnum) |  |  |
 |**bark** | **Boolean** |  |  [optional] |
 |**breed** | [**BreedEnum**](#BreedEnum) |  |  [optional] |
+|**capabilities** | [**List&lt;CapabilitiesEnum&gt;**](#List&lt;CapabilitiesEnum&gt;) |  |  |
 
 
 
@@ -17,7 +22,7 @@
 
 | Name | Value |
 |---- | -----|
-| DOG | &quot;Dog&quot; |
+| WORKINGDOG | &quot;WorkingDog&quot; |
 
 
 
@@ -29,6 +34,16 @@
 | HUSKY | &quot;Husky&quot; |
 | RETRIEVER | &quot;Retriever&quot; |
 | SHEPHERD | &quot;Shepherd&quot; |
+
+
+
+## Enum: List&lt;CapabilitiesEnum&gt;
+
+| Name | Value |
+|---- | -----|
+| GUIDE | &quot;Guide&quot; |
+| RESCUE | &quot;Rescue&quot; |
+| SEARCH | &quot;Search&quot; |
 
 
 

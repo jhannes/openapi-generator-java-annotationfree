@@ -54,10 +54,6 @@ public class PetBaseDto {
   @SerializedName(SERIALIZED_NAME_ID)
   private String id;
 
-  public static final String SERIALIZED_NAME_PET_TYPE = "pet_type";
-  @SerializedName(SERIALIZED_NAME_PET_TYPE)
-  private String petType;
-
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
   private String name;
@@ -95,29 +91,6 @@ public class PetBaseDto {
 
 
 
-  public PetBaseDto petType(String petType) {
-    
-    this.petType = petType;
-    return this;
-  }
-
-   /**
-   * Get petType
-   * @return petType
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-
-  public String getPetType() {
-    return petType;
-  }
-
-
-  public void setPetType(String petType) {
-    this.petType = petType;
-  }
-
-
   public PetBaseDto name(String name) {
     
     this.name = name;
@@ -128,8 +101,8 @@ public class PetBaseDto {
    * Get name
    * @return name
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "")
 
   public String getName() {
     return name;
@@ -198,7 +171,6 @@ public class PetBaseDto {
     }
     PetBaseDto petBase = (PetBaseDto) o;
     return Objects.equals(this.id, petBase.id) &&
-        Objects.equals(this.petType, petBase.petType) &&
         Objects.equals(this.name, petBase.name) &&
         Objects.equals(this.birthDate, petBase.birthDate) &&
         Objects.equals(this.ownerAddress, petBase.ownerAddress);
@@ -206,7 +178,7 @@ public class PetBaseDto {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, petType, name, birthDate, ownerAddress);
+    return Objects.hash(id, name, birthDate, ownerAddress);
   }
 
   @Override
@@ -214,7 +186,6 @@ public class PetBaseDto {
     StringBuilder sb = new StringBuilder();
     sb.append("class PetBaseDto {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    petType: ").append(toIndentedString(petType)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    birthDate: ").append(toIndentedString(birthDate)).append("\n");
     sb.append("    ownerAddress: ").append(toIndentedString(ownerAddress)).append("\n");
@@ -241,14 +212,13 @@ public class PetBaseDto {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("id");
-    openapiFields.add("pet_type");
     openapiFields.add("name");
     openapiFields.add("birth_date");
     openapiFields.add("ownerAddress");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("pet_type");
+    openapiRequiredFields.add("name");
   }
 
  /**
@@ -282,9 +252,6 @@ public class PetBaseDto {
       }
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
-      }
-      if ((jsonObj.get("pet_type") != null && !jsonObj.get("pet_type").isJsonNull()) && !jsonObj.get("pet_type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `pet_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("pet_type").toString()));
       }
       if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));

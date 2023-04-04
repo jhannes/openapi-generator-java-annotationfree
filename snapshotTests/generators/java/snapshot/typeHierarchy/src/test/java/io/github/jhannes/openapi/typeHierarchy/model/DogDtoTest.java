@@ -19,7 +19,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
-import io.github.jhannes.openapi.typeHierarchy.model.DogAllOfDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -50,14 +49,6 @@ public class DogDtoTest {
     }
 
     /**
-     * Test the property 'petType'
-     */
-    @Test
-    public void petTypeTest() {
-        // TODO: test petType
-    }
-
-    /**
      * Test the property 'name'
      */
     @Test
@@ -79,6 +70,14 @@ public class DogDtoTest {
     @Test
     public void ownerAddressTest() {
         // TODO: test ownerAddress
+    }
+
+    /**
+     * Test the property 'petType'
+     */
+    @Test
+    public void petTypeTest() {
+        // TODO: test petType
     }
 
     /**

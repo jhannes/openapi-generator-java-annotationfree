@@ -21,7 +21,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
-import io.github.jhannes.openapi.typeHierarchy.model.CatAllOfDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -50,14 +49,10 @@ import io.github.jhannes.openapi.typeHierarchy.JSON;
  * CatDto
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class CatDto extends CatAllOfDto {
+public class CatDto {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
   private String id;
-
-  public static final String SERIALIZED_NAME_PET_TYPE = "pet_type";
-  @SerializedName(SERIALIZED_NAME_PET_TYPE)
-  protected String petType;
 
   public static final String SERIALIZED_NAME_NAME = "name";
   @SerializedName(SERIALIZED_NAME_NAME)
@@ -71,8 +66,64 @@ public class CatDto extends CatAllOfDto {
   @SerializedName(SERIALIZED_NAME_OWNER_ADDRESS)
   private AddressDto ownerAddress;
 
+  /**
+   * Gets or Sets petType
+   */
+  @JsonAdapter(PetTypeEnum.Adapter.class)
+  public enum PetTypeEnum {
+    CAT("Cat");
+
+    private String value;
+
+    PetTypeEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static PetTypeEnum fromValue(String value) {
+      for (PetTypeEnum b : PetTypeEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<PetTypeEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final PetTypeEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public PetTypeEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return PetTypeEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_PET_TYPE = "pet_type";
+  @SerializedName(SERIALIZED_NAME_PET_TYPE)
+  private PetTypeEnum petType;
+
+  public static final String SERIALIZED_NAME_HUNTS = "hunts";
+  @SerializedName(SERIALIZED_NAME_HUNTS)
+  private Boolean hunts;
+
+  public static final String SERIALIZED_NAME_AGE = "age";
+  @SerializedName(SERIALIZED_NAME_AGE)
+  private Integer age;
+
   public CatDto() {
-    this.petType = this.getClass().getSimpleName();
   }
 
   
@@ -99,29 +150,6 @@ public class CatDto extends CatAllOfDto {
 
 
 
-  public CatDto petType(String petType) {
-    
-    this.petType = petType;
-    return this;
-  }
-
-   /**
-   * Get petType
-   * @return petType
-  **/
-  @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-
-  public String getPetType() {
-    return petType;
-  }
-
-
-  public void setPetType(String petType) {
-    this.petType = petType;
-  }
-
-
   public CatDto name(String name) {
     
     this.name = name;
@@ -132,8 +160,8 @@ public class CatDto extends CatAllOfDto {
    * Get name
    * @return name
   **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "")
 
   public String getName() {
     return name;
@@ -191,6 +219,66 @@ public class CatDto extends CatAllOfDto {
   }
 
 
+  public CatDto petType(PetTypeEnum petType) {
+    
+    this.petType = petType;
+    return this;
+  }
+
+   /**
+   * Get petType
+   * @return petType
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "")
+
+  public PetTypeEnum getPetType() {
+    return petType;
+  }
+
+
+  public void setPetType(PetTypeEnum petType) {
+    this.petType = petType;
+  }
+
+
+  public CatDto hunts(Boolean hunts) {
+    
+    this.hunts = hunts;
+    return this;
+  }
+
+   /**
+   * Get hunts
+   * @return hunts
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public Boolean getHunts() {
+    return hunts;
+  }
+
+
+  public void setHunts(Boolean hunts) {
+    this.hunts = hunts;
+  }
+
+
+   /**
+   * Get age
+   * @return age
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public Integer getAge() {
+    return age;
+  }
+
+
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -202,28 +290,30 @@ public class CatDto extends CatAllOfDto {
     }
     CatDto cat = (CatDto) o;
     return Objects.equals(this.id, cat.id) &&
-        Objects.equals(this.petType, cat.petType) &&
         Objects.equals(this.name, cat.name) &&
         Objects.equals(this.birthDate, cat.birthDate) &&
         Objects.equals(this.ownerAddress, cat.ownerAddress) &&
-        super.equals(o);
+        Objects.equals(this.petType, cat.petType) &&
+        Objects.equals(this.hunts, cat.hunts) &&
+        Objects.equals(this.age, cat.age);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, petType, name, birthDate, ownerAddress, super.hashCode());
+    return Objects.hash(id, name, birthDate, ownerAddress, petType, hunts, age);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("class CatDto {\n");
-    sb.append("    ").append(toIndentedString(super.toString())).append("\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
-    sb.append("    petType: ").append(toIndentedString(petType)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    birthDate: ").append(toIndentedString(birthDate)).append("\n");
     sb.append("    ownerAddress: ").append(toIndentedString(ownerAddress)).append("\n");
+    sb.append("    petType: ").append(toIndentedString(petType)).append("\n");
+    sb.append("    hunts: ").append(toIndentedString(hunts)).append("\n");
+    sb.append("    age: ").append(toIndentedString(age)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -247,15 +337,16 @@ public class CatDto extends CatAllOfDto {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("id");
-    openapiFields.add("pet_type");
     openapiFields.add("name");
     openapiFields.add("birth_date");
     openapiFields.add("ownerAddress");
+    openapiFields.add("pet_type");
     openapiFields.add("hunts");
     openapiFields.add("age");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
+    openapiRequiredFields.add("name");
     openapiRequiredFields.add("pet_type");
   }
 
@@ -287,6 +378,22 @@ public class CatDto extends CatAllOfDto {
         if (jsonObj.get(requiredField) == null) {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
         }
+      }
+      if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
+      }
+      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
+      }
+      if ((jsonObj.get("birth_date") != null && !jsonObj.get("birth_date").isJsonNull()) && !jsonObj.get("birth_date").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `birth_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("birth_date").toString()));
+      }
+      // validate the optional field `ownerAddress`
+      if (jsonObj.get("ownerAddress") != null && !jsonObj.get("ownerAddress").isJsonNull()) {
+        AddressDto.validateJsonObject(jsonObj.getAsJsonObject("ownerAddress"));
+      }
+      if ((jsonObj.get("pet_type") != null && !jsonObj.get("pet_type").isJsonNull()) && !jsonObj.get("pet_type").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `pet_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("pet_type").toString()));
       }
   }
 

@@ -23,9 +23,13 @@ import com.google.gson.stream.JsonWriter;
 import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
 import io.github.jhannes.openapi.typeHierarchy.model.CatDto;
 import io.github.jhannes.openapi.typeHierarchy.model.DogDto;
+import io.github.jhannes.openapi.typeHierarchy.model.GoldfishDto;
+import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.core.GenericType;
 
@@ -74,6 +78,8 @@ public class PetDto extends AbstractOpenApiSchema {
             final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
             final TypeAdapter<CatDto> adapterCatDto = gson.getDelegateAdapter(this, TypeToken.get(CatDto.class));
             final TypeAdapter<DogDto> adapterDogDto = gson.getDelegateAdapter(this, TypeToken.get(DogDto.class));
+            final TypeAdapter<GoldfishDto> adapterGoldfishDto = gson.getDelegateAdapter(this, TypeToken.get(GoldfishDto.class));
+            final TypeAdapter<WorkingDogDto> adapterWorkingDogDto = gson.getDelegateAdapter(this, TypeToken.get(WorkingDogDto.class));
 
             return (TypeAdapter<T>) new TypeAdapter<PetDto>() {
                 @Override
@@ -97,7 +103,21 @@ public class PetDto extends AbstractOpenApiSchema {
                         return;
                     }
 
-                    throw new IOException("Failed to serialize as the type doesn't match oneOf schemas: CatDto, DogDto");
+                    // check if the actual instance is of the type `GoldfishDto`
+                    if (value.getActualInstance() instanceof GoldfishDto) {
+                        JsonObject obj = adapterGoldfishDto.toJsonTree((GoldfishDto)value.getActualInstance()).getAsJsonObject();
+                        elementAdapter.write(out, obj);
+                        return;
+                    }
+
+                    // check if the actual instance is of the type `WorkingDogDto`
+                    if (value.getActualInstance() instanceof WorkingDogDto) {
+                        JsonObject obj = adapterWorkingDogDto.toJsonTree((WorkingDogDto)value.getActualInstance()).getAsJsonObject();
+                        elementAdapter.write(out, obj);
+                        return;
+                    }
+
+                    throw new IOException("Failed to serialize as the type doesn't match oneOf schemas: CatDto, DogDto, GoldfishDto, WorkingDogDto");
                 }
 
                 @Override
@@ -135,6 +155,32 @@ public class PetDto extends AbstractOpenApiSchema {
                         log.log(Level.FINER, "Input data does not match schema 'DogDto'", e);
                     }
 
+                    // deserialize GoldfishDto
+                    try {
+                        // validate the JSON object to see if any exception is thrown
+                        GoldfishDto.validateJsonObject(jsonObject);
+                        actualAdapter = adapterGoldfishDto;
+                        match++;
+                        log.log(Level.FINER, "Input data matches schema 'GoldfishDto'");
+                    } catch (Exception e) {
+                        // deserialization failed, continue
+                        errorMessages.add(String.format("Deserialization for GoldfishDto failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'GoldfishDto'", e);
+                    }
+
+                    // deserialize WorkingDogDto
+                    try {
+                        // validate the JSON object to see if any exception is thrown
+                        WorkingDogDto.validateJsonObject(jsonObject);
+                        actualAdapter = adapterWorkingDogDto;
+                        match++;
+                        log.log(Level.FINER, "Input data matches schema 'WorkingDogDto'");
+                    } catch (Exception e) {
+                        // deserialization failed, continue
+                        errorMessages.add(String.format("Deserialization for WorkingDogDto failed with `%s`.", e.getMessage()));
+                        log.log(Level.FINER, "Input data does not match schema 'WorkingDogDto'", e);
+                    }
+
                     if (match == 1) {
                         PetDto ret = new PetDto();
                         ret.setActualInstance(actualAdapter.fromJsonTree(jsonObject));
@@ -164,10 +210,24 @@ public class PetDto extends AbstractOpenApiSchema {
         setActualInstance(o);
     }
 
+    public PetDto(GoldfishDto o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
+
+    public PetDto(WorkingDogDto o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
+
     static {
         schemas.put("CatDto", new GenericType<CatDto>() {
         });
         schemas.put("DogDto", new GenericType<DogDto>() {
+        });
+        schemas.put("GoldfishDto", new GenericType<GoldfishDto>() {
+        });
+        schemas.put("WorkingDogDto", new GenericType<WorkingDogDto>() {
         });
     }
 
@@ -179,7 +239,7 @@ public class PetDto extends AbstractOpenApiSchema {
     /**
      * Set the instance that matches the oneOf child schema, check
      * the instance parameter is valid against the oneOf child schemas:
-     * CatDto, DogDto
+     * CatDto, DogDto, GoldfishDto, WorkingDogDto
      *
      * It could be an instance of the 'oneOf' schemas.
      * The oneOf child schemas may themselves be a composed schema (allOf, anyOf, oneOf).
@@ -196,14 +256,24 @@ public class PetDto extends AbstractOpenApiSchema {
             return;
         }
 
-        throw new RuntimeException("Invalid instance type. Must be CatDto, DogDto");
+        if (instance instanceof GoldfishDto) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        if (instance instanceof WorkingDogDto) {
+            super.setActualInstance(instance);
+            return;
+        }
+
+        throw new RuntimeException("Invalid instance type. Must be CatDto, DogDto, GoldfishDto, WorkingDogDto");
     }
 
     /**
      * Get the actual instance, which can be the following:
-     * CatDto, DogDto
+     * CatDto, DogDto, GoldfishDto, WorkingDogDto
      *
-     * @return The actual instance (CatDto, DogDto)
+     * @return The actual instance (CatDto, DogDto, GoldfishDto, WorkingDogDto)
      */
     @Override
     public Object getActualInstance() {
@@ -230,6 +300,28 @@ public class PetDto extends AbstractOpenApiSchema {
      */
     public DogDto getDogDto() throws ClassCastException {
         return (DogDto)super.getActualInstance();
+    }
+
+    /**
+     * Get the actual instance of `GoldfishDto`. If the actual instance is not `GoldfishDto`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `GoldfishDto`
+     * @throws ClassCastException if the instance is not `GoldfishDto`
+     */
+    public GoldfishDto getGoldfishDto() throws ClassCastException {
+        return (GoldfishDto)super.getActualInstance();
+    }
+
+    /**
+     * Get the actual instance of `WorkingDogDto`. If the actual instance is not `WorkingDogDto`,
+     * the ClassCastException will be thrown.
+     *
+     * @return The actual instance of `WorkingDogDto`
+     * @throws ClassCastException if the instance is not `WorkingDogDto`
+     */
+    public WorkingDogDto getWorkingDogDto() throws ClassCastException {
+        return (WorkingDogDto)super.getActualInstance();
     }
 
 
@@ -259,8 +351,24 @@ public class PetDto extends AbstractOpenApiSchema {
       errorMessages.add(String.format("Deserialization for DogDto failed with `%s`.", e.getMessage()));
       // continue to the next one
     }
+    // validate the json string with GoldfishDto
+    try {
+      GoldfishDto.validateJsonObject(jsonObj);
+      validCount++;
+    } catch (Exception e) {
+      errorMessages.add(String.format("Deserialization for GoldfishDto failed with `%s`.", e.getMessage()));
+      // continue to the next one
+    }
+    // validate the json string with WorkingDogDto
+    try {
+      WorkingDogDto.validateJsonObject(jsonObj);
+      validCount++;
+    } catch (Exception e) {
+      errorMessages.add(String.format("Deserialization for WorkingDogDto failed with `%s`.", e.getMessage()));
+      // continue to the next one
+    }
     if (validCount != 1) {
-      throw new IOException(String.format("The JSON string is invalid for PetDto with oneOf schemas: CatDto, DogDto. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", validCount, errorMessages, jsonObj.toString()));
+      throw new IOException(String.format("The JSON string is invalid for PetDto with oneOf schemas: CatDto, DogDto, GoldfishDto, WorkingDogDto. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", validCount, errorMessages, jsonObj.toString()));
     }
   }
 

@@ -19,10 +19,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
-import io.github.jhannes.openapi.typeHierarchy.model.CatDto;
-import io.github.jhannes.openapi.typeHierarchy.model.DogDto;
-import io.github.jhannes.openapi.typeHierarchy.model.GoldfishDto;
-import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -33,17 +29,17 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for PetDto
+ * Model tests for WorkingDogDto
  */
-public class PetDtoTest {
-    private final PetDto model = new PetDto();
+public class WorkingDogDtoTest {
+    private final WorkingDogDto model = new WorkingDogDto();
 
     /**
-     * Model tests for PetDto
+     * Model tests for WorkingDogDto
      */
     @Test
-    public void testPetDto() {
-        // TODO: test PetDto
+    public void testWorkingDogDto() {
+        // TODO: test WorkingDogDto
     }
 
     /**
@@ -87,22 +83,6 @@ public class PetDtoTest {
     }
 
     /**
-     * Test the property 'hunts'
-     */
-    @Test
-    public void huntsTest() {
-        // TODO: test hunts
-    }
-
-    /**
-     * Test the property 'age'
-     */
-    @Test
-    public void ageTest() {
-        // TODO: test age
-    }
-
-    /**
      * Test the property 'bark'
      */
     @Test
@@ -124,14 +104,6 @@ public class PetDtoTest {
     @Test
     public void capabilitiesTest() {
         // TODO: test capabilities
-    }
-
-    /**
-     * Test the property 'species'
-     */
-    @Test
-    public void speciesTest() {
-        // TODO: test species
     }
 
 }

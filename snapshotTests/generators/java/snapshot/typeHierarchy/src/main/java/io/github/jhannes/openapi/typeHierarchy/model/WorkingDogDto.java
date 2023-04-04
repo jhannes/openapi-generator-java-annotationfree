@@ -24,6 +24,8 @@ import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -46,10 +48,10 @@ import java.util.Set;
 import io.github.jhannes.openapi.typeHierarchy.JSON;
 
 /**
- * DogDto
+ * WorkingDogDto
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class DogDto {
+public class WorkingDogDto {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
   private String id;
@@ -71,7 +73,7 @@ public class DogDto {
    */
   @JsonAdapter(PetTypeEnum.Adapter.class)
   public enum PetTypeEnum {
-    DOG("Dog");
+    WORKINGDOG("WorkingDog");
 
     private String value;
 
@@ -174,11 +176,64 @@ public class DogDto {
   @SerializedName(SERIALIZED_NAME_BREED)
   private BreedEnum breed;
 
-  public DogDto() {
+  /**
+   * Gets or Sets capabilities
+   */
+  @JsonAdapter(CapabilitiesEnum.Adapter.class)
+  public enum CapabilitiesEnum {
+    GUIDE("Guide"),
+    
+    RESCUE("Rescue"),
+    
+    SEARCH("Search");
+
+    private String value;
+
+    CapabilitiesEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static CapabilitiesEnum fromValue(String value) {
+      for (CapabilitiesEnum b : CapabilitiesEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<CapabilitiesEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final CapabilitiesEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public CapabilitiesEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return CapabilitiesEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_CAPABILITIES = "capabilities";
+  @SerializedName(SERIALIZED_NAME_CAPABILITIES)
+  private List<CapabilitiesEnum> capabilities = new ArrayList<>();
+
+  public WorkingDogDto() {
   }
 
   
-  public DogDto(
+  public WorkingDogDto(
      String id
   ) {
     this();
@@ -199,7 +254,7 @@ public class DogDto {
 
 
 
-  public DogDto name(String name) {
+  public WorkingDogDto name(String name) {
     
     this.name = name;
     return this;
@@ -222,7 +277,7 @@ public class DogDto {
   }
 
 
-  public DogDto birthDate(String birthDate) {
+  public WorkingDogDto birthDate(String birthDate) {
     
     this.birthDate = birthDate;
     return this;
@@ -245,7 +300,7 @@ public class DogDto {
   }
 
 
-  public DogDto ownerAddress(AddressDto ownerAddress) {
+  public WorkingDogDto ownerAddress(AddressDto ownerAddress) {
     
     this.ownerAddress = ownerAddress;
     return this;
@@ -268,7 +323,7 @@ public class DogDto {
   }
 
 
-  public DogDto petType(PetTypeEnum petType) {
+  public WorkingDogDto petType(PetTypeEnum petType) {
     
     this.petType = petType;
     return this;
@@ -291,7 +346,7 @@ public class DogDto {
   }
 
 
-  public DogDto bark(Boolean bark) {
+  public WorkingDogDto bark(Boolean bark) {
     
     this.bark = bark;
     return this;
@@ -314,7 +369,7 @@ public class DogDto {
   }
 
 
-  public DogDto breed(BreedEnum breed) {
+  public WorkingDogDto breed(BreedEnum breed) {
     
     this.breed = breed;
     return this;
@@ -337,6 +392,34 @@ public class DogDto {
   }
 
 
+  public WorkingDogDto capabilities(List<CapabilitiesEnum> capabilities) {
+    
+    this.capabilities = capabilities;
+    return this;
+  }
+
+  public WorkingDogDto addCapabilitiesItem(CapabilitiesEnum capabilitiesItem) {
+    this.capabilities.add(capabilitiesItem);
+    return this;
+  }
+
+   /**
+   * Get capabilities
+   * @return capabilities
+  **/
+  @javax.annotation.Nonnull
+  @ApiModelProperty(required = true, value = "")
+
+  public List<CapabilitiesEnum> getCapabilities() {
+    return capabilities;
+  }
+
+
+  public void setCapabilities(List<CapabilitiesEnum> capabilities) {
+    this.capabilities = capabilities;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -346,25 +429,26 @@ public class DogDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    DogDto dog = (DogDto) o;
-    return Objects.equals(this.id, dog.id) &&
-        Objects.equals(this.name, dog.name) &&
-        Objects.equals(this.birthDate, dog.birthDate) &&
-        Objects.equals(this.ownerAddress, dog.ownerAddress) &&
-        Objects.equals(this.petType, dog.petType) &&
-        Objects.equals(this.bark, dog.bark) &&
-        Objects.equals(this.breed, dog.breed);
+    WorkingDogDto workingDog = (WorkingDogDto) o;
+    return Objects.equals(this.id, workingDog.id) &&
+        Objects.equals(this.name, workingDog.name) &&
+        Objects.equals(this.birthDate, workingDog.birthDate) &&
+        Objects.equals(this.ownerAddress, workingDog.ownerAddress) &&
+        Objects.equals(this.petType, workingDog.petType) &&
+        Objects.equals(this.bark, workingDog.bark) &&
+        Objects.equals(this.breed, workingDog.breed) &&
+        Objects.equals(this.capabilities, workingDog.capabilities);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, birthDate, ownerAddress, petType, bark, breed);
+    return Objects.hash(id, name, birthDate, ownerAddress, petType, bark, breed, capabilities);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class DogDto {\n");
+    sb.append("class WorkingDogDto {\n");
     sb.append("    id: ").append(toIndentedString(id)).append("\n");
     sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    birthDate: ").append(toIndentedString(birthDate)).append("\n");
@@ -372,6 +456,7 @@ public class DogDto {
     sb.append("    petType: ").append(toIndentedString(petType)).append("\n");
     sb.append("    bark: ").append(toIndentedString(bark)).append("\n");
     sb.append("    breed: ").append(toIndentedString(breed)).append("\n");
+    sb.append("    capabilities: ").append(toIndentedString(capabilities)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -401,38 +486,40 @@ public class DogDto {
     openapiFields.add("pet_type");
     openapiFields.add("bark");
     openapiFields.add("breed");
+    openapiFields.add("capabilities");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
     openapiRequiredFields.add("name");
     openapiRequiredFields.add("pet_type");
+    openapiRequiredFields.add("capabilities");
   }
 
  /**
   * Validates the JSON Object and throws an exception if issues found
   *
   * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to DogDto
+  * @throws IOException if the JSON Object is invalid with respect to WorkingDogDto
   */
   public static void validateJsonObject(JsonObject jsonObj) throws IOException {
       if (jsonObj == null) {
-        if (DogDto.openapiRequiredFields.isEmpty()) {
+        if (WorkingDogDto.openapiRequiredFields.isEmpty()) {
           return;
         } else { // has required fields
-          throw new IllegalArgumentException(String.format("The required field(s) %s in DogDto is not found in the empty JSON string", DogDto.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in WorkingDogDto is not found in the empty JSON string", WorkingDogDto.openapiRequiredFields.toString()));
         }
       }
 
       Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
       // check to see if the JSON string contains additional fields
       for (Entry<String, JsonElement> entry : entries) {
-        if (!DogDto.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `DogDto` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        if (!WorkingDogDto.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `WorkingDogDto` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : DogDto.openapiRequiredFields) {
+      for (String requiredField : WorkingDogDto.openapiRequiredFields) {
         if (jsonObj.get(requiredField) == null) {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
         }
@@ -456,28 +543,32 @@ public class DogDto {
       if ((jsonObj.get("breed") != null && !jsonObj.get("breed").isJsonNull()) && !jsonObj.get("breed").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `breed` to be a primitive type in the JSON string but got `%s`", jsonObj.get("breed").toString()));
       }
+      // ensure the json data is an array
+      if ((jsonObj.get("capabilities") != null && !jsonObj.get("capabilities").isJsonNull()) && !jsonObj.get("capabilities").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `capabilities` to be an array in the JSON string but got `%s`", jsonObj.get("capabilities").toString()));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!DogDto.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'DogDto' and its subtypes
+       if (!WorkingDogDto.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'WorkingDogDto' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<DogDto> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(DogDto.class));
+       final TypeAdapter<WorkingDogDto> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(WorkingDogDto.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<DogDto>() {
+       return (TypeAdapter<T>) new TypeAdapter<WorkingDogDto>() {
            @Override
-           public void write(JsonWriter out, DogDto value) throws IOException {
+           public void write(JsonWriter out, WorkingDogDto value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public DogDto read(JsonReader in) throws IOException {
+           public WorkingDogDto read(JsonReader in) throws IOException {
              JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
              validateJsonObject(jsonObj);
              return thisAdapter.fromJsonTree(jsonObj);
@@ -488,18 +579,18 @@ public class DogDto {
   }
 
  /**
-  * Create an instance of DogDto given an JSON string
+  * Create an instance of WorkingDogDto given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of DogDto
-  * @throws IOException if the JSON string is invalid with respect to DogDto
+  * @return An instance of WorkingDogDto
+  * @throws IOException if the JSON string is invalid with respect to WorkingDogDto
   */
-  public static DogDto fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, DogDto.class);
+  public static WorkingDogDto fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, WorkingDogDto.class);
   }
 
  /**
-  * Convert an instance of DogDto to an JSON string
+  * Convert an instance of WorkingDogDto to an JSON string
   *
   * @return JSON string
   */

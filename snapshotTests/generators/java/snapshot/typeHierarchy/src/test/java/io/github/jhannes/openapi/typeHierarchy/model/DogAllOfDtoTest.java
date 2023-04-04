@@ -18,7 +18,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.github.jhannes.openapi.typeHierarchy.model.DogDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -38,6 +37,14 @@ public class DogAllOfDtoTest {
     @Test
     public void testDogAllOfDto() {
         // TODO: test DogAllOfDto
+    }
+
+    /**
+     * Test the property 'petType'
+     */
+    @Test
+    public void petTypeTest() {
+        // TODO: test petType
     }
 
     /**

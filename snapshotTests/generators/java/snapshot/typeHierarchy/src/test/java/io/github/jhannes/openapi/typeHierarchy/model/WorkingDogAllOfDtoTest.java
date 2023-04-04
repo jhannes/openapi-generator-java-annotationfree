@@ -21,22 +21,24 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for CatAllOfDto
+ * Model tests for WorkingDogAllOfDto
  */
-public class CatAllOfDtoTest {
-    private final CatAllOfDto model = new CatAllOfDto();
+public class WorkingDogAllOfDtoTest {
+    private final WorkingDogAllOfDto model = new WorkingDogAllOfDto();
 
     /**
-     * Model tests for CatAllOfDto
+     * Model tests for WorkingDogAllOfDto
      */
     @Test
-    public void testCatAllOfDto() {
-        // TODO: test CatAllOfDto
+    public void testWorkingDogAllOfDto() {
+        // TODO: test WorkingDogAllOfDto
     }
 
     /**
@@ -48,19 +50,11 @@ public class CatAllOfDtoTest {
     }
 
     /**
-     * Test the property 'hunts'
+     * Test the property 'capabilities'
      */
     @Test
-    public void huntsTest() {
-        // TODO: test hunts
-    }
-
-    /**
-     * Test the property 'age'
-     */
-    @Test
-    public void ageTest() {
-        // TODO: test age
+    public void capabilitiesTest() {
+        // TODO: test capabilities
     }
 
 }

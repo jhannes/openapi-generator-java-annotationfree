@@ -26,17 +26,17 @@ import org.junit.jupiter.api.Test;
 
 
 /**
- * Model tests for CatAllOfDto
+ * Model tests for GoldfishDto
  */
-public class CatAllOfDtoTest {
-    private final CatAllOfDto model = new CatAllOfDto();
+public class GoldfishDtoTest {
+    private final GoldfishDto model = new GoldfishDto();
 
     /**
-     * Model tests for CatAllOfDto
+     * Model tests for GoldfishDto
      */
     @Test
-    public void testCatAllOfDto() {
-        // TODO: test CatAllOfDto
+    public void testGoldfishDto() {
+        // TODO: test GoldfishDto
     }
 
     /**
@@ -48,19 +48,11 @@ public class CatAllOfDtoTest {
     }
 
     /**
-     * Test the property 'hunts'
+     * Test the property 'species'
      */
     @Test
-    public void huntsTest() {
-        // TODO: test hunts
-    }
-
-    /**
-     * Test the property 'age'
-     */
-    @Test
-    public void ageTest() {
-        // TODO: test age
+    public void speciesTest() {
+        // TODO: test species
     }
 
 }

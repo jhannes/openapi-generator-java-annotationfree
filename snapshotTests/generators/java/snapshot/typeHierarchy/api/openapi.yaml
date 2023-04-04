@@ -42,8 +42,6 @@ components:
         id:
           readOnly: true
           type: string
-        pet_type:
-          type: string
         name:
           type: string
         birth_date:
@@ -51,25 +49,44 @@ components:
         ownerAddress:
           $ref: '#/components/schemas/Address'
       required:
-      - pet_type
+      - name
     Dog:
       allOf:
       - $ref: '#/components/schemas/PetBase'
       - $ref: '#/components/schemas/Dog_allOf'
+    WorkingDog:
+      allOf:
+      - $ref: '#/components/schemas/Dog'
+      - $ref: '#/components/schemas/WorkingDog_allOf'
     Cat:
       allOf:
       - $ref: '#/components/schemas/PetBase'
       - $ref: '#/components/schemas/Cat_allOf'
+    Goldfish:
+      properties:
+        pet_type:
+          enum:
+          - Goldfish
+          type: string
+        species:
+          type: string
+      required:
+      - pet_type
+      type: object
     Pet:
       discriminator:
         propertyName: pet_type
       oneOf:
       - $ref: '#/components/schemas/Cat'
       - $ref: '#/components/schemas/Dog'
+      - $ref: '#/components/schemas/WorkingDog'
+      - $ref: '#/components/schemas/Goldfish'
     Dog_allOf:
-      discriminator:
-        propertyName: pet_type
       properties:
+        pet_type:
+          enum:
+          - Dog
+          type: string
         bark:
           type: boolean
         breed:
@@ -79,17 +96,42 @@ components:
           - Retriever
           - Shepherd
           type: string
+      required:
+      - pet_type
+      type: object
+      example: null
+    WorkingDog_allOf:
+      properties:
+        pet_type:
+          enum:
+          - WorkingDog
+          type: string
+        capabilities:
+          items:
+            enum:
+            - Guide
+            - Rescue
+            - Search
+            type: string
+          type: array
+      required:
+      - capabilities
+      - pet_type
       type: object
       example: null
     Cat_allOf:
-      discriminator:
-        propertyName: pet_type
       properties:
+        pet_type:
+          enum:
+          - Cat
+          type: string
         hunts:
           type: boolean
         age:
           readOnly: true
           type: integer
+      required:
+      - pet_type
       type: object
       example: null
 

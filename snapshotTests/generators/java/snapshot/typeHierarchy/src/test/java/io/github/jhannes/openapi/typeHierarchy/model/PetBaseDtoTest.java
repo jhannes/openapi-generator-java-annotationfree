@@ -49,14 +49,6 @@ public class PetBaseDtoTest {
     }
 
     /**
-     * Test the property 'petType'
-     */
-    @Test
-    public void petTypeTest() {
-        // TODO: test petType
-    }
-
-    /**
      * Test the property 'name'
      */
     @Test

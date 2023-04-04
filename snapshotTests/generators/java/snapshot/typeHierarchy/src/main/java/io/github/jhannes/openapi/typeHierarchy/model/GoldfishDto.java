@@ -45,16 +45,16 @@ import java.util.Set;
 import io.github.jhannes.openapi.typeHierarchy.JSON;
 
 /**
- * CatAllOfDto
+ * GoldfishDto
  */
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen")
-public class CatAllOfDto {
+public class GoldfishDto {
   /**
    * Gets or Sets petType
    */
   @JsonAdapter(PetTypeEnum.Adapter.class)
   public enum PetTypeEnum {
-    CAT("Cat");
+    GOLDFISH("Goldfish");
 
     private String value;
 
@@ -98,26 +98,14 @@ public class CatAllOfDto {
   @SerializedName(SERIALIZED_NAME_PET_TYPE)
   private PetTypeEnum petType;
 
-  public static final String SERIALIZED_NAME_HUNTS = "hunts";
-  @SerializedName(SERIALIZED_NAME_HUNTS)
-  private Boolean hunts;
+  public static final String SERIALIZED_NAME_SPECIES = "species";
+  @SerializedName(SERIALIZED_NAME_SPECIES)
+  private String species;
 
-  public static final String SERIALIZED_NAME_AGE = "age";
-  @SerializedName(SERIALIZED_NAME_AGE)
-  private Integer age;
-
-  public CatAllOfDto() {
+  public GoldfishDto() {
   }
 
-  
-  public CatAllOfDto(
-     Integer age
-  ) {
-    this();
-    this.age = age;
-  }
-
-  public CatAllOfDto petType(PetTypeEnum petType) {
+  public GoldfishDto petType(PetTypeEnum petType) {
     
     this.petType = petType;
     return this;
@@ -140,41 +128,27 @@ public class CatAllOfDto {
   }
 
 
-  public CatAllOfDto hunts(Boolean hunts) {
+  public GoldfishDto species(String species) {
     
-    this.hunts = hunts;
+    this.species = species;
     return this;
   }
 
    /**
-   * Get hunts
-   * @return hunts
+   * Get species
+   * @return species
   **/
   @javax.annotation.Nullable
   @ApiModelProperty(value = "")
 
-  public Boolean getHunts() {
-    return hunts;
+  public String getSpecies() {
+    return species;
   }
 
 
-  public void setHunts(Boolean hunts) {
-    this.hunts = hunts;
+  public void setSpecies(String species) {
+    this.species = species;
   }
-
-
-   /**
-   * Get age
-   * @return age
-  **/
-  @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
-  public Integer getAge() {
-    return age;
-  }
-
-
 
 
 
@@ -186,24 +160,22 @@ public class CatAllOfDto {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CatAllOfDto catAllOf = (CatAllOfDto) o;
-    return Objects.equals(this.petType, catAllOf.petType) &&
-        Objects.equals(this.hunts, catAllOf.hunts) &&
-        Objects.equals(this.age, catAllOf.age);
+    GoldfishDto goldfish = (GoldfishDto) o;
+    return Objects.equals(this.petType, goldfish.petType) &&
+        Objects.equals(this.species, goldfish.species);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(petType, hunts, age);
+    return Objects.hash(petType, species);
   }
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CatAllOfDto {\n");
+    sb.append("class GoldfishDto {\n");
     sb.append("    petType: ").append(toIndentedString(petType)).append("\n");
-    sb.append("    hunts: ").append(toIndentedString(hunts)).append("\n");
-    sb.append("    age: ").append(toIndentedString(age)).append("\n");
+    sb.append("    species: ").append(toIndentedString(species)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -227,8 +199,7 @@ public class CatAllOfDto {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("pet_type");
-    openapiFields.add("hunts");
-    openapiFields.add("age");
+    openapiFields.add("species");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -239,27 +210,27 @@ public class CatAllOfDto {
   * Validates the JSON Object and throws an exception if issues found
   *
   * @param jsonObj JSON Object
-  * @throws IOException if the JSON Object is invalid with respect to CatAllOfDto
+  * @throws IOException if the JSON Object is invalid with respect to GoldfishDto
   */
   public static void validateJsonObject(JsonObject jsonObj) throws IOException {
       if (jsonObj == null) {
-        if (CatAllOfDto.openapiRequiredFields.isEmpty()) {
+        if (GoldfishDto.openapiRequiredFields.isEmpty()) {
           return;
         } else { // has required fields
-          throw new IllegalArgumentException(String.format("The required field(s) %s in CatAllOfDto is not found in the empty JSON string", CatAllOfDto.openapiRequiredFields.toString()));
+          throw new IllegalArgumentException(String.format("The required field(s) %s in GoldfishDto is not found in the empty JSON string", GoldfishDto.openapiRequiredFields.toString()));
         }
       }
 
       Set<Entry<String, JsonElement>> entries = jsonObj.entrySet();
       // check to see if the JSON string contains additional fields
       for (Entry<String, JsonElement> entry : entries) {
-        if (!CatAllOfDto.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `CatAllOfDto` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
+        if (!GoldfishDto.openapiFields.contains(entry.getKey())) {
+          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GoldfishDto` properties. JSON: %s", entry.getKey(), jsonObj.toString()));
         }
       }
 
       // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : CatAllOfDto.openapiRequiredFields) {
+      for (String requiredField : GoldfishDto.openapiRequiredFields) {
         if (jsonObj.get(requiredField) == null) {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
         }
@@ -267,28 +238,31 @@ public class CatAllOfDto {
       if ((jsonObj.get("pet_type") != null && !jsonObj.get("pet_type").isJsonNull()) && !jsonObj.get("pet_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `pet_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("pet_type").toString()));
       }
+      if ((jsonObj.get("species") != null && !jsonObj.get("species").isJsonNull()) && !jsonObj.get("species").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `species` to be a primitive type in the JSON string but got `%s`", jsonObj.get("species").toString()));
+      }
   }
 
   public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!CatAllOfDto.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'CatAllOfDto' and its subtypes
+       if (!GoldfishDto.class.isAssignableFrom(type.getRawType())) {
+         return null; // this class only serializes 'GoldfishDto' and its subtypes
        }
        final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<CatAllOfDto> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(CatAllOfDto.class));
+       final TypeAdapter<GoldfishDto> thisAdapter
+                        = gson.getDelegateAdapter(this, TypeToken.get(GoldfishDto.class));
 
-       return (TypeAdapter<T>) new TypeAdapter<CatAllOfDto>() {
+       return (TypeAdapter<T>) new TypeAdapter<GoldfishDto>() {
            @Override
-           public void write(JsonWriter out, CatAllOfDto value) throws IOException {
+           public void write(JsonWriter out, GoldfishDto value) throws IOException {
              JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
              elementAdapter.write(out, obj);
            }
 
            @Override
-           public CatAllOfDto read(JsonReader in) throws IOException {
+           public GoldfishDto read(JsonReader in) throws IOException {
              JsonObject jsonObj = elementAdapter.read(in).getAsJsonObject();
              validateJsonObject(jsonObj);
              return thisAdapter.fromJsonTree(jsonObj);
@@ -299,18 +273,18 @@ public class CatAllOfDto {
   }
 
  /**
-  * Create an instance of CatAllOfDto given an JSON string
+  * Create an instance of GoldfishDto given an JSON string
   *
   * @param jsonString JSON string
-  * @return An instance of CatAllOfDto
-  * @throws IOException if the JSON string is invalid with respect to CatAllOfDto
+  * @return An instance of GoldfishDto
+  * @throws IOException if the JSON string is invalid with respect to GoldfishDto
   */
-  public static CatAllOfDto fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, CatAllOfDto.class);
+  public static GoldfishDto fromJson(String jsonString) throws IOException {
+    return JSON.getGson().fromJson(jsonString, GoldfishDto.class);
   }
 
  /**
-  * Convert an instance of CatAllOfDto to an JSON string
+  * Convert an instance of GoldfishDto to an JSON string
   *
   * @return JSON string
   */

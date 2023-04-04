@@ -122,8 +122,11 @@ Class | Method | HTTP request | Description
  - [CatDto](docs/CatDto.md)
  - [DogAllOfDto](docs/DogAllOfDto.md)
  - [DogDto](docs/DogDto.md)
+ - [GoldfishDto](docs/GoldfishDto.md)
  - [PetBaseDto](docs/PetBaseDto.md)
  - [PetDto](docs/PetDto.md)
+ - [WorkingDogAllOfDto](docs/WorkingDogAllOfDto.md)
+ - [WorkingDogDto](docs/WorkingDogDto.md)
 
 
 ## Documentation for Authorization

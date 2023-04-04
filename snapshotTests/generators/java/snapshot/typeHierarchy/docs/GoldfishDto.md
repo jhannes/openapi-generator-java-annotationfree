@@ -1,6 +1,6 @@
 
 
-# CatAllOfDto
+# GoldfishDto
 
 
 ## Properties
@@ -8,8 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**petType** | [**PetTypeEnum**](#PetTypeEnum) |  |  |
-|**hunts** | **Boolean** |  |  [optional] |
-|**age** | **Integer** |  |  [optional] [readonly] |
+|**species** | **String** |  |  [optional] |
 
 
 
@@ -17,7 +16,7 @@
 
 | Name | Value |
 |---- | -----|
-| CAT | &quot;Cat&quot; |
+| GOLDFISH | &quot;Goldfish&quot; |
 
 
 

@@ -58,50 +58,14 @@ public class JSON {
     @SuppressWarnings("unchecked")
     public static GsonBuilder createGson() {
         GsonFireBuilder fireBuilder = new GsonFireBuilder()
-                .registerTypeSelector(io.github.jhannes.openapi.typeHierarchy.model.CatAllOfDto.class, new TypeSelector<io.github.jhannes.openapi.typeHierarchy.model.CatAllOfDto>() {
-                    @Override
-                    public Class<? extends io.github.jhannes.openapi.typeHierarchy.model.CatAllOfDto> getClassForElement(JsonElement readElement) {
-                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
-                        classByDiscriminatorValue.put("Cat", io.github.jhannes.openapi.typeHierarchy.model.CatDto.class);
-                        classByDiscriminatorValue.put("Cat_allOf", io.github.jhannes.openapi.typeHierarchy.model.CatAllOfDto.class);
-                        return getClassByDiscriminator(classByDiscriminatorValue,
-                                getDiscriminatorValue(readElement, "pet_type"));
-                    }
-          })
-                .registerTypeSelector(io.github.jhannes.openapi.typeHierarchy.model.CatDto.class, new TypeSelector<io.github.jhannes.openapi.typeHierarchy.model.CatDto>() {
-                    @Override
-                    public Class<? extends io.github.jhannes.openapi.typeHierarchy.model.CatDto> getClassForElement(JsonElement readElement) {
-                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
-                        classByDiscriminatorValue.put("Cat", io.github.jhannes.openapi.typeHierarchy.model.CatDto.class);
-                        return getClassByDiscriminator(classByDiscriminatorValue,
-                                getDiscriminatorValue(readElement, "pet_type"));
-                    }
-          })
-                .registerTypeSelector(io.github.jhannes.openapi.typeHierarchy.model.DogAllOfDto.class, new TypeSelector<io.github.jhannes.openapi.typeHierarchy.model.DogAllOfDto>() {
-                    @Override
-                    public Class<? extends io.github.jhannes.openapi.typeHierarchy.model.DogAllOfDto> getClassForElement(JsonElement readElement) {
-                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
-                        classByDiscriminatorValue.put("Dog", io.github.jhannes.openapi.typeHierarchy.model.DogDto.class);
-                        classByDiscriminatorValue.put("Dog_allOf", io.github.jhannes.openapi.typeHierarchy.model.DogAllOfDto.class);
-                        return getClassByDiscriminator(classByDiscriminatorValue,
-                                getDiscriminatorValue(readElement, "pet_type"));
-                    }
-          })
-                .registerTypeSelector(io.github.jhannes.openapi.typeHierarchy.model.DogDto.class, new TypeSelector<io.github.jhannes.openapi.typeHierarchy.model.DogDto>() {
-                    @Override
-                    public Class<? extends io.github.jhannes.openapi.typeHierarchy.model.DogDto> getClassForElement(JsonElement readElement) {
-                        Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
-                        classByDiscriminatorValue.put("Dog", io.github.jhannes.openapi.typeHierarchy.model.DogDto.class);
-                        return getClassByDiscriminator(classByDiscriminatorValue,
-                                getDiscriminatorValue(readElement, "pet_type"));
-                    }
-          })
                 .registerTypeSelector(io.github.jhannes.openapi.typeHierarchy.model.PetDto.class, new TypeSelector<io.github.jhannes.openapi.typeHierarchy.model.PetDto>() {
                     @Override
                     public Class<? extends io.github.jhannes.openapi.typeHierarchy.model.PetDto> getClassForElement(JsonElement readElement) {
                         Map<String, Class> classByDiscriminatorValue = new HashMap<String, Class>();
                         classByDiscriminatorValue.put("Cat", io.github.jhannes.openapi.typeHierarchy.model.CatDto.class);
                         classByDiscriminatorValue.put("Dog", io.github.jhannes.openapi.typeHierarchy.model.DogDto.class);
+                        classByDiscriminatorValue.put("Goldfish", io.github.jhannes.openapi.typeHierarchy.model.GoldfishDto.class);
+                        classByDiscriminatorValue.put("WorkingDog", io.github.jhannes.openapi.typeHierarchy.model.WorkingDogDto.class);
                         classByDiscriminatorValue.put("Pet", io.github.jhannes.openapi.typeHierarchy.model.PetDto.class);
                         return getClassByDiscriminator(classByDiscriminatorValue,
                                 getDiscriminatorValue(readElement, "pet_type"));
@@ -143,10 +107,15 @@ public class JSON {
         gsonBuilder.registerTypeAdapter(LocalDate.class, localDateTypeAdapter);
         gsonBuilder.registerTypeAdapter(byte[].class, byteArrayAdapter);
         gsonBuilder.registerTypeAdapterFactory(new io.github.jhannes.openapi.typeHierarchy.model.AddressDto.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new io.github.jhannes.openapi.typeHierarchy.model.CatAllOfDto.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new io.github.jhannes.openapi.typeHierarchy.model.CatDto.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new io.github.jhannes.openapi.typeHierarchy.model.DogAllOfDto.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new io.github.jhannes.openapi.typeHierarchy.model.DogDto.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new io.github.jhannes.openapi.typeHierarchy.model.GoldfishDto.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new io.github.jhannes.openapi.typeHierarchy.model.PetBaseDto.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new io.github.jhannes.openapi.typeHierarchy.model.PetDto.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new io.github.jhannes.openapi.typeHierarchy.model.WorkingDogAllOfDto.CustomTypeAdapterFactory());
+        gsonBuilder.registerTypeAdapterFactory(new io.github.jhannes.openapi.typeHierarchy.model.WorkingDogDto.CustomTypeAdapterFactory());
         gson = gsonBuilder.create();
     }
 
