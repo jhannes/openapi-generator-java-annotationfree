@@ -41,6 +41,7 @@ public class CatDto extends PetBaseDto implements PetDto {
 
     public static String[] readOnlyFields() {
         return new String[] {
+                "age",
                 "id",
         };
     }
@@ -185,11 +186,6 @@ public class CatDto extends PetBaseDto implements PetDto {
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    hunts: ").append(toIndentedString(getHunts())).append("\n");
         sb.append("    age: ").append(toIndentedString(getAge())).append("\n");
-        sb.append("    id: ").append(toIndentedString(getId())).append("\n");
-        sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
-        sb.append("    name: ").append(toIndentedString(getName())).append("\n");
-        sb.append("    birth_date: ").append(toIndentedString(getBirthDate())).append("\n");
-        sb.append("    ownerAddress: ").append(toIndentedString(getOwnerAddress())).append("\n");
         sb.append("}");
         return sb.toString();
     }

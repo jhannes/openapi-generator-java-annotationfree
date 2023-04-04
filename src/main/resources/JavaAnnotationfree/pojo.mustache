@@ -22,11 +22,9 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
 
     public static String[] readOnlyFields() {
         return new String[] {
-        {{#allVars}}
-            {{#isReadOnly}}
+        {{#readOnlyVars}}
                 "{{baseName}}",
-            {{/isReadOnly}}
-        {{/allVars}}
+        {{/readOnlyVars}}
         };
     }
 
@@ -263,7 +261,9 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         {{/parent}}
         {{#vars}}
+        {{^isInherited}}
         sb.append("    {{baseName}}: ").append(toIndentedString({{getter}}())).append("\n");
+        {{/isInherited}}
         {{/vars}}
         sb.append("}");
         return sb.toString();

@@ -82,11 +82,11 @@ public interface {{classname}}{{#interfaces}}{{#-first}} extends {{/-first}}{{^-
     {{#isMap}}
 
     @Override
-    public {{classname}} put{{nameInCamelCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item);
+    {{classname}} put{{nameInCamelCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item);
     {{/isMap}}
 
     @Override
-    public {{classname}} {{name}}({{{datatypeWithEnum}}} {{name}});
+    {{classname}} {{name}}({{{datatypeWithEnum}}} {{name}});
     {{/isInherited}}
 {{/vars}}
 
