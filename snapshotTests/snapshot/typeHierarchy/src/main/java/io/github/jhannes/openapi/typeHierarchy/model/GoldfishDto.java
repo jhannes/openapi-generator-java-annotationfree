@@ -31,20 +31,16 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
-* CatDto
+* GoldfishDto
 */
-public class CatDto extends PetBaseDto implements PetDto {
+public class GoldfishDto implements PetDto {
 
-    private String pet_type = "Cat";
+    private String pet_type = "Goldfish";
 
-    private Boolean hunts = null;
-
-    private Integer age = null;
+    private String species = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
-                "age",
-                "id",
         };
     }
 
@@ -56,28 +52,21 @@ public class CatDto extends PetBaseDto implements PetDto {
     public static String[] requiredFields() {
         return new String[] {
                 "pet_type",
-                "name",
         };
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = super.missingRequiredFields();
+        List<String> result = new ArrayList<>();
         if (isMissing(getPetType())) result.add("pet_type");
         return result;
     }
 
     public void readOnlyFieldsWithValue(List<String> result) {
-        super.readOnlyFieldsWithValue(result);
-        if (!isMissing(getAge())) {
-            result.add("CatDto.age");
-        }
     }
 
-    public <T extends CatDto> T copyTo(T target) {
-        super.copyTo(target);
+    public <T extends GoldfishDto> T copyTo(T target) {
         if (this.getPetType() != null) target.setPetType(this.getPetType());
-        if (this.getHunts() != null) target.setHunts(this.getHunts());
-        if (this.getAge() != null) target.setAge(this.getAge());
+        if (this.getSpecies() != null) target.setSpecies(this.getSpecies());
         return target;
     }
 
@@ -106,68 +95,25 @@ public class CatDto extends PetBaseDto implements PetDto {
         this.pet_type = petType;
     }
 
-    public CatDto petType(String petType) {
+    public GoldfishDto petType(String petType) {
         this.pet_type = petType;
         return this;
     }
 
     /**
-     * Get hunts
-     * @return hunts
+     * Get species
+     * @return species
      */
-    public Boolean getHunts() {
-        return hunts;
+    public String getSpecies() {
+        return species;
     }
 
-    public void setHunts(Boolean hunts) {
-        this.hunts = hunts;
+    public void setSpecies(String species) {
+        this.species = species;
     }
 
-    public CatDto hunts(Boolean hunts) {
-        this.hunts = hunts;
-        return this;
-    }
-
-    /**
-     * Get age
-     * read only
-     * @return age
-     */
-    public Integer getAge() {
-        return age;
-    }
-
-    /** <strong>read only</strong> */
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public CatDto age(Integer age) {
-        this.age = age;
-        return this;
-    }
-
-    @Override
-    public CatDto id(String id) {
-        super.id(id);
-        return this;
-    }
-
-    @Override
-    public CatDto name(String name) {
-        super.name(name);
-        return this;
-    }
-
-    @Override
-    public CatDto birthDate(String birthDate) {
-        super.birthDate(birthDate);
-        return this;
-    }
-
-    @Override
-    public CatDto ownerAddress(AddressDto ownerAddress) {
-        super.ownerAddress(ownerAddress);
+    public GoldfishDto species(String species) {
+        this.species = species;
         return this;
     }
 
@@ -179,30 +125,22 @@ public class CatDto extends PetBaseDto implements PetDto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CatDto cat = (CatDto) o;
-        return Objects.equals(this.getPetType(), cat.getPetType()) &&
-                Objects.equals(this.getHunts(), cat.getHunts()) &&
-                Objects.equals(this.getAge(), cat.getAge()) &&
-                Objects.equals(this.getId(), cat.getId()) &&
-                Objects.equals(this.getName(), cat.getName()) &&
-                Objects.equals(this.getBirthDate(), cat.getBirthDate()) &&
-                Objects.equals(this.getOwnerAddress(), cat.getOwnerAddress()) &&
-            super.equals(o);
+        GoldfishDto goldfish = (GoldfishDto) o;
+        return Objects.equals(this.getPetType(), goldfish.getPetType()) &&
+                Objects.equals(this.getSpecies(), goldfish.getSpecies());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPetType(), getHunts(), getAge(), getId(), getName(), getBirthDate(), getOwnerAddress());
+        return Objects.hash(getPetType(), getSpecies());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class CatDto {\n");
-        sb.append("    ").append(toIndentedString(super.toString())).append("\n");
+        sb.append("class GoldfishDto {\n");
         sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
-        sb.append("    hunts: ").append(toIndentedString(getHunts())).append("\n");
-        sb.append("    age: ").append(toIndentedString(getAge())).append("\n");
+        sb.append("    species: ").append(toIndentedString(getSpecies())).append("\n");
         sb.append("}");
         return sb.toString();
     }

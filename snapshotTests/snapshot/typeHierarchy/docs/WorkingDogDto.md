@@ -1,17 +1,28 @@
 
-# DogDto
+# WorkingDogDto
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**petType** | **"Dog"** |  | 
-**bark** | **Boolean** |  |  [optional]
-**breed** | [**BreedEnum**](#BreedEnum) |  |  [optional]
+**petType** | **"WorkingDog"** |  | 
+**capabilities** | [**List<CapabilitiesEnum>**](#List<CapabilitiesEnum>) |  | 
 **id** | **String** |  |  [optional] [readonly]
 **name** | **String** |  | 
 **birthDate** | **String** |  |  [optional]
 **ownerAddress** | [**AddressDto**](AddressDto.md) |  |  [optional]
+**bark** | **Boolean** |  |  [optional]
+**breed** | [**BreedEnum**](#BreedEnum) |  |  [optional]
+
+
+
+## Enum: List<CapabilitiesEnum>
+
+Name | Value
+---- | -----
+GUIDE | &quot;Guide&quot;
+RESCUE | &quot;Rescue&quot;
+SEARCH | &quot;Search&quot;
 
 
 

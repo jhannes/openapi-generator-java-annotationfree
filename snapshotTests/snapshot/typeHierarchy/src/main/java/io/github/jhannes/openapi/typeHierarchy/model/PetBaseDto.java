@@ -37,9 +37,7 @@ public class PetBaseDto {
 
     private String id = null;
 
-    private String pet_type;
-
-    private String name = null;
+    private String name;
 
     private String birth_date = null;
 
@@ -58,13 +56,13 @@ public class PetBaseDto {
 
     public static String[] requiredFields() {
         return new String[] {
-                "pet_type",
+                "name",
         };
     }
 
     public List<String> missingRequiredFields() {
         List<String> result = new ArrayList<>();
-        if (isMissing(getPetType())) result.add("pet_type");
+        if (isMissing(getName())) result.add("name");
         return result;
     }
 
@@ -79,7 +77,6 @@ public class PetBaseDto {
 
     public <T extends PetBaseDto> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
-        if (this.getPetType() != null) target.setPetType(this.getPetType());
         if (this.getName() != null) target.setName(this.getName());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
         if (this.getOwnerAddress() != null) target.setOwnerAddress(this.getOwnerAddress());
@@ -115,23 +112,6 @@ public class PetBaseDto {
 
     public PetBaseDto id(String id) {
         this.id = id;
-        return this;
-    }
-
-    /**
-     * Get pet_type
-     * @return pet_type
-     */
-    public String getPetType() {
-        return pet_type;
-    }
-
-    public void setPetType(String petType) {
-        this.pet_type = petType;
-    }
-
-    public PetBaseDto petType(String petType) {
-        this.pet_type = petType;
         return this;
     }
 
@@ -196,7 +176,6 @@ public class PetBaseDto {
         }
         PetBaseDto petBase = (PetBaseDto) o;
         return Objects.equals(this.getId(), petBase.getId()) &&
-                Objects.equals(this.getPetType(), petBase.getPetType()) &&
                 Objects.equals(this.getName(), petBase.getName()) &&
                 Objects.equals(this.getBirthDate(), petBase.getBirthDate()) &&
                 Objects.equals(this.getOwnerAddress(), petBase.getOwnerAddress());
@@ -204,7 +183,7 @@ public class PetBaseDto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getPetType(), getName(), getBirthDate(), getOwnerAddress());
+        return Objects.hash(getId(), getName(), getBirthDate(), getOwnerAddress());
     }
 
     @Override
@@ -212,7 +191,6 @@ public class PetBaseDto {
         StringBuilder sb = new StringBuilder();
         sb.append("class PetBaseDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
-        sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("    birth_date: ").append(toIndentedString(getBirthDate())).append("\n");
         sb.append("    ownerAddress: ").append(toIndentedString(getOwnerAddress())).append("\n");
