@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /**
 * PersonInterface
 */
-public interface PersonInterface {
+public interface PersonInterface extends RecipientInterface {
 
     /**
      * Gets or Sets gender
@@ -119,16 +119,6 @@ public interface PersonInterface {
     PersonInterface familyName(String familyName);
 
     /**
-     * Get email
-     * @return email
-     */
-    String getEmail();
-
-    void setEmail(String email);
-
-    PersonInterface email(String email);
-
-    /**
      * Get phone
      * @return phone
      */
@@ -158,15 +148,18 @@ public interface PersonInterface {
 
     PersonInterface gender(GenderEnum gender);
 
+    @Override
+    PersonInterface email(String email);
+
     default <T extends PersonInterface> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getType() != null) target.setType(this.getType());
         if (this.getGivenName() != null) target.setGivenName(this.getGivenName());
         if (this.getFamilyName() != null) target.setFamilyName(this.getFamilyName());
-        if (this.getEmail() != null) target.setEmail(this.getEmail());
         if (this.getPhone() != null) target.setPhone(this.getPhone());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
         if (this.getGender() != null) target.setGender(this.getGender());
+        if (this.getEmail() != null) target.setEmail(this.getEmail());
         return target;
     }
 }

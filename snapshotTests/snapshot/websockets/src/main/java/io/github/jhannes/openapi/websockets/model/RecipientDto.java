@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /**
 * RecipientDto
 */
-public class RecipientDto {
+public class RecipientDto implements RecipientInterface {
 
     private String email = null;
 

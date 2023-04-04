@@ -8,6 +8,7 @@ docs/PersonDto.md
 docs/PersonInterface.md
 docs/PersonSnapshotDto.md
 docs/RecipientDto.md
+docs/RecipientInterface.md
 docs/StringSnapshotDto.md
 docs/SubscribeDto.md
 docs/UnsubscribeDto.md
@@ -24,6 +25,7 @@ src/main/java/io/github/jhannes/openapi/websockets/model/PersonDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/PersonInterface.java
 src/main/java/io/github/jhannes/openapi/websockets/model/PersonSnapshotDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/RecipientDto.java
+src/main/java/io/github/jhannes/openapi/websockets/model/RecipientInterface.java
 src/main/java/io/github/jhannes/openapi/websockets/model/SampleModelData.java
 src/main/java/io/github/jhannes/openapi/websockets/model/StringSnapshotDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/SubscribeDto.java

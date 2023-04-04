@@ -93,10 +93,10 @@ public class SampleModelData {
             .type(sampleString("type"))
             .givenName(sampleString("givenName"))
             .familyName(sampleString("familyName"))
-            .email(sampleString("email", "email"))
             .phone(sampleString("phone", "phone"))
             .birthDate(sampleLocalDate("birthDate"))
-            .gender(sampleGenderEnum("gender"));
+            .gender(sampleGenderEnum("gender"))
+            .email(sampleString("email", "email"));
     }
 
     public List<PersonDto> sampleListOfPersonDto(String propertyName) {
@@ -121,11 +121,11 @@ public class SampleModelData {
             .createdBy(sampleString("createdBy", "username"))
             .updatedAt(sampleOffsetDateTime("updatedAt"))
             .updatedBy(sampleString("updatedBy", "username"))
+            .email(sampleString("email", "email"))
             .id(sampleUUID("id"))
             .type(sampleString("type"))
             .givenName(sampleString("givenName"))
             .familyName(sampleString("familyName"))
-            .email(sampleString("email", "email"))
             .phone(sampleString("phone", "phone"))
             .birthDate(sampleLocalDate("birthDate"))
             .gender(sampleGenderEnum("gender"));

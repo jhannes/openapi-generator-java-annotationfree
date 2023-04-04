@@ -152,10 +152,6 @@ public class StringSnapshotDto extends ChangeTrackedDto {
         sb.append("class StringSnapshotDto {\n");
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");
-        sb.append("    createdAt: ").append(toIndentedString(getCreatedAt())).append("\n");
-        sb.append("    createdBy: ").append(toIndentedString(getCreatedBy())).append("\n");
-        sb.append("    updatedAt: ").append(toIndentedString(getUpdatedAt())).append("\n");
-        sb.append("    updatedBy: ").append(toIndentedString(getUpdatedBy())).append("\n");
         sb.append("}");
         return sb.toString();
     }

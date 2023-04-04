@@ -44,6 +44,8 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
 
     private String updatedBy = null;
 
+    private String email = null;
+
     private UUID id = null;
 
     private String type;
@@ -51,8 +53,6 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
     private String givenName;
 
     private String familyName;
-
-    private String email = null;
 
     private String phone = null;
 
@@ -102,11 +102,11 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         if (this.getCreatedBy() != null) target.setCreatedBy(this.getCreatedBy());
         if (this.getUpdatedAt() != null) target.setUpdatedAt(this.getUpdatedAt());
         if (this.getUpdatedBy() != null) target.setUpdatedBy(this.getUpdatedBy());
+        if (this.getEmail() != null) target.setEmail(this.getEmail());
         if (this.getId() != null) target.setId(this.getId());
         if (this.getType() != null) target.setType(this.getType());
         if (this.getGivenName() != null) target.setGivenName(this.getGivenName());
         if (this.getFamilyName() != null) target.setFamilyName(this.getFamilyName());
-        if (this.getEmail() != null) target.setEmail(this.getEmail());
         if (this.getPhone() != null) target.setPhone(this.getPhone());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
         if (this.getGender() != null) target.setGender(this.getGender());
@@ -195,6 +195,23 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
     }
 
     /**
+     * Get email
+     * @return email
+     */
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public PersonSnapshotDto email(String email) {
+        this.email = email;
+        return this;
+    }
+
+    /**
      * Get id
      * read only
      * @return id
@@ -265,23 +282,6 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
     }
 
     /**
-     * Get email
-     * @return email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public PersonSnapshotDto email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    /**
      * Get phone
      * @return phone
      */
@@ -345,11 +345,11 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
                 Objects.equals(this.getCreatedBy(), personSnapshot.getCreatedBy()) &&
                 Objects.equals(this.getUpdatedAt(), personSnapshot.getUpdatedAt()) &&
                 Objects.equals(this.getUpdatedBy(), personSnapshot.getUpdatedBy()) &&
+                Objects.equals(this.getEmail(), personSnapshot.getEmail()) &&
                 Objects.equals(this.getId(), personSnapshot.getId()) &&
                 Objects.equals(this.getType(), personSnapshot.getType()) &&
                 Objects.equals(this.getGivenName(), personSnapshot.getGivenName()) &&
                 Objects.equals(this.getFamilyName(), personSnapshot.getFamilyName()) &&
-                Objects.equals(this.getEmail(), personSnapshot.getEmail()) &&
                 Objects.equals(this.getPhone(), personSnapshot.getPhone()) &&
                 Objects.equals(this.getBirthDate(), personSnapshot.getBirthDate()) &&
                 Objects.equals(this.getGender(), personSnapshot.getGender());
@@ -357,7 +357,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCreatedAt(), getCreatedBy(), getUpdatedAt(), getUpdatedBy(), getId(), getType(), getGivenName(), getFamilyName(), getEmail(), getPhone(), getBirthDate(), getGender());
+        return Objects.hash(getCreatedAt(), getCreatedBy(), getUpdatedAt(), getUpdatedBy(), getEmail(), getId(), getType(), getGivenName(), getFamilyName(), getPhone(), getBirthDate(), getGender());
     }
 
     @Override
@@ -368,11 +368,11 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         sb.append("    createdBy: ").append(toIndentedString(getCreatedBy())).append("\n");
         sb.append("    updatedAt: ").append(toIndentedString(getUpdatedAt())).append("\n");
         sb.append("    updatedBy: ").append(toIndentedString(getUpdatedBy())).append("\n");
+        sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    type: ").append(toIndentedString(getType())).append("\n");
         sb.append("    givenName: ").append(toIndentedString(getGivenName())).append("\n");
         sb.append("    familyName: ").append(toIndentedString(getFamilyName())).append("\n");
-        sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
         sb.append("    phone: ").append(toIndentedString(getPhone())).append("\n");
         sb.append("    birthDate: ").append(toIndentedString(getBirthDate())).append("\n");
         sb.append("    gender: ").append(toIndentedString(getGender())).append("\n");

@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **type** | **String** |  | 
 **givenName** | **String** |  | 
 **familyName** | **String** |  | 
-**email** | **String** |  |  [optional]
 **phone** | **String** |  |  [optional]
 **birthDate** | [**LocalDate**](LocalDate.md) |  |  [optional]
 **gender** | [**GenderEnum**](#GenderEnum) |  |  [optional]
+**email** | **String** |  |  [optional]
 
 
 
