@@ -49,7 +49,7 @@ public class CompilerTest extends AbstractSnapshotTest {
     }
 
     public static DynamicNode createTestFromSpec(Path spec) {
-        return createTestFromSpec(spec, targetDir(spec, "compile"));
+        return createTestFromSpec(spec, getRootDir(spec).resolve("compile"));
     }
 
     static DynamicContainer createTestFromSpec(Path spec, Path outputDir) {

@@ -15,6 +15,34 @@ public class AbstractSnapshotTest {
     public static final Path LOCAL_SNAPSHOT_ROOT = Paths.get("localSnapshotTests");
 
     protected static CodegenConfigurator createConfigurator(String modelName, Path input, Path outputDir) {
+        return createBaseConfigurator(modelName, input, outputDir)
+                .setGeneratorName("java-annotationfree");
+    }
+
+    static CodegenConfigurator createBaseConfigurator(String modelName, Path input, Path outputDir) {
+        return createBaseConfigurator(modelName)
+                .setInputSpec(getInputSpec(input))
+                .setOutputDir(outputDir.toString());
+    }
+
+    private static CodegenConfigurator createBaseConfigurator(String modelName) {
+        return createBaseConfigurator()
+                .setPackageName("io.github.jhannes.openapi." + modelName)
+                .setModelPackage("io.github.jhannes.openapi." + modelName + ".model")
+                .setApiPackage("io.github.jhannes.openapi." + modelName + ".api");
+    }
+
+    private static CodegenConfigurator createBaseConfigurator() {
+        return new CodegenConfigurator()
+                .setModelNameSuffix("Dto")
+                .addAdditionalProperty("hideGenerationTimestamp", "true")
+                .addAdditionalProperty("generateSupportingFiles", "true")
+                .addAdditionalProperty("generateModelTests", "true")
+                .addAdditionalProperty("generateApis", "true")
+                .addAdditionalProperty("dateLibrary", "java8");
+    }
+
+    private static String getInputSpec(Path input) {
         String spec = input.toString();
         try {
             if (input.getFileName().toString().endsWith(".link")) {
@@ -28,19 +56,7 @@ public class AbstractSnapshotTest {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return new CodegenConfigurator()
-                .setGeneratorName("java-annotationfree")
-                .setInputSpec(spec.replaceAll("\\\\", "/"))
-                .setModelNameSuffix("Dto")
-                .setPackageName("io.github.jhannes.openapi." + modelName)
-                .setModelPackage("io.github.jhannes.openapi." + modelName + ".model")
-                .setApiPackage("io.github.jhannes.openapi." + modelName + ".api")
-                .addAdditionalProperty("hideGenerationTimestamp", "true")
-                .addAdditionalProperty("generateSupportingFiles", "true")
-                .addAdditionalProperty("generateModelTests", "true")
-                .addAdditionalProperty("generateApis", "true")
-                .addAdditionalProperty("dateLibrary", "java8")
-                .setOutputDir(outputDir.toString());
+        return spec.replaceAll("\\\\", "/");
     }
 
     static void cleanDirectory(Path directory) throws IOException {
@@ -54,7 +70,7 @@ public class AbstractSnapshotTest {
         }
     }
 
-    static Path targetDir(Path spec, String compile) {
-        return spec.getParent().getParent().resolve(compile);
+    protected static Path getRootDir(Path spec) {
+        return spec.getParent().getParent();
     }
 }

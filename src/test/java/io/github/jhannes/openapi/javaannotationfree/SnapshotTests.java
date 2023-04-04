@@ -32,7 +32,7 @@ public class SnapshotTests extends AbstractSnapshotTest {
     Stream<DynamicNode> outputsShouldMatchSnapshots() throws IOException {
         List<DynamicNode> testSuites = new ArrayList<>();
         testSuites.add(snapshots(SNAPSHOT_ROOT));
-        if (Files.isDirectory(AbstractSnapshotTest.LOCAL_SNAPSHOT_ROOT)) {
+        if (Files.isDirectory(LOCAL_SNAPSHOT_ROOT)) {
             testSuites.add(snapshots(LOCAL_SNAPSHOT_ROOT));
         }
         return testSuites.stream();
@@ -53,18 +53,18 @@ public class SnapshotTests extends AbstractSnapshotTest {
     }
 
     public static DynamicNode createTestsForSpec(Path spec) {
-        return createTestsForSpec(spec, targetDir(spec, "output"), targetDir(spec, "snapshot"));
+        return createTestsForSpec(spec, getRootDir(spec).resolve("output"), getRootDir(spec).resolve("snapshot"));
     }
 
     private static DynamicNode createTestsForSpec(Path spec, Path outputRoot, Path snapshotRoot) {
         String modelName = getModelName(spec);
-        CodegenConfigurator configurator = AbstractSnapshotTest.createConfigurator(modelName, spec, outputRoot.resolve(modelName));
+        CodegenConfigurator configurator = createConfigurator(modelName, spec, outputRoot.resolve(modelName));
         return createTests(spec, outputRoot.resolve(modelName), snapshotRoot.resolve(modelName), configurator);
     }
 
     static DynamicNode createTests(Path spec, Path outputDir, Path snapshotDir, CodegenConfigurator configurator) {
         try {
-            AbstractSnapshotTest.cleanDirectory(outputDir);
+            cleanDirectory(outputDir);
             generate(configurator);
         } catch (Exception e) {
             return dynamicTest("Generator for " + spec, () -> {

@@ -21,15 +21,16 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
  *     </li>
  * </ol>
  */
-public class FocusedExampleTest {
+public class FocusedExampleTest extends AbstractSnapshotTest {
 
-    public static final Path SPEC = AbstractSnapshotTest.SNAPSHOT_ROOT.resolve("input/websockets.yaml");
+    public static final Path SPEC = SNAPSHOT_ROOT.resolve("input/typeHierarchy.yaml");
 
     @TestFactory
     DynamicNode snapshotShouldCompile() {
-        Path outputDir = AbstractSnapshotTest.targetDir(SPEC, "snapshot");
+        Path outputDir = getTargetDir("snapshot");
         return dynamicTest("Compile " + outputDir, () -> CompilerTest.compile(outputDir.resolve(CompilerTest.getModelName(SPEC))));
     }
+
 
     @TestFactory
     DynamicNode outputShouldMatchSnapshot() {
@@ -38,7 +39,10 @@ public class FocusedExampleTest {
 
     @TestFactory
     DynamicNode outputShouldCompile() {
-        return CompilerTest.createTestFromSpec(SPEC, AbstractSnapshotTest.targetDir(SPEC, "compile"));
+        return CompilerTest.createTestFromSpec(SPEC, getTargetDir("compile"));
     }
 
+    private static Path getTargetDir(String subdir) {
+        return getRootDir(SPEC).resolve(subdir);
+    }
 }
