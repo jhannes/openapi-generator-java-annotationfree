@@ -60,8 +60,8 @@ public interface UpdateErrorDto  {
         return result;
     }
 
-    static Class<? extends UpdateErrorDto> getType(String type) {
-        switch (type) {
+    static Class<? extends UpdateErrorDto> getType(String code) {
+        switch (code) {
         case "duplicateIdentifier":
             return DuplicateIdentifierErrorDto.class;
         case "generalError":
@@ -73,7 +73,7 @@ public interface UpdateErrorDto  {
         case "notFound":
             return NotFoundErrorDto.class;
         default:
-            throw new IllegalArgumentException("Illegal code " + type);
+            throw new IllegalArgumentException("Illegal code " + code);
         }
     }
 

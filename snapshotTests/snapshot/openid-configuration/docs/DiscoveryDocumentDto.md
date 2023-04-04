@@ -1,5 +1,4 @@
 
-
 # DiscoveryDocumentDto
 
 ## Properties

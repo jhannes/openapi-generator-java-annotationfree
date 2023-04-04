@@ -1,12 +1,11 @@
 
+# WebSocketMessageDto oneOf-interface
 
-# WebSocketMessageDto
+## Discriminator command
 
-## Properties
-
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**request** | **"Subscribe"** |  | 
-
+command  | Type          |
+----------------- | ------------- |
+"updatePerson" | [**UpdatePersonCommandDto**](UpdatePersonCommandDto.md) |
+"createPerson" | [**CreatePersonCommandDto**](CreatePersonCommandDto.md) |
 
 

@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
 /**
 * PersonDto
 */
-public class PersonDto implements PersonInterface {
+public class PersonDto extends RecipientDto implements PersonInterface {
 
     private UUID id = null;
 
@@ -43,8 +43,6 @@ public class PersonDto implements PersonInterface {
     private String givenName;
 
     private String familyName;
-
-    private String email = null;
 
     private String phone = null;
 
@@ -72,7 +70,7 @@ public class PersonDto implements PersonInterface {
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = new ArrayList<>();
+        List<String> result = super.missingRequiredFields();
         if (isMissing(getType())) result.add("type");
         if (isMissing(getGivenName())) result.add("givenName");
         if (isMissing(getFamilyName())) result.add("familyName");
@@ -80,17 +78,18 @@ public class PersonDto implements PersonInterface {
     }
 
     public void readOnlyFieldsWithValue(List<String> result) {
+        super.readOnlyFieldsWithValue(result);
         if (!isMissing(getId())) {
             result.add("PersonDto.id");
         }
     }
 
     public <T extends PersonDto> T copyTo(T target) {
+        super.copyTo(target);
         if (this.getId() != null) target.setId(this.getId());
         if (this.getType() != null) target.setType(this.getType());
         if (this.getGivenName() != null) target.setGivenName(this.getGivenName());
         if (this.getFamilyName() != null) target.setFamilyName(this.getFamilyName());
-        if (this.getEmail() != null) target.setEmail(this.getEmail());
         if (this.getPhone() != null) target.setPhone(this.getPhone());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
         if (this.getGender() != null) target.setGender(this.getGender());
@@ -181,23 +180,6 @@ public class PersonDto implements PersonInterface {
     }
 
     /**
-     * Get email
-     * @return email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public PersonDto email(String email) {
-        this.email = email;
-        return this;
-    }
-
-    /**
      * Get phone
      * @return phone
      */
@@ -249,6 +231,12 @@ public class PersonDto implements PersonInterface {
     }
 
     @Override
+    public PersonDto email(String email) {
+        super.email(email);
+        return this;
+    }
+
+    @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
             return true;
@@ -261,26 +249,27 @@ public class PersonDto implements PersonInterface {
                 Objects.equals(this.getType(), person.getType()) &&
                 Objects.equals(this.getGivenName(), person.getGivenName()) &&
                 Objects.equals(this.getFamilyName(), person.getFamilyName()) &&
-                Objects.equals(this.getEmail(), person.getEmail()) &&
                 Objects.equals(this.getPhone(), person.getPhone()) &&
                 Objects.equals(this.getBirthDate(), person.getBirthDate()) &&
-                Objects.equals(this.getGender(), person.getGender());
+                Objects.equals(this.getGender(), person.getGender()) &&
+                Objects.equals(this.getEmail(), person.getEmail()) &&
+            super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getType(), getGivenName(), getFamilyName(), getEmail(), getPhone(), getBirthDate(), getGender());
+        return Objects.hash(getId(), getType(), getGivenName(), getFamilyName(), getPhone(), getBirthDate(), getGender(), getEmail());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("class PersonDto {\n");
+        sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    type: ").append(toIndentedString(getType())).append("\n");
         sb.append("    givenName: ").append(toIndentedString(getGivenName())).append("\n");
         sb.append("    familyName: ").append(toIndentedString(getFamilyName())).append("\n");
-        sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
         sb.append("    phone: ").append(toIndentedString(getPhone())).append("\n");
         sb.append("    birthDate: ").append(toIndentedString(getBirthDate())).append("\n");
         sb.append("    gender: ").append(toIndentedString(getGender())).append("\n");

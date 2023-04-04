@@ -1,0 +1,15 @@
+# {{classname}} oneOf-interface
+{{#description}}
+
+{{&description}}
+{{/description}}
+{{#discriminator}}
+
+## Discriminator {{propertyName}}
+
+{{propertyName}}  | Type          |
+----------------- | ------------- |
+{{#mappedModels}}
+"{{mappingName}}" | [**{{{modelName}}}**]({{modelName}}.md) |
+{{/mappedModels}}
+{{/discriminator}}

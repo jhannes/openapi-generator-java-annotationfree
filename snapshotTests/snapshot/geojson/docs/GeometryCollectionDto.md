@@ -1,5 +1,4 @@
 
-
 # GeometryCollectionDto
 
 GeoJSon geometry collection

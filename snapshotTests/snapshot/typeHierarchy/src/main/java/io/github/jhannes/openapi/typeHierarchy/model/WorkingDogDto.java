@@ -31,27 +31,22 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
-* DogDto
+* WorkingDogDto
 */
-public class DogDto extends PetBaseDto implements PetDto {
-
-    private String pet_type = "Dog";
-
-    private Boolean bark = null;
+public class WorkingDogDto extends DogDto implements PetDto {
 
     /**
-     * Gets or Sets breed
+     * Gets or Sets capabilities
      */
-    public enum BreedEnum {
+    public enum CapabilitiesEnum {
 
-        DINGO("Dingo"),
-        HUSKY("Husky"),
-        RETRIEVER("Retriever"),
-        SHEPHERD("Shepherd");
+        GUIDE("Guide"),
+        RESCUE("Rescue"),
+        SEARCH("Search");
 
         private String value;
 
-        BreedEnum(String value) {
+        CapabilitiesEnum(String value) {
             this.value = value;
         }
 
@@ -64,8 +59,8 @@ public class DogDto extends PetBaseDto implements PetDto {
             return String.valueOf(value);
         }
 
-        public static BreedEnum fromValue(String text) {
-            for (BreedEnum b : BreedEnum.values()) {
+        public static CapabilitiesEnum fromValue(String text) {
+            for (CapabilitiesEnum b : CapabilitiesEnum.values()) {
                 if (String.valueOf(b.value).equals(text)) {
                     return b;
                 }
@@ -74,7 +69,7 @@ public class DogDto extends PetBaseDto implements PetDto {
         }
     }
 
-    private BreedEnum breed = null;
+    private List<CapabilitiesEnum> capabilities = new ArrayList<>();
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -90,13 +85,14 @@ public class DogDto extends PetBaseDto implements PetDto {
     public static String[] requiredFields() {
         return new String[] {
                 "pet_type",
+                "capabilities",
                 "name",
         };
     }
 
     public List<String> missingRequiredFields() {
         List<String> result = super.missingRequiredFields();
-        if (isMissing(getPetType())) result.add("pet_type");
+        if (isMissing(getCapabilities())) result.add("capabilities");
         return result;
     }
 
@@ -104,11 +100,9 @@ public class DogDto extends PetBaseDto implements PetDto {
         super.readOnlyFieldsWithValue(result);
     }
 
-    public <T extends DogDto> T copyTo(T target) {
+    public <T extends WorkingDogDto> T copyTo(T target) {
         super.copyTo(target);
-        if (this.getPetType() != null) target.setPetType(this.getPetType());
-        if (this.getBark() != null) target.setBark(this.getBark());
-        if (this.getBreed() != null) target.setBreed(this.getBreed());
+        if (this.getCapabilities() != null) target.setCapabilities(this.getCapabilities());
         return target;
     }
 
@@ -125,78 +119,75 @@ public class DogDto extends PetBaseDto implements PetDto {
     }
 
 
-    /**
-     * Get pet_type
-     * @return pet_type
-     */
-    public String getPetType() {
-        return pet_type;
+    @Override
+    public WorkingDogDto petType(String petType) {
+        super.petType(petType);
+        return this;
     }
 
-    public void setPetType(String petType) {
-        this.pet_type = petType;
+    public <T> WorkingDogDto capabilities(Collection<T> items, Function<T, CapabilitiesEnum> mapper) {
+        return capabilities(items.stream().map(mapper).collect(Collectors.toList()));
     }
 
-    public DogDto petType(String petType) {
-        this.pet_type = petType;
+    public <T> List<T> getCapabilities(Function<CapabilitiesEnum, T> mapper) {
+        return getCapabilities().stream().map(mapper).collect(Collectors.toList());
+    }
+
+    public WorkingDogDto addCapabilitiesItem(CapabilitiesEnum capabilitiesItem) {
+        this.capabilities.add(capabilitiesItem);
         return this;
     }
 
     /**
-     * Get bark
-     * @return bark
+     * Get capabilities
+     * @return capabilities
      */
-    public Boolean getBark() {
-        return bark;
+    public List<CapabilitiesEnum> getCapabilities() {
+        return capabilities;
     }
 
-    public void setBark(Boolean bark) {
-        this.bark = bark;
+    public void setCapabilities(List<CapabilitiesEnum> capabilities) {
+        this.capabilities = capabilities;
     }
 
-    public DogDto bark(Boolean bark) {
-        this.bark = bark;
-        return this;
-    }
-
-    /**
-     * Get breed
-     * @return breed
-     */
-    public BreedEnum getBreed() {
-        return breed;
-    }
-
-    public void setBreed(BreedEnum breed) {
-        this.breed = breed;
-    }
-
-    public DogDto breed(BreedEnum breed) {
-        this.breed = breed;
+    public WorkingDogDto capabilities(List<CapabilitiesEnum> capabilities) {
+        this.capabilities = capabilities;
         return this;
     }
 
     @Override
-    public DogDto id(String id) {
+    public WorkingDogDto id(String id) {
         super.id(id);
         return this;
     }
 
     @Override
-    public DogDto name(String name) {
+    public WorkingDogDto name(String name) {
         super.name(name);
         return this;
     }
 
     @Override
-    public DogDto birthDate(String birthDate) {
+    public WorkingDogDto birthDate(String birthDate) {
         super.birthDate(birthDate);
         return this;
     }
 
     @Override
-    public DogDto ownerAddress(AddressDto ownerAddress) {
+    public WorkingDogDto ownerAddress(AddressDto ownerAddress) {
         super.ownerAddress(ownerAddress);
+        return this;
+    }
+
+    @Override
+    public WorkingDogDto bark(Boolean bark) {
+        super.bark(bark);
+        return this;
+    }
+
+    @Override
+    public WorkingDogDto breed(BreedEnum breed) {
+        super.breed(breed);
         return this;
     }
 
@@ -208,30 +199,29 @@ public class DogDto extends PetBaseDto implements PetDto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        DogDto dog = (DogDto) o;
-        return Objects.equals(this.getPetType(), dog.getPetType()) &&
-                Objects.equals(this.getBark(), dog.getBark()) &&
-                Objects.equals(this.getBreed(), dog.getBreed()) &&
-                Objects.equals(this.getId(), dog.getId()) &&
-                Objects.equals(this.getName(), dog.getName()) &&
-                Objects.equals(this.getBirthDate(), dog.getBirthDate()) &&
-                Objects.equals(this.getOwnerAddress(), dog.getOwnerAddress()) &&
+        WorkingDogDto workingDog = (WorkingDogDto) o;
+        return Objects.equals(this.getPetType(), workingDog.getPetType()) &&
+                Objects.equals(this.getCapabilities(), workingDog.getCapabilities()) &&
+                Objects.equals(this.getId(), workingDog.getId()) &&
+                Objects.equals(this.getName(), workingDog.getName()) &&
+                Objects.equals(this.getBirthDate(), workingDog.getBirthDate()) &&
+                Objects.equals(this.getOwnerAddress(), workingDog.getOwnerAddress()) &&
+                Objects.equals(this.getBark(), workingDog.getBark()) &&
+                Objects.equals(this.getBreed(), workingDog.getBreed()) &&
             super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPetType(), getBark(), getBreed(), getId(), getName(), getBirthDate(), getOwnerAddress());
+        return Objects.hash(getPetType(), getCapabilities(), getId(), getName(), getBirthDate(), getOwnerAddress(), getBark(), getBreed());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class DogDto {\n");
+        sb.append("class WorkingDogDto {\n");
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
-        sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
-        sb.append("    bark: ").append(toIndentedString(getBark())).append("\n");
-        sb.append("    breed: ").append(toIndentedString(getBreed())).append("\n");
+        sb.append("    capabilities: ").append(toIndentedString(getCapabilities())).append("\n");
         sb.append("}");
         return sb.toString();
     }

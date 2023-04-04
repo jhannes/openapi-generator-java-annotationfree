@@ -1,5 +1,4 @@
 
-
 # UsersIdDelete200ResponseDto
 
 ## Properties

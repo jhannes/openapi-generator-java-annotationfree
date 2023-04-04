@@ -1,22 +1,11 @@
 
+# AnyPartyDto oneOf-interface
 
-# AnyPartyDto
+## Discriminator type
 
-## Properties
-
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | [**UUID**](UUID.md) |  |  [optional] [readonly]
-**type** | **String** |  | 
-**givenName** | **String** |  | 
-**familyName** | **String** |  | 
-**email** | **String** |  |  [optional]
-**phone** | **String** |  |  [optional]
-**birthDate** | [**LocalDate**](LocalDate.md) |  |  [optional]
-**name** | **String** |  | 
-**organizationId** | **String** |  |  [optional]
-**url** | [**URI**](URI.md) |  |  [optional]
-**emailDomains** | **List<String>** |  |  [optional] [readonly]
-
+type  | Type          |
+----------------- | ------------- |
+"organization" | [**OrganizationDto**](OrganizationDto.md) |
+"person" | [**PersonDto**](PersonDto.md) |
 
 

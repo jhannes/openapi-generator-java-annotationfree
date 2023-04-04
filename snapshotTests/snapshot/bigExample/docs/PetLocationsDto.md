@@ -1,5 +1,4 @@
 
-
 # PetLocationsDto
 
 ## Properties

@@ -1,5 +1,4 @@
 
-
 # IllegalEmailAddressErrorDto
 
 ## Properties

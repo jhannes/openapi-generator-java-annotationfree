@@ -1,11 +1,11 @@
 
-# UsersIdDelete200Response1Dto
+# RecipientInterface
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**updatedAt** | **String** |  |  [optional]
+**email** | **String** |  |  [optional]
 
 
 

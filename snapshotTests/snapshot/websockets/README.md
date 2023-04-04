@@ -109,6 +109,7 @@ Class | Method | HTTP request | Description
  - [PersonInterface](docs/PersonInterface.md)
  - [PersonSnapshotDto](docs/PersonSnapshotDto.md)
  - [RecipientDto](docs/RecipientDto.md)
+ - [RecipientInterface](docs/RecipientInterface.md)
  - [StringSnapshotDto](docs/StringSnapshotDto.md)
  - [SubscribeDto](docs/SubscribeDto.md)
  - [UnsubscribeDto](docs/UnsubscribeDto.md)

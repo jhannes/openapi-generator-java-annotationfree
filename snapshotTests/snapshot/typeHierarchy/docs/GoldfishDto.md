@@ -1,11 +1,12 @@
 
-# UsersIdDelete200Response1Dto
+# GoldfishDto
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**updatedAt** | **String** |  |  [optional]
+**petType** | **"Goldfish"** |  | 
+**species** | **String** |  |  [optional]
 
 
 

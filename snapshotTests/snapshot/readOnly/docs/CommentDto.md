@@ -1,5 +1,4 @@
 
-
 # CommentDto
 
 ## Properties

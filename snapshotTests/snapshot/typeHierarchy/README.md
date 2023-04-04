@@ -105,8 +105,10 @@ Class | Method | HTTP request | Description
  - [AddressDto](docs/AddressDto.md)
  - [CatDto](docs/CatDto.md)
  - [DogDto](docs/DogDto.md)
+ - [GoldfishDto](docs/GoldfishDto.md)
  - [PetBaseDto](docs/PetBaseDto.md)
  - [PetDto](docs/PetDto.md)
+ - [WorkingDogDto](docs/WorkingDogDto.md)
 
 
 ## Documentation for Authorization

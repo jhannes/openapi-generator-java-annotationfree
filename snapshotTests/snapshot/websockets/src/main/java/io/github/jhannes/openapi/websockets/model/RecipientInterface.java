@@ -31,24 +31,29 @@ import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public interface WebSocketRequestDto  {
-    String getRequest();
+/**
+* RecipientInterface
+*/
+public interface RecipientInterface {
 
-    static SubscribeDto Subscribe() {
-        SubscribeDto result = new SubscribeDto();
-        result.request("Subscribe");
-        return result;
+    List<String> missingRequiredFields();
+
+    void readOnlyFieldsWithValue(List<String> result);
+
+
+    /**
+     * Get email
+     * @return email
+     */
+    String getEmail();
+
+    void setEmail(String email);
+
+    RecipientInterface email(String email);
+
+    default <T extends RecipientInterface> T copyTo(T target) {
+        if (this.getEmail() != null) target.setEmail(this.getEmail());
+        return target;
     }
-
-    static Class<? extends WebSocketRequestDto> getType(String request) {
-        switch (request) {
-        case "Subscribe":
-            return SubscribeDto.class;
-        default:
-            throw new IllegalArgumentException("Illegal request " + request);
-        }
-    }
-
-    void readOnlyFieldsWithValue(List<String> fields);
 }
 

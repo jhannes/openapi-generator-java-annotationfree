@@ -1,5 +1,4 @@
 
-
 # PolygonDto
 
 ## Properties

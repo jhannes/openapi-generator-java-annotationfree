@@ -33,9 +33,19 @@ import java.util.stream.Collectors;
 public interface PetDto  {
     String getPetType();
 
+    static WorkingDogDto WorkingDog() {
+        WorkingDogDto result = new WorkingDogDto();
+        result.petType("WorkingDog");
+        return result;
+    }
     static CatDto Cat() {
         CatDto result = new CatDto();
         result.petType("Cat");
+        return result;
+    }
+    static GoldfishDto Goldfish() {
+        GoldfishDto result = new GoldfishDto();
+        result.petType("Goldfish");
         return result;
     }
     static DogDto Dog() {
@@ -44,14 +54,18 @@ public interface PetDto  {
         return result;
     }
 
-    static Class<? extends PetDto> getType(String type) {
-        switch (type) {
+    static Class<? extends PetDto> getType(String petType) {
+        switch (petType) {
+        case "WorkingDog":
+            return WorkingDogDto.class;
         case "Cat":
             return CatDto.class;
+        case "Goldfish":
+            return GoldfishDto.class;
         case "Dog":
             return DogDto.class;
         default:
-            throw new IllegalArgumentException("Illegal petType " + type);
+            throw new IllegalArgumentException("Illegal petType " + petType);
         }
     }
 

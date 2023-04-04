@@ -69,10 +69,10 @@ public class SampleModelData {
 
     public CatDto sampleCatDto() {
         return new CatDto()
+            .petType("Cat")
             .hunts(sampleBoolean("hunts"))
             .age(sampleInteger("age"))
             .id(sampleString("id"))
-            .petType(sampleString("petType"))
             .name(sampleString("name"))
             .birthDate(sampleString("birthDate"))
             .ownerAddress(sampleAddressDto("ownerAddress"));
@@ -92,10 +92,10 @@ public class SampleModelData {
 
     public DogDto sampleDogDto() {
         return new DogDto()
+            .petType("Dog")
             .bark(sampleBoolean("bark"))
             .breed(sampleDogDtoBreedEnum("breed"))
             .id(sampleString("id"))
-            .petType(sampleString("petType"))
             .name(sampleString("name"))
             .birthDate(sampleString("birthDate"))
             .ownerAddress(sampleAddressDto("ownerAddress"));
@@ -113,6 +113,24 @@ public class SampleModelData {
         return pickOne(DogDto.BreedEnum.values());
     }
 
+    public GoldfishDto sampleGoldfishDto(String propertyName) {
+        return sampleGoldfishDto();
+    }
+
+    public GoldfishDto sampleGoldfishDto() {
+        return new GoldfishDto()
+            .petType("Goldfish")
+            .species(sampleString("species"));
+    }
+
+    public List<GoldfishDto> sampleListOfGoldfishDto(String propertyName) {
+        return sampleListOfGoldfishDto();
+    }
+
+    public List<GoldfishDto> sampleListOfGoldfishDto() {
+        return sampleList(() -> sampleGoldfishDto());
+    }
+
     public PetBaseDto samplePetBaseDto(String propertyName) {
         return samplePetBaseDto();
     }
@@ -120,7 +138,6 @@ public class SampleModelData {
     public PetBaseDto samplePetBaseDto() {
         return new PetBaseDto()
             .id(sampleString("id"))
-            .petType(sampleString("petType"))
             .name(sampleString("name"))
             .birthDate(sampleString("birthDate"))
             .ownerAddress(sampleAddressDto("ownerAddress"));
@@ -140,7 +157,9 @@ public class SampleModelData {
 
     public PetDto samplePetDto() {
         List<Supplier<PetDto>> factories = List.of(
+            () -> sampleWorkingDogDto().petType("WorkingDog"),
             () -> sampleCatDto().petType("Cat"),
+            () -> sampleGoldfishDto().petType("Goldfish"),
             () -> sampleDogDto().petType("Dog")
         );
         return pickOne(factories).get();
@@ -152,6 +171,38 @@ public class SampleModelData {
 
     public List<PetDto> sampleListOfPetDto() {
         return sampleList(() -> samplePetDto());
+    }
+
+    public WorkingDogDto sampleWorkingDogDto(String propertyName) {
+        return sampleWorkingDogDto();
+    }
+
+    public WorkingDogDto sampleWorkingDogDto() {
+        return new WorkingDogDto()
+            .petType("WorkingDog")
+            .capabilities(sampleList(() -> sampleWorkingDogDtoCapabilitiesEnum("capabilities"), "capabilities"))
+            .id(sampleString("id"))
+            .name(sampleString("name"))
+            .birthDate(sampleString("birthDate"))
+            .ownerAddress(sampleAddressDto("ownerAddress"))
+            .bark(sampleBoolean("bark"))
+            .breed(sampleWorkingDogDtoBreedEnum("breed"));
+    }
+
+    public List<WorkingDogDto> sampleListOfWorkingDogDto(String propertyName) {
+        return sampleListOfWorkingDogDto();
+    }
+
+    public List<WorkingDogDto> sampleListOfWorkingDogDto() {
+        return sampleList(() -> sampleWorkingDogDto());
+    }
+
+    public WorkingDogDto.CapabilitiesEnum sampleWorkingDogDtoCapabilitiesEnum(String propertyName) {
+        return pickOne(WorkingDogDto.CapabilitiesEnum.values());
+    }
+
+    public WorkingDogDto.BreedEnum sampleWorkingDogDtoBreedEnum(String propertyName) {
+        return pickOne(WorkingDogDto.BreedEnum.values());
     }
 
     protected final Random random;

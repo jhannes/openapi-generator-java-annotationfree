@@ -74,33 +74,33 @@ components:
           type: string
           format: email
     Person:
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        type:
-          type: string
-        givenName:
-          type: string
-        familyName:
-          type: string
-        email:
-          type: string
-          format: email
-        phone:
-          type: string
-          format: phone
-        birthDate:
-          type: string
-          format: date
-        gender:
-          type: string
-          enum: [male, female, other, unspecified]
-      required:
-        - type
-        - givenName
-        - familyName
+      allOf:
+        - $ref: "#/components/schemas/Recipient"
+        - type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+            type:
+              type: string
+            givenName:
+              type: string
+            familyName:
+              type: string
+            phone:
+              type: string
+              format: phone
+            birthDate:
+              type: string
+              format: date
+            gender:
+              type: string
+              enum: [male, female, other, unspecified]
+          required:
+            - type
+            - givenName
+            - familyName
     ChangeTracked:
       properties:
         createdAt:

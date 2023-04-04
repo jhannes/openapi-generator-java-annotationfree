@@ -1,7 +1,7 @@
 /**
 * {{#description}}{{.}}{{/description}}{{^description}}{{classname}}{{/description}}
 */
-public interface {{classname}}{{#interfaces}}{{#-first}} extends {{/-first}}{{^-first}}, {{/-first}}{{{.}}}{{/interfaces}} {
+public interface {{classname}}{{#parent}} extends {{{.}}}{{/parent}} {
 {{#vars}}
     {{^isInherited}}
     {{#isEnum}}

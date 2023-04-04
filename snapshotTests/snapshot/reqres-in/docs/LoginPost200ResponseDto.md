@@ -1,5 +1,4 @@
 
-
 # LoginPost200ResponseDto
 
 ## Properties

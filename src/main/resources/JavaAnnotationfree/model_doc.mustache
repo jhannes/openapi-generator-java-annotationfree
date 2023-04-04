@@ -1,4 +1,3 @@
 {{#models}}{{#model}}
-
-{{#isEnum}}{{>enum_outer_doc}}{{/isEnum}}{{^isEnum}}{{>pojo_doc}}{{/isEnum}}
+{{#isEnum}}{{>enum_outer_doc}}{{/isEnum}}{{^isEnum}}{{#oneOf}}{{#-first}}{{>oneof_doc}}{{/-first}}{{/oneOf}}{{^oneOf}}{{>pojo_doc}}{{/oneOf}}{{/isEnum}}
 {{/model}}{{/models}}

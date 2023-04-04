@@ -1,5 +1,4 @@
 
-
 # PersonDto
 
 ## Properties

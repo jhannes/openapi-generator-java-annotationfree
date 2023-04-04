@@ -1,5 +1,4 @@
 
-
 # PetTypeDto
 
 ## Enum

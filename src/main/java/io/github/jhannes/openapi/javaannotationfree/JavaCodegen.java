@@ -152,6 +152,17 @@ public class JavaCodegen extends AbstractJavaCodegen {
     }
 
     @Override
+    protected void addProperties(Map<String, Schema> properties, List<String> required, Schema schema, Set<Schema> visitedSchemas) {
+        super.addProperties(properties, required, schema, visitedSchemas);
+        // HACK: compensate for missing fields on multi-level allOf-inheritance (breaks oneOf-inheritance)
+        if (schema instanceof ComposedSchema && schema.getAllOf() != null) {
+            if (schema.getProperties() != null) {
+                properties.putAll(schema.getProperties());
+            }
+        }
+    }
+
+    @Override
     public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
         Map<String, ModelsMap> result = super.postProcessAllModels(objs);
 
@@ -170,6 +181,10 @@ public class JavaCodegen extends AbstractJavaCodegen {
                     for (CodegenModel supertype : codegenModel.interfaceModels) {
                         multiplyInheritedTypes.add(supertype.name);
                         interfaceNames.add(supertype.name + "Interface");
+                        while (supertype.parentModel != null) {
+                            supertype = supertype.parentModel;
+                            multiplyInheritedTypes.add(supertype.name);
+                        }
                     }
                     codegenModel.interfaces = interfaceNames;
                 } else if (codegenModel.parent == null) {
@@ -209,6 +224,9 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 public boolean isMixin = true;
             };
             interfaceModel.classname = type + "Interface";
+            if (dtoModel.parentModel != null) {
+                interfaceModel.parent = dtoModel.parentModel.name + "Interface";
+            }
             for (CodegenProperty property : dtoModel.vars) {
                 interfaceModel.vars.add(property.clone());
             }

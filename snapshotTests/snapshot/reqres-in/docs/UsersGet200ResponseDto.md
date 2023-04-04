@@ -1,5 +1,4 @@
 
-
 # UsersGet200ResponseDto
 
 ## Properties
