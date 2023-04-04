@@ -14,14 +14,14 @@ public interface {{classname}} {{^vendorExtensions.x-implements}}{{#interfaces}}
 {{/discriminator}}
 
 {{#discriminator}}
-    static Class<? extends {{{classname}}}> getType(String type) {
-        switch (type) {
+    static Class<? extends {{{classname}}}> getType(String {{propertyName}}) {
+        switch ({{propertyName}}) {
 {{#mappedModels}}
         case "{{mappingName}}":
             return {{modelName}}.class;
     {{/mappedModels}}
         default:
-            throw new IllegalArgumentException("Illegal {{discriminator.propertyName}} " + type);
+            throw new IllegalArgumentException("Illegal {{propertyName}} " + {{propertyName}});
         }
     }
 {{/discriminator}}

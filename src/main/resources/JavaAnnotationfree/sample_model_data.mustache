@@ -76,7 +76,7 @@ public class SampleModelData {
     public List<{{classname}}> sampleListOf{{classname}}() {
         return sampleList(() -> sample{{classname}}());
     }
-{{#vars}}{{#isEnum}}
+{{#vars}}{{#isEnum}}{{^oneOf}}
 {{#isArray}}
     public {{classname}}.{{items.datatypeWithEnum}} sample{{classname}}{{items.datatypeWithEnum}}(String propertyName) {
         return pickOne({{classname}}.{{items.datatypeWithEnum}}.values());
@@ -87,7 +87,7 @@ public class SampleModelData {
         return pickOne({{classname}}.{{datatypeWithEnum}}.values());
     }
 {{/isArray}}
-{{/isEnum}}{{/vars}}
+{{/oneOf}}{{/isEnum}}{{/vars}}
 {{/isMixin}}
 {{#isMixin}}
 {{#vars}}

@@ -1,16 +1,11 @@
 
+# PetDto oneOf-interface
 
-# PetDto
+## Discriminator petType
 
-## Properties
-
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
-**id** | **String** |  |  [optional] [readonly]
-**petType** | **String** |  | 
-**name** | **String** |  |  [optional]
-**birthDate** | **String** |  |  [optional]
-**ownerAddress** | [**AddressDto**](AddressDto.md) |  |  [optional]
-
+petType  | Type          |
+----------------- | ------------- |
+"Cat" | [**CatDto**](CatDto.md) |
+"Dog" | [**DogDto**](DogDto.md) |
 
 

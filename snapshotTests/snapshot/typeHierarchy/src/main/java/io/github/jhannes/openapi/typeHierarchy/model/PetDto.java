@@ -44,14 +44,14 @@ public interface PetDto  {
         return result;
     }
 
-    static Class<? extends PetDto> getType(String type) {
-        switch (type) {
+    static Class<? extends PetDto> getType(String petType) {
+        switch (petType) {
         case "Cat":
             return CatDto.class;
         case "Dog":
             return DogDto.class;
         default:
-            throw new IllegalArgumentException("Illegal petType " + type);
+            throw new IllegalArgumentException("Illegal petType " + petType);
         }
     }
 

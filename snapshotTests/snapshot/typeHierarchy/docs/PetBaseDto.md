@@ -1,5 +1,4 @@
 
-
 # PetBaseDto
 
 ## Properties

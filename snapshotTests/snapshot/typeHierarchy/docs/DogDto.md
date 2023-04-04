@@ -1,5 +1,4 @@
 
-
 # DogDto
 
 ## Properties
