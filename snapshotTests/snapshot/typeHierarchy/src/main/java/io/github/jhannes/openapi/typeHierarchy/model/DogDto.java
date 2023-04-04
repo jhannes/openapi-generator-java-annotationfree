@@ -215,11 +215,6 @@ public class DogDto extends PetBaseDto implements PetDto {
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    bark: ").append(toIndentedString(getBark())).append("\n");
         sb.append("    breed: ").append(toIndentedString(getBreed())).append("\n");
-        sb.append("    id: ").append(toIndentedString(getId())).append("\n");
-        sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
-        sb.append("    name: ").append(toIndentedString(getName())).append("\n");
-        sb.append("    birth_date: ").append(toIndentedString(getBirthDate())).append("\n");
-        sb.append("    ownerAddress: ").append(toIndentedString(getOwnerAddress())).append("\n");
         sb.append("}");
         return sb.toString();
     }
