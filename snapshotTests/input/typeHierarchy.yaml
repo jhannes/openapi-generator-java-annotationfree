@@ -97,6 +97,8 @@ components:
       properties:
         pet_type:
           enum: ["Goldfish"]
+        name:
+          type: string
         species:
           type: string
       required:

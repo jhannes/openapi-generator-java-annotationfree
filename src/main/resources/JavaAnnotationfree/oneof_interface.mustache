@@ -3,6 +3,10 @@ public interface {{classname}} {{^vendorExtensions.x-implements}}{{#interfaces}}
     {{propertyType}} {{propertyGetter}}();
     {{/discriminator}}
 
+    {{#vars}}
+    {{{datatypeWithEnum}}} {{getter}}();
+
+    {{/vars}}
 {{#discriminator}}
     {{#mappedModels}}
     static {{{modelName}}} {{mappingName}}() {

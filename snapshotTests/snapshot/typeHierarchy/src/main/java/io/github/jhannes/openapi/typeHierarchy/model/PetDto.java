@@ -33,6 +33,8 @@ import java.util.stream.Collectors;
 public interface PetDto  {
     String getPetType();
 
+    String getName();
+
     static WorkingDogDto WorkingDog() {
         WorkingDogDto result = new WorkingDogDto();
         result.petType("WorkingDog");

@@ -145,9 +145,16 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 subtypeInterfaces.add(codegenModel);
             }
         }
+        codegenModel.vars.removeIf(v -> codegenModel.interfaceModels.stream()
+                .anyMatch(i -> i.vars.stream()
+                        .noneMatch(memberVar -> memberVar.name.equals(v.name) && memberVar.datatypeWithEnum.equals(v.datatypeWithEnum))
+                ));
         if (codegenModel.discriminator != null && codegenModel.discriminator.getMapping() == null) {
             codegenModel.discriminator.setMapping(mapping);
             codegenModel.discriminator.setMappedModels(mappedModels);
+        }
+        if (codegenModel.discriminator != null) {
+            codegenModel.vars.removeIf(v -> v.name.equals(codegenModel.discriminator.getPropertyName()));
         }
     }
 

@@ -48,6 +48,14 @@ public class GoldfishDtoTest {
     }
 
     /**
+     * Test the property 'name'
+     */
+    @Test
+    public void nameTest() {
+        // TODO: test name
+    }
+
+    /**
      * Test the property 'species'
      */
     @Test

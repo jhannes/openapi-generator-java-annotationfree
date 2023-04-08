@@ -34,6 +34,10 @@ import java.util.stream.Collectors;
 public interface WebSocketCommandDto extends WebSocketMessageDto {
     String getCommand();
 
+    UUID getId();
+
+    PersonDto getPerson();
+
     static CreatePersonCommandDto createPerson() {
         CreatePersonCommandDto result = new CreatePersonCommandDto();
         result.command("createPerson");

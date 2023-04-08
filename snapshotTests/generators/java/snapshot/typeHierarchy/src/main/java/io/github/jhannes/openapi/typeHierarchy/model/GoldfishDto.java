@@ -98,6 +98,10 @@ public class GoldfishDto {
   @SerializedName(SERIALIZED_NAME_PET_TYPE)
   private PetTypeEnum petType;
 
+  public static final String SERIALIZED_NAME_NAME = "name";
+  @SerializedName(SERIALIZED_NAME_NAME)
+  private String name;
+
   public static final String SERIALIZED_NAME_SPECIES = "species";
   @SerializedName(SERIALIZED_NAME_SPECIES)
   private String species;
@@ -125,6 +129,29 @@ public class GoldfishDto {
 
   public void setPetType(PetTypeEnum petType) {
     this.petType = petType;
+  }
+
+
+  public GoldfishDto name(String name) {
+    
+    this.name = name;
+    return this;
+  }
+
+   /**
+   * Get name
+   * @return name
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public String getName() {
+    return name;
+  }
+
+
+  public void setName(String name) {
+    this.name = name;
   }
 
 
@@ -162,12 +189,13 @@ public class GoldfishDto {
     }
     GoldfishDto goldfish = (GoldfishDto) o;
     return Objects.equals(this.petType, goldfish.petType) &&
+        Objects.equals(this.name, goldfish.name) &&
         Objects.equals(this.species, goldfish.species);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(petType, species);
+    return Objects.hash(petType, name, species);
   }
 
   @Override
@@ -175,6 +203,7 @@ public class GoldfishDto {
     StringBuilder sb = new StringBuilder();
     sb.append("class GoldfishDto {\n");
     sb.append("    petType: ").append(toIndentedString(petType)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    species: ").append(toIndentedString(species)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -199,6 +228,7 @@ public class GoldfishDto {
     // a set of all properties/fields (JSON key names)
     openapiFields = new HashSet<String>();
     openapiFields.add("pet_type");
+    openapiFields.add("name");
     openapiFields.add("species");
 
     // a set of required properties/fields (JSON key names)
@@ -237,6 +267,9 @@ public class GoldfishDto {
       }
       if ((jsonObj.get("pet_type") != null && !jsonObj.get("pet_type").isJsonNull()) && !jsonObj.get("pet_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `pet_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("pet_type").toString()));
+      }
+      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
+        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
       if ((jsonObj.get("species") != null && !jsonObj.get("species").isJsonNull()) && !jsonObj.get("species").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `species` to be a primitive type in the JSON string but got `%s`", jsonObj.get("species").toString()));

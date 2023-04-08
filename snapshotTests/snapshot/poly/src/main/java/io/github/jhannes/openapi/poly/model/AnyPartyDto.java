@@ -34,6 +34,12 @@ import java.util.stream.Collectors;
 public interface AnyPartyDto  {
     String getType();
 
+    UUID getId();
+
+    String getEmail();
+
+    String getPhone();
+
     static OrganizationDto organization() {
         OrganizationDto result = new OrganizationDto();
         result.type("organization");

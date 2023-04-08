@@ -8,6 +8,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 |**petType** | [**PetTypeEnum**](#PetTypeEnum) |  |  |
+|**name** | **String** |  |  [optional] |
 |**species** | **String** |  |  [optional] |
 
 

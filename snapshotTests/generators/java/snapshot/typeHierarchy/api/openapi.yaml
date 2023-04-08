@@ -68,6 +68,8 @@ components:
           enum:
           - Goldfish
           type: string
+        name:
+          type: string
         species:
           type: string
       required:

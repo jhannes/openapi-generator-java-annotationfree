@@ -120,6 +120,7 @@ public class SampleModelData {
     public GoldfishDto sampleGoldfishDto() {
         return new GoldfishDto()
             .petType("Goldfish")
+            .name(sampleString("name"))
             .species(sampleString("species"));
     }
 

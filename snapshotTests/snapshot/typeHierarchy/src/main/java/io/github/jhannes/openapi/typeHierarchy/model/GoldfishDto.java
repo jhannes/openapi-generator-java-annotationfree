@@ -37,6 +37,8 @@ public class GoldfishDto implements PetDto {
 
     private String pet_type = "Goldfish";
 
+    private String name = null;
+
     private String species = null;
 
     public static String[] readOnlyFields() {
@@ -66,6 +68,7 @@ public class GoldfishDto implements PetDto {
 
     public <T extends GoldfishDto> T copyTo(T target) {
         if (this.getPetType() != null) target.setPetType(this.getPetType());
+        if (this.getName() != null) target.setName(this.getName());
         if (this.getSpecies() != null) target.setSpecies(this.getSpecies());
         return target;
     }
@@ -101,6 +104,23 @@ public class GoldfishDto implements PetDto {
     }
 
     /**
+     * Get name
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public GoldfishDto name(String name) {
+        this.name = name;
+        return this;
+    }
+
+    /**
      * Get species
      * @return species
      */
@@ -127,12 +147,13 @@ public class GoldfishDto implements PetDto {
         }
         GoldfishDto goldfish = (GoldfishDto) o;
         return Objects.equals(this.getPetType(), goldfish.getPetType()) &&
+                Objects.equals(this.getName(), goldfish.getName()) &&
                 Objects.equals(this.getSpecies(), goldfish.getSpecies());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPetType(), getSpecies());
+        return Objects.hash(getPetType(), getName(), getSpecies());
     }
 
     @Override
@@ -140,6 +161,7 @@ public class GoldfishDto implements PetDto {
         StringBuilder sb = new StringBuilder();
         sb.append("class GoldfishDto {\n");
         sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
+        sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("    species: ").append(toIndentedString(getSpecies())).append("\n");
         sb.append("}");
         return sb.toString();
