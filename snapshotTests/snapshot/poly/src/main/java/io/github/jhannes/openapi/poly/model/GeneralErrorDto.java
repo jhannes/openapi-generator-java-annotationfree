@@ -141,7 +141,7 @@ public class GeneralErrorDto implements CreationErrorDto, UpdateErrorDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class GeneralErrorDto {\n");
+        sb.append("GeneralErrorDto {\n");
         sb.append("    code: ").append(toIndentedString(getCode())).append("\n");
         sb.append("    description: ").append(toIndentedString(getDescription())).append("\n");
         sb.append("}");

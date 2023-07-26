@@ -177,7 +177,7 @@ public class IllegalEmailAddressErrorDto implements CreationErrorDto, UpdateErro
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class IllegalEmailAddressErrorDto {\n");
+        sb.append("IllegalEmailAddressErrorDto {\n");
         sb.append("    code: ").append(toIndentedString(getCode())).append("\n");
         sb.append("    inputEmailAddress: ").append(toIndentedString(getInputEmailAddress())).append("\n");
         sb.append("    validDomains: ").append(toIndentedString(getValidDomains())).append("\n");

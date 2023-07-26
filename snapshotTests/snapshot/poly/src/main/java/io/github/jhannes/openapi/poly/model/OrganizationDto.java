@@ -295,7 +295,7 @@ public class OrganizationDto implements AnyPartyDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class OrganizationDto {\n");
+        sb.append("OrganizationDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    type: ").append(toIndentedString(getType())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");

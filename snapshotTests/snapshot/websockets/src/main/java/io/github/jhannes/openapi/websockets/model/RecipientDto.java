@@ -116,7 +116,7 @@ public class RecipientDto implements RecipientInterface {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class RecipientDto {\n");
+        sb.append("RecipientDto {\n");
         sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
         sb.append("}");
         return sb.toString();

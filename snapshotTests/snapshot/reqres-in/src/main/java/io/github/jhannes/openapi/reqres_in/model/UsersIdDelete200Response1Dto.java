@@ -115,7 +115,7 @@ public class UsersIdDelete200Response1Dto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class UsersIdDelete200Response1Dto {\n");
+        sb.append("UsersIdDelete200Response1Dto {\n");
         sb.append("    updatedAt: ").append(toIndentedString(getUpdatedAt())).append("\n");
         sb.append("}");
         return sb.toString();

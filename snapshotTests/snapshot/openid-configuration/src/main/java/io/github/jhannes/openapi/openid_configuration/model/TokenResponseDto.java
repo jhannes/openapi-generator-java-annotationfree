@@ -225,7 +225,7 @@ public class TokenResponseDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class TokenResponseDto {\n");
+        sb.append("TokenResponseDto {\n");
         sb.append("    access_token: ").append(toIndentedString(getAccessToken())).append("\n");
         sb.append("    token_type: ").append(toIndentedString(getTokenType())).append("\n");
         sb.append("    expires_in: ").append(toIndentedString(getExpiresIn())).append("\n");

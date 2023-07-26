@@ -157,7 +157,7 @@ public class CoverPhotoDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class CoverPhotoDto {\n");
+        sb.append("CoverPhotoDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    idBook: ").append(toIndentedString(getIdBook())).append("\n");
         sb.append("    url: ").append(toIndentedString(getUrl())).append("\n");

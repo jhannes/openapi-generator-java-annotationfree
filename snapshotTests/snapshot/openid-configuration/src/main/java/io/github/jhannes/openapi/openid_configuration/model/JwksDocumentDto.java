@@ -134,7 +134,7 @@ public class JwksDocumentDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class JwksDocumentDto {\n");
+        sb.append("JwksDocumentDto {\n");
         sb.append("    keys: ").append(toIndentedString(getKeys())).append("\n");
         sb.append("}");
         return sb.toString();

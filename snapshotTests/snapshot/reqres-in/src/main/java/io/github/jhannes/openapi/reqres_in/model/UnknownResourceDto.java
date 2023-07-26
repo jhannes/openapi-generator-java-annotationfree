@@ -199,7 +199,7 @@ public class UnknownResourceDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class UnknownResourceDto {\n");
+        sb.append("UnknownResourceDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("    year: ").append(toIndentedString(getYear())).append("\n");

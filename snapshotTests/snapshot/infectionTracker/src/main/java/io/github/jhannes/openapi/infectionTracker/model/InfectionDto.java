@@ -188,7 +188,7 @@ public class InfectionDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class InfectionDto {\n");
+        sb.append("InfectionDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    information: ").append(toIndentedString(getInformation())).append("\n");
         sb.append("    registeredExposures: ").append(toIndentedString(getRegisteredExposures())).append("\n");

@@ -184,7 +184,7 @@ public class JwksKeyDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class JwksKeyDto {\n");
+        sb.append("JwksKeyDto {\n");
         sb.append("    kty: ").append(toIndentedString(getKty())).append("\n");
         sb.append("    use: ").append(toIndentedString(getUse())).append("\n");
         sb.append("    kid: ").append(toIndentedString(getKid())).append("\n");

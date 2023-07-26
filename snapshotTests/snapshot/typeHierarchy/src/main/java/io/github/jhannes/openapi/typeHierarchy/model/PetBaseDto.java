@@ -189,7 +189,7 @@ public class PetBaseDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PetBaseDto {\n");
+        sb.append("PetBaseDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("    birth_date: ").append(toIndentedString(getBirthDate())).append("\n");

@@ -254,7 +254,7 @@ public class OrderDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class OrderDto {\n");
+        sb.append("OrderDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    petId: ").append(toIndentedString(getPetId())).append("\n");
         sb.append("    quantity: ").append(toIndentedString(getQuantity())).append("\n");

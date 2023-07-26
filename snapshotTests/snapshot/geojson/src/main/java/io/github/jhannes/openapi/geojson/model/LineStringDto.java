@@ -153,7 +153,7 @@ public class LineStringDto implements GeometryDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class LineStringDto {\n");
+        sb.append("LineStringDto {\n");
         sb.append("    type: ").append(toIndentedString(getType())).append("\n");
         sb.append("    coordinates: ").append(toIndentedString(getCoordinates())).append("\n");
         sb.append("}");

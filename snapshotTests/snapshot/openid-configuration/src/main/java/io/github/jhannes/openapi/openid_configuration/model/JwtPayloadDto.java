@@ -269,7 +269,7 @@ public class JwtPayloadDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class JwtPayloadDto {\n");
+        sb.append("JwtPayloadDto {\n");
         sb.append("    iss: ").append(toIndentedString(getIss())).append("\n");
         sb.append("    sub: ").append(toIndentedString(getSub())).append("\n");
         sb.append("    aud: ").append(toIndentedString(getAud())).append("\n");

@@ -366,7 +366,7 @@ public class ExposureDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class ExposureDto {\n");
+        sb.append("ExposureDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    exposedPersonName: ").append(toIndentedString(getExposedPersonName())).append("\n");
         sb.append("    exposedPersonPhoneNumber: ").append(toIndentedString(getExposedPersonPhoneNumber())).append("\n");

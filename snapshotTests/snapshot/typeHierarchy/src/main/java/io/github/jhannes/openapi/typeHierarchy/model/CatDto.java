@@ -198,7 +198,7 @@ public class CatDto extends PetBaseDto implements PetDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class CatDto {\n");
+        sb.append("CatDto {\n");
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
         sb.append("    hunts: ").append(toIndentedString(getHunts())).append("\n");

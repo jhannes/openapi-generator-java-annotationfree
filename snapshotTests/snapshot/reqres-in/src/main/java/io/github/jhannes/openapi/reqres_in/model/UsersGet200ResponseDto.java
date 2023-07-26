@@ -218,7 +218,7 @@ public class UsersGet200ResponseDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class UsersGet200ResponseDto {\n");
+        sb.append("UsersGet200ResponseDto {\n");
         sb.append("    page: ").append(toIndentedString(getPage())).append("\n");
         sb.append("    per_page: ").append(toIndentedString(getPerPage())).append("\n");
         sb.append("    total: ").append(toIndentedString(getTotal())).append("\n");

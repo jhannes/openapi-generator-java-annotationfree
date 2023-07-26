@@ -153,7 +153,7 @@ public class PointDto implements GeometryDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PointDto {\n");
+        sb.append("PointDto {\n");
         sb.append("    type: ").append(toIndentedString(getType())).append("\n");
         sb.append("    coordinates: ").append(toIndentedString(getCoordinates())).append("\n");
         sb.append("}");

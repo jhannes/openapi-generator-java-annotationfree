@@ -159,7 +159,7 @@ public class PetDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PetDto {\n");
+        sb.append("PetDto {\n");
         sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("    birth_date: ").append(toIndentedString(getBirthDate())).append("\n");

@@ -187,7 +187,7 @@ public class CommentDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class CommentDto {\n");
+        sb.append("CommentDto {\n");
         sb.append("    title: ").append(toIndentedString(getTitle())).append("\n");
         sb.append("    comment: ").append(toIndentedString(getComment())).append("\n");
         sb.append("    created_at: ").append(toIndentedString(getCreatedAt())).append("\n");

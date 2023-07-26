@@ -162,7 +162,7 @@ public class NotFoundErrorDto implements UpdateErrorDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class NotFoundErrorDto {\n");
+        sb.append("NotFoundErrorDto {\n");
         sb.append("    code: ").append(toIndentedString(getCode())).append("\n");
         sb.append("    identifierValue: ").append(toIndentedString(getIdentifierValue())).append("\n");
         sb.append("    entityType: ").append(toIndentedString(getEntityType())).append("\n");

@@ -252,7 +252,7 @@ public class AddressDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class AddressDto {\n");
+        sb.append("AddressDto {\n");
         sb.append("    addressLine1: ").append(toIndentedString(getAddressLine1())).append("\n");
         sb.append("    addressLine2: ").append(toIndentedString(getAddressLine2())).append("\n");
         sb.append("    city: ").append(toIndentedString(getCity())).append("\n");

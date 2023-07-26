@@ -123,7 +123,7 @@ public class PetLocationsDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PetLocationsDto {\n");
+        sb.append("PetLocationsDto {\n");
         sb.append("    locations: ").append(toIndentedString(getLocations())).append("\n");
         sb.append("}");
         return sb.toString();

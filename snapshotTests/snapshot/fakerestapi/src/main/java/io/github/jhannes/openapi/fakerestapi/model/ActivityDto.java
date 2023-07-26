@@ -178,7 +178,7 @@ public class ActivityDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class ActivityDto {\n");
+        sb.append("ActivityDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    title: ").append(toIndentedString(getTitle())).append("\n");
         sb.append("    dueDate: ").append(toIndentedString(getDueDate())).append("\n");

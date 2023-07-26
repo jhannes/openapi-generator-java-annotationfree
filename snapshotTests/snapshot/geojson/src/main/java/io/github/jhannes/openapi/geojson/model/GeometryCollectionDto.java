@@ -156,7 +156,7 @@ public class GeometryCollectionDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class GeometryCollectionDto {\n");
+        sb.append("GeometryCollectionDto {\n");
         sb.append("    type: ").append(toIndentedString(getType())).append("\n");
         sb.append("    geometries: ").append(toIndentedString(getGeometries())).append("\n");
         sb.append("}");

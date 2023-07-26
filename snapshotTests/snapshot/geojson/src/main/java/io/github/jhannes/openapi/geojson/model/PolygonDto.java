@@ -153,7 +153,7 @@ public class PolygonDto implements GeometryDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PolygonDto {\n");
+        sb.append("PolygonDto {\n");
         sb.append("    type: ").append(toIndentedString(getType())).append("\n");
         sb.append("    coordinates: ").append(toIndentedString(getCoordinates())).append("\n");
         sb.append("}");

@@ -118,7 +118,7 @@ public class SubscribeDto implements WebSocketRequestDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class SubscribeDto {\n");
+        sb.append("SubscribeDto {\n");
         sb.append("    request: ").append(toIndentedString(getRequest())).append("\n");
         sb.append("}");
         return sb.toString();

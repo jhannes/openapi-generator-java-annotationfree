@@ -167,7 +167,7 @@ public class UpdatePersonCommandDto implements WebSocketCommandDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class UpdatePersonCommandDto {\n");
+        sb.append("UpdatePersonCommandDto {\n");
         sb.append("    command: ").append(toIndentedString(getCommand())).append("\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    person: ").append(toIndentedString(getPerson())).append("\n");

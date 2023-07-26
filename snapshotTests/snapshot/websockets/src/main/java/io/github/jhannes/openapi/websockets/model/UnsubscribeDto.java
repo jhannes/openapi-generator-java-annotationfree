@@ -118,7 +118,7 @@ public class UnsubscribeDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class UnsubscribeDto {\n");
+        sb.append("UnsubscribeDto {\n");
         sb.append("    request: ").append(toIndentedString(getRequest())).append("\n");
         sb.append("}");
         return sb.toString();

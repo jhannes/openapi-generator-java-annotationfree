@@ -149,7 +149,7 @@ public class StringSnapshotDto extends ChangeTrackedDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class StringSnapshotDto {\n");
+        sb.append("StringSnapshotDto {\n");
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("}");

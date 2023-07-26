@@ -126,7 +126,7 @@ public class PetStoreDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PetStoreDto {\n");
+        sb.append("PetStoreDto {\n");
         sb.append("    pets: ").append(toIndentedString(getPets())).append("\n");
         sb.append("}");
         return sb.toString();

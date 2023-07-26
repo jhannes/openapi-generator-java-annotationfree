@@ -183,7 +183,7 @@ public class ChangeTrackedDto implements ChangeTrackedInterface {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class ChangeTrackedDto {\n");
+        sb.append("ChangeTrackedDto {\n");
         sb.append("    createdAt: ").append(toIndentedString(getCreatedAt())).append("\n");
         sb.append("    createdBy: ").append(toIndentedString(getCreatedBy())).append("\n");
         sb.append("    updatedAt: ").append(toIndentedString(getUpdatedAt())).append("\n");

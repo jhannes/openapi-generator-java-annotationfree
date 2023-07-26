@@ -157,7 +157,7 @@ public class LoginPostRequestDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class LoginPostRequestDto {\n");
+        sb.append("LoginPostRequestDto {\n");
         sb.append("    username: ").append(toIndentedString(getUsername())).append("\n");
         sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
         sb.append("    password: ").append(toIndentedString(getPassword())).append("\n");

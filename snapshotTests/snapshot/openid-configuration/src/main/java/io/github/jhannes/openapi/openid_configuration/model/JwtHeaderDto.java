@@ -158,7 +158,7 @@ public class JwtHeaderDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class JwtHeaderDto {\n");
+        sb.append("JwtHeaderDto {\n");
         sb.append("    typ: ").append(toIndentedString(getTyp())).append("\n");
         sb.append("    kid: ").append(toIndentedString(getKid())).append("\n");
         sb.append("    alg: ").append(toIndentedString(getAlg())).append("\n");

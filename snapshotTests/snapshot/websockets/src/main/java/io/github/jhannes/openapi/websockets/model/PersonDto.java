@@ -264,7 +264,7 @@ public class PersonDto extends RecipientDto implements PersonInterface {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PersonDto {\n");
+        sb.append("PersonDto {\n");
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    type: ").append(toIndentedString(getType())).append("\n");

@@ -178,7 +178,7 @@ public class AuthorDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class AuthorDto {\n");
+        sb.append("AuthorDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    idBook: ").append(toIndentedString(getIdBook())).append("\n");
         sb.append("    firstName: ").append(toIndentedString(getFirstName())).append("\n");

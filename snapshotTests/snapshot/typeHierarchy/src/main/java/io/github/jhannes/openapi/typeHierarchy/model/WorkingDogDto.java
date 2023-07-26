@@ -185,7 +185,7 @@ public class WorkingDogDto extends DogDto implements PetDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class WorkingDogDto {\n");
+        sb.append("WorkingDogDto {\n");
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    capabilities: ").append(toIndentedString(getCapabilities())).append("\n");
         sb.append("}");

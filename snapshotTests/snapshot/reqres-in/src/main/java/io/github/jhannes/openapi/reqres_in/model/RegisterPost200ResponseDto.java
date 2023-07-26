@@ -136,7 +136,7 @@ public class RegisterPost200ResponseDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class RegisterPost200ResponseDto {\n");
+        sb.append("RegisterPost200ResponseDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    token: ").append(toIndentedString(getToken())).append("\n");
         sb.append("}");

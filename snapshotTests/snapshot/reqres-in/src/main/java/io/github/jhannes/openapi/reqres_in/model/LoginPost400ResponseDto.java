@@ -115,7 +115,7 @@ public class LoginPost400ResponseDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class LoginPost400ResponseDto {\n");
+        sb.append("LoginPost400ResponseDto {\n");
         sb.append("    error: ").append(toIndentedString(getError())).append("\n");
         sb.append("}");
         return sb.toString();

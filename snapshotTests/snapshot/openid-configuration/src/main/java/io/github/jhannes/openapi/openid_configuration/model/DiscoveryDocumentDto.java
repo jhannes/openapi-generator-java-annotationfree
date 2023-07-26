@@ -570,7 +570,7 @@ public class DiscoveryDocumentDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class DiscoveryDocumentDto {\n");
+        sb.append("DiscoveryDocumentDto {\n");
         sb.append("    issuer: ").append(toIndentedString(getIssuer())).append("\n");
         sb.append("    authorization_endpoint: ").append(toIndentedString(getAuthorizationEndpoint())).append("\n");
         sb.append("    token_endpoint: ").append(toIndentedString(getTokenEndpoint())).append("\n");

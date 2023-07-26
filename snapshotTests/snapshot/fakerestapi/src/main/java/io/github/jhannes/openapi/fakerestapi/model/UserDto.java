@@ -157,7 +157,7 @@ public class UserDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class UserDto {\n");
+        sb.append("UserDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    userName: ").append(toIndentedString(getUserName())).append("\n");
         sb.append("    password: ").append(toIndentedString(getPassword())).append("\n");

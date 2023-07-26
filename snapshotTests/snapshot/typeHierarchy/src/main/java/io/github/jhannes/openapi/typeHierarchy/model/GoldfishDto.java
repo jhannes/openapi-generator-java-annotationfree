@@ -159,7 +159,7 @@ public class GoldfishDto implements PetDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class GoldfishDto {\n");
+        sb.append("GoldfishDto {\n");
         sb.append("    pet_type: ").append(toIndentedString(getPetType())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("    species: ").append(toIndentedString(getSpecies())).append("\n");

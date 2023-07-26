@@ -254,7 +254,7 @@ public class PersonDto implements AnyPartyDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class PersonDto {\n");
+        sb.append("PersonDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    type: ").append(toIndentedString(getType())).append("\n");
         sb.append("    givenName: ").append(toIndentedString(getGivenName())).append("\n");

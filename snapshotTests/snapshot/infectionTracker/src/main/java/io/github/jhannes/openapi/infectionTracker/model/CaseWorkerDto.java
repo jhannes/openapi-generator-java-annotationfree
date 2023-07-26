@@ -191,7 +191,7 @@ public class CaseWorkerDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class CaseWorkerDto {\n");
+        sb.append("CaseWorkerDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    fullName: ").append(toIndentedString(getFullName())).append("\n");
         sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");

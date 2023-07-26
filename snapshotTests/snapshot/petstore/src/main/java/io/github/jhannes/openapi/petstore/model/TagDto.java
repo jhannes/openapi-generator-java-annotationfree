@@ -136,7 +136,7 @@ public class TagDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class TagDto {\n");
+        sb.append("TagDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("}");

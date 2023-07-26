@@ -199,7 +199,7 @@ public class UserDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class UserDto {\n");
+        sb.append("UserDto {\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
         sb.append("    first_name: ").append(toIndentedString(getFirstName())).append("\n");

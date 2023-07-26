@@ -139,7 +139,7 @@ public class LogMessageDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("class LogMessageDto {\n");
+        sb.append("LogMessageDto {\n");
         sb.append("    message: ").append(toIndentedString(getMessage())).append("\n");
         sb.append("    error: ").append(toIndentedString(getError())).append("\n");
         sb.append("}");
