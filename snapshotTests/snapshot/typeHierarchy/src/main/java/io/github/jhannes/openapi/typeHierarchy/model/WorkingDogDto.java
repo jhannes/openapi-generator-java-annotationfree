@@ -35,41 +35,7 @@ import java.util.stream.Collectors;
 */
 public class WorkingDogDto extends DogDto implements PetDto {
 
-    /**
-     * Gets or Sets capabilities
-     */
-    public enum CapabilitiesEnum {
-
-        GUIDE("Guide"),
-        RESCUE("Rescue"),
-        SEARCH("Search");
-
-        private String value;
-
-        CapabilitiesEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static CapabilitiesEnum fromValue(String text) {
-            for (CapabilitiesEnum b : CapabilitiesEnum.values()) {
-                if (String.valueOf(b.value).equals(text)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + text + "'");
-        }
-    }
-
-    private List<CapabilitiesEnum> capabilities = new ArrayList<>();
+    private List<WorkingDogCapabilityDto> capabilities = new ArrayList<>();
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -125,15 +91,15 @@ public class WorkingDogDto extends DogDto implements PetDto {
         return this;
     }
 
-    public <T> WorkingDogDto capabilities(Collection<T> items, Function<T, CapabilitiesEnum> mapper) {
+    public <T> WorkingDogDto capabilities(Collection<T> items, Function<T, WorkingDogCapabilityDto> mapper) {
         return capabilities(items.stream().map(mapper).collect(Collectors.toList()));
     }
 
-    public <T> List<T> getCapabilities(Function<CapabilitiesEnum, T> mapper) {
+    public <T> List<T> getCapabilities(Function<WorkingDogCapabilityDto, T> mapper) {
         return getCapabilities().stream().map(mapper).collect(Collectors.toList());
     }
 
-    public WorkingDogDto addCapabilitiesItem(CapabilitiesEnum capabilitiesItem) {
+    public WorkingDogDto addCapabilitiesItem(WorkingDogCapabilityDto capabilitiesItem) {
         this.capabilities.add(capabilitiesItem);
         return this;
     }
@@ -142,15 +108,15 @@ public class WorkingDogDto extends DogDto implements PetDto {
      * Get capabilities
      * @return capabilities
      */
-    public List<CapabilitiesEnum> getCapabilities() {
+    public List<WorkingDogCapabilityDto> getCapabilities() {
         return capabilities;
     }
 
-    public void setCapabilities(List<CapabilitiesEnum> capabilities) {
+    public void setCapabilities(List<WorkingDogCapabilityDto> capabilities) {
         this.capabilities = capabilities;
     }
 
-    public WorkingDogDto capabilities(List<CapabilitiesEnum> capabilities) {
+    public WorkingDogDto capabilities(List<WorkingDogCapabilityDto> capabilities) {
         this.capabilities = capabilities;
         return this;
     }

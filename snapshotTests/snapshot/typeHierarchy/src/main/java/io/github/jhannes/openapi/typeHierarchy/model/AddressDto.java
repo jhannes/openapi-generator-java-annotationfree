@@ -43,6 +43,41 @@ public class AddressDto {
 
     private String country;
 
+    /**
+     * Gets or Sets addressTypes
+     */
+    public enum AddressTypesEnum {
+
+        SHIPPING("SHIPPING"),
+        BILLING("BILLING");
+
+        private String value;
+
+        AddressTypesEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static AddressTypesEnum fromValue(String text) {
+            for (AddressTypesEnum b : AddressTypesEnum.values()) {
+                if (String.valueOf(b.value).equals(text)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + text + "'");
+        }
+    }
+
+    private List<AddressTypesEnum> addressTypes = null;
+
     public static String[] readOnlyFields() {
         return new String[] {
         };
@@ -75,6 +110,7 @@ public class AddressDto {
         if (this.getAddressLine2() != null) target.setAddressLine2(this.getAddressLine2());
         if (this.getCity() != null) target.setCity(this.getCity());
         if (this.getCountry() != null) target.setCountry(this.getCountry());
+        if (this.getAddressTypes() != null) target.setAddressTypes(this.getAddressTypes());
         return target;
     }
 
@@ -159,6 +195,39 @@ public class AddressDto {
         return this;
     }
 
+    public <T> AddressDto addressTypes(Collection<T> items, Function<T, AddressTypesEnum> mapper) {
+        return addressTypes(items.stream().map(mapper).collect(Collectors.toList()));
+    }
+
+    public <T> List<T> getAddressTypes(Function<AddressTypesEnum, T> mapper) {
+        return getAddressTypes().stream().map(mapper).collect(Collectors.toList());
+    }
+
+    public AddressDto addAddressTypesItem(AddressTypesEnum addressTypesItem) {
+        if (this.addressTypes == null) {
+            this.addressTypes = new ArrayList<>();
+        }
+        this.addressTypes.add(addressTypesItem);
+        return this;
+    }
+
+    /**
+     * Get addressTypes
+     * @return addressTypes
+     */
+    public List<AddressTypesEnum> getAddressTypes() {
+        return addressTypes;
+    }
+
+    public void setAddressTypes(List<AddressTypesEnum> addressTypes) {
+        this.addressTypes = addressTypes;
+    }
+
+    public AddressDto addressTypes(List<AddressTypesEnum> addressTypes) {
+        this.addressTypes = addressTypes;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -171,12 +240,13 @@ public class AddressDto {
         return Objects.equals(this.getAddressLine1(), address.getAddressLine1()) &&
                 Objects.equals(this.getAddressLine2(), address.getAddressLine2()) &&
                 Objects.equals(this.getCity(), address.getCity()) &&
-                Objects.equals(this.getCountry(), address.getCountry());
+                Objects.equals(this.getCountry(), address.getCountry()) &&
+                Objects.equals(this.getAddressTypes(), address.getAddressTypes());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getAddressLine1(), getAddressLine2(), getCity(), getCountry());
+        return Objects.hash(getAddressLine1(), getAddressLine2(), getCity(), getCountry(), getAddressTypes());
     }
 
     @Override
@@ -187,6 +257,7 @@ public class AddressDto {
         sb.append("    addressLine2: ").append(toIndentedString(getAddressLine2())).append("\n");
         sb.append("    city: ").append(toIndentedString(getCity())).append("\n");
         sb.append("    country: ").append(toIndentedString(getCountry())).append("\n");
+        sb.append("    addressTypes: ").append(toIndentedString(getAddressTypes())).append("\n");
         sb.append("}");
         return sb.toString();
     }

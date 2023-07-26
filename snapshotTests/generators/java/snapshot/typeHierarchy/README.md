@@ -126,6 +126,7 @@ Class | Method | HTTP request | Description
  - [PetBaseDto](docs/PetBaseDto.md)
  - [PetDto](docs/PetDto.md)
  - [WorkingDogAllOfDto](docs/WorkingDogAllOfDto.md)
+ - [WorkingDogCapabilityDto](docs/WorkingDogCapabilityDto.md)
  - [WorkingDogDto](docs/WorkingDogDto.md)
 
 

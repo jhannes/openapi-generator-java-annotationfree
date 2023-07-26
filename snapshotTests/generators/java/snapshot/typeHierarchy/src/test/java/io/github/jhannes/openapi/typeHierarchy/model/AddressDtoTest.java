@@ -21,6 +21,8 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -69,6 +71,14 @@ public class AddressDtoTest {
     @Test
     public void countryTest() {
         // TODO: test country
+    }
+
+    /**
+     * Test the property 'addressTypes'
+     */
+    @Test
+    public void addressTypesTest() {
+        // TODO: test addressTypes
     }
 
 }

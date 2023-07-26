@@ -34,6 +34,13 @@ components:
           type: string
         country:
           type: string
+        addressTypes:
+          items:
+            enum:
+            - SHIPPING
+            - BILLING
+            type: string
+          type: array
       required:
       - city
       - country
@@ -58,6 +65,12 @@ components:
       allOf:
       - $ref: '#/components/schemas/Dog'
       - $ref: '#/components/schemas/WorkingDog_allOf'
+    WorkingDogCapability:
+      enum:
+      - Guide
+      - Rescue
+      - Search
+      type: string
     Cat:
       allOf:
       - $ref: '#/components/schemas/PetBase'
@@ -110,11 +123,7 @@ components:
           type: string
         capabilities:
           items:
-            enum:
-            - Guide
-            - Rescue
-            - Search
-            type: string
+            $ref: '#/components/schemas/WorkingDogCapability'
           type: array
       required:
       - capabilities

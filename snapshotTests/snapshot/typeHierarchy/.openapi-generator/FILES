@@ -7,6 +7,7 @@ docs/DogDto.md
 docs/GoldfishDto.md
 docs/PetBaseDto.md
 docs/PetDto.md
+docs/WorkingDogCapabilityDto.md
 docs/WorkingDogDto.md
 src/main/java/io/github/jhannes/openapi/typeHierarchy/api/DefaultApi.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/api/HttpDefaultApi.java
@@ -17,5 +18,6 @@ src/main/java/io/github/jhannes/openapi/typeHierarchy/model/GoldfishDto.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/model/PetBaseDto.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/model/PetDto.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/model/SampleModelData.java
+src/main/java/io/github/jhannes/openapi/typeHierarchy/model/WorkingDogCapabilityDto.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/model/WorkingDogDto.java
 src/test/java/io/github/jhannes/openapi/typeHierarchy/api/DefaultApiTest.java

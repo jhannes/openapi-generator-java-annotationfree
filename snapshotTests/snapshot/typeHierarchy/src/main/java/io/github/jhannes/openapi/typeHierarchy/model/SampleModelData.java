@@ -52,7 +52,8 @@ public class SampleModelData {
             .addressLine1(sampleString("addressLine1"))
             .addressLine2(sampleString("addressLine2"))
             .city(sampleString("city"))
-            .country(sampleString("country"));
+            .country(sampleString("country"))
+            .addressTypes(sampleList(() -> sampleAddressDtoAddressTypesEnum("addressTypes"), "addressTypes"));
     }
 
     public List<AddressDto> sampleListOfAddressDto(String propertyName) {
@@ -61,6 +62,10 @@ public class SampleModelData {
 
     public List<AddressDto> sampleListOfAddressDto() {
         return sampleList(() -> sampleAddressDto());
+    }
+
+    public AddressDto.AddressTypesEnum sampleAddressDtoAddressTypesEnum(String propertyName) {
+        return pickOne(AddressDto.AddressTypesEnum.values());
     }
 
     public CatDto sampleCatDto(String propertyName) {
@@ -174,6 +179,22 @@ public class SampleModelData {
         return sampleList(() -> samplePetDto());
     }
 
+    public WorkingDogCapabilityDto sampleWorkingDogCapabilityDto(String propertyName) {
+        return sampleWorkingDogCapabilityDto();
+    }
+
+    public WorkingDogCapabilityDto sampleWorkingDogCapabilityDto() {
+        return pickOne(WorkingDogCapabilityDto.values());
+    }
+
+    public List<WorkingDogCapabilityDto> sampleListOfWorkingDogCapabilityDto(String propertyName) {
+        return sampleListOfWorkingDogCapabilityDto();
+    }
+
+    public List<WorkingDogCapabilityDto> sampleListOfWorkingDogCapabilityDto() {
+        return sampleList(() -> sampleWorkingDogCapabilityDto());
+    }
+
     public WorkingDogDto sampleWorkingDogDto(String propertyName) {
         return sampleWorkingDogDto();
     }
@@ -181,7 +202,7 @@ public class SampleModelData {
     public WorkingDogDto sampleWorkingDogDto() {
         return new WorkingDogDto()
             .petType("WorkingDog")
-            .capabilities(sampleList(() -> sampleWorkingDogDtoCapabilitiesEnum("capabilities"), "capabilities"))
+            .capabilities(sampleListOfWorkingDogCapabilityDto("capabilities"))
             .id(sampleString("id"))
             .name(sampleString("name"))
             .birthDate(sampleString("birthDate"))
@@ -196,10 +217,6 @@ public class SampleModelData {
 
     public List<WorkingDogDto> sampleListOfWorkingDogDto() {
         return sampleList(() -> sampleWorkingDogDto());
-    }
-
-    public WorkingDogDto.CapabilitiesEnum sampleWorkingDogDtoCapabilitiesEnum(String propertyName) {
-        return pickOne(WorkingDogDto.CapabilitiesEnum.values());
     }
 
     public WorkingDogDto.BreedEnum sampleWorkingDogDtoBreedEnum(String propertyName) {

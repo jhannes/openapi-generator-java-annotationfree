@@ -16,6 +16,7 @@ docs/GoldfishDto.md
 docs/PetBaseDto.md
 docs/PetDto.md
 docs/WorkingDogAllOfDto.md
+docs/WorkingDogCapabilityDto.md
 docs/WorkingDogDto.md
 git_push.sh
 gradle.properties
@@ -54,6 +55,7 @@ src/main/java/io/github/jhannes/openapi/typeHierarchy/model/GoldfishDto.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/model/PetBaseDto.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/model/PetDto.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/model/WorkingDogAllOfDto.java
+src/main/java/io/github/jhannes/openapi/typeHierarchy/model/WorkingDogCapabilityDto.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/model/WorkingDogDto.java
 src/test/java/io/github/jhannes/openapi/typeHierarchy/api/DefaultApiTest.java
 src/test/java/io/github/jhannes/openapi/typeHierarchy/model/AddressDtoTest.java
@@ -65,4 +67,5 @@ src/test/java/io/github/jhannes/openapi/typeHierarchy/model/GoldfishDtoTest.java
 src/test/java/io/github/jhannes/openapi/typeHierarchy/model/PetBaseDtoTest.java
 src/test/java/io/github/jhannes/openapi/typeHierarchy/model/PetDtoTest.java
 src/test/java/io/github/jhannes/openapi/typeHierarchy/model/WorkingDogAllOfDtoTest.java
+src/test/java/io/github/jhannes/openapi/typeHierarchy/model/WorkingDogCapabilityDtoTest.java
 src/test/java/io/github/jhannes/openapi/typeHierarchy/model/WorkingDogDtoTest.java

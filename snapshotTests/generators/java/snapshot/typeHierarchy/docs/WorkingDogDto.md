@@ -14,7 +14,7 @@
 |**petType** | [**PetTypeEnum**](#PetTypeEnum) |  |  |
 |**bark** | **Boolean** |  |  [optional] |
 |**breed** | [**BreedEnum**](#BreedEnum) |  |  [optional] |
-|**capabilities** | [**List&lt;CapabilitiesEnum&gt;**](#List&lt;CapabilitiesEnum&gt;) |  |  |
+|**capabilities** | **List&lt;WorkingDogCapabilityDto&gt;** |  |  |
 
 
 
@@ -34,16 +34,6 @@
 | HUSKY | &quot;Husky&quot; |
 | RETRIEVER | &quot;Retriever&quot; |
 | SHEPHERD | &quot;Shepherd&quot; |
-
-
-
-## Enum: List&lt;CapabilitiesEnum&gt;
-
-| Name | Value |
-|---- | -----|
-| GUIDE | &quot;Guide&quot; |
-| RESCUE | &quot;Rescue&quot; |
-| SEARCH | &quot;Search&quot; |
 
 
 

@@ -108,6 +108,7 @@ Class | Method | HTTP request | Description
  - [GoldfishDto](docs/GoldfishDto.md)
  - [PetBaseDto](docs/PetBaseDto.md)
  - [PetDto](docs/PetDto.md)
+ - [WorkingDogCapabilityDto](docs/WorkingDogCapabilityDto.md)
  - [WorkingDogDto](docs/WorkingDogDto.md)
 
 

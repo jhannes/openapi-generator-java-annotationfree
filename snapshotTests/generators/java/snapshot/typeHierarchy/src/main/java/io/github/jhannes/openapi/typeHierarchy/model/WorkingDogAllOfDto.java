@@ -20,6 +20,7 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogCapabilityDto;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
@@ -100,58 +101,9 @@ public class WorkingDogAllOfDto {
   @SerializedName(SERIALIZED_NAME_PET_TYPE)
   private PetTypeEnum petType;
 
-  /**
-   * Gets or Sets capabilities
-   */
-  @JsonAdapter(CapabilitiesEnum.Adapter.class)
-  public enum CapabilitiesEnum {
-    GUIDE("Guide"),
-    
-    RESCUE("Rescue"),
-    
-    SEARCH("Search");
-
-    private String value;
-
-    CapabilitiesEnum(String value) {
-      this.value = value;
-    }
-
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    public static CapabilitiesEnum fromValue(String value) {
-      for (CapabilitiesEnum b : CapabilitiesEnum.values()) {
-        if (b.value.equals(value)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + value + "'");
-    }
-
-    public static class Adapter extends TypeAdapter<CapabilitiesEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final CapabilitiesEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public CapabilitiesEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return CapabilitiesEnum.fromValue(value);
-      }
-    }
-  }
-
   public static final String SERIALIZED_NAME_CAPABILITIES = "capabilities";
   @SerializedName(SERIALIZED_NAME_CAPABILITIES)
-  private List<CapabilitiesEnum> capabilities = new ArrayList<>();
+  private List<WorkingDogCapabilityDto> capabilities = new ArrayList<>();
 
   public WorkingDogAllOfDto() {
   }
@@ -179,13 +131,13 @@ public class WorkingDogAllOfDto {
   }
 
 
-  public WorkingDogAllOfDto capabilities(List<CapabilitiesEnum> capabilities) {
+  public WorkingDogAllOfDto capabilities(List<WorkingDogCapabilityDto> capabilities) {
     
     this.capabilities = capabilities;
     return this;
   }
 
-  public WorkingDogAllOfDto addCapabilitiesItem(CapabilitiesEnum capabilitiesItem) {
+  public WorkingDogAllOfDto addCapabilitiesItem(WorkingDogCapabilityDto capabilitiesItem) {
     this.capabilities.add(capabilitiesItem);
     return this;
   }
@@ -197,12 +149,12 @@ public class WorkingDogAllOfDto {
   @javax.annotation.Nonnull
   @ApiModelProperty(required = true, value = "")
 
-  public List<CapabilitiesEnum> getCapabilities() {
+  public List<WorkingDogCapabilityDto> getCapabilities() {
     return capabilities;
   }
 
 
-  public void setCapabilities(List<CapabilitiesEnum> capabilities) {
+  public void setCapabilities(List<WorkingDogCapabilityDto> capabilities) {
     this.capabilities = capabilities;
   }
 

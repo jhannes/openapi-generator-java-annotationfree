@@ -6,23 +6,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **petType** | **"WorkingDog"** |  | 
-**capabilities** | [**List<CapabilitiesEnum>**](#List<CapabilitiesEnum>) |  | 
+**capabilities** | [**List<WorkingDogCapabilityDto>**](WorkingDogCapabilityDto.md) |  | 
 **id** | **String** |  |  [optional] [readonly]
 **name** | **String** |  | 
 **birthDate** | **String** |  |  [optional]
 **ownerAddress** | [**AddressDto**](AddressDto.md) |  |  [optional]
 **bark** | **Boolean** |  |  [optional]
 **breed** | [**BreedEnum**](#BreedEnum) |  |  [optional]
-
-
-
-## Enum: List<CapabilitiesEnum>
-
-Name | Value
----- | -----
-GUIDE | &quot;Guide&quot;
-RESCUE | &quot;Rescue&quot;
-SEARCH | &quot;Search&quot;
 
 
 

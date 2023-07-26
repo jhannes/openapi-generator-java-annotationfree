@@ -23,6 +23,8 @@ import com.google.gson.stream.JsonWriter;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -64,6 +66,57 @@ public class AddressDto {
   public static final String SERIALIZED_NAME_COUNTRY = "country";
   @SerializedName(SERIALIZED_NAME_COUNTRY)
   private String country;
+
+  /**
+   * Gets or Sets addressTypes
+   */
+  @JsonAdapter(AddressTypesEnum.Adapter.class)
+  public enum AddressTypesEnum {
+    SHIPPING("SHIPPING"),
+    
+    BILLING("BILLING");
+
+    private String value;
+
+    AddressTypesEnum(String value) {
+      this.value = value;
+    }
+
+    public String getValue() {
+      return value;
+    }
+
+    @Override
+    public String toString() {
+      return String.valueOf(value);
+    }
+
+    public static AddressTypesEnum fromValue(String value) {
+      for (AddressTypesEnum b : AddressTypesEnum.values()) {
+        if (b.value.equals(value)) {
+          return b;
+        }
+      }
+      throw new IllegalArgumentException("Unexpected value '" + value + "'");
+    }
+
+    public static class Adapter extends TypeAdapter<AddressTypesEnum> {
+      @Override
+      public void write(final JsonWriter jsonWriter, final AddressTypesEnum enumeration) throws IOException {
+        jsonWriter.value(enumeration.getValue());
+      }
+
+      @Override
+      public AddressTypesEnum read(final JsonReader jsonReader) throws IOException {
+        String value =  jsonReader.nextString();
+        return AddressTypesEnum.fromValue(value);
+      }
+    }
+  }
+
+  public static final String SERIALIZED_NAME_ADDRESS_TYPES = "addressTypes";
+  @SerializedName(SERIALIZED_NAME_ADDRESS_TYPES)
+  private List<AddressTypesEnum> addressTypes = null;
 
   public AddressDto() {
   }
@@ -160,6 +213,37 @@ public class AddressDto {
   }
 
 
+  public AddressDto addressTypes(List<AddressTypesEnum> addressTypes) {
+    
+    this.addressTypes = addressTypes;
+    return this;
+  }
+
+  public AddressDto addAddressTypesItem(AddressTypesEnum addressTypesItem) {
+    if (this.addressTypes == null) {
+      this.addressTypes = new ArrayList<>();
+    }
+    this.addressTypes.add(addressTypesItem);
+    return this;
+  }
+
+   /**
+   * Get addressTypes
+   * @return addressTypes
+  **/
+  @javax.annotation.Nullable
+  @ApiModelProperty(value = "")
+
+  public List<AddressTypesEnum> getAddressTypes() {
+    return addressTypes;
+  }
+
+
+  public void setAddressTypes(List<AddressTypesEnum> addressTypes) {
+    this.addressTypes = addressTypes;
+  }
+
+
 
   @Override
   public boolean equals(Object o) {
@@ -173,12 +257,13 @@ public class AddressDto {
     return Objects.equals(this.addressLine1, address.addressLine1) &&
         Objects.equals(this.addressLine2, address.addressLine2) &&
         Objects.equals(this.city, address.city) &&
-        Objects.equals(this.country, address.country);
+        Objects.equals(this.country, address.country) &&
+        Objects.equals(this.addressTypes, address.addressTypes);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addressLine1, addressLine2, city, country);
+    return Objects.hash(addressLine1, addressLine2, city, country, addressTypes);
   }
 
   @Override
@@ -189,6 +274,7 @@ public class AddressDto {
     sb.append("    addressLine2: ").append(toIndentedString(addressLine2)).append("\n");
     sb.append("    city: ").append(toIndentedString(city)).append("\n");
     sb.append("    country: ").append(toIndentedString(country)).append("\n");
+    sb.append("    addressTypes: ").append(toIndentedString(addressTypes)).append("\n");
     sb.append("}");
     return sb.toString();
   }
@@ -215,6 +301,7 @@ public class AddressDto {
     openapiFields.add("addressLine2");
     openapiFields.add("city");
     openapiFields.add("country");
+    openapiFields.add("addressTypes");
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>();
@@ -262,6 +349,10 @@ public class AddressDto {
       }
       if ((jsonObj.get("country") != null && !jsonObj.get("country").isJsonNull()) && !jsonObj.get("country").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `country` to be a primitive type in the JSON string but got `%s`", jsonObj.get("country").toString()));
+      }
+      // ensure the json data is an array
+      if ((jsonObj.get("addressTypes") != null && !jsonObj.get("addressTypes").isJsonNull()) && !jsonObj.get("addressTypes").isJsonArray()) {
+        throw new IllegalArgumentException(String.format("Expected the field `addressTypes` to be an array in the JSON string but got `%s`", jsonObj.get("addressTypes").toString()));
       }
   }
 
