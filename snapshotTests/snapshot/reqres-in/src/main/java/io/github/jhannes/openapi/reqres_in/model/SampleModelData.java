@@ -243,6 +243,19 @@ public class SampleModelData {
         return result;
     }
 
+    public <T> List<T> sampleSubset(T[] alternatives) {
+        return sampleSubset(alternatives, 1, 4);
+    }
+
+    public <T> List<T> sampleSubset(T[] alternatives, int min, int max) {
+        List<T> result = new ArrayList<>();
+        int count = min + random.nextInt(max - min);
+        for (int i=0; i<count; i++) {
+            result.add(pickOne(alternatives));
+        }
+        return result;
+    }
+
     public <T> Map<String, T> sampleMap(Supplier<T> supplier, String propertyName) {
         return sampleMap(supplier, propertyName, 1, 4);
     }

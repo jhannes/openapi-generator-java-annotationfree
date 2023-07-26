@@ -53,7 +53,7 @@ public class SampleModelData {
             .addressLine2(sampleString("addressLine2"))
             .city(sampleString("city"))
             .country(sampleString("country"))
-            .addressTypes(sampleList(() -> sampleAddressDtoAddressTypesEnum("addressTypes"), "addressTypes"));
+            .addressTypes(sampleSubset(AddressDto.AddressTypesEnum.values()));
     }
 
     public List<AddressDto> sampleListOfAddressDto(String propertyName) {
@@ -192,7 +192,7 @@ public class SampleModelData {
     }
 
     public List<WorkingDogCapabilityDto> sampleListOfWorkingDogCapabilityDto() {
-        return sampleList(() -> sampleWorkingDogCapabilityDto());
+        return sampleSubset(WorkingDogCapabilityDto.values());
     }
 
     public WorkingDogDto sampleWorkingDogDto(String propertyName) {
@@ -251,6 +251,19 @@ public class SampleModelData {
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {
             result.add(supplier.get());
+        }
+        return result;
+    }
+
+    public <T> List<T> sampleSubset(T[] alternatives) {
+        return sampleSubset(alternatives, 1, 4);
+    }
+
+    public <T> List<T> sampleSubset(T[] alternatives, int min, int max) {
+        List<T> result = new ArrayList<>();
+        int count = min + random.nextInt(max - min);
+        for (int i=0; i<count; i++) {
+            result.add(pickOne(alternatives));
         }
         return result;
     }

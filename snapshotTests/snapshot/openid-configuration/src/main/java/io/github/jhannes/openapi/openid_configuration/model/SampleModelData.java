@@ -54,11 +54,11 @@ public class SampleModelData {
             .tokenEndpoint(sampleString("tokenEndpoint", "url"))
             .endSessionEndpoint(sampleString("endSessionEndpoint", "url"))
             .jwksUri(sampleString("jwksUri", "url"))
-            .responseTypesSupported(sampleList(() -> sampleDiscoveryDocumentDtoResponseTypesSupportedEnum("responseTypesSupported"), "responseTypesSupported"))
-            .responseModesSupported(sampleList(() -> sampleDiscoveryDocumentDtoResponseModesSupportedEnum("responseModesSupported"), "responseModesSupported"))
-            .subjectTypesSupported(sampleList(() -> sampleDiscoveryDocumentDtoSubjectTypesSupportedEnum("subjectTypesSupported"), "subjectTypesSupported"))
-            .codeChallengeMethodsSupported(sampleList(() -> sampleDiscoveryDocumentDtoCodeChallengeMethodsSupportedEnum("codeChallengeMethodsSupported"), "codeChallengeMethodsSupported"))
-            .idTokenSigningAlgValuesSupported(sampleList(() -> sampleDiscoveryDocumentDtoIdTokenSigningAlgValuesSupportedEnum("idTokenSigningAlgValuesSupported"), "idTokenSigningAlgValuesSupported"))
+            .responseTypesSupported(sampleSubset(DiscoveryDocumentDto.ResponseTypesSupportedEnum.values()))
+            .responseModesSupported(sampleSubset(DiscoveryDocumentDto.ResponseModesSupportedEnum.values()))
+            .subjectTypesSupported(sampleSubset(DiscoveryDocumentDto.SubjectTypesSupportedEnum.values()))
+            .codeChallengeMethodsSupported(sampleSubset(DiscoveryDocumentDto.CodeChallengeMethodsSupportedEnum.values()))
+            .idTokenSigningAlgValuesSupported(sampleSubset(DiscoveryDocumentDto.IdTokenSigningAlgValuesSupportedEnum.values()))
             .xSsoFrame(sampleString("xSsoFrame", "url"));
     }
 
@@ -220,6 +220,19 @@ public class SampleModelData {
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {
             result.add(supplier.get());
+        }
+        return result;
+    }
+
+    public <T> List<T> sampleSubset(T[] alternatives) {
+        return sampleSubset(alternatives, 1, 4);
+    }
+
+    public <T> List<T> sampleSubset(T[] alternatives, int min, int max) {
+        List<T> result = new ArrayList<>();
+        int count = min + random.nextInt(max - min);
+        for (int i=0; i<count; i++) {
+            result.add(pickOne(alternatives));
         }
         return result;
     }

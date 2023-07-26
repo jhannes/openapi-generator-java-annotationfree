@@ -75,7 +75,7 @@ public class SampleModelData {
     }
 
     public List<PetTypeDto> sampleListOfPetTypeDto() {
-        return sampleList(() -> samplePetTypeDto());
+        return sampleSubset(PetTypeDto.values());
     }
 
     protected final Random random;
@@ -106,6 +106,19 @@ public class SampleModelData {
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {
             result.add(supplier.get());
+        }
+        return result;
+    }
+
+    public <T> List<T> sampleSubset(T[] alternatives) {
+        return sampleSubset(alternatives, 1, 4);
+    }
+
+    public <T> List<T> sampleSubset(T[] alternatives, int min, int max) {
+        List<T> result = new ArrayList<>();
+        int count = min + random.nextInt(max - min);
+        for (int i=0; i<count; i++) {
+            result.add(pickOne(alternatives));
         }
         return result;
     }
