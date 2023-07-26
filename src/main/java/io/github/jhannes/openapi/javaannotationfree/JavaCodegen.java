@@ -145,10 +145,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 subtypeInterfaces.add(codegenModel);
             }
         }
-        codegenModel.vars.removeIf(v -> codegenModel.interfaceModels.stream()
-                .anyMatch(i -> i.vars.stream()
-                        .noneMatch(memberVar -> memberVar.name.equals(v.name) && memberVar.datatypeWithEnum.equals(v.datatypeWithEnum))
-                ));
+        codegenModel.vars.removeIf(var -> codegenModel.interfaceModels.stream().anyMatch(model -> varNotInImplementation(var, model)));
         if (codegenModel.discriminator != null && codegenModel.discriminator.getMapping() == null) {
             codegenModel.discriminator.setMapping(mapping);
             codegenModel.discriminator.setMappedModels(mappedModels);
@@ -156,6 +153,18 @@ public class JavaCodegen extends AbstractJavaCodegen {
         if (codegenModel.discriminator != null) {
             codegenModel.vars.removeIf(v -> v.name.equals(codegenModel.discriminator.getPropertyName()));
         }
+    }
+
+    private static boolean varNotInImplementation(CodegenProperty var, CodegenModel model) {
+        if (!model.oneOf.isEmpty()) {
+            for (CodegenModel subtype : model.interfaceModels) {
+                if (varNotInImplementation(var, subtype)) {
+                    return true;
+                }
+            }
+        }
+        return model.vars.stream()
+                .noneMatch(memberVar -> memberVar.name.equals(var.name) && memberVar.datatypeWithEnum.equals(var.datatypeWithEnum));
     }
 
     @Override
