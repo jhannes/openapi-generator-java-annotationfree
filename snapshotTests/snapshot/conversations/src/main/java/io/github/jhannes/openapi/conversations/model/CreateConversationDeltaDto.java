@@ -39,7 +39,7 @@ public class CreateConversationDeltaDto implements DeltaDto {
 
     private UUID conversationId;
 
-    private ConversationInfoDto info;
+    private ConversationInfoDto info = new ConversationInfoDto();
 
     public static String[] readOnlyFields() {
         return new String[] {

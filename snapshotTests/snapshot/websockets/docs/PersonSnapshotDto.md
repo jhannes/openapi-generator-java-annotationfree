@@ -12,8 +12,7 @@ Name | Type | Description | Notes
 **email** | **String** |  |  [optional]
 **id** | [**UUID**](UUID.md) |  |  [optional] [readonly]
 **type** | **String** |  | 
-**givenName** | **String** |  | 
-**familyName** | **String** |  | 
+**name** | [**PersonNameDto**](PersonNameDto.md) |  | 
 **phone** | **String** |  |  [optional]
 **birthDate** | [**LocalDate**](LocalDate.md) |  |  [optional]
 **gender** | **GenderEnum** |  |  [optional]

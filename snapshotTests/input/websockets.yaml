@@ -84,10 +84,8 @@ components:
               readOnly: true
             type:
               type: string
-            givenName:
-              type: string
-            familyName:
-              type: string
+            name:
+              $ref: "#/components/schemas/PersonName"
             phone:
               type: string
               format: phone
@@ -96,11 +94,13 @@ components:
               format: date
             gender:
               type: string
-              enum: [male, female, other, unspecified]
-          required:
-            - type
-            - givenName
-            - familyName
+              enum: [ male, female, other, unspecified ]
+    PersonName:
+      properties:
+        givenName:
+          type: string
+        familyName:
+          type: string
     ChangeTracked:
       properties:
         createdAt:
@@ -116,16 +116,19 @@ components:
           type: string
           format: username
       required:
-      - createdAt
-      - createdBy
+        - createdAt
+        - createdBy
     PersonSnapshot:
       allOf:
-      - $ref: "#/components/schemas/ChangeTracked"
-      - $ref: "#/components/schemas/Person"
+        - $ref: "#/components/schemas/ChangeTracked"
+        - $ref: "#/components/schemas/Person"
+      required:
+        - type
+        - name
     StringSnapshot:
       allOf:
-      - $ref: "#/components/schemas/ChangeTracked"
-      - type: object
-        properties:
-          name:
-            type: string
+        - $ref: "#/components/schemas/ChangeTracked"
+        - type: object
+          properties:
+            name:
+              type: string

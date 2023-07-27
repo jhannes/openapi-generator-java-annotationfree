@@ -6,6 +6,7 @@ docs/CreatePersonCommandDto.md
 docs/DefaultApi.md
 docs/PersonDto.md
 docs/PersonInterface.md
+docs/PersonNameDto.md
 docs/PersonSnapshotDto.md
 docs/RecipientDto.md
 docs/RecipientInterface.md
@@ -23,6 +24,7 @@ src/main/java/io/github/jhannes/openapi/websockets/model/ChangeTrackedInterface.
 src/main/java/io/github/jhannes/openapi/websockets/model/CreatePersonCommandDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/PersonDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/PersonInterface.java
+src/main/java/io/github/jhannes/openapi/websockets/model/PersonNameDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/PersonSnapshotDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/RecipientDto.java
 src/main/java/io/github/jhannes/openapi/websockets/model/RecipientInterface.java

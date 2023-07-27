@@ -37,7 +37,7 @@ public class ConversationSnapshotDto extends ChangeTrackedDto {
 
     private UUID id;
 
-    private ConversationInfoDto info;
+    private ConversationInfoDto info = new ConversationInfoDto();
 
     private Map<String, ConversationMessageSnapshotDto> messages = new HashMap<>();
 

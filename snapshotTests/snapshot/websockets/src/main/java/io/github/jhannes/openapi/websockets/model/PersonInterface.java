@@ -99,24 +99,14 @@ public interface PersonInterface extends RecipientInterface {
     PersonInterface type(String type);
 
     /**
-     * Get givenName
-     * @return givenName
+     * Get name
+     * @return name
      */
-    String getGivenName();
+    PersonNameDto getName();
 
-    void setGivenName(String givenName);
+    void setName(PersonNameDto name);
 
-    PersonInterface givenName(String givenName);
-
-    /**
-     * Get familyName
-     * @return familyName
-     */
-    String getFamilyName();
-
-    void setFamilyName(String familyName);
-
-    PersonInterface familyName(String familyName);
+    PersonInterface name(PersonNameDto name);
 
     /**
      * Get phone
@@ -154,8 +144,7 @@ public interface PersonInterface extends RecipientInterface {
     default <T extends PersonInterface> T copyTo(T target) {
         if (this.getId() != null) target.setId(this.getId());
         if (this.getType() != null) target.setType(this.getType());
-        if (this.getGivenName() != null) target.setGivenName(this.getGivenName());
-        if (this.getFamilyName() != null) target.setFamilyName(this.getFamilyName());
+        if (this.getName() != null) target.setName(this.getName());
         if (this.getPhone() != null) target.setPhone(this.getPhone());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
         if (this.getGender() != null) target.setGender(this.getGender());

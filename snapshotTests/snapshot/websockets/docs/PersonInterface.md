@@ -6,9 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | [**UUID**](UUID.md) |  |  [optional] [readonly]
-**type** | **String** |  | 
-**givenName** | **String** |  | 
-**familyName** | **String** |  | 
+**type** | **String** |  |  [optional]
+**name** | [**PersonNameDto**](PersonNameDto.md) |  |  [optional]
 **phone** | **String** |  |  [optional]
 **birthDate** | [**LocalDate**](LocalDate.md) |  |  [optional]
 **gender** | [**GenderEnum**](#GenderEnum) |  |  [optional]

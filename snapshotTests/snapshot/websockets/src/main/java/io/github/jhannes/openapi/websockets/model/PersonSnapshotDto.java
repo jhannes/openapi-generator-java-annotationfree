@@ -50,9 +50,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
 
     private String type;
 
-    private String givenName;
-
-    private String familyName;
+    private PersonNameDto name = new PersonNameDto();
 
     private String phone = null;
 
@@ -76,8 +74,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
                 "createdAt",
                 "createdBy",
                 "type",
-                "givenName",
-                "familyName",
+                "name",
         };
     }
 
@@ -86,14 +83,16 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         if (isMissing(getCreatedAt())) result.add("createdAt");
         if (isMissing(getCreatedBy())) result.add("createdBy");
         if (isMissing(getType())) result.add("type");
-        if (isMissing(getGivenName())) result.add("givenName");
-        if (isMissing(getFamilyName())) result.add("familyName");
+        if (isMissing(getName())) result.add("name");
         return result;
     }
 
     public void readOnlyFieldsWithValue(List<String> result) {
         if (!isMissing(getId())) {
             result.add("PersonSnapshotDto.id");
+        }
+        if (name != null) {
+            name.readOnlyFieldsWithValue(result);
         }
     }
 
@@ -105,8 +104,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         if (this.getEmail() != null) target.setEmail(this.getEmail());
         if (this.getId() != null) target.setId(this.getId());
         if (this.getType() != null) target.setType(this.getType());
-        if (this.getGivenName() != null) target.setGivenName(this.getGivenName());
-        if (this.getFamilyName() != null) target.setFamilyName(this.getFamilyName());
+        if (this.getName() != null) target.setName(this.getName());
         if (this.getPhone() != null) target.setPhone(this.getPhone());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
         if (this.getGender() != null) target.setGender(this.getGender());
@@ -248,36 +246,19 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
     }
 
     /**
-     * Get givenName
-     * @return givenName
+     * Get name
+     * @return name
      */
-    public String getGivenName() {
-        return givenName;
+    public PersonNameDto getName() {
+        return name;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
+    public void setName(PersonNameDto name) {
+        this.name = name;
     }
 
-    public PersonSnapshotDto givenName(String givenName) {
-        this.givenName = givenName;
-        return this;
-    }
-
-    /**
-     * Get familyName
-     * @return familyName
-     */
-    public String getFamilyName() {
-        return familyName;
-    }
-
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
-    }
-
-    public PersonSnapshotDto familyName(String familyName) {
-        this.familyName = familyName;
+    public PersonSnapshotDto name(PersonNameDto name) {
+        this.name = name;
         return this;
     }
 
@@ -348,8 +329,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
                 Objects.equals(this.getEmail(), personSnapshot.getEmail()) &&
                 Objects.equals(this.getId(), personSnapshot.getId()) &&
                 Objects.equals(this.getType(), personSnapshot.getType()) &&
-                Objects.equals(this.getGivenName(), personSnapshot.getGivenName()) &&
-                Objects.equals(this.getFamilyName(), personSnapshot.getFamilyName()) &&
+                Objects.equals(this.getName(), personSnapshot.getName()) &&
                 Objects.equals(this.getPhone(), personSnapshot.getPhone()) &&
                 Objects.equals(this.getBirthDate(), personSnapshot.getBirthDate()) &&
                 Objects.equals(this.getGender(), personSnapshot.getGender());
@@ -357,7 +337,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCreatedAt(), getCreatedBy(), getUpdatedAt(), getUpdatedBy(), getEmail(), getId(), getType(), getGivenName(), getFamilyName(), getPhone(), getBirthDate(), getGender());
+        return Objects.hash(getCreatedAt(), getCreatedBy(), getUpdatedAt(), getUpdatedBy(), getEmail(), getId(), getType(), getName(), getPhone(), getBirthDate(), getGender());
     }
 
     @Override
@@ -371,8 +351,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    type: ").append(toIndentedString(getType())).append("\n");
-        sb.append("    givenName: ").append(toIndentedString(getGivenName())).append("\n");
-        sb.append("    familyName: ").append(toIndentedString(getFamilyName())).append("\n");
+        sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("    phone: ").append(toIndentedString(getPhone())).append("\n");
         sb.append("    birthDate: ").append(toIndentedString(getBirthDate())).append("\n");
         sb.append("    gender: ").append(toIndentedString(getGender())).append("\n");

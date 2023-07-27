@@ -41,7 +41,7 @@ public class AddMessageToConversationDeltaDto implements DeltaDto {
 
     private UUID messageId;
 
-    private ConversationMessageDto message;
+    private ConversationMessageDto message = new ConversationMessageDto();
 
     public static String[] readOnlyFields() {
         return new String[] {

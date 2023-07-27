@@ -107,6 +107,7 @@ Class | Method | HTTP request | Description
  - [CreatePersonCommandDto](docs/CreatePersonCommandDto.md)
  - [PersonDto](docs/PersonDto.md)
  - [PersonInterface](docs/PersonInterface.md)
+ - [PersonNameDto](docs/PersonNameDto.md)
  - [PersonSnapshotDto](docs/PersonSnapshotDto.md)
  - [RecipientDto](docs/RecipientDto.md)
  - [RecipientInterface](docs/RecipientInterface.md)

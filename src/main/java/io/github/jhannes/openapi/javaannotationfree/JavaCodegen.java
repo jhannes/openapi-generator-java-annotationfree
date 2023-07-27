@@ -216,6 +216,10 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 }
             }
             for (CodegenProperty variable : codegenModel.vars) {
+                if (variable.isModel)
+                    if (allModels.get(variable.dataType).oneOf.isEmpty()) {
+                        variable.defaultValue = "new " + variable.dataType + "()";
+                    }
                 if (variable.get_enum() != null && variable.get_enum().size() == 1) {
                     variable.defaultValue = "\"" + variable.get_enum().get(0) + "\"";
                     variable.dataType = "\"" + variable.get_enum().get(0) + "\"";

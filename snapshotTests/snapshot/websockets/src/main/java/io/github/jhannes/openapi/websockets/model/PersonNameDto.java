@@ -32,15 +32,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
-* CreatePersonCommandDto
+* PersonNameDto
 */
-public class CreatePersonCommandDto implements WebSocketCommandDto {
+public class PersonNameDto {
 
-    private String command = "createPerson";
+    private String givenName = null;
 
-    private UUID id;
-
-    private PersonDto person = new PersonDto();
+    private String familyName = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -54,30 +52,20 @@ public class CreatePersonCommandDto implements WebSocketCommandDto {
 
     public static String[] requiredFields() {
         return new String[] {
-                "command",
-                "id",
-                "person",
         };
     }
 
     public List<String> missingRequiredFields() {
         List<String> result = new ArrayList<>();
-        if (isMissing(getCommand())) result.add("command");
-        if (isMissing(getId())) result.add("id");
-        if (isMissing(getPerson())) result.add("person");
         return result;
     }
 
     public void readOnlyFieldsWithValue(List<String> result) {
-        if (person != null) {
-            person.readOnlyFieldsWithValue(result);
-        }
     }
 
-    public <T extends CreatePersonCommandDto> T copyTo(T target) {
-        if (this.getCommand() != null) target.setCommand(this.getCommand());
-        if (this.getId() != null) target.setId(this.getId());
-        if (this.getPerson() != null) target.setPerson(this.getPerson());
+    public <T extends PersonNameDto> T copyTo(T target) {
+        if (this.getGivenName() != null) target.setGivenName(this.getGivenName());
+        if (this.getFamilyName() != null) target.setFamilyName(this.getFamilyName());
         return target;
     }
 
@@ -95,53 +83,36 @@ public class CreatePersonCommandDto implements WebSocketCommandDto {
 
 
     /**
-     * Get command
-     * @return command
+     * Get givenName
+     * @return givenName
      */
-    public String getCommand() {
-        return command;
+    public String getGivenName() {
+        return givenName;
     }
 
-    public void setCommand(String command) {
-        this.command = command;
+    public void setGivenName(String givenName) {
+        this.givenName = givenName;
     }
 
-    public CreatePersonCommandDto command(String command) {
-        this.command = command;
+    public PersonNameDto givenName(String givenName) {
+        this.givenName = givenName;
         return this;
     }
 
     /**
-     * Get id
-     * @return id
+     * Get familyName
+     * @return familyName
      */
-    public UUID getId() {
-        return id;
+    public String getFamilyName() {
+        return familyName;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
     }
 
-    public CreatePersonCommandDto id(UUID id) {
-        this.id = id;
-        return this;
-    }
-
-    /**
-     * Get person
-     * @return person
-     */
-    public PersonDto getPerson() {
-        return person;
-    }
-
-    public void setPerson(PersonDto person) {
-        this.person = person;
-    }
-
-    public CreatePersonCommandDto person(PersonDto person) {
-        this.person = person;
+    public PersonNameDto familyName(String familyName) {
+        this.familyName = familyName;
         return this;
     }
 
@@ -153,24 +124,22 @@ public class CreatePersonCommandDto implements WebSocketCommandDto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        CreatePersonCommandDto createPersonCommand = (CreatePersonCommandDto) o;
-        return Objects.equals(this.getCommand(), createPersonCommand.getCommand()) &&
-                Objects.equals(this.getId(), createPersonCommand.getId()) &&
-                Objects.equals(this.getPerson(), createPersonCommand.getPerson());
+        PersonNameDto personName = (PersonNameDto) o;
+        return Objects.equals(this.getGivenName(), personName.getGivenName()) &&
+                Objects.equals(this.getFamilyName(), personName.getFamilyName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCommand(), getId(), getPerson());
+        return Objects.hash(getGivenName(), getFamilyName());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("CreatePersonCommandDto {\n");
-        sb.append("    command: ").append(toIndentedString(getCommand())).append("\n");
-        sb.append("    id: ").append(toIndentedString(getId())).append("\n");
-        sb.append("    person: ").append(toIndentedString(getPerson())).append("\n");
+        sb.append("PersonNameDto {\n");
+        sb.append("    givenName: ").append(toIndentedString(getGivenName())).append("\n");
+        sb.append("    familyName: ").append(toIndentedString(getFamilyName())).append("\n");
         sb.append("}");
         return sb.toString();
     }

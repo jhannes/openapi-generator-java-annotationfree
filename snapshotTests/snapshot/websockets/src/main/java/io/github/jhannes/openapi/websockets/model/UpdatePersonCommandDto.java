@@ -40,7 +40,7 @@ public class UpdatePersonCommandDto implements WebSocketCommandDto {
 
     private UUID id;
 
-    private PersonDto person;
+    private PersonDto person = new PersonDto();
 
     public static String[] readOnlyFields() {
         return new String[] {

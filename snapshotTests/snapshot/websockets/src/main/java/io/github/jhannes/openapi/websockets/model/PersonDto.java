@@ -38,11 +38,9 @@ public class PersonDto extends RecipientDto implements PersonInterface {
 
     private UUID id = null;
 
-    private String type;
+    private String type = null;
 
-    private String givenName;
-
-    private String familyName;
+    private PersonNameDto name = null;
 
     private String phone = null;
 
@@ -63,17 +61,11 @@ public class PersonDto extends RecipientDto implements PersonInterface {
 
     public static String[] requiredFields() {
         return new String[] {
-                "type",
-                "givenName",
-                "familyName",
         };
     }
 
     public List<String> missingRequiredFields() {
         List<String> result = super.missingRequiredFields();
-        if (isMissing(getType())) result.add("type");
-        if (isMissing(getGivenName())) result.add("givenName");
-        if (isMissing(getFamilyName())) result.add("familyName");
         return result;
     }
 
@@ -82,14 +74,16 @@ public class PersonDto extends RecipientDto implements PersonInterface {
         if (!isMissing(getId())) {
             result.add("PersonDto.id");
         }
+        if (name != null) {
+            name.readOnlyFieldsWithValue(result);
+        }
     }
 
     public <T extends PersonDto> T copyTo(T target) {
         super.copyTo(target);
         if (this.getId() != null) target.setId(this.getId());
         if (this.getType() != null) target.setType(this.getType());
-        if (this.getGivenName() != null) target.setGivenName(this.getGivenName());
-        if (this.getFamilyName() != null) target.setFamilyName(this.getFamilyName());
+        if (this.getName() != null) target.setName(this.getName());
         if (this.getPhone() != null) target.setPhone(this.getPhone());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
         if (this.getGender() != null) target.setGender(this.getGender());
@@ -146,36 +140,19 @@ public class PersonDto extends RecipientDto implements PersonInterface {
     }
 
     /**
-     * Get givenName
-     * @return givenName
+     * Get name
+     * @return name
      */
-    public String getGivenName() {
-        return givenName;
+    public PersonNameDto getName() {
+        return name;
     }
 
-    public void setGivenName(String givenName) {
-        this.givenName = givenName;
+    public void setName(PersonNameDto name) {
+        this.name = name;
     }
 
-    public PersonDto givenName(String givenName) {
-        this.givenName = givenName;
-        return this;
-    }
-
-    /**
-     * Get familyName
-     * @return familyName
-     */
-    public String getFamilyName() {
-        return familyName;
-    }
-
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
-    }
-
-    public PersonDto familyName(String familyName) {
-        this.familyName = familyName;
+    public PersonDto name(PersonNameDto name) {
+        this.name = name;
         return this;
     }
 
@@ -247,8 +224,7 @@ public class PersonDto extends RecipientDto implements PersonInterface {
         PersonDto person = (PersonDto) o;
         return Objects.equals(this.getId(), person.getId()) &&
                 Objects.equals(this.getType(), person.getType()) &&
-                Objects.equals(this.getGivenName(), person.getGivenName()) &&
-                Objects.equals(this.getFamilyName(), person.getFamilyName()) &&
+                Objects.equals(this.getName(), person.getName()) &&
                 Objects.equals(this.getPhone(), person.getPhone()) &&
                 Objects.equals(this.getBirthDate(), person.getBirthDate()) &&
                 Objects.equals(this.getGender(), person.getGender()) &&
@@ -258,7 +234,7 @@ public class PersonDto extends RecipientDto implements PersonInterface {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getType(), getGivenName(), getFamilyName(), getPhone(), getBirthDate(), getGender(), getEmail());
+        return Objects.hash(getId(), getType(), getName(), getPhone(), getBirthDate(), getGender(), getEmail());
     }
 
     @Override
@@ -268,8 +244,7 @@ public class PersonDto extends RecipientDto implements PersonInterface {
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    id: ").append(toIndentedString(getId())).append("\n");
         sb.append("    type: ").append(toIndentedString(getType())).append("\n");
-        sb.append("    givenName: ").append(toIndentedString(getGivenName())).append("\n");
-        sb.append("    familyName: ").append(toIndentedString(getFamilyName())).append("\n");
+        sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("    phone: ").append(toIndentedString(getPhone())).append("\n");
         sb.append("    birthDate: ").append(toIndentedString(getBirthDate())).append("\n");
         sb.append("    gender: ").append(toIndentedString(getGender())).append("\n");
