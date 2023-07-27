@@ -1,0 +1,4 @@
+
+# MessageToServerDto oneOf-interface
+
+
