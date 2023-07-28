@@ -7,7 +7,7 @@ All URIs are relative to *http://api.example.com/v1*
 | [**petsPost**](DefaultApi.md#petsPost) | **POST** /pets |  |
 
 
-<a name="petsPost"></a>
+<a id="petsPost"></a>
 # **petsPost**
 > petsPost(petDto)
 

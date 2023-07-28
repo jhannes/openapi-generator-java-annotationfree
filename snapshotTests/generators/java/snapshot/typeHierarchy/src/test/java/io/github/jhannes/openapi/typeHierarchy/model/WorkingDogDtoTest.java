@@ -20,8 +20,6 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
 import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogCapabilityDto;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

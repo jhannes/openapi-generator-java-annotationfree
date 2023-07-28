@@ -20,8 +20,6 @@ import com.google.gson.annotations.JsonAdapter;
 import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,10 +34,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -116,7 +119,7 @@ public class AddressDto {
 
   public static final String SERIALIZED_NAME_ADDRESS_TYPES = "addressTypes";
   @SerializedName(SERIALIZED_NAME_ADDRESS_TYPES)
-  private List<AddressTypesEnum> addressTypes = null;
+  private List<AddressTypesEnum> addressTypes;
 
   public AddressDto() {
   }
@@ -132,8 +135,6 @@ public class AddressDto {
    * @return addressLine1
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
   public String getAddressLine1() {
     return addressLine1;
   }
@@ -155,8 +156,6 @@ public class AddressDto {
    * @return addressLine2
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
   public String getAddressLine2() {
     return addressLine2;
   }
@@ -178,8 +177,6 @@ public class AddressDto {
    * @return city
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-
   public String getCity() {
     return city;
   }
@@ -201,8 +198,6 @@ public class AddressDto {
    * @return country
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-
   public String getCountry() {
     return country;
   }
@@ -232,8 +227,6 @@ public class AddressDto {
    * @return addressTypes
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
   public List<AddressTypesEnum> getAddressTypes() {
     return addressTypes;
   }
@@ -317,9 +310,7 @@ public class AddressDto {
   */
   public static void validateJsonObject(JsonObject jsonObj) throws IOException {
       if (jsonObj == null) {
-        if (AddressDto.openapiRequiredFields.isEmpty()) {
-          return;
-        } else { // has required fields
+        if (!AddressDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in AddressDto is not found in the empty JSON string", AddressDto.openapiRequiredFields.toString()));
         }
       }
@@ -344,14 +335,14 @@ public class AddressDto {
       if ((jsonObj.get("addressLine2") != null && !jsonObj.get("addressLine2").isJsonNull()) && !jsonObj.get("addressLine2").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `addressLine2` to be a primitive type in the JSON string but got `%s`", jsonObj.get("addressLine2").toString()));
       }
-      if ((jsonObj.get("city") != null && !jsonObj.get("city").isJsonNull()) && !jsonObj.get("city").isJsonPrimitive()) {
+      if (!jsonObj.get("city").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `city` to be a primitive type in the JSON string but got `%s`", jsonObj.get("city").toString()));
       }
-      if ((jsonObj.get("country") != null && !jsonObj.get("country").isJsonNull()) && !jsonObj.get("country").isJsonPrimitive()) {
+      if (!jsonObj.get("country").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `country` to be a primitive type in the JSON string but got `%s`", jsonObj.get("country").toString()));
       }
-      // ensure the json data is an array
-      if ((jsonObj.get("addressTypes") != null && !jsonObj.get("addressTypes").isJsonNull()) && !jsonObj.get("addressTypes").isJsonArray()) {
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("addressTypes") != null && !jsonObj.get("addressTypes").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `addressTypes` to be an array in the JSON string but got `%s`", jsonObj.get("addressTypes").toString()));
       }
   }

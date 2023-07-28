@@ -21,8 +21,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogCapabilityDto;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +35,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -119,8 +122,6 @@ public class WorkingDogAllOfDto {
    * @return petType
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-
   public PetTypeEnum getPetType() {
     return petType;
   }
@@ -138,6 +139,9 @@ public class WorkingDogAllOfDto {
   }
 
   public WorkingDogAllOfDto addCapabilitiesItem(WorkingDogCapabilityDto capabilitiesItem) {
+    if (this.capabilities == null) {
+      this.capabilities = new ArrayList<>();
+    }
     this.capabilities.add(capabilitiesItem);
     return this;
   }
@@ -147,8 +151,6 @@ public class WorkingDogAllOfDto {
    * @return capabilities
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-
   public List<WorkingDogCapabilityDto> getCapabilities() {
     return capabilities;
   }
@@ -223,9 +225,7 @@ public class WorkingDogAllOfDto {
   */
   public static void validateJsonObject(JsonObject jsonObj) throws IOException {
       if (jsonObj == null) {
-        if (WorkingDogAllOfDto.openapiRequiredFields.isEmpty()) {
-          return;
-        } else { // has required fields
+        if (!WorkingDogAllOfDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in WorkingDogAllOfDto is not found in the empty JSON string", WorkingDogAllOfDto.openapiRequiredFields.toString()));
         }
       }
@@ -244,11 +244,13 @@ public class WorkingDogAllOfDto {
           throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonObj.toString()));
         }
       }
-      if ((jsonObj.get("pet_type") != null && !jsonObj.get("pet_type").isJsonNull()) && !jsonObj.get("pet_type").isJsonPrimitive()) {
+      if (!jsonObj.get("pet_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `pet_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("pet_type").toString()));
       }
-      // ensure the json data is an array
-      if ((jsonObj.get("capabilities") != null && !jsonObj.get("capabilities").isJsonNull()) && !jsonObj.get("capabilities").isJsonArray()) {
+      // ensure the required json array is present
+      if (jsonObj.get("capabilities") == null) {
+        throw new IllegalArgumentException("Expected the field `linkedContent` to be an array in the JSON string but got `null`");
+      } else if (!jsonObj.get("capabilities").isJsonArray()) {
         throw new IllegalArgumentException(String.format("Expected the field `capabilities` to be an array in the JSON string but got `%s`", jsonObj.get("capabilities").toString()));
       }
   }

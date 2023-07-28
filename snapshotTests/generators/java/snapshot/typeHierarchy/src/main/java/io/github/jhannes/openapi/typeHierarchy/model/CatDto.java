@@ -21,8 +21,6 @@ import com.google.gson.annotations.SerializedName;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 
 import com.google.gson.Gson;
@@ -35,10 +33,15 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import com.google.gson.TypeAdapter;
+import com.google.gson.stream.JsonReader;
+import com.google.gson.stream.JsonWriter;
+import java.io.IOException;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -141,8 +144,6 @@ public class CatDto {
    * @return id
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
   public String getId() {
     return id;
   }
@@ -161,8 +162,6 @@ public class CatDto {
    * @return name
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-
   public String getName() {
     return name;
   }
@@ -184,8 +183,6 @@ public class CatDto {
    * @return birthDate
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
   public String getBirthDate() {
     return birthDate;
   }
@@ -207,8 +204,6 @@ public class CatDto {
    * @return ownerAddress
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
   public AddressDto getOwnerAddress() {
     return ownerAddress;
   }
@@ -230,8 +225,6 @@ public class CatDto {
    * @return petType
   **/
   @javax.annotation.Nonnull
-  @ApiModelProperty(required = true, value = "")
-
   public PetTypeEnum getPetType() {
     return petType;
   }
@@ -253,8 +246,6 @@ public class CatDto {
    * @return hunts
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
   public Boolean getHunts() {
     return hunts;
   }
@@ -270,8 +261,6 @@ public class CatDto {
    * @return age
   **/
   @javax.annotation.Nullable
-  @ApiModelProperty(value = "")
-
   public Integer getAge() {
     return age;
   }
@@ -358,9 +347,7 @@ public class CatDto {
   */
   public static void validateJsonObject(JsonObject jsonObj) throws IOException {
       if (jsonObj == null) {
-        if (CatDto.openapiRequiredFields.isEmpty()) {
-          return;
-        } else { // has required fields
+        if (!CatDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON object is null
           throw new IllegalArgumentException(String.format("The required field(s) %s in CatDto is not found in the empty JSON string", CatDto.openapiRequiredFields.toString()));
         }
       }
@@ -382,7 +369,7 @@ public class CatDto {
       if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
       }
-      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
+      if (!jsonObj.get("name").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
       }
       if ((jsonObj.get("birth_date") != null && !jsonObj.get("birth_date").isJsonNull()) && !jsonObj.get("birth_date").isJsonPrimitive()) {
@@ -392,7 +379,7 @@ public class CatDto {
       if (jsonObj.get("ownerAddress") != null && !jsonObj.get("ownerAddress").isJsonNull()) {
         AddressDto.validateJsonObject(jsonObj.getAsJsonObject("ownerAddress"));
       }
-      if ((jsonObj.get("pet_type") != null && !jsonObj.get("pet_type").isJsonNull()) && !jsonObj.get("pet_type").isJsonPrimitive()) {
+      if (!jsonObj.get("pet_type").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format("Expected the field `pet_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("pet_type").toString()));
       }
   }

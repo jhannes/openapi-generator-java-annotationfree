@@ -24,8 +24,6 @@ import io.github.jhannes.openapi.typeHierarchy.model.DogDto;
 import io.github.jhannes.openapi.typeHierarchy.model.GoldfishDto;
 import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogCapabilityDto;
 import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogDto;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;

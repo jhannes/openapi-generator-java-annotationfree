@@ -130,10 +130,11 @@ Class | Method | HTTP request | Description
  - [WorkingDogDto](docs/WorkingDogDto.md)
 
 
+<a id="documentation-for-authorization"></a>
 ## Documentation for Authorization
 
-All endpoints do not require authorization.
-Authentication schemes defined for the API:
+Endpoints do not require authorization.
+
 
 ## Recommendation
 

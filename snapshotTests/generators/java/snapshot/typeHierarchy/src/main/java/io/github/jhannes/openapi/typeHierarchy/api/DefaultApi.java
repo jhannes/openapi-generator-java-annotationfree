@@ -111,7 +111,6 @@ public class DefaultApi {
         Map<String, Object> localVarFormParams = new HashMap<String, Object>();
 
         final String[] localVarAccepts = {
-            
         };
         final String localVarAccept = localVarApiClient.selectHeaderAccept(localVarAccepts);
         if (localVarAccept != null) {
@@ -132,10 +131,7 @@ public class DefaultApi {
 
     @SuppressWarnings("rawtypes")
     private okhttp3.Call petsPostValidateBeforeCall(PetDto petDto, final ApiCallback _callback) throws ApiException {
-        
-
-        okhttp3.Call localVarCall = petsPostCall(petDto, _callback);
-        return localVarCall;
+        return petsPostCall(petDto, _callback);
 
     }
 
