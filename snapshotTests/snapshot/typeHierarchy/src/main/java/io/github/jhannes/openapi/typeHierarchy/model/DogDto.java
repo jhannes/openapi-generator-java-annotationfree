@@ -89,8 +89,8 @@ public class DogDto extends PetBaseDto implements PetDto {
 
     public static String[] requiredFields() {
         return new String[] {
-                "pet_type",
                 "name",
+                "pet_type",
         };
     }
 
@@ -124,6 +124,30 @@ public class DogDto extends PetBaseDto implements PetDto {
         return s == null;
     }
 
+
+    @Override
+    public DogDto id(String id) {
+        super.id(id);
+        return this;
+    }
+
+    @Override
+    public DogDto name(String name) {
+        super.name(name);
+        return this;
+    }
+
+    @Override
+    public DogDto birthDate(String birthDate) {
+        super.birthDate(birthDate);
+        return this;
+    }
+
+    @Override
+    public DogDto ownerAddress(AddressDto ownerAddress) {
+        super.ownerAddress(ownerAddress);
+        return this;
+    }
 
     /**
      * Get pet_type
@@ -177,30 +201,6 @@ public class DogDto extends PetBaseDto implements PetDto {
     }
 
     @Override
-    public DogDto id(String id) {
-        super.id(id);
-        return this;
-    }
-
-    @Override
-    public DogDto name(String name) {
-        super.name(name);
-        return this;
-    }
-
-    @Override
-    public DogDto birthDate(String birthDate) {
-        super.birthDate(birthDate);
-        return this;
-    }
-
-    @Override
-    public DogDto ownerAddress(AddressDto ownerAddress) {
-        super.ownerAddress(ownerAddress);
-        return this;
-    }
-
-    @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
             return true;
@@ -212,16 +212,12 @@ public class DogDto extends PetBaseDto implements PetDto {
         return Objects.equals(this.getPetType(), dog.getPetType()) &&
                 Objects.equals(this.getBark(), dog.getBark()) &&
                 Objects.equals(this.getBreed(), dog.getBreed()) &&
-                Objects.equals(this.getId(), dog.getId()) &&
-                Objects.equals(this.getName(), dog.getName()) &&
-                Objects.equals(this.getBirthDate(), dog.getBirthDate()) &&
-                Objects.equals(this.getOwnerAddress(), dog.getOwnerAddress()) &&
-            super.equals(o);
+                super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPetType(), getBark(), getBreed(), getId(), getName(), getBirthDate(), getOwnerAddress());
+        return Objects.hash(getId(), getName(), getBirthDate(), getOwnerAddress(), getPetType(), getBark(), getBreed());
     }
 
     @Override

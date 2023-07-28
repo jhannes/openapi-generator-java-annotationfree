@@ -63,41 +63,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
         return "action-controller";
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    @Override
-    public void processOpenAPI(OpenAPI openAPI) {
-        for (Schema<?> schema : openAPI.getComponents().getSchemas().values()) {
-            if (schema instanceof ComposedSchema) {
-                ComposedSchema composedSchema = (ComposedSchema) schema;
-                if (composedSchema.getAllOf() != null) {
-                    for (Iterator<Schema> iterator = composedSchema.getAllOf().iterator(); iterator.hasNext(); ) {
-                        Schema parentSchema = iterator.next();
-                        String $ref = parentSchema.get$ref();
-                        if ($ref.endsWith("_allOf")) {
-                            assert $ref.startsWith("#/components/schemas/");
-                            Schema parent = openAPI.getComponents().getSchemas().get($ref.substring("#/components/schemas/".length()));
-                            if (schema.getProperties() == null) {
-                                schema.setProperties(parent.getProperties());
-                            } else if (parentSchema.getProperties() != null) {
-                                schema.getProperties().putAll(parent.getProperties());
-                            }
-                            if (schema.getRequired() == null) {
-                                schema.setRequired(parent.getRequired());
-                            } else if (parent.getRequired() != null) {
-                                schema.getRequired().addAll(parent.getRequired());
-                            }
-
-                            iterator.remove();
-                        }
-                    }
-                }
-            }
-        }
-        openAPI.getComponents().getSchemas().entrySet().removeIf(model -> model.getKey().endsWith("_allOf"));
-        super.processOpenAPI(openAPI);
-    }
-
-
     @Override
     public OperationsMap postProcessOperationsWithModels(OperationsMap objs, List<ModelMap> allModels) {
         objs = super.postProcessOperationsWithModels(objs, allModels);
@@ -145,13 +110,13 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 subtypeInterfaces.add(codegenModel);
             }
         }
-        codegenModel.vars.removeIf(var -> codegenModel.interfaceModels.stream().anyMatch(model -> varNotInImplementation(var, model)));
+        codegenModel.allVars.removeIf(var -> codegenModel.interfaceModels.stream().anyMatch(model -> varNotInImplementation(var, model)));
         if (codegenModel.discriminator != null && codegenModel.discriminator.getMapping() == null) {
             codegenModel.discriminator.setMapping(mapping);
             codegenModel.discriminator.setMappedModels(mappedModels);
         }
         if (codegenModel.discriminator != null) {
-            codegenModel.vars.removeIf(v -> v.name.equals(codegenModel.discriminator.getPropertyName()));
+            codegenModel.allVars.removeIf(v -> v.name.equals(codegenModel.discriminator.getPropertyName()));
         }
     }
 
@@ -168,18 +133,8 @@ public class JavaCodegen extends AbstractJavaCodegen {
     }
 
     @Override
-    protected void addProperties(Map<String, Schema> properties, List<String> required, Schema schema, Set<Schema> visitedSchemas) {
-        super.addProperties(properties, required, schema, visitedSchemas);
-        // HACK: compensate for missing fields on multi-level allOf-inheritance (breaks oneOf-inheritance)
-        if (schema instanceof ComposedSchema && schema.getAllOf() != null) {
-            if (schema.getProperties() != null) {
-                properties.putAll(schema.getProperties());
-            }
-        }
-    }
-
-    @Override
     public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
+        ArrayList<String> elementsToBeRemoved = new ArrayList<>();
         Map<String, ModelsMap> result = super.postProcessAllModels(objs);
 
         Map<String, CodegenModel> allModels = getAllModels(objs);
@@ -191,7 +146,14 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 postProcessOneOf(codegenModel, interfacesOfSubtypes, allModels);
             }
             if (!codegenModel.allOf.isEmpty()) {
-                if (codegenModel.allOf.size() >= 2) {
+                List<CodegenModel> interfacesToBeRemoved = codegenModel.interfaceModels.stream()
+                        .filter(element -> element.name.startsWith(codegenModel.name + "_allOf"))
+                        .collect(Collectors.toList());
+                for (CodegenModel itf : interfacesToBeRemoved) {
+                    codegenModel.allOf.remove(itf.classname);
+                    elementsToBeRemoved.add(itf.name);
+                }
+                if (codegenModel.allOf.size() > 1) {
                     //codegenModel.interfaces = new ArrayList<>(codegenModel.allOf);
                     List<String> interfaceNames = new ArrayList<>();
                     for (CodegenModel supertype : codegenModel.interfaceModels) {
@@ -207,27 +169,20 @@ public class JavaCodegen extends AbstractJavaCodegen {
                     // Mark inherited variables from allOf
                     codegenModel.parent = codegenModel.allOf.iterator().next();
                     codegenModel.parentModel = allModels.get(codegenModel.parent);
-                    for (CodegenProperty var : codegenModel.vars) {
-                        if (codegenModel.parentModel.vars.stream().anyMatch(v -> v.name.equals(var.name))) {
+                    for (CodegenProperty var : codegenModel.allVars) {
+                        if (codegenModel.parentModel.allVars.stream().anyMatch(v -> v.name.equals(var.name))) {
                             var.isInherited = true;
                         }
                     }
                     codegenModel.interfaces = null;
                 }
             }
-            for (CodegenProperty variable : codegenModel.vars) {
-                if (variable.isModel)
+            for (CodegenProperty variable : codegenModel.allVars) {
+                if (variable.isModel) {
                     if (allModels.get(variable.dataType).oneOf.isEmpty()) {
                         variable.defaultValue = "new " + variable.dataType + "()";
                     }
-                if (variable.get_enum() != null && variable.get_enum().size() == 1) {
-                    variable.defaultValue = "\"" + variable.get_enum().get(0) + "\"";
-                    variable.dataType = "\"" + variable.get_enum().get(0) + "\"";
-                    variable.datatypeWithEnum = "String";
-                    variable.isEnum = false;
                 }
-            }
-            for (CodegenProperty variable : codegenModel.allVars) {
                 if (variable.get_enum() != null && variable.get_enum().size() == 1) {
                     variable.defaultValue = "\"" + variable.get_enum().get(0) + "\"";
                     variable.dataType = "\"" + variable.get_enum().get(0) + "\"";
@@ -247,9 +202,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
             if (dtoModel.parentModel != null) {
                 interfaceModel.parent = dtoModel.parentModel.name + "Interface";
             }
-            for (CodegenProperty property : dtoModel.vars) {
-                interfaceModel.vars.add(property.clone());
-            }
             for (CodegenProperty property : dtoModel.allVars) {
                 interfaceModel.allVars.add(property.clone());
             }
@@ -266,12 +218,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
 
             for (CodegenModel codegenModel : allModels.values()) {
                 if (codegenModel.interfaces != null && codegenModel.interfaces.contains(interfaceModel.classname)) {
-                    for (CodegenProperty property : codegenModel.vars) {
-                        if (property.isEnum) {
-                            property.isEnum = false;
-                            property.dataType = property.datatypeWithEnum;
-                        }
-                    }
                     for (CodegenProperty property : codegenModel.allVars) {
                         if (property.isEnum) {
                             property.isEnum = false;
@@ -293,27 +239,47 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 modelEntry.getValue().interfaces = null;
             }
         }
+
+        for (var element : elementsToBeRemoved) {
+            result.remove(element);
+        }
+        for (ModelsMap modelsMap : result.values()) {
+            for (ModelMap model : modelsMap.getModels()) {
+                updateVariablesLists(model.getModel());
+            }
+        }
         return result;
+    }
+
+    private static void updateVariablesLists(CodegenModel codegenModel) {
+        codegenModel.vars = new ArrayList<>();
+        codegenModel.parentVars = new ArrayList<>();
+        codegenModel.optionalVars = new ArrayList<>();
+        codegenModel.readOnlyVars = new ArrayList<>();
+        codegenModel.readOnlyVars = new ArrayList<>();
+        for (CodegenProperty var : codegenModel.allVars) {
+            if (var.isInherited) {
+                codegenModel.parentVars.add(var.clone());
+            } else {
+                codegenModel.vars.add(var.clone());
+            }
+
+            if (var.required) {
+                codegenModel.requiredVars.add(var.clone());
+            } else {
+                codegenModel.optionalVars.add(var.clone());
+            }
+
+            if (var.isReadOnly) {
+                codegenModel.readOnlyVars.add(var.clone());
+            } else if (!var.isWriteOnly) {
+                codegenModel.readWriteVars.add(var.clone());
+            }
+        }
     }
 
     @Override
     public String toModelName(String name) {
         return mixinInterfaces.contains(name) ? name : super.toModelName(name);
-    }
-
-    @Override
-    public String toAllOfName(List<String> names, ComposedSchema composedSchema) {
-        Map<String, Object> exts = composedSchema.getExtensions();
-        if (exts != null && exts.containsKey("x-all-of-name")) {
-            return (String) exts.get("x-all-of-name");
-        }
-        if (names.size() == 0) {
-            this.LOGGER.error("allOf has no member defined: {}. Default to ERROR_ALLOF_SCHEMA", composedSchema);
-            return "ERROR_ALLOF_SCHEMA";
-        } else if (names.size() == 1) {
-            return names.get(0);
-        } else {
-            return "oneOf<" + String.join(",", names) + ">";
-        }
     }
 }

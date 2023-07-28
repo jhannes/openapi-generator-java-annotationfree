@@ -89,13 +89,13 @@ public class SampleModelData {
 
     public PersonDto samplePersonDto() {
         return new PersonDto()
+            .email(sampleString("email", "email"))
             .id(sampleUUID("id"))
             .type(sampleString("type"))
             .name(samplePersonNameDto("name"))
             .phone(sampleString("phone", "phone"))
             .birthDate(sampleLocalDate("birthDate"))
-            .gender(sampleGenderEnum("gender"))
-            .email(sampleString("email", "email"));
+            .gender(sampleGenderEnum("gender"));
     }
 
     public List<PersonDto> sampleListOfPersonDto(String propertyName) {
@@ -178,11 +178,11 @@ public class SampleModelData {
 
     public StringSnapshotDto sampleStringSnapshotDto() {
         return new StringSnapshotDto()
-            .name(sampleString("name"))
             .createdAt(sampleOffsetDateTime("createdAt"))
             .createdBy(sampleString("createdBy", "username"))
             .updatedAt(sampleOffsetDateTime("updatedAt"))
-            .updatedBy(sampleString("updatedBy", "username"));
+            .updatedBy(sampleString("updatedBy", "username"))
+            .name(sampleString("name"));
     }
 
     public List<StringSnapshotDto> sampleListOfStringSnapshotDto(String propertyName) {

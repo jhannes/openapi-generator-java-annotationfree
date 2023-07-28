@@ -76,6 +76,9 @@ public interface PersonInterface extends RecipientInterface {
     void readOnlyFieldsWithValue(List<String> result);
 
 
+    @Override
+    PersonInterface email(String email);
+
     /**
      * Get id
      * read only
@@ -138,17 +141,14 @@ public interface PersonInterface extends RecipientInterface {
 
     PersonInterface gender(GenderEnum gender);
 
-    @Override
-    PersonInterface email(String email);
-
     default <T extends PersonInterface> T copyTo(T target) {
+        if (this.getEmail() != null) target.setEmail(this.getEmail());
         if (this.getId() != null) target.setId(this.getId());
         if (this.getType() != null) target.setType(this.getType());
         if (this.getName() != null) target.setName(this.getName());
         if (this.getPhone() != null) target.setPhone(this.getPhone());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
         if (this.getGender() != null) target.setGender(this.getGender());
-        if (this.getEmail() != null) target.setEmail(this.getEmail());
         return target;
     }
 }

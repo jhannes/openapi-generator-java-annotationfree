@@ -5,13 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**petType** | **"Dog"** |  | 
-**bark** | **Boolean** |  |  [optional]
-**breed** | [**BreedEnum**](#BreedEnum) |  |  [optional]
 **id** | **String** |  |  [optional] [readonly]
 **name** | **String** |  | 
 **birthDate** | **String** |  |  [optional]
 **ownerAddress** | [**AddressDto**](AddressDto.md) |  |  [optional]
+**petType** | **"Dog"** |  | 
+**bark** | **Boolean** |  |  [optional]
+**breed** | [**BreedEnum**](#BreedEnum) |  |  [optional]
 
 
 

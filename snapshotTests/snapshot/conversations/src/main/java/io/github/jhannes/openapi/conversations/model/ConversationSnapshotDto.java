@@ -53,11 +53,11 @@ public class ConversationSnapshotDto extends ChangeTrackedDto {
 
     public static String[] requiredFields() {
         return new String[] {
+                "createdAt",
+                "updatedAt",
                 "id",
                 "info",
                 "messages",
-                "createdAt",
-                "updatedAt",
         };
     }
 
@@ -99,6 +99,18 @@ public class ConversationSnapshotDto extends ChangeTrackedDto {
         return s == null;
     }
 
+
+    @Override
+    public ConversationSnapshotDto createdAt(OffsetDateTime createdAt) {
+        super.createdAt(createdAt);
+        return this;
+    }
+
+    @Override
+    public ConversationSnapshotDto updatedAt(OffsetDateTime updatedAt) {
+        super.updatedAt(updatedAt);
+        return this;
+    }
 
     /**
      * Get id
@@ -157,18 +169,6 @@ public class ConversationSnapshotDto extends ChangeTrackedDto {
     }
 
     @Override
-    public ConversationSnapshotDto createdAt(OffsetDateTime createdAt) {
-        super.createdAt(createdAt);
-        return this;
-    }
-
-    @Override
-    public ConversationSnapshotDto updatedAt(OffsetDateTime updatedAt) {
-        super.updatedAt(updatedAt);
-        return this;
-    }
-
-    @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
             return true;
@@ -180,14 +180,12 @@ public class ConversationSnapshotDto extends ChangeTrackedDto {
         return Objects.equals(this.getId(), conversationSnapshot.getId()) &&
                 Objects.equals(this.getInfo(), conversationSnapshot.getInfo()) &&
                 Objects.equals(this.getMessages(), conversationSnapshot.getMessages()) &&
-                Objects.equals(this.getCreatedAt(), conversationSnapshot.getCreatedAt()) &&
-                Objects.equals(this.getUpdatedAt(), conversationSnapshot.getUpdatedAt()) &&
-            super.equals(o);
+                super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getInfo(), getMessages(), getCreatedAt(), getUpdatedAt());
+        return Objects.hash(getCreatedAt(), getUpdatedAt(), getId(), getInfo(), getMessages());
     }
 
     @Override

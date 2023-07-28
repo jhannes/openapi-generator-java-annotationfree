@@ -83,23 +83,6 @@ public class StringSnapshotDto extends ChangeTrackedDto {
     }
 
 
-    /**
-     * Get name
-     * @return name
-     */
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public StringSnapshotDto name(String name) {
-        this.name = name;
-        return this;
-    }
-
     @Override
     public StringSnapshotDto createdAt(OffsetDateTime createdAt) {
         super.createdAt(createdAt);
@@ -124,6 +107,23 @@ public class StringSnapshotDto extends ChangeTrackedDto {
         return this;
     }
 
+    /**
+     * Get name
+     * @return name
+     */
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public StringSnapshotDto name(String name) {
+        this.name = name;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -134,16 +134,12 @@ public class StringSnapshotDto extends ChangeTrackedDto {
         }
         StringSnapshotDto stringSnapshot = (StringSnapshotDto) o;
         return Objects.equals(this.getName(), stringSnapshot.getName()) &&
-                Objects.equals(this.getCreatedAt(), stringSnapshot.getCreatedAt()) &&
-                Objects.equals(this.getCreatedBy(), stringSnapshot.getCreatedBy()) &&
-                Objects.equals(this.getUpdatedAt(), stringSnapshot.getUpdatedAt()) &&
-                Objects.equals(this.getUpdatedBy(), stringSnapshot.getUpdatedBy()) &&
-            super.equals(o);
+                super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getName(), getCreatedAt(), getCreatedBy(), getUpdatedAt(), getUpdatedBy());
+        return Objects.hash(getCreatedAt(), getCreatedBy(), getUpdatedAt(), getUpdatedBy(), getName());
     }
 
     @Override

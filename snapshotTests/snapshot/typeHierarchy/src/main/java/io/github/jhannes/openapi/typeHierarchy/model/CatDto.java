@@ -43,8 +43,8 @@ public class CatDto extends PetBaseDto implements PetDto {
 
     public static String[] readOnlyFields() {
         return new String[] {
-                "age",
                 "id",
+                "age",
         };
     }
 
@@ -55,8 +55,8 @@ public class CatDto extends PetBaseDto implements PetDto {
 
     public static String[] requiredFields() {
         return new String[] {
-                "pet_type",
                 "name",
+                "pet_type",
         };
     }
 
@@ -93,6 +93,30 @@ public class CatDto extends PetBaseDto implements PetDto {
         return s == null;
     }
 
+
+    @Override
+    public CatDto id(String id) {
+        super.id(id);
+        return this;
+    }
+
+    @Override
+    public CatDto name(String name) {
+        super.name(name);
+        return this;
+    }
+
+    @Override
+    public CatDto birthDate(String birthDate) {
+        super.birthDate(birthDate);
+        return this;
+    }
+
+    @Override
+    public CatDto ownerAddress(AddressDto ownerAddress) {
+        super.ownerAddress(ownerAddress);
+        return this;
+    }
 
     /**
      * Get pet_type
@@ -148,30 +172,6 @@ public class CatDto extends PetBaseDto implements PetDto {
     }
 
     @Override
-    public CatDto id(String id) {
-        super.id(id);
-        return this;
-    }
-
-    @Override
-    public CatDto name(String name) {
-        super.name(name);
-        return this;
-    }
-
-    @Override
-    public CatDto birthDate(String birthDate) {
-        super.birthDate(birthDate);
-        return this;
-    }
-
-    @Override
-    public CatDto ownerAddress(AddressDto ownerAddress) {
-        super.ownerAddress(ownerAddress);
-        return this;
-    }
-
-    @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
             return true;
@@ -183,16 +183,12 @@ public class CatDto extends PetBaseDto implements PetDto {
         return Objects.equals(this.getPetType(), cat.getPetType()) &&
                 Objects.equals(this.getHunts(), cat.getHunts()) &&
                 Objects.equals(this.getAge(), cat.getAge()) &&
-                Objects.equals(this.getId(), cat.getId()) &&
-                Objects.equals(this.getName(), cat.getName()) &&
-                Objects.equals(this.getBirthDate(), cat.getBirthDate()) &&
-                Objects.equals(this.getOwnerAddress(), cat.getOwnerAddress()) &&
-            super.equals(o);
+                super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPetType(), getHunts(), getAge(), getId(), getName(), getBirthDate(), getOwnerAddress());
+        return Objects.hash(getId(), getName(), getBirthDate(), getOwnerAddress(), getPetType(), getHunts(), getAge());
     }
 
     @Override

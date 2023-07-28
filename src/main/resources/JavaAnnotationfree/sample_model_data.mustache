@@ -52,7 +52,7 @@ public class SampleModelData {
         return pickOne(factories).get();
     }
 {{/-last}}{{/oneOf}}{{/isEnum}}{{^isEnum}}{{^oneOf}}    public {{classname}} sample{{classname}}() {
-        return new {{classname}}(){{#vars}}{{^isArray}}{{^isMap}}{{^isString}}{{^isEnum}}
+        return new {{classname}}(){{#allVars}}{{^isArray}}{{^isMap}}{{^isString}}{{^isEnum}}
             .{{name}}(sample{{{datatypeWithEnum}}}("{{name}}")){{/isEnum}}{{/isString}}{{#isEnum}}
             .{{name}}(sample{{classname}}{{datatypeWithEnum}}("{{name}}")){{/isEnum}}{{#isString}}{{^isEnum}}
             .{{name}}({{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}sample{{datatypeWithEnum}}("{{name}}"{{#isPrimitiveType}}{{#dataFormat}}, "{{dataFormat}}"{{/dataFormat}}{{/isPrimitiveType}}){{/defaultValue}}){{/isEnum}}{{/isString}}{{/isMap}}{{/isArray}}{{#isArray}}{{#items.isContainer}}
@@ -61,7 +61,7 @@ public class SampleModelData {
             .{{name}}(sampleListOf{{{items.datatypeWithEnum}}}("{{name}}")){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}
             .{{name}}({{#isEnum}}sampleSubset({{classname}}.{{items.datatypeWithEnum}}.values()){{/isEnum}}{{^isEnum}}sampleList(() -> sample{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}), "{{name}}"){{/isEnum}}){{/items.isPrimitiveType}}{{/items.isContainer}}{{/isArray}}{{#isMap}}{{#items.isContainer}}
             .{{name}}({{name}}For{{classname}}()){{/items.isContainer}}{{^items.isContainer}}
-            .{{name}}(sampleMap(() -> {{^items.isPrimitiveType}}{{^items.isString}}sample{{{items.datatypeWithEnum}}}("{{name}}"){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}{{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}sample{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}{{/items.isPrimitiveType}}, "{{name}}")){{/items.isContainer}}{{/isMap}}{{/vars}};
+            .{{name}}(sampleMap(() -> {{^items.isPrimitiveType}}{{^items.isString}}sample{{{items.datatypeWithEnum}}}("{{name}}"){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}{{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}sample{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}{{/items.isPrimitiveType}}, "{{name}}")){{/items.isContainer}}{{/isMap}}{{/allVars}};
     }{{#vars}}{{#isContainer}}{{#items.isContainer}}
 
     public {{{datatypeWithEnum}}} {{name}}For{{classname}}() {
@@ -81,7 +81,7 @@ public class SampleModelData {
         return sampleSubset({{classname}}.values());
         {{/isEnum}}
     }
-{{#vars}}{{#isEnum}}{{^oneOf}}
+{{#allVars}}{{#isEnum}}{{^oneOf}}
 {{#isArray}}
     public {{classname}}.{{items.datatypeWithEnum}} sample{{classname}}{{items.datatypeWithEnum}}(String propertyName) {
         return pickOne({{classname}}.{{items.datatypeWithEnum}}.values());
@@ -92,7 +92,7 @@ public class SampleModelData {
         return pickOne({{classname}}.{{datatypeWithEnum}}.values());
     }
 {{/isArray}}
-{{/oneOf}}{{/isEnum}}{{/vars}}
+{{/oneOf}}{{/isEnum}}{{/allVars}}
 {{/isMixin}}
 {{#isMixin}}
 {{#vars}}

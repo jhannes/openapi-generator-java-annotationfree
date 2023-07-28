@@ -74,13 +74,13 @@ public class SampleModelData {
 
     public CatDto sampleCatDto() {
         return new CatDto()
-            .petType("Cat")
-            .hunts(sampleBoolean("hunts"))
-            .age(sampleInteger("age"))
             .id(sampleString("id"))
             .name(sampleString("name"))
             .birthDate(sampleString("birthDate"))
-            .ownerAddress(sampleAddressDto("ownerAddress"));
+            .ownerAddress(sampleAddressDto("ownerAddress"))
+            .petType("Cat")
+            .hunts(sampleBoolean("hunts"))
+            .age(sampleInteger("age"));
     }
 
     public List<CatDto> sampleListOfCatDto(String propertyName) {
@@ -97,13 +97,13 @@ public class SampleModelData {
 
     public DogDto sampleDogDto() {
         return new DogDto()
-            .petType("Dog")
-            .bark(sampleBoolean("bark"))
-            .breed(sampleDogDtoBreedEnum("breed"))
             .id(sampleString("id"))
             .name(sampleString("name"))
             .birthDate(sampleString("birthDate"))
-            .ownerAddress(sampleAddressDto("ownerAddress"));
+            .ownerAddress(sampleAddressDto("ownerAddress"))
+            .petType("Dog")
+            .bark(sampleBoolean("bark"))
+            .breed(sampleDogDtoBreedEnum("breed"));
     }
 
     public List<DogDto> sampleListOfDogDto(String propertyName) {
@@ -201,14 +201,14 @@ public class SampleModelData {
 
     public WorkingDogDto sampleWorkingDogDto() {
         return new WorkingDogDto()
-            .petType("WorkingDog")
-            .capabilities(sampleListOfWorkingDogCapabilityDto("capabilities"))
             .id(sampleString("id"))
             .name(sampleString("name"))
             .birthDate(sampleString("birthDate"))
             .ownerAddress(sampleAddressDto("ownerAddress"))
+            .petType("WorkingDog")
             .bark(sampleBoolean("bark"))
-            .breed(sampleWorkingDogDtoBreedEnum("breed"));
+            .breed(sampleWorkingDogDtoBreedEnum("breed"))
+            .capabilities(sampleListOfWorkingDogCapabilityDto("capabilities"));
     }
 
     public List<WorkingDogDto> sampleListOfWorkingDogDto(String propertyName) {

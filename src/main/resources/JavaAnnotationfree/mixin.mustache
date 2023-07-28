@@ -22,7 +22,7 @@ public interface {{classname}}{{#parent}} extends {{{.}}}{{/parent}} {
 
     void readOnlyFieldsWithValue(List<String> result);
 
-{{#vars}}
+{{#allVars}}
     {{^isInherited}}
     {{#isArray}}
 
@@ -88,12 +88,12 @@ public interface {{classname}}{{#parent}} extends {{{.}}}{{/parent}} {
     @Override
     {{classname}} {{name}}({{{datatypeWithEnum}}} {{name}});
     {{/isInherited}}
-{{/vars}}
+{{/allVars}}
 
     default <T extends {{classname}}> T copyTo(T target) {
-{{#vars}}
+{{#allVars}}
         if (this.{{getter}}() != null) target.{{setter}}(this.{{getter}}());
-{{/vars}}
+{{/allVars}}
         return target;
     }
 }

@@ -50,9 +50,9 @@ public class WorkingDogDto extends DogDto implements PetDto {
 
     public static String[] requiredFields() {
         return new String[] {
+                "name",
                 "pet_type",
                 "capabilities",
-                "name",
         };
     }
 
@@ -86,8 +86,44 @@ public class WorkingDogDto extends DogDto implements PetDto {
 
 
     @Override
+    public WorkingDogDto id(String id) {
+        super.id(id);
+        return this;
+    }
+
+    @Override
+    public WorkingDogDto name(String name) {
+        super.name(name);
+        return this;
+    }
+
+    @Override
+    public WorkingDogDto birthDate(String birthDate) {
+        super.birthDate(birthDate);
+        return this;
+    }
+
+    @Override
+    public WorkingDogDto ownerAddress(AddressDto ownerAddress) {
+        super.ownerAddress(ownerAddress);
+        return this;
+    }
+
+    @Override
     public WorkingDogDto petType(String petType) {
         super.petType(petType);
+        return this;
+    }
+
+    @Override
+    public WorkingDogDto bark(Boolean bark) {
+        super.bark(bark);
+        return this;
+    }
+
+    @Override
+    public WorkingDogDto breed(BreedEnum breed) {
+        super.breed(breed);
         return this;
     }
 
@@ -122,42 +158,6 @@ public class WorkingDogDto extends DogDto implements PetDto {
     }
 
     @Override
-    public WorkingDogDto id(String id) {
-        super.id(id);
-        return this;
-    }
-
-    @Override
-    public WorkingDogDto name(String name) {
-        super.name(name);
-        return this;
-    }
-
-    @Override
-    public WorkingDogDto birthDate(String birthDate) {
-        super.birthDate(birthDate);
-        return this;
-    }
-
-    @Override
-    public WorkingDogDto ownerAddress(AddressDto ownerAddress) {
-        super.ownerAddress(ownerAddress);
-        return this;
-    }
-
-    @Override
-    public WorkingDogDto bark(Boolean bark) {
-        super.bark(bark);
-        return this;
-    }
-
-    @Override
-    public WorkingDogDto breed(BreedEnum breed) {
-        super.breed(breed);
-        return this;
-    }
-
-    @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
             return true;
@@ -166,20 +166,13 @@ public class WorkingDogDto extends DogDto implements PetDto {
             return false;
         }
         WorkingDogDto workingDog = (WorkingDogDto) o;
-        return Objects.equals(this.getPetType(), workingDog.getPetType()) &&
-                Objects.equals(this.getCapabilities(), workingDog.getCapabilities()) &&
-                Objects.equals(this.getId(), workingDog.getId()) &&
-                Objects.equals(this.getName(), workingDog.getName()) &&
-                Objects.equals(this.getBirthDate(), workingDog.getBirthDate()) &&
-                Objects.equals(this.getOwnerAddress(), workingDog.getOwnerAddress()) &&
-                Objects.equals(this.getBark(), workingDog.getBark()) &&
-                Objects.equals(this.getBreed(), workingDog.getBreed()) &&
-            super.equals(o);
+        return Objects.equals(this.getCapabilities(), workingDog.getCapabilities()) &&
+                super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getPetType(), getCapabilities(), getId(), getName(), getBirthDate(), getOwnerAddress(), getBark(), getBreed());
+        return Objects.hash(getId(), getName(), getBirthDate(), getOwnerAddress(), getPetType(), getBark(), getBreed(), getCapabilities());
     }
 
     @Override

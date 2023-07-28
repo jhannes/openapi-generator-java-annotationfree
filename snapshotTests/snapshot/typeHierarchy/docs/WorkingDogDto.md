@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**petType** | **"WorkingDog"** |  | 
-**capabilities** | [**List<WorkingDogCapabilityDto>**](WorkingDogCapabilityDto.md) |  | 
 **id** | **String** |  |  [optional] [readonly]
 **name** | **String** |  | 
 **birthDate** | **String** |  |  [optional]
 **ownerAddress** | [**AddressDto**](AddressDto.md) |  |  [optional]
+**petType** | **"WorkingDog"** |  | 
 **bark** | **Boolean** |  |  [optional]
 **breed** | [**BreedEnum**](#BreedEnum) |  |  [optional]
+**capabilities** | [**List<WorkingDogCapabilityDto>**](WorkingDogCapabilityDto.md) |  | 
 
 
 

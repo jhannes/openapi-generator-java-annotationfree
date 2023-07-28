@@ -160,11 +160,11 @@ public class SampleModelData {
 
     public ConversationSnapshotDto sampleConversationSnapshotDto() {
         return new ConversationSnapshotDto()
+            .createdAt(sampleOffsetDateTime("createdAt"))
+            .updatedAt(sampleOffsetDateTime("updatedAt"))
             .id(sampleUUID("id"))
             .info(sampleConversationInfoDto("info"))
-            .messages(sampleMap(() -> sampleConversationMessageSnapshotDto("messages"), "messages"))
-            .createdAt(sampleOffsetDateTime("createdAt"))
-            .updatedAt(sampleOffsetDateTime("updatedAt"));
+            .messages(sampleMap(() -> sampleConversationMessageSnapshotDto("messages"), "messages"));
     }
 
     public List<ConversationSnapshotDto> sampleListOfConversationSnapshotDto(String propertyName) {
@@ -221,11 +221,11 @@ public class SampleModelData {
 
     public EventFromServerDto sampleEventFromServerDto() {
         return new EventFromServerDto()
-            .serverTime(sampleOffsetDateTime("serverTime"))
-            .username(sampleString("username"))
             .id(sampleUUID("id"))
             .clientTime(sampleOffsetDateTime("clientTime"))
-            .delta(sampleDeltaDto("delta"));
+            .delta(sampleDeltaDto("delta"))
+            .serverTime(sampleOffsetDateTime("serverTime"))
+            .username(sampleString("username"));
     }
 
     public List<EventFromServerDto> sampleListOfEventFromServerDto(String propertyName) {

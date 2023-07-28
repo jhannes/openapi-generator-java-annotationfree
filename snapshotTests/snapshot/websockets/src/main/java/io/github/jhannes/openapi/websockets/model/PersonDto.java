@@ -103,6 +103,12 @@ public class PersonDto extends RecipientDto implements PersonInterface {
     }
 
 
+    @Override
+    public PersonDto email(String email) {
+        super.email(email);
+        return this;
+    }
+
     /**
      * Get id
      * read only
@@ -208,12 +214,6 @@ public class PersonDto extends RecipientDto implements PersonInterface {
     }
 
     @Override
-    public PersonDto email(String email) {
-        super.email(email);
-        return this;
-    }
-
-    @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
             return true;
@@ -228,13 +228,12 @@ public class PersonDto extends RecipientDto implements PersonInterface {
                 Objects.equals(this.getPhone(), person.getPhone()) &&
                 Objects.equals(this.getBirthDate(), person.getBirthDate()) &&
                 Objects.equals(this.getGender(), person.getGender()) &&
-                Objects.equals(this.getEmail(), person.getEmail()) &&
-            super.equals(o);
+                super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getType(), getName(), getPhone(), getBirthDate(), getGender(), getEmail());
+        return Objects.hash(getEmail(), getId(), getType(), getName(), getPhone(), getBirthDate(), getGender());
     }
 
     @Override

@@ -51,11 +51,11 @@ public class EventFromServerDto extends CommandToServerDto implements MessageFro
 
     public static String[] requiredFields() {
         return new String[] {
-                "serverTime",
-                "username",
                 "id",
                 "clientTime",
                 "delta",
+                "serverTime",
+                "username",
         };
     }
 
@@ -89,6 +89,24 @@ public class EventFromServerDto extends CommandToServerDto implements MessageFro
         return s == null;
     }
 
+
+    @Override
+    public EventFromServerDto id(UUID id) {
+        super.id(id);
+        return this;
+    }
+
+    @Override
+    public EventFromServerDto clientTime(OffsetDateTime clientTime) {
+        super.clientTime(clientTime);
+        return this;
+    }
+
+    @Override
+    public EventFromServerDto delta(DeltaDto delta) {
+        super.delta(delta);
+        return this;
+    }
 
     /**
      * Get serverTime
@@ -125,24 +143,6 @@ public class EventFromServerDto extends CommandToServerDto implements MessageFro
     }
 
     @Override
-    public EventFromServerDto id(UUID id) {
-        super.id(id);
-        return this;
-    }
-
-    @Override
-    public EventFromServerDto clientTime(OffsetDateTime clientTime) {
-        super.clientTime(clientTime);
-        return this;
-    }
-
-    @Override
-    public EventFromServerDto delta(DeltaDto delta) {
-        super.delta(delta);
-        return this;
-    }
-
-    @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
             return true;
@@ -153,15 +153,12 @@ public class EventFromServerDto extends CommandToServerDto implements MessageFro
         EventFromServerDto eventFromServer = (EventFromServerDto) o;
         return Objects.equals(this.getServerTime(), eventFromServer.getServerTime()) &&
                 Objects.equals(this.getUsername(), eventFromServer.getUsername()) &&
-                Objects.equals(this.getId(), eventFromServer.getId()) &&
-                Objects.equals(this.getClientTime(), eventFromServer.getClientTime()) &&
-                Objects.equals(this.getDelta(), eventFromServer.getDelta()) &&
-            super.equals(o);
+                super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getServerTime(), getUsername(), getId(), getClientTime(), getDelta());
+        return Objects.hash(getId(), getClientTime(), getDelta(), getServerTime(), getUsername());
     }
 
     @Override
