@@ -124,7 +124,7 @@ public class SnapshotTests extends AbstractSnapshotTest {
         generator.opts(clientOptInput).generate();
     }
 
-    static String getModelName(Path file) {
+    public static String getModelName(Path file) {
         String filename = file.getFileName().toString();
         int lastDot = filename.lastIndexOf('.');
         return lastDot < 0 ? filename : filename.substring(0, lastDot);

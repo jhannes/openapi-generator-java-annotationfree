@@ -28,7 +28,7 @@ public class FocusedExampleTest extends AbstractSnapshotTest {
     @TestFactory
     DynamicNode snapshotShouldCompile() {
         Path outputDir = getTargetDir("snapshot");
-        return dynamicTest("Compile " + outputDir, () -> CompilerTest.compile(outputDir.resolve(CompilerTest.getModelName(SPEC))));
+        return dynamicTest("Compile " + outputDir, () -> CompilerTest.compile(outputDir.resolve(AbstractSnapshotTest.getModelName(SPEC))));
     }
 
 

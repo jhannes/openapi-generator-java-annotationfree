@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
 import org.openapitools.codegen.ClientOptInput;
 import org.openapitools.codegen.DefaultGenerator;
-import org.openapitools.codegen.config.CodegenConfigurator;
 
 import javax.tools.DiagnosticCollector;
 import javax.tools.JavaCompiler;
@@ -62,19 +61,11 @@ public class CompilerTest extends AbstractSnapshotTest {
 
     static void generate(Path spec, Path outputRoot, String modelName) {
         Path outputDir = outputRoot.resolve(modelName);
-        final CodegenConfigurator configurator = createConfigurator(modelName, spec, outputDir);
-
-        final ClientOptInput clientOptInput = configurator.toClientOptInput();
+        final ClientOptInput clientOptInput = createConfigurator(modelName, spec, outputDir).toClientOptInput();
         DefaultGenerator generator = new DefaultGenerator();
         generator.opts(clientOptInput).generate();
     }
 
-
-    static String getModelName(Path file) {
-        String filename = file.getFileName().toString();
-        int lastDot = filename.lastIndexOf('.');
-        return lastDot < 0 ? filename : filename.substring(0, lastDot);
-    }
 
     static void compile(Path path) throws IOException {
         JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();

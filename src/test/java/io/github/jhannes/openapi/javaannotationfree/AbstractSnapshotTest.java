@@ -61,13 +61,18 @@ public class AbstractSnapshotTest {
 
     static void cleanDirectory(Path directory) throws IOException {
         if (Files.isDirectory(directory)) {
-            System.out.println("rm -r " + directory);
             try (Stream<Path> walk = Files.walk(directory)) {
                 walk.sorted(Comparator.reverseOrder())
                         .map(Path::toFile)
                         .forEach(File::delete);
             }
         }
+    }
+
+    protected static String getModelName(Path file) {
+        String filename = file.getFileName().toString();
+        int lastDot = filename.lastIndexOf('.');
+        return lastDot < 0 ? filename : filename.substring(0, lastDot);
     }
 
     protected static Path getRootDir(Path spec) {
