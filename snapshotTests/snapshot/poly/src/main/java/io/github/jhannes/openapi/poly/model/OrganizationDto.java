@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -48,7 +48,7 @@ public class OrganizationDto implements AnyPartyDto {
 
     private String email = null;
 
-    private List<String> emailDomains = null;
+    private Set<String> emailDomains = null;
 
     private String phone = null;
 
@@ -217,16 +217,16 @@ public class OrganizationDto implements AnyPartyDto {
     }
 
     public <T> OrganizationDto emailDomains(Collection<T> items, Function<T, String> mapper) {
-        return emailDomains(items.stream().map(mapper).collect(Collectors.toList()));
+        return emailDomains(items.stream().map(mapper).collect(Collectors.toSet()));
     }
 
-    public <T> List<T> getEmailDomains(Function<String, T> mapper) {
-        return getEmailDomains().stream().map(mapper).collect(Collectors.toList());
+    public <T> Set<T> getEmailDomains(Function<String, T> mapper) {
+        return getEmailDomains().stream().map(mapper).collect(Collectors.toSet());
     }
 
     public OrganizationDto addEmailDomainsItem(String emailDomainsItem) {
         if (this.emailDomains == null) {
-            this.emailDomains = new ArrayList<>();
+            this.emailDomains = new LinkedHashSet<>();
         }
         this.emailDomains.add(emailDomainsItem);
         return this;
@@ -237,16 +237,16 @@ public class OrganizationDto implements AnyPartyDto {
      * read only
      * @return emailDomains
      */
-    public List<String> getEmailDomains() {
+    public Set<String> getEmailDomains() {
         return emailDomains;
     }
 
     /** <strong>read only</strong> */
-    public void setEmailDomains(List<String> emailDomains) {
+    public void setEmailDomains(Set<String> emailDomains) {
         this.emailDomains = emailDomains;
     }
 
-    public OrganizationDto emailDomains(List<String> emailDomains) {
+    public OrganizationDto emailDomains(Set<String> emailDomains) {
         this.emailDomains = emailDomains;
         return this;
     }

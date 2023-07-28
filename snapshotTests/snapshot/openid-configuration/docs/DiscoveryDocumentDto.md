@@ -10,16 +10,16 @@ Name | Type | Description | Notes
 **tokenEndpoint** | **String** |  |  [optional]
 **endSessionEndpoint** | **String** |  |  [optional]
 **jwksUri** | **String** |  |  [optional]
-**responseTypesSupported** | [**List<ResponseTypesSupportedEnum>**](#List<ResponseTypesSupportedEnum>) |  |  [optional]
-**responseModesSupported** | [**List<ResponseModesSupportedEnum>**](#List<ResponseModesSupportedEnum>) |  |  [optional]
-**subjectTypesSupported** | [**List<SubjectTypesSupportedEnum>**](#List<SubjectTypesSupportedEnum>) |  |  [optional]
-**codeChallengeMethodsSupported** | [**List<CodeChallengeMethodsSupportedEnum>**](#List<CodeChallengeMethodsSupportedEnum>) |  |  [optional]
+**responseTypesSupported** | [**Set<ResponseTypesSupportedEnum>**](#Set<ResponseTypesSupportedEnum>) |  | 
+**responseModesSupported** | [**Set<ResponseModesSupportedEnum>**](#Set<ResponseModesSupportedEnum>) |  |  [optional]
+**subjectTypesSupported** | [**Set<SubjectTypesSupportedEnum>**](#Set<SubjectTypesSupportedEnum>) |  |  [optional]
+**codeChallengeMethodsSupported** | [**Set<CodeChallengeMethodsSupportedEnum>**](#Set<CodeChallengeMethodsSupportedEnum>) |  |  [optional]
 **idTokenSigningAlgValuesSupported** | [**List<IdTokenSigningAlgValuesSupportedEnum>**](#List<IdTokenSigningAlgValuesSupportedEnum>) |  |  [optional]
 **xSsoFrame** | **String** |  |  [optional]
 
 
 
-## Enum: List<ResponseTypesSupportedEnum>
+## Enum: Set<ResponseTypesSupportedEnum>
 
 Name | Value
 ---- | -----
@@ -29,7 +29,7 @@ ID_TOKEN | &quot;id_token&quot;
 
 
 
-## Enum: List<ResponseModesSupportedEnum>
+## Enum: Set<ResponseModesSupportedEnum>
 
 Name | Value
 ---- | -----
@@ -38,7 +38,7 @@ FRAGMENT | &quot;fragment&quot;
 
 
 
-## Enum: List<SubjectTypesSupportedEnum>
+## Enum: Set<SubjectTypesSupportedEnum>
 
 Name | Value
 ---- | -----
@@ -47,7 +47,7 @@ PUBLIC | &quot;public&quot;
 
 
 
-## Enum: List<CodeChallengeMethodsSupportedEnum>
+## Enum: Set<CodeChallengeMethodsSupportedEnum>
 
 Name | Value
 ---- | -----

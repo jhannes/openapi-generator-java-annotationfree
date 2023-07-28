@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 */
 public class JwksDocumentDto {
 
-    private List<JwksKeyDto> keys = null;
+    private List<JwksKeyDto> keys = new ArrayList<>();
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -49,11 +49,13 @@ public class JwksDocumentDto {
 
     public static String[] requiredFields() {
         return new String[] {
+                "keys",
         };
     }
 
     public List<String> missingRequiredFields() {
         List<String> result = new ArrayList<>();
+        if (isMissing(getKeys())) result.add("keys");
         return result;
     }
 
@@ -90,9 +92,6 @@ public class JwksDocumentDto {
     }
 
     public JwksDocumentDto addKeysItem(JwksKeyDto keysItem) {
-        if (this.keys == null) {
-            this.keys = new ArrayList<>();
-        }
         this.keys.add(keysItem);
         return this;
     }

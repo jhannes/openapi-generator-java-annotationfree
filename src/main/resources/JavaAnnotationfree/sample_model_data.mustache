@@ -15,7 +15,9 @@ import java.time.ZoneId;
 
 import java.util.function.Supplier;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -59,7 +61,7 @@ public class SampleModelData {
             .{{name}}({{name}}For{{classname}}()){{/items.isContainer}}{{^items.isContainer}}{{^items.isPrimitiveType}}{{#items.isString}}
             .{{name}}(sampleList(() -> sample{{{items.datatypeWithEnum}}}("{{name}}"), "{{name}}")){{/items.isString}}{{^items.isString}}
             .{{name}}(sampleListOf{{{items.datatypeWithEnum}}}("{{name}}")){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}
-            .{{name}}({{#isEnum}}sampleSubset({{classname}}.{{items.datatypeWithEnum}}.values()){{/isEnum}}{{^isEnum}}sampleList(() -> sample{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}), "{{name}}"){{/isEnum}}){{/items.isPrimitiveType}}{{/items.isContainer}}{{/isArray}}{{#isMap}}{{#items.isContainer}}
+            .{{name}}({{#isEnum}}{{#uniqueItems}}sampleSubset{{/uniqueItems}}{{^uniqueItems}}pickSome{{/uniqueItems}}({{classname}}.{{items.datatypeWithEnum}}.values()){{/isEnum}}{{^isEnum}}{{#uniqueItems}}sampleSet{{/uniqueItems}}{{^uniqueItems}}sampleList{{/uniqueItems}}(() -> sample{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}), "{{name}}"){{/isEnum}}){{/items.isPrimitiveType}}{{/items.isContainer}}{{/isArray}}{{#isMap}}{{#items.isContainer}}
             .{{name}}({{name}}For{{classname}}()){{/items.isContainer}}{{^items.isContainer}}
             .{{name}}(sampleMap(() -> {{^items.isPrimitiveType}}{{^items.isString}}sample{{{items.datatypeWithEnum}}}("{{name}}"){{/items.isString}}{{/items.isPrimitiveType}}{{#items.isPrimitiveType}}{{#isEnum}}sample{{classname}}{{{items.datatypeWithEnum}}}("{{name}}"){{/isEnum}}{{^isEnum}}sample{{{items.datatypeWithEnum}}}("{{name}}"{{#items.dataFormat}}{{#items.isString}}, "{{items.dataFormat}}"{{/items.isString}}{{/items.dataFormat}}){{/isEnum}}{{/items.isPrimitiveType}}, "{{name}}")){{/items.isContainer}}{{/isMap}}{{/allVars}};
     }{{#vars}}{{#isContainer}}{{#items.isContainer}}
@@ -78,7 +80,7 @@ public class SampleModelData {
         return sampleList(() -> sample{{classname}}());
         {{/isEnum}}
         {{#isEnum}}
-        return sampleSubset({{classname}}.values());
+        return pickSome({{classname}}.values());
         {{/isEnum}}
     }
 {{#allVars}}{{#isEnum}}{{^oneOf}}

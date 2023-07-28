@@ -24,7 +24,9 @@ import java.time.ZoneId;
 
 import java.util.function.Supplier;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -191,7 +193,7 @@ public class SampleModelData {
             .organizationId(sampleString("organizationId"))
             .url(sampleURI("url"))
             .email(sampleString("email", "email"))
-            .emailDomains(sampleList(() -> sampleString("emailDomains"), "emailDomains"))
+            .emailDomains(sampleSet(() -> sampleString("emailDomains"), "emailDomains"))
             .phone(sampleString("phone", "phone"));
     }
 
@@ -281,17 +283,44 @@ public class SampleModelData {
         return result;
     }
 
-    public <T> List<T> sampleSubset(T[] alternatives) {
-        return sampleSubset(alternatives, 1, 4);
+    public <T> Set<T> sampleSet(Supplier<T> supplier, String propertyName) {
+        return sampleSet(supplier, propertyName, 1, 4);
     }
 
-    public <T> List<T> sampleSubset(T[] alternatives, int min, int max) {
-        List<T> result = new ArrayList<>();
+    public <T> Set<T> sampleSet(Supplier<T> supplier) {
+        return sampleSet(supplier, 1, 4);
+    }
+
+    public <T> Set<T> sampleSet(Supplier<T> supplier, String propertyName, int min, int max) {
+        return sampleSet(supplier, min, max);
+    }
+
+    public <T> Set<T> sampleSet(Supplier<T> supplier, int min, int max) {
+        Set<T> result = new LinkedHashSet<>();
         int count = min + random.nextInt(max - min);
         for (int i=0; i<count; i++) {
-            result.add(pickOne(alternatives));
+            result.add(supplier.get());
         }
         return result;
+    }
+
+    public <T> List<T> pickSome(T[] alternatives) {
+        return pickSome(alternatives, 1, 4);
+    }
+
+    public <T> List<T> pickSome(T[] alternatives, int min, int max) {
+        int count = min + random.nextInt(max - min);
+        List<T> result = new ArrayList<>(List.of(alternatives));
+        Collections.shuffle(result);
+        return result.subList(0, count);
+    }
+
+    public <T> Set<T> sampleSubset(T[] alternatives) {
+        return new LinkedHashSet<>(pickSome(alternatives, 1, 4));
+    }
+
+    public <T> Set<T> sampleSubset(T[] alternatives, int min, int max) {
+        return new LinkedHashSet<>(pickSome(alternatives, min, max));
     }
 
     public <T> Map<String, T> sampleMap(Supplier<T> supplier, String propertyName) {

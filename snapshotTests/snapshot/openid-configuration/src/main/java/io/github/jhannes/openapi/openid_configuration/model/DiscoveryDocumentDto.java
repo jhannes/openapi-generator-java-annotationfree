@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -79,7 +79,7 @@ public class DiscoveryDocumentDto {
         }
     }
 
-    private List<ResponseTypesSupportedEnum> response_types_supported = null;
+    private Set<ResponseTypesSupportedEnum> response_types_supported = new LinkedHashSet<>();
 
     /**
      * Gets or Sets responseModesSupported
@@ -114,7 +114,7 @@ public class DiscoveryDocumentDto {
         }
     }
 
-    private List<ResponseModesSupportedEnum> response_modes_supported = null;
+    private Set<ResponseModesSupportedEnum> response_modes_supported = null;
 
     /**
      * Gets or Sets subjectTypesSupported
@@ -149,7 +149,7 @@ public class DiscoveryDocumentDto {
         }
     }
 
-    private List<SubjectTypesSupportedEnum> subject_types_supported = null;
+    private Set<SubjectTypesSupportedEnum> subject_types_supported = null;
 
     /**
      * Gets or Sets codeChallengeMethodsSupported
@@ -184,7 +184,7 @@ public class DiscoveryDocumentDto {
         }
     }
 
-    private List<CodeChallengeMethodsSupportedEnum> code_challenge_methods_supported = null;
+    private Set<CodeChallengeMethodsSupportedEnum> code_challenge_methods_supported = null;
 
     /**
      * Gets or Sets idTokenSigningAlgValuesSupported
@@ -234,11 +234,13 @@ public class DiscoveryDocumentDto {
 
     public static String[] requiredFields() {
         return new String[] {
+                "response_types_supported",
         };
     }
 
     public List<String> missingRequiredFields() {
         List<String> result = new ArrayList<>();
+        if (isMissing(getResponseTypesSupported())) result.add("response_types_supported");
         return result;
     }
 
@@ -359,17 +361,14 @@ public class DiscoveryDocumentDto {
     }
 
     public <T> DiscoveryDocumentDto responseTypesSupported(Collection<T> items, Function<T, ResponseTypesSupportedEnum> mapper) {
-        return responseTypesSupported(items.stream().map(mapper).collect(Collectors.toList()));
+        return responseTypesSupported(items.stream().map(mapper).collect(Collectors.toSet()));
     }
 
-    public <T> List<T> getResponseTypesSupported(Function<ResponseTypesSupportedEnum, T> mapper) {
-        return getResponseTypesSupported().stream().map(mapper).collect(Collectors.toList());
+    public <T> Set<T> getResponseTypesSupported(Function<ResponseTypesSupportedEnum, T> mapper) {
+        return getResponseTypesSupported().stream().map(mapper).collect(Collectors.toSet());
     }
 
     public DiscoveryDocumentDto addResponseTypesSupportedItem(ResponseTypesSupportedEnum responseTypesSupportedItem) {
-        if (this.response_types_supported == null) {
-            this.response_types_supported = new ArrayList<>();
-        }
         this.response_types_supported.add(responseTypesSupportedItem);
         return this;
     }
@@ -378,30 +377,30 @@ public class DiscoveryDocumentDto {
      * Get response_types_supported
      * @return response_types_supported
      */
-    public List<ResponseTypesSupportedEnum> getResponseTypesSupported() {
+    public Set<ResponseTypesSupportedEnum> getResponseTypesSupported() {
         return response_types_supported;
     }
 
-    public void setResponseTypesSupported(List<ResponseTypesSupportedEnum> responseTypesSupported) {
+    public void setResponseTypesSupported(Set<ResponseTypesSupportedEnum> responseTypesSupported) {
         this.response_types_supported = responseTypesSupported;
     }
 
-    public DiscoveryDocumentDto responseTypesSupported(List<ResponseTypesSupportedEnum> responseTypesSupported) {
+    public DiscoveryDocumentDto responseTypesSupported(Set<ResponseTypesSupportedEnum> responseTypesSupported) {
         this.response_types_supported = responseTypesSupported;
         return this;
     }
 
     public <T> DiscoveryDocumentDto responseModesSupported(Collection<T> items, Function<T, ResponseModesSupportedEnum> mapper) {
-        return responseModesSupported(items.stream().map(mapper).collect(Collectors.toList()));
+        return responseModesSupported(items.stream().map(mapper).collect(Collectors.toSet()));
     }
 
-    public <T> List<T> getResponseModesSupported(Function<ResponseModesSupportedEnum, T> mapper) {
-        return getResponseModesSupported().stream().map(mapper).collect(Collectors.toList());
+    public <T> Set<T> getResponseModesSupported(Function<ResponseModesSupportedEnum, T> mapper) {
+        return getResponseModesSupported().stream().map(mapper).collect(Collectors.toSet());
     }
 
     public DiscoveryDocumentDto addResponseModesSupportedItem(ResponseModesSupportedEnum responseModesSupportedItem) {
         if (this.response_modes_supported == null) {
-            this.response_modes_supported = new ArrayList<>();
+            this.response_modes_supported = new LinkedHashSet<>();
         }
         this.response_modes_supported.add(responseModesSupportedItem);
         return this;
@@ -411,30 +410,30 @@ public class DiscoveryDocumentDto {
      * Get response_modes_supported
      * @return response_modes_supported
      */
-    public List<ResponseModesSupportedEnum> getResponseModesSupported() {
+    public Set<ResponseModesSupportedEnum> getResponseModesSupported() {
         return response_modes_supported;
     }
 
-    public void setResponseModesSupported(List<ResponseModesSupportedEnum> responseModesSupported) {
+    public void setResponseModesSupported(Set<ResponseModesSupportedEnum> responseModesSupported) {
         this.response_modes_supported = responseModesSupported;
     }
 
-    public DiscoveryDocumentDto responseModesSupported(List<ResponseModesSupportedEnum> responseModesSupported) {
+    public DiscoveryDocumentDto responseModesSupported(Set<ResponseModesSupportedEnum> responseModesSupported) {
         this.response_modes_supported = responseModesSupported;
         return this;
     }
 
     public <T> DiscoveryDocumentDto subjectTypesSupported(Collection<T> items, Function<T, SubjectTypesSupportedEnum> mapper) {
-        return subjectTypesSupported(items.stream().map(mapper).collect(Collectors.toList()));
+        return subjectTypesSupported(items.stream().map(mapper).collect(Collectors.toSet()));
     }
 
-    public <T> List<T> getSubjectTypesSupported(Function<SubjectTypesSupportedEnum, T> mapper) {
-        return getSubjectTypesSupported().stream().map(mapper).collect(Collectors.toList());
+    public <T> Set<T> getSubjectTypesSupported(Function<SubjectTypesSupportedEnum, T> mapper) {
+        return getSubjectTypesSupported().stream().map(mapper).collect(Collectors.toSet());
     }
 
     public DiscoveryDocumentDto addSubjectTypesSupportedItem(SubjectTypesSupportedEnum subjectTypesSupportedItem) {
         if (this.subject_types_supported == null) {
-            this.subject_types_supported = new ArrayList<>();
+            this.subject_types_supported = new LinkedHashSet<>();
         }
         this.subject_types_supported.add(subjectTypesSupportedItem);
         return this;
@@ -444,30 +443,30 @@ public class DiscoveryDocumentDto {
      * Get subject_types_supported
      * @return subject_types_supported
      */
-    public List<SubjectTypesSupportedEnum> getSubjectTypesSupported() {
+    public Set<SubjectTypesSupportedEnum> getSubjectTypesSupported() {
         return subject_types_supported;
     }
 
-    public void setSubjectTypesSupported(List<SubjectTypesSupportedEnum> subjectTypesSupported) {
+    public void setSubjectTypesSupported(Set<SubjectTypesSupportedEnum> subjectTypesSupported) {
         this.subject_types_supported = subjectTypesSupported;
     }
 
-    public DiscoveryDocumentDto subjectTypesSupported(List<SubjectTypesSupportedEnum> subjectTypesSupported) {
+    public DiscoveryDocumentDto subjectTypesSupported(Set<SubjectTypesSupportedEnum> subjectTypesSupported) {
         this.subject_types_supported = subjectTypesSupported;
         return this;
     }
 
     public <T> DiscoveryDocumentDto codeChallengeMethodsSupported(Collection<T> items, Function<T, CodeChallengeMethodsSupportedEnum> mapper) {
-        return codeChallengeMethodsSupported(items.stream().map(mapper).collect(Collectors.toList()));
+        return codeChallengeMethodsSupported(items.stream().map(mapper).collect(Collectors.toSet()));
     }
 
-    public <T> List<T> getCodeChallengeMethodsSupported(Function<CodeChallengeMethodsSupportedEnum, T> mapper) {
-        return getCodeChallengeMethodsSupported().stream().map(mapper).collect(Collectors.toList());
+    public <T> Set<T> getCodeChallengeMethodsSupported(Function<CodeChallengeMethodsSupportedEnum, T> mapper) {
+        return getCodeChallengeMethodsSupported().stream().map(mapper).collect(Collectors.toSet());
     }
 
     public DiscoveryDocumentDto addCodeChallengeMethodsSupportedItem(CodeChallengeMethodsSupportedEnum codeChallengeMethodsSupportedItem) {
         if (this.code_challenge_methods_supported == null) {
-            this.code_challenge_methods_supported = new ArrayList<>();
+            this.code_challenge_methods_supported = new LinkedHashSet<>();
         }
         this.code_challenge_methods_supported.add(codeChallengeMethodsSupportedItem);
         return this;
@@ -477,15 +476,15 @@ public class DiscoveryDocumentDto {
      * Get code_challenge_methods_supported
      * @return code_challenge_methods_supported
      */
-    public List<CodeChallengeMethodsSupportedEnum> getCodeChallengeMethodsSupported() {
+    public Set<CodeChallengeMethodsSupportedEnum> getCodeChallengeMethodsSupported() {
         return code_challenge_methods_supported;
     }
 
-    public void setCodeChallengeMethodsSupported(List<CodeChallengeMethodsSupportedEnum> codeChallengeMethodsSupported) {
+    public void setCodeChallengeMethodsSupported(Set<CodeChallengeMethodsSupportedEnum> codeChallengeMethodsSupported) {
         this.code_challenge_methods_supported = codeChallengeMethodsSupported;
     }
 
-    public DiscoveryDocumentDto codeChallengeMethodsSupported(List<CodeChallengeMethodsSupportedEnum> codeChallengeMethodsSupported) {
+    public DiscoveryDocumentDto codeChallengeMethodsSupported(Set<CodeChallengeMethodsSupportedEnum> codeChallengeMethodsSupported) {
         this.code_challenge_methods_supported = codeChallengeMethodsSupported;
         return this;
     }

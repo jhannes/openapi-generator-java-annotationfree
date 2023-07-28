@@ -124,6 +124,7 @@ components:
         emailDomains:
           type: array
           readOnly: true
+          uniqueItems: true
           items:
             type: string
             example: "myorg.example.com"

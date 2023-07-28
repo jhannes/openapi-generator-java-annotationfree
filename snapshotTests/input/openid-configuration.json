@@ -219,6 +219,7 @@
           },
           "response_types_supported": {
             "type": "array",
+            "uniqueItems": true,
             "items": {
               "type": "string",
               "enum": ["code", "token", "id_token"]
@@ -226,6 +227,7 @@
           },
           "response_modes_supported": {
             "type": "array",
+            "uniqueItems": true,
             "items": {
               "type": "string",
               "enum": ["query", "fragment"]
@@ -233,6 +235,7 @@
           },
           "subject_types_supported": {
             "type": "array",
+            "uniqueItems": true,
             "items": {
               "type": "string",
               "enum": ["pairwise", "public"]
@@ -240,6 +243,7 @@
           },
           "code_challenge_methods_supported": {
             "type": "array",
+            "uniqueItems": true,
             "items": {
               "type": "string",
               "enum": ["S256", "plain"]
@@ -256,7 +260,10 @@
             "type": "string",
             "format": "url"
           }
-        }
+        },
+        "required": [
+          "response_types_supported"
+        ]
       },
       "JwksDocument": {
         "type": "object",
@@ -267,7 +274,10 @@
               "$ref": "#/components/schemas/JwksKey"
             }
           }
-        }
+        },
+        "required": [
+          "keys"
+        ]
       },
       "JwksKey": {
         "type": "object",
