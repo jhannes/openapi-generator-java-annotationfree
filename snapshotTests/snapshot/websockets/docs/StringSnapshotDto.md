@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **updatedAt** | [**OffsetDateTime**](OffsetDateTime.md) |  |  [optional]
 **updatedBy** | **String** |  |  [optional]
 **name** | **String** |  |  [optional]
+**type** | **String** |  |  [optional]
 
 
 

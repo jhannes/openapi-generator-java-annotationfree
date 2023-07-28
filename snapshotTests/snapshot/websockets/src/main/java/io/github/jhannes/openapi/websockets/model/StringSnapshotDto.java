@@ -38,6 +38,8 @@ public class StringSnapshotDto extends ChangeTrackedDto {
 
     private String name = null;
 
+    private String type = null;
+
     public static String[] readOnlyFields() {
         return new String[] {
         };
@@ -67,6 +69,7 @@ public class StringSnapshotDto extends ChangeTrackedDto {
     public <T extends StringSnapshotDto> T copyTo(T target) {
         super.copyTo(target);
         if (this.getName() != null) target.setName(this.getName());
+        if (this.getType() != null) target.setType(this.getType());
         return target;
     }
 
@@ -124,6 +127,23 @@ public class StringSnapshotDto extends ChangeTrackedDto {
         return this;
     }
 
+    /**
+     * Get type
+     * @return type
+     */
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public StringSnapshotDto type(String type) {
+        this.type = type;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -134,12 +154,13 @@ public class StringSnapshotDto extends ChangeTrackedDto {
         }
         StringSnapshotDto stringSnapshot = (StringSnapshotDto) o;
         return Objects.equals(this.getName(), stringSnapshot.getName()) &&
+                Objects.equals(this.getType(), stringSnapshot.getType()) &&
                 super.equals(o);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCreatedAt(), getCreatedBy(), getUpdatedAt(), getUpdatedBy(), getName());
+        return Objects.hash(getCreatedAt(), getCreatedBy(), getUpdatedAt(), getUpdatedBy(), getName(), getType());
     }
 
     @Override
@@ -148,6 +169,7 @@ public class StringSnapshotDto extends ChangeTrackedDto {
         sb.append("StringSnapshotDto {\n");
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");
+        sb.append("    type: ").append(toIndentedString(getType())).append("\n");
         sb.append("}");
         return sb.toString();
     }

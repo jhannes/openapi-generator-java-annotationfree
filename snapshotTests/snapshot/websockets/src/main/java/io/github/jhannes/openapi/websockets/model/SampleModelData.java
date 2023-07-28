@@ -183,7 +183,8 @@ public class SampleModelData {
             .createdBy(sampleString("createdBy", "username"))
             .updatedAt(sampleOffsetDateTime("updatedAt"))
             .updatedBy(sampleString("updatedBy", "username"))
-            .name(sampleString("name"));
+            .name(sampleString("name"))
+            .type(sampleString("type"));
     }
 
     public List<StringSnapshotDto> sampleListOfStringSnapshotDto(String propertyName) {
