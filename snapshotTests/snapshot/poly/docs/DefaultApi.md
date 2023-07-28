@@ -112,6 +112,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Returns all parties that the user can see |  -  |
+| **204** | User has no access to any party |  -  |
 
 
 ## partiesIdPut

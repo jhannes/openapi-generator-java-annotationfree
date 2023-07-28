@@ -91,7 +91,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **caseWorkerDto** | [**CaseWorkerDto**](CaseWorkerDto.md)|  | [optional]
+ **caseWorkerDto** | [**CaseWorkerDto**](CaseWorkerDto.md)|  |
 
 ### Return type
 

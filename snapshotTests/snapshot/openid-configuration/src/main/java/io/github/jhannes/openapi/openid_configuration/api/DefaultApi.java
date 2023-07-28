@@ -13,6 +13,7 @@ package io.github.jhannes.openapi.openid_configuration.api;
 
 import io.github.jhannes.openapi.openid_configuration.model.DiscoveryDocumentDto;
 import io.github.jhannes.openapi.openid_configuration.model.JwksDocumentDto;
+import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
 
 import java.io.IOException;
 import java.util.Map;
@@ -20,6 +21,25 @@ import java.util.List;
 import java.util.Optional;
 
 public interface DefaultApi {
+    /**
+     * @param authorization Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret (optional)
+     * @param code  (optional)
+     * @param clientId  (optional)
+     * @param clientSecret  (optional)
+     * @param redirectUri  (optional)
+     * @param subjectToken Used with grant_type&#x3D;urn:ietf:params:oauth:grant-type:token-exchange to do a token exchange (optional)
+     * @param audience Used with token-exchange to indicate which application the token will be used with (optional)
+     * @return TokenResponseDto
+     */
+    TokenResponseDto fetchToken(
+            Optional<String> authorization,
+            Optional<String> code,
+            Optional<String> client_id,
+            Optional<String> client_secret,
+            Optional<String> redirect_uri,
+            Optional<String> subject_token,
+            Optional<String> audience
+    ) throws IOException;
     /**
      * @return JwksDocumentDto
      */

@@ -14,6 +14,7 @@ package io.github.jhannes.openapi.openid_configuration.api;
 
 import io.github.jhannes.openapi.openid_configuration.model.DiscoveryDocumentDto;
 import io.github.jhannes.openapi.openid_configuration.model.JwksDocumentDto;
+import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
 import io.github.jhannes.openapi.openid_configuration.model.SampleModelData;
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +34,19 @@ public class DefaultApiTest {
     private final SampleModelData sampleData = new SampleModelData(-1);
 
     public DefaultApiTest() throws MalformedURLException {
+    }
+
+    @Test
+    public void fetchTokenTest() throws IOException {
+        //String authorization = null;
+        //String code = null;
+        //String clientId = null;
+        //String clientSecret = null;
+        //String redirectUri = null;
+        //String subjectToken = null;
+        //String audience = null;
+        //TokenResponseDto response = api.fetchToken(authorization, code, clientId, clientSecret, redirectUri, subjectToken, audience);
+        // TODO: test validations
     }
 
     @Test

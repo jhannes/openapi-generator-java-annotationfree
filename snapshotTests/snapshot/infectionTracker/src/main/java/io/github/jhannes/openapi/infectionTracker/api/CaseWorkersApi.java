@@ -25,7 +25,7 @@ public interface CaseWorkersApi {
     CaseWorkerDto listCaseWorkers(
     ) throws IOException;
     /**
-     * @param caseWorkerDto  (optional)
+     * @param caseWorkerDto  (required)
      */
     void registerCaseWorker(
             CaseWorkerDto caseWorkerDto

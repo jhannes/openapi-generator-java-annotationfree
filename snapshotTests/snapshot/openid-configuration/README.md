@@ -79,11 +79,18 @@ public class Example {
     public static void main(String[] args) {
         DefaultApi client = new HttpDefaultApi();
 
+        String authorization = "authorization_example"; // String | Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret
+        String code = "code_example"; // String | 
+        String clientId = "clientId_example"; // String | 
+        String clientSecret = "clientSecret_example"; // String | 
+        String redirectUri = "redirectUri_example"; // String | 
+        String subjectToken = "subjectToken_example"; // String | Used with grant_type=urn:ietf:params:oauth:grant-type:token-exchange to do a token exchange
+        String audience = "audience_example"; // String | Used with token-exchange to indicate which application the token will be used with
         try {
-            JwksDocumentDto result = client.wellKnownKeysGet();
+            TokenResponseDto result = client.fetchToken(authorization, code, clientId, clientSecret, redirectUri, subjectToken, audience);
             System.out.println(result);
         } catch (IOException e) {
-            System.err.println("Exception when calling DefaultApi#wellKnownKeysGet");
+            System.err.println("Exception when calling DefaultApi#fetchToken");
             e.printStackTrace();
         }
     }
@@ -97,6 +104,7 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*DefaultApi* | [**fetchToken**](docs/DefaultApi.md#fetchToken) | **POST** /token | 
 *DefaultApi* | [**wellKnownKeysGet**](docs/DefaultApi.md#wellKnownKeysGet) | **GET** /.well-known/keys | 
 *DefaultApi* | [**wellKnownOpenidConfigurationGet**](docs/DefaultApi.md#wellKnownOpenidConfigurationGet) | **GET** /.well-known/openid-configuration | 
 
