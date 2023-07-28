@@ -16,6 +16,7 @@ Name | Type | Description | Notes
 **phone** | **String** |  |  [optional]
 **birthDate** | [**LocalDate**](LocalDate.md) |  |  [optional]
 **gender** | **GenderEnum** |  |  [optional]
+**extra** | **String** |  |  [optional]
 
 
 

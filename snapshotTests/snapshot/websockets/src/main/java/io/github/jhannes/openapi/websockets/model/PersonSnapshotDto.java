@@ -58,6 +58,8 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
 
     private GenderEnum gender = null;
 
+    private String extra = null;
+
     public static String[] readOnlyFields() {
         return new String[] {
                 "id",
@@ -108,6 +110,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         if (this.getPhone() != null) target.setPhone(this.getPhone());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
         if (this.getGender() != null) target.setGender(this.getGender());
+        if (this.getExtra() != null) target.setExtra(this.getExtra());
         return target;
     }
 
@@ -313,6 +316,23 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         return this;
     }
 
+    /**
+     * Get extra
+     * @return extra
+     */
+    public String getExtra() {
+        return extra;
+    }
+
+    public void setExtra(String extra) {
+        this.extra = extra;
+    }
+
+    public PersonSnapshotDto extra(String extra) {
+        this.extra = extra;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -332,12 +352,13 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
                 Objects.equals(this.getName(), personSnapshot.getName()) &&
                 Objects.equals(this.getPhone(), personSnapshot.getPhone()) &&
                 Objects.equals(this.getBirthDate(), personSnapshot.getBirthDate()) &&
-                Objects.equals(this.getGender(), personSnapshot.getGender());
+                Objects.equals(this.getGender(), personSnapshot.getGender()) &&
+                Objects.equals(this.getExtra(), personSnapshot.getExtra());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCreatedAt(), getCreatedBy(), getUpdatedAt(), getUpdatedBy(), getEmail(), getId(), getType(), getName(), getPhone(), getBirthDate(), getGender());
+        return Objects.hash(getCreatedAt(), getCreatedBy(), getUpdatedAt(), getUpdatedBy(), getEmail(), getId(), getType(), getName(), getPhone(), getBirthDate(), getGender(), getExtra());
     }
 
     @Override
@@ -355,6 +376,7 @@ public class PersonSnapshotDto implements ChangeTrackedInterface, PersonInterfac
         sb.append("    phone: ").append(toIndentedString(getPhone())).append("\n");
         sb.append("    birthDate: ").append(toIndentedString(getBirthDate())).append("\n");
         sb.append("    gender: ").append(toIndentedString(getGender())).append("\n");
+        sb.append("    extra: ").append(toIndentedString(getExtra())).append("\n");
         sb.append("}");
         return sb.toString();
     }

@@ -144,7 +144,8 @@ public class SampleModelData {
             .name(samplePersonNameDto("name"))
             .phone(sampleString("phone", "phone"))
             .birthDate(sampleLocalDate("birthDate"))
-            .gender(sampleGenderEnum("gender"));
+            .gender(sampleGenderEnum("gender"))
+            .extra(sampleString("extra"));
     }
 
     public List<PersonSnapshotDto> sampleListOfPersonSnapshotDto(String propertyName) {

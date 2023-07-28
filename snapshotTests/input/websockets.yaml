@@ -122,6 +122,10 @@ components:
       allOf:
         - $ref: "#/components/schemas/ChangeTracked"
         - $ref: "#/components/schemas/Person"
+        - type: object
+          properties:
+            extra:
+              type: string
       required:
         - type
         - name

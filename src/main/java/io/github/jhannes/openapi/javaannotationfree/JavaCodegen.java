@@ -1,8 +1,5 @@
 package io.github.jhannes.openapi.javaannotationfree;
 
-import io.swagger.v3.oas.models.OpenAPI;
-import io.swagger.v3.oas.models.media.ComposedSchema;
-import io.swagger.v3.oas.models.media.Schema;
 import org.openapitools.codegen.*;
 import org.openapitools.codegen.languages.AbstractJavaCodegen;
 import org.openapitools.codegen.model.ModelMap;
@@ -16,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -128,7 +124,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 }
             }
         }
-        return model.vars.stream()
+        return model.allVars.stream()
                 .noneMatch(memberVar -> memberVar.name.equals(var.name) && memberVar.datatypeWithEnum.equals(var.datatypeWithEnum));
     }
 
@@ -152,9 +148,9 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 for (CodegenModel itf : interfacesToBeRemoved) {
                     codegenModel.allOf.remove(itf.classname);
                     elementsToBeRemoved.add(itf.name);
+                    codegenModel.interfaceModels.removeIf(e -> e.name.equals(itf.name));
                 }
                 if (codegenModel.allOf.size() > 1) {
-                    //codegenModel.interfaces = new ArrayList<>(codegenModel.allOf);
                     List<String> interfaceNames = new ArrayList<>();
                     for (CodegenModel supertype : codegenModel.interfaceModels) {
                         multiplyInheritedTypes.add(supertype.name);
@@ -175,19 +171,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
                         }
                     }
                     codegenModel.interfaces = null;
-                }
-            }
-            for (CodegenProperty variable : codegenModel.allVars) {
-                if (variable.isModel) {
-                    if (allModels.get(variable.dataType).oneOf.isEmpty()) {
-                        variable.defaultValue = "new " + variable.dataType + "()";
-                    }
-                }
-                if (variable.get_enum() != null && variable.get_enum().size() == 1) {
-                    variable.defaultValue = "\"" + variable.get_enum().get(0) + "\"";
-                    variable.dataType = "\"" + variable.get_enum().get(0) + "\"";
-                    variable.datatypeWithEnum = "String";
-                    variable.isEnum = false;
                 }
             }
         }
@@ -245,6 +228,19 @@ public class JavaCodegen extends AbstractJavaCodegen {
         }
         for (ModelsMap modelsMap : result.values()) {
             for (ModelMap model : modelsMap.getModels()) {
+                for (CodegenProperty variable : model.getModel().allVars) {
+                    if (variable.isModel) {
+                        if (allModels.get(variable.dataType).oneOf.isEmpty()) {
+                            variable.defaultValue = "new " + variable.dataType + "()";
+                        }
+                    }
+                    if (variable.get_enum() != null && variable.get_enum().size() == 1) {
+                        variable.defaultValue = "\"" + variable.get_enum().get(0) + "\"";
+                        variable.dataType = "\"" + variable.get_enum().get(0) + "\"";
+                        variable.datatypeWithEnum = "String";
+                        variable.isEnum = false;
+                    }
+                }
                 updateVariablesLists(model.getModel());
             }
         }
