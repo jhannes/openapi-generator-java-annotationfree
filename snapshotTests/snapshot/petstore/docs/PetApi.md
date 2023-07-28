@@ -344,15 +344,7 @@ import io.github.jhannes.openapi.petstore.models.*;
 
 public class Example {
     public static void main(String[] args) {
-    // Configure HTTP bearer authorization: api_key
-        PetApi client = new HttpPetApi() {
-            protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
-                HttpURLConnection connection = super.openConnection(relativeUrl);
-                connection.setRequestParameter("api_key", apiKey);
-                return connection;
-            }
-        };
-
+    
         // Configure HTTP basic authorization: petstore_auth
         HttpURLConnectionApiClient client = new HttpURLConnectionApiClient("http://petstore.swagger.io/v2") {
             @Override
@@ -360,6 +352,14 @@ public class Example {
                 String authentication = "Bearer " + "BEARER TOKEN";
                 exchange.setHeader("Authorization", authentication);
                 return exchange;
+            }
+        };
+// Configure HTTP bearer authorization: api_key
+        PetApi client = new HttpPetApi() {
+            protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
+                HttpURLConnection connection = super.openConnection(relativeUrl);
+                connection.setRequestParameter("api_key", apiKey);
+                return connection;
             }
         };
 
@@ -388,7 +388,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[api_key](../README.md#api_key), [petstore_auth](../README.md#petstore_auth)
+[petstore_auth](../README.md#petstore_auth), [api_key](../README.md#api_key)
 
 ### HTTP request headers
 

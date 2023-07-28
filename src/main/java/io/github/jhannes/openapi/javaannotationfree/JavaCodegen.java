@@ -1,12 +1,16 @@
 package io.github.jhannes.openapi.javaannotationfree;
 
-import org.openapitools.codegen.*;
+import org.openapitools.codegen.CodegenConstants;
+import org.openapitools.codegen.CodegenDiscriminator;
+import org.openapitools.codegen.CodegenModel;
+import org.openapitools.codegen.CodegenOperation;
+import org.openapitools.codegen.CodegenProperty;
+import org.openapitools.codegen.CodegenResponse;
+import org.openapitools.codegen.SupportingFile;
 import org.openapitools.codegen.languages.AbstractJavaCodegen;
 import org.openapitools.codegen.model.ModelMap;
 import org.openapitools.codegen.model.ModelsMap;
 import org.openapitools.codegen.model.OperationsMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,7 +24,6 @@ import java.util.stream.Collectors;
 
 public class JavaCodegen extends AbstractJavaCodegen {
 
-    private final Logger LOGGER = LoggerFactory.getLogger(AbstractJavaCodegen.class);
     private final Set<String> mixinInterfaces = new HashSet<>();
 
     public JavaCodegen() {
@@ -36,7 +39,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
         apiTemplateFiles.put("api_http.mustache", ".java");
 
         if (additionalProperties.get(CodegenConstants.GENERATE_MODEL_TESTS) == Boolean.TRUE) {
-            supportingFiles.add(new SupportingFile("sample_model_data.mustache",  sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "SampleModelData.java"));
+            supportingFiles.add(new SupportingFile("sample_model_data.mustache", sourceFolder + File.separator + modelPackage().replace('.', File.separatorChar), "SampleModelData.java"));
         }
         additionalProperties.put("curly", "{");
     }
@@ -55,11 +58,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
     }
 
     @Override
-    public String getLibrary() {
-        return "action-controller";
-    }
-
-    @Override
     public OperationsMap postProcessOperationsWithModels(OperationsMap objs, List<ModelMap> allModels) {
         objs = super.postProcessOperationsWithModels(objs, allModels);
 
@@ -69,7 +67,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
             for (CodegenResponse response : operation.responses) {
                 if (response.is4xx && response.dataType != null) {
                     exceptionPayloads.add(response.dataType);
-                    ((Collection<String>)operation.vendorExtensions.get("x-java-import")).add(response.dataType);
+                    ((Collection<String>) operation.vendorExtensions.get("x-java-import")).add(response.dataType);
                 }
             }
         }
@@ -84,13 +82,13 @@ public class JavaCodegen extends AbstractJavaCodegen {
         HashMap<String, String> mapping = new HashMap<>();
         for (String className : codegenModel.oneOf) {
             CodegenModel subModel = allModels.get(className);
-            if (subModel.oneOf.isEmpty()){
+            if (subModel.oneOf.isEmpty()) {
                 mappedModels.add(new CodegenDiscriminator.MappedModel(subModel.name, className));
                 mapping.put(subModel.name, className);
             } else if (
-                codegenModel.discriminator != null
-                && subModel.discriminator != null 
-                && subModel.discriminator.getPropertyName().equals(codegenModel.discriminator.getPropertyName())
+                    codegenModel.discriminator != null
+                    && subModel.discriminator != null
+                    && subModel.discriminator.getPropertyName().equals(codegenModel.discriminator.getPropertyName())
             ) {
                 if (subModel.discriminator.getMapping() == null) {
                     postProcessOneOf(subModel, interfacesOfSubtypes, allModels);
@@ -233,6 +231,9 @@ public class JavaCodegen extends AbstractJavaCodegen {
                         if (allModels.get(variable.dataType).oneOf.isEmpty()) {
                             variable.defaultValue = "new " + variable.dataType + "()";
                         }
+                    }
+                    if (variable.isArray) {
+                        variable.defaultValue = variable.getUniqueItems() ? "new LinkedHashSet<>()" : "new ArrayList<>()";
                     }
                     if (variable.get_enum() != null && variable.get_enum().size() == 1) {
                         variable.defaultValue = "\"" + variable.get_enum().get(0) + "\"";

@@ -117,8 +117,8 @@ Class | Method | HTTP request | Description
  - [UnknownResourceDto](docs/UnknownResourceDto.md)
  - [UserDto](docs/UserDto.md)
  - [UsersGet200ResponseDto](docs/UsersGet200ResponseDto.md)
- - [UsersIdDelete200Response1Dto](docs/UsersIdDelete200Response1Dto.md)
- - [UsersIdDelete200ResponseDto](docs/UsersIdDelete200ResponseDto.md)
+ - [UsersIdGet200ResponseDto](docs/UsersIdGet200ResponseDto.md)
+ - [UsersIdPut200ResponseDto](docs/UsersIdPut200ResponseDto.md)
 
 
 ## Documentation for Authorization

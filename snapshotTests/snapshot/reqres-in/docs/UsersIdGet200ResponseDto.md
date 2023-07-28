@@ -1,5 +1,5 @@
 
-# UsersIdDelete200ResponseDto
+# UsersIdGet200ResponseDto
 
 ## Properties
 

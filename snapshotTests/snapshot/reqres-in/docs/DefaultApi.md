@@ -285,7 +285,7 @@ No authorization required
 
 ## usersIdGet
 
-> UsersIdDelete200ResponseDto usersIdGet(id)
+> UsersIdGet200ResponseDto usersIdGet(id)
 
 Fetches a user
 
@@ -301,7 +301,7 @@ public class Example {
 
         Integer id = 56; // Integer | 
         try {
-            UsersIdDelete200ResponseDto result = client.usersIdGet(id);
+            UsersIdGet200ResponseDto result = client.usersIdGet(id);
             System.out.println(result);
         } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#usersIdGet");
@@ -320,7 +320,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UsersIdDelete200ResponseDto**](UsersIdDelete200ResponseDto.md)
+[**UsersIdGet200ResponseDto**](UsersIdGet200ResponseDto.md)
 
 ### Authorization
 
@@ -339,7 +339,7 @@ No authorization required
 
 ## usersIdPatch
 
-> UsersIdDelete200Response1Dto usersIdPatch(id)
+> UsersIdPut200ResponseDto usersIdPatch(id)
 
 Updates a user
 
@@ -355,7 +355,7 @@ public class Example {
 
         Integer id = 56; // Integer | 
         try {
-            UsersIdDelete200Response1Dto result = client.usersIdPatch(id);
+            UsersIdPut200ResponseDto result = client.usersIdPatch(id);
             System.out.println(result);
         } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#usersIdPatch");
@@ -374,7 +374,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UsersIdDelete200Response1Dto**](UsersIdDelete200Response1Dto.md)
+[**UsersIdPut200ResponseDto**](UsersIdPut200ResponseDto.md)
 
 ### Authorization
 
@@ -393,7 +393,7 @@ No authorization required
 
 ## usersIdPut
 
-> UsersIdDelete200Response1Dto usersIdPut(id)
+> UsersIdPut200ResponseDto usersIdPut(id)
 
 Updates a user
 
@@ -409,7 +409,7 @@ public class Example {
 
         Integer id = 56; // Integer | 
         try {
-            UsersIdDelete200Response1Dto result = client.usersIdPut(id);
+            UsersIdPut200ResponseDto result = client.usersIdPut(id);
             System.out.println(result);
         } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#usersIdPut");
@@ -428,7 +428,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UsersIdDelete200Response1Dto**](UsersIdDelete200Response1Dto.md)
+[**UsersIdPut200ResponseDto**](UsersIdPut200ResponseDto.md)
 
 ### Authorization
 

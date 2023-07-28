@@ -31,9 +31,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
-* UsersIdDelete200Response1Dto
+* UsersIdPut200ResponseDto
 */
-public class UsersIdDelete200Response1Dto {
+public class UsersIdPut200ResponseDto {
 
     private String updatedAt = null;
 
@@ -60,7 +60,7 @@ public class UsersIdDelete200Response1Dto {
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public <T extends UsersIdDelete200Response1Dto> T copyTo(T target) {
+    public <T extends UsersIdPut200ResponseDto> T copyTo(T target) {
         if (this.getUpdatedAt() != null) target.setUpdatedAt(this.getUpdatedAt());
         return target;
     }
@@ -90,7 +90,7 @@ public class UsersIdDelete200Response1Dto {
         this.updatedAt = updatedAt;
     }
 
-    public UsersIdDelete200Response1Dto updatedAt(String updatedAt) {
+    public UsersIdPut200ResponseDto updatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
         return this;
     }
@@ -103,8 +103,8 @@ public class UsersIdDelete200Response1Dto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UsersIdDelete200Response1Dto usersIdDelete200Response1 = (UsersIdDelete200Response1Dto) o;
-        return Objects.equals(this.getUpdatedAt(), usersIdDelete200Response1.getUpdatedAt());
+        UsersIdPut200ResponseDto usersIdPut200Response = (UsersIdPut200ResponseDto) o;
+        return Objects.equals(this.getUpdatedAt(), usersIdPut200Response.getUpdatedAt());
     }
 
     @Override
@@ -115,7 +115,7 @@ public class UsersIdDelete200Response1Dto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("UsersIdDelete200Response1Dto {\n");
+        sb.append("UsersIdPut200ResponseDto {\n");
         sb.append("    updatedAt: ").append(toIndentedString(getUpdatedAt())).append("\n");
         sb.append("}");
         return sb.toString();

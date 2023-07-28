@@ -16,8 +16,8 @@ import io.github.jhannes.openapi.reqres_in.model.LoginPost400ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.LoginPostRequestDto;
 import io.github.jhannes.openapi.reqres_in.model.RegisterPost200ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.UsersGet200ResponseDto;
-import io.github.jhannes.openapi.reqres_in.model.UsersIdDelete200Response1Dto;
-import io.github.jhannes.openapi.reqres_in.model.UsersIdDelete200ResponseDto;
+import io.github.jhannes.openapi.reqres_in.model.UsersIdGet200ResponseDto;
+import io.github.jhannes.openapi.reqres_in.model.UsersIdPut200ResponseDto;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
@@ -125,7 +125,7 @@ public class HttpDefaultApi implements DefaultApi {
     }
 
     @Override
-    public UsersIdDelete200ResponseDto usersIdGet(
+    public UsersIdGet200ResponseDto usersIdGet(
             Integer id
     ) throws IOException {
         HttpURLConnection connection = openConnection("/users/{id}"
@@ -134,11 +134,11 @@ public class HttpDefaultApi implements DefaultApi {
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
-        return jsonb.fromJson(connection.getInputStream(), UsersIdDelete200ResponseDto.class);
+        return jsonb.fromJson(connection.getInputStream(), UsersIdGet200ResponseDto.class);
     }
 
     @Override
-    public UsersIdDelete200Response1Dto usersIdPatch(
+    public UsersIdPut200ResponseDto usersIdPatch(
             Integer id
     ) throws IOException {
         HttpURLConnection connection = openConnection("/users/{id}"
@@ -147,11 +147,11 @@ public class HttpDefaultApi implements DefaultApi {
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
-        return jsonb.fromJson(connection.getInputStream(), UsersIdDelete200Response1Dto.class);
+        return jsonb.fromJson(connection.getInputStream(), UsersIdPut200ResponseDto.class);
     }
 
     @Override
-    public UsersIdDelete200Response1Dto usersIdPut(
+    public UsersIdPut200ResponseDto usersIdPut(
             Integer id
     ) throws IOException {
         HttpURLConnection connection = openConnection("/users/{id}"
@@ -160,7 +160,7 @@ public class HttpDefaultApi implements DefaultApi {
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
-        return jsonb.fromJson(connection.getInputStream(), UsersIdDelete200Response1Dto.class);
+        return jsonb.fromJson(connection.getInputStream(), UsersIdPut200ResponseDto.class);
     }
 
     protected HttpURLConnection openConnection(String relativeUrl) throws IOException {

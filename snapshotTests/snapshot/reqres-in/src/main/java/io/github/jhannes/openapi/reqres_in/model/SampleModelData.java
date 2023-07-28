@@ -179,38 +179,38 @@ public class SampleModelData {
         return sampleList(() -> sampleUsersGet200ResponseDto());
     }
 
-    public UsersIdDelete200Response1Dto sampleUsersIdDelete200Response1Dto(String propertyName) {
-        return sampleUsersIdDelete200Response1Dto();
+    public UsersIdGet200ResponseDto sampleUsersIdGet200ResponseDto(String propertyName) {
+        return sampleUsersIdGet200ResponseDto();
     }
 
-    public UsersIdDelete200Response1Dto sampleUsersIdDelete200Response1Dto() {
-        return new UsersIdDelete200Response1Dto()
-            .updatedAt(sampleString("updatedAt"));
-    }
-
-    public List<UsersIdDelete200Response1Dto> sampleListOfUsersIdDelete200Response1Dto(String propertyName) {
-        return sampleListOfUsersIdDelete200Response1Dto();
-    }
-
-    public List<UsersIdDelete200Response1Dto> sampleListOfUsersIdDelete200Response1Dto() {
-        return sampleList(() -> sampleUsersIdDelete200Response1Dto());
-    }
-
-    public UsersIdDelete200ResponseDto sampleUsersIdDelete200ResponseDto(String propertyName) {
-        return sampleUsersIdDelete200ResponseDto();
-    }
-
-    public UsersIdDelete200ResponseDto sampleUsersIdDelete200ResponseDto() {
-        return new UsersIdDelete200ResponseDto()
+    public UsersIdGet200ResponseDto sampleUsersIdGet200ResponseDto() {
+        return new UsersIdGet200ResponseDto()
             .data(sampleUserDto("data"));
     }
 
-    public List<UsersIdDelete200ResponseDto> sampleListOfUsersIdDelete200ResponseDto(String propertyName) {
-        return sampleListOfUsersIdDelete200ResponseDto();
+    public List<UsersIdGet200ResponseDto> sampleListOfUsersIdGet200ResponseDto(String propertyName) {
+        return sampleListOfUsersIdGet200ResponseDto();
     }
 
-    public List<UsersIdDelete200ResponseDto> sampleListOfUsersIdDelete200ResponseDto() {
-        return sampleList(() -> sampleUsersIdDelete200ResponseDto());
+    public List<UsersIdGet200ResponseDto> sampleListOfUsersIdGet200ResponseDto() {
+        return sampleList(() -> sampleUsersIdGet200ResponseDto());
+    }
+
+    public UsersIdPut200ResponseDto sampleUsersIdPut200ResponseDto(String propertyName) {
+        return sampleUsersIdPut200ResponseDto();
+    }
+
+    public UsersIdPut200ResponseDto sampleUsersIdPut200ResponseDto() {
+        return new UsersIdPut200ResponseDto()
+            .updatedAt(sampleString("updatedAt"));
+    }
+
+    public List<UsersIdPut200ResponseDto> sampleListOfUsersIdPut200ResponseDto(String propertyName) {
+        return sampleListOfUsersIdPut200ResponseDto();
+    }
+
+    public List<UsersIdPut200ResponseDto> sampleListOfUsersIdPut200ResponseDto() {
+        return sampleList(() -> sampleUsersIdPut200ResponseDto());
     }
 
     protected final Random random;

@@ -17,8 +17,8 @@ import io.github.jhannes.openapi.reqres_in.model.LoginPost400ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.LoginPostRequestDto;
 import io.github.jhannes.openapi.reqres_in.model.RegisterPost200ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.UsersGet200ResponseDto;
-import io.github.jhannes.openapi.reqres_in.model.UsersIdDelete200Response1Dto;
-import io.github.jhannes.openapi.reqres_in.model.UsersIdDelete200ResponseDto;
+import io.github.jhannes.openapi.reqres_in.model.UsersIdGet200ResponseDto;
+import io.github.jhannes.openapi.reqres_in.model.UsersIdPut200ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.SampleModelData;
 import org.junit.jupiter.api.Test;
 
@@ -78,21 +78,21 @@ public class DefaultApiTest {
     @Test
     public void usersIdGetTest() throws IOException {
         //Integer id = null;
-        //UsersIdDelete200ResponseDto response = api.usersIdGet(id);
+        //UsersIdGet200ResponseDto response = api.usersIdGet(id);
         // TODO: test validations
     }
 
     @Test
     public void usersIdPatchTest() throws IOException {
         //Integer id = null;
-        //UsersIdDelete200Response1Dto response = api.usersIdPatch(id);
+        //UsersIdPut200ResponseDto response = api.usersIdPatch(id);
         // TODO: test validations
     }
 
     @Test
     public void usersIdPutTest() throws IOException {
         //Integer id = null;
-        //UsersIdDelete200Response1Dto response = api.usersIdPut(id);
+        //UsersIdPut200ResponseDto response = api.usersIdPut(id);
         // TODO: test validations
     }
 

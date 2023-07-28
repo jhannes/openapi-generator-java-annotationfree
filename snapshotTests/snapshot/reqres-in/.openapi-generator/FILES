@@ -8,8 +8,8 @@ docs/RegisterPost200ResponseDto.md
 docs/UnknownResourceDto.md
 docs/UserDto.md
 docs/UsersGet200ResponseDto.md
-docs/UsersIdDelete200Response1Dto.md
-docs/UsersIdDelete200ResponseDto.md
+docs/UsersIdGet200ResponseDto.md
+docs/UsersIdPut200ResponseDto.md
 src/main/java/io/github/jhannes/openapi/reqres_in/api/DefaultApi.java
 src/main/java/io/github/jhannes/openapi/reqres_in/api/HttpDefaultApi.java
 src/main/java/io/github/jhannes/openapi/reqres_in/model/LoginPost200ResponseDto.java
@@ -20,6 +20,6 @@ src/main/java/io/github/jhannes/openapi/reqres_in/model/SampleModelData.java
 src/main/java/io/github/jhannes/openapi/reqres_in/model/UnknownResourceDto.java
 src/main/java/io/github/jhannes/openapi/reqres_in/model/UserDto.java
 src/main/java/io/github/jhannes/openapi/reqres_in/model/UsersGet200ResponseDto.java
-src/main/java/io/github/jhannes/openapi/reqres_in/model/UsersIdDelete200Response1Dto.java
-src/main/java/io/github/jhannes/openapi/reqres_in/model/UsersIdDelete200ResponseDto.java
+src/main/java/io/github/jhannes/openapi/reqres_in/model/UsersIdGet200ResponseDto.java
+src/main/java/io/github/jhannes/openapi/reqres_in/model/UsersIdPut200ResponseDto.java
 src/test/java/io/github/jhannes/openapi/reqres_in/api/DefaultApiTest.java

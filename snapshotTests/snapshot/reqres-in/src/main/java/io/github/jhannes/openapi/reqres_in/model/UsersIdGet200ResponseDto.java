@@ -31,9 +31,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
-* UsersIdDelete200ResponseDto
+* UsersIdGet200ResponseDto
 */
-public class UsersIdDelete200ResponseDto {
+public class UsersIdGet200ResponseDto {
 
     private UserDto data = null;
 
@@ -63,7 +63,7 @@ public class UsersIdDelete200ResponseDto {
         }
     }
 
-    public <T extends UsersIdDelete200ResponseDto> T copyTo(T target) {
+    public <T extends UsersIdGet200ResponseDto> T copyTo(T target) {
         if (this.getData() != null) target.setData(this.getData());
         return target;
     }
@@ -93,7 +93,7 @@ public class UsersIdDelete200ResponseDto {
         this.data = data;
     }
 
-    public UsersIdDelete200ResponseDto data(UserDto data) {
+    public UsersIdGet200ResponseDto data(UserDto data) {
         this.data = data;
         return this;
     }
@@ -106,8 +106,8 @@ public class UsersIdDelete200ResponseDto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UsersIdDelete200ResponseDto usersIdDelete200Response = (UsersIdDelete200ResponseDto) o;
-        return Objects.equals(this.getData(), usersIdDelete200Response.getData());
+        UsersIdGet200ResponseDto usersIdGet200Response = (UsersIdGet200ResponseDto) o;
+        return Objects.equals(this.getData(), usersIdGet200Response.getData());
     }
 
     @Override
@@ -118,7 +118,7 @@ public class UsersIdDelete200ResponseDto {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("UsersIdDelete200ResponseDto {\n");
+        sb.append("UsersIdGet200ResponseDto {\n");
         sb.append("    data: ").append(toIndentedString(getData())).append("\n");
         sb.append("}");
         return sb.toString();

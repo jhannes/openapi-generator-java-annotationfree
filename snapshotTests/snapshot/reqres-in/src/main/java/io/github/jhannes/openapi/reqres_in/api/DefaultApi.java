@@ -16,8 +16,8 @@ import io.github.jhannes.openapi.reqres_in.model.LoginPost400ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.LoginPostRequestDto;
 import io.github.jhannes.openapi.reqres_in.model.RegisterPost200ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.UsersGet200ResponseDto;
-import io.github.jhannes.openapi.reqres_in.model.UsersIdDelete200Response1Dto;
-import io.github.jhannes.openapi.reqres_in.model.UsersIdDelete200ResponseDto;
+import io.github.jhannes.openapi.reqres_in.model.UsersIdGet200ResponseDto;
+import io.github.jhannes.openapi.reqres_in.model.UsersIdPut200ResponseDto;
 
 import java.io.IOException;
 import java.util.Map;
@@ -66,25 +66,25 @@ public interface DefaultApi {
     /**
      * Fetches a user
      * @param id  (path) (required)
-     * @return UsersIdDelete200ResponseDto
+     * @return UsersIdGet200ResponseDto
      */
-    UsersIdDelete200ResponseDto usersIdGet(
+    UsersIdGet200ResponseDto usersIdGet(
             Integer id
     ) throws IOException;
     /**
      * Updates a user
      * @param id  (path) (required)
-     * @return UsersIdDelete200Response1Dto
+     * @return UsersIdPut200ResponseDto
      */
-    UsersIdDelete200Response1Dto usersIdPatch(
+    UsersIdPut200ResponseDto usersIdPatch(
             Integer id
     ) throws IOException;
     /**
      * Updates a user
      * @param id  (path) (required)
-     * @return UsersIdDelete200Response1Dto
+     * @return UsersIdPut200ResponseDto
      */
-    UsersIdDelete200Response1Dto usersIdPut(
+    UsersIdPut200ResponseDto usersIdPut(
             Integer id
     ) throws IOException;
 }
