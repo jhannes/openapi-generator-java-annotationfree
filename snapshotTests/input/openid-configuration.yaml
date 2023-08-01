@@ -40,6 +40,12 @@ paths:
             schema:
               type: object
               properties:
+                grant_type:
+                  enum:
+                    - implicit
+                    - authorization_code
+                    - client_credentials
+                    - refresh_token
                 code:
                   type: string
                 client_id:
@@ -149,16 +155,29 @@ components:
           type: string
         authorization_endpoint:
           type: string
-          format: url
+          format: uri
         token_endpoint:
           type: string
-          format: url
+          format: uri
+        userinfo_endpoint:
+          type: string
+          format: uri
         end_session_endpoint:
           type: string
-          format: url
+          format: uri
         jwks_uri:
           type: string
-          format: url
+          format: uri
+        scopes_supported:
+          type: array
+          uniqueItems: true
+          items:
+            format: string
+        claims_supported:
+          type: array
+          uniqueItems: true
+          items:
+            format: string
         response_types_supported:
           type: array
           uniqueItems: true
@@ -176,6 +195,7 @@ components:
             enum:
               - query
               - fragment
+              - form_post
         subject_types_supported:
           type: array
           uniqueItems: true

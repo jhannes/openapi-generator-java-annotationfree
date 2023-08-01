@@ -39,13 +39,14 @@ public class DefaultApiTest {
     @Test
     public void fetchTokenTest() throws IOException {
         //String authorization = null;
+        //String grantType = null;
         //String code = null;
         //String clientId = null;
         //String clientSecret = null;
         //String redirectUri = null;
         //String subjectToken = null;
         //String audience = null;
-        //TokenResponseDto response = api.fetchToken(authorization, code, clientId, clientSecret, redirectUri, subjectToken, audience);
+        //TokenResponseDto response = api.fetchToken(authorization, grantType, code, clientId, clientSecret, redirectUri, subjectToken, audience);
         // TODO: test validations
     }
 

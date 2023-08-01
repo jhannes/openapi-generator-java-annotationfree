@@ -37,13 +37,19 @@ public class DiscoveryDocumentDto {
 
     private String issuer = null;
 
-    private String authorization_endpoint = null;
+    private URI authorization_endpoint = null;
 
-    private String token_endpoint = null;
+    private URI token_endpoint = null;
 
-    private String end_session_endpoint = null;
+    private URI userinfo_endpoint = null;
 
-    private String jwks_uri = null;
+    private URI end_session_endpoint = null;
+
+    private URI jwks_uri = null;
+
+    private Set<Object> scopes_supported = null;
+
+    private Set<Object> claims_supported = null;
 
     /**
      * Gets or Sets responseTypesSupported
@@ -87,7 +93,8 @@ public class DiscoveryDocumentDto {
     public enum ResponseModesSupportedEnum {
 
         QUERY("query"),
-        FRAGMENT("fragment");
+        FRAGMENT("fragment"),
+        FORM_POST("form_post");
 
         private String value;
 
@@ -251,8 +258,11 @@ public class DiscoveryDocumentDto {
         if (this.getIssuer() != null) target.setIssuer(this.getIssuer());
         if (this.getAuthorizationEndpoint() != null) target.setAuthorizationEndpoint(this.getAuthorizationEndpoint());
         if (this.getTokenEndpoint() != null) target.setTokenEndpoint(this.getTokenEndpoint());
+        if (this.getUserinfoEndpoint() != null) target.setUserinfoEndpoint(this.getUserinfoEndpoint());
         if (this.getEndSessionEndpoint() != null) target.setEndSessionEndpoint(this.getEndSessionEndpoint());
         if (this.getJwksUri() != null) target.setJwksUri(this.getJwksUri());
+        if (this.getScopesSupported() != null) target.setScopesSupported(this.getScopesSupported());
+        if (this.getClaimsSupported() != null) target.setClaimsSupported(this.getClaimsSupported());
         if (this.getResponseTypesSupported() != null) target.setResponseTypesSupported(this.getResponseTypesSupported());
         if (this.getResponseModesSupported() != null) target.setResponseModesSupported(this.getResponseModesSupported());
         if (this.getSubjectTypesSupported() != null) target.setSubjectTypesSupported(this.getSubjectTypesSupported());
@@ -296,15 +306,15 @@ public class DiscoveryDocumentDto {
      * Get authorization_endpoint
      * @return authorization_endpoint
      */
-    public String getAuthorizationEndpoint() {
+    public URI getAuthorizationEndpoint() {
         return authorization_endpoint;
     }
 
-    public void setAuthorizationEndpoint(String authorizationEndpoint) {
+    public void setAuthorizationEndpoint(URI authorizationEndpoint) {
         this.authorization_endpoint = authorizationEndpoint;
     }
 
-    public DiscoveryDocumentDto authorizationEndpoint(String authorizationEndpoint) {
+    public DiscoveryDocumentDto authorizationEndpoint(URI authorizationEndpoint) {
         this.authorization_endpoint = authorizationEndpoint;
         return this;
     }
@@ -313,16 +323,33 @@ public class DiscoveryDocumentDto {
      * Get token_endpoint
      * @return token_endpoint
      */
-    public String getTokenEndpoint() {
+    public URI getTokenEndpoint() {
         return token_endpoint;
     }
 
-    public void setTokenEndpoint(String tokenEndpoint) {
+    public void setTokenEndpoint(URI tokenEndpoint) {
         this.token_endpoint = tokenEndpoint;
     }
 
-    public DiscoveryDocumentDto tokenEndpoint(String tokenEndpoint) {
+    public DiscoveryDocumentDto tokenEndpoint(URI tokenEndpoint) {
         this.token_endpoint = tokenEndpoint;
+        return this;
+    }
+
+    /**
+     * Get userinfo_endpoint
+     * @return userinfo_endpoint
+     */
+    public URI getUserinfoEndpoint() {
+        return userinfo_endpoint;
+    }
+
+    public void setUserinfoEndpoint(URI userinfoEndpoint) {
+        this.userinfo_endpoint = userinfoEndpoint;
+    }
+
+    public DiscoveryDocumentDto userinfoEndpoint(URI userinfoEndpoint) {
+        this.userinfo_endpoint = userinfoEndpoint;
         return this;
     }
 
@@ -330,15 +357,15 @@ public class DiscoveryDocumentDto {
      * Get end_session_endpoint
      * @return end_session_endpoint
      */
-    public String getEndSessionEndpoint() {
+    public URI getEndSessionEndpoint() {
         return end_session_endpoint;
     }
 
-    public void setEndSessionEndpoint(String endSessionEndpoint) {
+    public void setEndSessionEndpoint(URI endSessionEndpoint) {
         this.end_session_endpoint = endSessionEndpoint;
     }
 
-    public DiscoveryDocumentDto endSessionEndpoint(String endSessionEndpoint) {
+    public DiscoveryDocumentDto endSessionEndpoint(URI endSessionEndpoint) {
         this.end_session_endpoint = endSessionEndpoint;
         return this;
     }
@@ -347,16 +374,82 @@ public class DiscoveryDocumentDto {
      * Get jwks_uri
      * @return jwks_uri
      */
-    public String getJwksUri() {
+    public URI getJwksUri() {
         return jwks_uri;
     }
 
-    public void setJwksUri(String jwksUri) {
+    public void setJwksUri(URI jwksUri) {
         this.jwks_uri = jwksUri;
     }
 
-    public DiscoveryDocumentDto jwksUri(String jwksUri) {
+    public DiscoveryDocumentDto jwksUri(URI jwksUri) {
         this.jwks_uri = jwksUri;
+        return this;
+    }
+
+    public <T> DiscoveryDocumentDto scopesSupported(Collection<T> items, Function<T, Object> mapper) {
+        return scopesSupported(items.stream().map(mapper).collect(Collectors.toSet()));
+    }
+
+    public <T> Set<T> getScopesSupported(Function<Object, T> mapper) {
+        return getScopesSupported().stream().map(mapper).collect(Collectors.toSet());
+    }
+
+    public DiscoveryDocumentDto addScopesSupportedItem(Object scopesSupportedItem) {
+        if (this.scopes_supported == null) {
+            this.scopes_supported = new LinkedHashSet<>();
+        }
+        this.scopes_supported.add(scopesSupportedItem);
+        return this;
+    }
+
+    /**
+     * Get scopes_supported
+     * @return scopes_supported
+     */
+    public Set<Object> getScopesSupported() {
+        return scopes_supported;
+    }
+
+    public void setScopesSupported(Set<Object> scopesSupported) {
+        this.scopes_supported = scopesSupported;
+    }
+
+    public DiscoveryDocumentDto scopesSupported(Set<Object> scopesSupported) {
+        this.scopes_supported = scopesSupported;
+        return this;
+    }
+
+    public <T> DiscoveryDocumentDto claimsSupported(Collection<T> items, Function<T, Object> mapper) {
+        return claimsSupported(items.stream().map(mapper).collect(Collectors.toSet()));
+    }
+
+    public <T> Set<T> getClaimsSupported(Function<Object, T> mapper) {
+        return getClaimsSupported().stream().map(mapper).collect(Collectors.toSet());
+    }
+
+    public DiscoveryDocumentDto addClaimsSupportedItem(Object claimsSupportedItem) {
+        if (this.claims_supported == null) {
+            this.claims_supported = new LinkedHashSet<>();
+        }
+        this.claims_supported.add(claimsSupportedItem);
+        return this;
+    }
+
+    /**
+     * Get claims_supported
+     * @return claims_supported
+     */
+    public Set<Object> getClaimsSupported() {
+        return claims_supported;
+    }
+
+    public void setClaimsSupported(Set<Object> claimsSupported) {
+        this.claims_supported = claimsSupported;
+    }
+
+    public DiscoveryDocumentDto claimsSupported(Set<Object> claimsSupported) {
+        this.claims_supported = claimsSupported;
         return this;
     }
 
@@ -551,8 +644,11 @@ public class DiscoveryDocumentDto {
         return Objects.equals(this.getIssuer(), discoveryDocument.getIssuer()) &&
                 Objects.equals(this.getAuthorizationEndpoint(), discoveryDocument.getAuthorizationEndpoint()) &&
                 Objects.equals(this.getTokenEndpoint(), discoveryDocument.getTokenEndpoint()) &&
+                Objects.equals(this.getUserinfoEndpoint(), discoveryDocument.getUserinfoEndpoint()) &&
                 Objects.equals(this.getEndSessionEndpoint(), discoveryDocument.getEndSessionEndpoint()) &&
                 Objects.equals(this.getJwksUri(), discoveryDocument.getJwksUri()) &&
+                Objects.equals(this.getScopesSupported(), discoveryDocument.getScopesSupported()) &&
+                Objects.equals(this.getClaimsSupported(), discoveryDocument.getClaimsSupported()) &&
                 Objects.equals(this.getResponseTypesSupported(), discoveryDocument.getResponseTypesSupported()) &&
                 Objects.equals(this.getResponseModesSupported(), discoveryDocument.getResponseModesSupported()) &&
                 Objects.equals(this.getSubjectTypesSupported(), discoveryDocument.getSubjectTypesSupported()) &&
@@ -563,7 +659,7 @@ public class DiscoveryDocumentDto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIssuer(), getAuthorizationEndpoint(), getTokenEndpoint(), getEndSessionEndpoint(), getJwksUri(), getResponseTypesSupported(), getResponseModesSupported(), getSubjectTypesSupported(), getCodeChallengeMethodsSupported(), getIdTokenSigningAlgValuesSupported(), getxSsoFrame());
+        return Objects.hash(getIssuer(), getAuthorizationEndpoint(), getTokenEndpoint(), getUserinfoEndpoint(), getEndSessionEndpoint(), getJwksUri(), getScopesSupported(), getClaimsSupported(), getResponseTypesSupported(), getResponseModesSupported(), getSubjectTypesSupported(), getCodeChallengeMethodsSupported(), getIdTokenSigningAlgValuesSupported(), getxSsoFrame());
     }
 
     @Override
@@ -573,8 +669,11 @@ public class DiscoveryDocumentDto {
         sb.append("    issuer: ").append(toIndentedString(getIssuer())).append("\n");
         sb.append("    authorization_endpoint: ").append(toIndentedString(getAuthorizationEndpoint())).append("\n");
         sb.append("    token_endpoint: ").append(toIndentedString(getTokenEndpoint())).append("\n");
+        sb.append("    userinfo_endpoint: ").append(toIndentedString(getUserinfoEndpoint())).append("\n");
         sb.append("    end_session_endpoint: ").append(toIndentedString(getEndSessionEndpoint())).append("\n");
         sb.append("    jwks_uri: ").append(toIndentedString(getJwksUri())).append("\n");
+        sb.append("    scopes_supported: ").append(toIndentedString(getScopesSupported())).append("\n");
+        sb.append("    claims_supported: ").append(toIndentedString(getClaimsSupported())).append("\n");
         sb.append("    response_types_supported: ").append(toIndentedString(getResponseTypesSupported())).append("\n");
         sb.append("    response_modes_supported: ").append(toIndentedString(getResponseModesSupported())).append("\n");
         sb.append("    subject_types_supported: ").append(toIndentedString(getSubjectTypesSupported())).append("\n");

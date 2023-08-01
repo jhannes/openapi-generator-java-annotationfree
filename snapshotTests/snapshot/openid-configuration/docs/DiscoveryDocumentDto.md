@@ -6,10 +6,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **issuer** | **String** |  |  [optional]
-**authorizationEndpoint** | **String** |  |  [optional]
-**tokenEndpoint** | **String** |  |  [optional]
-**endSessionEndpoint** | **String** |  |  [optional]
-**jwksUri** | **String** |  |  [optional]
+**authorizationEndpoint** | [**URI**](URI.md) |  |  [optional]
+**tokenEndpoint** | [**URI**](URI.md) |  |  [optional]
+**userinfoEndpoint** | [**URI**](URI.md) |  |  [optional]
+**endSessionEndpoint** | [**URI**](URI.md) |  |  [optional]
+**jwksUri** | [**URI**](URI.md) |  |  [optional]
+**scopesSupported** | **Set<Object>** |  |  [optional]
+**claimsSupported** | **Set<Object>** |  |  [optional]
 **responseTypesSupported** | [**Set<ResponseTypesSupportedEnum>**](#Set<ResponseTypesSupportedEnum>) |  | 
 **responseModesSupported** | [**Set<ResponseModesSupportedEnum>**](#Set<ResponseModesSupportedEnum>) |  |  [optional]
 **subjectTypesSupported** | [**Set<SubjectTypesSupportedEnum>**](#Set<SubjectTypesSupportedEnum>) |  |  [optional]
@@ -35,6 +38,7 @@ Name | Value
 ---- | -----
 QUERY | &quot;query&quot;
 FRAGMENT | &quot;fragment&quot;
+FORM_POST | &quot;form_post&quot;
 
 
 

@@ -54,6 +54,7 @@ public class HttpDefaultApi implements DefaultApi {
     @Override
     public TokenResponseDto fetchToken(
             Optional<String> authorization,
+            Optional<String> grant_type,
             Optional<String> code,
             Optional<String> client_id,
             Optional<String> client_secret,
@@ -67,6 +68,7 @@ public class HttpDefaultApi implements DefaultApi {
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         connection.setDoOutput(true);
         List<String> formParameters = new ArrayList<>();
+        grant_type.ifPresent(p -> formParameters.add("grant_type=" + encode(String.valueOf(p), UTF_8)));
         code.ifPresent(p -> formParameters.add("code=" + encode(String.valueOf(p), UTF_8)));
         client_id.ifPresent(p -> formParameters.add("client_id=" + encode(String.valueOf(p), UTF_8)));
         client_secret.ifPresent(p -> formParameters.add("client_secret=" + encode(String.valueOf(p), UTF_8)));

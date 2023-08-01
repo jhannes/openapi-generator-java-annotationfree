@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## fetchToken
 
-> TokenResponseDto fetchToken(authorization, code, clientId, clientSecret, redirectUri, subjectToken, audience)
+> TokenResponseDto fetchToken(authorization, grantType, code, clientId, clientSecret, redirectUri, subjectToken, audience)
 
 
 
@@ -27,6 +27,7 @@ public class Example {
         DefaultApi client = new HttpDefaultApi();
 
         String authorization = "authorization_example"; // String | Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret
+        String grantType = "implicit"; // String | 
         String code = "code_example"; // String | 
         String clientId = "clientId_example"; // String | 
         String clientSecret = "clientSecret_example"; // String | 
@@ -34,7 +35,7 @@ public class Example {
         String subjectToken = "subjectToken_example"; // String | Used with grant_type=urn:ietf:params:oauth:grant-type:token-exchange to do a token exchange
         String audience = "audience_example"; // String | Used with token-exchange to indicate which application the token will be used with
         try {
-            TokenResponseDto result = client.fetchToken(authorization, code, clientId, clientSecret, redirectUri, subjectToken, audience);
+            TokenResponseDto result = client.fetchToken(authorization, grantType, code, clientId, clientSecret, redirectUri, subjectToken, audience);
             System.out.println(result);
         } catch (IOException e) {
             System.err.println("Exception when calling DefaultApi#fetchToken");
@@ -50,6 +51,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **authorization** | **String**| Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret | [optional]
+ **grantType** | **String**|  | [optional] [enum: implicit, authorization_code, client_credentials, refresh_token]
  **code** | **String**|  | [optional]
  **clientId** | **String**|  | [optional]
  **clientSecret** | **String**|  | [optional]

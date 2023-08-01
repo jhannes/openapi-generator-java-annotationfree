@@ -23,6 +23,7 @@ import java.util.Optional;
 public interface DefaultApi {
     /**
      * @param authorization Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret (optional)
+     * @param grantType  (optional)
      * @param code  (optional)
      * @param clientId  (optional)
      * @param clientSecret  (optional)
@@ -33,6 +34,7 @@ public interface DefaultApi {
      */
     TokenResponseDto fetchToken(
             Optional<String> authorization,
+            Optional<String> grant_type,
             Optional<String> code,
             Optional<String> client_id,
             Optional<String> client_secret,
