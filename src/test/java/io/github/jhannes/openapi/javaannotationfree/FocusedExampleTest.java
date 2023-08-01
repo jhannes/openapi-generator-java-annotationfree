@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
  */
 public class FocusedExampleTest extends AbstractSnapshotTest {
 
-    public static final Path SPEC = SNAPSHOT_ROOT.resolve("input/openid-configuration.json");
+    public static final Path SPEC = SNAPSHOT_ROOT.resolve("input/openid-configuration.yaml");
 
     @TestFactory
     DynamicNode snapshotShouldCompile() {
