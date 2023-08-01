@@ -83,16 +83,16 @@ paths:
           description: Used if the authorization failed and the openid connect client wants to display an error message to the user
         304:
           description: After the authentication is complete, the openid connect client should set a session cookie and return the user to a suitable location
-#          headers:
-#            Set-Cookie:
-#              description: Used to set the session cookie for the client
-#              schema:
-#                type: string
-#            Location:
-#              description: The URI that the open id connect client wants the user the use to continue
-#              schema:
-#                type: string
-#                format: uri
+          headers:
+            Set-Cookie:
+              description: Used to set the session cookie for the client
+              schema:
+                type: string
+            Location:
+              description: The URI that the open id connect client wants the user the use to continue
+              schema:
+                type: string
+                format: uri
   /token:
     post:
       tags: [ IdentityProvider ]

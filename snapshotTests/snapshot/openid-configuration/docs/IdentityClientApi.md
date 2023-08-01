@@ -67,5 +67,5 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | Used if the authorization failed and the openid connect client wants to display an error message to the user |  -  |
-| **304** | After the authentication is complete, the openid connect client should set a session cookie and return the user to a suitable location |  -  |
+| **304** | After the authentication is complete, the openid connect client should set a session cookie and return the user to a suitable location |  * Set-Cookie - Used to set the session cookie for the client <br>  * Location - The URI that the open id connect client wants the user the use to continue <br>  |
 

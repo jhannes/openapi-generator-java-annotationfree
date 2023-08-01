@@ -12,6 +12,7 @@
 
 package io.github.jhannes.openapi.openid_configuration.api;
 
+import java.net.URI;
 import io.github.jhannes.openapi.openid_configuration.model.SampleModelData;
 import org.junit.jupiter.api.Test;
 

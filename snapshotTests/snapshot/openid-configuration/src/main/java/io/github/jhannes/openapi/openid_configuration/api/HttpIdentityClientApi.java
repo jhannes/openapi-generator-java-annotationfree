@@ -11,6 +11,7 @@
 
 package io.github.jhannes.openapi.openid_configuration.api;
 
+import java.net.URI;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 import static java.net.URLEncoder.encode;
 import static java.nio.charset.StandardCharsets.UTF_8;
@@ -53,7 +55,9 @@ public class HttpIdentityClientApi implements IdentityClientApi {
             Optional<String> state,
             Optional<String> code,
             Optional<String> error,
-            Optional<String> error_description
+            Optional<String> error_description,
+            Consumer<String> setSetCookie,
+            Consumer<URI> setLocation
     ) throws IOException {
         List<String> queryParameters = new ArrayList<>();
         state.ifPresent(p -> queryParameters.add("state=" + encode(String.valueOf(p), UTF_8)));

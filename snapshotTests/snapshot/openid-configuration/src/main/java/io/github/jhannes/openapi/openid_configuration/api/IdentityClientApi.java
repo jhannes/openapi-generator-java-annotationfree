@@ -11,11 +11,13 @@
 
 package io.github.jhannes.openapi.openid_configuration.api;
 
+import java.net.URI;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public interface IdentityClientApi {
     /**
@@ -29,6 +31,8 @@ public interface IdentityClientApi {
             Optional<String> state,
             Optional<String> code,
             Optional<String> error,
-            Optional<String> error_description
+            Optional<String> error_description,
+            Consumer<String> setSetCookie,
+            Consumer<URI> setLocation
     ) throws IOException;
 }
