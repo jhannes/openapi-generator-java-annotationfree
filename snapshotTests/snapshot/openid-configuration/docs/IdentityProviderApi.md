@@ -1,12 +1,12 @@
-# DefaultApi
+# IdentityProviderApi
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**fetchToken**](DefaultApi.md#fetchToken) | **POST** /token | 
-[**wellKnownKeysGet**](DefaultApi.md#wellKnownKeysGet) | **GET** /.well-known/keys | 
-[**wellKnownOpenidConfigurationGet**](DefaultApi.md#wellKnownOpenidConfigurationGet) | **GET** /.well-known/openid-configuration | 
+[**fetchToken**](IdentityProviderApi.md#fetchToken) | **POST** /token | 
+[**getUserinfo**](IdentityProviderApi.md#getUserinfo) | **GET** /userinfo | 
+[**startAuthorization**](IdentityProviderApi.md#startAuthorization) | **GET** /authorize | 
 
 
 
@@ -24,7 +24,7 @@ import io.github.jhannes.openapi.openid_configuration.models.*;
 
 public class Example {
     public static void main(String[] args) {
-        DefaultApi client = new HttpDefaultApi();
+        IdentityProviderApi client = new HttpIdentityProviderApi();
 
         String authorization = "authorization_example"; // String | Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret
         String grantType = "implicit"; // String | 
@@ -38,7 +38,7 @@ public class Example {
             TokenResponseDto result = client.fetchToken(authorization, grantType, code, clientId, clientSecret, redirectUri, subjectToken, audience);
             System.out.println(result);
         } catch (IOException e) {
-            System.err.println("Exception when calling DefaultApi#fetchToken");
+            System.err.println("Exception when calling IdentityProviderApi#fetchToken");
             e.printStackTrace();
         }
     }
@@ -78,11 +78,13 @@ No authorization required
 | **200** | The tokens from the identity service |  -  |
 
 
-## wellKnownKeysGet
+## getUserinfo
 
-> JwksDocumentDto wellKnownKeysGet()
+> UserinfoDto getUserinfo(authorization)
 
 
+
+Returns information about the currently logged in user
 
 ### Example
 
@@ -92,13 +94,14 @@ import io.github.jhannes.openapi.openid_configuration.models.*;
 
 public class Example {
     public static void main(String[] args) {
-        DefaultApi client = new HttpDefaultApi();
+        IdentityProviderApi client = new HttpIdentityProviderApi();
 
+        Object authorization = null; // Object | 
         try {
-            JwksDocumentDto result = client.wellKnownKeysGet();
+            UserinfoDto result = client.getUserinfo(authorization);
             System.out.println(result);
         } catch (IOException e) {
-            System.err.println("Exception when calling DefaultApi#wellKnownKeysGet");
+            System.err.println("Exception when calling IdentityProviderApi#getUserinfo");
             e.printStackTrace();
         }
     }
@@ -107,11 +110,14 @@ public class Example {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **authorization** | [**Object**](.md)|  | [optional]
 
 ### Return type
 
-[**JwksDocumentDto**](JwksDocumentDto.md)
+[**UserinfoDto**](UserinfoDto.md)
 
 ### Authorization
 
@@ -125,14 +131,17 @@ No authorization required
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | The cryptographic key description document |  -  |
+| **200** | Returns the actual user information |  -  |
+| **401** | Returned if the access token was invalid or expired |  -  |
 
 
-## wellKnownOpenidConfigurationGet
+## startAuthorization
 
-> DiscoveryDocumentDto wellKnownOpenidConfigurationGet()
+> startAuthorization(clientId, responseType, state, redirectUri, scope)
 
 
+
+Starts an authentication flow. If the request is successful, the user is returned to the redirect_uri with a parameter, otherwise the user is redirected with an error parameter
 
 ### Example
 
@@ -142,13 +151,17 @@ import io.github.jhannes.openapi.openid_configuration.models.*;
 
 public class Example {
     public static void main(String[] args) {
-        DefaultApi client = new HttpDefaultApi();
+        IdentityProviderApi client = new HttpIdentityProviderApi();
 
+        String clientId = "clientId_example"; // String | 
+        String responseType = "responseType_example"; // String | 
+        String state = "state_example"; // String | 
+        Object redirectUri = null; // Object | 
+        String scope = "scope_example"; // String | 
         try {
-            DiscoveryDocumentDto result = client.wellKnownOpenidConfigurationGet();
-            System.out.println(result);
+            client.startAuthorization(clientId, responseType, state, redirectUri, scope);
         } catch (IOException e) {
-            System.err.println("Exception when calling DefaultApi#wellKnownOpenidConfigurationGet");
+            System.err.println("Exception when calling IdentityProviderApi#startAuthorization");
             e.printStackTrace();
         }
     }
@@ -157,11 +170,18 @@ public class Example {
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **clientId** | **String**|  |
+ **responseType** | **String**|  | [optional]
+ **state** | **String**|  | [optional]
+ **redirectUri** | [**Object**](.md)|  | [optional]
+ **scope** | **String**|  | [optional]
 
 ### Return type
 
-[**DiscoveryDocumentDto**](DiscoveryDocumentDto.md)
+null (empty response body)
 
 ### Authorization
 
@@ -170,10 +190,10 @@ No authorization required
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: Not defined
 
 ### HTTP response details
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-| **200** | The openid discovery document |  -  |
+| **304** | User is redirected back to redirect_uri |  -  |
 

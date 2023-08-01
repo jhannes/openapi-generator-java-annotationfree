@@ -13,7 +13,6 @@ package io.github.jhannes.openapi.openid_configuration.api;
 
 import io.github.jhannes.openapi.openid_configuration.model.DiscoveryDocumentDto;
 import io.github.jhannes.openapi.openid_configuration.model.JwksDocumentDto;
-import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
@@ -32,69 +31,27 @@ import java.util.Optional;
 import static java.net.URLEncoder.encode;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-public class HttpDefaultApi implements DefaultApi {
+public class HttpDiscoveryApi implements DiscoveryApi {
 
     private final Jsonb jsonb;
 
     private final URL baseUrl;
 
-    public HttpDefaultApi() throws MalformedURLException {
+    public HttpDiscoveryApi() throws MalformedURLException {
         this(new URL("http://localhost"));
     }
 
-    public HttpDefaultApi(URL baseUrl) {
+    public HttpDiscoveryApi(URL baseUrl) {
         this(baseUrl, JsonbBuilder.create());
     }
 
-    public HttpDefaultApi(URL baseUrl, Jsonb jsonb) {
+    public HttpDiscoveryApi(URL baseUrl, Jsonb jsonb) {
         this.baseUrl = baseUrl;
         this.jsonb = jsonb;
     }
 
     @Override
-    public TokenResponseDto fetchToken(
-            Optional<String> authorization,
-            Optional<String> grant_type,
-            Optional<String> code,
-            Optional<String> client_id,
-            Optional<String> client_secret,
-            Optional<String> redirect_uri,
-            Optional<String> subject_token,
-            Optional<String> audience
-    ) throws IOException {
-        HttpURLConnection connection = openConnection("/token");
-        connection.setRequestMethod("POST");
-        authorization.ifPresent(p -> connection.setRequestProperty("Authorization", String.valueOf(p)));
-        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        connection.setDoOutput(true);
-        List<String> formParameters = new ArrayList<>();
-        grant_type.ifPresent(p -> formParameters.add("grant_type=" + encode(String.valueOf(p), UTF_8)));
-        code.ifPresent(p -> formParameters.add("code=" + encode(String.valueOf(p), UTF_8)));
-        client_id.ifPresent(p -> formParameters.add("client_id=" + encode(String.valueOf(p), UTF_8)));
-        client_secret.ifPresent(p -> formParameters.add("client_secret=" + encode(String.valueOf(p), UTF_8)));
-        redirect_uri.ifPresent(p -> formParameters.add("redirect_uri=" + encode(String.valueOf(p), UTF_8)));
-        subject_token.ifPresent(p -> formParameters.add("subject_token=" + encode(String.valueOf(p), UTF_8)));
-        audience.ifPresent(p -> formParameters.add("audience=" + encode(String.valueOf(p), UTF_8)));
-        connection.getOutputStream().write(String.join("&", formParameters).getBytes());
-        if (connection.getResponseCode() >= 300) {
-            throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
-        }
-        return jsonb.fromJson(connection.getInputStream(), TokenResponseDto.class);
-    }
-
-    @Override
-    public JwksDocumentDto wellKnownKeysGet(
-    ) throws IOException {
-        HttpURLConnection connection = openConnection("/.well-known/keys");
-        connection.setRequestMethod("GET");
-        if (connection.getResponseCode() >= 300) {
-            throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
-        }
-        return jsonb.fromJson(connection.getInputStream(), JwksDocumentDto.class);
-    }
-
-    @Override
-    public DiscoveryDocumentDto wellKnownOpenidConfigurationGet(
+    public DiscoveryDocumentDto getDiscoveryDocument(
     ) throws IOException {
         HttpURLConnection connection = openConnection("/.well-known/openid-configuration");
         connection.setRequestMethod("GET");
@@ -102,6 +59,17 @@ public class HttpDefaultApi implements DefaultApi {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
         return jsonb.fromJson(connection.getInputStream(), DiscoveryDocumentDto.class);
+    }
+
+    @Override
+    public JwksDocumentDto getJwksDocument(
+    ) throws IOException {
+        HttpURLConnection connection = openConnection("/.well-known/keys");
+        connection.setRequestMethod("GET");
+        if (connection.getResponseCode() >= 300) {
+            throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
+        }
+        return jsonb.fromJson(connection.getInputStream(), JwksDocumentDto.class);
     }
 
     protected HttpURLConnection openConnection(String relativeUrl) throws IOException {

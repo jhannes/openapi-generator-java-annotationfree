@@ -197,6 +197,25 @@ public class SampleModelData {
         return sampleList(() -> sampleTokenResponseDto());
     }
 
+    public UserinfoDto sampleUserinfoDto(String propertyName) {
+        return sampleUserinfoDto();
+    }
+
+    public UserinfoDto sampleUserinfoDto() {
+        return new UserinfoDto()
+            .sub(sampleString("sub"))
+            .name(sampleString("name"))
+            .email(sampleObject("email"));
+    }
+
+    public List<UserinfoDto> sampleListOfUserinfoDto(String propertyName) {
+        return sampleListOfUserinfoDto();
+    }
+
+    public List<UserinfoDto> sampleListOfUserinfoDto() {
+        return sampleList(() -> sampleUserinfoDto());
+    }
+
     protected final Random random;
     protected final Map<String, Supplier<String>> dataFormatFactories = new HashMap<>(Map.of(
         "email", this::randomEmail,

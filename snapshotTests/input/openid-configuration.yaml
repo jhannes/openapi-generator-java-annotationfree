@@ -6,6 +6,8 @@ info:
 paths:
   /.well-known/openid-configuration:
     get:
+      tags: [ Discovery ]
+      operationId: getDiscoveryDocument
       responses:
         200:
           description: The openid discovery document
@@ -15,6 +17,8 @@ paths:
                 $ref: "#/components/schemas/DiscoveryDocument"
   /.well-known/keys:
     get:
+      tags: [ Discovery ]
+      operationId: getJwksDocument
       responses:
         200:
           description: The cryptographic key description document
@@ -22,8 +26,76 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/JwksDocument"
+  /authorize:
+    get:
+      operationId: startAuthorization
+      tags: [ IdentityProvider ]
+      description: Starts an authentication flow. If the request is successful, the user is returned to the redirect_uri with a parameter, otherwise the user is redirected with an error parameter
+      parameters:
+        - name: response_type
+          in: query
+          schema:
+            type: string
+        - name: client_id
+          in: query
+          required: true
+          schema:
+            type: string
+        - name: state
+          in: query
+          schema:
+            type: string
+        - name: redirect_uri
+          in: query
+          schema:
+            format: uri
+        - name: scope
+          in: query
+          schema:
+            type: string
+      responses:
+        304:
+          description: User is redirected back to redirect_uri
+  /callback:
+    get:
+      tags: [ IdentityClient ]
+      operationId: handleCallback
+      description: Completes the authentication flow. This should be implemented by the openid connect client. The client should normally invoke the token endpoint with the code value provided by the identity provider.
+      parameters:
+        - name: state
+          in: query
+          schema:
+            type: string
+        - name: code
+          in: query
+          schema:
+            type: string
+        - name: error
+          in: query
+          schema:
+            type: string
+        - name: error_description
+          in: query
+          schema:
+            type: string
+      responses:
+        200:
+          description: Used if the authorization failed and the openid connect client wants to display an error message to the user
+        304:
+          description: After the authentication is complete, the openid connect client should set a session cookie and return the user to a suitable location
+#          headers:
+#            Set-Cookie:
+#              description: Used to set the session cookie for the client
+#              schema:
+#                type: string
+#            Location:
+#              description: The URI that the open id connect client wants the user the use to continue
+#              schema:
+#                type: string
+#                format: uri
   /token:
     post:
+      tags: [ IdentityProvider ]
       operationId: fetchToken
       parameters:
         - name: Authorization
@@ -71,6 +143,25 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/TokenResponse"
+  /userinfo:
+    get:
+      tags: [ IdentityProvider ]
+      operationId: getUserinfo
+      description: Returns information about the currently logged in user
+      parameters:
+        - name: Authorization
+          in: header
+          schema:
+            description: '"Bearer " + the access token'
+      responses:
+        200:
+          description: Returns the actual user information
+          content:
+            "application/json":
+              schema:
+                $ref: "#/components/schemas/Userinfo"
+        401:
+          description: Returned if the access token was invalid or expired
 components:
   schemas:
     TokenResponse:
@@ -248,3 +339,16 @@ components:
       required:
         - kid
         - x5c
+    Userinfo:
+      type: object
+      properties:
+        sub:
+          description: Subject identifier
+          type: string
+        name:
+          type: string
+        email:
+          format: email
+      required:
+        - sub
+

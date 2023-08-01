@@ -11,16 +11,15 @@
 
 package io.github.jhannes.openapi.openid_configuration.api;
 
-import io.github.jhannes.openapi.openid_configuration.model.DiscoveryDocumentDto;
-import io.github.jhannes.openapi.openid_configuration.model.JwksDocumentDto;
 import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
+import io.github.jhannes.openapi.openid_configuration.model.UserinfoDto;
 
 import java.io.IOException;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 
-public interface DefaultApi {
+public interface IdentityProviderApi {
     /**
      * @param authorization Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret (optional)
      * @param grantType  (optional)
@@ -43,13 +42,26 @@ public interface DefaultApi {
             Optional<String> audience
     ) throws IOException;
     /**
-     * @return JwksDocumentDto
+     * Returns information about the currently logged in user
+     * @param authorization  (optional)
+     * @return UserinfoDto
      */
-    JwksDocumentDto wellKnownKeysGet(
+    UserinfoDto getUserinfo(
+            Optional<Object> authorization
     ) throws IOException;
     /**
-     * @return DiscoveryDocumentDto
+     * Starts an authentication flow. If the request is successful, the user is returned to the redirect_uri with a parameter, otherwise the user is redirected with an error parameter
+     * @param clientId  (query) (required)
+     * @param responseType  (query) (optional)
+     * @param state  (query) (optional)
+     * @param redirectUri  (query) (optional)
+     * @param scope  (query) (optional)
      */
-    DiscoveryDocumentDto wellKnownOpenidConfigurationGet(
+    void startAuthorization(
+            String client_id,
+            Optional<String> response_type,
+            Optional<String> state,
+            Optional<Object> redirect_uri,
+            Optional<String> scope
     ) throws IOException;
 }

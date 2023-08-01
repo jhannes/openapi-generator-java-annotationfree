@@ -77,21 +77,13 @@ import io.github.jhannes.openapi.openid_configuration.models.*;
 
 public class Example {
     public static void main(String[] args) {
-        DefaultApi client = new HttpDefaultApi();
+        DiscoveryApi client = new HttpDiscoveryApi();
 
-        String authorization = "authorization_example"; // String | Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret
-        String grantType = "implicit"; // String | 
-        String code = "code_example"; // String | 
-        String clientId = "clientId_example"; // String | 
-        String clientSecret = "clientSecret_example"; // String | 
-        String redirectUri = "redirectUri_example"; // String | 
-        String subjectToken = "subjectToken_example"; // String | Used with grant_type=urn:ietf:params:oauth:grant-type:token-exchange to do a token exchange
-        String audience = "audience_example"; // String | Used with token-exchange to indicate which application the token will be used with
         try {
-            TokenResponseDto result = client.fetchToken(authorization, grantType, code, clientId, clientSecret, redirectUri, subjectToken, audience);
+            DiscoveryDocumentDto result = client.getDiscoveryDocument();
             System.out.println(result);
         } catch (IOException e) {
-            System.err.println("Exception when calling DefaultApi#fetchToken");
+            System.err.println("Exception when calling DiscoveryApi#getDiscoveryDocument");
             e.printStackTrace();
         }
     }
@@ -105,9 +97,12 @@ All URIs are relative to *http://localhost*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*DefaultApi* | [**fetchToken**](docs/DefaultApi.md#fetchToken) | **POST** /token | 
-*DefaultApi* | [**wellKnownKeysGet**](docs/DefaultApi.md#wellKnownKeysGet) | **GET** /.well-known/keys | 
-*DefaultApi* | [**wellKnownOpenidConfigurationGet**](docs/DefaultApi.md#wellKnownOpenidConfigurationGet) | **GET** /.well-known/openid-configuration | 
+*DiscoveryApi* | [**getDiscoveryDocument**](docs/DiscoveryApi.md#getDiscoveryDocument) | **GET** /.well-known/openid-configuration | 
+*DiscoveryApi* | [**getJwksDocument**](docs/DiscoveryApi.md#getJwksDocument) | **GET** /.well-known/keys | 
+*IdentityClientApi* | [**handleCallback**](docs/IdentityClientApi.md#handleCallback) | **GET** /callback | 
+*IdentityProviderApi* | [**fetchToken**](docs/IdentityProviderApi.md#fetchToken) | **POST** /token | 
+*IdentityProviderApi* | [**getUserinfo**](docs/IdentityProviderApi.md#getUserinfo) | **GET** /userinfo | 
+*IdentityProviderApi* | [**startAuthorization**](docs/IdentityProviderApi.md#startAuthorization) | **GET** /authorize | 
 
 
 ## Documentation for Models
@@ -118,6 +113,7 @@ Class | Method | HTTP request | Description
  - [JwtHeaderDto](docs/JwtHeaderDto.md)
  - [JwtPayloadDto](docs/JwtPayloadDto.md)
  - [TokenResponseDto](docs/TokenResponseDto.md)
+ - [UserinfoDto](docs/UserinfoDto.md)
 
 
 ## Documentation for Authorization

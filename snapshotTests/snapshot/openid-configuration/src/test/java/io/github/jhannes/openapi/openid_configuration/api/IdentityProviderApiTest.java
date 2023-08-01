@@ -12,9 +12,8 @@
 
 package io.github.jhannes.openapi.openid_configuration.api;
 
-import io.github.jhannes.openapi.openid_configuration.model.DiscoveryDocumentDto;
-import io.github.jhannes.openapi.openid_configuration.model.JwksDocumentDto;
 import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
+import io.github.jhannes.openapi.openid_configuration.model.UserinfoDto;
 import io.github.jhannes.openapi.openid_configuration.model.SampleModelData;
 import org.junit.jupiter.api.Test;
 
@@ -26,14 +25,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 /**
- * API tests for DefaultApi
+ * API tests for IdentityProviderApi
  */
-public class DefaultApiTest {
+public class IdentityProviderApiTest {
 
-    private final DefaultApi api = new HttpDefaultApi();
+    private final IdentityProviderApi api = new HttpIdentityProviderApi();
     private final SampleModelData sampleData = new SampleModelData(-1);
 
-    public DefaultApiTest() throws MalformedURLException {
+    public IdentityProviderApiTest() throws MalformedURLException {
     }
 
     @Test
@@ -51,14 +50,20 @@ public class DefaultApiTest {
     }
 
     @Test
-    public void wellKnownKeysGetTest() throws IOException {
-        //JwksDocumentDto response = api.wellKnownKeysGet();
+    public void getUserinfoTest() throws IOException {
+        //Object authorization = null;
+        //UserinfoDto response = api.getUserinfo(authorization);
         // TODO: test validations
     }
 
     @Test
-    public void wellKnownOpenidConfigurationGetTest() throws IOException {
-        //DiscoveryDocumentDto response = api.wellKnownOpenidConfigurationGet();
+    public void startAuthorizationTest() throws IOException {
+        //String clientId = null;
+        //String responseType = null;
+        //String state = null;
+        //Object redirectUri = null;
+        //String scope = null;
+        //api.startAuthorization(clientId, responseType, state, redirectUri, scope);
         // TODO: test validations
     }
 
