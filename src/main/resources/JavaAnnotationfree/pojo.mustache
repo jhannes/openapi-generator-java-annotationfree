@@ -1,7 +1,7 @@
 /**
 * {{#description}}{{.}}{{/description}}{{^description}}{{classname}}{{/description}}
 */
-public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces}}{{#-first}} implements {{/-first}}{{^-first}}, {{/-first}}{{{.}}}{{/interfaces}} {
+public class {{classname}}{{#parent}} extends {{{parent}}}{{/parent}}{{#interfaces}}{{#-first}} implements {{/-first}}{{^-first}}, {{/-first}}{{{.}}}{{/interfaces}} {
 {{#vars}}
     {{^isInherited}}
 
@@ -49,7 +49,7 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
     }
 
     public List<String> missingRequiredFields() {
-        List<String> result = {{#parent}}super.missingRequiredFields(){{/parent}}{{^parent}}new ArrayList<>(){{/parent}};
+        List<String> result = {{#parent}}{{^additionalProperties}}super.missingRequiredFields(){{/additionalProperties}}{{#additionalProperties}}new ArrayList<>(){{/additionalProperties}}{{/parent}}{{^parent}}new ArrayList<>(){{/parent}};
         {{#vars}}
             {{#required}}
                 {{^isInherited}}
@@ -62,7 +62,9 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
 
     public void readOnlyFieldsWithValue(List<String> result) {
 {{#parent}}
+{{^additionalProperties}}
         super.readOnlyFieldsWithValue(result);
+{{/additionalProperties}}
 {{/parent}}
 {{#vars}}
     {{#isReadOnly}}
@@ -102,7 +104,12 @@ public class {{classname}}{{#parent}} extends {{parent}}{{/parent}}{{#interfaces
 
     public <T extends {{classname}}> T copyTo(T target) {
 {{#parent}}
+{{#additionalProperties}}
+        target.putAll(this);
+{{/additionalProperties}}
+{{^additionalProperties}}
         super.copyTo(target);
+{{/additionalProperties}}
 {{/parent}}
 {{#vars}}
         if (this.{{getter}}() != null) target.{{setter}}(this.{{getter}}());

@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 /**
 * UserinfoDto
 */
-public class UserinfoDto {
+public class UserinfoDto extends HashMap<String, Object> {
 
     private String sub;
 
@@ -67,6 +67,7 @@ public class UserinfoDto {
     }
 
     public <T extends UserinfoDto> T copyTo(T target) {
+        target.putAll(this);
         if (this.getSub() != null) target.setSub(this.getSub());
         if (this.getName() != null) target.setName(this.getName());
         if (this.getEmail() != null) target.setEmail(this.getEmail());
@@ -148,7 +149,8 @@ public class UserinfoDto {
         UserinfoDto userinfo = (UserinfoDto) o;
         return Objects.equals(this.getSub(), userinfo.getSub()) &&
                 Objects.equals(this.getName(), userinfo.getName()) &&
-                Objects.equals(this.getEmail(), userinfo.getEmail());
+                Objects.equals(this.getEmail(), userinfo.getEmail()) &&
+                super.equals(o);
     }
 
     @Override
@@ -160,6 +162,7 @@ public class UserinfoDto {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("UserinfoDto {\n");
+        sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    sub: ").append(toIndentedString(getSub())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");

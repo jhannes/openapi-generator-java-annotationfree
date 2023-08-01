@@ -354,4 +354,6 @@ components:
           format: email
       required:
         - sub
+      additionalProperties:
+        type: object
 
