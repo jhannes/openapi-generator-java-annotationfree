@@ -112,6 +112,7 @@ Class | Method | HTTP request | Description
  - [JwksKeyDto](docs/JwksKeyDto.md)
  - [JwtHeaderDto](docs/JwtHeaderDto.md)
  - [JwtPayloadDto](docs/JwtPayloadDto.md)
+ - [ResponseTypeDto](docs/ResponseTypeDto.md)
  - [TokenResponseDto](docs/TokenResponseDto.md)
  - [UserinfoDto](docs/UserinfoDto.md)
 

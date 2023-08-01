@@ -11,6 +11,7 @@
 
 package io.github.jhannes.openapi.openid_configuration.api;
 
+import io.github.jhannes.openapi.openid_configuration.model.ResponseTypeDto;
 import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
 import io.github.jhannes.openapi.openid_configuration.model.UserinfoDto;
 import jakarta.json.bind.Jsonb;
@@ -97,7 +98,7 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
     @Override
     public void startAuthorization(
             String client_id,
-            Optional<String> response_type,
+            Optional<ResponseTypeDto> response_type,
             Optional<String> state,
             Optional<Object> redirect_uri,
             Optional<String> scope

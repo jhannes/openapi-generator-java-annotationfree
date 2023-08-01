@@ -154,7 +154,7 @@ public class Example {
         IdentityProviderApi client = new HttpIdentityProviderApi();
 
         String clientId = "clientId_example"; // String | 
-        String responseType = "responseType_example"; // String | 
+        ResponseTypeDto responseType = ResponseTypeDto.fromValue("code"); // ResponseTypeDto | 
         String state = "state_example"; // String | 
         Object redirectUri = null; // Object | 
         String scope = "scope_example"; // String | 
@@ -174,7 +174,7 @@ public class Example {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **clientId** | **String**|  |
- **responseType** | **String**|  | [optional]
+ **responseType** | [**ResponseTypeDto**](.md)|  | [optional] [enum: code, token, id_token, code id_token, id_token token]
  **state** | **String**|  | [optional]
  **redirectUri** | [**Object**](.md)|  | [optional]
  **scope** | **String**|  | [optional]

@@ -8,6 +8,7 @@ docs/JwksDocumentDto.md
 docs/JwksKeyDto.md
 docs/JwtHeaderDto.md
 docs/JwtPayloadDto.md
+docs/ResponseTypeDto.md
 docs/TokenResponseDto.md
 docs/UserinfoDto.md
 src/main/java/io/github/jhannes/openapi/openid_configuration/api/DiscoveryApi.java
@@ -21,6 +22,7 @@ src/main/java/io/github/jhannes/openapi/openid_configuration/model/JwksDocumentD
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/JwksKeyDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/JwtHeaderDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/JwtPayloadDto.java
+src/main/java/io/github/jhannes/openapi/openid_configuration/model/ResponseTypeDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/SampleModelData.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/TokenResponseDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/UserinfoDto.java

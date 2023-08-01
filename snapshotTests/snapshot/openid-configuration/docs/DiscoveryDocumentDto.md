@@ -13,22 +13,12 @@ Name | Type | Description | Notes
 **jwksUri** | [**URI**](URI.md) |  |  [optional]
 **scopesSupported** | **Set<Object>** |  |  [optional]
 **claimsSupported** | **Set<Object>** |  |  [optional]
-**responseTypesSupported** | [**Set<ResponseTypesSupportedEnum>**](#Set<ResponseTypesSupportedEnum>) |  | 
+**responseTypesSupported** | [**Set<ResponseTypeDto>**](ResponseTypeDto.md) |  | 
 **responseModesSupported** | [**Set<ResponseModesSupportedEnum>**](#Set<ResponseModesSupportedEnum>) |  |  [optional]
 **subjectTypesSupported** | [**Set<SubjectTypesSupportedEnum>**](#Set<SubjectTypesSupportedEnum>) |  |  [optional]
 **codeChallengeMethodsSupported** | [**Set<CodeChallengeMethodsSupportedEnum>**](#Set<CodeChallengeMethodsSupportedEnum>) |  |  [optional]
 **idTokenSigningAlgValuesSupported** | [**List<IdTokenSigningAlgValuesSupportedEnum>**](#List<IdTokenSigningAlgValuesSupportedEnum>) |  |  [optional]
 **xSsoFrame** | **String** |  |  [optional]
-
-
-
-## Enum: Set<ResponseTypesSupportedEnum>
-
-Name | Value
----- | -----
-CODE | &quot;code&quot;
-TOKEN | &quot;token&quot;
-ID_TOKEN | &quot;id_token&quot;
 
 
 

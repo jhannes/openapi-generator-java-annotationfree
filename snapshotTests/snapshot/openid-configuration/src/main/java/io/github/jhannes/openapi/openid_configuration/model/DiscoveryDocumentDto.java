@@ -51,41 +51,7 @@ public class DiscoveryDocumentDto {
 
     private Set<Object> claims_supported = null;
 
-    /**
-     * Gets or Sets responseTypesSupported
-     */
-    public enum ResponseTypesSupportedEnum {
-
-        CODE("code"),
-        TOKEN("token"),
-        ID_TOKEN("id_token");
-
-        private String value;
-
-        ResponseTypesSupportedEnum(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(value);
-        }
-
-        public static ResponseTypesSupportedEnum fromValue(String text) {
-            for (ResponseTypesSupportedEnum b : ResponseTypesSupportedEnum.values()) {
-                if (String.valueOf(b.value).equals(text)) {
-                    return b;
-                }
-            }
-            throw new IllegalArgumentException("Unexpected value '" + text + "'");
-        }
-    }
-
-    private Set<ResponseTypesSupportedEnum> response_types_supported = new LinkedHashSet<>();
+    private Set<ResponseTypeDto> response_types_supported = new LinkedHashSet<>();
 
     /**
      * Gets or Sets responseModesSupported
@@ -453,15 +419,15 @@ public class DiscoveryDocumentDto {
         return this;
     }
 
-    public <T> DiscoveryDocumentDto responseTypesSupported(Collection<T> items, Function<T, ResponseTypesSupportedEnum> mapper) {
+    public <T> DiscoveryDocumentDto responseTypesSupported(Collection<T> items, Function<T, ResponseTypeDto> mapper) {
         return responseTypesSupported(items.stream().map(mapper).collect(Collectors.toSet()));
     }
 
-    public <T> Set<T> getResponseTypesSupported(Function<ResponseTypesSupportedEnum, T> mapper) {
+    public <T> Set<T> getResponseTypesSupported(Function<ResponseTypeDto, T> mapper) {
         return getResponseTypesSupported().stream().map(mapper).collect(Collectors.toSet());
     }
 
-    public DiscoveryDocumentDto addResponseTypesSupportedItem(ResponseTypesSupportedEnum responseTypesSupportedItem) {
+    public DiscoveryDocumentDto addResponseTypesSupportedItem(ResponseTypeDto responseTypesSupportedItem) {
         this.response_types_supported.add(responseTypesSupportedItem);
         return this;
     }
@@ -470,15 +436,15 @@ public class DiscoveryDocumentDto {
      * Get response_types_supported
      * @return response_types_supported
      */
-    public Set<ResponseTypesSupportedEnum> getResponseTypesSupported() {
+    public Set<ResponseTypeDto> getResponseTypesSupported() {
         return response_types_supported;
     }
 
-    public void setResponseTypesSupported(Set<ResponseTypesSupportedEnum> responseTypesSupported) {
+    public void setResponseTypesSupported(Set<ResponseTypeDto> responseTypesSupported) {
         this.response_types_supported = responseTypesSupported;
     }
 
-    public DiscoveryDocumentDto responseTypesSupported(Set<ResponseTypesSupportedEnum> responseTypesSupported) {
+    public DiscoveryDocumentDto responseTypesSupported(Set<ResponseTypeDto> responseTypesSupported) {
         this.response_types_supported = responseTypesSupported;
         return this;
     }

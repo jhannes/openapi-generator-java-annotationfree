@@ -12,6 +12,7 @@
 
 package io.github.jhannes.openapi.openid_configuration.api;
 
+import io.github.jhannes.openapi.openid_configuration.model.ResponseTypeDto;
 import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
 import io.github.jhannes.openapi.openid_configuration.model.UserinfoDto;
 import io.github.jhannes.openapi.openid_configuration.model.SampleModelData;
@@ -59,7 +60,7 @@ public class IdentityProviderApiTest {
     @Test
     public void startAuthorizationTest() throws IOException {
         //String clientId = null;
-        //String responseType = null;
+        //ResponseTypeDto responseType = null;
         //String state = null;
         //Object redirectUri = null;
         //String scope = null;

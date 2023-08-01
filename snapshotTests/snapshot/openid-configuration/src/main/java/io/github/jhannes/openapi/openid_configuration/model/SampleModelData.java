@@ -59,7 +59,7 @@ public class SampleModelData {
             .jwksUri(sampleURI("jwksUri"))
             .scopesSupported(sampleSet(() -> sampleObject("scopesSupported"), "scopesSupported"))
             .claimsSupported(sampleSet(() -> sampleObject("claimsSupported"), "claimsSupported"))
-            .responseTypesSupported(sampleSubset(DiscoveryDocumentDto.ResponseTypesSupportedEnum.values()))
+            .responseTypesSupported(sampleSubset(ResponseTypeDto.values()))
             .responseModesSupported(sampleSubset(DiscoveryDocumentDto.ResponseModesSupportedEnum.values()))
             .subjectTypesSupported(sampleSubset(DiscoveryDocumentDto.SubjectTypesSupportedEnum.values()))
             .codeChallengeMethodsSupported(sampleSubset(DiscoveryDocumentDto.CodeChallengeMethodsSupportedEnum.values()))
@@ -73,10 +73,6 @@ public class SampleModelData {
 
     public List<DiscoveryDocumentDto> sampleListOfDiscoveryDocumentDto() {
         return sampleList(() -> sampleDiscoveryDocumentDto());
-    }
-
-    public DiscoveryDocumentDto.ResponseTypesSupportedEnum sampleDiscoveryDocumentDtoResponseTypesSupportedEnum(String propertyName) {
-        return pickOne(DiscoveryDocumentDto.ResponseTypesSupportedEnum.values());
     }
 
     public DiscoveryDocumentDto.ResponseModesSupportedEnum sampleDiscoveryDocumentDtoResponseModesSupportedEnum(String propertyName) {
@@ -173,6 +169,22 @@ public class SampleModelData {
 
     public List<JwtPayloadDto> sampleListOfJwtPayloadDto() {
         return sampleList(() -> sampleJwtPayloadDto());
+    }
+
+    public ResponseTypeDto sampleResponseTypeDto(String propertyName) {
+        return sampleResponseTypeDto();
+    }
+
+    public ResponseTypeDto sampleResponseTypeDto() {
+        return pickOne(ResponseTypeDto.values());
+    }
+
+    public List<ResponseTypeDto> sampleListOfResponseTypeDto(String propertyName) {
+        return sampleListOfResponseTypeDto();
+    }
+
+    public List<ResponseTypeDto> sampleListOfResponseTypeDto() {
+        return pickSome(ResponseTypeDto.values());
     }
 
     public TokenResponseDto sampleTokenResponseDto(String propertyName) {

@@ -35,7 +35,7 @@ paths:
         - name: response_type
           in: query
           schema:
-            type: string
+            $ref: "#/components/schemas/ResponseType"
         - name: client_id
           in: query
           required: true
@@ -164,6 +164,13 @@ paths:
           description: Returned if the access token was invalid or expired
 components:
   schemas:
+    ResponseType:
+      enum:
+        - code
+        - token
+        - id_token
+        - code id_token
+        - id_token token
     TokenResponse:
       type: object
       description: Token response according to https://www.oauth.com/oauth2-servers/access-tokens/access-token-response/
@@ -273,11 +280,7 @@ components:
           type: array
           uniqueItems: true
           items:
-            type: string
-            enum:
-              - code
-              - token
-              - id_token
+            $ref: "#/components/schemas/ResponseType"
         response_modes_supported:
           type: array
           uniqueItems: true
