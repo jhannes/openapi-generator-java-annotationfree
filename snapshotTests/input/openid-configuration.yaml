@@ -48,6 +48,7 @@ paths:
         - name: redirect_uri
           in: query
           schema:
+            type: string
             format: uri
         - name: scope
           in: query
@@ -126,6 +127,7 @@ paths:
                   type: string
                 redirect_uri:
                   type: string
+                  format: uri
                 subject_token:
                   type: string
                   description:
@@ -151,7 +153,10 @@ paths:
       parameters:
         - name: Authorization
           in: header
+          required: true
           schema:
+            type: string
+            format: bearer token
             description: '"Bearer " + the access token'
       responses:
         200:

@@ -14,6 +14,7 @@ package io.github.jhannes.openapi.openid_configuration.api;
 
 import io.github.jhannes.openapi.openid_configuration.model.ResponseTypeDto;
 import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
+import java.net.URI;
 import io.github.jhannes.openapi.openid_configuration.model.UserinfoDto;
 import io.github.jhannes.openapi.openid_configuration.model.SampleModelData;
 import org.junit.jupiter.api.Test;
@@ -43,7 +44,7 @@ public class IdentityProviderApiTest {
         //String code = null;
         //String clientId = null;
         //String clientSecret = null;
-        //String redirectUri = null;
+        //URI redirectUri = null;
         //String subjectToken = null;
         //String audience = null;
         //TokenResponseDto response = api.fetchToken(authorization, grantType, code, clientId, clientSecret, redirectUri, subjectToken, audience);
@@ -52,7 +53,7 @@ public class IdentityProviderApiTest {
 
     @Test
     public void getUserinfoTest() throws IOException {
-        //Object authorization = null;
+        //String authorization = null;
         //UserinfoDto response = api.getUserinfo(authorization);
         // TODO: test validations
     }
@@ -62,7 +63,7 @@ public class IdentityProviderApiTest {
         //String clientId = null;
         //ResponseTypeDto responseType = null;
         //String state = null;
-        //Object redirectUri = null;
+        //URI redirectUri = null;
         //String scope = null;
         //api.startAuthorization(clientId, responseType, state, redirectUri, scope);
         // TODO: test validations

@@ -85,7 +85,12 @@ public class Http{{classname}} implements {{classname}} {
                 .replace("{{curly}}{{paramName}}}", encode(String.valueOf({{paramName}}), UTF_8)){{/pathParams}}{{#hasQueryParams}} + query{{/hasQueryParams}});
         connection.setRequestMethod("{{httpMethod}}");
         {{#headerParams}}
+        {{#required}}
+        connection.setRequestProperty("{{baseName}}", String.valueOf({{paramName}}));
+        {{/required}}
+        {{^required}}
         {{paramName}}.ifPresent(p -> connection.setRequestProperty("{{baseName}}", String.valueOf(p)));
+        {{/required}}
         {{/headerParams}}
         {{#hasFormParams}}
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");

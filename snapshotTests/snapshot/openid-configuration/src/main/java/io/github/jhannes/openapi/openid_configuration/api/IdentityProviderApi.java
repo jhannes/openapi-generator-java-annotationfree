@@ -13,6 +13,7 @@ package io.github.jhannes.openapi.openid_configuration.api;
 
 import io.github.jhannes.openapi.openid_configuration.model.ResponseTypeDto;
 import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
+import java.net.URI;
 import io.github.jhannes.openapi.openid_configuration.model.UserinfoDto;
 
 import java.io.IOException;
@@ -39,17 +40,17 @@ public interface IdentityProviderApi {
             Optional<String> code,
             Optional<String> client_id,
             Optional<String> client_secret,
-            Optional<String> redirect_uri,
+            Optional<URI> redirect_uri,
             Optional<String> subject_token,
             Optional<String> audience
     ) throws IOException;
     /**
      * Returns information about the currently logged in user
-     * @param authorization  (optional)
+     * @param authorization  (required)
      * @return UserinfoDto
      */
     UserinfoDto getUserinfo(
-            Optional<Object> authorization
+            String authorization
     ) throws IOException;
     /**
      * Starts an authentication flow. If the request is successful, the user is returned to the redirect_uri with a parameter, otherwise the user is redirected with an error parameter
@@ -63,7 +64,7 @@ public interface IdentityProviderApi {
             String client_id,
             Optional<ResponseTypeDto> response_type,
             Optional<String> state,
-            Optional<Object> redirect_uri,
+            Optional<URI> redirect_uri,
             Optional<String> scope
     ) throws IOException;
 }

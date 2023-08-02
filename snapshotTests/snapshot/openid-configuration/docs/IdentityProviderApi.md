@@ -31,7 +31,7 @@ public class Example {
         String code = "code_example"; // String | 
         String clientId = "clientId_example"; // String | 
         String clientSecret = "clientSecret_example"; // String | 
-        String redirectUri = "redirectUri_example"; // String | 
+        URI redirectUri = new URI(); // URI | 
         String subjectToken = "subjectToken_example"; // String | Used with grant_type=urn:ietf:params:oauth:grant-type:token-exchange to do a token exchange
         String audience = "audience_example"; // String | Used with token-exchange to indicate which application the token will be used with
         try {
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
  **code** | **String**|  | [optional]
  **clientId** | **String**|  | [optional]
  **clientSecret** | **String**|  | [optional]
- **redirectUri** | **String**|  | [optional]
+ **redirectUri** | **URI**|  | [optional]
  **subjectToken** | **String**| Used with grant_type&#x3D;urn:ietf:params:oauth:grant-type:token-exchange to do a token exchange | [optional]
  **audience** | **String**| Used with token-exchange to indicate which application the token will be used with | [optional]
 
@@ -96,7 +96,7 @@ public class Example {
     public static void main(String[] args) {
         IdentityProviderApi client = new HttpIdentityProviderApi();
 
-        Object authorization = null; // Object | 
+        String authorization = "authorization_example"; // String | 
         try {
             UserinfoDto result = client.getUserinfo(authorization);
             System.out.println(result);
@@ -113,7 +113,7 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **authorization** | [**Object**](.md)|  | [optional]
+ **authorization** | **String**|  |
 
 ### Return type
 
@@ -156,7 +156,7 @@ public class Example {
         String clientId = "clientId_example"; // String | 
         ResponseTypeDto responseType = ResponseTypeDto.fromValue("code"); // ResponseTypeDto | 
         String state = "state_example"; // String | 
-        Object redirectUri = null; // Object | 
+        URI redirectUri = new URI(); // URI | 
         String scope = "scope_example"; // String | 
         try {
             client.startAuthorization(clientId, responseType, state, redirectUri, scope);
@@ -176,7 +176,7 @@ Name | Type | Description  | Notes
  **clientId** | **String**|  |
  **responseType** | [**ResponseTypeDto**](.md)|  | [optional] [enum: code, token, id_token, code id_token, id_token token]
  **state** | **String**|  | [optional]
- **redirectUri** | [**Object**](.md)|  | [optional]
+ **redirectUri** | **URI**|  | [optional]
  **scope** | **String**|  | [optional]
 
 ### Return type

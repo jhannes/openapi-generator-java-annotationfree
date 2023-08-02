@@ -13,6 +13,7 @@ package io.github.jhannes.openapi.openid_configuration.api;
 
 import io.github.jhannes.openapi.openid_configuration.model.ResponseTypeDto;
 import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
+import java.net.URI;
 import io.github.jhannes.openapi.openid_configuration.model.UserinfoDto;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
@@ -59,7 +60,7 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
             Optional<String> code,
             Optional<String> client_id,
             Optional<String> client_secret,
-            Optional<String> redirect_uri,
+            Optional<URI> redirect_uri,
             Optional<String> subject_token,
             Optional<String> audience
     ) throws IOException {
@@ -85,11 +86,11 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
 
     @Override
     public UserinfoDto getUserinfo(
-            Optional<Object> authorization
+            String authorization
     ) throws IOException {
         HttpURLConnection connection = openConnection("/userinfo");
         connection.setRequestMethod("GET");
-        authorization.ifPresent(p -> connection.setRequestProperty("Authorization", String.valueOf(p)));
+        connection.setRequestProperty("Authorization", String.valueOf(authorization));
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
@@ -101,7 +102,7 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
             String client_id,
             Optional<ResponseTypeDto> response_type,
             Optional<String> state,
-            Optional<Object> redirect_uri,
+            Optional<URI> redirect_uri,
             Optional<String> scope
     ) throws IOException {
         List<String> queryParameters = new ArrayList<>();
