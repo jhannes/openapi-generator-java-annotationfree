@@ -75,7 +75,4 @@ public class AbstractSnapshotTest {
         return lastDot < 0 ? filename : filename.substring(0, lastDot);
     }
 
-    protected static Path getRootDir(Path spec) {
-        return spec.getParent().getParent();
-    }
 }

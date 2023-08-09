@@ -2,6 +2,7 @@ package io.github.jhannes.openapi.javaannotationfree;
 
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
+import org.openapitools.codegen.config.CodegenConfigurator;
 
 import java.nio.file.Path;
 
@@ -24,25 +25,34 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 public class FocusedExampleTest extends AbstractSnapshotTest {
 
     public static final Path SPEC = SNAPSHOT_ROOT.resolve("input/openid-configuration.yaml");
+    public static final Path ROOT_DIR = SPEC.getParent().getParent();
 
     @TestFactory
     DynamicNode snapshotShouldCompile() {
-        Path outputDir = getTargetDir("snapshot");
-        return dynamicTest("Compile " + outputDir, () -> CompilerTest.compile(outputDir.resolve(AbstractSnapshotTest.getModelName(SPEC))));
+        Path snapshotDir = ROOT_DIR.resolve("snapshot").resolve(getModelName());
+        return dynamicTest("Compile " + snapshotDir, () -> CompilerTest.compile(snapshotDir));
     }
 
 
     @TestFactory
     DynamicNode outputShouldMatchSnapshot() {
-        return SnapshotTests.createTestsForSpec(SPEC);
+        Path outputDir = ROOT_DIR.resolve("output").resolve(getModelName());
+        Path snapshotDir = ROOT_DIR.resolve("snapshot").resolve(getModelName());
+        return SnapshotTests.createTests(SPEC, outputDir, snapshotDir, createConfigurator(outputDir));
     }
 
     @TestFactory
     DynamicNode outputShouldCompile() {
-        return CompilerTest.createTestFromSpec(SPEC, getTargetDir("compile"));
+        var targetRoot = ROOT_DIR.resolve("compile");
+        var configurator = createConfigurator(targetRoot.resolve(getModelName()));
+        return CompilerTest.createTestFromSpec(SPEC, configurator, targetRoot.resolve(getModelName(SPEC)));
     }
 
-    private static Path getTargetDir(String subdir) {
-        return getRootDir(SPEC).resolve(subdir);
+    private static CodegenConfigurator createConfigurator(Path targetDir) {
+        return createConfigurator(getModelName(), SPEC, targetDir);
+    }
+
+    private static String getModelName() {
+        return SnapshotTests.getModelName(SPEC);
     }
 }
