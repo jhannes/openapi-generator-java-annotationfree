@@ -11,6 +11,8 @@
 
 package io.github.jhannes.openapi.openid_configuration.api;
 
+import io.github.jhannes.openapi.openid_configuration.model.GrantTypeDto;
+import io.github.jhannes.openapi.openid_configuration.model.OauthErrorDto;
 import io.github.jhannes.openapi.openid_configuration.model.ResponseTypeDto;
 import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
 import java.net.URI;
@@ -24,6 +26,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
@@ -55,10 +58,10 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
 
     @Override
     public TokenResponseDto fetchToken(
+            GrantTypeDto grant_type,
+            String code,
+            String client_id,
             Optional<String> authorization,
-            Optional<String> grant_type,
-            Optional<String> code,
-            Optional<String> client_id,
             Optional<String> client_secret,
             Optional<URI> redirect_uri,
             Optional<String> subject_token,
@@ -70,9 +73,9 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
         connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         connection.setDoOutput(true);
         List<String> formParameters = new ArrayList<>();
-        grant_type.ifPresent(p -> formParameters.add("grant_type=" + encode(String.valueOf(p), UTF_8)));
-        code.ifPresent(p -> formParameters.add("code=" + encode(String.valueOf(p), UTF_8)));
-        client_id.ifPresent(p -> formParameters.add("client_id=" + encode(String.valueOf(p), UTF_8)));
+        formParameters.add("grant_type=" + encode(String.valueOf(grant_type), UTF_8));
+        formParameters.add("code=" + encode(String.valueOf(code), UTF_8));
+        formParameters.add("client_id=" + encode(String.valueOf(client_id), UTF_8));
         client_secret.ifPresent(p -> formParameters.add("client_secret=" + encode(String.valueOf(p), UTF_8)));
         redirect_uri.ifPresent(p -> formParameters.add("redirect_uri=" + encode(String.valueOf(p), UTF_8)));
         subject_token.ifPresent(p -> formParameters.add("subject_token=" + encode(String.valueOf(p), UTF_8)));

@@ -47,6 +47,8 @@ public class DiscoveryDocumentDto {
 
     private URI jwks_uri = null;
 
+    private Set<GrantTypeDto> grant_types_supported = null;
+
     private Set<Object> scopes_supported = null;
 
     private Set<Object> claims_supported = null;
@@ -227,6 +229,7 @@ public class DiscoveryDocumentDto {
         if (this.getUserinfoEndpoint() != null) target.setUserinfoEndpoint(this.getUserinfoEndpoint());
         if (this.getEndSessionEndpoint() != null) target.setEndSessionEndpoint(this.getEndSessionEndpoint());
         if (this.getJwksUri() != null) target.setJwksUri(this.getJwksUri());
+        if (this.getGrantTypesSupported() != null) target.setGrantTypesSupported(this.getGrantTypesSupported());
         if (this.getScopesSupported() != null) target.setScopesSupported(this.getScopesSupported());
         if (this.getClaimsSupported() != null) target.setClaimsSupported(this.getClaimsSupported());
         if (this.getResponseTypesSupported() != null) target.setResponseTypesSupported(this.getResponseTypesSupported());
@@ -350,6 +353,39 @@ public class DiscoveryDocumentDto {
 
     public DiscoveryDocumentDto jwksUri(URI jwksUri) {
         this.jwks_uri = jwksUri;
+        return this;
+    }
+
+    public <T> DiscoveryDocumentDto grantTypesSupported(Collection<T> items, Function<T, GrantTypeDto> mapper) {
+        return grantTypesSupported(items.stream().map(mapper).collect(Collectors.toSet()));
+    }
+
+    public <T> Set<T> getGrantTypesSupported(Function<GrantTypeDto, T> mapper) {
+        return getGrantTypesSupported().stream().map(mapper).collect(Collectors.toSet());
+    }
+
+    public DiscoveryDocumentDto addGrantTypesSupportedItem(GrantTypeDto grantTypesSupportedItem) {
+        if (this.grant_types_supported == null) {
+            this.grant_types_supported = new LinkedHashSet<>();
+        }
+        this.grant_types_supported.add(grantTypesSupportedItem);
+        return this;
+    }
+
+    /**
+     * Get grant_types_supported
+     * @return grant_types_supported
+     */
+    public Set<GrantTypeDto> getGrantTypesSupported() {
+        return grant_types_supported;
+    }
+
+    public void setGrantTypesSupported(Set<GrantTypeDto> grantTypesSupported) {
+        this.grant_types_supported = grantTypesSupported;
+    }
+
+    public DiscoveryDocumentDto grantTypesSupported(Set<GrantTypeDto> grantTypesSupported) {
+        this.grant_types_supported = grantTypesSupported;
         return this;
     }
 
@@ -613,6 +649,7 @@ public class DiscoveryDocumentDto {
                 Objects.equals(this.getUserinfoEndpoint(), discoveryDocument.getUserinfoEndpoint()) &&
                 Objects.equals(this.getEndSessionEndpoint(), discoveryDocument.getEndSessionEndpoint()) &&
                 Objects.equals(this.getJwksUri(), discoveryDocument.getJwksUri()) &&
+                Objects.equals(this.getGrantTypesSupported(), discoveryDocument.getGrantTypesSupported()) &&
                 Objects.equals(this.getScopesSupported(), discoveryDocument.getScopesSupported()) &&
                 Objects.equals(this.getClaimsSupported(), discoveryDocument.getClaimsSupported()) &&
                 Objects.equals(this.getResponseTypesSupported(), discoveryDocument.getResponseTypesSupported()) &&
@@ -625,7 +662,7 @@ public class DiscoveryDocumentDto {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIssuer(), getAuthorizationEndpoint(), getTokenEndpoint(), getUserinfoEndpoint(), getEndSessionEndpoint(), getJwksUri(), getScopesSupported(), getClaimsSupported(), getResponseTypesSupported(), getResponseModesSupported(), getSubjectTypesSupported(), getCodeChallengeMethodsSupported(), getIdTokenSigningAlgValuesSupported(), getxSsoFrame());
+        return Objects.hash(getIssuer(), getAuthorizationEndpoint(), getTokenEndpoint(), getUserinfoEndpoint(), getEndSessionEndpoint(), getJwksUri(), getGrantTypesSupported(), getScopesSupported(), getClaimsSupported(), getResponseTypesSupported(), getResponseModesSupported(), getSubjectTypesSupported(), getCodeChallengeMethodsSupported(), getIdTokenSigningAlgValuesSupported(), getxSsoFrame());
     }
 
     @Override
@@ -638,6 +675,7 @@ public class DiscoveryDocumentDto {
         sb.append("    userinfo_endpoint: ").append(toIndentedString(getUserinfoEndpoint())).append("\n");
         sb.append("    end_session_endpoint: ").append(toIndentedString(getEndSessionEndpoint())).append("\n");
         sb.append("    jwks_uri: ").append(toIndentedString(getJwksUri())).append("\n");
+        sb.append("    grant_types_supported: ").append(toIndentedString(getGrantTypesSupported())).append("\n");
         sb.append("    scopes_supported: ").append(toIndentedString(getScopesSupported())).append("\n");
         sb.append("    claims_supported: ").append(toIndentedString(getClaimsSupported())).append("\n");
         sb.append("    response_types_supported: ").append(toIndentedString(getResponseTypesSupported())).append("\n");

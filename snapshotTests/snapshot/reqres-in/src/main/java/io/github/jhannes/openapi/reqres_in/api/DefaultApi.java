@@ -20,10 +20,14 @@ import io.github.jhannes.openapi.reqres_in.model.UsersIdGet200ResponseDto;
 import io.github.jhannes.openapi.reqres_in.model.UsersIdPut200ResponseDto;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface DefaultApi {
     /**
@@ -57,6 +61,32 @@ public interface DefaultApi {
             Optional<Integer> page,
             Optional<Integer> per_page
     ) throws IOException;
+
+    public static class UsersGetQuery {
+        private Integer page;
+
+        public UsersGetQuery page(Integer page) {
+            this.page = page;
+            return this;
+        }
+        private Integer perPage;
+
+        public UsersGetQuery perPage(Integer perPage) {
+            this.perPage = perPage;
+            return this;
+        }
+
+        public String toUrlEncoded() {
+            List<String> parameters = new ArrayList<>();
+            if (page != null) {
+                parameters.add("page=" + encode(page.toString(), UTF_8));
+            }
+            if (perPage != null) {
+                parameters.add("per_page=" + encode(perPage.toString(), UTF_8));
+            }
+            return String.join("&", parameters);
+        }
+    }
     /**
      * Deletes a user
      * @param id  (path) (required)

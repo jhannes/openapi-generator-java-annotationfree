@@ -31,15 +31,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
-* UserinfoDto
+* OauthErrorDto
 */
-public class UserinfoDto {
+public class OauthErrorDto {
 
-    private String sub;
+    private String error;
 
-    private String name = null;
-
-    private Object email = null;
+    private String error_description;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -53,23 +51,24 @@ public class UserinfoDto {
 
     public static String[] requiredFields() {
         return new String[] {
-                "sub",
+                "error",
+                "error_description",
         };
     }
 
     public List<String> missingRequiredFields() {
         List<String> result = new ArrayList<>();
-        if (isMissing(getSub())) result.add("sub");
+        if (isMissing(getError())) result.add("error");
+        if (isMissing(getErrorDescription())) result.add("error_description");
         return result;
     }
 
     public void readOnlyFieldsWithValue(List<String> result) {
     }
 
-    public <T extends UserinfoDto> T copyTo(T target) {
-        if (this.getSub() != null) target.setSub(this.getSub());
-        if (this.getName() != null) target.setName(this.getName());
-        if (this.getEmail() != null) target.setEmail(this.getEmail());
+    public <T extends OauthErrorDto> T copyTo(T target) {
+        if (this.getError() != null) target.setError(this.getError());
+        if (this.getErrorDescription() != null) target.setErrorDescription(this.getErrorDescription());
         return target;
     }
 
@@ -87,53 +86,36 @@ public class UserinfoDto {
 
 
     /**
-     * Subject identifier
-     * @return sub
+     * Get error
+     * @return error
      */
-    public String getSub() {
-        return sub;
+    public String getError() {
+        return error;
     }
 
-    public void setSub(String sub) {
-        this.sub = sub;
+    public void setError(String error) {
+        this.error = error;
     }
 
-    public UserinfoDto sub(String sub) {
-        this.sub = sub;
+    public OauthErrorDto error(String error) {
+        this.error = error;
         return this;
     }
 
     /**
-     * Get name
-     * @return name
+     * Get error_description
+     * @return error_description
      */
-    public String getName() {
-        return name;
+    public String getErrorDescription() {
+        return error_description;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setErrorDescription(String errorDescription) {
+        this.error_description = errorDescription;
     }
 
-    public UserinfoDto name(String name) {
-        this.name = name;
-        return this;
-    }
-
-    /**
-     * Get email
-     * @return email
-     */
-    public Object getEmail() {
-        return email;
-    }
-
-    public void setEmail(Object email) {
-        this.email = email;
-    }
-
-    public UserinfoDto email(Object email) {
-        this.email = email;
+    public OauthErrorDto errorDescription(String errorDescription) {
+        this.error_description = errorDescription;
         return this;
     }
 
@@ -145,24 +127,22 @@ public class UserinfoDto {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        UserinfoDto userinfo = (UserinfoDto) o;
-        return Objects.equals(this.getSub(), userinfo.getSub()) &&
-                Objects.equals(this.getName(), userinfo.getName()) &&
-                Objects.equals(this.getEmail(), userinfo.getEmail());
+        OauthErrorDto oauthError = (OauthErrorDto) o;
+        return Objects.equals(this.getError(), oauthError.getError()) &&
+                Objects.equals(this.getErrorDescription(), oauthError.getErrorDescription());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getSub(), getName(), getEmail());
+        return Objects.hash(getError(), getErrorDescription());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("UserinfoDto {\n");
-        sb.append("    sub: ").append(toIndentedString(getSub())).append("\n");
-        sb.append("    name: ").append(toIndentedString(getName())).append("\n");
-        sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
+        sb.append("OauthErrorDto {\n");
+        sb.append("    error: ").append(toIndentedString(getError())).append("\n");
+        sb.append("    error_description: ").append(toIndentedString(getErrorDescription())).append("\n");
         sb.append("}");
         return sb.toString();
     }

@@ -5,10 +5,14 @@ package {{package}};
 {{/imports}}
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 {{#operations}}
 public interface {{classname}} {
@@ -45,6 +49,65 @@ public interface {{classname}} {
             {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}},{{/-last}}{{/allParams}}{{#responses}}{{#headers}},
             Consumer<{{{dataType}}}> set{{nameInCamelCase}}{{/headers}}{{/responses}}
     ) throws IOException;
+    {{#hasHeaderParams}}
+
+    public static class {{operationIdCamelCase}}Headers {
+        {{#headerParams}}
+        private {{{dataType}}} {{paramName}};
+
+        public {{operationIdCamelCase}}Headers {{paramName}}({{{dataType}}} {{paramName}}) {
+            this.{{paramName}} = {{paramName}};
+            return this;
+        }
+        {{/headerParams}}
+    }
+    {{/hasHeaderParams}}
+    {{#hasQueryParams}}
+
+    public static class {{operationIdCamelCase}}Query {
+        {{#queryParams}}
+        private {{{dataType}}} {{paramName}};
+
+        public {{operationIdCamelCase}}Query {{paramName}}({{{dataType}}} {{paramName}}) {
+            this.{{paramName}} = {{paramName}};
+            return this;
+        }
+        {{/queryParams}}
+
+        public String toUrlEncoded() {
+            List<String> parameters = new ArrayList<>();
+        {{#queryParams}}
+            if ({{paramName}} != null) {
+                parameters.add("{{baseName}}=" + encode({{paramName}}.toString(), UTF_8));
+            }
+        {{/queryParams}}
+            return String.join("&", parameters);
+        }
+    }
+    {{/hasQueryParams}}
+    {{#hasFormParams}}
+
+    public static class {{operationIdCamelCase}}Form {
+        {{#formParams}}
+        private {{{dataType}}} {{paramName}};
+
+        public {{operationIdCamelCase}}Form {{paramName}}({{{dataType}}} {{paramName}}) {
+            this.{{paramName}} = {{paramName}};
+            return this;
+        }
+        {{/formParams}}
+
+        public String toUrlEncoded() {
+            List<String> parameters = new ArrayList<>();
+        {{#formParams}}
+            if ({{paramName}} != null) {
+                parameters.add("{{baseName}}=" + encode({{paramName}}.toString(), UTF_8));
+            }
+        {{/formParams}}
+            return String.join("&", parameters);
+        }
+    }
+    {{/hasFormParams}}
 {{/operation}}
 }
 {{/operations}}

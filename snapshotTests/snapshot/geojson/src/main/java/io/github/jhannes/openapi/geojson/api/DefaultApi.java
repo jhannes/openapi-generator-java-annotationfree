@@ -16,10 +16,14 @@ import io.github.jhannes.openapi.geojson.model.GeometryDto;
 import io.github.jhannes.openapi.geojson.model.PolygonDto;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface DefaultApi {
     /**

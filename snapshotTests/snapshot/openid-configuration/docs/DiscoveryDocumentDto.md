@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **userinfoEndpoint** | [**URI**](URI.md) |  |  [optional]
 **endSessionEndpoint** | [**URI**](URI.md) |  |  [optional]
 **jwksUri** | [**URI**](URI.md) |  |  [optional]
+**grantTypesSupported** | [**Set<GrantTypeDto>**](GrantTypeDto.md) |  |  [optional]
 **scopesSupported** | **Set<Object>** |  |  [optional]
 **claimsSupported** | **Set<Object>** |  |  [optional]
 **responseTypesSupported** | [**Set<ResponseTypeDto>**](ResponseTypeDto.md) |  | 

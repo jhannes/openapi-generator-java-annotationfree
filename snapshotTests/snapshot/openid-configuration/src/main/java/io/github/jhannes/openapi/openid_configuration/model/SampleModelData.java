@@ -57,6 +57,7 @@ public class SampleModelData {
             .userinfoEndpoint(sampleURI("userinfoEndpoint"))
             .endSessionEndpoint(sampleURI("endSessionEndpoint"))
             .jwksUri(sampleURI("jwksUri"))
+            .grantTypesSupported(sampleSubset(GrantTypeDto.values()))
             .scopesSupported(sampleSet(() -> sampleObject("scopesSupported"), "scopesSupported"))
             .claimsSupported(sampleSet(() -> sampleObject("claimsSupported"), "claimsSupported"))
             .responseTypesSupported(sampleSubset(ResponseTypeDto.values()))
@@ -89,6 +90,22 @@ public class SampleModelData {
 
     public DiscoveryDocumentDto.IdTokenSigningAlgValuesSupportedEnum sampleDiscoveryDocumentDtoIdTokenSigningAlgValuesSupportedEnum(String propertyName) {
         return pickOne(DiscoveryDocumentDto.IdTokenSigningAlgValuesSupportedEnum.values());
+    }
+
+    public GrantTypeDto sampleGrantTypeDto(String propertyName) {
+        return sampleGrantTypeDto();
+    }
+
+    public GrantTypeDto sampleGrantTypeDto() {
+        return pickOne(GrantTypeDto.values());
+    }
+
+    public List<GrantTypeDto> sampleListOfGrantTypeDto(String propertyName) {
+        return sampleListOfGrantTypeDto();
+    }
+
+    public List<GrantTypeDto> sampleListOfGrantTypeDto() {
+        return pickSome(GrantTypeDto.values());
     }
 
     public JwksDocumentDto sampleJwksDocumentDto(String propertyName) {
@@ -169,6 +186,24 @@ public class SampleModelData {
 
     public List<JwtPayloadDto> sampleListOfJwtPayloadDto() {
         return sampleList(() -> sampleJwtPayloadDto());
+    }
+
+    public OauthErrorDto sampleOauthErrorDto(String propertyName) {
+        return sampleOauthErrorDto();
+    }
+
+    public OauthErrorDto sampleOauthErrorDto() {
+        return new OauthErrorDto()
+            .error(sampleString("error"))
+            .errorDescription(sampleString("errorDescription"));
+    }
+
+    public List<OauthErrorDto> sampleListOfOauthErrorDto(String propertyName) {
+        return sampleListOfOauthErrorDto();
+    }
+
+    public List<OauthErrorDto> sampleListOfOauthErrorDto() {
+        return sampleList(() -> sampleOauthErrorDto());
     }
 
     public ResponseTypeDto sampleResponseTypeDto(String propertyName) {

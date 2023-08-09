@@ -15,10 +15,14 @@ package io.github.jhannes.openapi.websockets.api;
 import io.github.jhannes.openapi.websockets.model.WebSocketCommandDto;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface DefaultApi {
     /**

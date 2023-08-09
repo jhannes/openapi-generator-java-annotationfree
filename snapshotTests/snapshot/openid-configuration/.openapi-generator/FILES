@@ -2,12 +2,14 @@
 README.md
 docs/DiscoveryApi.md
 docs/DiscoveryDocumentDto.md
+docs/GrantTypeDto.md
 docs/IdentityClientApi.md
 docs/IdentityProviderApi.md
 docs/JwksDocumentDto.md
 docs/JwksKeyDto.md
 docs/JwtHeaderDto.md
 docs/JwtPayloadDto.md
+docs/OauthErrorDto.md
 docs/ResponseTypeDto.md
 docs/TokenResponseDto.md
 docs/UserinfoDto.md
@@ -18,10 +20,12 @@ src/main/java/io/github/jhannes/openapi/openid_configuration/api/HttpIdentityPro
 src/main/java/io/github/jhannes/openapi/openid_configuration/api/IdentityClientApi.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/api/IdentityProviderApi.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/DiscoveryDocumentDto.java
+src/main/java/io/github/jhannes/openapi/openid_configuration/model/GrantTypeDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/JwksDocumentDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/JwksKeyDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/JwtHeaderDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/JwtPayloadDto.java
+src/main/java/io/github/jhannes/openapi/openid_configuration/model/OauthErrorDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/ResponseTypeDto.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/SampleModelData.java
 src/main/java/io/github/jhannes/openapi/openid_configuration/model/TokenResponseDto.java

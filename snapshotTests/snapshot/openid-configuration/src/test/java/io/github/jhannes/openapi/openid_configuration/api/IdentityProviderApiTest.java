@@ -12,6 +12,8 @@
 
 package io.github.jhannes.openapi.openid_configuration.api;
 
+import io.github.jhannes.openapi.openid_configuration.model.GrantTypeDto;
+import io.github.jhannes.openapi.openid_configuration.model.OauthErrorDto;
 import io.github.jhannes.openapi.openid_configuration.model.ResponseTypeDto;
 import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
 import java.net.URI;
@@ -39,15 +41,15 @@ public class IdentityProviderApiTest {
 
     @Test
     public void fetchTokenTest() throws IOException {
-        //String authorization = null;
-        //String grantType = null;
+        //GrantTypeDto grantType = null;
         //String code = null;
         //String clientId = null;
+        //String authorization = null;
         //String clientSecret = null;
         //URI redirectUri = null;
         //String subjectToken = null;
         //String audience = null;
-        //TokenResponseDto response = api.fetchToken(authorization, grantType, code, clientId, clientSecret, redirectUri, subjectToken, audience);
+        //TokenResponseDto response = api.fetchToken(grantType, code, clientId, authorization, clientSecret, redirectUri, subjectToken, audience);
         // TODO: test validations
     }
 

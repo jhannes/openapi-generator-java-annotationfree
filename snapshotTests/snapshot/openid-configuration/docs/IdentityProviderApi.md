@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 ## fetchToken
 
-> TokenResponseDto fetchToken(authorization, grantType, code, clientId, clientSecret, redirectUri, subjectToken, audience)
+> TokenResponseDto fetchToken(grantType, code, clientId, authorization, clientSecret, redirectUri, subjectToken, audience)
 
 
 
@@ -26,16 +26,16 @@ public class Example {
     public static void main(String[] args) {
         IdentityProviderApi client = new HttpIdentityProviderApi();
 
-        String authorization = "authorization_example"; // String | Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret
-        String grantType = "implicit"; // String | 
+        GrantTypeDto grantType = GrantTypeDto.fromValue("implicit"); // GrantTypeDto | 
         String code = "code_example"; // String | 
         String clientId = "clientId_example"; // String | 
+        String authorization = "authorization_example"; // String | Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret
         String clientSecret = "clientSecret_example"; // String | 
         URI redirectUri = new URI(); // URI | 
         String subjectToken = "subjectToken_example"; // String | Used with grant_type=urn:ietf:params:oauth:grant-type:token-exchange to do a token exchange
         String audience = "audience_example"; // String | Used with token-exchange to indicate which application the token will be used with
         try {
-            TokenResponseDto result = client.fetchToken(authorization, grantType, code, clientId, clientSecret, redirectUri, subjectToken, audience);
+            TokenResponseDto result = client.fetchToken(grantType, code, clientId, authorization, clientSecret, redirectUri, subjectToken, audience);
             System.out.println(result);
         } catch (IOException e) {
             System.err.println("Exception when calling IdentityProviderApi#fetchToken");
@@ -50,10 +50,10 @@ public class Example {
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
+ **grantType** | [**GrantTypeDto**](GrantTypeDto.md)|  | [enum: implicit, authorization_code, client_credentials, refresh_token, urn:ietf:params:oauth:grant-type:token-exchange]
+ **code** | **String**|  |
+ **clientId** | **String**|  |
  **authorization** | **String**| Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret | [optional]
- **grantType** | **String**|  | [optional] [enum: implicit, authorization_code, client_credentials, refresh_token]
- **code** | **String**|  | [optional]
- **clientId** | **String**|  | [optional]
  **clientSecret** | **String**|  | [optional]
  **redirectUri** | **URI**|  | [optional]
  **subjectToken** | **String**| Used with grant_type&#x3D;urn:ietf:params:oauth:grant-type:token-exchange to do a token exchange | [optional]
@@ -76,6 +76,7 @@ No authorization required
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 | **200** | The tokens from the identity service |  -  |
+| **400** | Errors in request |  -  |
 
 
 ## getUserinfo

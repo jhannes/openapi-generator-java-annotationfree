@@ -14,10 +14,14 @@ package io.github.jhannes.openapi.petstore.api;
 import io.github.jhannes.openapi.petstore.model.UserDto;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface UserApi {
     /**
@@ -68,6 +72,32 @@ public interface UserApi {
             Optional<String> username,
             Optional<String> password
     ) throws IOException;
+
+    public static class LoginUserQuery {
+        private String username;
+
+        public LoginUserQuery username(String username) {
+            this.username = username;
+            return this;
+        }
+        private String password;
+
+        public LoginUserQuery password(String password) {
+            this.password = password;
+            return this;
+        }
+
+        public String toUrlEncoded() {
+            List<String> parameters = new ArrayList<>();
+            if (username != null) {
+                parameters.add("username=" + encode(username.toString(), UTF_8));
+            }
+            if (password != null) {
+                parameters.add("password=" + encode(password.toString(), UTF_8));
+            }
+            return String.join("&", parameters);
+        }
+    }
     /**
      * Logs out current logged in user session
      */

@@ -15,10 +15,14 @@ import java.io.File;
 import io.github.jhannes.openapi.petstore.model.PetDto;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface PetApi {
     /**
@@ -37,6 +41,15 @@ public interface PetApi {
             Long petId,
             Optional<String> apiKey
     ) throws IOException;
+
+    public static class DeletePetHeaders {
+        private String apiKey;
+
+        public DeletePetHeaders apiKey(String apiKey) {
+            this.apiKey = apiKey;
+            return this;
+        }
+    }
     /**
      * downloads image
      * @param petId  (path) (required)
@@ -54,6 +67,23 @@ public interface PetApi {
     List<PetDto> findPetsByStatus(
             Optional<List<String>> status
     ) throws IOException;
+
+    public static class FindPetsByStatusQuery {
+        private List<String> status;
+
+        public FindPetsByStatusQuery status(List<String> status) {
+            this.status = status;
+            return this;
+        }
+
+        public String toUrlEncoded() {
+            List<String> parameters = new ArrayList<>();
+            if (status != null) {
+                parameters.add("status=" + encode(status.toString(), UTF_8));
+            }
+            return String.join("&", parameters);
+        }
+    }
     /**
      * Finds Pets by tags
      * Multiple tags can be provided with comma separated strings. Use tag1, tag2, tag3 for testing.
@@ -65,6 +95,23 @@ public interface PetApi {
     List<PetDto> findPetsByTags(
             Optional<List<String>> tags
     ) throws IOException;
+
+    public static class FindPetsByTagsQuery {
+        private List<String> tags;
+
+        public FindPetsByTagsQuery tags(List<String> tags) {
+            this.tags = tags;
+            return this;
+        }
+
+        public String toUrlEncoded() {
+            List<String> parameters = new ArrayList<>();
+            if (tags != null) {
+                parameters.add("tags=" + encode(tags.toString(), UTF_8));
+            }
+            return String.join("&", parameters);
+        }
+    }
     /**
      * Find pet by ID
      * Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions
@@ -92,6 +139,32 @@ public interface PetApi {
             Optional<String> name,
             Optional<String> status
     ) throws IOException;
+
+    public static class UpdatePetWithFormForm {
+        private String name;
+
+        public UpdatePetWithFormForm name(String name) {
+            this.name = name;
+            return this;
+        }
+        private String status;
+
+        public UpdatePetWithFormForm status(String status) {
+            this.status = status;
+            return this;
+        }
+
+        public String toUrlEncoded() {
+            List<String> parameters = new ArrayList<>();
+            if (name != null) {
+                parameters.add("name=" + encode(name.toString(), UTF_8));
+            }
+            if (status != null) {
+                parameters.add("status=" + encode(status.toString(), UTF_8));
+            }
+            return String.join("&", parameters);
+        }
+    }
     /**
      * uploads an image
      * @param petId ID of pet to update (path) (required)
@@ -103,4 +176,30 @@ public interface PetApi {
             Optional<String> additionalMetadata,
             Optional<File> file
     ) throws IOException;
+
+    public static class UploadFileForm {
+        private String additionalMetadata;
+
+        public UploadFileForm additionalMetadata(String additionalMetadata) {
+            this.additionalMetadata = additionalMetadata;
+            return this;
+        }
+        private File _file;
+
+        public UploadFileForm _file(File _file) {
+            this._file = _file;
+            return this;
+        }
+
+        public String toUrlEncoded() {
+            List<String> parameters = new ArrayList<>();
+            if (additionalMetadata != null) {
+                parameters.add("additionalMetadata=" + encode(additionalMetadata.toString(), UTF_8));
+            }
+            if (_file != null) {
+                parameters.add("file=" + encode(_file.toString(), UTF_8));
+            }
+            return String.join("&", parameters);
+        }
+    }
 }

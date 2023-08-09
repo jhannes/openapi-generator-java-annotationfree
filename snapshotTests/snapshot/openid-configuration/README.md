@@ -108,10 +108,12 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [DiscoveryDocumentDto](docs/DiscoveryDocumentDto.md)
+ - [GrantTypeDto](docs/GrantTypeDto.md)
  - [JwksDocumentDto](docs/JwksDocumentDto.md)
  - [JwksKeyDto](docs/JwksKeyDto.md)
  - [JwtHeaderDto](docs/JwtHeaderDto.md)
  - [JwtPayloadDto](docs/JwtPayloadDto.md)
+ - [OauthErrorDto](docs/OauthErrorDto.md)
  - [ResponseTypeDto](docs/ResponseTypeDto.md)
  - [TokenResponseDto](docs/TokenResponseDto.md)
  - [UserinfoDto](docs/UserinfoDto.md)

@@ -15,10 +15,14 @@ import java.time.OffsetDateTime;
 import io.github.jhannes.openapi.petstore.model.OrderDto;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface StoreApi {
     /**
@@ -38,6 +42,23 @@ public interface StoreApi {
     Map<String, Integer> getInventory(
             Optional<OffsetDateTime> effectiveDateTime
     ) throws IOException;
+
+    public static class GetInventoryQuery {
+        private OffsetDateTime effectiveDateTime;
+
+        public GetInventoryQuery effectiveDateTime(OffsetDateTime effectiveDateTime) {
+            this.effectiveDateTime = effectiveDateTime;
+            return this;
+        }
+
+        public String toUrlEncoded() {
+            List<String> parameters = new ArrayList<>();
+            if (effectiveDateTime != null) {
+                parameters.add("effectiveDateTime=" + encode(effectiveDateTime.toString(), UTF_8));
+            }
+            return String.join("&", parameters);
+        }
+    }
     /**
      * Find purchase order by ID
      * For valid response try integer IDs with value &lt;&#x3D; 5 or &gt; 10. Other values will generated exceptions

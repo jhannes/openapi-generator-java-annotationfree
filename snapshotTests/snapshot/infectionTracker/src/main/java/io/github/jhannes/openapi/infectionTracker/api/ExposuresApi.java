@@ -16,10 +16,14 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+
+import static java.net.URLEncoder.encode;
+import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface ExposuresApi {
     /**
@@ -31,6 +35,32 @@ public interface ExposuresApi {
             Optional<List<LocalDate>> exposureDate,
             Optional<Integer> maxCount
     ) throws IOException;
+
+    public static class ListExposuresQuery {
+        private List<LocalDate> exposureDate;
+
+        public ListExposuresQuery exposureDate(List<LocalDate> exposureDate) {
+            this.exposureDate = exposureDate;
+            return this;
+        }
+        private Integer maxCount;
+
+        public ListExposuresQuery maxCount(Integer maxCount) {
+            this.maxCount = maxCount;
+            return this;
+        }
+
+        public String toUrlEncoded() {
+            List<String> parameters = new ArrayList<>();
+            if (exposureDate != null) {
+                parameters.add("exposureDate=" + encode(exposureDate.toString(), UTF_8));
+            }
+            if (maxCount != null) {
+                parameters.add("maxCount=" + encode(maxCount.toString(), UTF_8));
+            }
+            return String.join("&", parameters);
+        }
+    }
     /**
      * @param exposureId  (path) (required)
      * @param exposureDto  (optional)
