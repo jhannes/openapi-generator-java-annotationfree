@@ -4,6 +4,7 @@
 .idea
 /snapshotTests/compile/
 /snapshotTests/output/
+/snapshotTests/generators/*/compile/
 /snapshotTests/generators/*/output/
 pom.xml.releaseBackup
 release.properties
