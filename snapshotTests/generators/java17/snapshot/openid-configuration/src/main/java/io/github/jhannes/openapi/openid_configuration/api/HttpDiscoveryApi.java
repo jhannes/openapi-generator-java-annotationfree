@@ -13,87 +13,105 @@ package io.github.jhannes.openapi.openid_configuration.api;
 
 import io.github.jhannes.openapi.openid_configuration.model.DiscoveryDocumentDto;
 import io.github.jhannes.openapi.openid_configuration.model.JwksDocumentDto;
+import jakarta.json.JsonStructure;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import static java.net.URLEncoder.encode;
-import static java.nio.charset.StandardCharsets.UTF_8;
-
+/* With Java 17 support */
 public class HttpDiscoveryApi implements DiscoveryApi {
 
     private final Jsonb jsonb;
 
-    private final URL baseUrl;
+    private final URI baseUri;
 
-    public HttpDiscoveryApi() throws MalformedURLException {
-        this(new URL("http://localhost"));
+    public HttpDiscoveryApi() throws URISyntaxException {
+        this(new URI("http://localhost"));
     }
 
-    public HttpDiscoveryApi(URL baseUrl) {
-        this(baseUrl, JsonbBuilder.create());
+    public HttpDiscoveryApi(URI baseUri) {
+        this(baseUri, JsonbBuilder.create());
     }
 
-    public HttpDiscoveryApi(URL baseUrl, Jsonb jsonb) {
-        this.baseUrl = baseUrl;
+    public HttpDiscoveryApi(URI baseUri, Jsonb jsonb) {
+        this.baseUri = baseUri;
         this.jsonb = jsonb;
     }
 
     @Override
     public DiscoveryDocumentDto getDiscoveryDocument(
-    ) throws IOException {
-        HttpURLConnection connection = openConnection("/.well-known/openid-configuration");
-        connection.setRequestMethod("GET");
-        if (connection.getResponseCode() >= 300) {
-            throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
+    ) throws IOException, InterruptedException {
+        var response = getDiscoveryDocumentResponse();
+        return switch (response) {
+            case GetDiscoveryDocumentSuccess success -> success.content();
+            case GetDiscoveryDocumentErrorResponse errorResponse ->
+                throw new RuntimeException("Error " + errorResponse.statusCode() + ": " + errorResponse.textResponse());
+        };
+    }
+
+    public GetDiscoveryDocumentResponse getDiscoveryDocumentResponse(
+    ) throws IOException, InterruptedException {
+        var request = HttpRequest.newBuilder(baseUri.resolve("/.well-known/openid-configuration")).GET();
+        return handleGetDiscoveryDocumentResponse(sendRequest(request.build()));
+    }
+
+    protected GetDiscoveryDocumentResponse handleGetDiscoveryDocumentResponse(HttpResponse<String> response) {
+        if (response.statusCode() == 200) {
+            return new GetDiscoveryDocumentSuccess(jsonb.fromJson(response.body(), DiscoveryDocumentDto.class));
         }
-        return jsonb.fromJson(connection.getInputStream(), DiscoveryDocumentDto.class);
+        if (isJsonResponse(response)) {
+            return new GetDiscoveryDocumentJsonError(response.statusCode(), jsonb.fromJson(response.body(), JsonStructure.class));
+        } else {
+            return new GetDiscoveryDocumentUnexpectedError(response.statusCode(), response.body());
+        }
     }
 
     @Override
     public JwksDocumentDto getJwksDocument(
-    ) throws IOException {
-        HttpURLConnection connection = openConnection("/.well-known/keys");
-        connection.setRequestMethod("GET");
-        if (connection.getResponseCode() >= 300) {
-            throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
-        }
-        return jsonb.fromJson(connection.getInputStream(), JwksDocumentDto.class);
-    }
-
-    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
-        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
-    }
-
-    private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {
-        return new ParameterizedType() {
-            @Override
-            public Type[] getActualTypeArguments() {
-                return typeArguments;
-            }
-
-            @Override
-            public Type getRawType() {
-                return rawType;
-            }
-
-            @Override
-            public Type getOwnerType() {
-                return null;
-            }
+    ) throws IOException, InterruptedException {
+        var response = getJwksDocumentResponse();
+        return switch (response) {
+            case GetJwksDocumentSuccess success -> success.content();
+            case GetJwksDocumentErrorResponse errorResponse ->
+                throw new RuntimeException("Error " + errorResponse.statusCode() + ": " + errorResponse.textResponse());
         };
+    }
+
+    public GetJwksDocumentResponse getJwksDocumentResponse(
+    ) throws IOException, InterruptedException {
+        var request = HttpRequest.newBuilder(baseUri.resolve("/.well-known/keys")).GET();
+        return handleGetJwksDocumentResponse(sendRequest(request.build()));
+    }
+
+    protected GetJwksDocumentResponse handleGetJwksDocumentResponse(HttpResponse<String> response) {
+        if (response.statusCode() == 200) {
+            return new GetJwksDocumentSuccess(jsonb.fromJson(response.body(), JwksDocumentDto.class));
+        }
+        if (isJsonResponse(response)) {
+            return new GetJwksDocumentJsonError(response.statusCode(), jsonb.fromJson(response.body(), JsonStructure.class));
+        } else {
+            return new GetJwksDocumentUnexpectedError(response.statusCode(), response.body());
+        }
+    }
+
+
+    protected HttpResponse<String> sendRequest(HttpRequest request) throws IOException, InterruptedException {
+        return HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
+    }
+
+    protected boolean isJsonResponse(HttpResponse<String> response) {
+        return response.headers().firstValue("content-type").filter(s -> s.startsWith("application/json")).isPresent();
     }
 }

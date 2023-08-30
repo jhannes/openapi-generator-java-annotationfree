@@ -4,6 +4,8 @@ package {{package}};
 {{#imports}}import {{import}};
 {{/imports}}
 
+import jakarta.json.JsonStructure;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -17,6 +19,34 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 {{#operations}}
 public interface {{classname}} {
 {{#operation}}
+    public sealed interface {{operationIdCamelCase}}Response {
+    }
+    {{#responses}}
+
+    public record {{operationIdCamelCase}}{{#is2xx}}Success{{/is2xx}}{{^is2xx}}{{code}}Response{{/is2xx}}({{#dataType}}{{{dataType}}} content{{#headers}}{{#first}}, {{/first}}{{/headers}}{{/dataType}}{{#headers}}{{^-first}}, {{/-first}}Optional<String> {{name}}Header{{/headers}}) implements {{operationIdCamelCase}}Response {
+    }
+    {{^is2xx}}
+
+    public class {{operationIdCamelCase}}{{code}}Exception extends RuntimeException {
+    {{#dataType}}
+        public final {{{dataType}}} content;
+        public {{operationIdCamelCase}}{{code}}Exception({{{dataType}}} content) {
+            super(content.toString());
+            this.content = content;
+        }
+    {{/dataType}}
+    }
+    {{/is2xx}}
+    {{/responses}}
+
+    public sealed interface {{operationIdCamelCase}}ErrorResponse extends {{operationIdCamelCase}}Response, ErrorResponse {}
+
+    public record {{operationIdCamelCase}}JsonError(int statusCode, JsonStructure content) implements {{operationIdCamelCase}}ErrorResponse, ErrorJsonResponse {
+    }
+
+    public record {{operationIdCamelCase}}UnexpectedError(int statusCode, String content) implements {{operationIdCamelCase}}ErrorResponse, ErrorTextResponse {
+    }
+
     /**
     {{#summary}}
      * {{summary}}
@@ -46,9 +76,8 @@ public interface {{classname}} {
             {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{baseName}}{{/isQueryParam}}{{#isBodyParam}}
             {{{dataType}}} {{paramName}}{{/isBodyParam}}{{#isFormParam}}
             {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{baseName}}{{/isFormParam}}{{#isHeaderParam}}
-            {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}},{{/-last}}{{/allParams}}{{#responses}}{{#headers}},
-            Consumer<{{{dataType}}}> set{{nameInCamelCase}}{{/headers}}{{/responses}}
-    ) throws IOException;
+            {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}},{{/-last}}{{/allParams}}{{#responses}}{{/responses}}
+    ) throws IOException, InterruptedException;
     {{#hasHeaderParams}}
 
     public static class {{operationIdCamelCase}}Headers {
@@ -108,6 +137,25 @@ public interface {{classname}} {
         }
     }
     {{/hasFormParams}}
+
 {{/operation}}
+    interface ErrorResponse {
+        int statusCode();
+        String textResponse();
+    }
+
+    interface ErrorJsonResponse extends ErrorResponse {
+        JsonStructure content();
+        default String textResponse() {
+            return content().toString();
+        }
+    }
+
+    interface ErrorTextResponse extends ErrorResponse {
+        String content();
+        default String textResponse() {
+            return content();
+        }
+    }
 }
 {{/operations}}

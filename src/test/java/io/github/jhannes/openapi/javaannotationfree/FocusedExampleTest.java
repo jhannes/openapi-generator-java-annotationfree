@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 public class FocusedExampleTest extends AbstractSnapshotTest {
 
     public static final Path SPEC = SNAPSHOT_ROOT.resolve("input/openid-configuration.yaml");
-    public static final Path ROOT_DIR = SPEC.getParent().getParent();
+    public static final Path ROOT_DIR = SPEC.getParent().getParent().resolve("generators").resolve("java17");
 
     @TestFactory
     DynamicNode snapshotShouldCompile() {
@@ -49,7 +49,8 @@ public class FocusedExampleTest extends AbstractSnapshotTest {
     }
 
     private static CodegenConfigurator createConfigurator(Path targetDir) {
-        return createConfigurator(getModelName(), SPEC, targetDir);
+        return createConfigurator(getModelName(), SPEC, targetDir)
+                .addAdditionalProperty("supportJava17", true);
     }
 
     private static String getModelName() {

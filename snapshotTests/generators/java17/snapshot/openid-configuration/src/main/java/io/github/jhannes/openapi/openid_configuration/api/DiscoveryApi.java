@@ -14,6 +14,8 @@ package io.github.jhannes.openapi.openid_configuration.api;
 import io.github.jhannes.openapi.openid_configuration.model.DiscoveryDocumentDto;
 import io.github.jhannes.openapi.openid_configuration.model.JwksDocumentDto;
 
+import jakarta.json.JsonStructure;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -25,14 +27,62 @@ import static java.net.URLEncoder.encode;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface DiscoveryApi {
+    public sealed interface GetDiscoveryDocumentResponse {
+    }
+
+    public record GetDiscoveryDocumentSuccess(DiscoveryDocumentDto content) implements GetDiscoveryDocumentResponse {
+    }
+
+    public sealed interface GetDiscoveryDocumentErrorResponse extends GetDiscoveryDocumentResponse, ErrorResponse {}
+
+    public record GetDiscoveryDocumentJsonError(int statusCode, JsonStructure content) implements GetDiscoveryDocumentErrorResponse, ErrorJsonResponse {
+    }
+
+    public record GetDiscoveryDocumentUnexpectedError(int statusCode, String content) implements GetDiscoveryDocumentErrorResponse, ErrorTextResponse {
+    }
+
     /**
      * @return DiscoveryDocumentDto
      */
     DiscoveryDocumentDto getDiscoveryDocument(
-    ) throws IOException;
+    ) throws IOException, InterruptedException;
+
+    public sealed interface GetJwksDocumentResponse {
+    }
+
+    public record GetJwksDocumentSuccess(JwksDocumentDto content) implements GetJwksDocumentResponse {
+    }
+
+    public sealed interface GetJwksDocumentErrorResponse extends GetJwksDocumentResponse, ErrorResponse {}
+
+    public record GetJwksDocumentJsonError(int statusCode, JsonStructure content) implements GetJwksDocumentErrorResponse, ErrorJsonResponse {
+    }
+
+    public record GetJwksDocumentUnexpectedError(int statusCode, String content) implements GetJwksDocumentErrorResponse, ErrorTextResponse {
+    }
+
     /**
      * @return JwksDocumentDto
      */
     JwksDocumentDto getJwksDocument(
-    ) throws IOException;
+    ) throws IOException, InterruptedException;
+
+    interface ErrorResponse {
+        int statusCode();
+        String textResponse();
+    }
+
+    interface ErrorJsonResponse extends ErrorResponse {
+        JsonStructure content();
+        default String textResponse() {
+            return content().toString();
+        }
+    }
+
+    interface ErrorTextResponse extends ErrorResponse {
+        String content();
+        default String textResponse() {
+            return content();
+        }
+    }
 }

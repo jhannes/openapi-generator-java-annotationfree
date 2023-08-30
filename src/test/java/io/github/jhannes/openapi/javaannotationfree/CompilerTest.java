@@ -7,6 +7,7 @@ import org.openapitools.codegen.ClientOptInput;
 import org.openapitools.codegen.DefaultGenerator;
 import org.openapitools.codegen.config.CodegenConfigurator;
 
+import javax.tools.Diagnostic;
 import javax.tools.DiagnosticCollector;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
@@ -88,13 +89,15 @@ public class CompilerTest extends AbstractSnapshotTest {
                     null,
                     fileManager,
                     diagnosticListener,
-                    List.of("-Xlint:deprecation", "-d", "target/testCompile/" + path.getFileName()),
+                    List.of("-Xlint:deprecation", "-d", "target/testCompile/" + path.getFileName(), "--enable-preview", "--source", "19"),
                     null,
                     fileManager.getJavaFileObjectsFromPaths(files)
             );
             Boolean result = task.call();
-            if (!diagnosticListener.getDiagnostics().isEmpty()) {
-                fail(diagnosticListener.getDiagnostics().toString());
+            List<Diagnostic<? extends JavaFileObject>> diagnostics = diagnosticListener.getDiagnostics()
+                    .stream().filter(d -> d.getKind() != Diagnostic.Kind.NOTE).collect(Collectors.toList());
+            if (!diagnostics.isEmpty()) {
+                fail(diagnostics.toString());
             }
             assertTrue(result);
         }

@@ -18,6 +18,8 @@ import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
 import java.net.URI;
 import io.github.jhannes.openapi.openid_configuration.model.UserinfoDto;
 
+import jakarta.json.JsonStructure;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -29,6 +31,31 @@ import static java.net.URLEncoder.encode;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface IdentityProviderApi {
+    public sealed interface FetchTokenResponse {
+    }
+
+    public record FetchTokenSuccess(TokenResponseDto content) implements FetchTokenResponse {
+    }
+
+    public record FetchToken400Response(OauthErrorDto content) implements FetchTokenResponse {
+    }
+
+    public class FetchToken400Exception extends RuntimeException {
+        public final OauthErrorDto content;
+        public FetchToken400Exception(OauthErrorDto content) {
+            super(content.toString());
+            this.content = content;
+        }
+    }
+
+    public sealed interface FetchTokenErrorResponse extends FetchTokenResponse, ErrorResponse {}
+
+    public record FetchTokenJsonError(int statusCode, JsonStructure content) implements FetchTokenErrorResponse, ErrorJsonResponse {
+    }
+
+    public record FetchTokenUnexpectedError(int statusCode, String content) implements FetchTokenErrorResponse, ErrorTextResponse {
+    }
+
     /**
      * @param grantType  (required)
      * @param code  (required)
@@ -49,7 +76,7 @@ public interface IdentityProviderApi {
             Optional<URI> redirect_uri,
             Optional<String> subject_token,
             Optional<String> audience
-    ) throws IOException;
+    ) throws IOException, InterruptedException;
 
     public static class FetchTokenHeaders {
         private String authorization;
@@ -130,6 +157,27 @@ public interface IdentityProviderApi {
             return String.join("&", parameters);
         }
     }
+
+    public sealed interface GetUserinfoResponse {
+    }
+
+    public record GetUserinfoSuccess(UserinfoDto content) implements GetUserinfoResponse {
+    }
+
+    public record GetUserinfo401Response() implements GetUserinfoResponse {
+    }
+
+    public class GetUserinfo401Exception extends RuntimeException {
+    }
+
+    public sealed interface GetUserinfoErrorResponse extends GetUserinfoResponse, ErrorResponse {}
+
+    public record GetUserinfoJsonError(int statusCode, JsonStructure content) implements GetUserinfoErrorResponse, ErrorJsonResponse {
+    }
+
+    public record GetUserinfoUnexpectedError(int statusCode, String content) implements GetUserinfoErrorResponse, ErrorTextResponse {
+    }
+
     /**
      * Returns information about the currently logged in user
      * @param authorization  (required)
@@ -137,7 +185,7 @@ public interface IdentityProviderApi {
      */
     UserinfoDto getUserinfo(
             String authorization
-    ) throws IOException;
+    ) throws IOException, InterruptedException;
 
     public static class GetUserinfoHeaders {
         private String authorization;
@@ -147,6 +195,24 @@ public interface IdentityProviderApi {
             return this;
         }
     }
+
+    public sealed interface StartAuthorizationResponse {
+    }
+
+    public record StartAuthorization304Response() implements StartAuthorizationResponse {
+    }
+
+    public class StartAuthorization304Exception extends RuntimeException {
+    }
+
+    public sealed interface StartAuthorizationErrorResponse extends StartAuthorizationResponse, ErrorResponse {}
+
+    public record StartAuthorizationJsonError(int statusCode, JsonStructure content) implements StartAuthorizationErrorResponse, ErrorJsonResponse {
+    }
+
+    public record StartAuthorizationUnexpectedError(int statusCode, String content) implements StartAuthorizationErrorResponse, ErrorTextResponse {
+    }
+
     /**
      * Starts an authentication flow. If the request is successful, the user is returned to the redirect_uri with a parameter, otherwise the user is redirected with an error parameter
      * @param clientId  (query) (required)
@@ -161,7 +227,7 @@ public interface IdentityProviderApi {
             Optional<String> state,
             Optional<URI> redirect_uri,
             Optional<String> scope
-    ) throws IOException;
+    ) throws IOException, InterruptedException;
 
     public static class StartAuthorizationQuery {
         private ResponseTypeDto responseType;
@@ -213,6 +279,25 @@ public interface IdentityProviderApi {
                 parameters.add("scope=" + encode(scope.toString(), UTF_8));
             }
             return String.join("&", parameters);
+        }
+    }
+
+    interface ErrorResponse {
+        int statusCode();
+        String textResponse();
+    }
+
+    interface ErrorJsonResponse extends ErrorResponse {
+        JsonStructure content();
+        default String textResponse() {
+            return content().toString();
+        }
+    }
+
+    interface ErrorTextResponse extends ErrorResponse {
+        String content();
+        default String textResponse() {
+            return content();
         }
     }
 }

@@ -17,42 +17,40 @@ import io.github.jhannes.openapi.openid_configuration.model.ResponseTypeDto;
 import io.github.jhannes.openapi.openid_configuration.model.TokenResponseDto;
 import java.net.URI;
 import io.github.jhannes.openapi.openid_configuration.model.UserinfoDto;
+import jakarta.json.JsonStructure;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import static java.net.URLEncoder.encode;
-import static java.nio.charset.StandardCharsets.UTF_8;
-
+/* With Java 17 support */
 public class HttpIdentityProviderApi implements IdentityProviderApi {
 
     private final Jsonb jsonb;
 
-    private final URL baseUrl;
+    private final URI baseUri;
 
-    public HttpIdentityProviderApi() throws MalformedURLException {
-        this(new URL("http://localhost"));
+    public HttpIdentityProviderApi() throws URISyntaxException {
+        this(new URI("http://localhost"));
     }
 
-    public HttpIdentityProviderApi(URL baseUrl) {
-        this(baseUrl, JsonbBuilder.create());
+    public HttpIdentityProviderApi(URI baseUri) {
+        this(baseUri, JsonbBuilder.create());
     }
 
-    public HttpIdentityProviderApi(URL baseUrl, Jsonb jsonb) {
-        this.baseUrl = baseUrl;
+    public HttpIdentityProviderApi(URI baseUri, Jsonb jsonb) {
+        this.baseUri = baseUri;
         this.jsonb = jsonb;
     }
 
@@ -66,38 +64,87 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
             Optional<URI> redirect_uri,
             Optional<String> subject_token,
             Optional<String> audience
-    ) throws IOException {
-        HttpURLConnection connection = openConnection("/token");
-        connection.setRequestMethod("POST");
-        authorization.ifPresent(p -> connection.setRequestProperty("Authorization", String.valueOf(p)));
-        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        connection.setDoOutput(true);
-        List<String> formParameters = new ArrayList<>();
-        formParameters.add("grant_type=" + encode(String.valueOf(grant_type), UTF_8));
-        formParameters.add("code=" + encode(String.valueOf(code), UTF_8));
-        formParameters.add("client_id=" + encode(String.valueOf(client_id), UTF_8));
-        client_secret.ifPresent(p -> formParameters.add("client_secret=" + encode(String.valueOf(p), UTF_8)));
-        redirect_uri.ifPresent(p -> formParameters.add("redirect_uri=" + encode(String.valueOf(p), UTF_8)));
-        subject_token.ifPresent(p -> formParameters.add("subject_token=" + encode(String.valueOf(p), UTF_8)));
-        audience.ifPresent(p -> formParameters.add("audience=" + encode(String.valueOf(p), UTF_8)));
-        connection.getOutputStream().write(String.join("&", formParameters).getBytes());
-        if (connection.getResponseCode() >= 300) {
-            throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
+    ) throws IOException, InterruptedException {
+        var formParams = new FetchTokenForm()
+            .grantType(grant_type)
+            .code(code)
+            .clientId(client_id)
+        ;
+        client_secret.ifPresent(formParams::clientSecret);
+        redirect_uri.ifPresent(formParams::redirectUri);
+        subject_token.ifPresent(formParams::subjectToken);
+        audience.ifPresent(formParams::audience);
+        var response = fetchTokenResponse(formParams,
+            authorization);
+        return switch (response) {
+            case FetchTokenSuccess success -> success.content();
+            case FetchToken400Response response400 ->
+                throw new FetchToken400Exception(response400.content());
+            case FetchTokenErrorResponse errorResponse ->
+                throw new RuntimeException("Error " + errorResponse.statusCode() + ": " + errorResponse.textResponse());
+        };
+    }
+
+    public FetchTokenResponse fetchTokenResponse(
+            FetchTokenForm formParams,
+            Optional<String> authorization
+    ) throws IOException, InterruptedException {
+        var request = HttpRequest.newBuilder(baseUri.resolve("/token"))
+            .POST(HttpRequest.BodyPublishers.ofString(formParams.toUrlEncoded()))
+            .header("Content-Type", "application/x-www-form-urlencoded");
+        authorization.ifPresent(p -> request.header("Authorization", String.valueOf(p)));
+        return handleFetchTokenResponse(sendRequest(request.build()));
+    }
+
+    protected FetchTokenResponse handleFetchTokenResponse(HttpResponse<String> response) {
+        if (response.statusCode() == 200) {
+            return new FetchTokenSuccess(jsonb.fromJson(response.body(), TokenResponseDto.class));
         }
-        return jsonb.fromJson(connection.getInputStream(), TokenResponseDto.class);
+        if (response.statusCode() == 400 && isJsonResponse(response)) {
+            return new FetchToken400Response(jsonb.fromJson(response.body(), OauthErrorDto.class));
+        }
+        if (isJsonResponse(response)) {
+            return new FetchTokenJsonError(response.statusCode(), jsonb.fromJson(response.body(), JsonStructure.class));
+        } else {
+            return new FetchTokenUnexpectedError(response.statusCode(), response.body());
+        }
     }
 
     @Override
     public UserinfoDto getUserinfo(
             String authorization
-    ) throws IOException {
-        HttpURLConnection connection = openConnection("/userinfo");
-        connection.setRequestMethod("GET");
-        connection.setRequestProperty("Authorization", String.valueOf(authorization));
-        if (connection.getResponseCode() >= 300) {
-            throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
+    ) throws IOException, InterruptedException {
+        var response = getUserinfoResponse(
+            authorization);
+        return switch (response) {
+            case GetUserinfoSuccess success -> success.content();
+            case GetUserinfo401Response response401 ->
+                throw new GetUserinfo401Exception();
+            case GetUserinfoErrorResponse errorResponse ->
+                throw new RuntimeException("Error " + errorResponse.statusCode() + ": " + errorResponse.textResponse());
+        };
+    }
+
+    public GetUserinfoResponse getUserinfoResponse(
+            String authorization
+    ) throws IOException, InterruptedException {
+        var request = HttpRequest.newBuilder(baseUri.resolve("/userinfo")).GET();
+        request.header("Authorization", String.valueOf(authorization));
+        return handleGetUserinfoResponse(sendRequest(request.build()));
+    }
+
+    protected GetUserinfoResponse handleGetUserinfoResponse(HttpResponse<String> response) {
+        if (response.statusCode() == 200) {
+            return new GetUserinfoSuccess(jsonb.fromJson(response.body(), UserinfoDto.class));
         }
-        return jsonb.fromJson(connection.getInputStream(), UserinfoDto.class);
+        if (response.statusCode() == 401) {
+            return new GetUserinfo401Response();
+        }
+        if (isJsonResponse(response)) {
+            return new GetUserinfoJsonError(response.statusCode(), jsonb.fromJson(response.body(), JsonStructure.class));
+        } else {
+            return new GetUserinfoUnexpectedError(response.statusCode(), response.body());
+        }
     }
 
     @Override
@@ -107,41 +154,47 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
             Optional<String> state,
             Optional<URI> redirect_uri,
             Optional<String> scope
-    ) throws IOException {
-        List<String> queryParameters = new ArrayList<>();
-        response_type.ifPresent(p -> queryParameters.add("response_type=" + encode(String.valueOf(p), UTF_8)));
-        queryParameters.add("client_id=" + encode(String.valueOf(client_id), UTF_8));
-        state.ifPresent(p -> queryParameters.add("state=" + encode(String.valueOf(p), UTF_8)));
-        redirect_uri.ifPresent(p -> queryParameters.add("redirect_uri=" + encode(String.valueOf(p), UTF_8)));
-        scope.ifPresent(p -> queryParameters.add("scope=" + encode(String.valueOf(p), UTF_8)));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        HttpURLConnection connection = openConnection("/authorize" + query);
-        connection.setRequestMethod("GET");
-        if (connection.getResponseCode() >= 300) {
-            throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
+    ) throws IOException, InterruptedException {
+        var query = new StartAuthorizationQuery()
+            .clientId(client_id)
+        ;
+        response_type.ifPresent(query::responseType);
+        state.ifPresent(query::state);
+        redirect_uri.ifPresent(query::redirectUri);
+        scope.ifPresent(query::scope);
+        var response = startAuthorizationResponse(query);
+        switch (response) {
+            case StartAuthorization304Response response304:
+                throw new StartAuthorization304Exception();
+            case StartAuthorizationErrorResponse errorResponse:
+                throw new RuntimeException("Error " + errorResponse.statusCode() + ": " + errorResponse.textResponse());
+        };
+    }
+
+    public StartAuthorizationResponse startAuthorizationResponse(
+            StartAuthorizationQuery query
+    ) throws IOException, InterruptedException {
+        var request = HttpRequest.newBuilder(baseUri.resolve("/authorize" + "?" + query.toUrlEncoded())).GET();
+        return handleStartAuthorizationResponse(sendRequest(request.build()));
+    }
+
+    protected StartAuthorizationResponse handleStartAuthorizationResponse(HttpResponse<String> response) {
+        if (response.statusCode() == 304) {
+            return new StartAuthorization304Response();
+        }
+        if (isJsonResponse(response)) {
+            return new StartAuthorizationJsonError(response.statusCode(), jsonb.fromJson(response.body(), JsonStructure.class));
+        } else {
+            return new StartAuthorizationUnexpectedError(response.statusCode(), response.body());
         }
     }
 
-    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
-        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
+
+    protected HttpResponse<String> sendRequest(HttpRequest request) throws IOException, InterruptedException {
+        return HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {
-        return new ParameterizedType() {
-            @Override
-            public Type[] getActualTypeArguments() {
-                return typeArguments;
-            }
-
-            @Override
-            public Type getRawType() {
-                return rawType;
-            }
-
-            @Override
-            public Type getOwnerType() {
-                return null;
-            }
-        };
+    protected boolean isJsonResponse(HttpResponse<String> response) {
+        return response.headers().firstValue("content-type").filter(s -> s.startsWith("application/json")).isPresent();
     }
 }

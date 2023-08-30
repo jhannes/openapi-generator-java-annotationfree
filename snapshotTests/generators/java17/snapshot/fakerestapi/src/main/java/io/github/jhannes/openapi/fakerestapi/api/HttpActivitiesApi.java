@@ -32,6 +32,7 @@ import java.util.function.Consumer;
 import static java.net.URLEncoder.encode;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+/* With Java 17 support */
 public class HttpActivitiesApi implements ActivitiesApi {
 
     private final Jsonb jsonb;

@@ -3,51 +3,49 @@ package {{package}};
 
 {{#imports}}import {{import}};
 {{/imports}}
+import jakarta.json.JsonStructure;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import static java.net.URLEncoder.encode;
-import static java.nio.charset.StandardCharsets.UTF_8;
-
+{{#supportJava17}}
+/* With Java 17 support */
+{{/supportJava17}}
 {{#operations}}
 public class Http{{classname}} implements {{classname}} {
 
-{{#operation}}
-{{#-first}}
     private final Jsonb jsonb;
 
-    private final URL baseUrl;
+    private final URI baseUri;
 {{#basePath}}
 
-    public Http{{classname}}() throws MalformedURLException {
-        this(new URL("{{basePath}}"));
+    public Http{{classname}}() throws URISyntaxException {
+        this(new URI("{{basePath}}"));
     }
 {{/basePath}}
 
-    public Http{{classname}}(URL baseUrl) {
-        this(baseUrl, JsonbBuilder.create());
+    public Http{{classname}}(URI baseUri) {
+        this(baseUri, JsonbBuilder.create());
     }
 
-    public Http{{classname}}(URL baseUrl, Jsonb jsonb) {
-        this.baseUrl = baseUrl;
+    public Http{{classname}}(URI baseUri, Jsonb jsonb) {
+        this.baseUri = baseUri;
         this.jsonb = jsonb;
     }
 
-{{/-first}}
+{{#operation}}
     {{#isDeprecated}}
     @SuppressWarnings("deprecation")
     {{/isDeprecated}}
@@ -57,103 +55,110 @@ public class Http{{classname}} implements {{classname}} {
             {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{baseName}}{{/isQueryParam}}{{#isBodyParam}}
             {{{dataType}}} {{paramName}}{{/isBodyParam}}{{#isFormParam}}
             {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{baseName}}{{/isFormParam}}{{#isHeaderParam}}
-            {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}},{{/-last}}{{/allParams}}{{#responses}}{{#headers}},
-            Consumer<{{{dataType}}}> set{{nameInCamelCase}}{{/headers}}{{/responses}}
-    ) throws IOException {
+            {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}},{{/-last}}{{/allParams}}
+    ) throws IOException, InterruptedException {
         {{#hasQueryParams}}
-        List<String> queryParameters = new ArrayList<>();
+        var query = new {{operationIdCamelCase}}Query()
         {{#queryParams}}
         {{#required}}
-            {{#isContainer}}
-        {{baseName}}.forEach(p -> queryParameters.add("{{baseName}}=" + encode(String.valueOf(p), UTF_8)));
-            {{/isContainer}}
-            {{^isContainer}}
-        queryParameters.add("{{baseName}}=" + encode(String.valueOf({{baseName}}), UTF_8));
-          {{/isContainer}}
+            .{{paramName}}({{baseName}})
         {{/required}}
+        {{/queryParams}}
+        ;
+        {{#queryParams}}
         {{^required}}
             {{#isContainer}}
         {{baseName}}.ifPresent(list -> list.forEach(p -> queryParameters.add("{{baseName}}=" + encode(String.valueOf(p), UTF_8))));
             {{/isContainer}}
             {{^isContainer}}
-        {{baseName}}.ifPresent(p -> queryParameters.add("{{baseName}}=" + encode(String.valueOf(p), UTF_8)));
+        {{baseName}}.ifPresent(query::{{paramName}});
             {{/isContainer}}
         {{/required}}
         {{/queryParams}}
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
         {{/hasQueryParams}}
-        HttpURLConnection connection = openConnection("{{path}}"{{#pathParams}}
-                .replace("{{curly}}{{paramName}}}", encode(String.valueOf({{paramName}}), UTF_8)){{/pathParams}}{{#hasQueryParams}} + query{{/hasQueryParams}});
-        connection.setRequestMethod("{{httpMethod}}");
-        {{#headerParams}}
-        {{#required}}
-        connection.setRequestProperty("{{baseName}}", String.valueOf({{paramName}}));
-        {{/required}}
-        {{^required}}
-        {{paramName}}.ifPresent(p -> connection.setRequestProperty("{{baseName}}", String.valueOf(p)));
-        {{/required}}
-        {{/headerParams}}
         {{#hasFormParams}}
-        connection.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-        connection.setDoOutput(true);
-        List<String> formParameters = new ArrayList<>();
+        var formParams = new {{operationIdCamelCase}}Form()
         {{#formParams}}
         {{#required}}
-        formParameters.add("{{baseName}}=" + encode(String.valueOf({{baseName}}), UTF_8));
-        {{/required}}
-        {{^required}}
-        {{baseName}}.ifPresent(p -> formParameters.add("{{baseName}}=" + encode(String.valueOf(p), UTF_8)));
+            .{{paramName}}({{baseName}})
         {{/required}}
         {{/formParams}}
-        connection.getOutputStream().write(String.join("&", formParameters).getBytes());
+        ;
+        {{#formParams}}
+        {{^required}}
+            {{#isContainer}}
+        {{baseName}}.ifPresent(list -> list.forEach(p -> queryParameters.add("{{baseName}}=" + encode(String.valueOf(p), UTF_8))));
+            {{/isContainer}}
+            {{^isContainer}}
+        {{baseName}}.ifPresent(formParams::{{paramName}});
+            {{/isContainer}}
+        {{/required}}
+        {{/formParams}}
         {{/hasFormParams}}
-        {{#bodyParam}}
-        connection.setRequestProperty("Content-Type", "application/json");
-        connection.setDoOutput(true);
-        jsonb.toJson({{paramName}}, connection.getOutputStream());
-        {{/bodyParam}}
-        if (connection.getResponseCode() >= 300) {
-            throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
+        var response = {{operationId}}Response({{#hasQueryParams}}query{{/hasQueryParams}}{{#hasFormParams}}formParams{{/hasFormParams}}{{#allParams}}{{#isPathParam}}{{^-first}},{{/-first}}{{#-first}}{{#hasQueryParams}},{{/hasQueryParams}}{{^hasQueryParams}}{{#hasFormParams}},{{/hasFormParams}}{{/hasQueryParams}}{{/-first}}
+            {{paramName}}{{/isPathParam}}{{#isBodyParam}}{{^-first}},{{/-first}}{{#-first}}{{#hasQueryParams}},{{/hasQueryParams}}{{^hasQueryParams}}{{#hasFormParams}},{{/hasFormParams}}{{/hasQueryParams}}{{/-first}}
+            {{paramName}}{{/isBodyParam}}{{#isHeaderParam}}{{^-first}},{{/-first}}{{#-first}}{{#hasQueryParams}},{{/hasQueryParams}}{{^hasQueryParams}}{{#hasFormParams}},{{/hasFormParams}}{{/hasQueryParams}}{{/-first}}
+            {{paramName}}{{/isHeaderParam}}{{/allParams}});
+        {{#returnType}}return {{/returnType}}switch (response) {
+{{#responses}}
+{{#is2xx}}
+            case {{operationIdCamelCase}}Success success{{#returnType}} -> success.content();{{/returnType}}{{^returnType}}:
+                return;{{/returnType}}
+{{/is2xx}}
+{{^is2xx}}
+            case {{operationIdCamelCase}}{{code}}Response response{{code}}{{#returnType}} ->{{/returnType}}{{^returnType}}:{{/returnType}}
+                throw new {{operationIdCamelCase}}{{code}}Exception({{#dataType}}response{{code}}.content(){{/dataType}});
+{{/is2xx}}
+{{/responses}}
+            case {{operationIdCamelCase}}ErrorResponse errorResponse{{#returnType}} ->{{/returnType}}{{^returnType}}:{{/returnType}}
+                throw new RuntimeException("Error " + errorResponse.statusCode() + ": " + errorResponse.textResponse());
+        };
+    }
+
+    public {{operationIdCamelCase}}Response {{operationId}}Response({{#hasQueryParams}}
+            {{operationIdCamelCase}}Query query{{/hasQueryParams}}{{#hasFormParams}}
+            {{operationIdCamelCase}}Form formParams{{/hasFormParams}}{{#allParams}}{{#isPathParam}}{{^-first}},{{/-first}}{{#-first}}{{#hasQueryParams}},{{/hasQueryParams}}{{^hasQueryParams}}{{#hasFormParams}},{{/hasFormParams}}{{/hasQueryParams}}{{/-first}}
+            {{{dataType}}} {{paramName}}{{/isPathParam}}{{#isBodyParam}}{{^-first}},{{/-first}}{{#-first}}{{#hasQueryParams}},{{/hasQueryParams}}{{^hasQueryParams}}{{#hasFormParams}},{{/hasFormParams}}{{/hasQueryParams}}{{/-first}}
+            {{{dataType}}} {{paramName}}{{/isBodyParam}}{{#isHeaderParam}}{{^-first}},{{/-first}}{{#-first}}{{#hasQueryParams}},{{/hasQueryParams}}{{^hasQueryParams}}{{#hasFormParams}},{{/hasFormParams}}{{/hasQueryParams}}{{/-first}}
+            {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{/allParams}}
+    ) throws IOException, InterruptedException {
+        var request = HttpRequest.newBuilder(baseUri.resolve("{{path}}"{{#hasQueryParams}} + "?" + query.toUrlEncoded(){{/hasQueryParams}})){{^hasFormParams}}.{{httpMethod}}();{{/hasFormParams}}
+        {{#hasFormParams}}
+            .{{httpMethod}}(HttpRequest.BodyPublishers.ofString(formParams.toUrlEncoded()))
+            .header("Content-Type", "application/x-www-form-urlencoded");
+        {{/hasFormParams}}
+        {{#headerParams}}
+        {{#required}}
+        request.header("{{baseName}}", String.valueOf({{paramName}}));
+        {{/required}}
+        {{^required}}
+        {{paramName}}.ifPresent(p -> request.header("{{baseName}}", String.valueOf(p)));
+        {{/required}}
+        {{/headerParams}}
+        return handle{{operationIdCamelCase}}Response(sendRequest(request.build()));
+    }
+
+    protected {{operationIdCamelCase}}Response handle{{operationIdCamelCase}}Response(HttpResponse<String> response) {
+{{#responses}}
+        if (response.statusCode() == {{code}}{{^is2xx}}{{#dataType}} && isJsonResponse(response){{/dataType}}{{/is2xx}}) {
+            return new {{operationIdCamelCase}}{{#is2xx}}Success{{/is2xx}}{{^is2xx}}{{code}}Response{{/is2xx}}({{#dataType}}jsonb.fromJson(response.body(), {{{dataType}}}.class){{#headers}}{{#-first}}, {{/-first}}{{/headers}}{{/dataType}}{{#headers}}{{^-first}}, {{/-first}}response.headers().firstValue("{{baseName}}"){{/headers}});
         }
-    {{#returnType}}
-    {{#isResponseFile}}
-        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        connection.getInputStream().transferTo(buffer);
-        return buffer.toByteArray();
-    {{/isResponseFile}}
-    {{^isResponseFile}}
-    {{#returnContainer}}
-        return jsonb.fromJson(connection.getInputStream(), getParameterizedType(List.class, new Type[]{ {{returnBaseType}}.class }));
-    {{/returnContainer}}
-    {{^returnContainer}}
-        return jsonb.fromJson(connection.getInputStream(), {{returnType}}.class);
-    {{/returnContainer}}
-    {{/isResponseFile}}
-    {{/returnType}}
+{{/responses}}
+        if (isJsonResponse(response)) {
+            return new {{operationIdCamelCase}}JsonError(response.statusCode(), jsonb.fromJson(response.body(), JsonStructure.class));
+        } else {
+            return new {{operationIdCamelCase}}UnexpectedError(response.statusCode(), response.body());
+        }
     }
 
 {{/operation}}
-    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
-        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
+
+    protected HttpResponse<String> sendRequest(HttpRequest request) throws IOException, InterruptedException {
+        return HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {
-        return new ParameterizedType() {
-            @Override
-            public Type[] getActualTypeArguments() {
-                return typeArguments;
-            }
-
-            @Override
-            public Type getRawType() {
-                return rawType;
-            }
-
-            @Override
-            public Type getOwnerType() {
-                return null;
-            }
-        };
+    protected boolean isJsonResponse(HttpResponse<String> response) {
+        return response.headers().firstValue("content-type").filter(s -> s.startsWith("application/json")).isPresent();
     }
 }
 {{/operations}}

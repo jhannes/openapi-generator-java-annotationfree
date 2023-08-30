@@ -12,42 +12,40 @@
 package io.github.jhannes.openapi.openid_configuration.api;
 
 import java.net.URI;
+import jakarta.json.JsonStructure;
 import jakarta.json.bind.Jsonb;
 import jakarta.json.bind.JsonbBuilder;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
+import java.net.URISyntaxException;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
-import static java.net.URLEncoder.encode;
-import static java.nio.charset.StandardCharsets.UTF_8;
-
+/* With Java 17 support */
 public class HttpIdentityClientApi implements IdentityClientApi {
 
     private final Jsonb jsonb;
 
-    private final URL baseUrl;
+    private final URI baseUri;
 
-    public HttpIdentityClientApi() throws MalformedURLException {
-        this(new URL("http://localhost"));
+    public HttpIdentityClientApi() throws URISyntaxException {
+        this(new URI("http://localhost"));
     }
 
-    public HttpIdentityClientApi(URL baseUrl) {
-        this(baseUrl, JsonbBuilder.create());
+    public HttpIdentityClientApi(URI baseUri) {
+        this(baseUri, JsonbBuilder.create());
     }
 
-    public HttpIdentityClientApi(URL baseUrl, Jsonb jsonb) {
-        this.baseUrl = baseUrl;
+    public HttpIdentityClientApi(URI baseUri, Jsonb jsonb) {
+        this.baseUri = baseUri;
         this.jsonb = jsonb;
     }
 
@@ -56,43 +54,52 @@ public class HttpIdentityClientApi implements IdentityClientApi {
             Optional<String> state,
             Optional<String> code,
             Optional<String> error,
-            Optional<String> error_description,
-            Consumer<String> setSetCookie,
-            Consumer<URI> setLocation
-    ) throws IOException {
-        List<String> queryParameters = new ArrayList<>();
-        state.ifPresent(p -> queryParameters.add("state=" + encode(String.valueOf(p), UTF_8)));
-        code.ifPresent(p -> queryParameters.add("code=" + encode(String.valueOf(p), UTF_8)));
-        error.ifPresent(p -> queryParameters.add("error=" + encode(String.valueOf(p), UTF_8)));
-        error_description.ifPresent(p -> queryParameters.add("error_description=" + encode(String.valueOf(p), UTF_8)));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        HttpURLConnection connection = openConnection("/callback" + query);
-        connection.setRequestMethod("GET");
-        if (connection.getResponseCode() >= 300) {
-            throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
+            Optional<String> error_description
+    ) throws IOException, InterruptedException {
+        var query = new HandleCallbackQuery()
+        ;
+        state.ifPresent(query::state);
+        code.ifPresent(query::code);
+        error.ifPresent(query::error);
+        error_description.ifPresent(query::errorDescription);
+        var response = handleCallbackResponse(query);
+        switch (response) {
+            case HandleCallbackSuccess success:
+                return;
+            case HandleCallback304Response response304:
+                throw new HandleCallback304Exception();
+            case HandleCallbackErrorResponse errorResponse:
+                throw new RuntimeException("Error " + errorResponse.statusCode() + ": " + errorResponse.textResponse());
+        };
+    }
+
+    public HandleCallbackResponse handleCallbackResponse(
+            HandleCallbackQuery query
+    ) throws IOException, InterruptedException {
+        var request = HttpRequest.newBuilder(baseUri.resolve("/callback" + "?" + query.toUrlEncoded())).GET();
+        return handleHandleCallbackResponse(sendRequest(request.build()));
+    }
+
+    protected HandleCallbackResponse handleHandleCallbackResponse(HttpResponse<String> response) {
+        if (response.statusCode() == 200) {
+            return new HandleCallbackSuccess();
+        }
+        if (response.statusCode() == 304) {
+            return new HandleCallback304Response(response.headers().firstValue("Set-Cookie"), response.headers().firstValue("Location"));
+        }
+        if (isJsonResponse(response)) {
+            return new HandleCallbackJsonError(response.statusCode(), jsonb.fromJson(response.body(), JsonStructure.class));
+        } else {
+            return new HandleCallbackUnexpectedError(response.statusCode(), response.body());
         }
     }
 
-    protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
-        return (HttpURLConnection) new URL(baseUrl + relativeUrl).openConnection();
+
+    protected HttpResponse<String> sendRequest(HttpRequest request) throws IOException, InterruptedException {
+        return HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
     }
 
-    private static ParameterizedType getParameterizedType(Class<?> rawType, final Type[] typeArguments) {
-        return new ParameterizedType() {
-            @Override
-            public Type[] getActualTypeArguments() {
-                return typeArguments;
-            }
-
-            @Override
-            public Type getRawType() {
-                return rawType;
-            }
-
-            @Override
-            public Type getOwnerType() {
-                return null;
-            }
-        };
+    protected boolean isJsonResponse(HttpResponse<String> response) {
+        return response.headers().firstValue("content-type").filter(s -> s.startsWith("application/json")).isPresent();
     }
 }

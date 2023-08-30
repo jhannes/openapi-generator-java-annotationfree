@@ -13,6 +13,8 @@ package io.github.jhannes.openapi.openid_configuration.api;
 
 import java.net.URI;
 
+import jakarta.json.JsonStructure;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -24,6 +26,26 @@ import static java.net.URLEncoder.encode;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public interface IdentityClientApi {
+    public sealed interface HandleCallbackResponse {
+    }
+
+    public record HandleCallbackSuccess() implements HandleCallbackResponse {
+    }
+
+    public record HandleCallback304Response(Optional<String> setCookieHeader, Optional<String> locationHeader) implements HandleCallbackResponse {
+    }
+
+    public class HandleCallback304Exception extends RuntimeException {
+    }
+
+    public sealed interface HandleCallbackErrorResponse extends HandleCallbackResponse, ErrorResponse {}
+
+    public record HandleCallbackJsonError(int statusCode, JsonStructure content) implements HandleCallbackErrorResponse, ErrorJsonResponse {
+    }
+
+    public record HandleCallbackUnexpectedError(int statusCode, String content) implements HandleCallbackErrorResponse, ErrorTextResponse {
+    }
+
     /**
      * Completes the authentication flow. This should be implemented by the openid connect client. The client should normally invoke the token endpoint with the code value provided by the identity provider.
      * @param state  (query) (optional)
@@ -35,10 +57,8 @@ public interface IdentityClientApi {
             Optional<String> state,
             Optional<String> code,
             Optional<String> error,
-            Optional<String> error_description,
-            Consumer<String> setSetCookie,
-            Consumer<URI> setLocation
-    ) throws IOException;
+            Optional<String> error_description
+    ) throws IOException, InterruptedException;
 
     public static class HandleCallbackQuery {
         private String state;
@@ -81,6 +101,25 @@ public interface IdentityClientApi {
                 parameters.add("error_description=" + encode(errorDescription.toString(), UTF_8));
             }
             return String.join("&", parameters);
+        }
+    }
+
+    interface ErrorResponse {
+        int statusCode();
+        String textResponse();
+    }
+
+    interface ErrorJsonResponse extends ErrorResponse {
+        JsonStructure content();
+        default String textResponse() {
+            return content().toString();
+        }
+    }
+
+    interface ErrorTextResponse extends ErrorResponse {
+        String content();
+        default String textResponse() {
+            return content();
         }
     }
 }
