@@ -22,7 +22,13 @@ public class AlternativeGeneratorSnapshotTest extends AbstractSnapshotTest {
     }
 
     private static CodegenConfigurator createConfigurator(Path outputDir) {
-        return createBaseConfigurator(SnapshotTests.getModelName(SPEC), SPEC, outputDir).setGeneratorName(GENERATOR_NAME);
+        var modelName = SnapshotTests.getModelName(SPEC);
+        return AbstractSnapshotTest.createBaseConfigurator(SPEC, outputDir)
+                .setModelNameSuffix("Dto")
+                .addAdditionalProperty("hideGenerationTimestamp", "true")
+                .setModelPackage("io.github.jhannes.openapi." + modelName + ".model")
+                .setApiPackage("io.github.jhannes.openapi." + modelName + ".api")
+                .setGeneratorName(GENERATOR_NAME);
     }
 
     private Path getTargetDir(String subdir) {

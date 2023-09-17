@@ -15,31 +15,17 @@ public class AbstractSnapshotTest {
     public static final Path LOCAL_SNAPSHOT_ROOT = Paths.get("localSnapshotTests");
 
     protected static CodegenConfigurator createConfigurator(String modelName, Path input, Path outputDir) {
-        return createBaseConfigurator(modelName, input, outputDir)
-                .setGeneratorName("java-annotationfree");
-    }
-
-    static CodegenConfigurator createBaseConfigurator(String modelName, Path input, Path outputDir) {
-        return createBaseConfigurator(modelName)
-                .setInputSpec(getInputSpec(input))
-                .setOutputDir(outputDir.toString());
-    }
-
-    private static CodegenConfigurator createBaseConfigurator(String modelName) {
-        return createBaseConfigurator()
-                .setPackageName("io.github.jhannes.openapi." + modelName)
-                .setModelPackage("io.github.jhannes.openapi." + modelName + ".model")
-                .setApiPackage("io.github.jhannes.openapi." + modelName + ".api");
-    }
-
-    private static CodegenConfigurator createBaseConfigurator() {
-        return new CodegenConfigurator()
+        return createBaseConfigurator(input, outputDir)
                 .setModelNameSuffix("Dto")
                 .addAdditionalProperty("hideGenerationTimestamp", "true")
-                .addAdditionalProperty("generateSupportingFiles", "true")
-                .addAdditionalProperty("generateModelTests", "true")
-                .addAdditionalProperty("generateApis", "true")
-                .addAdditionalProperty("dateLibrary", "java8");
+                .setGeneratorName("java-annotationfree")
+                .setPackageName("io.github.jhannes.openapi." + modelName);
+    }
+
+    static CodegenConfigurator createBaseConfigurator(Path input, Path outputDir) {
+        return new CodegenConfigurator()
+                .setInputSpec(getInputSpec(input))
+                .setOutputDir(outputDir.toString());
     }
 
     private static String getInputSpec(Path input) {
