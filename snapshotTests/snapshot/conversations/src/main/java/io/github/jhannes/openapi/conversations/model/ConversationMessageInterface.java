@@ -52,7 +52,7 @@ public interface ConversationMessageInterface {
 
     <T> ConversationMessageInterface tags(Collection<T> items, Function<T, String> mapper);
 
-    <T> List<T> getTags(Function<String, T> mapper);
+    <T> Set<T> getTags(Function<String, T> mapper);
 
     ConversationMessageInterface addTagsItem(String tagsItem);
 
