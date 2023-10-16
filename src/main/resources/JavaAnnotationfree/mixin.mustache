@@ -28,7 +28,7 @@ public interface {{classname}}{{#parent}} extends {{{.}}}{{/parent}} {
 
     <T> {{classname}} {{name}}(Collection<T> items, Function<T, {{{items.datatypeWithEnum}}}> mapper);
 
-    <T> List<T> {{getter}}(Function<{{{items.datatypeWithEnum}}}, T> mapper);
+    <T> {{#uniqueItems}}Set{{/uniqueItems}}{{^uniqueItems}}List{{/uniqueItems}}<T> {{getter}}(Function<{{{items.datatypeWithEnum}}}, T> mapper);
 
     {{classname}} add{{nameInCamelCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item);
     {{/isArray}}
