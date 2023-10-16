@@ -126,7 +126,8 @@ public class SampleModelData {
 
     public ConversationMessageDto sampleConversationMessageDto() {
         return new ConversationMessageDto()
-            .text(sampleString("text"));
+            .text(sampleString("text"))
+            .tags(sampleSet(() -> sampleString("tags"), "tags"));
     }
 
     public List<ConversationMessageDto> sampleListOfConversationMessageDto(String propertyName) {
@@ -145,7 +146,8 @@ public class SampleModelData {
         return new ConversationMessageSnapshotDto()
             .createdAt(sampleOffsetDateTime("createdAt"))
             .updatedAt(sampleOffsetDateTime("updatedAt"))
-            .text(sampleString("text"));
+            .text(sampleString("text"))
+            .tags(sampleSet(() -> sampleString("tags"), "tags"));
     }
 
     public List<ConversationMessageSnapshotDto> sampleListOfConversationMessageSnapshotDto(String propertyName) {

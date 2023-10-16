@@ -41,6 +41,8 @@ public class ConversationMessageSnapshotDto implements ChangeTrackedInterface, C
 
     private String text;
 
+    private Set<String> tags = null;
+
     public static String[] readOnlyFields() {
         return new String[] {
         };
@@ -74,6 +76,7 @@ public class ConversationMessageSnapshotDto implements ChangeTrackedInterface, C
         if (this.getCreatedAt() != null) target.setCreatedAt(this.getCreatedAt());
         if (this.getUpdatedAt() != null) target.setUpdatedAt(this.getUpdatedAt());
         if (this.getText() != null) target.setText(this.getText());
+        if (this.getTags() != null) target.setTags(this.getTags());
         return target;
     }
 
@@ -141,6 +144,39 @@ public class ConversationMessageSnapshotDto implements ChangeTrackedInterface, C
         return this;
     }
 
+    public <T> ConversationMessageSnapshotDto tags(Collection<T> items, Function<T, String> mapper) {
+        return tags(items.stream().map(mapper).collect(Collectors.toSet()));
+    }
+
+    public <T> Set<T> getTags(Function<String, T> mapper) {
+        return getTags().stream().map(mapper).collect(Collectors.toSet());
+    }
+
+    public ConversationMessageSnapshotDto addTagsItem(String tagsItem) {
+        if (this.tags == null) {
+            this.tags = new LinkedHashSet<>();
+        }
+        this.tags.add(tagsItem);
+        return this;
+    }
+
+    /**
+     * Get tags
+     * @return tags
+     */
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
+    }
+
+    public ConversationMessageSnapshotDto tags(Set<String> tags) {
+        this.tags = tags;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -152,12 +188,13 @@ public class ConversationMessageSnapshotDto implements ChangeTrackedInterface, C
         ConversationMessageSnapshotDto conversationMessageSnapshot = (ConversationMessageSnapshotDto) o;
         return Objects.equals(this.getCreatedAt(), conversationMessageSnapshot.getCreatedAt()) &&
                 Objects.equals(this.getUpdatedAt(), conversationMessageSnapshot.getUpdatedAt()) &&
-                Objects.equals(this.getText(), conversationMessageSnapshot.getText());
+                Objects.equals(this.getText(), conversationMessageSnapshot.getText()) &&
+                Objects.equals(this.getTags(), conversationMessageSnapshot.getTags());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getCreatedAt(), getUpdatedAt(), getText());
+        return Objects.hash(getCreatedAt(), getUpdatedAt(), getText(), getTags());
     }
 
     @Override
@@ -167,6 +204,7 @@ public class ConversationMessageSnapshotDto implements ChangeTrackedInterface, C
         sb.append("    createdAt: ").append(toIndentedString(getCreatedAt())).append("\n");
         sb.append("    updatedAt: ").append(toIndentedString(getUpdatedAt())).append("\n");
         sb.append("    text: ").append(toIndentedString(getText())).append("\n");
+        sb.append("    tags: ").append(toIndentedString(getTags())).append("\n");
         sb.append("}");
         return sb.toString();
     }
