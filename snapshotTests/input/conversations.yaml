@@ -64,6 +64,7 @@ components:
           type: string
         tags:
           type: array
+          uniqueItems: true
           items:
             type: string
       required: [ text ]

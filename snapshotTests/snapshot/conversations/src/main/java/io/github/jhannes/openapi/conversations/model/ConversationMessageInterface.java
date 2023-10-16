@@ -60,11 +60,11 @@ public interface ConversationMessageInterface {
      * Get tags
      * @return tags
      */
-    List<String> getTags();
+    Set<String> getTags();
 
-    void setTags(List<String> tags);
+    void setTags(Set<String> tags);
 
-    ConversationMessageInterface tags(List<String> tags);
+    ConversationMessageInterface tags(Set<String> tags);
 
     default <T extends ConversationMessageInterface> T copyTo(T target) {
         if (this.getText() != null) target.setText(this.getText());

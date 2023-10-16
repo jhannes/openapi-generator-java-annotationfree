@@ -37,7 +37,7 @@ public class ConversationMessageDto implements ConversationMessageInterface {
 
     private String text;
 
-    private List<String> tags = null;
+    private Set<String> tags = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -101,16 +101,16 @@ public class ConversationMessageDto implements ConversationMessageInterface {
     }
 
     public <T> ConversationMessageDto tags(Collection<T> items, Function<T, String> mapper) {
-        return tags(items.stream().map(mapper).collect(Collectors.toList()));
+        return tags(items.stream().map(mapper).collect(Collectors.toSet()));
     }
 
-    public <T> List<T> getTags(Function<String, T> mapper) {
-        return getTags().stream().map(mapper).collect(Collectors.toList());
+    public <T> Set<T> getTags(Function<String, T> mapper) {
+        return getTags().stream().map(mapper).collect(Collectors.toSet());
     }
 
     public ConversationMessageDto addTagsItem(String tagsItem) {
         if (this.tags == null) {
-            this.tags = new ArrayList<>();
+            this.tags = new LinkedHashSet<>();
         }
         this.tags.add(tagsItem);
         return this;
@@ -120,15 +120,15 @@ public class ConversationMessageDto implements ConversationMessageInterface {
      * Get tags
      * @return tags
      */
-    public List<String> getTags() {
+    public Set<String> getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(Set<String> tags) {
         this.tags = tags;
     }
 
-    public ConversationMessageDto tags(List<String> tags) {
+    public ConversationMessageDto tags(Set<String> tags) {
         this.tags = tags;
         return this;
     }

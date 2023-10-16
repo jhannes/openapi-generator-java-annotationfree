@@ -41,7 +41,7 @@ public class ConversationMessageSnapshotDto implements ChangeTrackedInterface, C
 
     private String text;
 
-    private List<String> tags = null;
+    private Set<String> tags = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -145,16 +145,16 @@ public class ConversationMessageSnapshotDto implements ChangeTrackedInterface, C
     }
 
     public <T> ConversationMessageSnapshotDto tags(Collection<T> items, Function<T, String> mapper) {
-        return tags(items.stream().map(mapper).collect(Collectors.toList()));
+        return tags(items.stream().map(mapper).collect(Collectors.toSet()));
     }
 
-    public <T> List<T> getTags(Function<String, T> mapper) {
-        return getTags().stream().map(mapper).collect(Collectors.toList());
+    public <T> Set<T> getTags(Function<String, T> mapper) {
+        return getTags().stream().map(mapper).collect(Collectors.toSet());
     }
 
     public ConversationMessageSnapshotDto addTagsItem(String tagsItem) {
         if (this.tags == null) {
-            this.tags = new ArrayList<>();
+            this.tags = new LinkedHashSet<>();
         }
         this.tags.add(tagsItem);
         return this;
@@ -164,15 +164,15 @@ public class ConversationMessageSnapshotDto implements ChangeTrackedInterface, C
      * Get tags
      * @return tags
      */
-    public List<String> getTags() {
+    public Set<String> getTags() {
         return tags;
     }
 
-    public void setTags(List<String> tags) {
+    public void setTags(Set<String> tags) {
         this.tags = tags;
     }
 
-    public ConversationMessageSnapshotDto tags(List<String> tags) {
+    public ConversationMessageSnapshotDto tags(Set<String> tags) {
         this.tags = tags;
         return this;
     }
