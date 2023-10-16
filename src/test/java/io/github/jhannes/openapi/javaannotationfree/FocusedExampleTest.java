@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
  */
 public class FocusedExampleTest extends AbstractSnapshotTest {
 
-    public static final Path SPEC = SNAPSHOT_ROOT.resolve("input/openid-configuration.yaml");
+    public static final Path SPEC = SNAPSHOT_ROOT.resolve("input/conversations.yaml");
     public static final Path ROOT_DIR = SPEC.getParent().getParent();
 
     @TestFactory

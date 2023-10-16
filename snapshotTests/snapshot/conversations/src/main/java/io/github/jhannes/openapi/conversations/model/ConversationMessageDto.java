@@ -37,6 +37,8 @@ public class ConversationMessageDto implements ConversationMessageInterface {
 
     private String text;
 
+    private List<String> tags = null;
+
     public static String[] readOnlyFields() {
         return new String[] {
         };
@@ -64,6 +66,7 @@ public class ConversationMessageDto implements ConversationMessageInterface {
 
     public <T extends ConversationMessageDto> T copyTo(T target) {
         if (this.getText() != null) target.setText(this.getText());
+        if (this.getTags() != null) target.setTags(this.getTags());
         return target;
     }
 
@@ -97,6 +100,39 @@ public class ConversationMessageDto implements ConversationMessageInterface {
         return this;
     }
 
+    public <T> ConversationMessageDto tags(Collection<T> items, Function<T, String> mapper) {
+        return tags(items.stream().map(mapper).collect(Collectors.toList()));
+    }
+
+    public <T> List<T> getTags(Function<String, T> mapper) {
+        return getTags().stream().map(mapper).collect(Collectors.toList());
+    }
+
+    public ConversationMessageDto addTagsItem(String tagsItem) {
+        if (this.tags == null) {
+            this.tags = new ArrayList<>();
+        }
+        this.tags.add(tagsItem);
+        return this;
+    }
+
+    /**
+     * Get tags
+     * @return tags
+     */
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public ConversationMessageDto tags(List<String> tags) {
+        this.tags = tags;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -106,12 +142,13 @@ public class ConversationMessageDto implements ConversationMessageInterface {
             return false;
         }
         ConversationMessageDto conversationMessage = (ConversationMessageDto) o;
-        return Objects.equals(this.getText(), conversationMessage.getText());
+        return Objects.equals(this.getText(), conversationMessage.getText()) &&
+                Objects.equals(this.getTags(), conversationMessage.getTags());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getText());
+        return Objects.hash(getText(), getTags());
     }
 
     @Override
@@ -119,6 +156,7 @@ public class ConversationMessageDto implements ConversationMessageInterface {
         StringBuilder sb = new StringBuilder();
         sb.append("ConversationMessageDto {\n");
         sb.append("    text: ").append(toIndentedString(getText())).append("\n");
+        sb.append("    tags: ").append(toIndentedString(getTags())).append("\n");
         sb.append("}");
         return sb.toString();
     }

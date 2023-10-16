@@ -50,8 +50,25 @@ public interface ConversationMessageInterface {
 
     ConversationMessageInterface text(String text);
 
+    <T> ConversationMessageInterface tags(Collection<T> items, Function<T, String> mapper);
+
+    <T> List<T> getTags(Function<String, T> mapper);
+
+    ConversationMessageInterface addTagsItem(String tagsItem);
+
+    /**
+     * Get tags
+     * @return tags
+     */
+    List<String> getTags();
+
+    void setTags(List<String> tags);
+
+    ConversationMessageInterface tags(List<String> tags);
+
     default <T extends ConversationMessageInterface> T copyTo(T target) {
         if (this.getText() != null) target.setText(this.getText());
+        if (this.getTags() != null) target.setTags(this.getTags());
         return target;
     }
 }
