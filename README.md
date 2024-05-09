@@ -35,7 +35,7 @@ Add to your `pom.xml`:
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>6.2.0</version>
+                <version>7.5.0</version>
                 <executions>
                     <execution>
                         <id>petstore-java</id>
@@ -57,7 +57,7 @@ Add to your `pom.xml`:
                     <dependency>
                         <groupId>io.github.jhannes.openapi</groupId>
                         <artifactId>openapi-generator-java-annotationfree</artifactId>
-                        <version>0.5.0</version>
+                        <version>0.6.0</version>
                     </dependency>
                 </dependencies>
             </plugin>

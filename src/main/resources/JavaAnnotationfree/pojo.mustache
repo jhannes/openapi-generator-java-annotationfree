@@ -141,7 +141,7 @@ public class {{classname}}{{#parent}} extends {{{parent}}}{{/parent}}{{#interfac
         return {{getter}}().stream().map(mapper).collect(Collectors.{{#uniqueItems}}toSet{{/uniqueItems}}{{^uniqueItems}}toList{{/uniqueItems}}());
     }
 
-    public {{classname}} add{{nameInCamelCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item) {
+    public {{classname}} add{{nameInPascalCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item) {
         {{^required}}
         if (this.{{baseName}} == null) {
             this.{{baseName}} = {{{defaultValue}}};
@@ -153,7 +153,7 @@ public class {{classname}}{{#parent}} extends {{{parent}}}{{/parent}}{{#interfac
     {{/isArray}}
     {{#isMap}}
 
-    public {{classname}} put{{nameInCamelCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item) {
+    public {{classname}} put{{nameInPascalCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item) {
          {{^required}}
          if (this.{{baseName}} == null) {
              this.{{baseName}} = {{{defaultValue}}};
@@ -214,16 +214,16 @@ public class {{classname}}{{#parent}} extends {{{parent}}}{{/parent}}{{#interfac
     }
 
     @Override
-    public {{classname}} add{{nameInCamelCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item) {
-        super.add{{nameInCamelCase}}Item({{name}}Item);
+    public {{classname}} add{{nameInPascalCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item) {
+        super.add{{nameInPascalCase}}Item({{name}}Item);
         return this;
     }
     {{/isArray}}
     {{#isMap}}
 
     @Override
-    public {{classname}} put{{nameInCamelCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item) {
-        super.put{{nameInCamelCase}}Item(key, {{name}}Item)
+    public {{classname}} put{{nameInPascalCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item) {
+        super.put{{nameInPascalCase}}Item(key, {{name}}Item)
         return this;
     }
     {{/isMap}}

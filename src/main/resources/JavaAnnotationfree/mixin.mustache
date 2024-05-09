@@ -30,11 +30,11 @@ public interface {{classname}}{{#parent}} extends {{{.}}}{{/parent}} {
 
     <T> {{#uniqueItems}}Set{{/uniqueItems}}{{^uniqueItems}}List{{/uniqueItems}}<T> {{getter}}(Function<{{{items.datatypeWithEnum}}}, T> mapper);
 
-    {{classname}} add{{nameInCamelCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item);
+    {{classname}} add{{nameInPascalCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item);
     {{/isArray}}
     {{#isMap}}
 
-    {{classname}} put{{nameInCamelCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item);
+    {{classname}} put{{nameInPascalCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item);
     {{/isMap}}
 
     /**
@@ -77,12 +77,12 @@ public interface {{classname}}{{#parent}} extends {{{.}}}{{/parent}} {
     <T> {{classname}} {{name}}(Collection<T> items, Function<T, {{{items.datatypeWithEnum}}}> mapper);
 
     @Override
-    {{classname}} add{{nameInCamelCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item);
+    {{classname}} add{{nameInPascalCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item);
     {{/isArray}}
     {{#isMap}}
 
     @Override
-    {{classname}} put{{nameInCamelCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item);
+    {{classname}} put{{nameInPascalCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item);
     {{/isMap}}
 
     @Override

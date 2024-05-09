@@ -47,7 +47,7 @@ public interface {{classname}} {
             {{{dataType}}} {{paramName}}{{/isBodyParam}}{{#isFormParam}}
             {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{baseName}}{{/isFormParam}}{{#isHeaderParam}}
             {{^required}}Optional<{{{dataType}}}>{{/required}}{{#required}}{{{dataType}}}{{/required}} {{paramName}}{{/isHeaderParam}}{{^-last}},{{/-last}}{{/allParams}}{{#responses}}{{#headers}},
-            Consumer<{{{dataType}}}> set{{nameInCamelCase}}{{/headers}}{{/responses}}
+            Consumer<{{{dataType}}}> set{{nameInPascalCase}}{{/headers}}{{/responses}}
     ) throws IOException;
     {{#hasHeaderParams}}
 
