@@ -21,7 +21,8 @@ paths:
         "200":
           description: Updated
       x-content-type: application/json
-      x-accepts: application/json
+      x-accepts:
+      - application/json
 components:
   schemas:
     Address:
@@ -60,11 +61,39 @@ components:
     Dog:
       allOf:
       - $ref: '#/components/schemas/PetBase'
-      - $ref: '#/components/schemas/Dog_allOf'
+      - properties:
+          pet_type:
+            enum:
+            - Dog
+            type: string
+          bark:
+            type: boolean
+          breed:
+            enum:
+            - Dingo
+            - Husky
+            - Retriever
+            - Shepherd
+            type: string
+        required:
+        - pet_type
+        type: object
     WorkingDog:
       allOf:
       - $ref: '#/components/schemas/Dog'
-      - $ref: '#/components/schemas/WorkingDog_allOf'
+      - properties:
+          pet_type:
+            enum:
+            - WorkingDog
+            type: string
+          capabilities:
+            items:
+              $ref: '#/components/schemas/WorkingDogCapability'
+            type: array
+        required:
+        - capabilities
+        - pet_type
+        type: object
     WorkingDogCapability:
       enum:
       - Guide
@@ -74,7 +103,19 @@ components:
     Cat:
       allOf:
       - $ref: '#/components/schemas/PetBase'
-      - $ref: '#/components/schemas/Cat_allOf'
+      - properties:
+          pet_type:
+            enum:
+            - Cat
+            type: string
+          hunts:
+            type: boolean
+          age:
+            readOnly: true
+            type: integer
+        required:
+        - pet_type
+        type: object
     Goldfish:
       properties:
         pet_type:
@@ -96,53 +137,4 @@ components:
       - $ref: '#/components/schemas/Dog'
       - $ref: '#/components/schemas/WorkingDog'
       - $ref: '#/components/schemas/Goldfish'
-    Dog_allOf:
-      properties:
-        pet_type:
-          enum:
-          - Dog
-          type: string
-        bark:
-          type: boolean
-        breed:
-          enum:
-          - Dingo
-          - Husky
-          - Retriever
-          - Shepherd
-          type: string
-      required:
-      - pet_type
-      type: object
-      example: null
-    WorkingDog_allOf:
-      properties:
-        pet_type:
-          enum:
-          - WorkingDog
-          type: string
-        capabilities:
-          items:
-            $ref: '#/components/schemas/WorkingDogCapability'
-          type: array
-      required:
-      - capabilities
-      - pet_type
-      type: object
-      example: null
-    Cat_allOf:
-      properties:
-        pet_type:
-          enum:
-          - Cat
-          type: string
-        hunts:
-          type: boolean
-        age:
-          readOnly: true
-          type: integer
-      required:
-      - pet_type
-      type: object
-      example: null
 

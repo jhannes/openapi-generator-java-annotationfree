@@ -2,6 +2,7 @@
 
 Sample API
 - API version: 0.1.9
+  - Generator version: 7.5.0
 
 Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
 
@@ -118,14 +119,11 @@ Class | Method | HTTP request | Description
 ## Documentation for Models
 
  - [AddressDto](docs/AddressDto.md)
- - [CatAllOfDto](docs/CatAllOfDto.md)
  - [CatDto](docs/CatDto.md)
- - [DogAllOfDto](docs/DogAllOfDto.md)
  - [DogDto](docs/DogDto.md)
  - [GoldfishDto](docs/GoldfishDto.md)
  - [PetBaseDto](docs/PetBaseDto.md)
  - [PetDto](docs/PetDto.md)
- - [WorkingDogAllOfDto](docs/WorkingDogAllOfDto.md)
  - [WorkingDogCapabilityDto](docs/WorkingDogCapabilityDto.md)
  - [WorkingDogDto](docs/WorkingDogDto.md)
 
