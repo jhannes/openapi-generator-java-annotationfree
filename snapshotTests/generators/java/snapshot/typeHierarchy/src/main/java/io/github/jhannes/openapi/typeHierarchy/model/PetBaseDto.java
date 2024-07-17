@@ -50,7 +50,7 @@ import io.github.jhannes.openapi.typeHierarchy.JSON;
 /**
  * PetBaseDto
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.5.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
 public class PetBaseDto {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -78,10 +78,10 @@ public class PetBaseDto {
     this.id = id;
   }
 
-   /**
+  /**
    * Get id
    * @return id
-  **/
+   */
   @javax.annotation.Nullable
   public String getId() {
     return id;
@@ -94,10 +94,10 @@ public class PetBaseDto {
     return this;
   }
 
-   /**
+  /**
    * Get name
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
@@ -113,10 +113,10 @@ public class PetBaseDto {
     return this;
   }
 
-   /**
+  /**
    * Get birthDate
    * @return birthDate
-  **/
+   */
   @javax.annotation.Nullable
   public String getBirthDate() {
     return birthDate;
@@ -132,10 +132,10 @@ public class PetBaseDto {
     return this;
   }
 
-   /**
+  /**
    * Get ownerAddress
    * @return ownerAddress
-  **/
+   */
   @javax.annotation.Nullable
   public AddressDto getOwnerAddress() {
     return ownerAddress;
@@ -207,12 +207,12 @@ public class PetBaseDto {
     openapiRequiredFields.add("name");
   }
 
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to PetBaseDto
-  */
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to PetBaseDto
+   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!PetBaseDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
@@ -279,22 +279,22 @@ public class PetBaseDto {
     }
   }
 
- /**
-  * Create an instance of PetBaseDto given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of PetBaseDto
-  * @throws IOException if the JSON string is invalid with respect to PetBaseDto
-  */
+  /**
+   * Create an instance of PetBaseDto given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of PetBaseDto
+   * @throws IOException if the JSON string is invalid with respect to PetBaseDto
+   */
   public static PetBaseDto fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, PetBaseDto.class);
   }
 
- /**
-  * Convert an instance of PetBaseDto to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of PetBaseDto to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

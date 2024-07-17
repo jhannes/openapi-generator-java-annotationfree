@@ -51,7 +51,7 @@ import io.github.jhannes.openapi.typeHierarchy.JSON;
 /**
  * AddressDto
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.5.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
 public class AddressDto {
   public static final String SERIALIZED_NAME_ADDRESS_LINE1 = "addressLine1";
   @SerializedName(SERIALIZED_NAME_ADDRESS_LINE1)
@@ -133,10 +133,10 @@ public class AddressDto {
     return this;
   }
 
-   /**
+  /**
    * Get addressLine1
    * @return addressLine1
-  **/
+   */
   @javax.annotation.Nullable
   public String getAddressLine1() {
     return addressLine1;
@@ -152,10 +152,10 @@ public class AddressDto {
     return this;
   }
 
-   /**
+  /**
    * Get addressLine2
    * @return addressLine2
-  **/
+   */
   @javax.annotation.Nullable
   public String getAddressLine2() {
     return addressLine2;
@@ -171,10 +171,10 @@ public class AddressDto {
     return this;
   }
 
-   /**
+  /**
    * Get city
    * @return city
-  **/
+   */
   @javax.annotation.Nonnull
   public String getCity() {
     return city;
@@ -190,10 +190,10 @@ public class AddressDto {
     return this;
   }
 
-   /**
+  /**
    * Get country
    * @return country
-  **/
+   */
   @javax.annotation.Nonnull
   public String getCountry() {
     return country;
@@ -217,10 +217,10 @@ public class AddressDto {
     return this;
   }
 
-   /**
+  /**
    * Get addressTypes
    * @return addressTypes
-  **/
+   */
   @javax.annotation.Nullable
   public List<AddressTypesEnum> getAddressTypes() {
     return addressTypes;
@@ -296,12 +296,12 @@ public class AddressDto {
     openapiRequiredFields.add("country");
   }
 
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to AddressDto
-  */
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to AddressDto
+   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!AddressDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
@@ -371,22 +371,22 @@ public class AddressDto {
     }
   }
 
- /**
-  * Create an instance of AddressDto given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of AddressDto
-  * @throws IOException if the JSON string is invalid with respect to AddressDto
-  */
+  /**
+   * Create an instance of AddressDto given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of AddressDto
+   * @throws IOException if the JSON string is invalid with respect to AddressDto
+   */
   public static AddressDto fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, AddressDto.class);
   }
 
- /**
-  * Convert an instance of AddressDto to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of AddressDto to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

@@ -65,7 +65,7 @@ import com.google.gson.JsonParseException;
 
 import io.github.jhannes.openapi.typeHierarchy.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.5.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
 public class PetDto extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(PetDto.class.getName());
 
@@ -194,22 +194,7 @@ public class PetDto extends AbstractOpenApiSchema {
         super("oneOf", Boolean.FALSE);
     }
 
-    public PetDto(CatDto o) {
-        super("oneOf", Boolean.FALSE);
-        setActualInstance(o);
-    }
-
-    public PetDto(DogDto o) {
-        super("oneOf", Boolean.FALSE);
-        setActualInstance(o);
-    }
-
-    public PetDto(GoldfishDto o) {
-        super("oneOf", Boolean.FALSE);
-        setActualInstance(o);
-    }
-
-    public PetDto(WorkingDogDto o) {
+    public PetDto(Object o) {
         super("oneOf", Boolean.FALSE);
         setActualInstance(o);
     }

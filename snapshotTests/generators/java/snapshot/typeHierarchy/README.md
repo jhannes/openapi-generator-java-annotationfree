@@ -2,7 +2,7 @@
 
 Sample API
 - API version: 0.1.9
-  - Generator version: 7.5.0
+  - Generator version: 7.7.0
 
 Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
 

@@ -49,7 +49,7 @@ import io.github.jhannes.openapi.typeHierarchy.JSON;
 /**
  * GoldfishDto
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.5.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
 public class GoldfishDto {
   /**
    * Gets or Sets petType
@@ -121,10 +121,10 @@ public class GoldfishDto {
     return this;
   }
 
-   /**
+  /**
    * Get petType
    * @return petType
-  **/
+   */
   @javax.annotation.Nonnull
   public PetTypeEnum getPetType() {
     return petType;
@@ -140,10 +140,10 @@ public class GoldfishDto {
     return this;
   }
 
-   /**
+  /**
    * Get name
    * @return name
-  **/
+   */
   @javax.annotation.Nullable
   public String getName() {
     return name;
@@ -159,10 +159,10 @@ public class GoldfishDto {
     return this;
   }
 
-   /**
+  /**
    * Get species
    * @return species
-  **/
+   */
   @javax.annotation.Nullable
   public String getSpecies() {
     return species;
@@ -231,12 +231,12 @@ public class GoldfishDto {
     openapiRequiredFields.add("pet_type");
   }
 
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to GoldfishDto
-  */
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to GoldfishDto
+   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!GoldfishDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
@@ -301,22 +301,22 @@ public class GoldfishDto {
     }
   }
 
- /**
-  * Create an instance of GoldfishDto given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of GoldfishDto
-  * @throws IOException if the JSON string is invalid with respect to GoldfishDto
-  */
+  /**
+   * Create an instance of GoldfishDto given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of GoldfishDto
+   * @throws IOException if the JSON string is invalid with respect to GoldfishDto
+   */
   public static GoldfishDto fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, GoldfishDto.class);
   }
 
- /**
-  * Convert an instance of GoldfishDto to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of GoldfishDto to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

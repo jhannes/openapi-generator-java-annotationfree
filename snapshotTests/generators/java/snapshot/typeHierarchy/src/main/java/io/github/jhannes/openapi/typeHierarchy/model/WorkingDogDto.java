@@ -53,7 +53,7 @@ import io.github.jhannes.openapi.typeHierarchy.JSON;
 /**
  * WorkingDogDto
  */
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.5.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
 public class WorkingDogDto {
   public static final String SERIALIZED_NAME_ID = "id";
   @SerializedName(SERIALIZED_NAME_ID)
@@ -76,7 +76,7 @@ public class WorkingDogDto {
    */
   @JsonAdapter(PetTypeEnum.Adapter.class)
   public enum PetTypeEnum {
-    WORKINGDOG("WorkingDog");
+    WORKING_DOG("WorkingDog");
 
     private String value;
 
@@ -203,10 +203,10 @@ public class WorkingDogDto {
     this.id = id;
   }
 
-   /**
+  /**
    * Get id
    * @return id
-  **/
+   */
   @javax.annotation.Nullable
   public String getId() {
     return id;
@@ -219,10 +219,10 @@ public class WorkingDogDto {
     return this;
   }
 
-   /**
+  /**
    * Get name
    * @return name
-  **/
+   */
   @javax.annotation.Nonnull
   public String getName() {
     return name;
@@ -238,10 +238,10 @@ public class WorkingDogDto {
     return this;
   }
 
-   /**
+  /**
    * Get birthDate
    * @return birthDate
-  **/
+   */
   @javax.annotation.Nullable
   public String getBirthDate() {
     return birthDate;
@@ -257,10 +257,10 @@ public class WorkingDogDto {
     return this;
   }
 
-   /**
+  /**
    * Get ownerAddress
    * @return ownerAddress
-  **/
+   */
   @javax.annotation.Nullable
   public AddressDto getOwnerAddress() {
     return ownerAddress;
@@ -276,10 +276,10 @@ public class WorkingDogDto {
     return this;
   }
 
-   /**
+  /**
    * Get petType
    * @return petType
-  **/
+   */
   @javax.annotation.Nonnull
   public PetTypeEnum getPetType() {
     return petType;
@@ -295,10 +295,10 @@ public class WorkingDogDto {
     return this;
   }
 
-   /**
+  /**
    * Get bark
    * @return bark
-  **/
+   */
   @javax.annotation.Nullable
   public Boolean getBark() {
     return bark;
@@ -314,10 +314,10 @@ public class WorkingDogDto {
     return this;
   }
 
-   /**
+  /**
    * Get breed
    * @return breed
-  **/
+   */
   @javax.annotation.Nullable
   public BreedEnum getBreed() {
     return breed;
@@ -341,10 +341,10 @@ public class WorkingDogDto {
     return this;
   }
 
-   /**
+  /**
    * Get capabilities
    * @return capabilities
-  **/
+   */
   @javax.annotation.Nonnull
   public List<WorkingDogCapabilityDto> getCapabilities() {
     return capabilities;
@@ -430,12 +430,12 @@ public class WorkingDogDto {
     openapiRequiredFields.add("capabilities");
   }
 
- /**
-  * Validates the JSON Element and throws an exception if issues found
-  *
-  * @param jsonElement JSON Element
-  * @throws IOException if the JSON Element is invalid with respect to WorkingDogDto
-  */
+  /**
+   * Validates the JSON Element and throws an exception if issues found
+   *
+   * @param jsonElement JSON Element
+   * @throws IOException if the JSON Element is invalid with respect to WorkingDogDto
+   */
   public static void validateJsonElement(JsonElement jsonElement) throws IOException {
       if (jsonElement == null) {
         if (!WorkingDogDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
@@ -520,22 +520,22 @@ public class WorkingDogDto {
     }
   }
 
- /**
-  * Create an instance of WorkingDogDto given an JSON string
-  *
-  * @param jsonString JSON string
-  * @return An instance of WorkingDogDto
-  * @throws IOException if the JSON string is invalid with respect to WorkingDogDto
-  */
+  /**
+   * Create an instance of WorkingDogDto given an JSON string
+   *
+   * @param jsonString JSON string
+   * @return An instance of WorkingDogDto
+   * @throws IOException if the JSON string is invalid with respect to WorkingDogDto
+   */
   public static WorkingDogDto fromJson(String jsonString) throws IOException {
     return JSON.getGson().fromJson(jsonString, WorkingDogDto.class);
   }
 
- /**
-  * Convert an instance of WorkingDogDto to an JSON string
-  *
-  * @return JSON string
-  */
+  /**
+   * Convert an instance of WorkingDogDto to an JSON string
+   *
+   * @return JSON string
+   */
   public String toJson() {
     return JSON.getGson().toJson(this);
   }

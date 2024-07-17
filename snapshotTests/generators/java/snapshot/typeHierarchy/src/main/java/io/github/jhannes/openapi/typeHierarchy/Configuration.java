@@ -13,7 +13,7 @@
 
 package io.github.jhannes.openapi.typeHierarchy;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.5.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
 public class Configuration {
     public static final String VERSION = "0.1.9";
 
