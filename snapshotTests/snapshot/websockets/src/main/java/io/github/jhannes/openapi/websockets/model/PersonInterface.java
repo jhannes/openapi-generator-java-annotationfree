@@ -41,10 +41,10 @@ public interface PersonInterface extends RecipientInterface {
      */
     public enum GenderEnum {
 
-        MALE("male"),
-        FEMALE("female"),
-        OTHER("other"),
-        UNSPECIFIED("unspecified");
+        male("male"),
+        female("female"),
+        other("other"),
+        unspecified("unspecified");
 
         private String value;
 

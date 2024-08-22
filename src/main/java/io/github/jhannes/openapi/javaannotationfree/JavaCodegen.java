@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -287,5 +288,42 @@ public class JavaCodegen extends AbstractJavaCodegen {
     @Override
     public String toModelName(String name) {
         return mixinInterfaces.contains(name) ? name : super.toModelName(name);
+    }
+
+    @Override
+    public String toEnumVarName(String value, String datatype) {
+        if (enumNameMapping.containsKey(value)) {
+            return enumNameMapping.get(value);
+        }
+
+        if (value.isEmpty()) {
+            return "EMPTY";
+        }
+
+        // for symbol, e.g. $, #
+        if (getSymbolName(value) != null) {
+            return getSymbolName(value).toUpperCase(Locale.ROOT);
+        }
+
+        if (" ".equals(value)) {
+            return "SPACE";
+        }
+
+        // number
+        if ("Integer".equals(datatype) || "Long".equals(datatype) ||
+            "Float".equals(datatype) || "Double".equals(datatype) || "BigDecimal".equals(datatype)) {
+            String varName = "NUMBER_" + value;
+            varName = varName.replaceAll("-", "MINUS_");
+            varName = varName.replaceAll("\\+", "PLUS_");
+            varName = varName.replaceAll("\\.", "_DOT_");
+            return varName;
+        }
+
+        // string
+        String var = value.replaceAll("\\W+", "_");
+        if (var.matches("\\d.*")) {
+            var = "_" + var;
+        }
+        return reservedWords.contains(var) ? escapeReservedWord(var) : var;
     }
 }

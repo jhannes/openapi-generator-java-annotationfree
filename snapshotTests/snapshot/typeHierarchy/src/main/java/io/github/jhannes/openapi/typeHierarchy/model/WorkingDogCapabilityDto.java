@@ -35,9 +35,9 @@ import java.util.stream.Collectors;
 */
 public enum WorkingDogCapabilityDto {
 
-    GUIDE("Guide"),
-    RESCUE("Rescue"),
-    SEARCH("Search");
+    Guide("Guide"),
+    Rescue("Rescue"),
+    Search("Search");
 
     private String value;
 

@@ -19,10 +19,10 @@ Name | Type | Description | Notes
 
 Name | Value
 ---- | -----
-MALE | &quot;male&quot;
-FEMALE | &quot;female&quot;
-OTHER | &quot;other&quot;
-UNSPECIFIED | &quot;unspecified&quot;
+male | &quot;male&quot;
+female | &quot;female&quot;
+other | &quot;other&quot;
+unspecified | &quot;unspecified&quot;
 
 
 

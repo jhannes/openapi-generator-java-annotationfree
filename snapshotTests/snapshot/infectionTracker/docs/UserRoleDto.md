@@ -4,11 +4,11 @@
 ## Enum
 
 
-* `ADMINISTRATOR` (value: `"administrator"`)
+* `administrator` (value: `"administrator"`)
 
-* `INTERVIEWER` (value: `"interviewer"`)
+* `interviewer` (value: `"interviewer"`)
 
-* `FOLLOWUP` (value: `"followup"`)
+* `followup` (value: `"followup"`)
 
 
 

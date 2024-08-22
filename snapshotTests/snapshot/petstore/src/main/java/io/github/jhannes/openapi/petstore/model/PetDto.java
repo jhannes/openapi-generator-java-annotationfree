@@ -50,9 +50,9 @@ public class PetDto {
      */
     public enum StatusEnum {
 
-        AVAILABLE("available"),
-        PENDING("pending"),
-        SOLD("sold");
+        available("available"),
+        pending("pending"),
+        sold("sold");
 
         private String value;
 

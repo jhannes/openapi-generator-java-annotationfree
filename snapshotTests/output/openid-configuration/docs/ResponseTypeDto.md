@@ -4,15 +4,15 @@
 ## Enum
 
 
-* `CODE` (value: `"code"`)
+* `code` (value: `"code"`)
 
-* `TOKEN` (value: `"token"`)
+* `token` (value: `"token"`)
 
-* `ID_TOKEN` (value: `"id_token"`)
+* `id_token` (value: `"id_token"`)
 
-* `CODE_ID_TOKEN` (value: `"code id_token"`)
+* `code_id_token` (value: `"code id_token"`)
 
-* `ID_TOKEN_TOKEN` (value: `"id_token token"`)
+* `id_token_token` (value: `"id_token token"`)
 
 
 

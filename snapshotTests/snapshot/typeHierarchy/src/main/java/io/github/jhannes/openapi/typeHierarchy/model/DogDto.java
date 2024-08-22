@@ -44,10 +44,10 @@ public class DogDto extends PetBaseDto implements PetDto {
      */
     public enum BreedEnum {
 
-        DINGO("Dingo"),
-        HUSKY("Husky"),
-        RETRIEVER("Retriever"),
-        SHEPHERD("Shepherd");
+        Dingo("Dingo"),
+        Husky("Husky"),
+        Retriever("Retriever"),
+        Shepherd("Shepherd");
 
         private String value;
 

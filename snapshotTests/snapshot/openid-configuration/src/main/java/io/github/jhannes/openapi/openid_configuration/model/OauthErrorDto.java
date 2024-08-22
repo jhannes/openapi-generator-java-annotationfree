@@ -40,12 +40,12 @@ public class OauthErrorDto {
      */
     public enum ErrorEnum {
 
-        INVALID_REQUEST("invalid_request"),
-        INVALID_CLIENT("invalid_client"),
-        INVALID_GRANT("invalid_grant"),
-        UNAUTHORIZED_CLIENT("unauthorized_client"),
-        UNSUPPORTED_GRANT_TYPE("unsupported_grant_type"),
-        INVALID_SCOPE("invalid_scope");
+        invalid_request("invalid_request"),
+        invalid_client("invalid_client"),
+        invalid_grant("invalid_grant"),
+        unauthorized_client("unauthorized_client"),
+        unsupported_grant_type("unsupported_grant_type"),
+        invalid_scope("invalid_scope");
 
         private String value;
 

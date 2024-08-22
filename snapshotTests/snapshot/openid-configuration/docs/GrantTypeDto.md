@@ -4,15 +4,15 @@
 ## Enum
 
 
-* `IMPLICIT` (value: `"implicit"`)
+* `implicit` (value: `"implicit"`)
 
-* `AUTHORIZATION_CODE` (value: `"authorization_code"`)
+* `authorization_code` (value: `"authorization_code"`)
 
-* `CLIENT_CREDENTIALS` (value: `"client_credentials"`)
+* `client_credentials` (value: `"client_credentials"`)
 
-* `REFRESH_TOKEN` (value: `"refresh_token"`)
+* `refresh_token` (value: `"refresh_token"`)
 
-* `URN_IETF_PARAMS_OAUTH_GRANT_TYPE_TOKEN_EXCHANGE` (value: `"urn:ietf:params:oauth:grant-type:token-exchange"`)
+* `urn_ietf_params_oauth_grant_type_token_exchange` (value: `"urn:ietf:params:oauth:grant-type:token-exchange"`)
 
 
 

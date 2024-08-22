@@ -19,8 +19,8 @@ Name | Type | Description | Notes
 
 Name | Value
 ---- | -----
-CAT | &quot;Cat&quot;
-DOG | &quot;Dog&quot;
+Cat | &quot;Cat&quot;
+Dog | &quot;Dog&quot;
 
 
 
@@ -28,9 +28,9 @@ DOG | &quot;Dog&quot;
 
 Name | Value
 ---- | -----
-PENDING | &quot;Pending&quot;
-AVAILABLE | &quot;Available&quot;
-SOLD | &quot;Sold&quot;
+Pending | &quot;Pending&quot;
+Available | &quot;Available&quot;
+Sold | &quot;Sold&quot;
 
 
 
