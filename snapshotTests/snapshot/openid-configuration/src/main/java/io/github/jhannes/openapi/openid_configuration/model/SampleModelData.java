@@ -134,7 +134,9 @@ public class SampleModelData {
             .kty(sampleString("kty"))
             .use(sampleString("use"))
             .kid(sampleString("kid"))
-            .x5c(sampleString("x5c"));
+            .x5c(sampleString("x5c"))
+            .e(sampleString("e"))
+            .n(sampleString("n"));
     }
 
     public List<JwksKeyDto> sampleListOfJwksKeyDto(String propertyName) {
@@ -194,7 +196,7 @@ public class SampleModelData {
 
     public OauthErrorDto sampleOauthErrorDto() {
         return new OauthErrorDto()
-            .error(sampleString("error"))
+            .error(sampleOauthErrorDtoErrorEnum("error"))
             .errorDescription(sampleString("errorDescription"));
     }
 
@@ -204,6 +206,10 @@ public class SampleModelData {
 
     public List<OauthErrorDto> sampleListOfOauthErrorDto() {
         return sampleList(() -> sampleOauthErrorDto());
+    }
+
+    public OauthErrorDto.ErrorEnum sampleOauthErrorDtoErrorEnum(String propertyName) {
+        return pickOne(OauthErrorDto.ErrorEnum.values());
     }
 
     public ResponseTypeDto sampleResponseTypeDto(String propertyName) {

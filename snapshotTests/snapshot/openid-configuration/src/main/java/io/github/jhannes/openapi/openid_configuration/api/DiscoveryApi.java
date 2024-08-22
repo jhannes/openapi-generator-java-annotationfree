@@ -27,11 +27,13 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public interface DiscoveryApi {
     /**
      * @return DiscoveryDocumentDto
+     * @see <a href="https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig"> Documentation</a>
      */
     DiscoveryDocumentDto getDiscoveryDocument(
     ) throws IOException;
     /**
      * @return JwksDocumentDto
+     * @see <a href="https://datatracker.ietf.org/doc/html/rfc7517"> Documentation</a>
      */
     JwksDocumentDto getJwksDocument(
     ) throws IOException;

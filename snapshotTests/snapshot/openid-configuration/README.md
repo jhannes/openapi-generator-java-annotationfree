@@ -100,9 +100,9 @@ Class | Method | HTTP request | Description
 *DiscoveryApi* | [**getDiscoveryDocument**](docs/DiscoveryApi.md#getDiscoveryDocument) | **GET** /.well-known/openid-configuration | 
 *DiscoveryApi* | [**getJwksDocument**](docs/DiscoveryApi.md#getJwksDocument) | **GET** /.well-known/keys | 
 *IdentityClientApi* | [**handleCallback**](docs/IdentityClientApi.md#handleCallback) | **GET** /callback | 
+*IdentityProviderApi* | [**authorization**](docs/IdentityProviderApi.md#authorization) | **GET** /authorize | 
 *IdentityProviderApi* | [**fetchToken**](docs/IdentityProviderApi.md#fetchToken) | **POST** /token | 
 *IdentityProviderApi* | [**getUserinfo**](docs/IdentityProviderApi.md#getUserinfo) | **GET** /userinfo | 
-*IdentityProviderApi* | [**startAuthorization**](docs/IdentityProviderApi.md#startAuthorization) | **GET** /authorize | 
 
 
 ## Documentation for Models

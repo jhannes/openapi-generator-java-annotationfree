@@ -43,6 +43,10 @@ public class JwksKeyDto {
 
     private String x5c;
 
+    private String e = null;
+
+    private String n = null;
+
     public static String[] readOnlyFields() {
         return new String[] {
         };
@@ -75,6 +79,8 @@ public class JwksKeyDto {
         if (this.getUse() != null) target.setUse(this.getUse());
         if (this.getKid() != null) target.setKid(this.getKid());
         if (this.getX5c() != null) target.setX5c(this.getX5c());
+        if (this.getE() != null) target.setE(this.getE());
+        if (this.getN() != null) target.setN(this.getN());
         return target;
     }
 
@@ -161,6 +167,40 @@ public class JwksKeyDto {
         return this;
     }
 
+    /**
+     * Get e
+     * @return e
+     */
+    public String getE() {
+        return e;
+    }
+
+    public void setE(String e) {
+        this.e = e;
+    }
+
+    public JwksKeyDto e(String e) {
+        this.e = e;
+        return this;
+    }
+
+    /**
+     * Get n
+     * @return n
+     */
+    public String getN() {
+        return n;
+    }
+
+    public void setN(String n) {
+        this.n = n;
+    }
+
+    public JwksKeyDto n(String n) {
+        this.n = n;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -173,12 +213,14 @@ public class JwksKeyDto {
         return Objects.equals(this.getKty(), jwksKey.getKty()) &&
                 Objects.equals(this.getUse(), jwksKey.getUse()) &&
                 Objects.equals(this.getKid(), jwksKey.getKid()) &&
-                Objects.equals(this.getX5c(), jwksKey.getX5c());
+                Objects.equals(this.getX5c(), jwksKey.getX5c()) &&
+                Objects.equals(this.getE(), jwksKey.getE()) &&
+                Objects.equals(this.getN(), jwksKey.getN());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getKty(), getUse(), getKid(), getX5c());
+        return Objects.hash(getKty(), getUse(), getKid(), getX5c(), getE(), getN());
     }
 
     @Override
@@ -189,6 +231,8 @@ public class JwksKeyDto {
         sb.append("    use: ").append(toIndentedString(getUse())).append("\n");
         sb.append("    kid: ").append(toIndentedString(getKid())).append("\n");
         sb.append("    x5c: ").append(toIndentedString(getX5c())).append("\n");
+        sb.append("    e: ").append(toIndentedString(getE())).append("\n");
+        sb.append("    n: ").append(toIndentedString(getN())).append("\n");
         sb.append("}");
         return sb.toString();
     }

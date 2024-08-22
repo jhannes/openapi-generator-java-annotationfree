@@ -40,6 +40,23 @@ public class IdentityProviderApiTest {
     }
 
     @Test
+    public void authorizationTest() throws IOException {
+        //ResponseTypeDto responseType = null;
+        //String clientId = null;
+        //URI redirectUri = null;
+        //String responseMode = null;
+        //String state = null;
+        //String scope = null;
+        //String loginHint = null;
+        //List<String> prompt = null;
+        //List<String> acrValues = null;
+        //String nonce = null;
+        //String display = null;
+        //api.authorization(responseType, clientId, redirectUri, responseMode, state, scope, loginHint, prompt, acrValues, nonce, display);
+        // TODO: test validations
+    }
+
+    @Test
     public void fetchTokenTest() throws IOException {
         //GrantTypeDto grantType = null;
         //String code = null;
@@ -57,17 +74,6 @@ public class IdentityProviderApiTest {
     public void getUserinfoTest() throws IOException {
         //String authorization = null;
         //UserinfoDto response = api.getUserinfo(authorization);
-        // TODO: test validations
-    }
-
-    @Test
-    public void startAuthorizationTest() throws IOException {
-        //String clientId = null;
-        //ResponseTypeDto responseType = null;
-        //String state = null;
-        //URI redirectUri = null;
-        //String scope = null;
-        //api.startAuthorization(clientId, responseType, state, redirectUri, scope);
         // TODO: test validations
     }
 

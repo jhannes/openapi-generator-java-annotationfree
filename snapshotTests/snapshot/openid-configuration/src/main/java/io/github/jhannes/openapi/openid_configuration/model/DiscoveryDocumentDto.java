@@ -35,11 +35,11 @@ import java.util.stream.Collectors;
 */
 public class DiscoveryDocumentDto {
 
-    private String issuer = null;
+    private String issuer;
 
-    private URI authorization_endpoint = null;
+    private URI authorization_endpoint;
 
-    private URI token_endpoint = null;
+    private URI token_endpoint;
 
     private URI userinfo_endpoint = null;
 
@@ -209,12 +209,18 @@ public class DiscoveryDocumentDto {
 
     public static String[] requiredFields() {
         return new String[] {
+                "issuer",
+                "authorization_endpoint",
+                "token_endpoint",
                 "response_types_supported",
         };
     }
 
     public List<String> missingRequiredFields() {
         List<String> result = new ArrayList<>();
+        if (isMissing(getIssuer())) result.add("issuer");
+        if (isMissing(getAuthorizationEndpoint())) result.add("authorization_endpoint");
+        if (isMissing(getTokenEndpoint())) result.add("token_endpoint");
         if (isMissing(getResponseTypesSupported())) result.add("response_types_supported");
         return result;
     }

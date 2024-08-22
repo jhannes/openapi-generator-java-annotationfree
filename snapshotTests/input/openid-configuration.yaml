@@ -3,11 +3,20 @@ info:
   description: Open ID Connect Discovery
   title: Open ID Connect
   version: 1.0.0-draft
+tags:
+  - name: Discovery
+    description: The location of meta-data such as authentication and token urls
+  - name: IdentityProvider
+    description: The identity provider
+  - name: IdentityClient
+    description: The application to be authenticated. Your application should implement this protocol for the callback uri
 paths:
   /.well-known/openid-configuration:
     get:
       tags: [ Discovery ]
       operationId: getDiscoveryDocument
+      externalDocs:
+        url: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfig
       responses:
         200:
           description: The openid discovery document
@@ -19,6 +28,8 @@ paths:
     get:
       tags: [ Discovery ]
       operationId: getJwksDocument
+      externalDocs:
+        url: https://datatracker.ietf.org/doc/html/rfc7517
       responses:
         200:
           description: The cryptographic key description document
@@ -28,14 +39,22 @@ paths:
                 $ref: "#/components/schemas/JwksDocument"
   /authorize:
     get:
-      operationId: startAuthorization
+      operationId: authorization
       tags: [ IdentityProvider ]
       description: Starts an authentication flow. If the request is successful, the user is returned to the redirect_uri with a parameter, otherwise the user is redirected with an error parameter
+      externalDocs:
+        url: https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest
       parameters:
         - name: response_type
           in: query
+          required: true
           schema:
             $ref: "#/components/schemas/ResponseType"
+        - name: response_mode
+          in: query
+          example: query
+          schema:
+            type: string
         - name: client_id
           in: query
           required: true
@@ -47,13 +66,45 @@ paths:
             type: string
         - name: redirect_uri
           in: query
+          required: true
           schema:
             type: string
             format: uri
         - name: scope
           in: query
+          style: spaceDelimited
           schema:
             type: string
+        - name: login_hint
+          in: query
+          schema:
+            type: string
+        - name: prompt
+          in: query
+          style: spaceDelimited
+          schema:
+            type: array
+            items:
+              type: string
+              enum: [ none, login, consent, select_account ]
+        - name: acr_values
+          in: query
+          style: spaceDelimited
+          description: "Requested Authentication Context Class Reference values. Space-separated string that specifies the acr values that the Authorization Server is being requested to use for processing this Authentication Request, with the values appearing in order of preference. The Authentication Context Class satisfied by the authentication performed is returned as the acr Claim Value, as specified in Section 2"
+          schema:
+            type: array
+            items:
+              type: string
+        - name: nonce
+          in: query
+          description: "OPTIONAL. String value used to associate a Client session with an ID Token, and to mitigate replay attacks. The value is passed through unmodified from the Authentication Request to the ID Token"
+          schema:
+            type: string
+        - name: display
+          in: query
+          schema:
+            type: string
+            enum: [ page, popup, touch, wap ]
       responses:
         304:
           description: User is redirected back to redirect_uri
@@ -75,6 +126,23 @@ paths:
           in: query
           schema:
             type: string
+            enum:
+              - invalid_request
+              - unauthorized_client
+              - access_denied
+              - unsupported_response_type
+              - invalid_scope
+              - server_error
+              - temporarily_unavailable
+              - invalid_request_uri
+              - invalid_request_object
+              - request_not_supported
+              - request_uri_not_supported
+              - registration_not_supported
+              - interaction_required
+              - login_required
+              - account_selection_required
+              - consent_required
         - name: error_description
           in: query
           schema:
@@ -111,12 +179,11 @@ paths:
         content:
           application/x-www-form-urlencoded:
             schema:
+              title: TokenForm
               type: object
               properties:
                 grant_type:
                   $ref: "#/components/schemas/GrantType"
-                code:
-                  type: string
                 client_id:
                   type: string
                 client_secret:
@@ -124,6 +191,10 @@ paths:
                 redirect_uri:
                   type: string
                   format: uri
+                code:
+                  type: string
+                refresh_token:
+                  type: string
                 subject_token:
                   type: string
                   description:
@@ -176,12 +247,15 @@ paths:
 components:
   schemas:
     ResponseType:
-      enum:
-        - code
-        - token
-        - id_token
-        - code id_token
-        - id_token token
+      type: string
+      anyOf:
+        - enum:
+            - code
+            - token
+            - id_token
+            - code id_token
+            - id_token token
+        - {}
     GrantType:
       enum:
         - implicit
@@ -191,6 +265,8 @@ components:
         - urn:ietf:params:oauth:grant-type:token-exchange
     TokenResponse:
       type: object
+      externalDocs:
+        url: https://www.rfc-editor.org/rfc/rfc6749#section-5.1
       description: Token response according to https://www.oauth.com/oauth2-servers/access-tokens/access-token-response/
       properties:
         access_token:
@@ -198,9 +274,12 @@ components:
         token_type:
           type: string
           description: The type of token this is. Always the string 'bearer'
+          externalDocs:
+            url: https://www.rfc-editor.org/rfc/rfc6749#section-7.1
           example: bearer
         expires_in:
           type: integer
+          format: int32
           description: The duration of time the access token is granted for in seconds
         scope:
           type: string
@@ -260,12 +339,18 @@ components:
           type: string
           description: For JWT from ID-porten, contains national identity number
           example: 24079420405
+      additionalProperties:
+        items:
+          type: string
       required:
         - iss
         - aud
         - sub
+        - exp
     DiscoveryDocument:
       type: object
+      externalDocs:
+        url: https://openid.net/specs/openid-connect-discovery-1_0.html#ProviderConfigurationResponse
       properties:
         issuer:
           type: string
@@ -340,8 +425,13 @@ components:
           format: url
       required:
         - response_types_supported
+        - authorization_endpoint
+        - token_endpoint
+        - issuer
     JwksDocument:
       type: object
+      externalDocs:
+        url: https://datatracker.ietf.org/doc/html/rfc7517
       properties:
         keys:
           type: array
@@ -351,16 +441,22 @@ components:
         - keys
     JwksKey:
       type: object
+      externalDocs:
+        url: https://datatracker.ietf.org/doc/html/rfc7517#section-4
       properties:
         kty:
           type: string
           example: RSA
         use:
           type: string
-          example: sig
+          example: sig, enc
         kid:
           type: string
         x5c:
+          type: string
+        e:
+          type: string
+        n:
           type: string
       required:
         - kid
@@ -381,6 +477,13 @@ components:
       properties:
         error:
           type: string
+          enum:
+            - invalid_request
+            - invalid_client
+            - invalid_grant
+            - unauthorized_client
+            - unsupported_grant_type
+            - invalid_scope
         error_description:
           type: string
       required:

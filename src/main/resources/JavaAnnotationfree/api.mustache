@@ -34,7 +34,9 @@ public interface {{classname}} {
      * @deprecated
     {{/isDeprecated}}
     {{#externalDocs}}
-     * {{description}}
+    {{#description}}
+     * {{.}}
+    {{/description}}
      * @see <a href="{{url}}">{{summary}} Documentation</a>
     {{/externalDocs}}
      */

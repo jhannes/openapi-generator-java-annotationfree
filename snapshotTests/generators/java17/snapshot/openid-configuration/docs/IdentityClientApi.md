@@ -28,7 +28,7 @@ public class Example {
 
         String state = "state_example"; // String | 
         String code = "code_example"; // String | 
-        String error = "error_example"; // String | 
+        String error = "invalid_request"; // String | 
         String errorDescription = "errorDescription_example"; // String | 
         try {
             client.handleCallback(state, code, error, errorDescription);
@@ -47,7 +47,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **state** | **String**|  | [optional]
  **code** | **String**|  | [optional]
- **error** | **String**|  | [optional]
+ **error** | **String**|  | [optional] [enum: invalid_request, unauthorized_client, access_denied, unsupported_response_type, invalid_scope, server_error, temporarily_unavailable, invalid_request_uri, invalid_request_object, request_not_supported, request_uri_not_supported, registration_not_supported, interaction_required, login_required, account_selection_required, consent_required]
  **errorDescription** | **String**|  | [optional]
 
 ### Return type

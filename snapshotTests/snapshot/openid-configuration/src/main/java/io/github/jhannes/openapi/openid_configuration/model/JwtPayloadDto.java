@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 /**
 * JwtPayloadDto
 */
-public class JwtPayloadDto {
+public class JwtPayloadDto extends HashMap<String, List> {
 
     private String iss;
 
@@ -81,6 +81,7 @@ public class JwtPayloadDto {
     }
 
     public <T extends JwtPayloadDto> T copyTo(T target) {
+        target.putAll(this);
         if (this.getIss() != null) target.setIss(this.getIss());
         if (this.getSub() != null) target.setSub(this.getSub());
         if (this.getAud() != null) target.setAud(this.getAud());
@@ -258,7 +259,8 @@ public class JwtPayloadDto {
                 Objects.equals(this.getEmail(), jwtPayload.getEmail()) &&
                 Objects.equals(this.getOrgId(), jwtPayload.getOrgId()) &&
                 Objects.equals(this.getOrg(), jwtPayload.getOrg()) &&
-                Objects.equals(this.getPid(), jwtPayload.getPid());
+                Objects.equals(this.getPid(), jwtPayload.getPid()) &&
+                super.equals(o);
     }
 
     @Override
@@ -270,6 +272,7 @@ public class JwtPayloadDto {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("JwtPayloadDto {\n");
+        sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    iss: ").append(toIndentedString(getIss())).append("\n");
         sb.append("    sub: ").append(toIndentedString(getSub())).append("\n");
         sb.append("    aud: ").append(toIndentedString(getAud())).append("\n");

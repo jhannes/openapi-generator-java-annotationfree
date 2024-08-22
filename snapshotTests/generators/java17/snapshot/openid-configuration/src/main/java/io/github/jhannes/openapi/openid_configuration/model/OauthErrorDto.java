@@ -35,7 +35,44 @@ import java.util.stream.Collectors;
 */
 public class OauthErrorDto {
 
-    private String error;
+    /**
+     * Gets or Sets error
+     */
+    public enum ErrorEnum {
+
+        INVALID_REQUEST("invalid_request"),
+        INVALID_CLIENT("invalid_client"),
+        INVALID_GRANT("invalid_grant"),
+        UNAUTHORIZED_CLIENT("unauthorized_client"),
+        UNSUPPORTED_GRANT_TYPE("unsupported_grant_type"),
+        INVALID_SCOPE("invalid_scope");
+
+        private String value;
+
+        ErrorEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static ErrorEnum fromValue(String text) {
+            for (ErrorEnum b : ErrorEnum.values()) {
+                if (String.valueOf(b.value).equals(text)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + text + "'");
+        }
+    }
+
+    private ErrorEnum error;
 
     private String error_description;
 
@@ -89,15 +126,15 @@ public class OauthErrorDto {
      * Get error
      * @return error
      */
-    public String getError() {
+    public ErrorEnum getError() {
         return error;
     }
 
-    public void setError(String error) {
+    public void setError(ErrorEnum error) {
         this.error = error;
     }
 
-    public OauthErrorDto error(String error) {
+    public OauthErrorDto error(ErrorEnum error) {
         this.error = error;
         return this;
     }

@@ -9,6 +9,8 @@ Name | Type | Description | Notes
 **use** | **String** |  |  [optional]
 **kid** | **String** |  | 
 **x5c** | **String** |  | 
+**e** | **String** |  |  [optional]
+**n** | **String** |  |  [optional]
 
 
 

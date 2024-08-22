@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**issuer** | **String** |  |  [optional]
-**authorizationEndpoint** | [**URI**](URI.md) |  |  [optional]
-**tokenEndpoint** | [**URI**](URI.md) |  |  [optional]
+**issuer** | **String** |  | 
+**authorizationEndpoint** | [**URI**](URI.md) |  | 
+**tokenEndpoint** | [**URI**](URI.md) |  | 
 **userinfoEndpoint** | [**URI**](URI.md) |  |  [optional]
 **endSessionEndpoint** | [**URI**](URI.md) |  |  [optional]
 **jwksUri** | [**URI**](URI.md) |  |  [optional]

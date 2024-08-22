@@ -57,13 +57,48 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
     }
 
     @Override
+    public void authorization(
+            ResponseTypeDto response_type,
+            String client_id,
+            URI redirect_uri,
+            Optional<String> response_mode,
+            Optional<String> state,
+            Optional<String> scope,
+            Optional<String> login_hint,
+            Optional<List<String>> prompt,
+            Optional<List<String>> acr_values,
+            Optional<String> nonce,
+            Optional<String> display
+    ) throws IOException {
+        List<String> queryParameters = new ArrayList<>();
+        queryParameters.add("response_type=" + encode(String.valueOf(response_type), UTF_8));
+        response_mode.ifPresent(p -> queryParameters.add("response_mode=" + encode(String.valueOf(p), UTF_8)));
+        queryParameters.add("client_id=" + encode(String.valueOf(client_id), UTF_8));
+        state.ifPresent(p -> queryParameters.add("state=" + encode(String.valueOf(p), UTF_8)));
+        queryParameters.add("redirect_uri=" + encode(String.valueOf(redirect_uri), UTF_8));
+        scope.ifPresent(p -> queryParameters.add("scope=" + encode(String.valueOf(p), UTF_8)));
+        login_hint.ifPresent(p -> queryParameters.add("login_hint=" + encode(String.valueOf(p), UTF_8)));
+        prompt.ifPresent(list -> list.forEach(p -> queryParameters.add("prompt=" + encode(String.valueOf(p), UTF_8))));
+        acr_values.ifPresent(list -> list.forEach(p -> queryParameters.add("acr_values=" + encode(String.valueOf(p), UTF_8))));
+        nonce.ifPresent(p -> queryParameters.add("nonce=" + encode(String.valueOf(p), UTF_8)));
+        display.ifPresent(p -> queryParameters.add("display=" + encode(String.valueOf(p), UTF_8)));
+        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        HttpURLConnection connection = openConnection("/authorize" + query);
+        connection.setRequestMethod("GET");
+        if (connection.getResponseCode() >= 300) {
+            throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
+        }
+    }
+
+    @Override
     public TokenResponseDto fetchToken(
             GrantTypeDto grant_type,
-            String code,
             String client_id,
+            String code,
             Optional<String> authorization,
             Optional<String> client_secret,
             Optional<URI> redirect_uri,
+            Optional<String> refresh_token,
             Optional<String> subject_token,
             Optional<String> audience
     ) throws IOException {
@@ -74,10 +109,11 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
         connection.setDoOutput(true);
         List<String> formParameters = new ArrayList<>();
         formParameters.add("grant_type=" + encode(String.valueOf(grant_type), UTF_8));
-        formParameters.add("code=" + encode(String.valueOf(code), UTF_8));
         formParameters.add("client_id=" + encode(String.valueOf(client_id), UTF_8));
         client_secret.ifPresent(p -> formParameters.add("client_secret=" + encode(String.valueOf(p), UTF_8)));
         redirect_uri.ifPresent(p -> formParameters.add("redirect_uri=" + encode(String.valueOf(p), UTF_8)));
+        formParameters.add("code=" + encode(String.valueOf(code), UTF_8));
+        refresh_token.ifPresent(p -> formParameters.add("refresh_token=" + encode(String.valueOf(p), UTF_8)));
         subject_token.ifPresent(p -> formParameters.add("subject_token=" + encode(String.valueOf(p), UTF_8)));
         audience.ifPresent(p -> formParameters.add("audience=" + encode(String.valueOf(p), UTF_8)));
         connection.getOutputStream().write(String.join("&", formParameters).getBytes());
@@ -98,28 +134,6 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
         }
         return jsonb.fromJson(connection.getInputStream(), UserinfoDto.class);
-    }
-
-    @Override
-    public void startAuthorization(
-            String client_id,
-            Optional<ResponseTypeDto> response_type,
-            Optional<String> state,
-            Optional<URI> redirect_uri,
-            Optional<String> scope
-    ) throws IOException {
-        List<String> queryParameters = new ArrayList<>();
-        response_type.ifPresent(p -> queryParameters.add("response_type=" + encode(String.valueOf(p), UTF_8)));
-        queryParameters.add("client_id=" + encode(String.valueOf(client_id), UTF_8));
-        state.ifPresent(p -> queryParameters.add("state=" + encode(String.valueOf(p), UTF_8)));
-        redirect_uri.ifPresent(p -> queryParameters.add("redirect_uri=" + encode(String.valueOf(p), UTF_8)));
-        scope.ifPresent(p -> queryParameters.add("scope=" + encode(String.valueOf(p), UTF_8)));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        HttpURLConnection connection = openConnection("/authorize" + query);
-        connection.setRequestMethod("GET");
-        if (connection.getResponseCode() >= 300) {
-            throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
-        }
     }
 
     protected HttpURLConnection openConnection(String relativeUrl) throws IOException {
