@@ -101,8 +101,8 @@ public class HttpPetApi implements PetApi {
     ) throws IOException {
         List<String> queryParameters = new ArrayList<>();
         status.ifPresent(list -> list.forEach(p -> queryParameters.add("status=" + encode(String.valueOf(p), UTF_8))));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        HttpURLConnection connection = openConnection("/pet/findByStatus" + query);
+        String queryString = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        HttpURLConnection connection = openConnection("/pet/findByStatus" + queryString);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -117,8 +117,8 @@ public class HttpPetApi implements PetApi {
     ) throws IOException {
         List<String> queryParameters = new ArrayList<>();
         tags.ifPresent(list -> list.forEach(p -> queryParameters.add("tags=" + encode(String.valueOf(p), UTF_8))));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        HttpURLConnection connection = openConnection("/pet/findByTags" + query);
+        String queryString = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        HttpURLConnection connection = openConnection("/pet/findByTags" + queryString);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());

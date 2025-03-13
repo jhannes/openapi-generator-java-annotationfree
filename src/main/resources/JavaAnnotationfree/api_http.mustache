@@ -80,10 +80,10 @@ public class Http{{classname}} implements {{classname}} {
             {{/isContainer}}
         {{/required}}
         {{/queryParams}}
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        String queryString = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
         {{/hasQueryParams}}
         HttpURLConnection connection = openConnection("{{path}}"{{#pathParams}}
-                .replace("{{curly}}{{paramName}}}", encode(String.valueOf({{paramName}}), UTF_8)){{/pathParams}}{{#hasQueryParams}} + query{{/hasQueryParams}});
+                .replace("{{curly}}{{paramName}}}", encode(String.valueOf({{paramName}}), UTF_8)){{/pathParams}}{{#hasQueryParams}} + queryString{{/hasQueryParams}});
         connection.setRequestMethod("{{httpMethod}}");
         {{#headerParams}}
         {{#required}}

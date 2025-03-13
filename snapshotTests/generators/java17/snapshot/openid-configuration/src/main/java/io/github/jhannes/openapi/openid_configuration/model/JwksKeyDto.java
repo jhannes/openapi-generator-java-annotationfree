@@ -117,7 +117,7 @@ public class JwksKeyDto {
 
     /**
      * Get use
-     * example: sig
+     * example: sig, enc
      * @return use
      */
     public String getUse() {

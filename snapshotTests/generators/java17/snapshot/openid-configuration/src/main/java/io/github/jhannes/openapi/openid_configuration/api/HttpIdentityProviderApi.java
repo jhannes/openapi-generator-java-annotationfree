@@ -82,8 +82,8 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
         acr_values.ifPresent(list -> list.forEach(p -> queryParameters.add("acr_values=" + encode(String.valueOf(p), UTF_8))));
         nonce.ifPresent(p -> queryParameters.add("nonce=" + encode(String.valueOf(p), UTF_8)));
         display.ifPresent(p -> queryParameters.add("display=" + encode(String.valueOf(p), UTF_8)));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        HttpURLConnection connection = openConnection("/authorize" + query);
+        String queryString = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        HttpURLConnection connection = openConnection("/authorize" + queryString);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());
@@ -93,11 +93,12 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
     @Override
     public TokenResponseDto fetchToken(
             GrantTypeDto grant_type,
-            String code,
             String client_id,
+            String code,
             Optional<String> authorization,
             Optional<String> client_secret,
             Optional<URI> redirect_uri,
+            Optional<String> refresh_token,
             Optional<String> subject_token,
             Optional<String> audience
     ) throws IOException {
@@ -108,10 +109,11 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
         connection.setDoOutput(true);
         List<String> formParameters = new ArrayList<>();
         formParameters.add("grant_type=" + encode(String.valueOf(grant_type), UTF_8));
-        formParameters.add("code=" + encode(String.valueOf(code), UTF_8));
         formParameters.add("client_id=" + encode(String.valueOf(client_id), UTF_8));
         client_secret.ifPresent(p -> formParameters.add("client_secret=" + encode(String.valueOf(p), UTF_8)));
         redirect_uri.ifPresent(p -> formParameters.add("redirect_uri=" + encode(String.valueOf(p), UTF_8)));
+        formParameters.add("code=" + encode(String.valueOf(code), UTF_8));
+        refresh_token.ifPresent(p -> formParameters.add("refresh_token=" + encode(String.valueOf(p), UTF_8)));
         subject_token.ifPresent(p -> formParameters.add("subject_token=" + encode(String.valueOf(p), UTF_8)));
         audience.ifPresent(p -> formParameters.add("audience=" + encode(String.valueOf(p), UTF_8)));
         connection.getOutputStream().write(String.join("&", formParameters).getBytes());

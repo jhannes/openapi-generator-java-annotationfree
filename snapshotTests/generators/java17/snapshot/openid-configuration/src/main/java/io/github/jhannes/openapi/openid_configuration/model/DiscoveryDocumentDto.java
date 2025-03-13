@@ -60,9 +60,9 @@ public class DiscoveryDocumentDto {
      */
     public enum ResponseModesSupportedEnum {
 
-        QUERY("query"),
-        FRAGMENT("fragment"),
-        FORM_POST("form_post");
+        query("query"),
+        fragment("fragment"),
+        form_post("form_post");
 
         private String value;
 
@@ -96,8 +96,8 @@ public class DiscoveryDocumentDto {
      */
     public enum SubjectTypesSupportedEnum {
 
-        PAIRWISE("pairwise"),
-        PUBLIC("public");
+        pairwise("pairwise"),
+        _public("public");
 
         private String value;
 
@@ -132,7 +132,7 @@ public class DiscoveryDocumentDto {
     public enum CodeChallengeMethodsSupportedEnum {
 
         S256("S256"),
-        PLAIN("plain");
+        plain("plain");
 
         private String value;
 

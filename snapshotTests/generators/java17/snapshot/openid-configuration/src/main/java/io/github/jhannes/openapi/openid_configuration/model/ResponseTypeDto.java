@@ -35,11 +35,11 @@ import java.util.stream.Collectors;
 */
 public enum ResponseTypeDto {
 
-    CODE("code"),
-    TOKEN("token"),
-    ID_TOKEN("id_token"),
-    CODE_ID_TOKEN("code id_token"),
-    ID_TOKEN_TOKEN("id_token token");
+    code("code"),
+    token("token"),
+    id_token("id_token"),
+    code_id_token("code id_token"),
+    id_token_token("id_token token");
 
     private String value;
 

@@ -112,9 +112,9 @@ public class HttpDefaultApi implements DefaultApi {
         status.ifPresent(list -> list.forEach(p -> queryParameters.add("status=" + encode(String.valueOf(p), UTF_8))));
         tags.ifPresent(list -> list.forEach(p -> queryParameters.add("tags=" + encode(String.valueOf(p), UTF_8))));
         bornAfter.ifPresent(p -> queryParameters.add("bornAfter=" + encode(String.valueOf(p), UTF_8)));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        String queryString = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
         HttpURLConnection connection = openConnection("/{storeId}/pets"
-                .replace("{storeId}", encode(String.valueOf(storeId), UTF_8)) + query);
+                .replace("{storeId}", encode(String.valueOf(storeId), UTF_8)) + queryString);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());

@@ -70,8 +70,8 @@ public class HttpStoreApi implements StoreApi {
     ) throws IOException {
         List<String> queryParameters = new ArrayList<>();
         effectiveDateTime.ifPresent(p -> queryParameters.add("effectiveDateTime=" + encode(String.valueOf(p), UTF_8)));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        HttpURLConnection connection = openConnection("/store/inventory" + query);
+        String queryString = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        HttpURLConnection connection = openConnection("/store/inventory" + queryString);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());

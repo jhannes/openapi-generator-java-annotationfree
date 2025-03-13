@@ -82,8 +82,8 @@ public class HttpIdentityProviderApi implements IdentityProviderApi {
         acr_values.ifPresent(list -> list.forEach(p -> queryParameters.add("acr_values=" + encode(String.valueOf(p), UTF_8))));
         nonce.ifPresent(p -> queryParameters.add("nonce=" + encode(String.valueOf(p), UTF_8)));
         display.ifPresent(p -> queryParameters.add("display=" + encode(String.valueOf(p), UTF_8)));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        HttpURLConnection connection = openConnection("/authorize" + query);
+        String queryString = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        HttpURLConnection connection = openConnection("/authorize" + queryString);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());

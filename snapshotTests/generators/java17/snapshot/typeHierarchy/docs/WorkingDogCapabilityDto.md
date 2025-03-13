@@ -4,11 +4,11 @@
 ## Enum
 
 
-* `GUIDE` (value: `"Guide"`)
+* `Guide` (value: `"Guide"`)
 
-* `RESCUE` (value: `"Rescue"`)
+* `Rescue` (value: `"Rescue"`)
 
-* `SEARCH` (value: `"Search"`)
+* `Search` (value: `"Search"`)
 
 
 

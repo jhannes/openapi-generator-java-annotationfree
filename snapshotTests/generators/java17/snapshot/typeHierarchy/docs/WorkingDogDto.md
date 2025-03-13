@@ -20,10 +20,10 @@ Name | Type | Description | Notes
 
 Name | Value
 ---- | -----
-DINGO | &quot;Dingo&quot;
-HUSKY | &quot;Husky&quot;
-RETRIEVER | &quot;Retriever&quot;
-SHEPHERD | &quot;Shepherd&quot;
+Dingo | &quot;Dingo&quot;
+Husky | &quot;Husky&quot;
+Retriever | &quot;Retriever&quot;
+Shepherd | &quot;Shepherd&quot;
 
 
 

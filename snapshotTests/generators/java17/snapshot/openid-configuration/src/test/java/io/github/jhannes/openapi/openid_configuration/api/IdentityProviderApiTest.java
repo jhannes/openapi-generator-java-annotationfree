@@ -59,14 +59,15 @@ public class IdentityProviderApiTest {
     @Test
     public void fetchTokenTest() throws IOException {
         //GrantTypeDto grantType = null;
-        //String code = null;
         //String clientId = null;
+        //String code = null;
         //String authorization = null;
         //String clientSecret = null;
         //URI redirectUri = null;
+        //String refreshToken = null;
         //String subjectToken = null;
         //String audience = null;
-        //TokenResponseDto response = api.fetchToken(grantType, code, clientId, authorization, clientSecret, redirectUri, subjectToken, audience);
+        //TokenResponseDto response = api.fetchToken(grantType, clientId, code, authorization, clientSecret, redirectUri, refreshToken, subjectToken, audience);
         // TODO: test validations
     }
 

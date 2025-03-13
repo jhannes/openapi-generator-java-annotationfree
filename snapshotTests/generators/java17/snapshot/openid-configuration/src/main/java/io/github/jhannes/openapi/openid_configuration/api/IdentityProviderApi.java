@@ -42,7 +42,6 @@ public interface IdentityProviderApi {
      * @param acrValues Requested Authentication Context Class Reference values. Space-separated string that specifies the acr values that the Authorization Server is being requested to use for processing this Authentication Request, with the values appearing in order of preference. The Authentication Context Class satisfied by the authentication performed is returned as the acr Claim Value, as specified in Section 2 (query) (optional
      * @param nonce OPTIONAL. String value used to associate a Client session with an ID Token, and to mitigate replay attacks. The value is passed through unmodified from the Authentication Request to the ID Token (query) (optional)
      * @param display  (query) (optional)
-     * 
      * @see <a href="https://openid.net/specs/openid-connect-core-1_0.html#AuthRequest"> Documentation</a>
      */
     void authorization(
@@ -167,22 +166,24 @@ public interface IdentityProviderApi {
     }
     /**
      * @param grantType  (required)
-     * @param code  (required)
      * @param clientId  (required)
+     * @param code  (required)
      * @param authorization Used with token-exchange to validate client_name - use Basic authentication with client_id:client_secret (optional)
      * @param clientSecret  (optional)
      * @param redirectUri  (optional)
+     * @param refreshToken  (optional)
      * @param subjectToken Used with grant_type&#x3D;urn:ietf:params:oauth:grant-type:token-exchange to do a token exchange (optional)
      * @param audience Used with token-exchange to indicate which application the token will be used with (optional)
      * @return TokenResponseDto
      */
     TokenResponseDto fetchToken(
             GrantTypeDto grant_type,
-            String code,
             String client_id,
+            String code,
             Optional<String> authorization,
             Optional<String> client_secret,
             Optional<URI> redirect_uri,
+            Optional<String> refresh_token,
             Optional<String> subject_token,
             Optional<String> audience
     ) throws IOException;
@@ -203,12 +204,6 @@ public interface IdentityProviderApi {
             this.grantType = grantType;
             return this;
         }
-        private String code;
-
-        public FetchTokenForm code(String code) {
-            this.code = code;
-            return this;
-        }
         private String clientId;
 
         public FetchTokenForm clientId(String clientId) {
@@ -225,6 +220,18 @@ public interface IdentityProviderApi {
 
         public FetchTokenForm redirectUri(URI redirectUri) {
             this.redirectUri = redirectUri;
+            return this;
+        }
+        private String code;
+
+        public FetchTokenForm code(String code) {
+            this.code = code;
+            return this;
+        }
+        private String refreshToken;
+
+        public FetchTokenForm refreshToken(String refreshToken) {
+            this.refreshToken = refreshToken;
             return this;
         }
         private String subjectToken;
@@ -245,9 +252,6 @@ public interface IdentityProviderApi {
             if (grantType != null) {
                 parameters.add("grant_type=" + encode(grantType.toString(), UTF_8));
             }
-            if (code != null) {
-                parameters.add("code=" + encode(code.toString(), UTF_8));
-            }
             if (clientId != null) {
                 parameters.add("client_id=" + encode(clientId.toString(), UTF_8));
             }
@@ -256,6 +260,12 @@ public interface IdentityProviderApi {
             }
             if (redirectUri != null) {
                 parameters.add("redirect_uri=" + encode(redirectUri.toString(), UTF_8));
+            }
+            if (code != null) {
+                parameters.add("code=" + encode(code.toString(), UTF_8));
+            }
+            if (refreshToken != null) {
+                parameters.add("refresh_token=" + encode(refreshToken.toString(), UTF_8));
             }
             if (subjectToken != null) {
                 parameters.add("subject_token=" + encode(subjectToken.toString(), UTF_8));

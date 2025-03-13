@@ -126,8 +126,8 @@ public class HttpUserApi implements UserApi {
         List<String> queryParameters = new ArrayList<>();
         username.ifPresent(p -> queryParameters.add("username=" + encode(String.valueOf(p), UTF_8)));
         password.ifPresent(p -> queryParameters.add("password=" + encode(String.valueOf(p), UTF_8)));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        HttpURLConnection connection = openConnection("/user/login" + query);
+        String queryString = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        HttpURLConnection connection = openConnection("/user/login" + queryString);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());

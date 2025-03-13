@@ -4,11 +4,11 @@
 ## Enum
 
 
-* `CAT` (value: `"cat"`)
+* `cat` (value: `"cat"`)
 
-* `DOG` (value: `"dog"`)
+* `dog` (value: `"dog"`)
 
-* `BIRD` (value: `"bird"`)
+* `bird` (value: `"bird"`)
 
 
 

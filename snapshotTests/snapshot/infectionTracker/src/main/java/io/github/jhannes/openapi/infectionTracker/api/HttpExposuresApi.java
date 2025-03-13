@@ -61,8 +61,8 @@ public class HttpExposuresApi implements ExposuresApi {
         List<String> queryParameters = new ArrayList<>();
         exposureDate.ifPresent(list -> list.forEach(p -> queryParameters.add("exposureDate=" + encode(String.valueOf(p), UTF_8))));
         maxCount.ifPresent(p -> queryParameters.add("maxCount=" + encode(String.valueOf(p), UTF_8)));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        HttpURLConnection connection = openConnection("/api/exposures" + query);
+        String queryString = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        HttpURLConnection connection = openConnection("/api/exposures" + queryString);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());

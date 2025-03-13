@@ -27,9 +27,9 @@ Name | Type | Description | Notes
 
 Name | Value
 ---- | -----
-QUERY | &quot;query&quot;
-FRAGMENT | &quot;fragment&quot;
-FORM_POST | &quot;form_post&quot;
+query | &quot;query&quot;
+fragment | &quot;fragment&quot;
+form_post | &quot;form_post&quot;
 
 
 
@@ -37,8 +37,8 @@ FORM_POST | &quot;form_post&quot;
 
 Name | Value
 ---- | -----
-PAIRWISE | &quot;pairwise&quot;
-PUBLIC | &quot;public&quot;
+pairwise | &quot;pairwise&quot;
+_public | &quot;public&quot;
 
 
 
@@ -47,7 +47,7 @@ PUBLIC | &quot;public&quot;
 Name | Value
 ---- | -----
 S256 | &quot;S256&quot;
-PLAIN | &quot;plain&quot;
+plain | &quot;plain&quot;
 
 
 

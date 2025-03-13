@@ -65,8 +65,8 @@ public class HttpIdentityClientApi implements IdentityClientApi {
         code.ifPresent(p -> queryParameters.add("code=" + encode(String.valueOf(p), UTF_8)));
         error.ifPresent(p -> queryParameters.add("error=" + encode(String.valueOf(p), UTF_8)));
         error_description.ifPresent(p -> queryParameters.add("error_description=" + encode(String.valueOf(p), UTF_8)));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        HttpURLConnection connection = openConnection("/callback" + query);
+        String queryString = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        HttpURLConnection connection = openConnection("/callback" + queryString);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());

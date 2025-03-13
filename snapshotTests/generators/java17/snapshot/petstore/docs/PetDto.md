@@ -18,9 +18,9 @@ Name | Type | Description | Notes
 
 Name | Value
 ---- | -----
-AVAILABLE | &quot;available&quot;
-PENDING | &quot;pending&quot;
-SOLD | &quot;sold&quot;
+available | &quot;available&quot;
+pending | &quot;pending&quot;
+sold | &quot;sold&quot;
 
 
 

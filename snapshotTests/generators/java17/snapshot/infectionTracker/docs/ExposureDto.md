@@ -21,11 +21,11 @@ Name | Type | Description | Notes
 
 Name | Value
 ---- | -----
-UNIDENTIFIED | &quot;unidentified&quot;
-IDENTIFIED | &quot;identified&quot;
-CONTACTED | &quot;contacted&quot;
-TESTED | &quot;tested&quot;
-INFECTED | &quot;infected&quot;
+unidentified | &quot;unidentified&quot;
+identified | &quot;identified&quot;
+contacted | &quot;contacted&quot;
+tested | &quot;tested&quot;
+infected | &quot;infected&quot;
 
 
 

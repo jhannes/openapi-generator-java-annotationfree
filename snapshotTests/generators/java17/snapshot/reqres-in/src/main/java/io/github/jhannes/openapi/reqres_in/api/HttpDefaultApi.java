@@ -105,8 +105,8 @@ public class HttpDefaultApi implements DefaultApi {
         List<String> queryParameters = new ArrayList<>();
         page.ifPresent(p -> queryParameters.add("page=" + encode(String.valueOf(p), UTF_8)));
         per_page.ifPresent(p -> queryParameters.add("per_page=" + encode(String.valueOf(p), UTF_8)));
-        String query = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
-        HttpURLConnection connection = openConnection("/users" + query);
+        String queryString = queryParameters.isEmpty() ? "" : "?" + String.join("&", queryParameters);
+        HttpURLConnection connection = openConnection("/users" + queryString);
         connection.setRequestMethod("GET");
         if (connection.getResponseCode() >= 300) {
             throw new IOException("Unsuccessful http request " + connection.getResponseCode() + " " + connection.getResponseMessage());

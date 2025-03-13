@@ -18,9 +18,9 @@ Name | Type | Description | Notes
 
 Name | Value
 ---- | -----
-PLACED | &quot;placed&quot;
-APPROVED | &quot;approved&quot;
-DELIVERED | &quot;delivered&quot;
+placed | &quot;placed&quot;
+approved | &quot;approved&quot;
+delivered | &quot;delivered&quot;
 
 
 
