@@ -223,7 +223,7 @@ public class {{classname}}{{#parent}} extends {{{parent}}}{{/parent}}{{#interfac
 
     @Override
     public {{classname}} put{{nameInPascalCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item) {
-        super.put{{nameInPascalCase}}Item(key, {{name}}Item)
+        super.put{{nameInPascalCase}}Item(key, {{name}}Item);
         return this;
     }
     {{/isMap}}

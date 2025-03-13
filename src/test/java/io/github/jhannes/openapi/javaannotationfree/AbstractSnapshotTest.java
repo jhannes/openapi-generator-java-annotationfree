@@ -15,8 +15,7 @@ public class AbstractSnapshotTest {
     public static final Path LOCAL_SNAPSHOT_ROOT = Paths.get("localSnapshotTests");
 
     protected static CodegenConfigurator createConfigurator(String modelName, Path input, Path outputDir) {
-        return createBaseConfigurator(input, outputDir)
-                .setModelNameSuffix("Dto")
+        return AbstractSnapshotTest.createBaseConfigurator(input, outputDir)
                 .addAdditionalProperty("hideGenerationTimestamp", "true")
                 .setGeneratorName("java-annotationfree")
                 .setPackageName("io.github.jhannes.openapi." + modelName);
@@ -24,6 +23,7 @@ public class AbstractSnapshotTest {
 
     static CodegenConfigurator createBaseConfigurator(Path input, Path outputDir) {
         return new CodegenConfigurator()
+                .setModelNameSuffix("Dto")
                 .setInputSpec(getInputSpec(input))
                 .setOutputDir(outputDir.toString());
     }
