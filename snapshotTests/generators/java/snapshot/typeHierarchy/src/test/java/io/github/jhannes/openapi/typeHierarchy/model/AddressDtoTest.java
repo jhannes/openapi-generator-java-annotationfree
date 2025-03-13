@@ -13,29 +13,29 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
  * Model tests for AddressDto
  */
-public class AddressDtoTest {
+class AddressDtoTest {
     private final AddressDto model = new AddressDto();
 
     /**
      * Model tests for AddressDto
      */
     @Test
-    public void testAddressDto() {
+    void testAddressDto() {
         // TODO: test AddressDto
     }
 
@@ -43,7 +43,7 @@ public class AddressDtoTest {
      * Test the property 'addressLine1'
      */
     @Test
-    public void addressLine1Test() {
+    void addressLine1Test() {
         // TODO: test addressLine1
     }
 
@@ -51,7 +51,7 @@ public class AddressDtoTest {
      * Test the property 'addressLine2'
      */
     @Test
-    public void addressLine2Test() {
+    void addressLine2Test() {
         // TODO: test addressLine2
     }
 
@@ -59,7 +59,7 @@ public class AddressDtoTest {
      * Test the property 'city'
      */
     @Test
-    public void cityTest() {
+    void cityTest() {
         // TODO: test city
     }
 
@@ -67,7 +67,7 @@ public class AddressDtoTest {
      * Test the property 'country'
      */
     @Test
-    public void countryTest() {
+    void countryTest() {
         // TODO: test country
     }
 
@@ -75,7 +75,7 @@ public class AddressDtoTest {
      * Test the property 'addressTypes'
      */
     @Test
-    public void addressTypesTest() {
+    void addressTypesTest() {
         // TODO: test addressTypes
     }
 

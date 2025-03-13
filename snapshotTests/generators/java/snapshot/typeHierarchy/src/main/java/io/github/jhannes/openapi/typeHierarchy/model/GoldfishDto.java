@@ -13,48 +13,35 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.StringJoiner;
 import java.util.Objects;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.HashMap;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import io.github.jhannes.openapi.typeHierarchy.JSON;
 
+import io.github.jhannes.openapi.typeHierarchy.ApiClient;
 /**
  * GoldfishDto
  */
+@JsonPropertyOrder({
+  GoldfishDto.JSON_PROPERTY_PET_TYPE,
+  GoldfishDto.JSON_PROPERTY_NAME,
+  GoldfishDto.JSON_PROPERTY_SPECIES
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
 public class GoldfishDto {
   /**
    * Gets or Sets petType
    */
-  @JsonAdapter(PetTypeEnum.Adapter.class)
   public enum PetTypeEnum {
     GOLDFISH("Goldfish");
 
@@ -64,6 +51,7 @@ public class GoldfishDto {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -73,6 +61,7 @@ public class GoldfishDto {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static PetTypeEnum fromValue(String value) {
       for (PetTypeEnum b : PetTypeEnum.values()) {
         if (b.value.equals(value)) {
@@ -81,39 +70,18 @@ public class GoldfishDto {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<PetTypeEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final PetTypeEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public PetTypeEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return PetTypeEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      PetTypeEnum.fromValue(value);
-    }
   }
 
-  public static final String SERIALIZED_NAME_PET_TYPE = "pet_type";
-  @SerializedName(SERIALIZED_NAME_PET_TYPE)
+  public static final String JSON_PROPERTY_PET_TYPE = "pet_type";
   private PetTypeEnum petType;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String JSON_PROPERTY_NAME = "name";
   private String name;
 
-  public static final String SERIALIZED_NAME_SPECIES = "species";
-  @SerializedName(SERIALIZED_NAME_SPECIES)
+  public static final String JSON_PROPERTY_SPECIES = "species";
   private String species;
 
-  public GoldfishDto() {
+  public GoldfishDto() { 
   }
 
   public GoldfishDto petType(PetTypeEnum petType) {
@@ -126,10 +94,15 @@ public class GoldfishDto {
    * @return petType
    */
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_PET_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public PetTypeEnum getPetType() {
     return petType;
   }
 
+
+  @JsonProperty(JSON_PROPERTY_PET_TYPE)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPetType(PetTypeEnum petType) {
     this.petType = petType;
   }
@@ -145,10 +118,15 @@ public class GoldfishDto {
    * @return name
    */
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getName() {
     return name;
   }
 
+
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setName(String name) {
     this.name = name;
   }
@@ -164,16 +142,23 @@ public class GoldfishDto {
    * @return species
    */
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_SPECIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getSpecies() {
     return species;
   }
 
+
+  @JsonProperty(JSON_PROPERTY_SPECIES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSpecies(String species) {
     this.species = species;
   }
 
 
-
+  /**
+   * Return true if this Goldfish object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -215,110 +200,54 @@ public class GoldfishDto {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("pet_type");
-    openapiFields.add("name");
-    openapiFields.add("species");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("pet_type");
+  /**
+   * Convert the instance into URL query string.
+   *
+   * @return URL query string
+   */
+  public String toUrlQueryString() {
+    return toUrlQueryString(null);
   }
 
   /**
-   * Validates the JSON Element and throws an exception if issues found
+   * Convert the instance into URL query string.
    *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to GoldfishDto
+   * @param prefix prefix of the query string
+   * @return URL query string
    */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!GoldfishDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in GoldfishDto is not found in the empty JSON string", GoldfishDto.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!GoldfishDto.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `GoldfishDto` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : GoldfishDto.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if (!jsonObj.get("pet_type").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `pet_type` to be a primitive type in the JSON string but got `%s`", jsonObj.get("pet_type").toString()));
-      }
-      // validate the required field `pet_type`
-      PetTypeEnum.validateJsonElement(jsonObj.get("pet_type"));
-      if ((jsonObj.get("name") != null && !jsonObj.get("name").isJsonNull()) && !jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      if ((jsonObj.get("species") != null && !jsonObj.get("species").isJsonNull()) && !jsonObj.get("species").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `species` to be a primitive type in the JSON string but got `%s`", jsonObj.get("species").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!GoldfishDto.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'GoldfishDto' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<GoldfishDto> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(GoldfishDto.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<GoldfishDto>() {
-           @Override
-           public void write(JsonWriter out, GoldfishDto value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public GoldfishDto read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
+  public String toUrlQueryString(String prefix) {
+    String suffix = "";
+    String containerSuffix = "";
+    String containerPrefix = "";
+    if (prefix == null) {
+      // style=form, explode=true, e.g. /pet?name=cat&type=manx
+      prefix = "";
+    } else {
+      // deepObject style e.g. /pet?id[name]=cat&id[type]=manx
+      prefix = prefix + "[";
+      suffix = "]";
+      containerSuffix = "]";
+      containerPrefix = "[";
     }
-  }
 
-  /**
-   * Create an instance of GoldfishDto given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of GoldfishDto
-   * @throws IOException if the JSON string is invalid with respect to GoldfishDto
-   */
-  public static GoldfishDto fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, GoldfishDto.class);
-  }
+    StringJoiner joiner = new StringJoiner("&");
 
-  /**
-   * Convert an instance of GoldfishDto to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
+    // add `pet_type` to the URL query string
+    if (getPetType() != null) {
+      joiner.add(String.format("%spet_type%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getPetType()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    }
+
+    // add `name` to the URL query string
+    if (getName() != null) {
+      joiner.add(String.format("%sname%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getName()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    }
+
+    // add `species` to the URL query string
+    if (getSpecies() != null) {
+      joiner.add(String.format("%sspecies%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getSpecies()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    }
+
+    return joiner.toString();
   }
 }
 

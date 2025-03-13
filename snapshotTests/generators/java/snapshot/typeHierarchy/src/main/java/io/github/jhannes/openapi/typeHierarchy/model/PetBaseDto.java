@@ -13,68 +13,54 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.StringJoiner;
 import java.util.Objects;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
-import java.io.IOException;
-import java.util.Arrays;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
-
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
+import java.util.HashMap;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
+import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
+import java.util.Arrays;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import io.github.jhannes.openapi.typeHierarchy.JSON;
 
+import io.github.jhannes.openapi.typeHierarchy.ApiClient;
 /**
  * PetBaseDto
  */
+@JsonPropertyOrder({
+  PetBaseDto.JSON_PROPERTY_ID,
+  PetBaseDto.JSON_PROPERTY_NAME,
+  PetBaseDto.JSON_PROPERTY_BIRTH_DATE,
+  PetBaseDto.JSON_PROPERTY_OWNER_ADDRESS
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
 public class PetBaseDto {
-  public static final String SERIALIZED_NAME_ID = "id";
-  @SerializedName(SERIALIZED_NAME_ID)
+  public static final String JSON_PROPERTY_ID = "id";
   private String id;
 
-  public static final String SERIALIZED_NAME_NAME = "name";
-  @SerializedName(SERIALIZED_NAME_NAME)
+  public static final String JSON_PROPERTY_NAME = "name";
   private String name;
 
-  public static final String SERIALIZED_NAME_BIRTH_DATE = "birth_date";
-  @SerializedName(SERIALIZED_NAME_BIRTH_DATE)
+  public static final String JSON_PROPERTY_BIRTH_DATE = "birth_date";
   private String birthDate;
 
-  public static final String SERIALIZED_NAME_OWNER_ADDRESS = "ownerAddress";
-  @SerializedName(SERIALIZED_NAME_OWNER_ADDRESS)
+  public static final String JSON_PROPERTY_OWNER_ADDRESS = "ownerAddress";
   private AddressDto ownerAddress;
 
-  public PetBaseDto() {
+  public PetBaseDto() { 
   }
 
+  @JsonCreator
   public PetBaseDto(
-     String id
+    @JsonProperty(JSON_PROPERTY_ID) String id
   ) {
-    this();
+  this();
     this.id = id;
   }
 
@@ -83,9 +69,12 @@ public class PetBaseDto {
    * @return id
    */
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_ID)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getId() {
     return id;
   }
+
 
 
 
@@ -99,10 +88,15 @@ public class PetBaseDto {
    * @return name
    */
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getName() {
     return name;
   }
 
+
+  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setName(String name) {
     this.name = name;
   }
@@ -118,10 +112,15 @@ public class PetBaseDto {
    * @return birthDate
    */
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_BIRTH_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getBirthDate() {
     return birthDate;
   }
 
+
+  @JsonProperty(JSON_PROPERTY_BIRTH_DATE)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBirthDate(String birthDate) {
     this.birthDate = birthDate;
   }
@@ -137,16 +136,23 @@ public class PetBaseDto {
    * @return ownerAddress
    */
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_OWNER_ADDRESS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public AddressDto getOwnerAddress() {
     return ownerAddress;
   }
 
+
+  @JsonProperty(JSON_PROPERTY_OWNER_ADDRESS)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setOwnerAddress(AddressDto ownerAddress) {
     this.ownerAddress = ownerAddress;
   }
 
 
-
+  /**
+   * Return true if this PetBase object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -190,113 +196,59 @@ public class PetBaseDto {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("id");
-    openapiFields.add("name");
-    openapiFields.add("birth_date");
-    openapiFields.add("ownerAddress");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("name");
+  /**
+   * Convert the instance into URL query string.
+   *
+   * @return URL query string
+   */
+  public String toUrlQueryString() {
+    return toUrlQueryString(null);
   }
 
   /**
-   * Validates the JSON Element and throws an exception if issues found
+   * Convert the instance into URL query string.
    *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to PetBaseDto
+   * @param prefix prefix of the query string
+   * @return URL query string
    */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!PetBaseDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in PetBaseDto is not found in the empty JSON string", PetBaseDto.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!PetBaseDto.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `PetBaseDto` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : PetBaseDto.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("id") != null && !jsonObj.get("id").isJsonNull()) && !jsonObj.get("id").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("id").toString()));
-      }
-      if (!jsonObj.get("name").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `name` to be a primitive type in the JSON string but got `%s`", jsonObj.get("name").toString()));
-      }
-      if ((jsonObj.get("birth_date") != null && !jsonObj.get("birth_date").isJsonNull()) && !jsonObj.get("birth_date").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `birth_date` to be a primitive type in the JSON string but got `%s`", jsonObj.get("birth_date").toString()));
-      }
-      // validate the optional field `ownerAddress`
-      if (jsonObj.get("ownerAddress") != null && !jsonObj.get("ownerAddress").isJsonNull()) {
-        AddressDto.validateJsonElement(jsonObj.get("ownerAddress"));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!PetBaseDto.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'PetBaseDto' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<PetBaseDto> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(PetBaseDto.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<PetBaseDto>() {
-           @Override
-           public void write(JsonWriter out, PetBaseDto value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public PetBaseDto read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
+  public String toUrlQueryString(String prefix) {
+    String suffix = "";
+    String containerSuffix = "";
+    String containerPrefix = "";
+    if (prefix == null) {
+      // style=form, explode=true, e.g. /pet?name=cat&type=manx
+      prefix = "";
+    } else {
+      // deepObject style e.g. /pet?id[name]=cat&id[type]=manx
+      prefix = prefix + "[";
+      suffix = "]";
+      containerSuffix = "]";
+      containerPrefix = "[";
     }
-  }
 
-  /**
-   * Create an instance of PetBaseDto given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of PetBaseDto
-   * @throws IOException if the JSON string is invalid with respect to PetBaseDto
-   */
-  public static PetBaseDto fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, PetBaseDto.class);
-  }
+    StringJoiner joiner = new StringJoiner("&");
 
-  /**
-   * Convert an instance of PetBaseDto to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
+    // add `id` to the URL query string
+    if (getId() != null) {
+      joiner.add(String.format("%sid%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getId()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    }
+
+    // add `name` to the URL query string
+    if (getName() != null) {
+      joiner.add(String.format("%sname%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getName()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    }
+
+    // add `birth_date` to the URL query string
+    if (getBirthDate() != null) {
+      joiner.add(String.format("%sbirth_date%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getBirthDate()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    }
+
+    // add `ownerAddress` to the URL query string
+    if (getOwnerAddress() != null) {
+      joiner.add(getOwnerAddress().toUrlQueryString(prefix + "ownerAddress" + suffix));
+    }
+
+    return joiner.toString();
   }
 }
 

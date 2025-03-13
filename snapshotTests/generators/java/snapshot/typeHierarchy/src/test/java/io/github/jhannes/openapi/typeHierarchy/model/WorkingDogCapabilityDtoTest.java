@@ -13,19 +13,19 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import com.google.gson.annotations.SerializedName;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
  * Model tests for WorkingDogCapabilityDto
  */
-public class WorkingDogCapabilityDtoTest {
+class WorkingDogCapabilityDtoTest {
     /**
      * Model tests for WorkingDogCapabilityDto
      */
     @Test
-    public void testWorkingDogCapabilityDto() {
+    void testWorkingDogCapabilityDto() {
         // TODO: test WorkingDogCapabilityDto
     }
 

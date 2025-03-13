@@ -13,10 +13,11 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import io.github.jhannes.openapi.typeHierarchy.ApiException;
 import java.util.Objects;
 import java.lang.reflect.Type;
 import java.util.Map;
+
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Abstract class for oneOf,anyOf schemas defined in OpenAPI spec
@@ -50,7 +51,7 @@ public abstract class AbstractOpenApiSchema {
      *
      * @return an instance of the actual schema/object
      */
-    //@JsonValue
+    @JsonValue
     public Object getActualInstance() {return instance;}
 
     /**

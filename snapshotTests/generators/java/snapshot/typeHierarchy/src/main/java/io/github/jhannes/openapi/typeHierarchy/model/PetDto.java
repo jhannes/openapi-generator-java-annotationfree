@@ -13,188 +13,236 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.StringJoiner;
 import java.util.Objects;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
+import java.util.Map;
+import java.util.HashMap;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
 import io.github.jhannes.openapi.typeHierarchy.model.CatDto;
 import io.github.jhannes.openapi.typeHierarchy.model.DogDto;
 import io.github.jhannes.openapi.typeHierarchy.model.GoldfishDto;
 import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogCapabilityDto;
 import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogDto;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-
+import com.fasterxml.jackson.core.type.TypeReference;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapter;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonSerializationContext;
-import com.google.gson.JsonSerializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonParseException;
-
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.JsonToken;
+import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 import io.github.jhannes.openapi.typeHierarchy.JSON;
 
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
+@JsonDeserialize(using = PetDto.PetDtoDeserializer.class)
+@JsonSerialize(using = PetDto.PetDtoSerializer.class)
 public class PetDto extends AbstractOpenApiSchema {
     private static final Logger log = Logger.getLogger(PetDto.class.getName());
 
-    public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-        @SuppressWarnings("unchecked")
+    public static class PetDtoSerializer extends StdSerializer<PetDto> {
+        public PetDtoSerializer(Class<PetDto> t) {
+            super(t);
+        }
+
+        public PetDtoSerializer() {
+            this(null);
+        }
+
         @Override
-        public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-            if (!PetDto.class.isAssignableFrom(type.getRawType())) {
-                return null; // this class only serializes 'PetDto' and its subtypes
+        public void serialize(PetDto value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonProcessingException {
+            jgen.writeObject(value.getActualInstance());
+        }
+    }
+
+    public static class PetDtoDeserializer extends StdDeserializer<PetDto> {
+        public PetDtoDeserializer() {
+            this(PetDto.class);
+        }
+
+        public PetDtoDeserializer(Class<?> vc) {
+            super(vc);
+        }
+
+        @Override
+        public PetDto deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+            JsonNode tree = jp.readValueAsTree();
+            Object deserialized = null;
+            boolean typeCoercion = ctxt.isEnabled(MapperFeature.ALLOW_COERCION_OF_SCALARS);
+            int match = 0;
+            JsonToken token = tree.traverse(jp.getCodec()).nextToken();
+            // deserialize CatDto
+            try {
+                boolean attemptParsing = true;
+                // ensure that we respect type coercion as set on the client ObjectMapper
+                if (CatDto.class.equals(Integer.class) || CatDto.class.equals(Long.class) || CatDto.class.equals(Float.class) || CatDto.class.equals(Double.class) || CatDto.class.equals(Boolean.class) || CatDto.class.equals(String.class)) {
+                    attemptParsing = typeCoercion;
+                    if (!attemptParsing) {
+                        attemptParsing |= ((CatDto.class.equals(Integer.class) || CatDto.class.equals(Long.class)) && token == JsonToken.VALUE_NUMBER_INT);
+                        attemptParsing |= ((CatDto.class.equals(Float.class) || CatDto.class.equals(Double.class)) && token == JsonToken.VALUE_NUMBER_FLOAT);
+                        attemptParsing |= (CatDto.class.equals(Boolean.class) && (token == JsonToken.VALUE_FALSE || token == JsonToken.VALUE_TRUE));
+                        attemptParsing |= (CatDto.class.equals(String.class) && token == JsonToken.VALUE_STRING);
+                    }
+                }
+                if (attemptParsing) {
+                    deserialized = tree.traverse(jp.getCodec()).readValueAs(CatDto.class);
+                    // TODO: there is no validation against JSON schema constraints
+                    // (min, max, enum, pattern...), this does not perform a strict JSON
+                    // validation, which means the 'match' count may be higher than it should be.
+                    match++;
+                    log.log(Level.FINER, "Input data matches schema 'CatDto'");
+                }
+            } catch (Exception e) {
+                // deserialization failed, continue
+                log.log(Level.FINER, "Input data does not match schema 'CatDto'", e);
             }
-            final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-            final TypeAdapter<CatDto> adapterCatDto = gson.getDelegateAdapter(this, TypeToken.get(CatDto.class));
-            final TypeAdapter<DogDto> adapterDogDto = gson.getDelegateAdapter(this, TypeToken.get(DogDto.class));
-            final TypeAdapter<WorkingDogDto> adapterWorkingDogDto = gson.getDelegateAdapter(this, TypeToken.get(WorkingDogDto.class));
-            final TypeAdapter<GoldfishDto> adapterGoldfishDto = gson.getDelegateAdapter(this, TypeToken.get(GoldfishDto.class));
 
-            return (TypeAdapter<T>) new TypeAdapter<PetDto>() {
-                @Override
-                public void write(JsonWriter out, PetDto value) throws IOException {
-                    if (value == null || value.getActualInstance() == null) {
-                        elementAdapter.write(out, null);
-                        return;
+            // deserialize DogDto
+            try {
+                boolean attemptParsing = true;
+                // ensure that we respect type coercion as set on the client ObjectMapper
+                if (DogDto.class.equals(Integer.class) || DogDto.class.equals(Long.class) || DogDto.class.equals(Float.class) || DogDto.class.equals(Double.class) || DogDto.class.equals(Boolean.class) || DogDto.class.equals(String.class)) {
+                    attemptParsing = typeCoercion;
+                    if (!attemptParsing) {
+                        attemptParsing |= ((DogDto.class.equals(Integer.class) || DogDto.class.equals(Long.class)) && token == JsonToken.VALUE_NUMBER_INT);
+                        attemptParsing |= ((DogDto.class.equals(Float.class) || DogDto.class.equals(Double.class)) && token == JsonToken.VALUE_NUMBER_FLOAT);
+                        attemptParsing |= (DogDto.class.equals(Boolean.class) && (token == JsonToken.VALUE_FALSE || token == JsonToken.VALUE_TRUE));
+                        attemptParsing |= (DogDto.class.equals(String.class) && token == JsonToken.VALUE_STRING);
                     }
-
-                    // check if the actual instance is of the type `CatDto`
-                    if (value.getActualInstance() instanceof CatDto) {
-                        JsonElement element = adapterCatDto.toJsonTree((CatDto)value.getActualInstance());
-                        elementAdapter.write(out, element);
-                        return;
-                    }
-                    // check if the actual instance is of the type `DogDto`
-                    if (value.getActualInstance() instanceof DogDto) {
-                        JsonElement element = adapterDogDto.toJsonTree((DogDto)value.getActualInstance());
-                        elementAdapter.write(out, element);
-                        return;
-                    }
-                    // check if the actual instance is of the type `WorkingDogDto`
-                    if (value.getActualInstance() instanceof WorkingDogDto) {
-                        JsonElement element = adapterWorkingDogDto.toJsonTree((WorkingDogDto)value.getActualInstance());
-                        elementAdapter.write(out, element);
-                        return;
-                    }
-                    // check if the actual instance is of the type `GoldfishDto`
-                    if (value.getActualInstance() instanceof GoldfishDto) {
-                        JsonElement element = adapterGoldfishDto.toJsonTree((GoldfishDto)value.getActualInstance());
-                        elementAdapter.write(out, element);
-                        return;
-                    }
-                    throw new IOException("Failed to serialize as the type doesn't match oneOf schemas: CatDto, DogDto, GoldfishDto, WorkingDogDto");
                 }
-
-                @Override
-                public PetDto read(JsonReader in) throws IOException {
-                    Object deserialized = null;
-                    JsonElement jsonElement = elementAdapter.read(in);
-
-                    int match = 0;
-                    ArrayList<String> errorMessages = new ArrayList<>();
-                    TypeAdapter actualAdapter = elementAdapter;
-
-                    // deserialize CatDto
-                    try {
-                        // validate the JSON object to see if any exception is thrown
-                        CatDto.validateJsonElement(jsonElement);
-                        actualAdapter = adapterCatDto;
-                        match++;
-                        log.log(Level.FINER, "Input data matches schema 'CatDto'");
-                    } catch (Exception e) {
-                        // deserialization failed, continue
-                        errorMessages.add(String.format("Deserialization for CatDto failed with `%s`.", e.getMessage()));
-                        log.log(Level.FINER, "Input data does not match schema 'CatDto'", e);
-                    }
-                    // deserialize DogDto
-                    try {
-                        // validate the JSON object to see if any exception is thrown
-                        DogDto.validateJsonElement(jsonElement);
-                        actualAdapter = adapterDogDto;
-                        match++;
-                        log.log(Level.FINER, "Input data matches schema 'DogDto'");
-                    } catch (Exception e) {
-                        // deserialization failed, continue
-                        errorMessages.add(String.format("Deserialization for DogDto failed with `%s`.", e.getMessage()));
-                        log.log(Level.FINER, "Input data does not match schema 'DogDto'", e);
-                    }
-                    // deserialize WorkingDogDto
-                    try {
-                        // validate the JSON object to see if any exception is thrown
-                        WorkingDogDto.validateJsonElement(jsonElement);
-                        actualAdapter = adapterWorkingDogDto;
-                        match++;
-                        log.log(Level.FINER, "Input data matches schema 'WorkingDogDto'");
-                    } catch (Exception e) {
-                        // deserialization failed, continue
-                        errorMessages.add(String.format("Deserialization for WorkingDogDto failed with `%s`.", e.getMessage()));
-                        log.log(Level.FINER, "Input data does not match schema 'WorkingDogDto'", e);
-                    }
-                    // deserialize GoldfishDto
-                    try {
-                        // validate the JSON object to see if any exception is thrown
-                        GoldfishDto.validateJsonElement(jsonElement);
-                        actualAdapter = adapterGoldfishDto;
-                        match++;
-                        log.log(Level.FINER, "Input data matches schema 'GoldfishDto'");
-                    } catch (Exception e) {
-                        // deserialization failed, continue
-                        errorMessages.add(String.format("Deserialization for GoldfishDto failed with `%s`.", e.getMessage()));
-                        log.log(Level.FINER, "Input data does not match schema 'GoldfishDto'", e);
-                    }
-
-                    if (match == 1) {
-                        PetDto ret = new PetDto();
-                        ret.setActualInstance(actualAdapter.fromJsonTree(jsonElement));
-                        return ret;
-                    }
-
-                    throw new IOException(String.format("Failed deserialization for PetDto: %d classes match result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", match, errorMessages, jsonElement.toString()));
+                if (attemptParsing) {
+                    deserialized = tree.traverse(jp.getCodec()).readValueAs(DogDto.class);
+                    // TODO: there is no validation against JSON schema constraints
+                    // (min, max, enum, pattern...), this does not perform a strict JSON
+                    // validation, which means the 'match' count may be higher than it should be.
+                    match++;
+                    log.log(Level.FINER, "Input data matches schema 'DogDto'");
                 }
-            }.nullSafe();
+            } catch (Exception e) {
+                // deserialization failed, continue
+                log.log(Level.FINER, "Input data does not match schema 'DogDto'", e);
+            }
+
+            // deserialize GoldfishDto
+            try {
+                boolean attemptParsing = true;
+                // ensure that we respect type coercion as set on the client ObjectMapper
+                if (GoldfishDto.class.equals(Integer.class) || GoldfishDto.class.equals(Long.class) || GoldfishDto.class.equals(Float.class) || GoldfishDto.class.equals(Double.class) || GoldfishDto.class.equals(Boolean.class) || GoldfishDto.class.equals(String.class)) {
+                    attemptParsing = typeCoercion;
+                    if (!attemptParsing) {
+                        attemptParsing |= ((GoldfishDto.class.equals(Integer.class) || GoldfishDto.class.equals(Long.class)) && token == JsonToken.VALUE_NUMBER_INT);
+                        attemptParsing |= ((GoldfishDto.class.equals(Float.class) || GoldfishDto.class.equals(Double.class)) && token == JsonToken.VALUE_NUMBER_FLOAT);
+                        attemptParsing |= (GoldfishDto.class.equals(Boolean.class) && (token == JsonToken.VALUE_FALSE || token == JsonToken.VALUE_TRUE));
+                        attemptParsing |= (GoldfishDto.class.equals(String.class) && token == JsonToken.VALUE_STRING);
+                    }
+                }
+                if (attemptParsing) {
+                    deserialized = tree.traverse(jp.getCodec()).readValueAs(GoldfishDto.class);
+                    // TODO: there is no validation against JSON schema constraints
+                    // (min, max, enum, pattern...), this does not perform a strict JSON
+                    // validation, which means the 'match' count may be higher than it should be.
+                    match++;
+                    log.log(Level.FINER, "Input data matches schema 'GoldfishDto'");
+                }
+            } catch (Exception e) {
+                // deserialization failed, continue
+                log.log(Level.FINER, "Input data does not match schema 'GoldfishDto'", e);
+            }
+
+            // deserialize WorkingDogDto
+            try {
+                boolean attemptParsing = true;
+                // ensure that we respect type coercion as set on the client ObjectMapper
+                if (WorkingDogDto.class.equals(Integer.class) || WorkingDogDto.class.equals(Long.class) || WorkingDogDto.class.equals(Float.class) || WorkingDogDto.class.equals(Double.class) || WorkingDogDto.class.equals(Boolean.class) || WorkingDogDto.class.equals(String.class)) {
+                    attemptParsing = typeCoercion;
+                    if (!attemptParsing) {
+                        attemptParsing |= ((WorkingDogDto.class.equals(Integer.class) || WorkingDogDto.class.equals(Long.class)) && token == JsonToken.VALUE_NUMBER_INT);
+                        attemptParsing |= ((WorkingDogDto.class.equals(Float.class) || WorkingDogDto.class.equals(Double.class)) && token == JsonToken.VALUE_NUMBER_FLOAT);
+                        attemptParsing |= (WorkingDogDto.class.equals(Boolean.class) && (token == JsonToken.VALUE_FALSE || token == JsonToken.VALUE_TRUE));
+                        attemptParsing |= (WorkingDogDto.class.equals(String.class) && token == JsonToken.VALUE_STRING);
+                    }
+                }
+                if (attemptParsing) {
+                    deserialized = tree.traverse(jp.getCodec()).readValueAs(WorkingDogDto.class);
+                    // TODO: there is no validation against JSON schema constraints
+                    // (min, max, enum, pattern...), this does not perform a strict JSON
+                    // validation, which means the 'match' count may be higher than it should be.
+                    match++;
+                    log.log(Level.FINER, "Input data matches schema 'WorkingDogDto'");
+                }
+            } catch (Exception e) {
+                // deserialization failed, continue
+                log.log(Level.FINER, "Input data does not match schema 'WorkingDogDto'", e);
+            }
+
+            if (match == 1) {
+                PetDto ret = new PetDto();
+                ret.setActualInstance(deserialized);
+                return ret;
+            }
+            throw new IOException(String.format("Failed deserialization for PetDto: %d classes match result, expected 1", match));
+        }
+
+        /**
+         * Handle deserialization of the 'null' value.
+         */
+        @Override
+        public PetDto getNullValue(DeserializationContext ctxt) throws JsonMappingException {
+            throw new JsonMappingException(ctxt.getParser(), "PetDto cannot be null");
         }
     }
 
     // store a list of schema names defined in oneOf
-    public static final Map<String, Class<?>> schemas = new HashMap<String, Class<?>>();
+    public static final Map<String, Class<?>> schemas = new HashMap<>();
 
     public PetDto() {
         super("oneOf", Boolean.FALSE);
     }
 
-    public PetDto(Object o) {
+    public PetDto(CatDto o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
+
+    public PetDto(DogDto o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
+
+    public PetDto(GoldfishDto o) {
+        super("oneOf", Boolean.FALSE);
+        setActualInstance(o);
+    }
+
+    public PetDto(WorkingDogDto o) {
         super("oneOf", Boolean.FALSE);
         setActualInstance(o);
     }
@@ -202,8 +250,17 @@ public class PetDto extends AbstractOpenApiSchema {
     static {
         schemas.put("CatDto", CatDto.class);
         schemas.put("DogDto", DogDto.class);
-        schemas.put("WorkingDogDto", WorkingDogDto.class);
         schemas.put("GoldfishDto", GoldfishDto.class);
+        schemas.put("WorkingDogDto", WorkingDogDto.class);
+        JSON.registerDescendants(PetDto.class, Collections.unmodifiableMap(schemas));
+        // Initialize and register the discriminator mappings.
+        Map<String, Class<?>> mappings = new HashMap<String, Class<?>>();
+        mappings.put("Cat", CatDto.class);
+        mappings.put("Dog", DogDto.class);
+        mappings.put("Goldfish", GoldfishDto.class);
+        mappings.put("WorkingDog", WorkingDogDto.class);
+        mappings.put("Pet", PetDto.class);
+        JSON.registerDiscriminator(PetDto.class, "pet_type", mappings);
     }
 
     @Override
@@ -217,25 +274,26 @@ public class PetDto extends AbstractOpenApiSchema {
      * CatDto, DogDto, GoldfishDto, WorkingDogDto
      *
      * It could be an instance of the 'oneOf' schemas.
+     * The oneOf child schemas may themselves be a composed schema (allOf, anyOf, oneOf).
      */
     @Override
     public void setActualInstance(Object instance) {
-        if (instance instanceof CatDto) {
+        if (JSON.isInstanceOf(CatDto.class, instance, new HashSet<Class<?>>())) {
             super.setActualInstance(instance);
             return;
         }
 
-        if (instance instanceof DogDto) {
+        if (JSON.isInstanceOf(DogDto.class, instance, new HashSet<Class<?>>())) {
             super.setActualInstance(instance);
             return;
         }
 
-        if (instance instanceof WorkingDogDto) {
+        if (JSON.isInstanceOf(GoldfishDto.class, instance, new HashSet<Class<?>>())) {
             super.setActualInstance(instance);
             return;
         }
 
-        if (instance instanceof GoldfishDto) {
+        if (JSON.isInstanceOf(WorkingDogDto.class, instance, new HashSet<Class<?>>())) {
             super.setActualInstance(instance);
             return;
         }
@@ -249,7 +307,6 @@ public class PetDto extends AbstractOpenApiSchema {
      *
      * @return The actual instance (CatDto, DogDto, GoldfishDto, WorkingDogDto)
      */
-    @SuppressWarnings("unchecked")
     @Override
     public Object getActualInstance() {
         return super.getActualInstance();
@@ -265,6 +322,7 @@ public class PetDto extends AbstractOpenApiSchema {
     public CatDto getCatDto() throws ClassCastException {
         return (CatDto)super.getActualInstance();
     }
+
     /**
      * Get the actual instance of `DogDto`. If the actual instance is not `DogDto`,
      * the ClassCastException will be thrown.
@@ -275,16 +333,7 @@ public class PetDto extends AbstractOpenApiSchema {
     public DogDto getDogDto() throws ClassCastException {
         return (DogDto)super.getActualInstance();
     }
-    /**
-     * Get the actual instance of `WorkingDogDto`. If the actual instance is not `WorkingDogDto`,
-     * the ClassCastException will be thrown.
-     *
-     * @return The actual instance of `WorkingDogDto`
-     * @throws ClassCastException if the instance is not `WorkingDogDto`
-     */
-    public WorkingDogDto getWorkingDogDto() throws ClassCastException {
-        return (WorkingDogDto)super.getActualInstance();
-    }
+
     /**
      * Get the actual instance of `GoldfishDto`. If the actual instance is not `GoldfishDto`,
      * the ClassCastException will be thrown.
@@ -297,70 +346,76 @@ public class PetDto extends AbstractOpenApiSchema {
     }
 
     /**
-     * Validates the JSON Element and throws an exception if issues found
+     * Get the actual instance of `WorkingDogDto`. If the actual instance is not `WorkingDogDto`,
+     * the ClassCastException will be thrown.
      *
-     * @param jsonElement JSON Element
-     * @throws IOException if the JSON Element is invalid with respect to PetDto
+     * @return The actual instance of `WorkingDogDto`
+     * @throws ClassCastException if the instance is not `WorkingDogDto`
      */
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-        // validate oneOf schemas one by one
-        int validCount = 0;
-        ArrayList<String> errorMessages = new ArrayList<>();
-        // validate the json string with CatDto
-        try {
-            CatDto.validateJsonElement(jsonElement);
-            validCount++;
-        } catch (Exception e) {
-            errorMessages.add(String.format("Deserialization for CatDto failed with `%s`.", e.getMessage()));
-            // continue to the next one
-        }
-        // validate the json string with DogDto
-        try {
-            DogDto.validateJsonElement(jsonElement);
-            validCount++;
-        } catch (Exception e) {
-            errorMessages.add(String.format("Deserialization for DogDto failed with `%s`.", e.getMessage()));
-            // continue to the next one
-        }
-        // validate the json string with WorkingDogDto
-        try {
-            WorkingDogDto.validateJsonElement(jsonElement);
-            validCount++;
-        } catch (Exception e) {
-            errorMessages.add(String.format("Deserialization for WorkingDogDto failed with `%s`.", e.getMessage()));
-            // continue to the next one
-        }
-        // validate the json string with GoldfishDto
-        try {
-            GoldfishDto.validateJsonElement(jsonElement);
-            validCount++;
-        } catch (Exception e) {
-            errorMessages.add(String.format("Deserialization for GoldfishDto failed with `%s`.", e.getMessage()));
-            // continue to the next one
-        }
-        if (validCount != 1) {
-            throw new IOException(String.format("The JSON string is invalid for PetDto with oneOf schemas: CatDto, DogDto, GoldfishDto, WorkingDogDto. %d class(es) match the result, expected 1. Detailed failure message for oneOf schemas: %s. JSON: %s", validCount, errorMessages, jsonElement.toString()));
-        }
+    public WorkingDogDto getWorkingDogDto() throws ClassCastException {
+        return (WorkingDogDto)super.getActualInstance();
     }
 
-    /**
-     * Create an instance of PetDto given an JSON string
-     *
-     * @param jsonString JSON string
-     * @return An instance of PetDto
-     * @throws IOException if the JSON string is invalid with respect to PetDto
-     */
-    public static PetDto fromJson(String jsonString) throws IOException {
-        return JSON.getGson().fromJson(jsonString, PetDto.class);
+
+
+  /**
+   * Convert the instance into URL query string.
+   *
+   * @return URL query string
+   */
+  public String toUrlQueryString() {
+    return toUrlQueryString(null);
+  }
+
+  /**
+   * Convert the instance into URL query string.
+   *
+   * @param prefix prefix of the query string
+   * @return URL query string
+   */
+  public String toUrlQueryString(String prefix) {
+    String suffix = "";
+    String containerSuffix = "";
+    String containerPrefix = "";
+    if (prefix == null) {
+      // style=form, explode=true, e.g. /pet?name=cat&type=manx
+      prefix = "";
+    } else {
+      // deepObject style e.g. /pet?id[name]=cat&id[type]=manx
+      prefix = prefix + "[";
+      suffix = "]";
+      containerSuffix = "]";
+      containerPrefix = "[";
     }
 
-    /**
-     * Convert an instance of PetDto to an JSON string
-     *
-     * @return JSON string
-     */
-    public String toJson() {
-        return JSON.getGson().toJson(this);
+    StringJoiner joiner = new StringJoiner("&");
+
+    if (getActualInstance() instanceof CatDto) {
+        if (getActualInstance() != null) {
+          joiner.add(((CatDto)getActualInstance()).toUrlQueryString(prefix + "one_of_0" + suffix));
+        }
+        return joiner.toString();
     }
+    if (getActualInstance() instanceof DogDto) {
+        if (getActualInstance() != null) {
+          joiner.add(((DogDto)getActualInstance()).toUrlQueryString(prefix + "one_of_1" + suffix));
+        }
+        return joiner.toString();
+    }
+    if (getActualInstance() instanceof WorkingDogDto) {
+        if (getActualInstance() != null) {
+          joiner.add(((WorkingDogDto)getActualInstance()).toUrlQueryString(prefix + "one_of_2" + suffix));
+        }
+        return joiner.toString();
+    }
+    if (getActualInstance() instanceof GoldfishDto) {
+        if (getActualInstance() != null) {
+          joiner.add(((GoldfishDto)getActualInstance()).toUrlQueryString(prefix + "one_of_3" + suffix));
+        }
+        return joiner.toString();
+    }
+    return null;
+  }
+
 }
 

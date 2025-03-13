@@ -13,66 +13,51 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.StringJoiner;
 import java.util.Objects;
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
+import java.util.Map;
+import java.util.HashMap;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonDeserializationContext;
-import com.google.gson.JsonDeserializer;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
-import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-import com.google.gson.TypeAdapter;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
-import java.io.IOException;
 
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import io.github.jhannes.openapi.typeHierarchy.JSON;
-
+import io.github.jhannes.openapi.typeHierarchy.ApiClient;
 /**
  * AddressDto
  */
+@JsonPropertyOrder({
+  AddressDto.JSON_PROPERTY_ADDRESS_LINE1,
+  AddressDto.JSON_PROPERTY_ADDRESS_LINE2,
+  AddressDto.JSON_PROPERTY_CITY,
+  AddressDto.JSON_PROPERTY_COUNTRY,
+  AddressDto.JSON_PROPERTY_ADDRESS_TYPES
+})
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
 public class AddressDto {
-  public static final String SERIALIZED_NAME_ADDRESS_LINE1 = "addressLine1";
-  @SerializedName(SERIALIZED_NAME_ADDRESS_LINE1)
+  public static final String JSON_PROPERTY_ADDRESS_LINE1 = "addressLine1";
   private String addressLine1;
 
-  public static final String SERIALIZED_NAME_ADDRESS_LINE2 = "addressLine2";
-  @SerializedName(SERIALIZED_NAME_ADDRESS_LINE2)
+  public static final String JSON_PROPERTY_ADDRESS_LINE2 = "addressLine2";
   private String addressLine2;
 
-  public static final String SERIALIZED_NAME_CITY = "city";
-  @SerializedName(SERIALIZED_NAME_CITY)
+  public static final String JSON_PROPERTY_CITY = "city";
   private String city;
 
-  public static final String SERIALIZED_NAME_COUNTRY = "country";
-  @SerializedName(SERIALIZED_NAME_COUNTRY)
+  public static final String JSON_PROPERTY_COUNTRY = "country";
   private String country;
 
   /**
    * Gets or Sets addressTypes
    */
-  @JsonAdapter(AddressTypesEnum.Adapter.class)
   public enum AddressTypesEnum {
     SHIPPING("SHIPPING"),
     
@@ -84,6 +69,7 @@ public class AddressDto {
       this.value = value;
     }
 
+    @JsonValue
     public String getValue() {
       return value;
     }
@@ -93,6 +79,7 @@ public class AddressDto {
       return String.valueOf(value);
     }
 
+    @JsonCreator
     public static AddressTypesEnum fromValue(String value) {
       for (AddressTypesEnum b : AddressTypesEnum.values()) {
         if (b.value.equals(value)) {
@@ -101,31 +88,12 @@ public class AddressDto {
       }
       throw new IllegalArgumentException("Unexpected value '" + value + "'");
     }
-
-    public static class Adapter extends TypeAdapter<AddressTypesEnum> {
-      @Override
-      public void write(final JsonWriter jsonWriter, final AddressTypesEnum enumeration) throws IOException {
-        jsonWriter.value(enumeration.getValue());
-      }
-
-      @Override
-      public AddressTypesEnum read(final JsonReader jsonReader) throws IOException {
-        String value =  jsonReader.nextString();
-        return AddressTypesEnum.fromValue(value);
-      }
-    }
-
-    public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      String value = jsonElement.getAsString();
-      AddressTypesEnum.fromValue(value);
-    }
   }
 
-  public static final String SERIALIZED_NAME_ADDRESS_TYPES = "addressTypes";
-  @SerializedName(SERIALIZED_NAME_ADDRESS_TYPES)
+  public static final String JSON_PROPERTY_ADDRESS_TYPES = "addressTypes";
   private List<AddressTypesEnum> addressTypes = new ArrayList<>();
 
-  public AddressDto() {
+  public AddressDto() { 
   }
 
   public AddressDto addressLine1(String addressLine1) {
@@ -138,10 +106,15 @@ public class AddressDto {
    * @return addressLine1
    */
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE1)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAddressLine1() {
     return addressLine1;
   }
 
+
+  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE1)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAddressLine1(String addressLine1) {
     this.addressLine1 = addressLine1;
   }
@@ -157,10 +130,15 @@ public class AddressDto {
    * @return addressLine2
    */
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE2)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAddressLine2() {
     return addressLine2;
   }
 
+
+  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE2)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAddressLine2(String addressLine2) {
     this.addressLine2 = addressLine2;
   }
@@ -176,10 +154,15 @@ public class AddressDto {
    * @return city
    */
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_CITY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCity() {
     return city;
   }
 
+
+  @JsonProperty(JSON_PROPERTY_CITY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCity(String city) {
     this.city = city;
   }
@@ -195,10 +178,15 @@ public class AddressDto {
    * @return country
    */
   @javax.annotation.Nonnull
+  @JsonProperty(JSON_PROPERTY_COUNTRY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCountry() {
     return country;
   }
 
+
+  @JsonProperty(JSON_PROPERTY_COUNTRY)
+  @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCountry(String country) {
     this.country = country;
   }
@@ -222,16 +210,23 @@ public class AddressDto {
    * @return addressTypes
    */
   @javax.annotation.Nullable
+  @JsonProperty(JSON_PROPERTY_ADDRESS_TYPES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<AddressTypesEnum> getAddressTypes() {
     return addressTypes;
   }
 
+
+  @JsonProperty(JSON_PROPERTY_ADDRESS_TYPES)
+  @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAddressTypes(List<AddressTypesEnum> addressTypes) {
     this.addressTypes = addressTypes;
   }
 
 
-
+  /**
+   * Return true if this Address object is equal to o.
+   */
   @Override
   public boolean equals(Object o) {
     if (this == o) {
@@ -277,118 +272,68 @@ public class AddressDto {
     return o.toString().replace("\n", "\n    ");
   }
 
-
-  public static HashSet<String> openapiFields;
-  public static HashSet<String> openapiRequiredFields;
-
-  static {
-    // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>();
-    openapiFields.add("addressLine1");
-    openapiFields.add("addressLine2");
-    openapiFields.add("city");
-    openapiFields.add("country");
-    openapiFields.add("addressTypes");
-
-    // a set of required properties/fields (JSON key names)
-    openapiRequiredFields = new HashSet<String>();
-    openapiRequiredFields.add("city");
-    openapiRequiredFields.add("country");
+  /**
+   * Convert the instance into URL query string.
+   *
+   * @return URL query string
+   */
+  public String toUrlQueryString() {
+    return toUrlQueryString(null);
   }
 
   /**
-   * Validates the JSON Element and throws an exception if issues found
+   * Convert the instance into URL query string.
    *
-   * @param jsonElement JSON Element
-   * @throws IOException if the JSON Element is invalid with respect to AddressDto
+   * @param prefix prefix of the query string
+   * @return URL query string
    */
-  public static void validateJsonElement(JsonElement jsonElement) throws IOException {
-      if (jsonElement == null) {
-        if (!AddressDto.openapiRequiredFields.isEmpty()) { // has required fields but JSON element is null
-          throw new IllegalArgumentException(String.format("The required field(s) %s in AddressDto is not found in the empty JSON string", AddressDto.openapiRequiredFields.toString()));
-        }
-      }
-
-      Set<Map.Entry<String, JsonElement>> entries = jsonElement.getAsJsonObject().entrySet();
-      // check to see if the JSON string contains additional fields
-      for (Map.Entry<String, JsonElement> entry : entries) {
-        if (!AddressDto.openapiFields.contains(entry.getKey())) {
-          throw new IllegalArgumentException(String.format("The field `%s` in the JSON string is not defined in the `AddressDto` properties. JSON: %s", entry.getKey(), jsonElement.toString()));
-        }
-      }
-
-      // check to make sure all required properties/fields are present in the JSON string
-      for (String requiredField : AddressDto.openapiRequiredFields) {
-        if (jsonElement.getAsJsonObject().get(requiredField) == null) {
-          throw new IllegalArgumentException(String.format("The required field `%s` is not found in the JSON string: %s", requiredField, jsonElement.toString()));
-        }
-      }
-        JsonObject jsonObj = jsonElement.getAsJsonObject();
-      if ((jsonObj.get("addressLine1") != null && !jsonObj.get("addressLine1").isJsonNull()) && !jsonObj.get("addressLine1").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `addressLine1` to be a primitive type in the JSON string but got `%s`", jsonObj.get("addressLine1").toString()));
-      }
-      if ((jsonObj.get("addressLine2") != null && !jsonObj.get("addressLine2").isJsonNull()) && !jsonObj.get("addressLine2").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `addressLine2` to be a primitive type in the JSON string but got `%s`", jsonObj.get("addressLine2").toString()));
-      }
-      if (!jsonObj.get("city").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `city` to be a primitive type in the JSON string but got `%s`", jsonObj.get("city").toString()));
-      }
-      if (!jsonObj.get("country").isJsonPrimitive()) {
-        throw new IllegalArgumentException(String.format("Expected the field `country` to be a primitive type in the JSON string but got `%s`", jsonObj.get("country").toString()));
-      }
-      // ensure the optional json data is an array if present
-      if (jsonObj.get("addressTypes") != null && !jsonObj.get("addressTypes").isJsonNull() && !jsonObj.get("addressTypes").isJsonArray()) {
-        throw new IllegalArgumentException(String.format("Expected the field `addressTypes` to be an array in the JSON string but got `%s`", jsonObj.get("addressTypes").toString()));
-      }
-  }
-
-  public static class CustomTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
-    @Override
-    public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-       if (!AddressDto.class.isAssignableFrom(type.getRawType())) {
-         return null; // this class only serializes 'AddressDto' and its subtypes
-       }
-       final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-       final TypeAdapter<AddressDto> thisAdapter
-                        = gson.getDelegateAdapter(this, TypeToken.get(AddressDto.class));
-
-       return (TypeAdapter<T>) new TypeAdapter<AddressDto>() {
-           @Override
-           public void write(JsonWriter out, AddressDto value) throws IOException {
-             JsonObject obj = thisAdapter.toJsonTree(value).getAsJsonObject();
-             elementAdapter.write(out, obj);
-           }
-
-           @Override
-           public AddressDto read(JsonReader in) throws IOException {
-             JsonElement jsonElement = elementAdapter.read(in);
-             validateJsonElement(jsonElement);
-             return thisAdapter.fromJsonTree(jsonElement);
-           }
-
-       }.nullSafe();
+  public String toUrlQueryString(String prefix) {
+    String suffix = "";
+    String containerSuffix = "";
+    String containerPrefix = "";
+    if (prefix == null) {
+      // style=form, explode=true, e.g. /pet?name=cat&type=manx
+      prefix = "";
+    } else {
+      // deepObject style e.g. /pet?id[name]=cat&id[type]=manx
+      prefix = prefix + "[";
+      suffix = "]";
+      containerSuffix = "]";
+      containerPrefix = "[";
     }
-  }
 
-  /**
-   * Create an instance of AddressDto given an JSON string
-   *
-   * @param jsonString JSON string
-   * @return An instance of AddressDto
-   * @throws IOException if the JSON string is invalid with respect to AddressDto
-   */
-  public static AddressDto fromJson(String jsonString) throws IOException {
-    return JSON.getGson().fromJson(jsonString, AddressDto.class);
-  }
+    StringJoiner joiner = new StringJoiner("&");
 
-  /**
-   * Convert an instance of AddressDto to an JSON string
-   *
-   * @return JSON string
-   */
-  public String toJson() {
-    return JSON.getGson().toJson(this);
+    // add `addressLine1` to the URL query string
+    if (getAddressLine1() != null) {
+      joiner.add(String.format("%saddressLine1%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getAddressLine1()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    }
+
+    // add `addressLine2` to the URL query string
+    if (getAddressLine2() != null) {
+      joiner.add(String.format("%saddressLine2%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getAddressLine2()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    }
+
+    // add `city` to the URL query string
+    if (getCity() != null) {
+      joiner.add(String.format("%scity%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getCity()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    }
+
+    // add `country` to the URL query string
+    if (getCountry() != null) {
+      joiner.add(String.format("%scountry%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getCountry()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+    }
+
+    // add `addressTypes` to the URL query string
+    if (getAddressTypes() != null) {
+      for (int i = 0; i < getAddressTypes().size(); i++) {
+        joiner.add(String.format("%saddressTypes%s%s=%s", prefix, suffix,
+            "".equals(suffix) ? "" : String.format("%s%d%s", containerPrefix, i, containerSuffix),
+            URLEncoder.encode(ApiClient.valueToString(getAddressTypes().get(i)), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      }
+    }
+
+    return joiner.toString();
   }
 }
 

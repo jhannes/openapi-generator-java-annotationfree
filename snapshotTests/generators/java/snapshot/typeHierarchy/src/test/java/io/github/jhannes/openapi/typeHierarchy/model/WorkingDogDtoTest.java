@@ -13,31 +13,31 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
 import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogCapabilityDto;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
  * Model tests for WorkingDogDto
  */
-public class WorkingDogDtoTest {
+class WorkingDogDtoTest {
     private final WorkingDogDto model = new WorkingDogDto();
 
     /**
      * Model tests for WorkingDogDto
      */
     @Test
-    public void testWorkingDogDto() {
+    void testWorkingDogDto() {
         // TODO: test WorkingDogDto
     }
 
@@ -45,7 +45,7 @@ public class WorkingDogDtoTest {
      * Test the property 'id'
      */
     @Test
-    public void idTest() {
+    void idTest() {
         // TODO: test id
     }
 
@@ -53,7 +53,7 @@ public class WorkingDogDtoTest {
      * Test the property 'name'
      */
     @Test
-    public void nameTest() {
+    void nameTest() {
         // TODO: test name
     }
 
@@ -61,7 +61,7 @@ public class WorkingDogDtoTest {
      * Test the property 'birthDate'
      */
     @Test
-    public void birthDateTest() {
+    void birthDateTest() {
         // TODO: test birthDate
     }
 
@@ -69,7 +69,7 @@ public class WorkingDogDtoTest {
      * Test the property 'ownerAddress'
      */
     @Test
-    public void ownerAddressTest() {
+    void ownerAddressTest() {
         // TODO: test ownerAddress
     }
 
@@ -77,7 +77,7 @@ public class WorkingDogDtoTest {
      * Test the property 'petType'
      */
     @Test
-    public void petTypeTest() {
+    void petTypeTest() {
         // TODO: test petType
     }
 
@@ -85,7 +85,7 @@ public class WorkingDogDtoTest {
      * Test the property 'bark'
      */
     @Test
-    public void barkTest() {
+    void barkTest() {
         // TODO: test bark
     }
 
@@ -93,7 +93,7 @@ public class WorkingDogDtoTest {
      * Test the property 'breed'
      */
     @Test
-    public void breedTest() {
+    void breedTest() {
         // TODO: test breed
     }
 
@@ -101,7 +101,7 @@ public class WorkingDogDtoTest {
      * Test the property 'capabilities'
      */
     @Test
-    public void capabilitiesTest() {
+    void capabilitiesTest() {
         // TODO: test capabilities
     }
 

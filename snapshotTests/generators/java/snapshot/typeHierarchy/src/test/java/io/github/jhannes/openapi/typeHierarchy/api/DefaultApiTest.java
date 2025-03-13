@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
 
 /**
  * API tests for DefaultApi
@@ -31,14 +33,22 @@ public class DefaultApiTest {
 
     private final DefaultApi api = new DefaultApi();
 
+    
     /**
-     * @throws ApiException if the Api call fails
+     * 
+     *
+     * 
+     *
+     * @throws ApiException
+     *          if the Api call fails
      */
     @Test
     public void petsPostTest() throws ApiException {
         PetDto petDto = null;
+        
         api.petsPost(petDto);
+        
         // TODO: test validations
     }
-
+    
 }

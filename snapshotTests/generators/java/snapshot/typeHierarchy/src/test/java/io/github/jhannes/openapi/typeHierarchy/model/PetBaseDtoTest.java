@@ -13,28 +13,28 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
-import java.io.IOException;
 import java.util.Arrays;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
  * Model tests for PetBaseDto
  */
-public class PetBaseDtoTest {
+class PetBaseDtoTest {
     private final PetBaseDto model = new PetBaseDto();
 
     /**
      * Model tests for PetBaseDto
      */
     @Test
-    public void testPetBaseDto() {
+    void testPetBaseDto() {
         // TODO: test PetBaseDto
     }
 
@@ -42,7 +42,7 @@ public class PetBaseDtoTest {
      * Test the property 'id'
      */
     @Test
-    public void idTest() {
+    void idTest() {
         // TODO: test id
     }
 
@@ -50,7 +50,7 @@ public class PetBaseDtoTest {
      * Test the property 'name'
      */
     @Test
-    public void nameTest() {
+    void nameTest() {
         // TODO: test name
     }
 
@@ -58,7 +58,7 @@ public class PetBaseDtoTest {
      * Test the property 'birthDate'
      */
     @Test
-    public void birthDateTest() {
+    void birthDateTest() {
         // TODO: test birthDate
     }
 
@@ -66,7 +66,7 @@ public class PetBaseDtoTest {
      * Test the property 'ownerAddress'
      */
     @Test
-    public void ownerAddressTest() {
+    void ownerAddressTest() {
         // TODO: test ownerAddress
     }
 

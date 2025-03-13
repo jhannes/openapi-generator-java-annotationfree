@@ -13,28 +13,28 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
-import java.io.IOException;
 import java.util.Arrays;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
  * Model tests for CatDto
  */
-public class CatDtoTest {
+class CatDtoTest {
     private final CatDto model = new CatDto();
 
     /**
      * Model tests for CatDto
      */
     @Test
-    public void testCatDto() {
+    void testCatDto() {
         // TODO: test CatDto
     }
 
@@ -42,7 +42,7 @@ public class CatDtoTest {
      * Test the property 'id'
      */
     @Test
-    public void idTest() {
+    void idTest() {
         // TODO: test id
     }
 
@@ -50,7 +50,7 @@ public class CatDtoTest {
      * Test the property 'name'
      */
     @Test
-    public void nameTest() {
+    void nameTest() {
         // TODO: test name
     }
 
@@ -58,7 +58,7 @@ public class CatDtoTest {
      * Test the property 'birthDate'
      */
     @Test
-    public void birthDateTest() {
+    void birthDateTest() {
         // TODO: test birthDate
     }
 
@@ -66,7 +66,7 @@ public class CatDtoTest {
      * Test the property 'ownerAddress'
      */
     @Test
-    public void ownerAddressTest() {
+    void ownerAddressTest() {
         // TODO: test ownerAddress
     }
 
@@ -74,7 +74,7 @@ public class CatDtoTest {
      * Test the property 'petType'
      */
     @Test
-    public void petTypeTest() {
+    void petTypeTest() {
         // TODO: test petType
     }
 
@@ -82,7 +82,7 @@ public class CatDtoTest {
      * Test the property 'hunts'
      */
     @Test
-    public void huntsTest() {
+    void huntsTest() {
         // TODO: test hunts
     }
 
@@ -90,7 +90,7 @@ public class CatDtoTest {
      * Test the property 'age'
      */
     @Test
-    public void ageTest() {
+    void ageTest() {
         // TODO: test age
     }
 

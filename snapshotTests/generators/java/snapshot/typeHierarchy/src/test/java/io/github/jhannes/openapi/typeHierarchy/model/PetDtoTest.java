@@ -13,35 +13,38 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import com.google.gson.TypeAdapter;
-import com.google.gson.annotations.JsonAdapter;
-import com.google.gson.annotations.SerializedName;
-import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonWriter;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonValue;
 import io.github.jhannes.openapi.typeHierarchy.model.AddressDto;
 import io.github.jhannes.openapi.typeHierarchy.model.CatDto;
 import io.github.jhannes.openapi.typeHierarchy.model.DogDto;
 import io.github.jhannes.openapi.typeHierarchy.model.GoldfishDto;
 import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogCapabilityDto;
 import io.github.jhannes.openapi.typeHierarchy.model.WorkingDogDto;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
  * Model tests for PetDto
  */
-public class PetDtoTest {
+class PetDtoTest {
     private final PetDto model = new PetDto();
 
     /**
      * Model tests for PetDto
      */
     @Test
-    public void testPetDto() {
+    void testPetDto() {
         // TODO: test PetDto
     }
 
@@ -49,7 +52,7 @@ public class PetDtoTest {
      * Test the property 'id'
      */
     @Test
-    public void idTest() {
+    void idTest() {
         // TODO: test id
     }
 
@@ -57,7 +60,7 @@ public class PetDtoTest {
      * Test the property 'name'
      */
     @Test
-    public void nameTest() {
+    void nameTest() {
         // TODO: test name
     }
 
@@ -65,7 +68,7 @@ public class PetDtoTest {
      * Test the property 'birthDate'
      */
     @Test
-    public void birthDateTest() {
+    void birthDateTest() {
         // TODO: test birthDate
     }
 
@@ -73,7 +76,7 @@ public class PetDtoTest {
      * Test the property 'ownerAddress'
      */
     @Test
-    public void ownerAddressTest() {
+    void ownerAddressTest() {
         // TODO: test ownerAddress
     }
 
@@ -81,7 +84,7 @@ public class PetDtoTest {
      * Test the property 'petType'
      */
     @Test
-    public void petTypeTest() {
+    void petTypeTest() {
         // TODO: test petType
     }
 
@@ -89,7 +92,7 @@ public class PetDtoTest {
      * Test the property 'hunts'
      */
     @Test
-    public void huntsTest() {
+    void huntsTest() {
         // TODO: test hunts
     }
 
@@ -97,7 +100,7 @@ public class PetDtoTest {
      * Test the property 'age'
      */
     @Test
-    public void ageTest() {
+    void ageTest() {
         // TODO: test age
     }
 
@@ -105,7 +108,7 @@ public class PetDtoTest {
      * Test the property 'bark'
      */
     @Test
-    public void barkTest() {
+    void barkTest() {
         // TODO: test bark
     }
 
@@ -113,7 +116,7 @@ public class PetDtoTest {
      * Test the property 'breed'
      */
     @Test
-    public void breedTest() {
+    void breedTest() {
         // TODO: test breed
     }
 
@@ -121,7 +124,7 @@ public class PetDtoTest {
      * Test the property 'capabilities'
      */
     @Test
-    public void capabilitiesTest() {
+    void capabilitiesTest() {
         // TODO: test capabilities
     }
 
@@ -129,7 +132,7 @@ public class PetDtoTest {
      * Test the property 'species'
      */
     @Test
-    public void speciesTest() {
+    void speciesTest() {
         // TODO: test species
     }
 
