@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 */
 public class SnapshotSetDto implements MessageFromServerDto {
 
-    private List<ConversationSnapshotDto> conversations = new ArrayList<>();
+    private List<ConversationSnapshotDto> list = new ArrayList<>();
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -49,24 +49,24 @@ public class SnapshotSetDto implements MessageFromServerDto {
 
     public static String[] requiredFields() {
         return new String[] {
-                "conversations",
+                "list",
         };
     }
 
     public List<String> missingRequiredFields() {
         List<String> result = new ArrayList<>();
-        if (isMissing(getConversations())) result.add("conversations");
+        if (isMissing(getList())) result.add("list");
         return result;
     }
 
     public void readOnlyFieldsWithValue(List<String> result) {
-        if (conversations != null) {
-            conversations.forEach(o -> o.readOnlyFieldsWithValue(result));
+        if (list != null) {
+            list.forEach(o -> o.readOnlyFieldsWithValue(result));
         }
     }
 
     public <T extends SnapshotSetDto> T copyTo(T target) {
-        if (this.getConversations() != null) target.setConversations(this.getConversations());
+        if (this.getList() != null) target.setList(this.getList());
         return target;
     }
 
@@ -83,33 +83,33 @@ public class SnapshotSetDto implements MessageFromServerDto {
     }
 
 
-    public <T> SnapshotSetDto conversations(Collection<T> items, Function<T, ConversationSnapshotDto> mapper) {
-        return conversations(items.stream().map(mapper).collect(Collectors.toList()));
+    public <T> SnapshotSetDto list(Collection<T> items, Function<T, ConversationSnapshotDto> mapper) {
+        return list(items.stream().map(mapper).collect(Collectors.toList()));
     }
 
-    public <T> List<T> getConversations(Function<ConversationSnapshotDto, T> mapper) {
-        return getConversations().stream().map(mapper).collect(Collectors.toList());
+    public <T> List<T> getList(Function<ConversationSnapshotDto, T> mapper) {
+        return getList().stream().map(mapper).collect(Collectors.toList());
     }
 
-    public SnapshotSetDto addConversationsItem(ConversationSnapshotDto conversationsItem) {
-        this.conversations.add(conversationsItem);
+    public SnapshotSetDto addListItem(ConversationSnapshotDto listItem) {
+        this.list.add(listItem);
         return this;
     }
 
     /**
-     * Get conversations
-     * @return conversations
+     * Get list
+     * @return list
      */
-    public List<ConversationSnapshotDto> getConversations() {
-        return conversations;
+    public List<ConversationSnapshotDto> getList() {
+        return list;
     }
 
-    public void setConversations(List<ConversationSnapshotDto> conversations) {
-        this.conversations = conversations;
+    public void setList(List<ConversationSnapshotDto> list) {
+        this.list = list;
     }
 
-    public SnapshotSetDto conversations(List<ConversationSnapshotDto> conversations) {
-        this.conversations = conversations;
+    public SnapshotSetDto list(List<ConversationSnapshotDto> list) {
+        this.list = list;
         return this;
     }
 
@@ -122,19 +122,19 @@ public class SnapshotSetDto implements MessageFromServerDto {
             return false;
         }
         SnapshotSetDto snapshotSet = (SnapshotSetDto) o;
-        return Objects.equals(this.getConversations(), snapshotSet.getConversations());
+        return Objects.equals(this.getList(), snapshotSet.getList());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getConversations());
+        return Objects.hash(getList());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("SnapshotSetDto {\n");
-        sb.append("    conversations: ").append(toIndentedString(getConversations())).append("\n");
+        sb.append("    list: ").append(toIndentedString(getList())).append("\n");
         sb.append("}");
         return sb.toString();
     }

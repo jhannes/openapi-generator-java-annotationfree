@@ -144,11 +144,11 @@ components:
 
     SnapshotSet:
       properties:
-        conversations:
+        list:
           type: array
           items:
             $ref: "#/components/schemas/ConversationSnapshot"
-      required: [conversations]
+      required: [ list ]
     EventFromServer:
       allOf:
         - $ref: "#/components/schemas/CommandToServer"

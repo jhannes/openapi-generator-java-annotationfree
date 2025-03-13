@@ -31,6 +31,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
         embeddedTemplateDir = templateDir = "JavaAnnotationfree";
         artifactId = "openapi-java-client";
         supportsMixins = true;
+        reservedWords.remove("list");
     }
 
     @Override

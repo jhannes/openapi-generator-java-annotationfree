@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**conversations** | [**List<ConversationSnapshotDto>**](ConversationSnapshotDto.md) |  | 
+**list** | [**List<ConversationSnapshotDto>**](ConversationSnapshotDto.md) |  | 
 
 
 

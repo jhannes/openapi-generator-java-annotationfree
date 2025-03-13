@@ -301,7 +301,7 @@ public class SampleModelData {
 
     public SnapshotSetDto sampleSnapshotSetDto() {
         return new SnapshotSetDto()
-            .conversations(sampleListOfConversationSnapshotDto("conversations"));
+            .list(sampleListOfConversationSnapshotDto("list"));
     }
 
     public List<SnapshotSetDto> sampleListOfSnapshotSetDto(String propertyName) {
