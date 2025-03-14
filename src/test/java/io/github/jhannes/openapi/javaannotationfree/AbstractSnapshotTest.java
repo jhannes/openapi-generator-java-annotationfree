@@ -1,5 +1,7 @@
 package io.github.jhannes.openapi.javaannotationfree;
 
+import org.openapitools.codegen.ClientOptInput;
+import org.openapitools.codegen.DefaultGenerator;
 import org.openapitools.codegen.config.CodegenConfigurator;
 
 import java.io.File;
@@ -8,41 +10,67 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class AbstractSnapshotTest {
     public static final Path SNAPSHOT_ROOT = Paths.get("snapshotTests");
     public static final Path LOCAL_SNAPSHOT_ROOT = Paths.get("localSnapshotTests");
 
-    protected static CodegenConfigurator createConfigurator(String modelName, Path input, Path outputDir) {
-        return AbstractSnapshotTest.createBaseConfigurator(input, outputDir)
+    protected static CodegenConfigurator createConfigurator(String modelName) {
+        return new CodegenConfigurator()
+                .setModelNameSuffix("Dto")
                 .addAdditionalProperty("hideGenerationTimestamp", "true")
                 .setGeneratorName("java-annotationfree")
                 .setPackageName("io.github.jhannes.openapi." + modelName);
     }
 
-    static CodegenConfigurator createBaseConfigurator(Path input, Path outputDir) {
-        return new CodegenConfigurator()
-                .setModelNameSuffix("Dto")
-                .setInputSpec(getInputSpec(input))
-                .setOutputDir(outputDir.toString());
+    public static String getInputSpec(Path input) {
+        if (!input.getFileName().toString().endsWith(".link")) {
+            return input.toString();
+        }
+        String path = readFirstLine(input).trim();
+        if (path.matches("https?://.*")) {
+            return path;
+        }
+        String[] parts = path.split("\\s+");
+        if (parts.length == 1) {
+            return Paths.get(path).toString().replaceAll("\\\\", "/");
+        } else {
+            return Paths.get(parts[0]).resolve(parts[1]).toString().replaceAll("\\\\", "/");
+        }
     }
 
-    private static String getInputSpec(Path input) {
-        String spec = input.toString();
-        try {
-            if (input.getFileName().toString().endsWith(".link")) {
-                String path = Files.readAllLines(input).get(0);
-                if (path.matches("https?://.*")) {
-                    spec = path;
-                } else {
-                    spec = Paths.get(path).toString();
-                }
+    static Path getSnapshotDir(Path spec) {
+        return getBasePath(spec).map(p -> p.resolve("snapshot"))
+                .orElse(spec.getParent().getParent().resolve("snapshot").resolve(SnapshotTests.getModelName(spec)));
+    }
+
+    static Path getCompileDir(Path spec) {
+        return getBasePath(spec).map(p -> p.resolve("compile"))
+                .orElse(spec.getParent().getParent().resolve("compile").resolve(SnapshotTests.getModelName(spec)));
+    }
+
+    static Path getOutputDir(Path spec) {
+        return getBasePath(spec).map(p -> p.resolve("output"))
+                .orElse(spec.getParent().getParent().resolve("output").resolve(getModelName(spec)));
+    }
+
+    private static Optional<Path> getBasePath(Path spec) {
+        if (spec.getFileName().toString().endsWith(".link")) {
+            String path = readFirstLine(spec).trim();
+            if (path.matches("https?://.*")) {
+                return Optional.empty();
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            String[] parts = path.split("\\s+");
+            if (parts.length == 1) {
+                return Optional.empty();
+            } else {
+                return Optional.of(Paths.get(parts[0]));
+            }
+        } else {
+            return Optional.empty();
         }
-        return spec.replaceAll("\\\\", "/");
     }
 
     static void cleanDirectory(Path directory) throws IOException {
@@ -61,4 +89,17 @@ public class AbstractSnapshotTest {
         return lastDot < 0 ? filename : filename.substring(0, lastDot);
     }
 
+    private static String readFirstLine(Path spec) {
+        try {
+            return Files.readAllLines(spec).get(0);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    static void generate(CodegenConfigurator configurator) {
+        final ClientOptInput clientOptInput = configurator.toClientOptInput();
+        DefaultGenerator generator = new DefaultGenerator();
+        generator.opts(clientOptInput).generate();
+    }
 }

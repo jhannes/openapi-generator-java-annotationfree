@@ -3,8 +3,6 @@ package io.github.jhannes.openapi.javaannotationfree;
 import org.junit.jupiter.api.DynamicContainer;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
-import org.openapitools.codegen.ClientOptInput;
-import org.openapitools.codegen.DefaultGenerator;
 import org.openapitools.codegen.config.CodegenConfigurator;
 
 import javax.tools.DiagnosticCollector;
@@ -32,7 +30,7 @@ public class CompilerTest extends AbstractSnapshotTest {
     Stream<DynamicNode> outputsFromSpecsShouldCompile() throws IOException {
         List<DynamicNode> testSuites = new ArrayList<>();
         testSuites.add(compileSpec(AbstractSnapshotTest.SNAPSHOT_ROOT));
-        if (Files.isDirectory(AbstractSnapshotTest.LOCAL_SNAPSHOT_ROOT)) {
+        if (Files.isDirectory(AbstractSnapshotTest.LOCAL_SNAPSHOT_ROOT.resolve("input"))) {
             testSuites.add(compileSpec(AbstractSnapshotTest.LOCAL_SNAPSHOT_ROOT));
         }
         return testSuites.stream();
@@ -42,31 +40,22 @@ public class CompilerTest extends AbstractSnapshotTest {
         Path inputDir = testDir.resolve("input");
         return dynamicContainer(
                 "Output should compile: " + testDir,
-                Files.list(inputDir)
-                        .filter(p -> p.toFile().isFile())
-                        .map(this::createTestFromSpec)
+                Files.list(inputDir).filter(p -> p.toFile().isFile()).map(CompilerTest::createTestFromSpec)
         );
     }
 
-    public DynamicNode createTestFromSpec(Path spec) {
-        String modelName = getModelName(spec);
-        Path outputDir = spec.getParent().getParent().resolve("compile").resolve(modelName);
-        var configurator = createConfigurator(modelName, spec, outputDir);
-        return createTestFromSpec(spec, configurator, outputDir);
+    public static DynamicNode createTestFromSpec(Path spec) {
+        return createTestNode(spec, createConfigurator(getModelName(spec)), getCompileDir(spec));
     }
 
-    static DynamicContainer createTestFromSpec(Path spec, CodegenConfigurator configurator, Path outputDir) {
+    private static DynamicContainer createTestNode(Path spec, CodegenConfigurator configurator, Path outputDir) {
+        configurator.setInputSpec(getInputSpec(spec));
+        configurator.setOutputDir(outputDir.toString());
         return dynamicContainer("Compile " + spec, Arrays.asList(
-                dynamicTest("Clean " + spec, () -> cleanDirectory(outputDir)),
-                dynamicTest("Generate " + spec, () -> generate(configurator)),
-                dynamicTest("javac " + spec, () -> compile(outputDir))
+                dynamicTest("Clean " + outputDir, () -> cleanDirectory(outputDir)),
+                dynamicTest("Generate " + outputDir, () -> generate(configurator)),
+                dynamicTest("javac " + outputDir, () -> compile(outputDir))
         ));
-    }
-
-    static void generate(CodegenConfigurator configurator) {
-        final ClientOptInput clientOptInput = configurator.toClientOptInput();
-        DefaultGenerator generator = new DefaultGenerator();
-        generator.opts(clientOptInput).generate();
     }
 
 

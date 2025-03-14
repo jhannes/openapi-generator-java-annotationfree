@@ -17,23 +17,18 @@ public class AlternativeGeneratorSnapshotTest extends AbstractSnapshotTest {
 
     @TestFactory
     DynamicNode outputShouldMatchSnapshot() {
-        String modelName = getModelName(SPEC);
         Path outputDir = ROOT_DIR.resolve("output").resolve(getModelName(SPEC));
-        var configurator = createJavaConfigurator(modelName, SPEC, outputDir);
-        return SnapshotTests.createTests(SPEC, outputDir, getTargetDir("snapshot"), configurator);
+        Path snapshotDir = ROOT_DIR.resolve("snapshot").resolve(getModelName(SPEC));
+        return SnapshotTests.createTestNode(SPEC, createJavaConfigurator(getModelName(SPEC)), outputDir, snapshotDir);
     }
 
-    static CodegenConfigurator createJavaConfigurator(String modelName, Path input, Path outputDir) {
-        return AbstractSnapshotTest.createBaseConfigurator(input, outputDir)
+    static CodegenConfigurator createJavaConfigurator(String modelName) {
+        return new CodegenConfigurator()
+                .setModelNameSuffix("Dto")
                 .addAdditionalProperty("hideGenerationTimestamp", "true")
                 .setModelPackage("io.github.jhannes.openapi." + modelName + ".model")
                 .setApiPackage("io.github.jhannes.openapi." + modelName + ".api")
                 .setLibrary("native")
                 .setGeneratorName(GENERATOR_NAME);
     }
-
-    private Path getTargetDir(String subdir) {
-        return ROOT_DIR.resolve(subdir).resolve(SnapshotTests.getModelName(SPEC));
-    }
-
 }
