@@ -319,6 +319,10 @@ components:
         sub:
           type: string
           description: Subject - the unique identifier for the logged in user
+        exp:
+          type: integer
+          format: int64
+          description: Expiry - the unix timestamp after which the JWT should be rejected
         aud:
           type: string
           description: Audience - the client_id that the JWT was issued to
@@ -378,12 +382,12 @@ components:
           type: array
           uniqueItems: true
           items:
-            format: string
+            type: string
         claims_supported:
           type: array
           uniqueItems: true
           items:
-            format: string
+            type: string
         response_types_supported:
           type: array
           uniqueItems: true

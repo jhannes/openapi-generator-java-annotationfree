@@ -49,9 +49,9 @@ public class DiscoveryDocumentDto {
 
     private Set<GrantTypeDto> grant_types_supported = null;
 
-    private Set<Object> scopes_supported = null;
+    private Set<String> scopes_supported = null;
 
-    private Set<Object> claims_supported = null;
+    private Set<String> claims_supported = null;
 
     private Set<ResponseTypeDto> response_types_supported = new LinkedHashSet<>();
 
@@ -395,15 +395,15 @@ public class DiscoveryDocumentDto {
         return this;
     }
 
-    public <T> DiscoveryDocumentDto scopesSupported(Collection<T> items, Function<T, Object> mapper) {
+    public <T> DiscoveryDocumentDto scopesSupported(Collection<T> items, Function<T, String> mapper) {
         return scopesSupported(items.stream().map(mapper).collect(Collectors.toSet()));
     }
 
-    public <T> Set<T> getScopesSupported(Function<Object, T> mapper) {
+    public <T> Set<T> getScopesSupported(Function<String, T> mapper) {
         return getScopesSupported().stream().map(mapper).collect(Collectors.toSet());
     }
 
-    public DiscoveryDocumentDto addScopesSupportedItem(Object scopesSupportedItem) {
+    public DiscoveryDocumentDto addScopesSupportedItem(String scopesSupportedItem) {
         if (this.scopes_supported == null) {
             this.scopes_supported = new LinkedHashSet<>();
         }
@@ -415,28 +415,28 @@ public class DiscoveryDocumentDto {
      * Get scopes_supported
      * @return scopes_supported
      */
-    public Set<Object> getScopesSupported() {
+    public Set<String> getScopesSupported() {
         return scopes_supported;
     }
 
-    public void setScopesSupported(Set<Object> scopesSupported) {
+    public void setScopesSupported(Set<String> scopesSupported) {
         this.scopes_supported = scopesSupported;
     }
 
-    public DiscoveryDocumentDto scopesSupported(Set<Object> scopesSupported) {
+    public DiscoveryDocumentDto scopesSupported(Set<String> scopesSupported) {
         this.scopes_supported = scopesSupported;
         return this;
     }
 
-    public <T> DiscoveryDocumentDto claimsSupported(Collection<T> items, Function<T, Object> mapper) {
+    public <T> DiscoveryDocumentDto claimsSupported(Collection<T> items, Function<T, String> mapper) {
         return claimsSupported(items.stream().map(mapper).collect(Collectors.toSet()));
     }
 
-    public <T> Set<T> getClaimsSupported(Function<Object, T> mapper) {
+    public <T> Set<T> getClaimsSupported(Function<String, T> mapper) {
         return getClaimsSupported().stream().map(mapper).collect(Collectors.toSet());
     }
 
-    public DiscoveryDocumentDto addClaimsSupportedItem(Object claimsSupportedItem) {
+    public DiscoveryDocumentDto addClaimsSupportedItem(String claimsSupportedItem) {
         if (this.claims_supported == null) {
             this.claims_supported = new LinkedHashSet<>();
         }
@@ -448,15 +448,15 @@ public class DiscoveryDocumentDto {
      * Get claims_supported
      * @return claims_supported
      */
-    public Set<Object> getClaimsSupported() {
+    public Set<String> getClaimsSupported() {
         return claims_supported;
     }
 
-    public void setClaimsSupported(Set<Object> claimsSupported) {
+    public void setClaimsSupported(Set<String> claimsSupported) {
         this.claims_supported = claimsSupported;
     }
 
-    public DiscoveryDocumentDto claimsSupported(Set<Object> claimsSupported) {
+    public DiscoveryDocumentDto claimsSupported(Set<String> claimsSupported) {
         this.claims_supported = claimsSupported;
         return this;
     }
