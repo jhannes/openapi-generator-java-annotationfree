@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 public class JavaCodegen extends AbstractJavaCodegen {
@@ -32,6 +33,11 @@ public class JavaCodegen extends AbstractJavaCodegen {
         artifactId = "openapi-java-client";
         supportsMixins = true;
         reservedWords.remove("list");
+    }
+
+    @Override
+    public String getName() {
+        return "java-annotationfree";
     }
 
     @Override
@@ -64,11 +70,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
     }
 
     @Override
-    public String getName() {
-        return "java-annotationfree";
-    }
-
-    @Override
     public OperationsMap postProcessOperationsWithModels(OperationsMap objs, List<ModelMap> allModels) {
         objs = super.postProcessOperationsWithModels(objs, allModels);
 
@@ -87,76 +88,56 @@ public class JavaCodegen extends AbstractJavaCodegen {
         return objs;
     }
 
-
-    public void postProcessOneOf(CodegenModel codegenModel, Map<String, List<CodegenModel>> interfacesOfSubtypes, Map<String, CodegenModel> allModels) {
-        Set<CodegenDiscriminator.MappedModel> mappedModels = new HashSet<>();
-        HashMap<String, String> mapping = new HashMap<>();
-        for (String className : codegenModel.oneOf) {
-            CodegenModel subModel = allModels.get(className);
-            if (subModel.oneOf.isEmpty()) {
-                mappedModels.add(new CodegenDiscriminator.MappedModel(subModel.name, className));
-                mapping.put(subModel.name, className);
-            } else if (
-                    codegenModel.discriminator != null
-                    && subModel.discriminator != null
-                    && subModel.discriminator.getPropertyName().equals(codegenModel.discriminator.getPropertyName())
-            ) {
-                if (subModel.discriminator.getMapping() == null) {
-                    postProcessOneOf(subModel, interfacesOfSubtypes, allModels);
-                }
-                mappedModels.addAll(subModel.discriminator.getMappedModels());
-                mapping.putAll(subModel.discriminator.getMapping());
-            } else if (codegenModel.discriminator != null && subModel.discriminator != null) {
-                //not matching discriminators, cannot be matched from spec
-                continue;
-            }
-            List<CodegenModel> subtypeInterfaces = interfacesOfSubtypes.computeIfAbsent(className, k -> new ArrayList<>());
-            if (!subtypeInterfaces.contains(codegenModel)) {
-                subtypeInterfaces.add(codegenModel);
-            }
-        }
-        codegenModel.allVars.removeIf(var -> codegenModel.interfaceModels.stream().anyMatch(model -> varNotInImplementation(var, model)));
-        if (codegenModel.discriminator != null && codegenModel.discriminator.getMapping() == null) {
-            codegenModel.discriminator.setMapping(mapping);
-            codegenModel.discriminator.setMappedModels(mappedModels);
-        }
-        if (codegenModel.discriminator != null) {
-            codegenModel.allVars.removeIf(v -> v.name.equals(codegenModel.discriminator.getPropertyName()));
-        }
-    }
-
-    private static boolean varNotInImplementation(CodegenProperty var, CodegenModel model) {
-        if (!model.oneOf.isEmpty()) {
-            for (CodegenModel subtype : model.interfaceModels) {
-                if (varNotInImplementation(var, subtype)) {
-                    return true;
-                }
-            }
-        }
-        return model.allVars.stream()
-                .noneMatch(memberVar -> memberVar.name.equals(var.name) && memberVar.datatypeWithEnum.equals(var.datatypeWithEnum));
+    @Override
+    public String toModelName(String name) {
+        return mixinInterfaces.contains(name) ? name : super.toModelName(name);
     }
 
     @Override
     public Map<String, ModelsMap> postProcessAllModels(Map<String, ModelsMap> objs) {
-        ArrayList<String> elementsToBeRemoved = new ArrayList<>();
         Map<String, ModelsMap> result = super.postProcessAllModels(objs);
+        processAllOfTypes(result);
+        processOneOfInterfaces(result);
+        setupDerivedVariables(result);
+        return result;
+    }
 
-        Map<String, CodegenModel> allModels = getAllModels(objs);
-
-        Map<String, List<CodegenModel>> interfacesOfSubtypes = new HashMap<>();
-        Set<String> multiplyInheritedTypes = new HashSet<>();
-        for (CodegenModel codegenModel : allModels.values()) {
-            if (!codegenModel.oneOf.isEmpty()) {
-                postProcessOneOf(codegenModel, interfacesOfSubtypes, allModels);
+    private void setupDerivedVariables(Map<String, ModelsMap> result) {
+        Map<String, CodegenModel> allModels = getAllModels(result);
+        for (ModelsMap modelsMap : result.values()) {
+            for (ModelMap model : modelsMap.getModels()) {
+                for (CodegenProperty variable : model.getModel().allVars) {
+                    if (variable.isModel) {
+                        if (allModels.get(variable.dataType).oneOf.isEmpty()) {
+                            variable.defaultValue = "new " + variable.dataType + "()";
+                        }
+                    }
+                    if (variable.isArray) {
+                        variable.defaultValue = variable.getUniqueItems() ? "new LinkedHashSet<>()" : "new ArrayList<>()";
+                    }
+                    if (variable.get_enum() != null && variable.get_enum().size() == 1) {
+                        variable.defaultValue = "\"" + variable.get_enum().get(0) + "\"";
+                        variable.dataType = "\"" + variable.get_enum().get(0) + "\"";
+                        variable.datatypeWithEnum = "String";
+                        variable.isEnum = false;
+                    }
+                }
+                updateVariablesLists(model.getModel());
             }
+        }
+    }
+
+    private void processAllOfTypes(Map<String, ModelsMap> result) {
+        Set<String> multiplyInheritedTypes = new HashSet<>();
+        Map<String, CodegenModel> allModels = getAllModels(result);
+        for (Map.Entry<String, CodegenModel> codegenEntry : allModels.entrySet()) {
+            CodegenModel codegenModel = codegenEntry.getValue();
             if (!codegenModel.allOf.isEmpty()) {
                 List<CodegenModel> interfacesToBeRemoved = codegenModel.interfaceModels.stream()
                         .filter(element -> element.name.startsWith(codegenModel.name + "_allOf"))
                         .collect(Collectors.toList());
                 for (CodegenModel itf : interfacesToBeRemoved) {
                     codegenModel.allOf.remove(itf.classname);
-                    elementsToBeRemoved.add(itf.name);
                     codegenModel.interfaceModels.removeIf(e -> e.name.equals(itf.name));
                 }
                 if (codegenModel.allOf.size() > 1) {
@@ -183,7 +164,6 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 }
             }
         }
-
         for (String type : multiplyInheritedTypes) {
             CodegenModel dtoModel = result.get(type).getModels().get(0).getModel();
 
@@ -219,44 +199,41 @@ public class JavaCodegen extends AbstractJavaCodegen {
                 }
             }
         }
+    }
 
-        // Only support interfaces from oneOfModels
-        for (Map.Entry<String, CodegenModel> modelEntry : allModels.entrySet()) {
-            modelEntry.getValue().interfaceModels = interfacesOfSubtypes.get(modelEntry.getKey());
-            if (modelEntry.getValue().interfaceModels != null) {
-                modelEntry.getValue().interfaces = modelEntry.getValue().interfaceModels.stream()
-                        .map(CodegenModel::getClassname)
-                        .collect(Collectors.toList());
-            } else if (!modelEntry.getValue().oneOf.isEmpty()) {
-                modelEntry.getValue().interfaces = null;
+    private static CodegenModel createMixin(CodegenModel dtoModel) {
+        CodegenModel interfaceModel = new CodegenModel() {
+            public boolean isMixin = true;
+
+            public Collection<CodegenModel> getDescendants() {
+                Map<String, CodegenModel> result = new TreeMap<>();
+                putDescendants(this, result);
+                return result.values();
             }
-        }
 
-        for (var element : elementsToBeRemoved) {
-            result.remove(element);
-        }
-        for (ModelsMap modelsMap : result.values()) {
-            for (ModelMap model : modelsMap.getModels()) {
-                for (CodegenProperty variable : model.getModel().allVars) {
-                    if (variable.isModel) {
-                        if (allModels.get(variable.dataType).oneOf.isEmpty()) {
-                            variable.defaultValue = "new " + variable.dataType + "()";
+            private void putDescendants(CodegenModel codegenModel, Map<String, CodegenModel> descendants) {
+                for (CodegenModel child : codegenModel.children) {
+                    if (descendants.containsKey(child.name)) {
+                        // prefer interface to implementation
+                        if (descendants.get(child.name).interfaceModels.contains(child)) {
+                            descendants.put(child.name, child);
                         }
+                    } else {
+                        descendants.put(child.name, child);
                     }
-                    if (variable.isArray) {
-                        variable.defaultValue = variable.getUniqueItems() ? "new LinkedHashSet<>()" : "new ArrayList<>()";
-                    }
-                    if (variable.get_enum() != null && variable.get_enum().size() == 1) {
-                        variable.defaultValue = "\"" + variable.get_enum().get(0) + "\"";
-                        variable.dataType = "\"" + variable.get_enum().get(0) + "\"";
-                        variable.datatypeWithEnum = "String";
-                        variable.isEnum = false;
-                    }
+                    putDescendants(child, descendants);
                 }
-                updateVariablesLists(model.getModel());
             }
+        };
+        interfaceModel.name = dtoModel.name;
+        interfaceModel.interfaceModels = new ArrayList<>();
+        interfaceModel.classname = dtoModel.name + "Interface";
+        for (CodegenProperty property : dtoModel.allVars) {
+            CodegenProperty clone = property.clone();
+            interfaceModel.allVars.add(clone);
+            property.isNew = true;
         }
-        return result;
+        return interfaceModel;
     }
 
     private static void updateVariablesLists(CodegenModel codegenModel) {
@@ -286,9 +263,76 @@ public class JavaCodegen extends AbstractJavaCodegen {
         }
     }
 
-    @Override
-    public String toModelName(String name) {
-        return mixinInterfaces.contains(name) ? name : super.toModelName(name);
+    private void processOneOfInterfaces(Map<String, ModelsMap> objs) {
+        Map<String, List<CodegenModel>> interfacesOfSubtypes = new HashMap<>();
+        Map<String, CodegenModel> allModels = getAllModels(objs);
+        for (CodegenModel codegenModel : allModels.values()) {
+            if (!codegenModel.oneOf.isEmpty()) {
+                postProcessOneOf(codegenModel, interfacesOfSubtypes, allModels);
+            }
+        }
+
+        // Only support interfaces from oneOfModels
+        for (Map.Entry<String, CodegenModel> modelEntry : allModels.entrySet()) {
+            modelEntry.getValue().interfaceModels = interfacesOfSubtypes.get(modelEntry.getKey());
+            if (modelEntry.getValue().interfaceModels != null) {
+                modelEntry.getValue().interfaces = modelEntry.getValue().interfaceModels.stream()
+                        .map(CodegenModel::getClassname)
+                        .collect(Collectors.toList());
+            } else if (!modelEntry.getValue().oneOf.isEmpty()) {
+                modelEntry.getValue().interfaces = null;
+            }
+        }
+    }
+
+    public void postProcessOneOf(CodegenModel codegenModel, Map<String, List<CodegenModel>> interfacesOfSubtypes, Map<String, CodegenModel> allModels) {
+        Set<CodegenDiscriminator.MappedModel> mappedModels = new HashSet<>();
+        HashMap<String, String> mapping = new HashMap<>();
+        CodegenDiscriminator discriminator = codegenModel.discriminator;
+        for (String className : codegenModel.oneOf) {
+            CodegenModel subModel = allModels.get(className);
+            if (subModel.oneOf.isEmpty()) {
+                mappedModels.add(new CodegenDiscriminator.MappedModel(subModel.name, subModel.classname));
+                mapping.put(subModel.name, subModel.classname);
+            } else if (
+                    discriminator != null
+                            && subModel.discriminator != null
+                            && subModel.discriminator.getPropertyName().equals(discriminator.getPropertyName())
+            ) {
+                if (subModel.discriminator.getMapping() == null) {
+                    postProcessOneOf(subModel, interfacesOfSubtypes, allModels);
+                }
+                mappedModels.addAll(subModel.discriminator.getMappedModels());
+                mapping.putAll(subModel.discriminator.getMapping());
+            } else if (discriminator != null && subModel.discriminator != null) {
+                //not matching discriminators, cannot be matched from spec
+                continue;
+            }
+            List<CodegenModel> subtypeInterfaces = interfacesOfSubtypes.computeIfAbsent(subModel.classname, k -> new ArrayList<>());
+            if (!subtypeInterfaces.contains(codegenModel)) {
+                subtypeInterfaces.add(codegenModel);
+            }
+        }
+        codegenModel.allVars.removeIf(var -> codegenModel.interfaceModels.stream().anyMatch(model -> varNotInImplementation(var, model)));
+        if (discriminator != null && discriminator.getMapping() == null) {
+            discriminator.setMapping(mapping);
+            discriminator.setMappedModels(mappedModels);
+        }
+        if (discriminator != null) {
+            codegenModel.allVars.removeIf(v -> v.name.equals(discriminator.getPropertyName()));
+        }
+    }
+
+    private static boolean varNotInImplementation(CodegenProperty var, CodegenModel model) {
+        if (!model.oneOf.isEmpty()) {
+            for (CodegenModel subtype : model.interfaceModels) {
+                if (varNotInImplementation(var, subtype)) {
+                    return true;
+                }
+            }
+        }
+        return model.allVars.stream()
+                .noneMatch(memberVar -> memberVar.name.equals(var.name) && memberVar.datatypeWithEnum.equals(var.datatypeWithEnum));
     }
 
     @Override
@@ -312,7 +356,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
 
         // number
         if ("Integer".equals(datatype) || "Long".equals(datatype) ||
-            "Float".equals(datatype) || "Double".equals(datatype) || "BigDecimal".equals(datatype)) {
+                "Float".equals(datatype) || "Double".equals(datatype) || "BigDecimal".equals(datatype)) {
             String varName = "NUMBER_" + value;
             varName = varName.replaceAll("-", "MINUS_");
             varName = varName.replaceAll("\\+", "PLUS_");
