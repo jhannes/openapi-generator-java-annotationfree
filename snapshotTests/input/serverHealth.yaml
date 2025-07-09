@@ -1,0 +1,124 @@
+openapi: 3.0.2
+info:
+  title: Health API
+  description: Returns the status of the service
+  version: 0.1.0
+servers:
+  - url: /health
+    description: Server
+paths:
+  /:
+    get:
+      operationId: listHealthResult
+      responses:
+        200:
+          description: The server is operating as expected
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthSummary"
+components:
+  schemas:
+    HealthSummary:
+      properties:
+        status:
+          $ref: "#/components/schemas/HealthStatus"
+        components:
+          additionalProperties:
+            $ref: "#/components/schemas/HealthComponent"
+      required: [ status, components ]
+
+    HealthStatus:
+      type: string
+      enum:
+        - UP
+        - DOWN
+
+    HealthComponent:
+      properties:
+        status:
+          $ref: "#/components/schemas/HealthStatus"
+        details:
+          $ref: "#/components/schemas/HealthDetails"
+        time:
+          type: string
+          format: date-time
+      required: [ status, details ]
+
+    HealthDetails:
+      oneOf:
+        - $ref: "#/components/schemas/HealthComponentFailureDetails"
+        - $ref: "#/components/schemas/ThreadHealthDetails"
+        - $ref: "#/components/schemas/DataSourceHealthDetails"
+      discriminator:
+        propertyName: type
+
+    HealthComponentFailureDetails:
+      properties:
+        type:
+          enum: [HealthComponentFailureDetails]
+        exception:
+          $ref: "#/components/schemas/Exception"
+      required: [type]
+
+    ThreadHealthDetails:
+      properties:
+        type:
+          enum: [ThreadHealthDetails]
+        threadState:
+          type: string
+          enum: [NEW, RUNNABLE, WAITING, TIMED_WAITING, TERMINATED]
+        stackTrace:
+          $ref: "#/components/schemas/StackTrace"
+        lastAliveTime:
+          type: string
+          format: date-time
+        lastSuccessTime:
+          type: string
+          format: date-time
+        lastFailureTime:
+          type: string
+          format: date-time
+        lastFailureException:
+          $ref: "#/components/schemas/Exception"
+      required: [type]
+
+    DataSourceHealthDetails:
+      properties:
+        type:
+          enum: [DataSourceHealthDetails]
+        url:
+          type: string
+        lastAliveTime:
+          type: string
+          format: date-time
+        lastFailureException:
+          $ref: "#/components/schemas/Exception"
+      required: [type]
+
+    Exception:
+      properties:
+        type:
+          type: string
+          format: className
+        message:
+          type: string
+        stackTrace:
+          $ref: "#/components/schemas/StackTrace"
+      required: [ type ]
+
+    StackTrace:
+      type: array
+      items:
+        properties:
+          className:
+            type: string
+            format: className
+          methodName:
+            type: string
+          fileName:
+            type: string
+          lineNumber:
+            type: integer
+            format: int32
+        required: [ className, methodName, fileName, lineNumber ]
