@@ -20,6 +20,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -106,20 +107,20 @@ public class JavaCodegen extends AbstractJavaCodegen {
         Map<String, CodegenModel> allModels = getAllModels(result);
         for (ModelsMap modelsMap : result.values()) {
             for (ModelMap model : modelsMap.getModels()) {
-                for (CodegenProperty variable : model.getModel().allVars) {
-                    if (variable.isModel) {
-                        if (allModels.get(variable.dataType).oneOf.isEmpty()) {
-                            variable.defaultValue = "new " + variable.dataType + "()";
+                for (CodegenProperty var : model.getModel().allVars) {
+                    if (var.isModel) {
+                        if (allModels.get(var.dataType).oneOf.isEmpty()) {
+                            var.defaultValue = "new " + var.dataType + "()";
                         }
                     }
-                    if (variable.isArray) {
-                        variable.defaultValue = variable.getUniqueItems() ? "new LinkedHashSet<>()" : "new ArrayList<>()";
+                    if (var.isArray) {
+                        var.defaultValue = var.getUniqueItems() ? "new LinkedHashSet<>()" : "new ArrayList<>()";
                     }
-                    if (variable.get_enum() != null && variable.get_enum().size() == 1) {
-                        variable.defaultValue = "\"" + variable.get_enum().get(0) + "\"";
-                        variable.dataType = "\"" + variable.get_enum().get(0) + "\"";
-                        variable.datatypeWithEnum = "String";
-                        variable.isEnum = false;
+                    if (var.get_enum() != null && var.get_enum().size() == 1) {
+                        var.defaultValue = "\"" + var.get_enum().get(0) + "\"";
+                        var.dataType = "\"" + var.get_enum().get(0) + "\"";
+                        var.datatypeWithEnum = "String";
+                        var.isEnum = false;
                     }
                 }
                 updateVariablesLists(model.getModel());
@@ -289,6 +290,7 @@ public class JavaCodegen extends AbstractJavaCodegen {
         Set<CodegenDiscriminator.MappedModel> mappedModels = new HashSet<>();
         HashMap<String, String> mapping = new HashMap<>();
         CodegenDiscriminator discriminator = codegenModel.discriminator;
+        codegenModel.allVars.removeIf(var -> !(discriminator != null && discriminator.getPropertyBaseName().equals(var.getBaseName())) && codegenModel.interfaceModels.stream().anyMatch(model -> varNotInImplementation(var, model)));
         for (String className : codegenModel.oneOf) {
             CodegenModel subModel = allModels.get(className);
             if (subModel.oneOf.isEmpty()) {
@@ -312,14 +314,34 @@ public class JavaCodegen extends AbstractJavaCodegen {
             if (!subtypeInterfaces.contains(codegenModel)) {
                 subtypeInterfaces.add(codegenModel);
             }
+            if (codegenModel.getDiscriminatorName() != null) {
+                Optional<CodegenProperty> prop = subModel.allVars.stream().filter(v -> v.baseName.equals(codegenModel.getDiscriminator().getPropertyBaseName())).findFirst();
+                if (!prop.isPresent()) {
+                    CodegenProperty property = new CodegenProperty();
+                    property.name = property.baseName = codegenModel.getDiscriminator().getPropertyBaseName();
+                    property.getter = toGetter(property.name);
+                    property.setter = toSetter(property.name);
+                    property.isString = true;
+                    property.dataType = property.datatypeWithEnum = "String";
+                    property.required = true;
+                    property.defaultValue = "\"" + subModel.name + "\"";
+                    property.isInherited = false;
+                    property.isNew = true;
+                    property.isDiscriminator = true;
+                    subModel.allVars.add(0, property);
+                } else {
+                    prop.get().isNew = true;
+                    prop.get().datatypeWithEnum = prop.get().dataType;
+                }
+            }
         }
-        codegenModel.allVars.removeIf(var -> codegenModel.interfaceModels.stream().anyMatch(model -> varNotInImplementation(var, model)));
         if (discriminator != null && discriminator.getMapping() == null) {
             discriminator.setMapping(mapping);
             discriminator.setMappedModels(mappedModels);
         }
         if (discriminator != null) {
-            codegenModel.allVars.removeIf(v -> v.name.equals(discriminator.getPropertyName()));
+            codegenModel.allVars.stream().filter(var -> var.getBaseName().equals(discriminator.getPropertyBaseName()))
+                    .forEach(var -> var.datatypeWithEnum = var.dataType);
         }
     }
 

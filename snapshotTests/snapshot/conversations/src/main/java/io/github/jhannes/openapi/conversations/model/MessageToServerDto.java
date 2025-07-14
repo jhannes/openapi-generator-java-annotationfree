@@ -33,7 +33,6 @@ import java.util.stream.Collectors;
 public interface MessageToServerDto  {
 
 
-
     void readOnlyFieldsWithValue(List<String> fields);
 }
 

@@ -31,9 +31,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public interface PetDto  {
-    String getPetType();
-
     String getName();
+
+    String getPetType();
 
     static WorkingDogDto WorkingDog() {
         WorkingDogDto result = new WorkingDogDto();
