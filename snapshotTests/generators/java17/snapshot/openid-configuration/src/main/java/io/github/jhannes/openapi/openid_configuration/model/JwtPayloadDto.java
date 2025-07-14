@@ -39,6 +39,8 @@ public class JwtPayloadDto extends HashMap<String, List> {
 
     private String sub;
 
+    private Long exp;
+
     private String aud;
 
     private String name = null;
@@ -65,6 +67,7 @@ public class JwtPayloadDto extends HashMap<String, List> {
         return new String[] {
                 "iss",
                 "sub",
+                "exp",
                 "aud",
         };
     }
@@ -73,6 +76,7 @@ public class JwtPayloadDto extends HashMap<String, List> {
         List<String> result = new ArrayList<>();
         if (isMissing(getIss())) result.add("iss");
         if (isMissing(getSub())) result.add("sub");
+        if (isMissing(getExp())) result.add("exp");
         if (isMissing(getAud())) result.add("aud");
         return result;
     }
@@ -84,6 +88,7 @@ public class JwtPayloadDto extends HashMap<String, List> {
         target.putAll(this);
         if (this.getIss() != null) target.setIss(this.getIss());
         if (this.getSub() != null) target.setSub(this.getSub());
+        if (this.getExp() != null) target.setExp(this.getExp());
         if (this.getAud() != null) target.setAud(this.getAud());
         if (this.getName() != null) target.setName(this.getName());
         if (this.getEmail() != null) target.setEmail(this.getEmail());
@@ -137,6 +142,23 @@ public class JwtPayloadDto extends HashMap<String, List> {
 
     public JwtPayloadDto sub(String sub) {
         this.sub = sub;
+        return this;
+    }
+
+    /**
+     * Expiry - the unix timestamp after which the JWT should be rejected
+     * @return exp
+     */
+    public Long getExp() {
+        return exp;
+    }
+
+    public void setExp(Long exp) {
+        this.exp = exp;
+    }
+
+    public JwtPayloadDto exp(Long exp) {
+        this.exp = exp;
         return this;
     }
 
@@ -254,6 +276,7 @@ public class JwtPayloadDto extends HashMap<String, List> {
         JwtPayloadDto jwtPayload = (JwtPayloadDto) o;
         return Objects.equals(this.getIss(), jwtPayload.getIss()) &&
                 Objects.equals(this.getSub(), jwtPayload.getSub()) &&
+                Objects.equals(this.getExp(), jwtPayload.getExp()) &&
                 Objects.equals(this.getAud(), jwtPayload.getAud()) &&
                 Objects.equals(this.getName(), jwtPayload.getName()) &&
                 Objects.equals(this.getEmail(), jwtPayload.getEmail()) &&
@@ -265,7 +288,7 @@ public class JwtPayloadDto extends HashMap<String, List> {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getIss(), getSub(), getAud(), getName(), getEmail(), getOrgId(), getOrg(), getPid());
+        return Objects.hash(getIss(), getSub(), getExp(), getAud(), getName(), getEmail(), getOrgId(), getOrg(), getPid());
     }
 
     @Override
@@ -275,6 +298,7 @@ public class JwtPayloadDto extends HashMap<String, List> {
         sb.append("    ").append(toIndentedString(super.toString())).append("\n");
         sb.append("    iss: ").append(toIndentedString(getIss())).append("\n");
         sb.append("    sub: ").append(toIndentedString(getSub())).append("\n");
+        sb.append("    exp: ").append(toIndentedString(getExp())).append("\n");
         sb.append("    aud: ").append(toIndentedString(getAud())).append("\n");
         sb.append("    name: ").append(toIndentedString(getName())).append("\n");
         sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");

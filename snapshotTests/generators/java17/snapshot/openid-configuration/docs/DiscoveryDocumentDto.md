@@ -12,8 +12,8 @@ Name | Type | Description | Notes
 **endSessionEndpoint** | [**URI**](URI.md) |  |  [optional]
 **jwksUri** | [**URI**](URI.md) |  |  [optional]
 **grantTypesSupported** | [**Set<GrantTypeDto>**](GrantTypeDto.md) |  |  [optional]
-**scopesSupported** | **Set<Object>** |  |  [optional]
-**claimsSupported** | **Set<Object>** |  |  [optional]
+**scopesSupported** | **Set<String>** |  |  [optional]
+**claimsSupported** | **Set<String>** |  |  [optional]
 **responseTypesSupported** | [**Set<ResponseTypeDto>**](ResponseTypeDto.md) |  | 
 **responseModesSupported** | [**Set<ResponseModesSupportedEnum>**](#Set<ResponseModesSupportedEnum>) |  |  [optional]
 **subjectTypesSupported** | [**Set<SubjectTypesSupportedEnum>**](#Set<SubjectTypesSupportedEnum>) |  |  [optional]
