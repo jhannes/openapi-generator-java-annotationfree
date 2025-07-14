@@ -107,6 +107,7 @@ Class | Method | HTTP request | Description
  - [HealthComponentDto](docs/HealthComponentDto.md)
  - [HealthComponentFailureDetailsDto](docs/HealthComponentFailureDetailsDto.md)
  - [HealthDetailsDto](docs/HealthDetailsDto.md)
+ - [HealthOverviewDto](docs/HealthOverviewDto.md)
  - [HealthStatusDto](docs/HealthStatusDto.md)
  - [HealthSummaryDto](docs/HealthSummaryDto.md)
  - [StackTraceInnerDto](docs/StackTraceInnerDto.md)

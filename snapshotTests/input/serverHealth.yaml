@@ -28,6 +28,13 @@ components:
             $ref: "#/components/schemas/HealthComponent"
       required: [ status, components ]
 
+    HealthOverview:
+      properties:
+        components:
+          additionalProperties:
+            $ref: "#/components/schemas/HealthStatus"
+      required: [ components ]
+
     HealthStatus:
       type: string
       enum:

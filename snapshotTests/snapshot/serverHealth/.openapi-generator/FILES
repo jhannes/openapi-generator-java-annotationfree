@@ -6,6 +6,7 @@ docs/ExceptionDto.md
 docs/HealthComponentDto.md
 docs/HealthComponentFailureDetailsDto.md
 docs/HealthDetailsDto.md
+docs/HealthOverviewDto.md
 docs/HealthStatusDto.md
 docs/HealthSummaryDto.md
 docs/StackTraceInnerDto.md
@@ -17,6 +18,7 @@ src/main/java/io/github/jhannes/openapi/serverHealth/model/ExceptionDto.java
 src/main/java/io/github/jhannes/openapi/serverHealth/model/HealthComponentDto.java
 src/main/java/io/github/jhannes/openapi/serverHealth/model/HealthComponentFailureDetailsDto.java
 src/main/java/io/github/jhannes/openapi/serverHealth/model/HealthDetailsDto.java
+src/main/java/io/github/jhannes/openapi/serverHealth/model/HealthOverviewDto.java
 src/main/java/io/github/jhannes/openapi/serverHealth/model/HealthStatusDto.java
 src/main/java/io/github/jhannes/openapi/serverHealth/model/HealthSummaryDto.java
 src/main/java/io/github/jhannes/openapi/serverHealth/model/SampleModelData.java

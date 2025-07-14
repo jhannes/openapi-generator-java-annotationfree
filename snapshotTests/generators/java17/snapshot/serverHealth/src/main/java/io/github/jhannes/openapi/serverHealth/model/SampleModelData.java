@@ -142,6 +142,23 @@ public class SampleModelData {
         return sampleList(() -> sampleHealthDetailsDto());
     }
 
+    public HealthOverviewDto sampleHealthOverviewDto(String propertyName) {
+        return sampleHealthOverviewDto();
+    }
+
+    public HealthOverviewDto sampleHealthOverviewDto() {
+        return new HealthOverviewDto()
+            .components(sampleMap(() -> sampleHealthStatusDto("components"), "components"));
+    }
+
+    public List<HealthOverviewDto> sampleListOfHealthOverviewDto(String propertyName) {
+        return sampleListOfHealthOverviewDto();
+    }
+
+    public List<HealthOverviewDto> sampleListOfHealthOverviewDto() {
+        return sampleList(() -> sampleHealthOverviewDto());
+    }
+
     public HealthStatusDto sampleHealthStatusDto(String propertyName) {
         return sampleHealthStatusDto();
     }

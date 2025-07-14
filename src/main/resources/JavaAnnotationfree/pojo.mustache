@@ -74,29 +74,22 @@ public class {{classname}}{{#parent}} extends {{{parent}}}{{/parent}}{{#interfac
     {{/isReadOnly}}
     {{^isReadOnly}}
         {{^isPrimitiveType}}
-            {{^isMap}}
-                {{#items}}
-                    {{#isModel}}
+            {{#isContainer}}
+                {{#items.isModel}}
+                    {{^items.isEnumOrRef}}
         if ({{baseName}} != null) {
-            {{baseName}}.forEach(o -> o.readOnlyFieldsWithValue(result));
+            {{baseName}}{{#isMap}}.values(){{/isMap}}.forEach(o -> o.readOnlyFieldsWithValue(result));
         }
-                    {{/isModel}}
-                {{/items}}
-            {{/isMap}}
-            {{#isMap}}
-                {{^items.isContainer}}
-        if ({{baseName}} != null) {
-            {{baseName}}.values().forEach(o -> o.readOnlyFieldsWithValue(result));
-        }
-                {{/items.isContainer}}
-            {{/isMap}}
-            {{^isArray}}
+                    {{/items.isEnumOrRef}}
+                {{/items.isModel}}
+            {{/isContainer}}
+            {{^isContainer}}
                 {{#isModel}}
         if ({{baseName}} != null) {
             {{baseName}}.readOnlyFieldsWithValue(result);
         }
                 {{/isModel}}
-            {{/isArray}}
+            {{/isContainer}}
         {{/isPrimitiveType}}
     {{/isReadOnly}}
 {{/vars}}
