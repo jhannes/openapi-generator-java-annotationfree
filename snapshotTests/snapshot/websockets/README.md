@@ -117,7 +117,6 @@ Class | Method | HTTP request | Description
  - [UpdatePersonCommandDto](docs/UpdatePersonCommandDto.md)
  - [WebSocketCommandDto](docs/WebSocketCommandDto.md)
  - [WebSocketMessageDto](docs/WebSocketMessageDto.md)
- - [WebSocketRequestDto](docs/WebSocketRequestDto.md)
 
 
 ## Documentation for Authorization

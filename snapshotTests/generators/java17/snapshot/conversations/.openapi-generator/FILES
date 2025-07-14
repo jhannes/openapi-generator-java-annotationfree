@@ -15,7 +15,6 @@ docs/DeltaDto.md
 docs/EventFromServerDto.md
 docs/MessageFromServerDto.md
 docs/MessageToServerDto.md
-docs/RequestToServerDto.md
 docs/SnapshotSetDto.md
 docs/SubscribeRequestDto.md
 docs/UpdateConversationDeltaDto.md
@@ -35,7 +34,6 @@ src/main/java/io/github/jhannes/openapi/conversations/model/DeltaDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/EventFromServerDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/MessageFromServerDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/MessageToServerDto.java
-src/main/java/io/github/jhannes/openapi/conversations/model/RequestToServerDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/SampleModelData.java
 src/main/java/io/github/jhannes/openapi/conversations/model/SnapshotSetDto.java
 src/main/java/io/github/jhannes/openapi/conversations/model/SubscribeRequestDto.java

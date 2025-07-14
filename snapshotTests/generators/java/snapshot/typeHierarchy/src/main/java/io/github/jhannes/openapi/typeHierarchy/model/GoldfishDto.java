@@ -37,7 +37,7 @@ import io.github.jhannes.openapi.typeHierarchy.ApiClient;
   GoldfishDto.JSON_PROPERTY_NAME,
   GoldfishDto.JSON_PROPERTY_SPECIES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class GoldfishDto {
   /**
    * Gets or Sets petType

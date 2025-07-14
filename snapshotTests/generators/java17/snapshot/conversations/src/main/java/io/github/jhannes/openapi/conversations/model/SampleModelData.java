@@ -276,25 +276,6 @@ public class SampleModelData {
         return sampleList(() -> sampleMessageToServerDto());
     }
 
-    public RequestToServerDto sampleRequestToServerDto(String propertyName) {
-        return sampleRequestToServerDto();
-    }
-
-    public RequestToServerDto sampleRequestToServerDto() {
-        List<Supplier<RequestToServerDto>> factories = List.of(
-            () -> sampleSubscribeRequestDto().request("SubscribeRequest")
-        );
-        return pickOne(factories).get();
-    }
-
-    public List<RequestToServerDto> sampleListOfRequestToServerDto(String propertyName) {
-        return sampleListOfRequestToServerDto();
-    }
-
-    public List<RequestToServerDto> sampleListOfRequestToServerDto() {
-        return sampleList(() -> sampleRequestToServerDto());
-    }
-
     public SnapshotSetDto sampleSnapshotSetDto(String propertyName) {
         return sampleSnapshotSetDto();
     }

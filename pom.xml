@@ -132,13 +132,13 @@
         <dependency>
             <groupId>org.eclipse</groupId>
             <artifactId>yasson</artifactId>
-            <version>3.0.3</version>
+            <version>3.0.4</version>
             <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>org.openapitools</groupId>
             <artifactId>openapi-generator</artifactId>
-            <version>7.12.0</version>
+            <version>7.14.0</version>
             <scope>provided</scope>
             <exclusions>
                 <exclusion>

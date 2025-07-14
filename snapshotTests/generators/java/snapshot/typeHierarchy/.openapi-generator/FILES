@@ -31,6 +31,8 @@ src/main/java/io/github/jhannes/openapi/typeHierarchy/Configuration.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/JSON.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/Pair.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/RFC3339DateFormat.java
+src/main/java/io/github/jhannes/openapi/typeHierarchy/RFC3339InstantDeserializer.java
+src/main/java/io/github/jhannes/openapi/typeHierarchy/RFC3339JavaTimeModule.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/ServerConfiguration.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/ServerVariable.java
 src/main/java/io/github/jhannes/openapi/typeHierarchy/api/DefaultApi.java

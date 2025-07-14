@@ -203,6 +203,7 @@ public class SampleModelData {
 
     public SubscribeDto sampleSubscribeDto() {
         return new SubscribeDto()
+            .command("Subscribe")
             .request("Subscribe");
     }
 
@@ -277,7 +278,8 @@ public class SampleModelData {
     public WebSocketMessageDto sampleWebSocketMessageDto() {
         List<Supplier<WebSocketMessageDto>> factories = List.of(
             () -> sampleUpdatePersonCommandDto().command("updatePerson"),
-            () -> sampleCreatePersonCommandDto().command("createPerson")
+            () -> sampleCreatePersonCommandDto().command("createPerson"),
+            () -> sampleSubscribeDto().command("Subscribe")
         );
         return pickOne(factories).get();
     }
@@ -288,25 +290,6 @@ public class SampleModelData {
 
     public List<WebSocketMessageDto> sampleListOfWebSocketMessageDto() {
         return sampleList(() -> sampleWebSocketMessageDto());
-    }
-
-    public WebSocketRequestDto sampleWebSocketRequestDto(String propertyName) {
-        return sampleWebSocketRequestDto();
-    }
-
-    public WebSocketRequestDto sampleWebSocketRequestDto() {
-        List<Supplier<WebSocketRequestDto>> factories = List.of(
-            () -> sampleSubscribeDto().request("Subscribe")
-        );
-        return pickOne(factories).get();
-    }
-
-    public List<WebSocketRequestDto> sampleListOfWebSocketRequestDto(String propertyName) {
-        return sampleListOfWebSocketRequestDto();
-    }
-
-    public List<WebSocketRequestDto> sampleListOfWebSocketRequestDto() {
-        return sampleList(() -> sampleWebSocketRequestDto());
     }
 
     protected final Random random;

@@ -44,6 +44,11 @@ public interface WebSocketMessageDto  {
         result.command("createPerson");
         return result;
     }
+    static SubscribeDto Subscribe() {
+        SubscribeDto result = new SubscribeDto();
+        result.command("Subscribe");
+        return result;
+    }
 
     static Class<? extends WebSocketMessageDto> getType(String command) {
         switch (command) {
@@ -51,6 +56,8 @@ public interface WebSocketMessageDto  {
             return UpdatePersonCommandDto.class;
         case "createPerson":
             return CreatePersonCommandDto.class;
+        case "Subscribe":
+            return SubscribeDto.class;
         default:
             throw new IllegalArgumentException("Illegal command " + command);
         }

@@ -46,7 +46,7 @@ import io.github.jhannes.openapi.typeHierarchy.ApiClient;
   WorkingDogDto.JSON_PROPERTY_BREED,
   WorkingDogDto.JSON_PROPERTY_CAPABILITIES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class WorkingDogDto {
   public static final String JSON_PROPERTY_ID = "id";
   @javax.annotation.Nullable

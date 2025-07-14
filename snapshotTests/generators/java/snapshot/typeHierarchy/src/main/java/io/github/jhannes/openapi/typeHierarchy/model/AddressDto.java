@@ -41,7 +41,7 @@ import io.github.jhannes.openapi.typeHierarchy.ApiClient;
   AddressDto.JSON_PROPERTY_COUNTRY,
   AddressDto.JSON_PROPERTY_ADDRESS_TYPES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class AddressDto {
   public static final String JSON_PROPERTY_ADDRESS_LINE1 = "addressLine1";
   @javax.annotation.Nullable

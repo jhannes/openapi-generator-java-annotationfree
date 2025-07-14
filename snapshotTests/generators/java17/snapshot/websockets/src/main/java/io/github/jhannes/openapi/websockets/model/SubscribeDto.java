@@ -34,7 +34,9 @@ import java.util.stream.Collectors;
 /**
 * SubscribeDto
 */
-public class SubscribeDto implements WebSocketRequestDto {
+public class SubscribeDto implements WebSocketMessageDto {
+
+    private String command = "Subscribe";
 
     private String request = "Subscribe";
 
@@ -50,12 +52,14 @@ public class SubscribeDto implements WebSocketRequestDto {
 
     public static String[] requiredFields() {
         return new String[] {
+                "command",
                 "request",
         };
     }
 
     public List<String> missingRequiredFields() {
         List<String> result = new ArrayList<>();
+        if (isMissing(getCommand())) result.add("command");
         if (isMissing(getRequest())) result.add("request");
         return result;
     }
@@ -64,6 +68,7 @@ public class SubscribeDto implements WebSocketRequestDto {
     }
 
     public <T extends SubscribeDto> T copyTo(T target) {
+        if (this.getCommand() != null) target.setCommand(this.getCommand());
         if (this.getRequest() != null) target.setRequest(this.getRequest());
         return target;
     }
@@ -80,6 +85,23 @@ public class SubscribeDto implements WebSocketRequestDto {
         return s == null;
     }
 
+
+    /**
+     * Get command
+     * @return command
+     */
+    public String getCommand() {
+        return command;
+    }
+
+    public void setCommand(String command) {
+        this.command = command;
+    }
+
+    public SubscribeDto command(String command) {
+        this.command = command;
+        return this;
+    }
 
     /**
      * Get request
@@ -107,18 +129,20 @@ public class SubscribeDto implements WebSocketRequestDto {
             return false;
         }
         SubscribeDto subscribe = (SubscribeDto) o;
-        return Objects.equals(this.getRequest(), subscribe.getRequest());
+        return Objects.equals(this.getCommand(), subscribe.getCommand()) &&
+                Objects.equals(this.getRequest(), subscribe.getRequest());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getRequest());
+        return Objects.hash(getCommand(), getRequest());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("SubscribeDto {\n");
+        sb.append("    command: ").append(toIndentedString(getCommand())).append("\n");
         sb.append("    request: ").append(toIndentedString(getRequest())).append("\n");
         sb.append("}");
         return sb.toString();

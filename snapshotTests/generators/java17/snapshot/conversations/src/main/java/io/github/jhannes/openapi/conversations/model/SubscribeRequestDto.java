@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 /**
 * SubscribeRequestDto
 */
-public class SubscribeRequestDto implements RequestToServerDto {
+public class SubscribeRequestDto implements MessageToServerDto {
 
     private String request = "SubscribeRequest";
 

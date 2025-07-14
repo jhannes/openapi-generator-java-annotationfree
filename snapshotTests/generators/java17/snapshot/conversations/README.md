@@ -117,7 +117,6 @@ Class | Method | HTTP request | Description
  - [EventFromServerDto](docs/EventFromServerDto.md)
  - [MessageFromServerDto](docs/MessageFromServerDto.md)
  - [MessageToServerDto](docs/MessageToServerDto.md)
- - [RequestToServerDto](docs/RequestToServerDto.md)
  - [SnapshotSetDto](docs/SnapshotSetDto.md)
  - [SubscribeRequestDto](docs/SubscribeRequestDto.md)
  - [UpdateConversationDeltaDto](docs/UpdateConversationDeltaDto.md)

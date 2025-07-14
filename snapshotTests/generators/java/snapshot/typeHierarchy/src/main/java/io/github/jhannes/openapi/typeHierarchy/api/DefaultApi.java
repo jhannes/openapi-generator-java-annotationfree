@@ -45,7 +45,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
 public class DefaultApi {
   private final HttpClient memberVarHttpClient;
   private final ObjectMapper memberVarObjectMapper;
@@ -88,7 +88,7 @@ public class DefaultApi {
    * @param petDto  (optional)
    * @throws ApiException if fails to make API call
    */
-  public void petsPost(PetDto petDto) throws ApiException {
+  public void petsPost(@javax.annotation.Nullable PetDto petDto) throws ApiException {
     petsPostWithHttpInfo(petDto);
   }
 
@@ -99,7 +99,7 @@ public class DefaultApi {
    * @return ApiResponse&lt;Void&gt;
    * @throws ApiException if fails to make API call
    */
-  public ApiResponse<Void> petsPostWithHttpInfo(PetDto petDto) throws ApiException {
+  public ApiResponse<Void> petsPostWithHttpInfo(@javax.annotation.Nullable PetDto petDto) throws ApiException {
     HttpRequest.Builder localVarRequestBuilder = petsPostRequestBuilder(petDto);
     try {
       HttpResponse<InputStream> localVarResponse = memberVarHttpClient.send(
@@ -133,7 +133,7 @@ public class DefaultApi {
     }
   }
 
-  private HttpRequest.Builder petsPostRequestBuilder(PetDto petDto) throws ApiException {
+  private HttpRequest.Builder petsPostRequestBuilder(@javax.annotation.Nullable PetDto petDto) throws ApiException {
 
     HttpRequest.Builder localVarRequestBuilder = HttpRequest.newBuilder();
 
