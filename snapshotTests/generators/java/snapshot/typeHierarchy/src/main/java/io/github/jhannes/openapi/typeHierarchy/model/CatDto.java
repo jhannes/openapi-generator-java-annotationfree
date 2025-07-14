@@ -42,25 +42,29 @@ import io.github.jhannes.openapi.typeHierarchy.ApiClient;
   CatDto.JSON_PROPERTY_HUNTS,
   CatDto.JSON_PROPERTY_AGE
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class CatDto {
   public static final String JSON_PROPERTY_ID = "id";
+  @javax.annotation.Nullable
   private String id;
 
   public static final String JSON_PROPERTY_NAME = "name";
+  @javax.annotation.Nonnull
   private String name;
 
   public static final String JSON_PROPERTY_BIRTH_DATE = "birth_date";
+  @javax.annotation.Nullable
   private String birthDate;
 
   public static final String JSON_PROPERTY_OWNER_ADDRESS = "ownerAddress";
+  @javax.annotation.Nullable
   private AddressDto ownerAddress;
 
   /**
    * Gets or Sets petType
    */
   public enum PetTypeEnum {
-    CAT("Cat");
+    CAT(String.valueOf("Cat"));
 
     private String value;
 
@@ -90,12 +94,15 @@ public class CatDto {
   }
 
   public static final String JSON_PROPERTY_PET_TYPE = "pet_type";
+  @javax.annotation.Nonnull
   private PetTypeEnum petType;
 
   public static final String JSON_PROPERTY_HUNTS = "hunts";
+  @javax.annotation.Nullable
   private Boolean hunts;
 
   public static final String JSON_PROPERTY_AGE = "age";
+  @javax.annotation.Nullable
   private Integer age;
 
   public CatDto() { 
@@ -125,7 +132,7 @@ public class CatDto {
 
 
 
-  public CatDto name(String name) {
+  public CatDto name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
@@ -144,12 +151,12 @@ public class CatDto {
 
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public CatDto birthDate(String birthDate) {
+  public CatDto birthDate(@javax.annotation.Nullable String birthDate) {
     this.birthDate = birthDate;
     return this;
   }
@@ -168,12 +175,12 @@ public class CatDto {
 
   @JsonProperty(JSON_PROPERTY_BIRTH_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBirthDate(String birthDate) {
+  public void setBirthDate(@javax.annotation.Nullable String birthDate) {
     this.birthDate = birthDate;
   }
 
 
-  public CatDto ownerAddress(AddressDto ownerAddress) {
+  public CatDto ownerAddress(@javax.annotation.Nullable AddressDto ownerAddress) {
     this.ownerAddress = ownerAddress;
     return this;
   }
@@ -192,12 +199,12 @@ public class CatDto {
 
   @JsonProperty(JSON_PROPERTY_OWNER_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setOwnerAddress(AddressDto ownerAddress) {
+  public void setOwnerAddress(@javax.annotation.Nullable AddressDto ownerAddress) {
     this.ownerAddress = ownerAddress;
   }
 
 
-  public CatDto petType(PetTypeEnum petType) {
+  public CatDto petType(@javax.annotation.Nonnull PetTypeEnum petType) {
     this.petType = petType;
     return this;
   }
@@ -216,12 +223,12 @@ public class CatDto {
 
   @JsonProperty(JSON_PROPERTY_PET_TYPE)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setPetType(PetTypeEnum petType) {
+  public void setPetType(@javax.annotation.Nonnull PetTypeEnum petType) {
     this.petType = petType;
   }
 
 
-  public CatDto hunts(Boolean hunts) {
+  public CatDto hunts(@javax.annotation.Nullable Boolean hunts) {
     this.hunts = hunts;
     return this;
   }
@@ -240,7 +247,7 @@ public class CatDto {
 
   @JsonProperty(JSON_PROPERTY_HUNTS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setHunts(Boolean hunts) {
+  public void setHunts(@javax.annotation.Nullable Boolean hunts) {
     this.hunts = hunts;
   }
 
@@ -345,17 +352,17 @@ public class CatDto {
 
     // add `id` to the URL query string
     if (getId() != null) {
-      joiner.add(String.format("%sid%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getId()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%sid%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getId()))));
     }
 
     // add `name` to the URL query string
     if (getName() != null) {
-      joiner.add(String.format("%sname%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getName()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%sname%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getName()))));
     }
 
     // add `birth_date` to the URL query string
     if (getBirthDate() != null) {
-      joiner.add(String.format("%sbirth_date%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getBirthDate()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%sbirth_date%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBirthDate()))));
     }
 
     // add `ownerAddress` to the URL query string
@@ -365,17 +372,17 @@ public class CatDto {
 
     // add `pet_type` to the URL query string
     if (getPetType() != null) {
-      joiner.add(String.format("%spet_type%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getPetType()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%spet_type%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getPetType()))));
     }
 
     // add `hunts` to the URL query string
     if (getHunts() != null) {
-      joiner.add(String.format("%shunts%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getHunts()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%shunts%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getHunts()))));
     }
 
     // add `age` to the URL query string
     if (getAge() != null) {
-      joiner.add(String.format("%sage%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getAge()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%sage%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAge()))));
     }
 
     return joiner.toString();

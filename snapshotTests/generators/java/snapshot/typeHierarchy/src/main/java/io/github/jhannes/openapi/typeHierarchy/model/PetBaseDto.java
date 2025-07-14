@@ -39,18 +39,22 @@ import io.github.jhannes.openapi.typeHierarchy.ApiClient;
   PetBaseDto.JSON_PROPERTY_BIRTH_DATE,
   PetBaseDto.JSON_PROPERTY_OWNER_ADDRESS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class PetBaseDto {
   public static final String JSON_PROPERTY_ID = "id";
+  @javax.annotation.Nullable
   private String id;
 
   public static final String JSON_PROPERTY_NAME = "name";
+  @javax.annotation.Nonnull
   private String name;
 
   public static final String JSON_PROPERTY_BIRTH_DATE = "birth_date";
+  @javax.annotation.Nullable
   private String birthDate;
 
   public static final String JSON_PROPERTY_OWNER_ADDRESS = "ownerAddress";
+  @javax.annotation.Nullable
   private AddressDto ownerAddress;
 
   public PetBaseDto() { 
@@ -78,7 +82,7 @@ public class PetBaseDto {
 
 
 
-  public PetBaseDto name(String name) {
+  public PetBaseDto name(@javax.annotation.Nonnull String name) {
     this.name = name;
     return this;
   }
@@ -97,12 +101,12 @@ public class PetBaseDto {
 
   @JsonProperty(JSON_PROPERTY_NAME)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setName(String name) {
+  public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
   }
 
 
-  public PetBaseDto birthDate(String birthDate) {
+  public PetBaseDto birthDate(@javax.annotation.Nullable String birthDate) {
     this.birthDate = birthDate;
     return this;
   }
@@ -121,12 +125,12 @@ public class PetBaseDto {
 
   @JsonProperty(JSON_PROPERTY_BIRTH_DATE)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setBirthDate(String birthDate) {
+  public void setBirthDate(@javax.annotation.Nullable String birthDate) {
     this.birthDate = birthDate;
   }
 
 
-  public PetBaseDto ownerAddress(AddressDto ownerAddress) {
+  public PetBaseDto ownerAddress(@javax.annotation.Nullable AddressDto ownerAddress) {
     this.ownerAddress = ownerAddress;
     return this;
   }
@@ -145,7 +149,7 @@ public class PetBaseDto {
 
   @JsonProperty(JSON_PROPERTY_OWNER_ADDRESS)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setOwnerAddress(AddressDto ownerAddress) {
+  public void setOwnerAddress(@javax.annotation.Nullable AddressDto ownerAddress) {
     this.ownerAddress = ownerAddress;
   }
 
@@ -230,17 +234,17 @@ public class PetBaseDto {
 
     // add `id` to the URL query string
     if (getId() != null) {
-      joiner.add(String.format("%sid%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getId()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%sid%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getId()))));
     }
 
     // add `name` to the URL query string
     if (getName() != null) {
-      joiner.add(String.format("%sname%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getName()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%sname%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getName()))));
     }
 
     // add `birth_date` to the URL query string
     if (getBirthDate() != null) {
-      joiner.add(String.format("%sbirth_date%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getBirthDate()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%sbirth_date%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBirthDate()))));
     }
 
     // add `ownerAddress` to the URL query string

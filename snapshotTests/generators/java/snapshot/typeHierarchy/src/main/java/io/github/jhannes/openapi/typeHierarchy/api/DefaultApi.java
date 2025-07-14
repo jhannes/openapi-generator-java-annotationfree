@@ -15,6 +15,7 @@ package io.github.jhannes.openapi.typeHierarchy.api;
 import io.github.jhannes.openapi.typeHierarchy.ApiClient;
 import io.github.jhannes.openapi.typeHierarchy.ApiException;
 import io.github.jhannes.openapi.typeHierarchy.ApiResponse;
+import io.github.jhannes.openapi.typeHierarchy.Configuration;
 import io.github.jhannes.openapi.typeHierarchy.Pair;
 
 import io.github.jhannes.openapi.typeHierarchy.model.PetDto;
@@ -44,7 +45,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.function.Consumer;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class DefaultApi {
   private final HttpClient memberVarHttpClient;
   private final ObjectMapper memberVarObjectMapper;
@@ -55,7 +56,7 @@ public class DefaultApi {
   private final Consumer<HttpResponse<String>> memberVarAsyncResponseInterceptor;
 
   public DefaultApi() {
-    this(new ApiClient());
+    this(Configuration.getDefaultApiClient());
   }
 
   public DefaultApi(ApiClient apiClient) {
@@ -111,15 +112,15 @@ public class DefaultApi {
         if (localVarResponse.statusCode()/ 100 != 2) {
           throw getApiException("petsPost", localVarResponse);
         }
-        return new ApiResponse<Void>(
-          localVarResponse.statusCode(),
-          localVarResponse.headers().map(),
-          null
+        return new ApiResponse<>(
+            localVarResponse.statusCode(),
+            localVarResponse.headers().map(),
+            null
         );
       } finally {
         // Drain the InputStream
         while (localVarResponse.body().read() != -1) {
-            // Ignore
+          // Ignore
         }
         localVarResponse.body().close();
       }

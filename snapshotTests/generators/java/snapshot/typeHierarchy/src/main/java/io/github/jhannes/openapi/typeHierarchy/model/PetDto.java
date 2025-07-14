@@ -60,9 +60,10 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import io.github.jhannes.openapi.typeHierarchy.ApiClient;
 import io.github.jhannes.openapi.typeHierarchy.JSON;
 
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 @JsonDeserialize(using = PetDto.PetDtoDeserializer.class)
 @JsonSerialize(using = PetDto.PetDtoSerializer.class)
 public class PetDto extends AbstractOpenApiSchema {

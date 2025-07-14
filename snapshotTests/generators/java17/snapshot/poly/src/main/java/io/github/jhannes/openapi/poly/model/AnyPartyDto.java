@@ -32,9 +32,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public interface AnyPartyDto  {
-    String getType();
-
     UUID getId();
+
+    String getType();
 
     String getEmail();
 

@@ -41,27 +41,31 @@ import io.github.jhannes.openapi.typeHierarchy.ApiClient;
   AddressDto.JSON_PROPERTY_COUNTRY,
   AddressDto.JSON_PROPERTY_ADDRESS_TYPES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.7.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.12.0")
 public class AddressDto {
   public static final String JSON_PROPERTY_ADDRESS_LINE1 = "addressLine1";
+  @javax.annotation.Nullable
   private String addressLine1;
 
   public static final String JSON_PROPERTY_ADDRESS_LINE2 = "addressLine2";
+  @javax.annotation.Nullable
   private String addressLine2;
 
   public static final String JSON_PROPERTY_CITY = "city";
+  @javax.annotation.Nonnull
   private String city;
 
   public static final String JSON_PROPERTY_COUNTRY = "country";
+  @javax.annotation.Nonnull
   private String country;
 
   /**
    * Gets or Sets addressTypes
    */
   public enum AddressTypesEnum {
-    SHIPPING("SHIPPING"),
+    SHIPPING(String.valueOf("SHIPPING")),
     
-    BILLING("BILLING");
+    BILLING(String.valueOf("BILLING"));
 
     private String value;
 
@@ -91,12 +95,13 @@ public class AddressDto {
   }
 
   public static final String JSON_PROPERTY_ADDRESS_TYPES = "addressTypes";
+  @javax.annotation.Nullable
   private List<AddressTypesEnum> addressTypes = new ArrayList<>();
 
   public AddressDto() { 
   }
 
-  public AddressDto addressLine1(String addressLine1) {
+  public AddressDto addressLine1(@javax.annotation.Nullable String addressLine1) {
     this.addressLine1 = addressLine1;
     return this;
   }
@@ -115,12 +120,12 @@ public class AddressDto {
 
   @JsonProperty(JSON_PROPERTY_ADDRESS_LINE1)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAddressLine1(String addressLine1) {
+  public void setAddressLine1(@javax.annotation.Nullable String addressLine1) {
     this.addressLine1 = addressLine1;
   }
 
 
-  public AddressDto addressLine2(String addressLine2) {
+  public AddressDto addressLine2(@javax.annotation.Nullable String addressLine2) {
     this.addressLine2 = addressLine2;
     return this;
   }
@@ -139,12 +144,12 @@ public class AddressDto {
 
   @JsonProperty(JSON_PROPERTY_ADDRESS_LINE2)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAddressLine2(String addressLine2) {
+  public void setAddressLine2(@javax.annotation.Nullable String addressLine2) {
     this.addressLine2 = addressLine2;
   }
 
 
-  public AddressDto city(String city) {
+  public AddressDto city(@javax.annotation.Nonnull String city) {
     this.city = city;
     return this;
   }
@@ -163,12 +168,12 @@ public class AddressDto {
 
   @JsonProperty(JSON_PROPERTY_CITY)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setCity(String city) {
+  public void setCity(@javax.annotation.Nonnull String city) {
     this.city = city;
   }
 
 
-  public AddressDto country(String country) {
+  public AddressDto country(@javax.annotation.Nonnull String country) {
     this.country = country;
     return this;
   }
@@ -187,12 +192,12 @@ public class AddressDto {
 
   @JsonProperty(JSON_PROPERTY_COUNTRY)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
-  public void setCountry(String country) {
+  public void setCountry(@javax.annotation.Nonnull String country) {
     this.country = country;
   }
 
 
-  public AddressDto addressTypes(List<AddressTypesEnum> addressTypes) {
+  public AddressDto addressTypes(@javax.annotation.Nullable List<AddressTypesEnum> addressTypes) {
     this.addressTypes = addressTypes;
     return this;
   }
@@ -219,7 +224,7 @@ public class AddressDto {
 
   @JsonProperty(JSON_PROPERTY_ADDRESS_TYPES)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
-  public void setAddressTypes(List<AddressTypesEnum> addressTypes) {
+  public void setAddressTypes(@javax.annotation.Nullable List<AddressTypesEnum> addressTypes) {
     this.addressTypes = addressTypes;
   }
 
@@ -306,22 +311,22 @@ public class AddressDto {
 
     // add `addressLine1` to the URL query string
     if (getAddressLine1() != null) {
-      joiner.add(String.format("%saddressLine1%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getAddressLine1()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%saddressLine1%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAddressLine1()))));
     }
 
     // add `addressLine2` to the URL query string
     if (getAddressLine2() != null) {
-      joiner.add(String.format("%saddressLine2%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getAddressLine2()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%saddressLine2%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAddressLine2()))));
     }
 
     // add `city` to the URL query string
     if (getCity() != null) {
-      joiner.add(String.format("%scity%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getCity()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%scity%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getCity()))));
     }
 
     // add `country` to the URL query string
     if (getCountry() != null) {
-      joiner.add(String.format("%scountry%s=%s", prefix, suffix, URLEncoder.encode(ApiClient.valueToString(getCountry()), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+      joiner.add(String.format("%scountry%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getCountry()))));
     }
 
     // add `addressTypes` to the URL query string
@@ -329,7 +334,7 @@ public class AddressDto {
       for (int i = 0; i < getAddressTypes().size(); i++) {
         joiner.add(String.format("%saddressTypes%s%s=%s", prefix, suffix,
             "".equals(suffix) ? "" : String.format("%s%d%s", containerPrefix, i, containerSuffix),
-            URLEncoder.encode(ApiClient.valueToString(getAddressTypes().get(i)), StandardCharsets.UTF_8).replaceAll("\\+", "%20")));
+            ApiClient.urlEncode(ApiClient.valueToString(getAddressTypes().get(i)))));
       }
     }
 
