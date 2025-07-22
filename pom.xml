@@ -9,7 +9,7 @@
         OpenAPI-generator for Java client APIs and DTOs avoiding annotations.
         Generates direct mapping of APIs as interfaces and test-data generators for DTOs
     </description>
-    <version>0.6.3</version>
+    <version>0.6.4-SNAPSHOT</version>
 
     <url>https://github.com/jhannes/openapi-generator-java-annotationfree/blob/main/README.md</url>
     <licenses>
