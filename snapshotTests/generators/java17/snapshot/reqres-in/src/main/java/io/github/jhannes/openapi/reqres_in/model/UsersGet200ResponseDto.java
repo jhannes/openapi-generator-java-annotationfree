@@ -37,11 +37,11 @@ public class UsersGet200ResponseDto {
 
     private Integer page = null;
 
-    private Integer per_page = null;
+    private Integer perPage = null;
 
     private Integer total = null;
 
-    private Integer total_pages = null;
+    private Integer totalPages = null;
 
     private List<UserDto> data = null;
 
@@ -115,15 +115,15 @@ public class UsersGet200ResponseDto {
      * @return per_page
      */
     public Integer getPerPage() {
-        return per_page;
+        return perPage;
     }
 
     public void setPerPage(Integer perPage) {
-        this.per_page = perPage;
+        this.perPage = perPage;
     }
 
     public UsersGet200ResponseDto perPage(Integer perPage) {
-        this.per_page = perPage;
+        this.perPage = perPage;
         return this;
     }
 
@@ -149,15 +149,15 @@ public class UsersGet200ResponseDto {
      * @return total_pages
      */
     public Integer getTotalPages() {
-        return total_pages;
+        return totalPages;
     }
 
     public void setTotalPages(Integer totalPages) {
-        this.total_pages = totalPages;
+        this.totalPages = totalPages;
     }
 
     public UsersGet200ResponseDto totalPages(Integer totalPages) {
-        this.total_pages = totalPages;
+        this.totalPages = totalPages;
         return this;
     }
 

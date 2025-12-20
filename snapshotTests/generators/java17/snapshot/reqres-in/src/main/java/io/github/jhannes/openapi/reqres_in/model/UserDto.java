@@ -39,9 +39,9 @@ public class UserDto {
 
     private String email = null;
 
-    private String first_name = null;
+    private String firstName = null;
 
-    private String last_name = null;
+    private String lastName = null;
 
     private String avatar = null;
 
@@ -129,15 +129,15 @@ public class UserDto {
      * @return first_name
      */
     public String getFirstName() {
-        return first_name;
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
-        this.first_name = firstName;
+        this.firstName = firstName;
     }
 
     public UserDto firstName(String firstName) {
-        this.first_name = firstName;
+        this.firstName = firstName;
         return this;
     }
 
@@ -146,15 +146,15 @@ public class UserDto {
      * @return last_name
      */
     public String getLastName() {
-        return last_name;
+        return lastName;
     }
 
     public void setLastName(String lastName) {
-        this.last_name = lastName;
+        this.lastName = lastName;
     }
 
     public UserDto lastName(String lastName) {
-        this.last_name = lastName;
+        this.lastName = lastName;
         return this;
     }
 

@@ -39,7 +39,7 @@ public class CommentDto {
 
     private String comment = null;
 
-    private OffsetDateTime created_at = null;
+    private OffsetDateTime createdAt = null;
 
     private UserDto user = null;
 
@@ -134,16 +134,16 @@ public class CommentDto {
      * @return created_at
      */
     public OffsetDateTime getCreatedAt() {
-        return created_at;
+        return createdAt;
     }
 
     /** <strong>read only</strong> */
     public void setCreatedAt(OffsetDateTime createdAt) {
-        this.created_at = createdAt;
+        this.createdAt = createdAt;
     }
 
     public CommentDto createdAt(OffsetDateTime createdAt) {
-        this.created_at = createdAt;
+        this.createdAt = createdAt;
         return this;
     }
 

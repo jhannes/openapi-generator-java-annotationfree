@@ -108,6 +108,7 @@ public class SampleModelData {
 
     public ConversationInfoDto sampleConversationInfoDto() {
         return new ConversationInfoDto()
+            ._public(sampleBoolean("_public"))
             .title(sampleString("title"))
             .summary(sampleString("summary"));
     }

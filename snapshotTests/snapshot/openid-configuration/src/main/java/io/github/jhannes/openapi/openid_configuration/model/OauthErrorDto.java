@@ -74,7 +74,7 @@ public class OauthErrorDto {
 
     private ErrorEnum error;
 
-    private String error_description;
+    private String errorDescription;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -144,15 +144,15 @@ public class OauthErrorDto {
      * @return error_description
      */
     public String getErrorDescription() {
-        return error_description;
+        return errorDescription;
     }
 
     public void setErrorDescription(String errorDescription) {
-        this.error_description = errorDescription;
+        this.errorDescription = errorDescription;
     }
 
     public OauthErrorDto errorDescription(String errorDescription) {
-        this.error_description = errorDescription;
+        this.errorDescription = errorDescription;
         return this;
     }
 

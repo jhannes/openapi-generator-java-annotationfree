@@ -35,11 +35,11 @@ import java.util.stream.Collectors;
 */
 public class PetDto {
 
-    private PetTypeDto pet_type;
+    private PetTypeDto petType;
 
     private String name = null;
 
-    private LocalDate birth_date = null;
+    private LocalDate birthDate = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -91,15 +91,15 @@ public class PetDto {
      * @return pet_type
      */
     public PetTypeDto getPetType() {
-        return pet_type;
+        return petType;
     }
 
     public void setPetType(PetTypeDto petType) {
-        this.pet_type = petType;
+        this.petType = petType;
     }
 
     public PetDto petType(PetTypeDto petType) {
-        this.pet_type = petType;
+        this.petType = petType;
         return this;
     }
 
@@ -125,15 +125,15 @@ public class PetDto {
      * @return birth_date
      */
     public LocalDate getBirthDate() {
-        return birth_date;
+        return birthDate;
     }
 
     public void setBirthDate(LocalDate birthDate) {
-        this.birth_date = birthDate;
+        this.birthDate = birthDate;
     }
 
     public PetDto birthDate(LocalDate birthDate) {
-        this.birth_date = birthDate;
+        this.birthDate = birthDate;
         return this;
     }
 

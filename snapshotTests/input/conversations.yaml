@@ -53,6 +53,9 @@ components:
 
     ConversationInfo:
       properties:
+        public:
+          type: boolean
+          default: false
         title:
           type: string
         summary:

@@ -37,23 +37,23 @@ public class DiscoveryDocumentDto {
 
     private String issuer;
 
-    private URI authorization_endpoint;
+    private URI authorizationEndpoint;
 
-    private URI token_endpoint;
+    private URI tokenEndpoint;
 
-    private URI userinfo_endpoint = null;
+    private URI userinfoEndpoint = null;
 
-    private URI end_session_endpoint = null;
+    private URI endSessionEndpoint = null;
 
-    private URI jwks_uri = null;
+    private URI jwksUri = null;
 
-    private Set<GrantTypeDto> grant_types_supported = null;
+    private Set<GrantTypeDto> grantTypesSupported = null;
 
-    private Set<String> scopes_supported = null;
+    private Set<String> scopesSupported = null;
 
-    private Set<String> claims_supported = null;
+    private Set<String> claimsSupported = null;
 
-    private Set<ResponseTypeDto> response_types_supported = new LinkedHashSet<>();
+    private Set<ResponseTypeDto> responseTypesSupported = new LinkedHashSet<>();
 
     /**
      * Gets or Sets responseModesSupported
@@ -89,7 +89,7 @@ public class DiscoveryDocumentDto {
         }
     }
 
-    private Set<ResponseModesSupportedEnum> response_modes_supported = null;
+    private Set<ResponseModesSupportedEnum> responseModesSupported = null;
 
     /**
      * Gets or Sets subjectTypesSupported
@@ -124,7 +124,7 @@ public class DiscoveryDocumentDto {
         }
     }
 
-    private Set<SubjectTypesSupportedEnum> subject_types_supported = null;
+    private Set<SubjectTypesSupportedEnum> subjectTypesSupported = null;
 
     /**
      * Gets or Sets codeChallengeMethodsSupported
@@ -159,7 +159,7 @@ public class DiscoveryDocumentDto {
         }
     }
 
-    private Set<CodeChallengeMethodsSupportedEnum> code_challenge_methods_supported = null;
+    private Set<CodeChallengeMethodsSupportedEnum> codeChallengeMethodsSupported = null;
 
     /**
      * Gets or Sets idTokenSigningAlgValuesSupported
@@ -193,9 +193,9 @@ public class DiscoveryDocumentDto {
         }
     }
 
-    private List<IdTokenSigningAlgValuesSupportedEnum> id_token_signing_alg_values_supported = null;
+    private List<IdTokenSigningAlgValuesSupportedEnum> idTokenSigningAlgValuesSupported = null;
 
-    private String x_sso_frame = null;
+    private String xSsoFrame = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -282,15 +282,15 @@ public class DiscoveryDocumentDto {
      * @return authorization_endpoint
      */
     public URI getAuthorizationEndpoint() {
-        return authorization_endpoint;
+        return authorizationEndpoint;
     }
 
     public void setAuthorizationEndpoint(URI authorizationEndpoint) {
-        this.authorization_endpoint = authorizationEndpoint;
+        this.authorizationEndpoint = authorizationEndpoint;
     }
 
     public DiscoveryDocumentDto authorizationEndpoint(URI authorizationEndpoint) {
-        this.authorization_endpoint = authorizationEndpoint;
+        this.authorizationEndpoint = authorizationEndpoint;
         return this;
     }
 
@@ -299,15 +299,15 @@ public class DiscoveryDocumentDto {
      * @return token_endpoint
      */
     public URI getTokenEndpoint() {
-        return token_endpoint;
+        return tokenEndpoint;
     }
 
     public void setTokenEndpoint(URI tokenEndpoint) {
-        this.token_endpoint = tokenEndpoint;
+        this.tokenEndpoint = tokenEndpoint;
     }
 
     public DiscoveryDocumentDto tokenEndpoint(URI tokenEndpoint) {
-        this.token_endpoint = tokenEndpoint;
+        this.tokenEndpoint = tokenEndpoint;
         return this;
     }
 
@@ -316,15 +316,15 @@ public class DiscoveryDocumentDto {
      * @return userinfo_endpoint
      */
     public URI getUserinfoEndpoint() {
-        return userinfo_endpoint;
+        return userinfoEndpoint;
     }
 
     public void setUserinfoEndpoint(URI userinfoEndpoint) {
-        this.userinfo_endpoint = userinfoEndpoint;
+        this.userinfoEndpoint = userinfoEndpoint;
     }
 
     public DiscoveryDocumentDto userinfoEndpoint(URI userinfoEndpoint) {
-        this.userinfo_endpoint = userinfoEndpoint;
+        this.userinfoEndpoint = userinfoEndpoint;
         return this;
     }
 
@@ -333,15 +333,15 @@ public class DiscoveryDocumentDto {
      * @return end_session_endpoint
      */
     public URI getEndSessionEndpoint() {
-        return end_session_endpoint;
+        return endSessionEndpoint;
     }
 
     public void setEndSessionEndpoint(URI endSessionEndpoint) {
-        this.end_session_endpoint = endSessionEndpoint;
+        this.endSessionEndpoint = endSessionEndpoint;
     }
 
     public DiscoveryDocumentDto endSessionEndpoint(URI endSessionEndpoint) {
-        this.end_session_endpoint = endSessionEndpoint;
+        this.endSessionEndpoint = endSessionEndpoint;
         return this;
     }
 
@@ -350,15 +350,15 @@ public class DiscoveryDocumentDto {
      * @return jwks_uri
      */
     public URI getJwksUri() {
-        return jwks_uri;
+        return jwksUri;
     }
 
     public void setJwksUri(URI jwksUri) {
-        this.jwks_uri = jwksUri;
+        this.jwksUri = jwksUri;
     }
 
     public DiscoveryDocumentDto jwksUri(URI jwksUri) {
-        this.jwks_uri = jwksUri;
+        this.jwksUri = jwksUri;
         return this;
     }
 
@@ -371,10 +371,10 @@ public class DiscoveryDocumentDto {
     }
 
     public DiscoveryDocumentDto addGrantTypesSupportedItem(GrantTypeDto grantTypesSupportedItem) {
-        if (this.grant_types_supported == null) {
-            this.grant_types_supported = new LinkedHashSet<>();
+        if (this.grantTypesSupported == null) {
+            this.grantTypesSupported = new LinkedHashSet<>();
         }
-        this.grant_types_supported.add(grantTypesSupportedItem);
+        this.grantTypesSupported.add(grantTypesSupportedItem);
         return this;
     }
 
@@ -383,15 +383,15 @@ public class DiscoveryDocumentDto {
      * @return grant_types_supported
      */
     public Set<GrantTypeDto> getGrantTypesSupported() {
-        return grant_types_supported;
+        return grantTypesSupported;
     }
 
     public void setGrantTypesSupported(Set<GrantTypeDto> grantTypesSupported) {
-        this.grant_types_supported = grantTypesSupported;
+        this.grantTypesSupported = grantTypesSupported;
     }
 
     public DiscoveryDocumentDto grantTypesSupported(Set<GrantTypeDto> grantTypesSupported) {
-        this.grant_types_supported = grantTypesSupported;
+        this.grantTypesSupported = grantTypesSupported;
         return this;
     }
 
@@ -404,10 +404,10 @@ public class DiscoveryDocumentDto {
     }
 
     public DiscoveryDocumentDto addScopesSupportedItem(String scopesSupportedItem) {
-        if (this.scopes_supported == null) {
-            this.scopes_supported = new LinkedHashSet<>();
+        if (this.scopesSupported == null) {
+            this.scopesSupported = new LinkedHashSet<>();
         }
-        this.scopes_supported.add(scopesSupportedItem);
+        this.scopesSupported.add(scopesSupportedItem);
         return this;
     }
 
@@ -416,15 +416,15 @@ public class DiscoveryDocumentDto {
      * @return scopes_supported
      */
     public Set<String> getScopesSupported() {
-        return scopes_supported;
+        return scopesSupported;
     }
 
     public void setScopesSupported(Set<String> scopesSupported) {
-        this.scopes_supported = scopesSupported;
+        this.scopesSupported = scopesSupported;
     }
 
     public DiscoveryDocumentDto scopesSupported(Set<String> scopesSupported) {
-        this.scopes_supported = scopesSupported;
+        this.scopesSupported = scopesSupported;
         return this;
     }
 
@@ -437,10 +437,10 @@ public class DiscoveryDocumentDto {
     }
 
     public DiscoveryDocumentDto addClaimsSupportedItem(String claimsSupportedItem) {
-        if (this.claims_supported == null) {
-            this.claims_supported = new LinkedHashSet<>();
+        if (this.claimsSupported == null) {
+            this.claimsSupported = new LinkedHashSet<>();
         }
-        this.claims_supported.add(claimsSupportedItem);
+        this.claimsSupported.add(claimsSupportedItem);
         return this;
     }
 
@@ -449,15 +449,15 @@ public class DiscoveryDocumentDto {
      * @return claims_supported
      */
     public Set<String> getClaimsSupported() {
-        return claims_supported;
+        return claimsSupported;
     }
 
     public void setClaimsSupported(Set<String> claimsSupported) {
-        this.claims_supported = claimsSupported;
+        this.claimsSupported = claimsSupported;
     }
 
     public DiscoveryDocumentDto claimsSupported(Set<String> claimsSupported) {
-        this.claims_supported = claimsSupported;
+        this.claimsSupported = claimsSupported;
         return this;
     }
 
@@ -470,7 +470,7 @@ public class DiscoveryDocumentDto {
     }
 
     public DiscoveryDocumentDto addResponseTypesSupportedItem(ResponseTypeDto responseTypesSupportedItem) {
-        this.response_types_supported.add(responseTypesSupportedItem);
+        this.responseTypesSupported.add(responseTypesSupportedItem);
         return this;
     }
 
@@ -479,15 +479,15 @@ public class DiscoveryDocumentDto {
      * @return response_types_supported
      */
     public Set<ResponseTypeDto> getResponseTypesSupported() {
-        return response_types_supported;
+        return responseTypesSupported;
     }
 
     public void setResponseTypesSupported(Set<ResponseTypeDto> responseTypesSupported) {
-        this.response_types_supported = responseTypesSupported;
+        this.responseTypesSupported = responseTypesSupported;
     }
 
     public DiscoveryDocumentDto responseTypesSupported(Set<ResponseTypeDto> responseTypesSupported) {
-        this.response_types_supported = responseTypesSupported;
+        this.responseTypesSupported = responseTypesSupported;
         return this;
     }
 
@@ -500,10 +500,10 @@ public class DiscoveryDocumentDto {
     }
 
     public DiscoveryDocumentDto addResponseModesSupportedItem(ResponseModesSupportedEnum responseModesSupportedItem) {
-        if (this.response_modes_supported == null) {
-            this.response_modes_supported = new LinkedHashSet<>();
+        if (this.responseModesSupported == null) {
+            this.responseModesSupported = new LinkedHashSet<>();
         }
-        this.response_modes_supported.add(responseModesSupportedItem);
+        this.responseModesSupported.add(responseModesSupportedItem);
         return this;
     }
 
@@ -512,15 +512,15 @@ public class DiscoveryDocumentDto {
      * @return response_modes_supported
      */
     public Set<ResponseModesSupportedEnum> getResponseModesSupported() {
-        return response_modes_supported;
+        return responseModesSupported;
     }
 
     public void setResponseModesSupported(Set<ResponseModesSupportedEnum> responseModesSupported) {
-        this.response_modes_supported = responseModesSupported;
+        this.responseModesSupported = responseModesSupported;
     }
 
     public DiscoveryDocumentDto responseModesSupported(Set<ResponseModesSupportedEnum> responseModesSupported) {
-        this.response_modes_supported = responseModesSupported;
+        this.responseModesSupported = responseModesSupported;
         return this;
     }
 
@@ -533,10 +533,10 @@ public class DiscoveryDocumentDto {
     }
 
     public DiscoveryDocumentDto addSubjectTypesSupportedItem(SubjectTypesSupportedEnum subjectTypesSupportedItem) {
-        if (this.subject_types_supported == null) {
-            this.subject_types_supported = new LinkedHashSet<>();
+        if (this.subjectTypesSupported == null) {
+            this.subjectTypesSupported = new LinkedHashSet<>();
         }
-        this.subject_types_supported.add(subjectTypesSupportedItem);
+        this.subjectTypesSupported.add(subjectTypesSupportedItem);
         return this;
     }
 
@@ -545,15 +545,15 @@ public class DiscoveryDocumentDto {
      * @return subject_types_supported
      */
     public Set<SubjectTypesSupportedEnum> getSubjectTypesSupported() {
-        return subject_types_supported;
+        return subjectTypesSupported;
     }
 
     public void setSubjectTypesSupported(Set<SubjectTypesSupportedEnum> subjectTypesSupported) {
-        this.subject_types_supported = subjectTypesSupported;
+        this.subjectTypesSupported = subjectTypesSupported;
     }
 
     public DiscoveryDocumentDto subjectTypesSupported(Set<SubjectTypesSupportedEnum> subjectTypesSupported) {
-        this.subject_types_supported = subjectTypesSupported;
+        this.subjectTypesSupported = subjectTypesSupported;
         return this;
     }
 
@@ -566,10 +566,10 @@ public class DiscoveryDocumentDto {
     }
 
     public DiscoveryDocumentDto addCodeChallengeMethodsSupportedItem(CodeChallengeMethodsSupportedEnum codeChallengeMethodsSupportedItem) {
-        if (this.code_challenge_methods_supported == null) {
-            this.code_challenge_methods_supported = new LinkedHashSet<>();
+        if (this.codeChallengeMethodsSupported == null) {
+            this.codeChallengeMethodsSupported = new LinkedHashSet<>();
         }
-        this.code_challenge_methods_supported.add(codeChallengeMethodsSupportedItem);
+        this.codeChallengeMethodsSupported.add(codeChallengeMethodsSupportedItem);
         return this;
     }
 
@@ -578,15 +578,15 @@ public class DiscoveryDocumentDto {
      * @return code_challenge_methods_supported
      */
     public Set<CodeChallengeMethodsSupportedEnum> getCodeChallengeMethodsSupported() {
-        return code_challenge_methods_supported;
+        return codeChallengeMethodsSupported;
     }
 
     public void setCodeChallengeMethodsSupported(Set<CodeChallengeMethodsSupportedEnum> codeChallengeMethodsSupported) {
-        this.code_challenge_methods_supported = codeChallengeMethodsSupported;
+        this.codeChallengeMethodsSupported = codeChallengeMethodsSupported;
     }
 
     public DiscoveryDocumentDto codeChallengeMethodsSupported(Set<CodeChallengeMethodsSupportedEnum> codeChallengeMethodsSupported) {
-        this.code_challenge_methods_supported = codeChallengeMethodsSupported;
+        this.codeChallengeMethodsSupported = codeChallengeMethodsSupported;
         return this;
     }
 
@@ -599,10 +599,10 @@ public class DiscoveryDocumentDto {
     }
 
     public DiscoveryDocumentDto addIdTokenSigningAlgValuesSupportedItem(IdTokenSigningAlgValuesSupportedEnum idTokenSigningAlgValuesSupportedItem) {
-        if (this.id_token_signing_alg_values_supported == null) {
-            this.id_token_signing_alg_values_supported = new ArrayList<>();
+        if (this.idTokenSigningAlgValuesSupported == null) {
+            this.idTokenSigningAlgValuesSupported = new ArrayList<>();
         }
-        this.id_token_signing_alg_values_supported.add(idTokenSigningAlgValuesSupportedItem);
+        this.idTokenSigningAlgValuesSupported.add(idTokenSigningAlgValuesSupportedItem);
         return this;
     }
 
@@ -611,15 +611,15 @@ public class DiscoveryDocumentDto {
      * @return id_token_signing_alg_values_supported
      */
     public List<IdTokenSigningAlgValuesSupportedEnum> getIdTokenSigningAlgValuesSupported() {
-        return id_token_signing_alg_values_supported;
+        return idTokenSigningAlgValuesSupported;
     }
 
     public void setIdTokenSigningAlgValuesSupported(List<IdTokenSigningAlgValuesSupportedEnum> idTokenSigningAlgValuesSupported) {
-        this.id_token_signing_alg_values_supported = idTokenSigningAlgValuesSupported;
+        this.idTokenSigningAlgValuesSupported = idTokenSigningAlgValuesSupported;
     }
 
     public DiscoveryDocumentDto idTokenSigningAlgValuesSupported(List<IdTokenSigningAlgValuesSupportedEnum> idTokenSigningAlgValuesSupported) {
-        this.id_token_signing_alg_values_supported = idTokenSigningAlgValuesSupported;
+        this.idTokenSigningAlgValuesSupported = idTokenSigningAlgValuesSupported;
         return this;
     }
 
@@ -628,15 +628,15 @@ public class DiscoveryDocumentDto {
      * @return x_sso_frame
      */
     public String getxSsoFrame() {
-        return x_sso_frame;
+        return xSsoFrame;
     }
 
     public void setxSsoFrame(String xSsoFrame) {
-        this.x_sso_frame = xSsoFrame;
+        this.xSsoFrame = xSsoFrame;
     }
 
     public DiscoveryDocumentDto xSsoFrame(String xSsoFrame) {
-        this.x_sso_frame = xSsoFrame;
+        this.xSsoFrame = xSsoFrame;
         return this;
     }
 

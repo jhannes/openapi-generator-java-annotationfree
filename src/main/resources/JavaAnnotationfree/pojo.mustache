@@ -16,7 +16,7 @@ public class {{classname}}{{#parent}} extends {{{parent}}}{{/parent}}{{#interfac
         {{/isContainer}}
 
     {{/isEnum}}
-    private {{{datatypeWithEnum}}} {{baseName}}{{#required}}{{#defaultValue}} = {{{.}}}{{/defaultValue}}{{/required}}{{^required}} = null{{/required}};
+    private {{{datatypeWithEnum}}} {{name}}{{#required}}{{#defaultValue}} = {{{.}}}{{/defaultValue}}{{/required}}{{^required}} = null{{/required}};
     {{/isInherited}}
 {{/vars}}
 
@@ -136,11 +136,11 @@ public class {{classname}}{{#parent}} extends {{{parent}}}{{/parent}}{{#interfac
 
     public {{classname}} add{{nameInPascalCase}}Item({{{items.datatypeWithEnum}}} {{name}}Item) {
         {{^required}}
-        if (this.{{baseName}} == null) {
-            this.{{baseName}} = {{{defaultValue}}};
+        if (this.{{name}} == null) {
+            this.{{name}} = {{{defaultValue}}};
         }
         {{/required}}
-        this.{{baseName}}.add({{name}}Item);
+        this.{{name}}.add({{name}}Item);
         return this;
     }
     {{/isArray}}
@@ -148,11 +148,11 @@ public class {{classname}}{{#parent}} extends {{{parent}}}{{/parent}}{{#interfac
 
     public {{classname}} put{{nameInPascalCase}}Item(String key, {{{items.datatypeWithEnum}}} {{name}}Item) {
          {{^required}}
-         if (this.{{baseName}} == null) {
-             this.{{baseName}} = {{{defaultValue}}};
+         if (this.{{name}} == null) {
+             this.{{name}} = {{{defaultValue}}};
          }
          {{/required}}
-         this.{{baseName}}.put(key, {{name}}Item);
+         this.{{name}}.put(key, {{name}}Item);
          return this;
     }
     {{/isMap}}
@@ -182,18 +182,18 @@ public class {{classname}}{{#parent}} extends {{{parent}}}{{/parent}}{{#interfac
         {{{vendorExtensions.extraAnnotation}}}
     {{/vendorExtensions.extraAnnotation}}
     public {{{datatypeWithEnum}}} {{getter}}() {
-        return {{baseName}};
+        return {{name}};
     }
 
     {{#isReadOnly}}
     /** <strong>read only</strong> */
     {{/isReadOnly}}
     public void {{setter}}({{{datatypeWithEnum}}} {{name}}) {
-        this.{{baseName}} = {{name}};
+        this.{{name}} = {{name}};
     }
 
     public {{classname}} {{name}}({{{datatypeWithEnum}}} {{name}}) {
-        this.{{baseName}} = {{name}};
+        this.{{name}} = {{name}};
         return this;
     }
     {{/isInherited}}

@@ -70,13 +70,13 @@ public class PetDto {
         }
     }
 
-    private PetTypeEnum pet_type;
+    private PetTypeEnum petType;
 
     private String name = null;
 
-    private LocalDate birth_date = null;
+    private LocalDate birthDate = null;
 
-    private OffsetDateTime created_at = null;
+    private OffsetDateTime createdAt = null;
 
     private List<CommentDto> comments = null;
 
@@ -205,15 +205,15 @@ public class PetDto {
      * @return pet_type
      */
     public PetTypeEnum getPetType() {
-        return pet_type;
+        return petType;
     }
 
     public void setPetType(PetTypeEnum petType) {
-        this.pet_type = petType;
+        this.petType = petType;
     }
 
     public PetDto petType(PetTypeEnum petType) {
-        this.pet_type = petType;
+        this.petType = petType;
         return this;
     }
 
@@ -239,15 +239,15 @@ public class PetDto {
      * @return birth_date
      */
     public LocalDate getBirthDate() {
-        return birth_date;
+        return birthDate;
     }
 
     public void setBirthDate(LocalDate birthDate) {
-        this.birth_date = birthDate;
+        this.birthDate = birthDate;
     }
 
     public PetDto birthDate(LocalDate birthDate) {
-        this.birth_date = birthDate;
+        this.birthDate = birthDate;
         return this;
     }
 
@@ -257,16 +257,16 @@ public class PetDto {
      * @return created_at
      */
     public OffsetDateTime getCreatedAt() {
-        return created_at;
+        return createdAt;
     }
 
     /** <strong>read only</strong> */
     public void setCreatedAt(OffsetDateTime createdAt) {
-        this.created_at = createdAt;
+        this.createdAt = createdAt;
     }
 
     public PetDto createdAt(OffsetDateTime createdAt) {
-        this.created_at = createdAt;
+        this.createdAt = createdAt;
         return this;
     }
 

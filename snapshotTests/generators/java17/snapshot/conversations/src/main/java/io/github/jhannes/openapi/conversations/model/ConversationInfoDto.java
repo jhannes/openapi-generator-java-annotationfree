@@ -35,6 +35,8 @@ import java.util.stream.Collectors;
 */
 public class ConversationInfoDto {
 
+    private Boolean _public = null;
+
     private String title;
 
     private String summary = null;
@@ -65,6 +67,7 @@ public class ConversationInfoDto {
     }
 
     public <T extends ConversationInfoDto> T copyTo(T target) {
+        if (this.getPublic() != null) target.setPublic(this.getPublic());
         if (this.getTitle() != null) target.setTitle(this.getTitle());
         if (this.getSummary() != null) target.setSummary(this.getSummary());
         return target;
@@ -82,6 +85,23 @@ public class ConversationInfoDto {
         return s == null;
     }
 
+
+    /**
+     * Get public
+     * @return public
+     */
+    public Boolean getPublic() {
+        return _public;
+    }
+
+    public void setPublic(Boolean _public) {
+        this._public = _public;
+    }
+
+    public ConversationInfoDto _public(Boolean _public) {
+        this._public = _public;
+        return this;
+    }
 
     /**
      * Get title
@@ -126,19 +146,21 @@ public class ConversationInfoDto {
             return false;
         }
         ConversationInfoDto conversationInfo = (ConversationInfoDto) o;
-        return Objects.equals(this.getTitle(), conversationInfo.getTitle()) &&
+        return Objects.equals(this.getPublic(), conversationInfo.getPublic()) &&
+                Objects.equals(this.getTitle(), conversationInfo.getTitle()) &&
                 Objects.equals(this.getSummary(), conversationInfo.getSummary());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getTitle(), getSummary());
+        return Objects.hash(getPublic(), getTitle(), getSummary());
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("ConversationInfoDto {\n");
+        sb.append("    public: ").append(toIndentedString(getPublic())).append("\n");
         sb.append("    title: ").append(toIndentedString(getTitle())).append("\n");
         sb.append("    summary: ").append(toIndentedString(getSummary())).append("\n");
         sb.append("}");

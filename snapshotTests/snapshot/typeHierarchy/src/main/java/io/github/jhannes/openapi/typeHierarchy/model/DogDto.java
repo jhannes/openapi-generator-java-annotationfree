@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 */
 public class DogDto extends PetBaseDto implements PetDto {
 
-    private String pet_type = "Dog";
+    private String petType = "Dog";
 
     private Boolean bark = null;
 
@@ -154,15 +154,15 @@ public class DogDto extends PetBaseDto implements PetDto {
      * @return pet_type
      */
     public String getPetType() {
-        return pet_type;
+        return petType;
     }
 
     public void setPetType(String petType) {
-        this.pet_type = petType;
+        this.petType = petType;
     }
 
     public DogDto petType(String petType) {
-        this.pet_type = petType;
+        this.petType = petType;
         return this;
     }
 

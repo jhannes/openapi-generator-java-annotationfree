@@ -43,7 +43,7 @@ public class UnknownResourceDto {
 
     private String color = null;
 
-    private String pantone_value = null;
+    private String pantoneValue = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -163,15 +163,15 @@ public class UnknownResourceDto {
      * @return pantone_value
      */
     public String getPantoneValue() {
-        return pantone_value;
+        return pantoneValue;
     }
 
     public void setPantoneValue(String pantoneValue) {
-        this.pantone_value = pantoneValue;
+        this.pantoneValue = pantoneValue;
     }
 
     public UnknownResourceDto pantoneValue(String pantoneValue) {
-        this.pantone_value = pantoneValue;
+        this.pantoneValue = pantoneValue;
         return this;
     }
 

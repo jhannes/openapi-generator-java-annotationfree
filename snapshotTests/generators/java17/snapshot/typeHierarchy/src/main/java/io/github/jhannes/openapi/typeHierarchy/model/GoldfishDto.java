@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 */
 public class GoldfishDto implements PetDto {
 
-    private String pet_type = "Goldfish";
+    private String petType = "Goldfish";
 
     private String name = null;
 
@@ -91,15 +91,15 @@ public class GoldfishDto implements PetDto {
      * @return pet_type
      */
     public String getPetType() {
-        return pet_type;
+        return petType;
     }
 
     public void setPetType(String petType) {
-        this.pet_type = petType;
+        this.petType = petType;
     }
 
     public GoldfishDto petType(String petType) {
-        this.pet_type = petType;
+        this.petType = petType;
         return this;
     }
 

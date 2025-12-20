@@ -39,7 +39,7 @@ public class PetBaseDto {
 
     private String name;
 
-    private String birth_date = null;
+    private String birthDate = null;
 
     private AddressDto ownerAddress = null;
 
@@ -137,15 +137,15 @@ public class PetBaseDto {
      * @return birth_date
      */
     public String getBirthDate() {
-        return birth_date;
+        return birthDate;
     }
 
     public void setBirthDate(String birthDate) {
-        this.birth_date = birthDate;
+        this.birthDate = birthDate;
     }
 
     public PetBaseDto birthDate(String birthDate) {
-        this.birth_date = birthDate;
+        this.birthDate = birthDate;
         return this;
     }
 

@@ -35,17 +35,17 @@ import java.util.stream.Collectors;
 */
 public class TokenResponseDto {
 
-    private String access_token;
+    private String accessToken;
 
-    private String token_type;
+    private String tokenType;
 
-    private Integer expires_in = null;
+    private Integer expiresIn = null;
 
     private String scope = null;
 
-    private String id_token = null;
+    private String idToken = null;
 
-    private String refresh_token = null;
+    private String refreshToken = null;
 
     public static String[] readOnlyFields() {
         return new String[] {
@@ -102,15 +102,15 @@ public class TokenResponseDto {
      * @return access_token
      */
     public String getAccessToken() {
-        return access_token;
+        return accessToken;
     }
 
     public void setAccessToken(String accessToken) {
-        this.access_token = accessToken;
+        this.accessToken = accessToken;
     }
 
     public TokenResponseDto accessToken(String accessToken) {
-        this.access_token = accessToken;
+        this.accessToken = accessToken;
         return this;
     }
 
@@ -120,15 +120,15 @@ public class TokenResponseDto {
      * @return token_type
      */
     public String getTokenType() {
-        return token_type;
+        return tokenType;
     }
 
     public void setTokenType(String tokenType) {
-        this.token_type = tokenType;
+        this.tokenType = tokenType;
     }
 
     public TokenResponseDto tokenType(String tokenType) {
-        this.token_type = tokenType;
+        this.tokenType = tokenType;
         return this;
     }
 
@@ -137,15 +137,15 @@ public class TokenResponseDto {
      * @return expires_in
      */
     public Integer getExpiresIn() {
-        return expires_in;
+        return expiresIn;
     }
 
     public void setExpiresIn(Integer expiresIn) {
-        this.expires_in = expiresIn;
+        this.expiresIn = expiresIn;
     }
 
     public TokenResponseDto expiresIn(Integer expiresIn) {
-        this.expires_in = expiresIn;
+        this.expiresIn = expiresIn;
         return this;
     }
 
@@ -171,15 +171,15 @@ public class TokenResponseDto {
      * @return id_token
      */
     public String getIdToken() {
-        return id_token;
+        return idToken;
     }
 
     public void setIdToken(String idToken) {
-        this.id_token = idToken;
+        this.idToken = idToken;
     }
 
     public TokenResponseDto idToken(String idToken) {
-        this.id_token = idToken;
+        this.idToken = idToken;
         return this;
     }
 
@@ -188,15 +188,15 @@ public class TokenResponseDto {
      * @return refresh_token
      */
     public String getRefreshToken() {
-        return refresh_token;
+        return refreshToken;
     }
 
     public void setRefreshToken(String refreshToken) {
-        this.refresh_token = refreshToken;
+        this.refreshToken = refreshToken;
     }
 
     public TokenResponseDto refreshToken(String refreshToken) {
-        this.refresh_token = refreshToken;
+        this.refreshToken = refreshToken;
         return this;
     }
 
