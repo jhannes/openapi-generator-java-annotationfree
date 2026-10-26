@@ -194,7 +194,9 @@ public class SampleModelData {
             .url(sampleURI("url"))
             .email(sampleString("email", "email"))
             .emailDomains(sampleSet(() -> sampleString("emailDomains"), "emailDomains"))
-            .phone(sampleString("phone", "phone"));
+            .phone(sampleString("phone", "phone"))
+            .status(sampleOrganizationDtoStatusEnum("status"))
+            .contactChannels(pickSome(OrganizationDto.ContactChannelsEnum.values()));
     }
 
     public List<OrganizationDto> sampleListOfOrganizationDto(String propertyName) {
@@ -203,6 +205,14 @@ public class SampleModelData {
 
     public List<OrganizationDto> sampleListOfOrganizationDto() {
         return sampleList(() -> sampleOrganizationDto());
+    }
+
+    public OrganizationDto.StatusEnum sampleOrganizationDtoStatusEnum(String propertyName) {
+        return pickOne(OrganizationDto.StatusEnum.values());
+    }
+
+    public OrganizationDto.ContactChannelsEnum sampleOrganizationDtoContactChannelsEnum(String propertyName) {
+        return pickOne(OrganizationDto.ContactChannelsEnum.values());
     }
 
     public PersonDto samplePersonDto(String propertyName) {
@@ -217,7 +227,9 @@ public class SampleModelData {
             .familyName(sampleString("familyName"))
             .email(sampleString("email", "email"))
             .phone(sampleString("phone", "phone"))
-            .birthDate(sampleLocalDate("birthDate"));
+            .birthDate(sampleLocalDate("birthDate"))
+            .status(samplePersonDtoStatusEnum("status"))
+            .contactChannels(pickSome(PersonDto.ContactChannelsEnum.values()));
     }
 
     public List<PersonDto> sampleListOfPersonDto(String propertyName) {
@@ -226,6 +238,14 @@ public class SampleModelData {
 
     public List<PersonDto> sampleListOfPersonDto() {
         return sampleList(() -> samplePersonDto());
+    }
+
+    public PersonDto.StatusEnum samplePersonDtoStatusEnum(String propertyName) {
+        return pickOne(PersonDto.StatusEnum.values());
+    }
+
+    public PersonDto.ContactChannelsEnum samplePersonDtoContactChannelsEnum(String propertyName) {
+        return pickOne(PersonDto.ContactChannelsEnum.values());
     }
 
     public UpdateErrorDto sampleUpdateErrorDto(String propertyName) {

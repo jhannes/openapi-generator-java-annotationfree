@@ -50,6 +50,76 @@ public class PersonDto implements AnyPartyDto {
 
     private LocalDate birthDate = null;
 
+    /**
+     * Gets or Sets status
+     */
+    public enum StatusEnum {
+
+        active("active"),
+        deceased("deceased");
+
+        private String value;
+
+        StatusEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static StatusEnum fromValue(String text) {
+            for (StatusEnum b : StatusEnum.values()) {
+                if (String.valueOf(b.value).equals(text)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + text + "'");
+        }
+    }
+
+    private StatusEnum status = null;
+
+    /**
+     * Gets or Sets contactChannels
+     */
+    public enum ContactChannelsEnum {
+
+        email("email"),
+        phone("phone");
+
+        private String value;
+
+        ContactChannelsEnum(String value) {
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return String.valueOf(value);
+        }
+
+        public static ContactChannelsEnum fromValue(String text) {
+            for (ContactChannelsEnum b : ContactChannelsEnum.values()) {
+                if (String.valueOf(b.value).equals(text)) {
+                    return b;
+                }
+            }
+            throw new IllegalArgumentException("Unexpected value '" + text + "'");
+        }
+    }
+
+    private List<ContactChannelsEnum> contactChannels = null;
+
     public static String[] readOnlyFields() {
         return new String[] {
                 "id",
@@ -91,6 +161,8 @@ public class PersonDto implements AnyPartyDto {
         if (this.getEmail() != null) target.setEmail(this.getEmail());
         if (this.getPhone() != null) target.setPhone(this.getPhone());
         if (this.getBirthDate() != null) target.setBirthDate(this.getBirthDate());
+        if (this.getStatus() != null) target.setStatus(this.getStatus());
+        if (this.getContactChannels() != null) target.setContactChannels(this.getContactChannels());
         return target;
     }
 
@@ -228,6 +300,56 @@ public class PersonDto implements AnyPartyDto {
         return this;
     }
 
+    /**
+     * Get status
+     * @return status
+     */
+    public StatusEnum getStatus() {
+        return status;
+    }
+
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
+    public PersonDto status(StatusEnum status) {
+        this.status = status;
+        return this;
+    }
+
+    public <T> PersonDto contactChannels(Collection<T> items, Function<T, ContactChannelsEnum> mapper) {
+        return contactChannels(items.stream().map(mapper).collect(Collectors.toList()));
+    }
+
+    public <T> List<T> getContactChannels(Function<ContactChannelsEnum, T> mapper) {
+        return getContactChannels().stream().map(mapper).collect(Collectors.toList());
+    }
+
+    public PersonDto addContactChannelsItem(ContactChannelsEnum contactChannelsItem) {
+        if (this.contactChannels == null) {
+            this.contactChannels = new ArrayList<>();
+        }
+        this.contactChannels.add(contactChannelsItem);
+        return this;
+    }
+
+    /**
+     * Get contactChannels
+     * @return contactChannels
+     */
+    public List<ContactChannelsEnum> getContactChannels() {
+        return contactChannels;
+    }
+
+    public void setContactChannels(List<ContactChannelsEnum> contactChannels) {
+        this.contactChannels = contactChannels;
+    }
+
+    public PersonDto contactChannels(List<ContactChannelsEnum> contactChannels) {
+        this.contactChannels = contactChannels;
+        return this;
+    }
+
     @Override
     public boolean equals(java.lang.Object o) {
         if (this == o) {
@@ -243,12 +365,14 @@ public class PersonDto implements AnyPartyDto {
                 Objects.equals(this.getFamilyName(), person.getFamilyName()) &&
                 Objects.equals(this.getEmail(), person.getEmail()) &&
                 Objects.equals(this.getPhone(), person.getPhone()) &&
-                Objects.equals(this.getBirthDate(), person.getBirthDate());
+                Objects.equals(this.getBirthDate(), person.getBirthDate()) &&
+                Objects.equals(this.getStatus(), person.getStatus()) &&
+                Objects.equals(this.getContactChannels(), person.getContactChannels());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getType(), getGivenName(), getFamilyName(), getEmail(), getPhone(), getBirthDate());
+        return Objects.hash(getId(), getType(), getGivenName(), getFamilyName(), getEmail(), getPhone(), getBirthDate(), getStatus(), getContactChannels());
     }
 
     @Override
@@ -262,6 +386,8 @@ public class PersonDto implements AnyPartyDto {
         sb.append("    email: ").append(toIndentedString(getEmail())).append("\n");
         sb.append("    phone: ").append(toIndentedString(getPhone())).append("\n");
         sb.append("    birthDate: ").append(toIndentedString(getBirthDate())).append("\n");
+        sb.append("    status: ").append(toIndentedString(getStatus())).append("\n");
+        sb.append("    contactChannels: ").append(toIndentedString(getContactChannels())).append("\n");
         sb.append("}");
         return sb.toString();
     }

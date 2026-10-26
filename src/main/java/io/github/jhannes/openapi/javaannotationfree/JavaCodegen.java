@@ -290,7 +290,8 @@ public class JavaCodegen extends AbstractJavaCodegen {
         Set<CodegenDiscriminator.MappedModel> mappedModels = new HashSet<>();
         HashMap<String, String> mapping = new HashMap<>();
         CodegenDiscriminator discriminator = codegenModel.discriminator;
-        codegenModel.allVars.removeIf(var -> !(discriminator != null && discriminator.getPropertyBaseName().equals(var.getBaseName())) && codegenModel.interfaceModels.stream().anyMatch(model -> varNotInImplementation(var, model)));
+        codegenModel.allVars.removeIf(var -> !(discriminator != null && discriminator.getPropertyBaseName().equals(var.getBaseName()))
+                && (isInlineEnum(var) || codegenModel.interfaceModels.stream().anyMatch(model -> varNotInImplementation(var, model))));
         for (String className : codegenModel.oneOf) {
             CodegenModel subModel = allModels.get(className);
             if (subModel.oneOf.isEmpty()) {
@@ -343,6 +344,11 @@ public class JavaCodegen extends AbstractJavaCodegen {
             codegenModel.allVars.stream().filter(var -> var.getBaseName().equals(discriminator.getPropertyBaseName()))
                     .forEach(var -> var.datatypeWithEnum = var.dataType);
         }
+    }
+
+    // Inline enums are generated as a separate nested type in each subtype, so they have no common type in the interface
+    private static boolean isInlineEnum(CodegenProperty var) {
+        return var.isEnum || (var.mostInnerItems != null && var.mostInnerItems.isEnum);
     }
 
     private static boolean varNotInImplementation(CodegenProperty var, CodegenModel model) {

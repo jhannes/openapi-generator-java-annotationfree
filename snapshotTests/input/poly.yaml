@@ -99,6 +99,14 @@ components:
         birthDate:
           type: string
           format: date
+        status:
+          type: string
+          enum: [active, deceased]
+        contactChannels:
+          type: array
+          items:
+            type: string
+            enum: [email, phone]
       required:
         - type
         - givenName
@@ -131,6 +139,14 @@ components:
         phone:
           type: string
           format: phone
+        status:
+          type: string
+          enum: [active, dissolved]
+        contactChannels:
+          type: array
+          items:
+            type: string
+            enum: [email, phone]
       required:
         - type
         - name
