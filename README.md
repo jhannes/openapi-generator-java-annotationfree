@@ -1,6 +1,6 @@
 [![Java CI with Maven](https://github.com/jhannes/openapi-generator-java-annotationfree/actions/workflows/maven.yml/badge.svg)](https://github.com/jhannes/openapi-generator-java-annotationfree/actions/workflows/maven.yml)
 [![Apache 2.0 License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Maven Central](https://img.shields.io/maven-central/v/io.github.jhannes.openapi/openapi-generator-java-annotationfree/badge.svg)](https://repo1.maven.org/maven2/io/github/jhannes/openapi/openapi-generator-java-annotationfree/)
+[![Sonatype Central](https://maven-badges.sml.io/sonatype-central/io.github.jhannes.openapi/openapi-generator-java-annotationfree/badge.svg)](https://maven-badges.sml.io/sonatype-central/io.github.jhannes.openapi/openapi-generator-java-annotationfree/)
 
 # OpenAPI Generator for Java with support for nested allOf-types and multiple inheritance with oneOf
 
@@ -40,7 +40,7 @@ Add to your `pom.xml`:
                     <dependency>
                         <groupId>io.github.jhannes.openapi</groupId>
                         <artifactId>openapi-generator-java-annotationfree</artifactId>
-                        <version>0.7.0</version>
+                        <version>0.7.1</version>
                     </dependency>
                 </dependencies>
                 <executions>
