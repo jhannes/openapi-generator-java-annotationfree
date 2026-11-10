@@ -73,7 +73,6 @@ public class DogDto extends PetBaseDto implements PetDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private BreedEnum breed = null;
 
     public static String[] readOnlyFields() {

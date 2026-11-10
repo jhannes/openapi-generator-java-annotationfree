@@ -41,7 +41,7 @@ import io.github.jhannes.openapi.typeHierarchy.ApiClient;
   AddressDto.JSON_PROPERTY_COUNTRY,
   AddressDto.JSON_PROPERTY_ADDRESS_TYPES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class AddressDto {
   public static final String JSON_PROPERTY_ADDRESS_LINE1 = "addressLine1";
   @javax.annotation.Nullable
@@ -111,14 +111,14 @@ public class AddressDto {
    * @return addressLine1
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE1)
+  @JsonProperty(value = JSON_PROPERTY_ADDRESS_LINE1, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAddressLine1() {
     return addressLine1;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE1)
+  @JsonProperty(value = JSON_PROPERTY_ADDRESS_LINE1, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAddressLine1(@javax.annotation.Nullable String addressLine1) {
     this.addressLine1 = addressLine1;
@@ -135,14 +135,14 @@ public class AddressDto {
    * @return addressLine2
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE2)
+  @JsonProperty(value = JSON_PROPERTY_ADDRESS_LINE2, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getAddressLine2() {
     return addressLine2;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ADDRESS_LINE2)
+  @JsonProperty(value = JSON_PROPERTY_ADDRESS_LINE2, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAddressLine2(@javax.annotation.Nullable String addressLine2) {
     this.addressLine2 = addressLine2;
@@ -159,14 +159,14 @@ public class AddressDto {
    * @return city
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_CITY)
+  @JsonProperty(value = JSON_PROPERTY_CITY, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCity() {
     return city;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_CITY)
+  @JsonProperty(value = JSON_PROPERTY_CITY, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCity(@javax.annotation.Nonnull String city) {
     this.city = city;
@@ -183,14 +183,14 @@ public class AddressDto {
    * @return country
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_COUNTRY)
+  @JsonProperty(value = JSON_PROPERTY_COUNTRY, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getCountry() {
     return country;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_COUNTRY)
+  @JsonProperty(value = JSON_PROPERTY_COUNTRY, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCountry(@javax.annotation.Nonnull String country) {
     this.country = country;
@@ -215,14 +215,14 @@ public class AddressDto {
    * @return addressTypes
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_ADDRESS_TYPES)
+  @JsonProperty(value = JSON_PROPERTY_ADDRESS_TYPES, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public List<AddressTypesEnum> getAddressTypes() {
     return addressTypes;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_ADDRESS_TYPES)
+  @JsonProperty(value = JSON_PROPERTY_ADDRESS_TYPES, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setAddressTypes(@javax.annotation.Nullable List<AddressTypesEnum> addressTypes) {
     this.addressTypes = addressTypes;
@@ -271,10 +271,7 @@ public class AddressDto {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
   /**
@@ -311,29 +308,29 @@ public class AddressDto {
 
     // add `addressLine1` to the URL query string
     if (getAddressLine1() != null) {
-      joiner.add(String.format("%saddressLine1%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAddressLine1()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%saddressLine1%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAddressLine1()))));
     }
 
     // add `addressLine2` to the URL query string
     if (getAddressLine2() != null) {
-      joiner.add(String.format("%saddressLine2%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAddressLine2()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%saddressLine2%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAddressLine2()))));
     }
 
     // add `city` to the URL query string
     if (getCity() != null) {
-      joiner.add(String.format("%scity%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getCity()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%scity%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getCity()))));
     }
 
     // add `country` to the URL query string
     if (getCountry() != null) {
-      joiner.add(String.format("%scountry%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getCountry()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%scountry%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getCountry()))));
     }
 
     // add `addressTypes` to the URL query string
     if (getAddressTypes() != null) {
       for (int i = 0; i < getAddressTypes().size(); i++) {
-        joiner.add(String.format("%saddressTypes%s%s=%s", prefix, suffix,
-            "".equals(suffix) ? "" : String.format("%s%d%s", containerPrefix, i, containerSuffix),
+        joiner.add(String.format(java.util.Locale.ROOT, "%saddressTypes%s%s=%s", prefix, suffix,
+            "".equals(suffix) ? "" : String.format(java.util.Locale.ROOT, "%s%d%s", containerPrefix, i, containerSuffix),
             ApiClient.urlEncode(ApiClient.valueToString(getAddressTypes().get(i)))));
       }
     }

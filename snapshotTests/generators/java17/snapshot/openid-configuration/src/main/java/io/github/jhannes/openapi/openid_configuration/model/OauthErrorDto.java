@@ -71,7 +71,6 @@ public class OauthErrorDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private ErrorEnum error;
 
     private String error_description;

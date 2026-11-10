@@ -39,7 +39,7 @@ import io.github.jhannes.openapi.typeHierarchy.ApiClient;
   PetBaseDto.JSON_PROPERTY_BIRTH_DATE,
   PetBaseDto.JSON_PROPERTY_OWNER_ADDRESS
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class PetBaseDto {
   public static final String JSON_PROPERTY_ID = "id";
   @javax.annotation.Nullable
@@ -73,7 +73,7 @@ public class PetBaseDto {
    * @return id
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_ID)
+  @JsonProperty(value = JSON_PROPERTY_ID, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getId() {
     return id;
@@ -92,14 +92,14 @@ public class PetBaseDto {
    * @return name
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(value = JSON_PROPERTY_NAME, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getName() {
     return name;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(value = JSON_PROPERTY_NAME, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
@@ -116,14 +116,14 @@ public class PetBaseDto {
    * @return birthDate
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_BIRTH_DATE)
+  @JsonProperty(value = JSON_PROPERTY_BIRTH_DATE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getBirthDate() {
     return birthDate;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_BIRTH_DATE)
+  @JsonProperty(value = JSON_PROPERTY_BIRTH_DATE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBirthDate(@javax.annotation.Nullable String birthDate) {
     this.birthDate = birthDate;
@@ -140,14 +140,14 @@ public class PetBaseDto {
    * @return ownerAddress
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_OWNER_ADDRESS)
+  @JsonProperty(value = JSON_PROPERTY_OWNER_ADDRESS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public AddressDto getOwnerAddress() {
     return ownerAddress;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_OWNER_ADDRESS)
+  @JsonProperty(value = JSON_PROPERTY_OWNER_ADDRESS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setOwnerAddress(@javax.annotation.Nullable AddressDto ownerAddress) {
     this.ownerAddress = ownerAddress;
@@ -194,10 +194,7 @@ public class PetBaseDto {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
   /**
@@ -234,17 +231,17 @@ public class PetBaseDto {
 
     // add `id` to the URL query string
     if (getId() != null) {
-      joiner.add(String.format("%sid%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getId()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%sid%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getId()))));
     }
 
     // add `name` to the URL query string
     if (getName() != null) {
-      joiner.add(String.format("%sname%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getName()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%sname%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getName()))));
     }
 
     // add `birth_date` to the URL query string
     if (getBirthDate() != null) {
-      joiner.add(String.format("%sbirth_date%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBirthDate()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%sbirth_date%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBirthDate()))));
     }
 
     // add `ownerAddress` to the URL query string

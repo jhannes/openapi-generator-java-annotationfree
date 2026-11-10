@@ -46,7 +46,7 @@ import io.github.jhannes.openapi.typeHierarchy.ApiClient;
   WorkingDogDto.JSON_PROPERTY_BREED,
   WorkingDogDto.JSON_PROPERTY_CAPABILITIES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class WorkingDogDto {
   public static final String JSON_PROPERTY_ID = "id";
   @javax.annotation.Nullable
@@ -168,7 +168,7 @@ public class WorkingDogDto {
    * @return id
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_ID)
+  @JsonProperty(value = JSON_PROPERTY_ID, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getId() {
     return id;
@@ -187,14 +187,14 @@ public class WorkingDogDto {
    * @return name
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(value = JSON_PROPERTY_NAME, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public String getName() {
     return name;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(value = JSON_PROPERTY_NAME, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setName(@javax.annotation.Nonnull String name) {
     this.name = name;
@@ -211,14 +211,14 @@ public class WorkingDogDto {
    * @return birthDate
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_BIRTH_DATE)
+  @JsonProperty(value = JSON_PROPERTY_BIRTH_DATE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getBirthDate() {
     return birthDate;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_BIRTH_DATE)
+  @JsonProperty(value = JSON_PROPERTY_BIRTH_DATE, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBirthDate(@javax.annotation.Nullable String birthDate) {
     this.birthDate = birthDate;
@@ -235,14 +235,14 @@ public class WorkingDogDto {
    * @return ownerAddress
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_OWNER_ADDRESS)
+  @JsonProperty(value = JSON_PROPERTY_OWNER_ADDRESS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public AddressDto getOwnerAddress() {
     return ownerAddress;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_OWNER_ADDRESS)
+  @JsonProperty(value = JSON_PROPERTY_OWNER_ADDRESS, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setOwnerAddress(@javax.annotation.Nullable AddressDto ownerAddress) {
     this.ownerAddress = ownerAddress;
@@ -259,14 +259,14 @@ public class WorkingDogDto {
    * @return petType
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_PET_TYPE)
+  @JsonProperty(value = JSON_PROPERTY_PET_TYPE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public PetTypeEnum getPetType() {
     return petType;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_PET_TYPE)
+  @JsonProperty(value = JSON_PROPERTY_PET_TYPE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPetType(@javax.annotation.Nonnull PetTypeEnum petType) {
     this.petType = petType;
@@ -283,14 +283,14 @@ public class WorkingDogDto {
    * @return bark
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_BARK)
+  @JsonProperty(value = JSON_PROPERTY_BARK, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public Boolean getBark() {
     return bark;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_BARK)
+  @JsonProperty(value = JSON_PROPERTY_BARK, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBark(@javax.annotation.Nullable Boolean bark) {
     this.bark = bark;
@@ -307,14 +307,14 @@ public class WorkingDogDto {
    * @return breed
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_BREED)
+  @JsonProperty(value = JSON_PROPERTY_BREED, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public BreedEnum getBreed() {
     return breed;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_BREED)
+  @JsonProperty(value = JSON_PROPERTY_BREED, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setBreed(@javax.annotation.Nullable BreedEnum breed) {
     this.breed = breed;
@@ -339,14 +339,14 @@ public class WorkingDogDto {
    * @return capabilities
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_CAPABILITIES)
+  @JsonProperty(value = JSON_PROPERTY_CAPABILITIES, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public List<WorkingDogCapabilityDto> getCapabilities() {
     return capabilities;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_CAPABILITIES)
+  @JsonProperty(value = JSON_PROPERTY_CAPABILITIES, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setCapabilities(@javax.annotation.Nonnull List<WorkingDogCapabilityDto> capabilities) {
     this.capabilities = capabilities;
@@ -401,10 +401,7 @@ public class WorkingDogDto {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
   /**
@@ -441,17 +438,17 @@ public class WorkingDogDto {
 
     // add `id` to the URL query string
     if (getId() != null) {
-      joiner.add(String.format("%sid%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getId()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%sid%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getId()))));
     }
 
     // add `name` to the URL query string
     if (getName() != null) {
-      joiner.add(String.format("%sname%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getName()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%sname%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getName()))));
     }
 
     // add `birth_date` to the URL query string
     if (getBirthDate() != null) {
-      joiner.add(String.format("%sbirth_date%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBirthDate()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%sbirth_date%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBirthDate()))));
     }
 
     // add `ownerAddress` to the URL query string
@@ -461,25 +458,25 @@ public class WorkingDogDto {
 
     // add `pet_type` to the URL query string
     if (getPetType() != null) {
-      joiner.add(String.format("%spet_type%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getPetType()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%spet_type%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getPetType()))));
     }
 
     // add `bark` to the URL query string
     if (getBark() != null) {
-      joiner.add(String.format("%sbark%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBark()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%sbark%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBark()))));
     }
 
     // add `breed` to the URL query string
     if (getBreed() != null) {
-      joiner.add(String.format("%sbreed%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBreed()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%sbreed%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBreed()))));
     }
 
     // add `capabilities` to the URL query string
     if (getCapabilities() != null) {
       for (int i = 0; i < getCapabilities().size(); i++) {
         if (getCapabilities().get(i) != null) {
-          joiner.add(String.format("%scapabilities%s%s=%s", prefix, suffix,
-              "".equals(suffix) ? "" : String.format("%s%d%s", containerPrefix, i, containerSuffix),
+          joiner.add(String.format(java.util.Locale.ROOT, "%scapabilities%s%s=%s", prefix, suffix,
+              "".equals(suffix) ? "" : String.format(java.util.Locale.ROOT, "%s%d%s", containerPrefix, i, containerSuffix),
               ApiClient.urlEncode(ApiClient.valueToString(getCapabilities().get(i)))));
         }
       }

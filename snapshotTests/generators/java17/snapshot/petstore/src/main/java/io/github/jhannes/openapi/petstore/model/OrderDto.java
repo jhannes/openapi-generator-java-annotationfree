@@ -76,7 +76,6 @@ public class OrderDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private StatusEnum status = null;
 
     private Boolean complete = null;

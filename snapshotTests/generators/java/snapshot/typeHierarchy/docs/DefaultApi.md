@@ -73,7 +73,7 @@ No authorization required
 
 ## petsPostWithHttpInfo
 
-> ApiResponse<Void> petsPost petsPostWithHttpInfo(petDto)
+> ApiResponse<Void> petsPostWithHttpInfo(petDto)
 
 
 

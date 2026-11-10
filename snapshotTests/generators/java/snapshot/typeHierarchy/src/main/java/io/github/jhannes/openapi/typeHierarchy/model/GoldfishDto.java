@@ -37,7 +37,7 @@ import io.github.jhannes.openapi.typeHierarchy.ApiClient;
   GoldfishDto.JSON_PROPERTY_NAME,
   GoldfishDto.JSON_PROPERTY_SPECIES
 })
-@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.14.0")
+@javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
 public class GoldfishDto {
   /**
    * Gets or Sets petType
@@ -97,14 +97,14 @@ public class GoldfishDto {
    * @return petType
    */
   @javax.annotation.Nonnull
-  @JsonProperty(JSON_PROPERTY_PET_TYPE)
+  @JsonProperty(value = JSON_PROPERTY_PET_TYPE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public PetTypeEnum getPetType() {
     return petType;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_PET_TYPE)
+  @JsonProperty(value = JSON_PROPERTY_PET_TYPE, required = true)
   @JsonInclude(value = JsonInclude.Include.ALWAYS)
   public void setPetType(@javax.annotation.Nonnull PetTypeEnum petType) {
     this.petType = petType;
@@ -121,14 +121,14 @@ public class GoldfishDto {
    * @return name
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(value = JSON_PROPERTY_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getName() {
     return name;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_NAME)
+  @JsonProperty(value = JSON_PROPERTY_NAME, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setName(@javax.annotation.Nullable String name) {
     this.name = name;
@@ -145,14 +145,14 @@ public class GoldfishDto {
    * @return species
    */
   @javax.annotation.Nullable
-  @JsonProperty(JSON_PROPERTY_SPECIES)
+  @JsonProperty(value = JSON_PROPERTY_SPECIES, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public String getSpecies() {
     return species;
   }
 
 
-  @JsonProperty(JSON_PROPERTY_SPECIES)
+  @JsonProperty(value = JSON_PROPERTY_SPECIES, required = false)
   @JsonInclude(value = JsonInclude.Include.USE_DEFAULTS)
   public void setSpecies(@javax.annotation.Nullable String species) {
     this.species = species;
@@ -197,10 +197,7 @@ public class GoldfishDto {
    * (except the first line).
    */
   private String toIndentedString(Object o) {
-    if (o == null) {
-      return "null";
-    }
-    return o.toString().replace("\n", "\n    ");
+    return o == null ? "null" : o.toString().replace("\n", "\n    ");
   }
 
   /**
@@ -237,17 +234,17 @@ public class GoldfishDto {
 
     // add `pet_type` to the URL query string
     if (getPetType() != null) {
-      joiner.add(String.format("%spet_type%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getPetType()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%spet_type%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getPetType()))));
     }
 
     // add `name` to the URL query string
     if (getName() != null) {
-      joiner.add(String.format("%sname%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getName()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%sname%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getName()))));
     }
 
     // add `species` to the URL query string
     if (getSpecies() != null) {
-      joiner.add(String.format("%sspecies%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getSpecies()))));
+      joiner.add(String.format(java.util.Locale.ROOT, "%sspecies%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getSpecies()))));
     }
 
     return joiner.toString();

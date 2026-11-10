@@ -317,5 +317,4 @@ public class SampleModelData {
             throw new RuntimeException(e);
         }
     }
-
 }

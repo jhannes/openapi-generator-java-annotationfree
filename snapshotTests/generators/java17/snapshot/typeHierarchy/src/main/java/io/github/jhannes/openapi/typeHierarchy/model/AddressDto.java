@@ -75,7 +75,6 @@ public class AddressDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private List<AddressTypesEnum> addressTypes = null;
 
     public static String[] readOnlyFields() {

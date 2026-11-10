@@ -88,7 +88,6 @@ public class DiscoveryDocumentDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private Set<ResponseModesSupportedEnum> response_modes_supported = null;
 
     /**
@@ -123,7 +122,6 @@ public class DiscoveryDocumentDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private Set<SubjectTypesSupportedEnum> subject_types_supported = null;
 
     /**
@@ -158,7 +156,6 @@ public class DiscoveryDocumentDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private Set<CodeChallengeMethodsSupportedEnum> code_challenge_methods_supported = null;
 
     /**
@@ -192,7 +189,6 @@ public class DiscoveryDocumentDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private List<IdTokenSigningAlgValuesSupportedEnum> id_token_signing_alg_values_supported = null;
 
     private String x_sso_frame = null;
