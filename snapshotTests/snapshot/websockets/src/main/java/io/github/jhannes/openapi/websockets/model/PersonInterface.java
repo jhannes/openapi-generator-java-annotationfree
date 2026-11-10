@@ -70,7 +70,6 @@ public interface PersonInterface extends RecipientInterface {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     List<String> missingRequiredFields();
 
     void readOnlyFieldsWithValue(List<String> result);

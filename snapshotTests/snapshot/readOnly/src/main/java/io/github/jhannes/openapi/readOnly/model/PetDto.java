@@ -69,7 +69,6 @@ public class PetDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private PetTypeEnum pet_type;
 
     private String name = null;
@@ -113,7 +112,6 @@ public class PetDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private StatusEnum status = null;
 
     public static String[] readOnlyFields() {

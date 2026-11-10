@@ -72,7 +72,6 @@ public class ThreadHealthDetailsDto implements HealthDetailsDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private ThreadStateEnum threadState = null;
 
     private List<StackTraceInnerDto> stackTrace = null;

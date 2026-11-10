@@ -84,7 +84,6 @@ public class ExposureDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private StatusEnum status;
 
     /**
@@ -124,7 +123,6 @@ public class ExposureDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private DelayAfterInfectionEnum delayAfterInfection = null;
 
     public static String[] readOnlyFields() {

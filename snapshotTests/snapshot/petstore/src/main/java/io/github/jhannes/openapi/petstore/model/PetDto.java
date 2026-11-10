@@ -78,7 +78,6 @@ public class PetDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private StatusEnum status = null;
 
     public static String[] readOnlyFields() {

@@ -82,7 +82,6 @@ public class PersonDto implements AnyPartyDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private StatusEnum status = null;
 
     /**
@@ -117,7 +116,6 @@ public class PersonDto implements AnyPartyDto {
             throw new IllegalArgumentException("Unexpected value '" + text + "'");
         }
     }
-
     private List<ContactChannelsEnum> contactChannels = null;
 
     public static String[] readOnlyFields() {
