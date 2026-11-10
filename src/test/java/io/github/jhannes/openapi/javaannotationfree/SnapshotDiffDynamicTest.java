@@ -76,6 +76,7 @@ public class SnapshotDiffDynamicTest implements Executable {
     }
 
     private void diff(Path file, Path snapshot) throws IOException {
+        assertTrue(Files.exists(file), "Missing " + file);
         assertTrue(Files.exists(snapshot), "Missing " + snapshot);
         Patch<String> diff = DiffUtils.diff(Files.readAllLines(file), Files.readAllLines(snapshot));
         if (!diff.getDeltas().isEmpty()) {

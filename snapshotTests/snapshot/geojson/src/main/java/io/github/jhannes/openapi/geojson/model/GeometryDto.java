@@ -33,6 +33,11 @@ import java.util.stream.Collectors;
 public interface GeometryDto  {
     String getType();
 
+    static LineStringDto LineString() {
+        LineStringDto result = new LineStringDto();
+        result.type("LineString");
+        return result;
+    }
     static PointDto Point() {
         PointDto result = new PointDto();
         result.type("Point");
@@ -43,20 +48,15 @@ public interface GeometryDto  {
         result.type("Polygon");
         return result;
     }
-    static LineStringDto LineString() {
-        LineStringDto result = new LineStringDto();
-        result.type("LineString");
-        return result;
-    }
 
     static Class<? extends GeometryDto> getType(String type) {
         switch (type) {
+        case "LineString":
+            return LineStringDto.class;
         case "Point":
             return PointDto.class;
         case "Polygon":
             return PolygonDto.class;
-        case "LineString":
-            return LineStringDto.class;
         default:
             throw new IllegalArgumentException("Illegal type " + type);
         }

@@ -165,10 +165,10 @@ public class SampleModelData {
 
     public PetDto samplePetDto() {
         List<Supplier<PetDto>> factories = List.of(
-            () -> sampleWorkingDogDto().petType("WorkingDog"),
             () -> sampleCatDto().petType("Cat"),
+            () -> sampleDogDto().petType("Dog"),
             () -> sampleGoldfishDto().petType("Goldfish"),
-            () -> sampleDogDto().petType("Dog")
+            () -> sampleWorkingDogDto().petType("WorkingDog")
         );
         return pickOne(factories).get();
     }

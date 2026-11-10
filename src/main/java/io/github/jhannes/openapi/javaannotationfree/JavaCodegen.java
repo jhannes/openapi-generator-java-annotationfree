@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -287,8 +289,8 @@ public class JavaCodegen extends AbstractJavaCodegen {
     }
 
     public void postProcessOneOf(CodegenModel codegenModel, Map<String, List<CodegenModel>> interfacesOfSubtypes, Map<String, CodegenModel> allModels) {
-        Set<CodegenDiscriminator.MappedModel> mappedModels = new HashSet<>();
-        HashMap<String, String> mapping = new HashMap<>();
+        Set<CodegenDiscriminator.MappedModel> mappedModels = new LinkedHashSet<>();
+        HashMap<String, String> mapping = new LinkedHashMap<>();
         CodegenDiscriminator discriminator = codegenModel.discriminator;
         codegenModel.allVars.removeIf(var -> !(discriminator != null && discriminator.getPropertyBaseName().equals(var.getBaseName()))
                 && (isInlineEnum(var) || codegenModel.interfaceModels.stream().anyMatch(model -> varNotInImplementation(var, model))));

@@ -34,9 +34,9 @@ import java.util.stream.Collectors;
 public interface WebSocketMessageDto  {
     String getCommand();
 
-    static UpdatePersonCommandDto updatePerson() {
-        UpdatePersonCommandDto result = new UpdatePersonCommandDto();
-        result.command("updatePerson");
+    static SubscribeDto Subscribe() {
+        SubscribeDto result = new SubscribeDto();
+        result.command("Subscribe");
         return result;
     }
     static CreatePersonCommandDto createPerson() {
@@ -44,20 +44,20 @@ public interface WebSocketMessageDto  {
         result.command("createPerson");
         return result;
     }
-    static SubscribeDto Subscribe() {
-        SubscribeDto result = new SubscribeDto();
-        result.command("Subscribe");
+    static UpdatePersonCommandDto updatePerson() {
+        UpdatePersonCommandDto result = new UpdatePersonCommandDto();
+        result.command("updatePerson");
         return result;
     }
 
     static Class<? extends WebSocketMessageDto> getType(String command) {
         switch (command) {
-        case "updatePerson":
-            return UpdatePersonCommandDto.class;
-        case "createPerson":
-            return CreatePersonCommandDto.class;
         case "Subscribe":
             return SubscribeDto.class;
+        case "createPerson":
+            return CreatePersonCommandDto.class;
+        case "updatePerson":
+            return UpdatePersonCommandDto.class;
         default:
             throw new IllegalArgumentException("Illegal command " + command);
         }

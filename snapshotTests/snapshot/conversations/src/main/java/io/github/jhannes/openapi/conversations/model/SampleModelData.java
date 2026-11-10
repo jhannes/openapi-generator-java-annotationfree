@@ -205,8 +205,8 @@ public class SampleModelData {
     public DeltaDto sampleDeltaDto() {
         List<Supplier<DeltaDto>> factories = List.of(
             () -> sampleAddMessageToConversationDeltaDto().delta("AddMessageToConversationDelta"),
-            () -> sampleUpdateConversationDeltaDto().delta("UpdateConversationDelta"),
-            () -> sampleCreateConversationDeltaDto().delta("CreateConversationDelta")
+            () -> sampleCreateConversationDeltaDto().delta("CreateConversationDelta"),
+            () -> sampleUpdateConversationDeltaDto().delta("UpdateConversationDelta")
         );
         return pickOne(factories).get();
     }
