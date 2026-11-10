@@ -1,8 +1,8 @@
 package io.github.jhannes.openapi.javaannotationfree;
 
-import difflib.Delta;
-import difflib.DiffUtils;
-import difflib.Patch;
+import com.github.difflib.DiffUtils;
+import com.github.difflib.patch.AbstractDelta;
+import com.github.difflib.patch.Patch;
 import org.openapitools.codegen.ClientOptInput;
 import org.openapitools.codegen.DefaultGenerator;
 import org.openapitools.codegen.config.CodegenConfigurator;
@@ -59,8 +59,8 @@ public class SnapshotRunner {
 
                     try {
                         Patch<String> diff = DiffUtils.diff(Files.readAllLines(file), Files.readAllLines(snapshotFile));
-                        List<Delta<String>> deltas = diff.getDeltas();
-                        for (Delta<String> delta : deltas) {
+                        List<AbstractDelta<String>> deltas = diff.getDeltas();
+                        for (AbstractDelta<String> delta : deltas) {
                             System.err.println(file + " differs");
                             System.out.println(delta);
                         }

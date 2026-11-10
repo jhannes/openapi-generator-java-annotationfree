@@ -1,10 +1,10 @@
 package io.github.jhannes.openapi.javaannotationfree;
 
-import difflib.DeleteDelta;
-import difflib.Delta;
-import difflib.DiffUtils;
-import difflib.InsertDelta;
-import difflib.Patch;
+import com.github.difflib.DiffUtils;
+import com.github.difflib.patch.AbstractDelta;
+import com.github.difflib.patch.DeleteDelta;
+import com.github.difflib.patch.InsertDelta;
+import com.github.difflib.patch.Patch;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.DynamicTest;
 import org.junit.jupiter.api.function.Executable;
@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,6 +25,7 @@ import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
 import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class SnapshotDiffDynamicTest implements Executable {
+    public static final Pattern WHITESPACE = Pattern.compile("\\s*");
     private final Path file;
     private final Path outputDir;
     private final Path snapshotDir;
@@ -35,7 +37,7 @@ public class SnapshotDiffDynamicTest implements Executable {
     }
 
     public static DynamicTest createSnapshotDiffTest(Path file, Path outputDir, Path snapshotDir) {
-        return dynamicTest("file " + outputDir.relativize(file), new SnapshotDiffDynamicTest(file, outputDir, snapshotDir));
+        return dynamicTest(file.getFileName() + " in " + outputDir.relativize(file).getParent(), new SnapshotDiffDynamicTest(file, outputDir, snapshotDir));
     }
 
     static DynamicNode compareDirectories(Path spec, Path outputDir, Path snapshotDir) {
@@ -43,11 +45,11 @@ public class SnapshotDiffDynamicTest implements Executable {
         try (Stream<Path> list = Files.walk(outputDir)) {
             files = list.filter(SnapshotDiffDynamicTest::isTextOutput).collect(Collectors.toList());
         } catch (IOException e) {
-            return dynamicTest("Snapshots for " + spec, () -> assertNull(e));
+            return dynamicTest(spec.getFileName() + " in " + spec.getParent(), () -> assertNull(e));
         }
-        return dynamicContainer("Snapshots for " + spec, Stream.of(
+        return dynamicContainer(spec.getFileName() + " in " + spec, Stream.of(
                 dynamicTest("Files", () -> compareFiles(outputDir, snapshotDir)),
-                dynamicContainer("File contents in " + outputDir, files.stream().map(file ->
+                dynamicContainer("Files in " + outputDir.getFileName() + " in " + outputDir.getParent(), files.stream().map(file ->
                         createSnapshotDiffTest(file, outputDir, snapshotDir)
                 ))));
     }
@@ -77,7 +79,7 @@ public class SnapshotDiffDynamicTest implements Executable {
         assertTrue(Files.exists(snapshot), "Missing " + snapshot);
         Patch<String> diff = DiffUtils.diff(Files.readAllLines(file), Files.readAllLines(snapshot));
         if (!diff.getDeltas().isEmpty()) {
-            List<Delta<String>> significantDiff = diff.getDeltas().stream().filter(delta -> !whitespaceOnly(delta)).collect(Collectors.toList());
+            List<AbstractDelta<String>> significantDiff = diff.getDeltas().stream().filter(delta -> !whitespaceOnly(delta)).collect(Collectors.toList());
             if (significantDiff.isEmpty()) {
                 fail("whitespace difference: " + diff.getDeltas());
             } else {
@@ -86,11 +88,11 @@ public class SnapshotDiffDynamicTest implements Executable {
         }
     }
 
-    private static boolean whitespaceOnly(Delta<String> delta) {
+    private static boolean whitespaceOnly(AbstractDelta<String> delta) {
         if (delta instanceof InsertDelta) {
-            return delta.getRevised().getLines().stream().allMatch(s -> s == null || s.trim().length() == 0);
+            return delta.getSource().getLines().stream().allMatch(s -> s == null || WHITESPACE.matcher(s).matches());
         } else if (delta instanceof DeleteDelta) {
-            return delta.getOriginal().getLines().stream().allMatch(s -> s == null || s.trim().length() == 0);
+            return delta.getTarget().getLines().stream().allMatch(s -> s == null || WHITESPACE.matcher(s).matches());
         } else {
             return false;
         }
