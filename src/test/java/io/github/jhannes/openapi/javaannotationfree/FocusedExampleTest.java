@@ -33,7 +33,7 @@ public class FocusedExampleTest extends AbstractSnapshotTest {
 
     @TestFactory
     DynamicNode snapshotShouldCompile() {
-        Path snapshotDir = AbstractSnapshotTest.getSnapshotDir(SPEC);
+        Path snapshotDir = getSnapshotDir(SPEC);
         return dynamicTest("Compile " + snapshotDir, () -> CompilerTest.compile(snapshotDir));
     }
 
@@ -45,5 +45,15 @@ public class FocusedExampleTest extends AbstractSnapshotTest {
     @TestFactory
     DynamicNode outputShouldCompile() {
         return CompilerTest.createTestFromSpec(SPEC);
+    }
+
+    @TestFactory
+    DynamicNode shouldGenerateForJava17() {
+        return createTestNode(SPEC, Java17SnapshotTests.createJava17Configurator(getModelName(SPEC)), getGeneratorOutputDir(SPEC, "java17"), getGeneratorSnapshotDir(SPEC, "java17"));
+    }
+
+    @TestFactory
+    DynamicNode shouldGenerateForPlainJava() {
+        return SnapshotTests.createTestNode(SPEC, AlternativeGeneratorSnapshotTest.createJavaConfigurator(getModelName(SPEC)), getGeneratorOutputDir(SPEC, "java"), getGeneratorSnapshotDir(SPEC, "java"));
     }
 }

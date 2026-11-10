@@ -13,9 +13,6 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.StringJoiner;
 import java.util.Objects;
 import java.util.Map;
 import java.util.HashMap;
@@ -60,7 +57,6 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import io.github.jhannes.openapi.typeHierarchy.ApiClient;
 import io.github.jhannes.openapi.typeHierarchy.JSON;
 
 @javax.annotation.Generated(value = "org.openapitools.codegen.languages.JavaClientCodegen", comments = "Generator version: 7.24.0")
@@ -358,65 +354,6 @@ public class PetDto extends AbstractOpenApiSchema {
     }
 
 
-
-  /**
-   * Convert the instance into URL query string.
-   *
-   * @return URL query string
-   */
-  public String toUrlQueryString() {
-    return toUrlQueryString(null);
-  }
-
-  /**
-   * Convert the instance into URL query string.
-   *
-   * @param prefix prefix of the query string
-   * @return URL query string
-   */
-  public String toUrlQueryString(String prefix) {
-    String suffix = "";
-    String containerSuffix = "";
-    String containerPrefix = "";
-    if (prefix == null) {
-      // style=form, explode=true, e.g. /pet?name=cat&type=manx
-      prefix = "";
-    } else {
-      // deepObject style e.g. /pet?id[name]=cat&id[type]=manx
-      prefix = prefix + "[";
-      suffix = "]";
-      containerSuffix = "]";
-      containerPrefix = "[";
-    }
-
-    StringJoiner joiner = new StringJoiner("&");
-
-    if (getActualInstance() instanceof CatDto) {
-        if (getActualInstance() != null) {
-          joiner.add(((CatDto)getActualInstance()).toUrlQueryString(prefix + "one_of_0" + suffix));
-        }
-        return joiner.toString();
-    }
-    if (getActualInstance() instanceof DogDto) {
-        if (getActualInstance() != null) {
-          joiner.add(((DogDto)getActualInstance()).toUrlQueryString(prefix + "one_of_1" + suffix));
-        }
-        return joiner.toString();
-    }
-    if (getActualInstance() instanceof WorkingDogDto) {
-        if (getActualInstance() != null) {
-          joiner.add(((WorkingDogDto)getActualInstance()).toUrlQueryString(prefix + "one_of_2" + suffix));
-        }
-        return joiner.toString();
-    }
-    if (getActualInstance() instanceof GoldfishDto) {
-        if (getActualInstance() != null) {
-          joiner.add(((GoldfishDto)getActualInstance()).toUrlQueryString(prefix + "one_of_3" + suffix));
-        }
-        return joiner.toString();
-    }
-    return null;
-  }
 
 }
 

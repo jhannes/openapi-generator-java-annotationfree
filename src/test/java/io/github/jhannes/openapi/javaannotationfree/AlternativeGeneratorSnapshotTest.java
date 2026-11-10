@@ -3,6 +3,7 @@ package io.github.jhannes.openapi.javaannotationfree;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
 import org.openapitools.codegen.config.CodegenConfigurator;
+import org.openapitools.codegen.languages.JavaClientCodegen;
 
 import java.nio.file.Path;
 
@@ -26,6 +27,7 @@ public class AlternativeGeneratorSnapshotTest extends AbstractSnapshotTest {
         return new CodegenConfigurator()
                 .setModelNameSuffix("Dto")
                 .addAdditionalProperty("hideGenerationTimestamp", "true")
+                .addAdditionalProperty(JavaClientCodegen.SUPPORT_URL_QUERY, "false")
                 .setModelPackage("io.github.jhannes.openapi." + modelName + ".model")
                 .setApiPackage("io.github.jhannes.openapi." + modelName + ".api")
                 .setLibrary("native")

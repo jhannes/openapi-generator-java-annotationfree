@@ -13,9 +13,6 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.StringJoiner;
 import java.util.Objects;
 import java.util.Map;
 import java.util.HashMap;
@@ -32,7 +29,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
-import io.github.jhannes.openapi.typeHierarchy.ApiClient;
 /**
  * WorkingDogDto
  */
@@ -402,87 +398,6 @@ public class WorkingDogDto {
    */
   private String toIndentedString(Object o) {
     return o == null ? "null" : o.toString().replace("\n", "\n    ");
-  }
-
-  /**
-   * Convert the instance into URL query string.
-   *
-   * @return URL query string
-   */
-  public String toUrlQueryString() {
-    return toUrlQueryString(null);
-  }
-
-  /**
-   * Convert the instance into URL query string.
-   *
-   * @param prefix prefix of the query string
-   * @return URL query string
-   */
-  public String toUrlQueryString(String prefix) {
-    String suffix = "";
-    String containerSuffix = "";
-    String containerPrefix = "";
-    if (prefix == null) {
-      // style=form, explode=true, e.g. /pet?name=cat&type=manx
-      prefix = "";
-    } else {
-      // deepObject style e.g. /pet?id[name]=cat&id[type]=manx
-      prefix = prefix + "[";
-      suffix = "]";
-      containerSuffix = "]";
-      containerPrefix = "[";
-    }
-
-    StringJoiner joiner = new StringJoiner("&");
-
-    // add `id` to the URL query string
-    if (getId() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%sid%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getId()))));
-    }
-
-    // add `name` to the URL query string
-    if (getName() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%sname%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getName()))));
-    }
-
-    // add `birth_date` to the URL query string
-    if (getBirthDate() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%sbirth_date%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBirthDate()))));
-    }
-
-    // add `ownerAddress` to the URL query string
-    if (getOwnerAddress() != null) {
-      joiner.add(getOwnerAddress().toUrlQueryString(prefix + "ownerAddress" + suffix));
-    }
-
-    // add `pet_type` to the URL query string
-    if (getPetType() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%spet_type%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getPetType()))));
-    }
-
-    // add `bark` to the URL query string
-    if (getBark() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%sbark%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBark()))));
-    }
-
-    // add `breed` to the URL query string
-    if (getBreed() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%sbreed%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getBreed()))));
-    }
-
-    // add `capabilities` to the URL query string
-    if (getCapabilities() != null) {
-      for (int i = 0; i < getCapabilities().size(); i++) {
-        if (getCapabilities().get(i) != null) {
-          joiner.add(String.format(java.util.Locale.ROOT, "%scapabilities%s%s=%s", prefix, suffix,
-              "".equals(suffix) ? "" : String.format(java.util.Locale.ROOT, "%s%d%s", containerPrefix, i, containerSuffix),
-              ApiClient.urlEncode(ApiClient.valueToString(getCapabilities().get(i)))));
-        }
-      }
-    }
-
-    return joiner.toString();
   }
 }
 

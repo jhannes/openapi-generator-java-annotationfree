@@ -48,7 +48,7 @@ public class CompilerTest extends AbstractSnapshotTest {
         return createTestNode(spec, createConfigurator(getModelName(spec)), getCompileDir(spec));
     }
 
-    private static DynamicContainer createTestNode(Path spec, CodegenConfigurator configurator, Path outputDir) {
+    static DynamicContainer createTestNode(Path spec, CodegenConfigurator configurator, Path outputDir) {
         configurator.setInputSpec(getInputSpec(spec));
         configurator.setOutputDir(outputDir.toString());
         return dynamicContainer("Compile " + spec, Arrays.asList(

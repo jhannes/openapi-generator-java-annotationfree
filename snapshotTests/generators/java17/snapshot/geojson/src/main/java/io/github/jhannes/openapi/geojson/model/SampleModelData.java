@@ -69,9 +69,9 @@ public class SampleModelData {
 
     public GeometryDto sampleGeometryDto() {
         List<Supplier<GeometryDto>> factories = List.of(
+            () -> sampleLineStringDto().type("LineString"),
             () -> samplePointDto().type("Point"),
-            () -> samplePolygonDto().type("Polygon"),
-            () -> sampleLineStringDto().type("LineString")
+            () -> samplePolygonDto().type("Polygon")
         );
         return pickOne(factories).get();
     }

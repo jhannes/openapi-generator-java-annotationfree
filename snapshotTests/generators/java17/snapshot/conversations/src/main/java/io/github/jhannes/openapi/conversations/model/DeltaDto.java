@@ -40,14 +40,14 @@ public interface DeltaDto  {
         result.delta("AddMessageToConversationDelta");
         return result;
     }
-    static UpdateConversationDeltaDto UpdateConversationDelta() {
-        UpdateConversationDeltaDto result = new UpdateConversationDeltaDto();
-        result.delta("UpdateConversationDelta");
-        return result;
-    }
     static CreateConversationDeltaDto CreateConversationDelta() {
         CreateConversationDeltaDto result = new CreateConversationDeltaDto();
         result.delta("CreateConversationDelta");
+        return result;
+    }
+    static UpdateConversationDeltaDto UpdateConversationDelta() {
+        UpdateConversationDeltaDto result = new UpdateConversationDeltaDto();
+        result.delta("UpdateConversationDelta");
         return result;
     }
 
@@ -55,10 +55,10 @@ public interface DeltaDto  {
         switch (delta) {
         case "AddMessageToConversationDelta":
             return AddMessageToConversationDeltaDto.class;
-        case "UpdateConversationDelta":
-            return UpdateConversationDeltaDto.class;
         case "CreateConversationDelta":
             return CreateConversationDeltaDto.class;
+        case "UpdateConversationDelta":
+            return UpdateConversationDeltaDto.class;
         default:
             throw new IllegalArgumentException("Illegal delta " + delta);
         }

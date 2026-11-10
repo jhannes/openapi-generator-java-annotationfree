@@ -62,7 +62,7 @@ public class SnapshotDiffDynamicTest implements Executable {
 
     private static String listFiles(Path outputDir) throws IOException {
         try (Stream<Path> walk = Files.walk(outputDir)) {
-            return walk.map(path -> outputDir.relativize(path).toString()).collect(Collectors.joining("\n"));
+            return walk.map(path -> outputDir.relativize(path).toString()).filter(p -> !p.startsWith("target")).collect(Collectors.joining("\n"));
         }
     }
 

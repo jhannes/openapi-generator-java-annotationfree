@@ -13,9 +13,6 @@
 
 package io.github.jhannes.openapi.typeHierarchy.model;
 
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
-import java.util.StringJoiner;
 import java.util.Objects;
 import java.util.Map;
 import java.util.HashMap;
@@ -30,7 +27,6 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 
-import io.github.jhannes.openapi.typeHierarchy.ApiClient;
 /**
  * AddressDto
  */
@@ -272,70 +268,6 @@ public class AddressDto {
    */
   private String toIndentedString(Object o) {
     return o == null ? "null" : o.toString().replace("\n", "\n    ");
-  }
-
-  /**
-   * Convert the instance into URL query string.
-   *
-   * @return URL query string
-   */
-  public String toUrlQueryString() {
-    return toUrlQueryString(null);
-  }
-
-  /**
-   * Convert the instance into URL query string.
-   *
-   * @param prefix prefix of the query string
-   * @return URL query string
-   */
-  public String toUrlQueryString(String prefix) {
-    String suffix = "";
-    String containerSuffix = "";
-    String containerPrefix = "";
-    if (prefix == null) {
-      // style=form, explode=true, e.g. /pet?name=cat&type=manx
-      prefix = "";
-    } else {
-      // deepObject style e.g. /pet?id[name]=cat&id[type]=manx
-      prefix = prefix + "[";
-      suffix = "]";
-      containerSuffix = "]";
-      containerPrefix = "[";
-    }
-
-    StringJoiner joiner = new StringJoiner("&");
-
-    // add `addressLine1` to the URL query string
-    if (getAddressLine1() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%saddressLine1%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAddressLine1()))));
-    }
-
-    // add `addressLine2` to the URL query string
-    if (getAddressLine2() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%saddressLine2%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getAddressLine2()))));
-    }
-
-    // add `city` to the URL query string
-    if (getCity() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%scity%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getCity()))));
-    }
-
-    // add `country` to the URL query string
-    if (getCountry() != null) {
-      joiner.add(String.format(java.util.Locale.ROOT, "%scountry%s=%s", prefix, suffix, ApiClient.urlEncode(ApiClient.valueToString(getCountry()))));
-    }
-
-    // add `addressTypes` to the URL query string
-    if (getAddressTypes() != null) {
-      for (int i = 0; i < getAddressTypes().size(); i++) {
-        joiner.add(String.format(java.util.Locale.ROOT, "%saddressTypes%s%s=%s", prefix, suffix,
-            "".equals(suffix) ? "" : String.format(java.util.Locale.ROOT, "%s%d%s", containerPrefix, i, containerSuffix),
-            ApiClient.urlEncode(ApiClient.valueToString(getAddressTypes().get(i)))));
-      }
-    }
-
-    return joiner.toString();
   }
 }
 

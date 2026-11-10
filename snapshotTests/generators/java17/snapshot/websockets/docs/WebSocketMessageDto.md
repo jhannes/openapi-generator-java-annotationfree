@@ -5,8 +5,8 @@
 
 command  | Type          |
 ----------------- | ------------- |
-"updatePerson" | [**UpdatePersonCommandDto**](UpdatePersonCommandDto.md) |
-"createPerson" | [**CreatePersonCommandDto**](CreatePersonCommandDto.md) |
 "Subscribe" | [**SubscribeDto**](SubscribeDto.md) |
+"createPerson" | [**CreatePersonCommandDto**](CreatePersonCommandDto.md) |
+"updatePerson" | [**UpdatePersonCommandDto**](UpdatePersonCommandDto.md) |
 
 

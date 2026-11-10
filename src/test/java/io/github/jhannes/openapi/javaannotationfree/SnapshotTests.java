@@ -40,19 +40,4 @@ public class SnapshotTests extends AbstractSnapshotTest {
     public static DynamicNode createTestNode(Path spec) {
         return createTestNode(spec, createConfigurator(getModelName(spec)), getOutputDir(spec), getSnapshotDir(spec));
     }
-
-    protected static DynamicNode createTestNode(Path spec, CodegenConfigurator configurator, Path outputDir, Path snapshotDir) {
-        configurator.setInputSpec(getInputSpec(spec));
-        configurator.setOutputDir(outputDir.toString());
-        try {
-            cleanDirectory(outputDir);
-            generate(configurator);
-        } catch (Exception e) {
-            return dynamicTest("Generator for " + spec, () -> {
-                throw e;
-            });
-        }
-        return SnapshotDiffDynamicTest.compareDirectories(spec, outputDir, snapshotDir);
-    }
-
 }

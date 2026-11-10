@@ -277,9 +277,9 @@ public class SampleModelData {
 
     public WebSocketMessageDto sampleWebSocketMessageDto() {
         List<Supplier<WebSocketMessageDto>> factories = List.of(
-            () -> sampleUpdatePersonCommandDto().command("updatePerson"),
+            () -> sampleSubscribeDto().command("Subscribe"),
             () -> sampleCreatePersonCommandDto().command("createPerson"),
-            () -> sampleSubscribeDto().command("Subscribe")
+            () -> sampleUpdatePersonCommandDto().command("updatePerson")
         );
         return pickOne(factories).get();
     }

@@ -5,8 +5,8 @@
 
 type  | Type          |
 ----------------- | ------------- |
+"LineString" | [**LineStringDto**](LineStringDto.md) |
 "Point" | [**PointDto**](PointDto.md) |
 "Polygon" | [**PolygonDto**](PolygonDto.md) |
-"LineString" | [**LineStringDto**](LineStringDto.md) |
 
 

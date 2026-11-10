@@ -1,0 +1,190 @@
+openapi: 3.0.2
+info:
+  contact:
+    email: johannes@brodwall.com
+    name: Johannes Brodwall
+  description: An example of sending requests and commands
+  title: WebSockets
+  version: 0.1.0
+servers:
+- url: /
+paths:
+  /commands:
+    get:
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/WebSocketCommand"
+          description: Returns a log of all commands
+      x-accepts:
+      - application/json
+components:
+  schemas:
+    WebSocketMessage:
+      discriminator:
+        propertyName: command
+      oneOf:
+      - $ref: "#/components/schemas/WebSocketCommand"
+      - $ref: "#/components/schemas/WebSocketRequest"
+    WebSocketRequest:
+      $ref: "#/components/schemas/Subscribe"
+    Subscribe:
+      properties:
+        request:
+          enum:
+          - Subscribe
+          type: string
+      required:
+      - request
+    Unsubscribe:
+      properties:
+        request:
+          enum:
+          - Unsubscribe
+          type: string
+      required:
+      - request
+    WebSocketCommand:
+      discriminator:
+        mapping:
+          createPerson: CreatePersonCommand
+          updatePerson: UpdatePersonCommand
+        propertyName: command
+      oneOf:
+      - $ref: "#/components/schemas/CreatePersonCommand"
+      - $ref: "#/components/schemas/UpdatePersonCommand"
+    CreatePersonCommand:
+      example:
+        command: createPerson
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        person:
+          email: email
+          id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+          type: type
+          name:
+            givenName: givenName
+            familyName: familyName
+          phone: phone
+          birthDate: 2000-01-23
+          gender: male
+      properties:
+        command:
+          enum:
+          - createPerson
+          type: string
+        id:
+          format: uuid
+          type: string
+        person:
+          $ref: "#/components/schemas/Person"
+      required:
+      - command
+      - id
+      - person
+    UpdatePersonCommand:
+      properties:
+        command:
+          enum:
+          - updatePerson
+          type: string
+        id:
+          format: uuid
+          type: string
+        person:
+          $ref: "#/components/schemas/Person"
+      required:
+      - command
+      - id
+      - person
+    Recipient:
+      properties:
+        email:
+          format: email
+          type: string
+    Person:
+      allOf:
+      - $ref: "#/components/schemas/Recipient"
+      - properties:
+          id:
+            format: uuid
+            readOnly: true
+            type: string
+          type:
+            type: string
+          name:
+            $ref: "#/components/schemas/PersonName"
+          phone:
+            format: phone
+            type: string
+          birthDate:
+            format: date
+            type: string
+          gender:
+            enum:
+            - male
+            - female
+            - other
+            - unspecified
+            type: string
+        type: object
+      example:
+        email: email
+        id: 046b6c7f-0b8a-43b9-b35d-6489e6daee91
+        type: type
+        name:
+          givenName: givenName
+          familyName: familyName
+        phone: phone
+        birthDate: 2000-01-23
+        gender: male
+    PersonName:
+      example:
+        givenName: givenName
+        familyName: familyName
+      properties:
+        givenName:
+          type: string
+        familyName:
+          type: string
+    ChangeTracked:
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        createdBy:
+          format: username
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        updatedBy:
+          format: username
+          type: string
+      required:
+      - createdAt
+      - createdBy
+    PersonSnapshot:
+      allOf:
+      - $ref: "#/components/schemas/ChangeTracked"
+      - $ref: "#/components/schemas/Person"
+      - properties:
+          extra:
+            type: string
+        type: object
+      required:
+      - name
+      - type
+    StringSnapshot:
+      allOf:
+      - $ref: "#/components/schemas/ChangeTracked"
+      - properties:
+          name:
+            type: string
+        type: object
+      - properties:
+          type:
+            type: string
+        type: object
+

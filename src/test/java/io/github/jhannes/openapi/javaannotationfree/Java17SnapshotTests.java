@@ -1,6 +1,7 @@
 package io.github.jhannes.openapi.javaannotationfree;
 
 import org.junit.jupiter.api.DynamicNode;
+import org.openapitools.codegen.config.CodegenConfigurator;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -25,12 +26,12 @@ public class Java17SnapshotTests extends SnapshotTests {
     }
 
     public DynamicNode createTests(Path spec) {
-        return createTestNode(
-                spec,
-                AbstractSnapshotTest.createConfigurator(getModelName(spec)).addAdditionalProperty("supportJava17", true),
-                spec.getParent().getParent().resolve("generators").resolve("java17").resolve("output").resolve(getModelName(spec)),
-                spec.getParent().getParent().resolve("generators").resolve("java17").resolve("snapshot").resolve(getModelName(spec))
-        );
+        var outputRoot = spec.getParent().getParent().resolve("generators").resolve("java17");
+        return createTestNode(spec, createJava17Configurator(getModelName(spec)), outputRoot.resolve("output").resolve(getModelName(spec)), outputRoot.resolve("snapshot").resolve(getModelName(spec)));
+    }
+
+    static CodegenConfigurator createJava17Configurator(String modelName) {
+        return AbstractSnapshotTest.createConfigurator(modelName).addAdditionalProperty("supportJava17", true);
     }
 
 }

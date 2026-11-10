@@ -1,5 +1,6 @@
 package io.github.jhannes.openapi.javaannotationfree;
 
+import org.junit.jupiter.api.DynamicNode;
 import org.openapitools.codegen.ClientOptInput;
 import org.openapitools.codegen.DefaultGenerator;
 import org.openapitools.codegen.config.CodegenConfigurator;
@@ -16,6 +17,8 @@ import java.util.Comparator;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class AbstractSnapshotTest {
     public static final Path SNAPSHOT_ROOT = Paths.get("snapshotTests");
@@ -50,6 +53,16 @@ public class AbstractSnapshotTest {
                 .orElse(spec.getParent().getParent().resolve("snapshot").resolve(SnapshotTests.getModelName(spec)));
     }
 
+    static Path getGeneratorOutputDir(Path spec, String generatorName) {
+        return getBasePath(spec).map(p -> p.resolve("generators").resolve(generatorName).resolve("output"))
+                .orElse(spec.getParent().getParent().resolve("generators").resolve(generatorName).resolve("output").resolve(SnapshotTests.getModelName(spec)));
+    }
+
+    static Path getGeneratorSnapshotDir(Path spec, String generatorName) {
+        return getBasePath(spec).map(p -> p.resolve("generators").resolve(generatorName).resolve("snapshot"))
+                .orElse(spec.getParent().getParent().resolve("generators").resolve(generatorName).resolve("snapshot").resolve(SnapshotTests.getModelName(spec)));
+    }
+
     static Path getCompileDir(Path spec) {
         return getBasePath(spec).map(p -> p.resolve("compile"))
                 .orElse(spec.getParent().getParent().resolve("compile").resolve(SnapshotTests.getModelName(spec)));
@@ -60,7 +73,7 @@ public class AbstractSnapshotTest {
                 .orElse(spec.getParent().getParent().resolve("output").resolve(getModelName(spec)));
     }
 
-    private static Optional<Path> getBasePath(Path spec) {
+    protected static Optional<Path> getBasePath(Path spec) {
         if (spec.getFileName().toString().endsWith(".link")) {
             String path = readFirstLine(spec).trim();
             if (path.matches("https?://.*")) {
@@ -114,5 +127,19 @@ public class AbstractSnapshotTest {
         final ClientOptInput clientOptInput = configurator.toClientOptInput();
         DefaultGenerator generator = new DefaultGenerator();
         generator.opts(clientOptInput).generate();
+    }
+
+    protected static DynamicNode createTestNode(Path spec, CodegenConfigurator configurator, Path outputDir, Path snapshotDir) {
+        configurator.setInputSpec(getInputSpec(spec));
+        configurator.setOutputDir(outputDir.toString());
+        try {
+            cleanDirectory(outputDir);
+            generate(configurator);
+        } catch (Exception e) {
+            return dynamicTest("Generator for " + spec, () -> {
+                throw e;
+            });
+        }
+        return SnapshotDiffDynamicTest.compareDirectories(spec, outputDir, snapshotDir);
     }
 }
