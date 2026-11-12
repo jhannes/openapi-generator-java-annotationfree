@@ -137,11 +137,17 @@ public class JavaCodegen extends AbstractJavaCodegen {
             CodegenModel codegenModel = codegenEntry.getValue();
             if (!codegenModel.allOf.isEmpty()) {
                 List<CodegenModel> interfacesToBeRemoved = codegenModel.interfaceModels.stream()
-                        .filter(element -> element.name.startsWith(codegenModel.name + "_allOf"))
+                        .filter(element -> element.name.startsWith(codegenModel.name + "_allOf") || element.classname.equals(codegenModel.parent))
                         .collect(Collectors.toList());
                 for (CodegenModel itf : interfacesToBeRemoved) {
                     codegenModel.allOf.remove(itf.classname);
                     codegenModel.interfaceModels.removeIf(e -> e.name.equals(itf.name));
+                    codegenModel.interfaces.remove(itf.classname);
+                    for (CodegenProperty var : codegenModel.allVars) {
+                        if (itf.allVars.stream().anyMatch(v -> v.name.equals(var.name))) {
+                            var.isInherited = true;
+                        }
+                    }
                 }
                 if (codegenModel.allOf.size() > 1) {
                     List<String> interfaceNames = new ArrayList<>();

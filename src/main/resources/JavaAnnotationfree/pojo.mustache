@@ -2,6 +2,30 @@
 * {{#description}}{{.}}{{/description}}{{^description}}{{classname}}{{/description}}
 */
 public class {{classname}}{{#parent}} extends {{{parent}}}{{/parent}}{{#interfaces}}{{#-first}} implements {{/-first}}{{^-first}}, {{/-first}}{{{.}}}{{/interfaces}} {
+{{#discriminator}}
+
+    {{#mappedModels}}
+    public static {{{modelName}}} {{mappingName}}() {
+        {{{modelName}}} result = new {{{modelName}}}();
+        result.{{discriminator.propertyName}}("{{mappingName}}");
+        return result;
+    }
+    {{/mappedModels}}
+
+{{/discriminator}}
+{{#discriminator}}
+    public static Class<? extends {{{classname}}}> getType(String {{propertyName}}) {
+        switch ({{propertyName}}) {
+    {{#mappedModels}}
+        case "{{mappingName}}":
+            return {{modelName}}.class;
+    {{/mappedModels}}
+        default:
+            throw new IllegalArgumentException("Illegal {{propertyName}} " + {{propertyName}});
+        }
+    }
+
+{{/discriminator}}
 {{#vars}}
     {{^isInherited}}
 

@@ -2,7 +2,6 @@ package io.github.jhannes.openapi.javaannotationfree;
 
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
-import org.openapitools.codegen.config.CodegenConfigurator;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.DynamicContainer.dynamicContainer;
-import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 public class SnapshotTests extends AbstractSnapshotTest {
 
@@ -34,10 +32,7 @@ public class SnapshotTests extends AbstractSnapshotTest {
     }
 
     protected DynamicNode createTests(Path spec) {
-        return createTestNode(spec);
+        return createTestNode(spec, createConfigurator(getModelName(spec)), getOutputDir(spec), getSnapshotDir(spec), false);
     }
 
-    public static DynamicNode createTestNode(Path spec) {
-        return createTestNode(spec, createConfigurator(getModelName(spec)), getOutputDir(spec), getSnapshotDir(spec));
-    }
 }

@@ -20,7 +20,7 @@ public class AlternativeGeneratorSnapshotTest extends AbstractSnapshotTest {
     DynamicNode outputShouldMatchSnapshot() {
         Path outputDir = ROOT_DIR.resolve("output").resolve(getModelName(SPEC));
         Path snapshotDir = ROOT_DIR.resolve("snapshot").resolve(getModelName(SPEC));
-        return SnapshotTests.createTestNode(SPEC, createJavaConfigurator(getModelName(SPEC)), outputDir, snapshotDir);
+        return SnapshotTests.createTestNode(SPEC, createJavaConfigurator(getModelName(SPEC)), outputDir, snapshotDir, false);
     }
 
     static CodegenConfigurator createJavaConfigurator(String modelName) {

@@ -27,7 +27,7 @@ public class Java17SnapshotTests extends SnapshotTests {
 
     public DynamicNode createTests(Path spec) {
         var outputRoot = spec.getParent().getParent().resolve("generators").resolve("java17");
-        return createTestNode(spec, createJava17Configurator(getModelName(spec)), outputRoot.resolve("output").resolve(getModelName(spec)), outputRoot.resolve("snapshot").resolve(getModelName(spec)));
+        return createTestNode(spec, createJava17Configurator(getModelName(spec)), outputRoot.resolve("output").resolve(getModelName(spec)), outputRoot.resolve("snapshot").resolve(getModelName(spec)), false);
     }
 
     static CodegenConfigurator createJava17Configurator(String modelName) {

@@ -1,5 +1,6 @@
 package io.github.jhannes.openapi.javaannotationfree;
 
+import io.github.jhannes.openapi.javaannotationfree.testsupport.GeneratorTestFactory;
 import org.junit.jupiter.api.DynamicNode;
 import org.junit.jupiter.api.TestFactory;
 
@@ -33,27 +34,16 @@ public class FocusedExampleTest extends AbstractSnapshotTest {
 
     @TestFactory
     DynamicNode snapshotShouldCompile() {
-        Path snapshotDir = getSnapshotDir(SPEC);
-        return dynamicTest("Compile " + snapshotDir, () -> CompilerTest.compile(snapshotDir));
+        return GeneratorTestFactory.createCompileTest(getSnapshotDir(SPEC));
     }
 
     @TestFactory
     DynamicNode outputShouldMatchSnapshot() {
-        return SnapshotTests.createTestNode(SPEC);
+        return createTestNode(SPEC, createConfigurator(getModelName(SPEC)), getOutputDir(SPEC), getSnapshotDir(SPEC), false);
     }
 
     @TestFactory
     DynamicNode outputShouldCompile() {
         return CompilerTest.createTestFromSpec(SPEC);
-    }
-
-    @TestFactory
-    DynamicNode shouldGenerateForJava17() {
-        return createTestNode(SPEC, Java17SnapshotTests.createJava17Configurator(getModelName(SPEC)), getGeneratorOutputDir(SPEC, "java17"), getGeneratorSnapshotDir(SPEC, "java17"));
-    }
-
-    @TestFactory
-    DynamicNode shouldGenerateForPlainJava() {
-        return SnapshotTests.createTestNode(SPEC, AlternativeGeneratorSnapshotTest.createJavaConfigurator(getModelName(SPEC)), getGeneratorOutputDir(SPEC, "java"), getGeneratorSnapshotDir(SPEC, "java"));
     }
 }

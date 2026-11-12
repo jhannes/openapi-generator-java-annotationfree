@@ -11,12 +11,12 @@ public interface {{classname}} {{^vendorExtensions.x-implements}}{{#interfaces}}
         return result;
     }
     {{/mappedModels}}
-{{/discriminator}}
 
+{{/discriminator}}
 {{#discriminator}}
     static Class<? extends {{{classname}}}> getType(String {{propertyName}}) {
         switch ({{propertyName}}) {
-{{#mappedModels}}
+    {{#mappedModels}}
         case "{{mappingName}}":
             return {{modelName}}.class;
     {{/mappedModels}}
@@ -24,7 +24,7 @@ public interface {{classname}} {{^vendorExtensions.x-implements}}{{#interfaces}}
             throw new IllegalArgumentException("Illegal {{propertyName}} " + {{propertyName}});
         }
     }
-{{/discriminator}}
 
+{{/discriminator}}
     void readOnlyFieldsWithValue(List<String> fields);
 }
